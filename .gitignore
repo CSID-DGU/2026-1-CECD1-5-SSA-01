@@ -1,0 +1,52 @@
+# ========= 환경변수 (절대 커밋 X) =========
+.env
+.env.*
+!.env.example
+
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# ========= Python =========
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+
+# ========= Node =========
+node_modules/
+dist/
+.vite/
+*.log
+
+# ========= 큰 생성 데이터 (DB에 이미 있음) =========
+backend/generated/
+*.jsonl
+
+# DOCX/HWPX 자동 생성물 (템플릿은 보존)
+backend/generated/**/*.hwpx
+backend/generated/**/*.docx
+backend/generated/_hwpx_template_work/
+
+# ========= 임시 결과 =========
+/tmp/
+*.tmp
+
+# ========= OS =========
+.DS_Store
+Thumbs.db
+
+# ========= IDE =========
+.vscode/
+.idea/
+*.swp
+
+# ========= Claude Code 캐시 =========
+.claude/
