@@ -105,7 +105,7 @@ def _fetch_kosis(cfg: dict, n_years: int = 6) -> list:
     for key in ("objL3","objL4","objL5","objL6","objL7","objL8"):
         if key in cfg:
             params[key] = cfg[key]
-    r = requests.get(BASE_URL, params=params)
+    r = requests.get(BASE_URL, params=params, timeout=15)
     data = r.json()
     if isinstance(data, dict) and "err" in data:
         raise ValueError(f"KOSIS API 오류: {data['errMsg']}")

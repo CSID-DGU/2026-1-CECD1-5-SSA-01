@@ -29,9 +29,8 @@ if str(PROJECT_ROOT) not in sys.path:
 from backend.config import GENERATED_DIR, get_env
 
 DEFAULT_SEED_DIR = GENERATED_DIR / "assembly_rag_seed"
-EMBEDDING_MODEL = get_env("AZURE_OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
+EMBEDDING_MODEL = get_env("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 EMBEDDING_DIM = 1536
-AZURE_API_VERSION = "2024-02-01"
 
 
 def parse_args() -> argparse.Namespace:
@@ -41,48 +40,39 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--supabase-batch", type=int, default=50, help="Supabase upsert 배치 크기")
     parser.add_argument("--sleep", type=float, default=0.5, help="API 호출 간격(초)")
     parser.add_argument("--dry-run", action="store_true", help="임베딩만 생성, Supabase 저장 건너뜀")
+    parser.add_argument("--skip-existing", action="store_true", help="Supabase에 이미 임베딩된 chunk_id 스킵")
     return parser.parse_args()
 
 
 # ── Azure OpenAI API ─────────────────────────────────────────────────────────
 
-def get_azure_config() -> tuple[str, str]:
-    key = get_env("AZURE_OPENAI_API_KEY")
+def get_openai_key() -> str:
+    key = get_env("OPENAI_API_KEY")
     if not key:
-        key = getpass.getpass("AZURE_OPENAI_API_KEY: ").strip()
+        key = getpass.getpass("OPENAI_API_KEY: ").strip()
     if not key:
-        raise SystemExit("AZURE_OPENAI_API_KEY 가 필요합니다.")
-
-    endpoint = get_env("AZURE_OPENAI_ENDPOINT").rstrip("/")
-    if not endpoint:
-        endpoint = input("AZURE_OPENAI_ENDPOINT (예: https://xxx.openai.azure.com): ").strip()
-    if not endpoint:
-        raise SystemExit("AZURE_OPENAI_ENDPOINT 가 필요합니다.")
-
-    return key, endpoint
+        raise SystemExit("OPENAI_API_KEY 가 필요합니다.")
+    return key
 
 
-def embed_batch(texts: list[str], api_key: str, endpoint: str) -> list[list[float]]:
-    """Azure OpenAI Embeddings API 호출.
-    URL: {endpoint}/openai/deployments/{deployment}/embeddings?api-version={version}
-    """
-    url = (
-        f"{endpoint}/openai/deployments/{EMBEDDING_MODEL}"
-        f"/embeddings?api-version={AZURE_API_VERSION}"
-    )
-    payload = {"input": texts}
+def embed_batch(texts: list[str], api_key: str, endpoint: str = "") -> list[list[float]]:
+    """OpenAI Embeddings API 호출."""
+    payload = {"model": EMBEDDING_MODEL, "input": texts}
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     headers = {
-        "api-key": api_key,
+        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
-    req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/embeddings",
+        data=body, headers=headers, method="POST",
+    )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
         error_body = exc.read().decode("utf-8", errors="ignore")
-        raise RuntimeError(f"Azure OpenAI HTTP {exc.code}: {error_body}") from exc
+        raise RuntimeError(f"OpenAI HTTP {exc.code}: {error_body}") from exc
 
     items = sorted(data["data"], key=lambda x: x["index"])
     return [item["embedding"] for item in items]
@@ -149,7 +139,8 @@ def batched(items: list[Any], size: int):
 
 def main() -> None:
     args = parse_args()
-    azure_key, azure_endpoint = get_azure_config()
+    azure_key = get_openai_key()
+    azure_endpoint = ""
 
     if not args.dry_run:
         supa_url, supa_key = get_supabase_config()
@@ -161,6 +152,31 @@ def main() -> None:
     if not all_chunks:
         print(f"[INFO] RAG 대상 chunks 0건 (cost_estimate/non_attachment 없는 의안). 임베딩 스킵.")
         return
+
+    # 이미 임베딩된 chunk_id 스킵
+    if args.skip_existing and not args.dry_run:
+        existing_ids: set[str] = set()
+        offset = 0
+        while True:
+            req = urllib.request.Request(
+                f"{supa_url}/rest/v1/assembly_chunks?select=chunk_id&embedding=not.is.null&limit=1000&offset={offset}",
+                headers={"apikey": supa_key, "Authorization": f"Bearer {supa_key}"},
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=30) as r:
+                    rows = json.loads(r.read())
+            except Exception:
+                break
+            if not rows:
+                break
+            for r in rows:
+                existing_ids.add(r["chunk_id"])
+            if len(rows) < 1000:
+                break
+            offset += 1000
+        before = len(all_chunks)
+        all_chunks = [c for c in all_chunks if c.get("chunkId") not in existing_ids]
+        print(f"skip-existing: {before - len(all_chunks)}건 스킵, {len(all_chunks)}건 처리")
 
     print(f"총 chunk 수: {len(all_chunks)} | 모델: {EMBEDDING_MODEL}")
 

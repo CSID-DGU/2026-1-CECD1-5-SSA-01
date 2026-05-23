@@ -50,12 +50,21 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
+def _api_get(url: str, retries: int = 3, timeout: int = 30) -> Any:
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read())
+        except Exception:
+            if attempt == retries - 1:
+                raise
+            time.sleep(2 ** attempt)
+
+
 def fetch_total_count(age: str, api_key: str) -> int:
     q = {"KEY": api_key, "Type": "json", "pIndex": "1", "pSize": "1", "AGE": age}
-    req = urllib.request.Request(API_URL + "?" + urllib.parse.urlencode(q),
-                                 headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        data = json.loads(r.read())
+    data = _api_get(API_URL + "?" + urllib.parse.urlencode(q))
     for it in data.get("nzmimeepazxkubdpn", []):
         if "head" in it:
             for h in it["head"]:
@@ -68,68 +77,96 @@ def fetch_bills_for_age(age: str, api_key: str, max_n: int = 0) -> list[dict]:
     total = fetch_total_count(age, api_key)
     if max_n:
         total = min(total, max_n)
-    print(f"  AGE {age}: 총 {total}건 메타 수집...")
+    print(f"  AGE {age}: 총 {total}건 메타 수집...", flush=True)
     bills: list[dict] = []
     per_page = 100
     pages = (total + per_page - 1) // per_page
     for page in range(1, pages + 1):
         q = {"KEY": api_key, "Type": "json",
              "pIndex": str(page), "pSize": str(per_page), "AGE": age}
-        req = urllib.request.Request(API_URL + "?" + urllib.parse.urlencode(q),
-                                     headers={"User-Agent": UA})
-        with urllib.request.urlopen(req, timeout=30) as r:
-            data = json.loads(r.read())
+        data = _api_get(API_URL + "?" + urllib.parse.urlencode(q))
         for it in data.get("nzmimeepazxkubdpn", []):
             if "row" in it:
                 bills.extend(it["row"])
+        print(f"  메타 수집: {min(len(bills), total)}/{total}건 (페이지 {page}/{pages})", flush=True)
         if len(bills) >= total:
             break
     return bills[:total]
 
 
+LIKMS_BASE   = "http://likms.assembly.go.kr/bill"
+LIKMS_DETAIL = LIKMS_BASE + "/billDetail.do"
+LIKMS_AJAX   = LIKMS_BASE + "/bi/bill/detail/billInfo.do"
+
+import html as _html
+import re as _re
+
+def _scrape_doc_names(bill_id: str) -> list[str]:
+    """LIKMS 상세 HTML → AJAX 한 번 → 첨부 파일명 목록 반환 (ZIP 다운로드 없음)."""
+    detail_url = f"{LIKMS_DETAIL}?billId={bill_id}"
+    req = urllib.request.Request(detail_url, headers={"User-Agent": UA})
+    with urllib.request.urlopen(req, timeout=15) as r:
+        detail_html = r.read().decode("utf-8", errors="replace")
+
+    # hidden input 추출
+    form: dict[str, str] = {}
+    for m in _re.finditer(r"<input\b([^>]*)>", detail_html, _re.IGNORECASE):
+        attrs: dict[str, str] = {}
+        for a in _re.finditer(
+            r"""([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))""",
+            m.group(1), _re.IGNORECASE
+        ):
+            attrs[a.group(1).lower()] = _html.unescape(a.group(2) or a.group(3) or a.group(4) or "")
+        name = attrs.get("name") or attrs.get("id")
+        if name:
+            form[name] = attrs.get("value", "")
+    form.setdefault("billId", bill_id)
+    form.setdefault("billKindCd", "법률안")
+
+    body = urllib.parse.urlencode(form).encode()
+    req2 = urllib.request.Request(
+        LIKMS_AJAX, data=body,
+        headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded"},
+    )
+    with urllib.request.urlopen(req2, timeout=15) as r:
+        frag = r.read().decode("utf-8", errors="replace")
+
+    # <span> 텍스트 + <a title=...> 에서 파일명 추출
+    names: list[str] = []
+    for m in _re.finditer(r"<span[^>]*>(.*?)</span>", frag, _re.IGNORECASE | _re.DOTALL):
+        t = _re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        if t: names.append(t)
+    for m in _re.finditer(r'title=["\']([^"\']+)["\']', frag, _re.IGNORECASE):
+        names.append(_html.unescape(m.group(1)))
+    return names
+
+
 def inspect_zip(bill: dict) -> dict:
-    """ZIP 까서 추계서/미첨부 첨부 여부만 빠르게 판정."""
+    """HTML 스크래핑으로 첨부 파일명 확인 (ZIP 다운로드 없음 → 빠름)."""
+    base = {
+        "BILL_ID":    bill["BILL_ID"],
+        "BILL_NO":    bill.get("BILL_NO"),
+        "BILL_NAME":  bill.get("BILL_NAME"),
+        "AGE":        bill.get("AGE"),
+        "PROPOSER":   bill.get("PROPOSER"),
+        "PROPOSE_DT": bill.get("PROPOSE_DT"),
+        "COMMITTEE":  bill.get("COMMITTEE"),
+        "PROC_RESULT": bill.get("PROC_RESULT"),
+    }
     try:
-        body = urllib.parse.urlencode({
-            "billId": bill["BILL_ID"], "billKindCd": "법률안", "dwFileGbn": "B",
-        }).encode()
-        req = urllib.request.Request(ZIP_URL, data=body,
-                                     headers={"User-Agent": UA})
-        with urllib.request.urlopen(req, timeout=120) as r:
-            zip_bytes = r.read()
+        names = _scrape_doc_names(bill["BILL_ID"])
         has_ce = has_na = has_bt = False
-        with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
-            for info in zf.infolist():
-                name = info.filename
-                try:
-                    name = info.filename.encode("cp437").decode("utf-8")
-                except (UnicodeDecodeError, UnicodeEncodeError):
-                    pass
-                flat = name.replace(" ", "")
-                if "미첨부" in flat: has_na = True
-                elif "비용추계" in flat or "추계서" in flat: has_ce = True
-                elif "의안원문" in flat: has_bt = True
-        return {
-            "BILL_ID":      bill["BILL_ID"],
-            "BILL_NO":      bill.get("BILL_NO"),
-            "BILL_NAME":    bill.get("BILL_NAME"),
-            "AGE":          bill.get("AGE"),
-            "PROPOSER":     bill.get("PROPOSER"),
-            "PROPOSE_DT":   bill.get("PROPOSE_DT"),
-            "COMMITTEE":    bill.get("COMMITTEE"),
-            "PROC_RESULT":  bill.get("PROC_RESULT"),
-            "has_cost_estimate":  has_ce,
-            "has_non_attachment": has_na,
-            "has_bill_text":      has_bt,
-        }
+        for name in names:
+            flat = name.replace(" ", "")
+            if "미첨부" in flat: has_na = True
+            elif "비용추계" in flat or "추계서" in flat: has_ce = True
+            elif "의안원문" in flat: has_bt = True
+        return {**base,
+                "has_cost_estimate": has_ce,
+                "has_non_attachment": has_na,
+                "has_bill_text": has_bt}
     except Exception as e:
-        return {
-            "BILL_ID":  bill.get("BILL_ID"),
-            "BILL_NO":  bill.get("BILL_NO"),
-            "BILL_NAME": bill.get("BILL_NAME"),
-            "AGE":      bill.get("AGE"),
-            "error":    type(e).__name__,
-        }
+        return {**base, "error": type(e).__name__}
 
 
 def main() -> None:

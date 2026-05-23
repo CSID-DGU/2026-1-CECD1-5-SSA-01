@@ -250,6 +250,8 @@ function App() {
               <EstimateView
                 estimate={result.estimate}
                 nonAttachment={result.nonAttachment}
+                refs={result.references}
+                openModal={setModal}
               />
             )}
             {activeTab === 'form' && (
@@ -423,13 +425,62 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
   )
 }
 
-function EstimateView({ estimate, nonAttachment }) {
+function SimilarCasesTable({ items, openModal }) {
+  if (!items || items.length === 0) return null
+  return (
+    <div className="similar-cases">
+      <div className="similar-cases-label">참고한 유사 사례</div>
+      <table className="similar-cases-table">
+        <thead>
+          <tr>
+            <th>의안번호</th>
+            <th>법률명</th>
+            <th>유사도</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.slice(0, 5).map((it, i) => (
+            <tr key={i}>
+              <td className="bill-no">{it.bill_no || '—'}</td>
+              <td className="bill-name">{(it.bill_name || '').slice(0, 38)}</td>
+              <td className="bill-sim">{Math.round((it.similarity || 0) * 100)}%</td>
+              <td>
+                <button
+                  className="sim-view-btn"
+                  onClick={() => openModal({
+                    title: `${it.bill_no} ${it.bill_name || ''}`,
+                    meta: `유사도 ${Math.round((it.similarity || 0) * 100)}%`,
+                    body: it.content,
+                  })}
+                >
+                  보기
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function EstimateView({ estimate, nonAttachment, refs, openModal }) {
+  const similarCE = refs?.similar_bills_cost_estimate || []
+  const similarNA = refs?.similar_bills_non_attachment || []
+
   if (nonAttachment) {
     return (
-      <div className="non-attach-card animate-fade-in">
-        <h3>📋 비용추계서 미첨부 사유서</h3>
-        <div className="na-type-badge">{nonAttachment.type}유형</div>
-        <p className="na-reason">{nonAttachment.reason_text}</p>
+      <div className="animate-fade-in">
+        <div className="non-attach-card">
+          <h3>📋 비용추계서 미첨부 사유서</h3>
+          <div className="na-type-badge">{nonAttachment.type}유형</div>
+          <p className="na-reason">{nonAttachment.reason_text}</p>
+        </div>
+        <SimilarCasesTable
+          items={similarNA.length ? similarNA : similarCE}
+          openModal={openModal}
+        />
       </div>
     )
   }
@@ -463,6 +514,27 @@ function EstimateView({ estimate, nonAttachment }) {
                 </div>
               </div>
             )}
+            {item.kosis_lookups && item.kosis_lookups.length > 0 && (
+              <div className="kosis-block">
+                <div className="kosis-label">📊 KOSIS 자동 조회값</div>
+                {item.kosis_lookups.map((k, j) => (
+                  <div key={j} className="kosis-row">
+                    <div className="kosis-name">
+                      {k.variable} <span className="kosis-source">({k.source})</span>
+                    </div>
+                    <div className="kosis-values">
+                      {k.year_values.map((yv, idx) => (
+                        <span key={idx} className="kosis-year-value">
+                          <b>{yv.year}</b>: {typeof yv.value === 'number'
+                            ? (yv.value > 1000 ? yv.value.toLocaleString() : yv.value)
+                            : yv.value} {k.unit}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -480,6 +552,8 @@ function EstimateView({ estimate, nonAttachment }) {
           ))}
         </div>
       )}
+
+      <SimilarCasesTable items={similarCE} openModal={openModal} />
     </div>
   )
 }

@@ -49,11 +49,28 @@ def render_gyeonggi(result: dict[str, Any]) -> str:
         for a in triggers
     ) or "<tr><td colspan='3' class='empty'>해당 조문 없음</td></tr>"
 
-    # 항목별
+    # 항목별 + KOSIS 자동조회값
+    def _kosis_html(it):
+        lookups = it.get("kosis_lookups") or []
+        if not lookups:
+            return ""
+        rows = []
+        for k in lookups:
+            yvs = " · ".join(
+                f"{yv.get('year')}: {yv.get('value')}{k.get('unit','')}"
+                for yv in (k.get("year_values") or [])
+            )
+            rows.append(
+                f"<div style='margin-top:4px'><b>{_safe(k.get('variable'))}</b> "
+                f"<span style='color:#666;font-size:9pt'>({_safe(k.get('source'))})</span>"
+                f"<div style='font-size:9pt;color:#333'>{_safe(yvs)}</div></div>"
+            )
+        return "<div style='margin-top:6px;padding:6px;background:#f0fdf4;border-left:3px solid #16a34a;font-size:9pt'><b>📊 KOSIS</b>" + "".join(rows) + "</div>"
+
     item_rows = "".join(
         f"<tr>"
         f"<td>{i+1}</td>"
-        f"<td>{_safe(it.get('name'))}</td>"
+        f"<td>{_safe(it.get('name'))}{_kosis_html(it)}</td>"
         f"<td>{_safe(it.get('category'))}</td>"
         f"<td>{_safe(it.get('formula'))}</td>"
         f"<td>{_safe(it.get('trigger_ref'))}</td>"
