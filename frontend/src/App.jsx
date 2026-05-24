@@ -11,10 +11,16 @@ const PIPELINE_STEPS = [
 ]
 
 const VERDICT_META = {
-  '추계필요': { label: '추계 필요',         color: 'red',   emoji: '💰', desc: '비용 발생 — 추계서 작성이 필요합니다' },
-  '미첨부_A': { label: '비용 없음 (A유형)', color: 'green', emoji: '⚪', desc: '정의·명칭 변경 등 비용 미수반' },
-  '미첨부_B': { label: '추계 곤란 (B유형)', color: 'amber', emoji: '🟡', desc: '대상자 산정 불가 등 기술적 곤란' },
-  '미첨부_C': { label: '예산 흡수 (C유형)', color: 'blue',  emoji: '🔵', desc: '기존 예산 범위 내 집행 가능' },
+  '추계서':    { label: '비용추계서',                     color: 'red',   emoji: '💰', desc: 'NABO 기준: 연 10억 이상 또는 한시 30억 이상 — 추계서 작성 필수' },
+  '미첨부_1호': { label: '미첨부 1호 (비용 미미)',         color: 'green', emoji: '⚪', desc: 'NABO 기준: 연평균 10억 미만 또는 한시 30억 미만' },
+  '미첨부_2호': { label: '미첨부 2호 (안보·기밀)',         color: 'gray',  emoji: '🔒', desc: 'NABO 기준: 국가안전보장·군사기밀 관련' },
+  '미첨부_3호': { label: '미첨부 3호 (기술적 곤란)',        color: 'amber', emoji: '🟡', desc: 'NABO 기준: 선언적·권고적 또는 시행령 위임 등' },
+  '미대상':    { label: '미대상 (재정변화 없음)',           color: 'blue',  emoji: '🔵', desc: 'NABO 기준: 정의 조항, 명칭 변경 등 재정규모 변화 없음' },
+  // 기존 분류와의 하위 호환 (legacy)
+  '추계필요': { label: '추계 필요',         color: 'red',   emoji: '💰', desc: '비용 발생' },
+  '미첨부_A': { label: '비용 없음 (A유형)', color: 'green', emoji: '⚪', desc: '비용 미수반' },
+  '미첨부_B': { label: '추계 곤란 (B유형)', color: 'amber', emoji: '🟡', desc: '기술적 곤란' },
+  '미첨부_C': { label: '예산 흡수 (C유형)', color: 'blue',  emoji: '🔵', desc: '기존 예산 범위' },
 }
 
 const TRIGGER_TYPE_COLOR = {
@@ -217,7 +223,7 @@ function App() {
               </div>
             </div>
 
-            <VerdictCard verdict={result.verdict} />
+            <VerdictCard verdict={result.verdict} field={result.field} />
             {result.qaReport && <QaReport report={result.qaReport} />}
 
             <div className="tab-bar">
@@ -312,7 +318,7 @@ function QaReport({ report }) {
   )
 }
 
-function VerdictCard({ verdict }) {
+function VerdictCard({ verdict, field }) {
   const meta = VERDICT_META[verdict.type] || {
     label: verdict.label, color: 'gray', emoji: '❓', desc: ''
   }
@@ -323,7 +329,16 @@ function VerdictCard({ verdict }) {
       <div className="verdict-body">
         <div className="verdict-label">{meta.label}</div>
         <div className="verdict-desc">{meta.desc}</div>
+        {field && field.field && (
+          <div className="verdict-field">📂 분야: <b>{field.field}</b></div>
+        )}
         <div className="verdict-summary">{verdict.summary}</div>
+        {verdict.nabo_reason && (
+          <div className="verdict-nabo">
+            <span className="verdict-nabo-label">NABO 기준 근거</span>
+            <div className="verdict-nabo-text">{verdict.nabo_reason}</div>
+          </div>
+        )}
         <div className="verdict-confidence">
           <span>AI 신뢰도</span>
           <div className="confidence-bar">
@@ -533,6 +548,39 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
   return (
     <div className="estimate-view animate-fade-in">
       <h3>💰 자동 생성 비용추계서</h3>
+      {estimate.calculation_status && (
+        <div className={`calc-status ${
+          estimate.calculation_status.startsWith('computed')
+            ? 'ok'
+            : estimate.calculation_status.startsWith('estimated')
+              ? 'estimated'
+              : 'blocked'
+        }`}>
+          <span className="calc-status-label">계산 상태</span>
+          <span>
+            {estimate.calculation_status === 'computed_by_python'
+              ? 'Python 계산기가 산출했습니다.'
+              : estimate.calculation_status === 'estimated_by_tag'
+                ? '유사 비용추계서 기반 초안입니다. 확인이 필요합니다.'
+              : estimate.calculation_status === 'blocked_missing_variables'
+                ? '필수 변수가 부족해 금액 계산을 차단했습니다.'
+                : '구조화 산식이 없어 금액 계산을 차단했습니다.'}
+          </span>
+        </div>
+      )}
+      {estimate.verification_needed && Object.keys(estimate.verification_needed).length > 0 && (
+        <div className="verify-block">
+          <div className="verify-title">확인 필요 변수</div>
+          {Object.entries(estimate.verification_needed).map(([name, vars]) => (
+            <div key={name} className="verify-row">
+              <span className="verify-name">{name}</span>
+              <div className="vars-list">
+                {vars.map((v, j) => <span key={j} className="var-chip">{v}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="estimate-items">
         {(estimate.items || []).map((item, i) => (
           <div key={i} className="estimate-item-card">
@@ -578,6 +626,28 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
                 ))}
               </div>
             )}
+            {item.requires_review && (
+              <div className="review-note">
+                <span>확인 필요: {item.review_reason || '유사사례 기반 추정값입니다.'}</span>
+                {item.evidence_basis && (
+                  <button
+                    className="evidence-mini-btn"
+                    onClick={() => openModal({
+                      title: `${item.name} 추정 근거`,
+                      meta: item.evidence_basis.label || '유사 비용추계서 기반',
+                      body: (item.evidence_basis.amount_candidates || []).map((c, idx) =>
+                        `${idx + 1}. ${c.bill_no || ''} ${c.bill_name || ''}\n` +
+                        `항목: [${c.category || '-'}] ${c.name || '-'}\n` +
+                        `금액: ${Number(c.amount_thousand || 0).toLocaleString()}천원 / 점수 ${Math.round((c.score || 0) * 100)}%\n` +
+                        `산식: ${c.formula || '-'}`
+                      ).join('\n\n') || '표시할 근거가 없습니다.',
+                    })}
+                  >
+                    근거 보기
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -588,8 +658,11 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
             <div key={i} className="year-card">
               <div className="year-label">{y.year}차년도</div>
               <div className="year-amount">
-                {y.amount_thousand ? `${(y.amount_thousand / 1000).toLocaleString()}백만원` : '—'}
+                {y.amount_thousand !== null && y.amount_thousand !== undefined
+                  ? `${(y.amount_thousand / 1000).toLocaleString()}백만원`
+                  : '—'}
               </div>
+              {y.requires_review && <div className="year-note warn">확인 필요</div>}
               {y.note && <div className="year-note">{y.note}</div>}
             </div>
           ))}
