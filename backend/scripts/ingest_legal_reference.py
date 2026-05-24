@@ -27,10 +27,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from backend.config import SCRIPT_DIR, get_env
 
-DOC_ID       = "LEGAL_REF_COST_ESTIMATION"
-BILL_ID      = "LEGAL_REF_COST_ESTIMATION"
-EMBED_MODEL  = get_env("AZURE_OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
-AZURE_VER    = "2024-02-01"
+EMBED_MODEL  = get_env("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 
 # 조문 경계 패턴
 _ARTICLE_RE  = re.compile(r"제\s*\d+\s*조(?:의\d+)?(?:\s*\([^)]+\))?")
@@ -42,7 +39,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--pdf",
         type=Path,
-        default=Path("/Users/anseung-won/Desktop/프로젝트/비용추계자동화시스템/법안비용추계_이해와_실제 1.pdf"),
+        required=True,
+        help="적재할 PDF 경로",
+    )
+    parser.add_argument(
+        "--doc-id",
+        type=str,
+        required=True,
+        help="문서 고유 ID (예: NABO_2021_GUIDE_I)",
+    )
+    parser.add_argument(
+        "--doc-name",
+        type=str,
+        help="문서 표시명 (없으면 파일명 사용)",
     )
     parser.add_argument("--batch-size", type=int, default=50)
     parser.add_argument("--dry-run", action="store_true", help="Supabase 저장 없이 청킹/임베딩만 확인")
@@ -52,14 +61,9 @@ def parse_args() -> argparse.Namespace:
 # ── PDF 텍스트 추출 ────────────────────────────────────────────────────────────
 
 def extract_pdf_text(pdf_path: Path) -> str:
-    swift = SCRIPT_DIR / "extract_pdf_text.swift"
-    result = subprocess.run(
-        ["swift", str(swift), str(pdf_path)],
-        check=False, capture_output=True, text=True, timeout=300,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"PDF 추출 실패: {result.stderr[:300]}")
-    return result.stdout.strip()
+    import fitz  # PyMuPDF
+    with fitz.open(str(pdf_path)) as doc:
+        return "\n".join(p.get_text() for p in doc).strip()
 
 
 # ── 청킹 ──────────────────────────────────────────────────────────────────────
@@ -107,31 +111,28 @@ def split_chunks(text: str, max_chars: int = 2400, overlap: int = 600) -> list[s
     return chunks
 
 
-# ── Azure 임베딩 ───────────────────────────────────────────────────────────────
+# ── OpenAI 임베딩 ──────────────────────────────────────────────────────────────
 
-def get_azure_config() -> tuple[str, str]:
-    key = get_env("AZURE_OPENAI_API_KEY")
+def get_openai_key() -> str:
+    key = get_env("OPENAI_API_KEY")
     if not key:
-        key = getpass.getpass("AZURE_OPENAI_API_KEY: ").strip()
-    endpoint = get_env("AZURE_OPENAI_ENDPOINT").rstrip("/")
-    if not endpoint:
-        endpoint = input("AZURE_OPENAI_ENDPOINT: ").strip()
-    return key, endpoint
+        key = getpass.getpass("OPENAI_API_KEY: ").strip()
+    return key
 
 
-def embed_batch(texts: list[str], api_key: str, endpoint: str) -> list[list[float]]:
-    url = f"{endpoint}/openai/deployments/{EMBED_MODEL}/embeddings?api-version={AZURE_VER}"
-    body = json.dumps({"input": texts}, ensure_ascii=False).encode("utf-8")
+def embed_batch(texts: list[str], api_key: str, _unused: str = "") -> list[list[float]]:
+    body = json.dumps({"model": EMBED_MODEL, "input": texts}, ensure_ascii=False).encode("utf-8")
     req = urllib.request.Request(
-        url, data=body,
-        headers={"api-key": api_key, "Content-Type": "application/json"},
+        "https://api.openai.com/v1/embeddings",
+        data=body,
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
         method="POST",
     )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             data = json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"Azure OpenAI {exc.code}: {exc.read().decode()}") from exc
+        raise RuntimeError(f"OpenAI {exc.code}: {exc.read().decode()}") from exc
     return [item["embedding"] for item in sorted(data["data"], key=lambda x: x["index"])]
 
 
@@ -165,13 +166,13 @@ def upsert_chunks(base_url: str, key: str, rows: list[dict[str, Any]]) -> None:
         raise RuntimeError(f"Supabase {exc.code}: {exc.read().decode()}") from exc
 
 
-def ensure_bill_row(base_url: str, key: str) -> None:
+def ensure_bill_row(base_url: str, key: str, bill_id: str, bill_name: str) -> None:
     """assembly_bills FK 충족용 더미 행 보장."""
     url = f"{base_url}/rest/v1/assembly_bills?on_conflict=bill_id"
     row = [{
-        "bill_id":   BILL_ID,
+        "bill_id":   bill_id,
         "source":    "legal_reference",
-        "bill_name": "법안비용추계 이해와 실제 (관계법령)",
+        "bill_name": bill_name,
     }]
     headers = {
         "apikey": key, "Authorization": f"Bearer {key}",
@@ -200,6 +201,9 @@ def main() -> None:
     if not args.pdf.exists():
         raise SystemExit(f"PDF 파일 없음: {args.pdf}")
 
+    doc_id = args.doc_id
+    doc_name = args.doc_name or args.pdf.name
+
     print(f"PDF 텍스트 추출 중: {args.pdf.name}")
     text = extract_pdf_text(args.pdf)
     if not text:
@@ -209,11 +213,11 @@ def main() -> None:
     chunks = split_chunks(text)
     print(f"  청킹 완료: {len(chunks)}개 chunk")
 
-    azure_key, azure_endpoint = get_azure_config()
+    openai_key = get_openai_key()
 
     if not args.dry_run:
         supa_url, supa_key = get_supabase_config()
-        ensure_bill_row(supa_url, supa_key)
+        ensure_bill_row(supa_url, supa_key, doc_id, doc_name)
 
     rows: list[dict[str, Any]] = []
     total_batches = (len(chunks) + args.batch_size - 1) // args.batch_size
@@ -222,20 +226,20 @@ def main() -> None:
         texts = [c for c in batch if c.strip()]
         if not texts:
             continue
-        vectors = embed_batch(texts, azure_key, azure_endpoint)
+        vectors = embed_batch(texts, openai_key)
         for chunk_idx_in_batch, (chunk_text, vector) in enumerate(zip(texts, vectors)):
             global_idx = (batch_idx - 1) * args.batch_size + chunk_idx_in_batch + 1
             rows.append({
-                "chunk_id":      f"{DOC_ID}:{global_idx}",
-                "bill_id":       BILL_ID,
+                "chunk_id":      f"{doc_id}:{global_idx}",
+                "bill_id":       doc_id,
                 "source":        "legal_reference",
-                "document_name": args.pdf.name,
+                "document_name": doc_name,
                 "document_type": "legal_reference",
                 "chunk_index":   global_idx,
                 "content":       chunk_text,
                 "embedding":     vector,
             })
-        print(f"  임베딩 배치 {batch_idx}/{total_batches} 완료 ({len(texts)}건)")
+        print(f"  임베딩 배치 {batch_idx}/{total_batches} 완료 ({len(texts)}건)", flush=True)
 
     print(f"\n임베딩 완료: {len(rows)}건")
 
