@@ -151,6 +151,48 @@ create index if not exists assembly_chunks_doc_type_idx
 create index if not exists assembly_chunks_content_trgm_idx
   on public.assembly_chunks using gin (content gin_trgm_ops);
 
+-- 서비스 레이어가 호출하는 벡터 검색 RPC.
+-- repo 스키마만 적용해도 /rest/v1/rpc/match_assembly_chunks 가 재현되도록 고정한다.
+create or replace function public.match_assembly_chunks(
+  query_embedding extensions.vector(1536),
+  match_count integer default 5,
+  filter_source text default null,
+  filter_doc_type text default null
+)
+returns table (
+  chunk_id text,
+  bill_id text,
+  bill_no text,
+  bill_name text,
+  source text,
+  document_name text,
+  document_type text,
+  chunk_index integer,
+  content text,
+  similarity double precision
+)
+language sql
+stable
+as $$
+  select
+    c.chunk_id,
+    c.bill_id,
+    c.bill_no,
+    c.bill_name,
+    c.source,
+    c.document_name,
+    c.document_type,
+    c.chunk_index,
+    c.content,
+    1 - (c.embedding <=> query_embedding) as similarity
+  from public.assembly_chunks c
+  where c.embedding is not null
+    and (filter_source is null or c.source = filter_source)
+    and (filter_doc_type is null or c.document_type = filter_doc_type)
+  order by c.embedding <=> query_embedding
+  limit greatest(match_count, 1);
+$$;
+
 -- ============================================================
 -- 5. 비용 유발 조문 분석 결과
 --    의안원문에서 추출한 조문별 비용 유발 판단 결과
@@ -331,4 +373,3 @@ create index if not exists non_attachment_bill_id_idx
 
 create index if not exists non_attachment_reason_type_idx
   on public.non_attachment_reason_classifications (reason_type);
-

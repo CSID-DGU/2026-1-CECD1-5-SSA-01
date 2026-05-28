@@ -50,3 +50,6 @@ Thumbs.db
 
 # ========= Claude Code 캐시 =========
 .claude/
+
+# NABO PDF 원본 (Supabase에 적재됨, 용량 큼)
+법안비용추계_이해와_사례_*.pdf
