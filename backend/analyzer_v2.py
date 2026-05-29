@@ -673,6 +673,65 @@ def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
     return out
 
 
+_UNIT_COST_KEYWORDS = ("단가", "개소당", "1인당", "1개소", "대당", "건당", "원/", "/개소", "/명", "/대")
+
+
+def _name_overlap(a: str, b: str) -> float:
+    """두 문자열의 2-gram 토큰 겹침 비율 (간단 유사도)."""
+    def toks(s: str) -> set[str]:
+        s = "".join(s.split())
+        return {s[i:i+2] for i in range(len(s)-1)} if len(s) >= 2 else {s}
+    ta, tb = toks(a), toks(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / len(ta | tb)
+
+
+def pick_reference_unit_cost(patterns: list[dict], item_name: str, category: str) -> dict[str, Any] | None:
+    """해당 항목과 가장 유사한 단가 1개를 '참고값'으로 선정.
+
+    추천이 아니라 참고용. 국회 의안 기준이라 규모 주의 라벨 포함.
+    """
+    best: dict[str, Any] | None = None
+    best_score = 0.0
+    for p in patterns:
+        bill_no = p.get("bill_no")
+        bill_name = (p.get("bill_name") or "")[:35]
+        for it in p.get("items", []):
+            cat = str(it.get("category") or "")
+            tagged_item = str(it.get("name") or "")
+            for v in it.get("variables", []):
+                name = str(v.get("name") or "")
+                val = v.get("value")
+                unit = str(v.get("unit") or "")
+                if val is None:
+                    continue
+                if not any(kw in f"{name} {unit}" for kw in _UNIT_COST_KEYWORDS):
+                    continue
+                try:
+                    fval = float(val)
+                except (TypeError, ValueError):
+                    continue
+                if fval <= 0:
+                    continue
+                # 유사도: 항목명 겹침 + 카테고리 일치 보너스
+                score = _name_overlap(item_name, tagged_item) + _name_overlap(item_name, name)
+                if category and cat and category == cat:
+                    score += 0.3
+                if score > best_score:
+                    best_score = score
+                    best = {
+                        "variable_name": name,
+                        "value": fval,
+                        "unit": unit,
+                        "ref_item": tagged_item,
+                        "source": f"국회의안 {bill_no} {bill_name}",
+                        "caveat": "국회 의안 기준 — 지자체 사업 규모와 다를 수 있음. 직접 확인 후 입력 권장.",
+                        "score": round(best_score, 3),
+                    }
+    return best
+
+
 def format_tag_patterns(patterns: list[dict]) -> str:
     """TAG 패턴을 Gemini 프롬프트용 텍스트로 포맷."""
     if not patterns:
@@ -756,21 +815,27 @@ verdict 값은 아래 5개 중 하나여야 합니다:
 
 1. "추계서"
    - 법안 시행 시 직접적 재정지출 순증가 또는 재정수입 순증감 발생
-   - 예상비용 연평균 10억원 이상 또는 한시적 비용 총 30억원 이상
+   - ★ 중요: 조례안에 대상·단가 등 구체적 숫자가 없어도, 사업의 성격상 추가
+     재정지출이 발생하는 것이 명백하면 "추계서"로 판단한다.
+   - 실제 추계자는 구체값이 없어도 "전제조건(가정)"을 세워서 추계한다.
+     (예: 시군 수요조사 가정 연 5개소 × 유사사업 단가)
+   - 구체값이 없다는 이유만으로 미첨부_3호로 도피하지 마라.
 
 2. "미첨부_1호" — 소요비용이 적어 재정 영향 미미
-   - 예상비용 연평균 10억원 미만
-   - 한시적 비용으로서 총 30억원 미만
+   - 예상비용 연평균 10억원 미만 또는 한시적 비용 총 30억원 미만
 
 3. "미첨부_2호" — 국가안전보장·군사기밀 관련
 
-4. "미첨부_3호" — 추계 기술적 곤란
-   - 조항이 선언적·권고적 형식
-   - 구체적 내용이 시행령 등에 위임됨
-   - 유사사례·관련 자료 부족
+4. "미첨부_3호" — 추계가 근본적으로 불가능한 경우만
+   - 조항이 순수 선언적·권고적이고 어떤 사업도 특정되지 않음
+   - 유사사례·단가 참고자료가 전혀 없어 가정조차 세울 수 없음
+   - ★ 유사 사업이나 단가 후보가 하나라도 있으면 미첨부_3호가 아니라
+     "추계서"(전제조건 기반)로 판단한다.
 
 5. "미대상" — 재정규모 변화 없음
-   - 정의 조항, 명칭 변경, 절차 정비 등
+   - 정의 조항, 명칭 변경, 절차 정비, 대상의 명칭만 확대(신규 지출 없음) 등
+   - ★ 명칭 변경/대상 확대 자체는 비용이 아니다. 신규 사업·시설·지원이
+     추가될 때만 비용으로 본다.
 
 ━━━ 참조 자료 (목적별) ━━━
 
@@ -813,21 +878,39 @@ verdict 값은 아래 5개 중 하나여야 합니다:
       {{
         "name": "항목명",
         "category": "인건비|운영비|사업비|지원금|위탁비",
-        "formula": "산식 텍스트",
+        "formula": "산식 텍스트 (예: 지원 개소수 × 개소당 단가 × 5년)",
         "trigger_ref": "근거 조문",
-        "variables_needed": ["대상자 수", "단가", "소비자물가상승률", ...],
+        "variables_needed": ["지원 개소수", "개소당 단가"],
+        "assumptions": [
+          {{
+            "name": "지원 개소수",
+            "value": 5,
+            "unit": "개소/년",
+            "basis": "가정 근거 (예: 시군 수요조사 기준 연 5개소 가정)",
+            "source_type": "user_input | tag_reference | document | statistic",
+            "needs_user_confirm": true
+          }},
+          {{
+            "name": "개소당 단가",
+            "value": null,
+            "unit": "천원/개소",
+            "basis": "유사사업 단가 후보 참조 (값은 사용자 확정 필요)",
+            "source_type": "user_input",
+            "needs_user_confirm": true
+          }}
+        ],
         "calculation": {{
           "base_amount_thousand": 숫자 또는 null,
-          "recurrence": "annual" | "one_time" | "unknown",
+          "recurrence": "annual" | "one_time",
           "start_year": 1,
           "end_year": 5,
-          "growth_variable": "소비자물가상승률" 또는 null,
-          "source_note": "base_amount_thousand를 둔 근거. TAG/RAG/조문에 명시된 숫자가 없으면 null"
+          "growth_variable": "카테고리 규칙에 따라 (아래 참조)",
+          "source_note": "base_amount 산정 근거. 대상/단가가 사용자입력이면 null"
         }}
       }}
     ],
     "year_estimates": [
-      {{"year": 1, "amount_thousand": null, "note": "금액은 시스템 Python 계산기가 산출하므로 null"}}
+      {{"year": 1, "amount_thousand": null, "note": "금액은 시스템 Python 계산기가 산출"}}
     ]
   }} 또는 null,
   "if_non_attachment": {{
@@ -836,12 +919,27 @@ verdict 값은 아래 5개 중 하나여야 합니다:
   }} 또는 null
 }}
 
+━━━ 증가율(growth_variable) 카테고리 규칙 ━━━
+- 인건비 → "명목임금상승률" 또는 "공무원임금상승률" (매년 복리)
+- 운영비 → "소비자물가상승률" (매년 복리)
+- 사업비/시설비 → null (정액. 단가 고정이므로 복리 적용 안 함)
+- 지원금/위탁비 → 대상이 매년 늘면 해당 변수, 아니면 null
+
+━━━ 전제조건(assumptions) 작성 규칙 ★ 핵심 ★ ━━━
+- 추계서일 때 각 비용 항목에 assumptions 배열을 반드시 작성한다.
+- 대상 규모(개소수/대상자수)와 단가는 조례안에 없으면 "가정"으로 명시한다.
+  · 대상 규모: 합리적 가정값 + basis에 근거 ("시군 수요조사 기준 연 N개소 가정")
+  · 단가: 값을 모르면 value=null, source_type="user_input" (절대 임의로 지어내지 마라)
+- needs_user_confirm=true면 사용자가 확인/입력해야 하는 값이다.
+- 조례안·참고자료에 명시된 실제 숫자가 있으면 그 값 + source_type="document".
+
 ━━━ 중요 ━━━
-- verdict는 NABO 5개 분류 중 정확히 하나여야 한다.
-- 금액 계산은 하지 마라. year_estimates.amount_thousand는 null로 둔다.
-- calculation.base_amount_thousand는 RAG/TAG/조문에 명시된 천원 단위 금액을 확인할 수 있을 때만 넣는다.
-- 대상자 수, 단가, 횟수 등 필수 숫자가 불명확하면 base_amount_thousand는 반드시 null이다.
-- verdict_reason_nabo는 반드시 NABO 분류 5개 중 어디에 해당하는지 명시한다.
+- verdict는 NABO 5개 분류 중 정확히 하나.
+- 금액 계산은 하지 마라. year_estimates.amount_thousand는 null.
+- calculation.base_amount_thousand는 대상·단가가 모두 확정(document/statistic)일 때만 숫자.
+  하나라도 user_input이면 null (Python 계산기가 사용자 입력 후 계산).
+- 단가/대상을 절대 임의로 지어내지 마라. 모르면 null + needs_user_confirm.
+- verdict_reason_nabo는 NABO 분류 5개 중 어디에 해당하는지 명시.
 """
 
 # ── 분야 자동 분류 ───────────────────────────────────────────────────────────
@@ -1140,13 +1238,33 @@ def analyze_v2(filename: str, content_b64: str) -> dict[str, Any]:
         similar_non_attach=similar_na_text or "(없음)",
     )) or {}
 
-    # 5-1) KOSIS 변수값 자동 채우기
+    # 5-1) KOSIS 변수값 자동 채우기 + 단가 참고값 1개 제시
     estimate = final.get("if_needs_estimate")
     if estimate and estimate.get("items"):
         for item in estimate["items"]:
             kosis_results = _lookup_kosis_variables(item.get("variables_needed", []))
             if kosis_results:
                 item["kosis_lookups"] = kosis_results
+            # 항목과 가장 유사한 단가 1개를 '참고값'으로 (추천 아님)
+            ref = pick_reference_unit_cost(
+                tag_patterns, item.get("name", ""), item.get("category", "")
+            )
+            if ref:
+                item["reference_unit_cost"] = ref
+        # 사용자 입력 필요한 전제조건 수집
+        needs_input = []
+        for item in estimate["items"]:
+            for a in item.get("assumptions") or []:
+                if a.get("needs_user_confirm") or a.get("value") is None:
+                    needs_input.append({
+                        "item": item.get("name"),
+                        "variable": a.get("name"),
+                        "unit": a.get("unit"),
+                        "basis": a.get("basis"),
+                        "current_value": a.get("value"),
+                    })
+        if needs_input:
+            estimate["user_inputs_needed"] = needs_input
 
     # 5-2) Python 계산기로 연도별 금액 산출
     if estimate and estimate.get("items"):

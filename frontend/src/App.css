@@ -837,6 +837,54 @@
   font-weight: 600;
 }
 
+/* ========== 전제조건 (Assumptions) ========== */
+.assumptions-block {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+}
+.assumptions-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+.assumption-row {
+  padding: 6px 0;
+  border-top: 1px solid #fde68a;
+}
+.assumption-row:first-of-type { border-top: none; padding-top: 0; }
+.assumption-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.assumption-name { font-size: 0.84rem; font-weight: 600; color: var(--text); }
+.assumption-value { font-size: 0.82rem; font-weight: 700; color: #92400e; font-variant-numeric: tabular-nums; }
+.assumption-input-badge {
+  font-size: 0.7rem; font-weight: 700;
+  background: #dc2626; color: white;
+  padding: 2px 8px; border-radius: 10px;
+}
+.assumption-row.need-input { background: rgba(220,38,38,0.04); }
+.assumption-basis { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+/* ========== 단가 참고값 ========== */
+.ref-cost-block {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--primary-soft);
+  border-radius: var(--radius-sm);
+}
+.ref-cost-label { font-size: 0.72rem; font-weight: 700; color: var(--primary); }
+.ref-cost-body { font-size: 0.84rem; margin-top: 3px; color: var(--text); }
+.ref-cost-src { font-size: 0.74rem; color: var(--text-muted); font-weight: 400; }
+.ref-cost-caveat { font-size: 0.72rem; color: #b45309; margin-top: 4px; line-height: 1.4; }
+
 /* ========== KOSIS Lookup Block ========== */
 .kosis-block {
   margin-top: 10px;

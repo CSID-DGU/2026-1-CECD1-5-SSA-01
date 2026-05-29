@@ -43,6 +43,15 @@ function fileToDataUrl(file) {
   })
 }
 
+function asList(value) {
+  if (Array.isArray(value)) return value
+  if (value === null || value === undefined) return []
+  if (typeof value === 'object') {
+    return [value.reason || value.item || JSON.stringify(value)]
+  }
+  return [String(value)]
+}
+
 function App() {
   const [file, setFile] = useState(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -229,7 +238,7 @@ function App() {
             <div className="tab-bar">
               <button className={`tab ${activeTab === 'articles' ? 'active' : ''}`}
                 onClick={() => setActiveTab('articles')}>
-                📋 조문별 분석 <span className="tab-count">{result.articles.length}</span>
+                📋 조문별 분석 <span className="tab-count">{(result.articles || []).length}</span>
               </button>
               <button className={`tab ${activeTab === 'estimate' ? 'active' : ''}`}
                 onClick={() => setActiveTab('estimate')}>
@@ -247,7 +256,7 @@ function App() {
 
             {activeTab === 'articles' && (
               <ArticlesView
-                articles={result.articles}
+                articles={result.articles || []}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 openModal={setModal}
@@ -300,7 +309,7 @@ function QaReport({ report }) {
                   <div key={name} className="qa-item-block">
                     <div className="qa-item-name">[{name}]</div>
                     <div className="qa-item-vars">
-                      {vars.map((v, j) => <span key={j} className="qa-var-chip">{v}</span>)}
+                      {asList(vars).map((v, j) => <span key={j} className="qa-var-chip">{String(v)}</span>)}
                     </div>
                   </div>
                 ))}
@@ -308,7 +317,7 @@ function QaReport({ report }) {
             )}
             {iss.missing_vars && iss.missing_vars.length > 0 && (
               <div className="qa-item-vars">
-                {iss.missing_vars.map((v, j) => <span key={j} className="qa-var-chip">{v}</span>)}
+                {asList(iss.missing_vars).map((v, j) => <span key={j} className="qa-var-chip">{String(v)}</span>)}
               </div>
             )}
           </div>
@@ -575,7 +584,7 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
             <div key={name} className="verify-row">
               <span className="verify-name">{name}</span>
               <div className="vars-list">
-                {vars.map((v, j) => <span key={j} className="var-chip">{v}</span>)}
+                {asList(vars).map((v, j) => <span key={j} className="var-chip">{String(v)}</span>)}
               </div>
             </div>
           ))}
@@ -595,12 +604,43 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
               <span className="formula-label">산식</span>
               <code>{item.formula}</code>
             </div>
+            {item.assumptions && item.assumptions.length > 0 && (
+              <div className="assumptions-block">
+                <div className="assumptions-label">📐 전제조건 (가정)</div>
+                {item.assumptions.map((a, j) => {
+                  const needInput = a.needs_user_confirm || a.value === null || a.value === undefined
+                  return (
+                    <div key={j} className={`assumption-row ${needInput ? 'need-input' : ''}`}>
+                      <div className="assumption-head">
+                        <span className="assumption-name">{a.name}</span>
+                        {needInput ? (
+                          <span className="assumption-input-badge">입력 필요</span>
+                        ) : (
+                          <span className="assumption-value">{typeof a.value === 'number' ? a.value.toLocaleString() : a.value} {a.unit}</span>
+                        )}
+                      </div>
+                      {a.basis && <div className="assumption-basis">{a.basis}</div>}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+            {item.reference_unit_cost && (
+              <div className="ref-cost-block">
+                <span className="ref-cost-label">💡 단가 참고값</span>
+                <div className="ref-cost-body">
+                  <b>{Number(item.reference_unit_cost.value).toLocaleString()}{item.reference_unit_cost.unit}</b>
+                  <span className="ref-cost-src"> · {item.reference_unit_cost.ref_item} ({item.reference_unit_cost.source})</span>
+                </div>
+                <div className="ref-cost-caveat">{item.reference_unit_cost.caveat}</div>
+              </div>
+            )}
             {item.variables_needed && (
               <div className="estimate-variables">
                 <span className="vars-label">필요 변수</span>
                 <div className="vars-list">
-                  {item.variables_needed.map((v, j) => (
-                    <span key={j} className="var-chip">{v}</span>
+                  {asList(item.variables_needed).map((v, j) => (
+                    <span key={j} className="var-chip">{String(v)}</span>
                   ))}
                 </div>
               </div>
@@ -614,9 +654,9 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
                       {k.variable} <span className="kosis-source">({k.source})</span>
                     </div>
                     <div className="kosis-values">
-                      {k.year_values.map((yv, idx) => (
+                      {asList(k.year_values).map((yv, idx) => (
                         <span key={idx} className="kosis-year-value">
-                          <b>{yv.year}</b>: {typeof yv.value === 'number'
+                          <b>{yv.year || '-'}</b>: {typeof yv.value === 'number'
                             ? (yv.value > 1000 ? yv.value.toLocaleString() : yv.value)
                             : yv.value} {k.unit}
                         </span>
