@@ -65,6 +65,33 @@ KOSIS_MAP = {
         "calc": "sum",
         "unit": "명",
     },
+    "영유아인구": {
+        "orgId": "101",
+        "tblId": "DT_1B04005N",      # 0~4세 (영유아보육법 기준 6세 미만 근사)
+        "itmId": "T2", "objL1": "00", "objL2": "ALL",
+        "prdSe": "Y",
+        "filter": lambda d: d.get("C1") == "00" and d.get("C2") in {"5"},
+        "calc": "sum",
+        "unit": "명",
+    },
+    "아동인구": {
+        "orgId": "101",
+        "tblId": "DT_1B04005N",      # 0~19세 (아동복지법 기준 18세 미만 근사)
+        "itmId": "T2", "objL1": "00", "objL2": "ALL",
+        "prdSe": "Y",
+        "filter": lambda d: d.get("C1") == "00" and d.get("C2") in {"5","10","15","20"},
+        "calc": "sum",
+        "unit": "명",
+    },
+    "청년인구": {
+        "orgId": "101",
+        "tblId": "DT_1B04005N",      # 20~39세 (경기도 청년기본조례 기준 19~39세 근사)
+        "itmId": "T2", "objL1": "00", "objL2": "ALL",
+        "prdSe": "Y",
+        "filter": lambda d: d.get("C1") == "00" and d.get("C2") in {"25","30","35","40"},
+        "calc": "sum",
+        "unit": "명",
+    },
     "등록장애인수": {
         "orgId": "110",
         "tblId": "DT_110001_A045",   # 국민기초생활보장수급자 및 등록장애인
@@ -171,6 +198,12 @@ def get_variable(variable_name: str, year: str = None) -> dict:
 
     if year:
         matched = next((r for r in rows if r["year"] == year), None)
+        if matched is None and rows:
+            matched = max(rows, key=lambda r: r["year"])
+            return {"variable": variable_name, "year": matched["year"],
+                    "value": matched["value"],
+                    "unit": cfg["unit"], "source": f"KOSIS {cfg['tblId']}",
+                    "note": f"{year}년 데이터 없음 → {matched['year']}년으로 대체"}
         return {"variable": variable_name, "year": year,
                 "value": matched["value"] if matched else None,
                 "unit": cfg["unit"], "source": f"KOSIS {cfg['tblId']}"}
