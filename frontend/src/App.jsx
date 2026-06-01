@@ -91,7 +91,12 @@ function App() {
       const res = await fetch(`${API_BASE}/api/analyze_v2`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: file.name, mimeType: file.type, content }),
+        body: JSON.stringify({
+          filename: file.name,
+          mimeType: file.type,
+          content,
+          formType,  // 'gyeonggi' | 'assembly' → 백엔드 분류 기준 분기
+        }),
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || '분석 실패')

@@ -118,7 +118,10 @@ class ApiHandler(BaseHTTPRequestHandler):
 
         try:
             if parsed.path == "/api/analyze_v2":
-                result = analyze_v2(filename, content)
+                form_type = str(payload.get("formType") or "gyeonggi").strip()
+                if form_type not in ("gyeonggi", "assembly"):
+                    form_type = "gyeonggi"
+                result = analyze_v2(filename, content, form_type=form_type)
             else:
                 result = analyze_document(filename, content)
         except ValueError as exc:
