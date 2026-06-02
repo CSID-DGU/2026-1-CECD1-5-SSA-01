@@ -269,9 +269,12 @@ function App() {
             )}
             {activeTab === 'estimate' && (
               <EstimateView
+                result={result}
                 estimate={result.estimate}
                 nonAttachment={result.nonAttachment}
                 refs={result.references}
+                formType={formType}
+                onResult={setResult}
                 openModal={setModal}
               />
             )}
@@ -537,9 +540,84 @@ function SimilarCasesTable({ items, openModal }) {
   )
 }
 
-function EstimateView({ estimate, nonAttachment, refs, openModal }) {
+function EstimateView({ result, estimate, nonAttachment, refs, formType, onResult, openModal }) {
   const similarCE = refs?.similar_bills_cost_estimate || []
   const similarNA = refs?.similar_bills_non_attachment || []
+  const [drafts, setDrafts] = useState({})
+  const [isRecomputing, setIsRecomputing] = useState(false)
+  const [recomputeError, setRecomputeError] = useState('')
+
+  const setDraft = (index, key, value) => {
+    setDrafts(prev => ({
+      ...prev,
+      [index]: {
+        ...(prev[index] || {}),
+        [key]: value,
+      },
+    }))
+  }
+
+  const toNumber = value => {
+    if (value === '' || value === null || value === undefined) return null
+    const parsed = Number(String(value).replace(/,/g, ''))
+    return Number.isFinite(parsed) ? parsed : null
+  }
+
+  const recompute = async () => {
+    if (!estimate) return
+    const userInputs = (estimate.items || []).map((item, index) => {
+      const draft = drafts[index] || {}
+      const baseAmount = toNumber(draft.base_amount_thousand)
+      const unitCost = toNumber(draft.unit_cost)
+      const target = toNumber(draft.target)
+      const calc = item.calculation || {}
+      const input = {
+        item_index: index,
+        recurrence: draft.recurrence || calc.recurrence || 'annual',
+        start_year: toNumber(draft.start_year) || calc.start_year || 1,
+        end_year: toNumber(draft.end_year) || calc.end_year || 5,
+        growth_variable: draft.growth_variable ?? calc.growth_variable ?? null,
+      }
+      if (baseAmount !== null) {
+        input.base_amount_thousand = baseAmount
+      } else if (unitCost !== null || target !== null) {
+        input.variables = {
+          unit_cost: unitCost || 0,
+          target: target || 1,
+        }
+      } else {
+        return null
+      }
+      return input
+    }).filter(Boolean)
+
+    if (userInputs.length === 0) {
+      setRecomputeError('재계산할 단가, 대상 수 또는 연간 기준금액을 입력하세요.')
+      return
+    }
+
+    setIsRecomputing(true)
+    setRecomputeError('')
+    try {
+      const res = await fetch(`${API_BASE}/api/recompute`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          result,
+          estimate,
+          userInputs,
+          formType,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || '재계산 실패')
+      onResult(data)
+    } catch (e) {
+      setRecomputeError(e.message)
+    } finally {
+      setIsRecomputing(false)
+    }
+  }
 
   if (nonAttachment) {
     return (
@@ -574,10 +652,14 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
           <span>
             {estimate.calculation_status === 'computed_by_python'
               ? 'Python 계산기가 산출했습니다.'
+              : estimate.calculation_status === 'computed_by_special_template'
+                ? '국회 특별위원회 신설 템플릿으로 산출했습니다.'
               : estimate.calculation_status === 'estimated_by_tag'
                 ? '유사 비용추계서 기반 초안입니다. 확인이 필요합니다.'
               : estimate.calculation_status === 'blocked_missing_variables'
                 ? '필수 변수가 부족해 금액 계산을 차단했습니다.'
+              : estimate.calculation_status === 'awaiting_user_input'
+                ? '단가·대상 입력 후 재계산이 필요합니다.'
                 : '구조화 산식이 없어 금액 계산을 차단했습니다.'}
           </span>
         </div>
@@ -609,6 +691,41 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
               <span className="formula-label">산식</span>
               <code>{item.formula}</code>
             </div>
+            {item.formula_template && (
+              <div className="formula-template-block">
+                <div className="formula-template-head">
+                  <span className="formula-template-label">{item.formula_template.label}</span>
+                  <span className="formula-template-confidence">
+                    신뢰도 {Math.round((item.formula_template.confidence || 0) * 100)}%
+                  </span>
+                </div>
+                <code>{item.formula_template.standard_formula}</code>
+                <div className="formula-template-vars">
+                  {asList(item.formula_template.variables).map((v, j) => (
+                    <span key={j} className="var-chip">{String(v)}</span>
+                  ))}
+                </div>
+                <div className="formula-template-note">{item.formula_template.notes}</div>
+                {item.formula_template.tag_formula_evidence?.length > 0 && (
+                  <button
+                    type="button"
+                    className="evidence-mini-btn"
+                    onClick={() => openModal({
+                      title: `${item.formula_template.label} TAG 근거`,
+                      meta: item.formula_template.source || 'TAG 산식 패턴',
+                      body: item.formula_template.tag_formula_evidence.map((e, idx) =>
+                        `${idx + 1}. ${e.bill_no || ''} ${e.bill_name || ''}\n` +
+                        `항목: [${e.item_category || '-'}] ${e.item_name || '-'}\n` +
+                        `산식: ${e.formula_text || '-'}\n` +
+                        `점수: ${Math.round((e.score || 0) * 100)}`
+                      ).join('\n\n'),
+                    })}
+                  >
+                    TAG 산식 근거
+                  </button>
+                )}
+              </div>
+            )}
             {item.assumptions && item.assumptions.length > 0 && (
               <div className="assumptions-block">
                 <div className="assumptions-label">📐 전제조건 (가정)</div>
@@ -630,16 +747,156 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
                 })}
               </div>
             )}
-            {item.reference_unit_cost && (
+            {(item.reference_unit_costs || (item.reference_unit_cost ? [item.reference_unit_cost] : [])).length > 0 && (
               <div className="ref-cost-block">
-                <span className="ref-cost-label">💡 단가 참고값</span>
-                <div className="ref-cost-body">
-                  <b>{Number(item.reference_unit_cost.value).toLocaleString()}{item.reference_unit_cost.unit}</b>
-                  <span className="ref-cost-src"> · {item.reference_unit_cost.ref_item} ({item.reference_unit_cost.source})</span>
+                <span className="ref-cost-label">
+                  {formType === 'assembly' ? '💡 추천 단가 후보' : '💡 국회 단가 참고값'}
+                </span>
+                <div className="ref-cost-list">
+                  {(item.reference_unit_costs || [item.reference_unit_cost]).slice(0, 3).map((ref, refIdx) => (
+                    <div key={refIdx} className="ref-cost-row">
+                      <div className="ref-cost-main">
+                        <span className="ref-cost-rank">{refIdx + 1}</span>
+                        <div>
+                          <div className="ref-cost-body">
+                            <b>{Number(ref.value).toLocaleString()}{ref.unit}</b>
+                            <span className="ref-cost-src"> · {ref.variable_name || '단가'} · 점수 {Math.min(100, Math.round((ref.score || 0) * 100))}</span>
+                          </div>
+                          <div className="ref-cost-src">{ref.ref_item} ({ref.source})</div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="use-ref-btn compact"
+                        onClick={() => setDraft(i, 'unit_cost', String(ref.value))}
+                      >
+                        사용
+                      </button>
+                    </div>
+                  ))}
                 </div>
-                <div className="ref-cost-caveat">{item.reference_unit_cost.caveat}</div>
+                <div className="ref-cost-caveat">{item.reference_unit_cost?.caveat}</div>
               </div>
             )}
+            {item.assumption_candidates && item.assumption_candidates.length > 0 && (
+              <div className="assumption-candidates-block">
+                <span className="assumption-candidates-label">국회 기준값 후보</span>
+                <div className="assumption-candidates-list">
+                  {item.assumption_candidates.slice(0, 5).map((candidate, idx) => (
+                    <div key={idx} className="assumption-candidate-row">
+                      <div className="assumption-candidate-main">
+                        <span className="assumption-candidate-rank">{idx + 1}</span>
+                        <div>
+                          <div className="assumption-candidate-value">
+                            <b>{candidate.label || candidate.variable_name}</b>
+                            <span>
+                              {typeof candidate.value === 'number'
+                                ? candidate.value.toLocaleString()
+                                : candidate.value} {candidate.unit || ''}
+                            </span>
+                          </div>
+                          <div className="assumption-candidate-meta">
+                            {candidate.year || '연도 미상'} · 반복 {candidate.repeat_count || 1}건 · {candidate.bill_no} {candidate.bill_name}
+                          </div>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="evidence-mini-btn"
+                        onClick={() => openModal({
+                          title: `${candidate.label || candidate.variable_name} 후보 근거`,
+                          meta: `${candidate.bill_no || ''} ${candidate.bill_name || ''}`,
+                          body:
+                            `값: ${candidate.value?.toLocaleString?.() || candidate.value} ${candidate.unit || ''}\n` +
+                            `연도: ${candidate.year || '-'}\n` +
+                            `항목: ${candidate.item_name || '-'}\n` +
+                            `반복: ${candidate.repeat_count || 1}건\n\n` +
+                            `${candidate.source_text || '근거 문장이 없습니다.'}`,
+                        })}
+                      >
+                        근거
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="recompute-panel">
+              <div className="recompute-title">단가·대상 확정</div>
+              <div className="recompute-grid">
+                <label>
+                  <span>단가</span>
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    placeholder="천원 단위"
+                    value={drafts[i]?.unit_cost || ''}
+                    onChange={(e) => setDraft(i, 'unit_cost', e.target.value)}
+                  />
+                </label>
+                <label>
+                  <span>대상 수</span>
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    placeholder="명/개소/건"
+                    value={drafts[i]?.target || ''}
+                    onChange={(e) => setDraft(i, 'target', e.target.value)}
+                  />
+                </label>
+                <label>
+                  <span>연간 기준금액</span>
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    placeholder="직접 입력, 천원"
+                    value={drafts[i]?.base_amount_thousand || ''}
+                    onChange={(e) => setDraft(i, 'base_amount_thousand', e.target.value)}
+                  />
+                </label>
+                <label>
+                  <span>반복</span>
+                  <select
+                    value={drafts[i]?.recurrence || item.calculation?.recurrence || 'annual'}
+                    onChange={(e) => setDraft(i, 'recurrence', e.target.value)}
+                  >
+                    <option value="annual">매년</option>
+                    <option value="one_time">1회성</option>
+                  </select>
+                </label>
+              </div>
+              <div className="recompute-subgrid">
+                <label>
+                  <span>시작</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    value={drafts[i]?.start_year || item.calculation?.start_year || 1}
+                    onChange={(e) => setDraft(i, 'start_year', e.target.value)}
+                  />
+                </label>
+                <label>
+                  <span>종료</span>
+                  <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    value={drafts[i]?.end_year || item.calculation?.end_year || 5}
+                    onChange={(e) => setDraft(i, 'end_year', e.target.value)}
+                  />
+                </label>
+                {item.reference_unit_cost && (
+                  <button
+                    type="button"
+                    className="use-ref-btn"
+                    onClick={() => setDraft(i, 'unit_cost', String(item.reference_unit_cost.value))}
+                  >
+                    {formType === 'assembly' ? '추천값 사용' : '참고값 사용'}
+                  </button>
+                )}
+              </div>
+            </div>
             {item.variables_needed && (
               <div className="estimate-variables">
                 <span className="vars-label">필요 변수</span>
@@ -695,6 +952,13 @@ function EstimateView({ estimate, nonAttachment, refs, openModal }) {
             )}
           </div>
         ))}
+      </div>
+
+      <div className="recompute-actions">
+        {recomputeError && <span className="recompute-error">{recomputeError}</span>}
+        <button className="recompute-btn" disabled={isRecomputing} onClick={recompute}>
+          {isRecomputing ? '재계산 중...' : '입력값으로 재계산'}
+        </button>
       </div>
 
       {estimate.year_estimates && estimate.year_estimates.length > 0 && (
@@ -772,13 +1036,14 @@ function EvidenceSection({ title, items, openModal, kind }) {
 }
 
 function FormView({ result, formType, setFormType }) {
-  const [html, setHtml] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [err, setErr] = useState('')
+  const renderKey = `${formType}:${result?.generatedAt || ''}:${result?.billName || ''}`
+  const [rendered, setRendered] = useState({ key: '', html: '', err: '' })
+  const html = rendered.key === renderKey ? rendered.html : ''
+  const err = rendered.key === renderKey ? rendered.err : ''
+  const loading = rendered.key !== renderKey
 
   useEffect(() => {
     let alive = true
-    setLoading(true); setErr('')
     fetch(`${API_BASE}/api/render`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -788,11 +1053,14 @@ function FormView({ result, formType, setFormType }) {
         if (!r.ok) throw new Error(await r.text())
         return r.text()
       })
-      .then((text) => { if (alive) setHtml(text) })
-      .catch((e) => { if (alive) setErr(e.message) })
-      .finally(() => { if (alive) setLoading(false) })
+      .then((text) => {
+        if (alive) setRendered({ key: renderKey, html: text, err: '' })
+      })
+      .catch((e) => {
+        if (alive) setRendered({ key: renderKey, html: '', err: e.message })
+      })
     return () => { alive = false }
-  }, [result, formType])
+  }, [result, formType, renderKey])
 
   const handlePrint = () => {
     const w = window.open('', '_blank')

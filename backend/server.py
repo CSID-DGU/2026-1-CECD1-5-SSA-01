@@ -7,7 +7,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from .analyzer import analyze_document
-from .analyzer_v2 import analyze_v2
+from .analyzer_v2 import analyze_v2, recompute_with_user_inputs
 from .form_renderer import render_form
 from .config import GENERATED_DIR, GEMINI_API_KEY, HOST, PORT
 
@@ -74,7 +74,7 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path not in ("/api/analyze", "/api/analyze_v2", "/api/render"):
+        if parsed.path not in ("/api/analyze", "/api/analyze_v2", "/api/render", "/api/recompute"):
             self._send_json({"error": "지원하지 않는 경로입니다."}, status=404)
             return
 
@@ -105,6 +105,38 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+            return
+
+        # ── /api/recompute: 사용자 입력값으로 비용추계서 재계산 ──
+        if parsed.path == "/api/recompute":
+            result = payload.get("result")
+            estimate = payload.get("estimate")
+            user_inputs = payload.get("userInputs") or payload.get("user_inputs") or []
+            fmt = str(payload.get("formType") or "assembly").strip()
+            if fmt not in ("gyeonggi", "assembly"):
+                fmt = "gyeonggi"
+            if isinstance(result, dict) and not isinstance(estimate, dict):
+                estimate = result.get("estimate")
+            if not isinstance(estimate, dict):
+                self._send_json({"error": "estimate 객체가 필요합니다."}, status=400)
+                return
+            if not isinstance(user_inputs, list):
+                self._send_json({"error": "userInputs 배열이 필요합니다."}, status=400)
+                return
+            try:
+                recomputed = recompute_with_user_inputs(estimate, user_inputs, form_type=fmt)
+            except Exception as exc:
+                self._send_json({"error": str(exc)}, status=500)
+                return
+            if isinstance(result, dict):
+                result["estimate"] = recomputed
+                if recomputed.get("verdict_after_recompute"):
+                    result.setdefault("verdict", {})
+                    if isinstance(result["verdict"], dict):
+                        result["verdict"]["type"] = recomputed["verdict_after_recompute"]
+                self._send_json(result, status=HTTPStatus.OK)
+            else:
+                self._send_json({"estimate": recomputed}, status=HTTPStatus.OK)
             return
 
         filename = str(payload.get("filename") or "").strip()

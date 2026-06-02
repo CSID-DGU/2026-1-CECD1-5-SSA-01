@@ -217,6 +217,7 @@ def compute_year_estimates(
                 if not item.get("requires_review"):
                     item["year_amounts_thousand"] = [None] * years
                     continue
+                growth_rate_value = 0.0
             growth_rate = growth_rate_value
 
         item_amounts: list[int | None] = []
