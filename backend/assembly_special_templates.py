@@ -78,7 +78,15 @@ def _has_constitution_special_committee(text: str, articles: list[dict[str, Any]
         + [str(article.get("no") or "") + " " + str(article.get("text") or "") for article in articles]
     )
     compact = re.sub(r"\s+", "", haystack)
-    return "헌법특별위원회" in compact and ("제45조의2" in compact or "제45조의2" in text)
+    is_national_assembly_act_amendment = (
+        "국회법일부개정법률안" in compact
+        or "국회법일부를다음과같이개정한다" in compact
+    )
+    return (
+        is_national_assembly_act_amendment
+        and "헌법특별위원회" in compact
+        and ("제45조의2" in compact or "제45조의2" in text)
+    )
 
 
 def build_constitution_special_committee_estimate() -> dict[str, Any]:
