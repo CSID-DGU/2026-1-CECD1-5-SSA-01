@@ -157,7 +157,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 with tempfile.TemporaryDirectory(prefix="cost-estimate-pdf-") as tmp:
                     pdf_path = Path(tmp) / "estimate.pdf"
                     media_box = fitz.paper_rect("a4")
-                    content_box = media_box + (38, 38, -38, -38)
+                    content_box = media_box + (34, 34, -34, -34)
                     writer = fitz.DocumentWriter(str(pdf_path))
 
                     def rectfn(_rect_num: int, _filled: bool):

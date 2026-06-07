@@ -401,12 +401,16 @@ def render_assembly(result: dict[str, Any]) -> str:
             unit = assumption.get("unit") or ""
             value_text = "확인 필요" if value is None else f"{value:,}{unit}" if isinstance(value, int) else f"{value}{unit}"
             assumption_rows.append(
-                f"<tr><td>{_safe(item.get('name'))}</td>"
-                f"<td>{_safe(assumption.get('name'))}</td>"
-                f"<td>{_safe(value_text)}</td>"
-                f"<td>{_safe(assumption.get('basis'))}</td></tr>"
+                "<table class='assumption-item'><tbody>"
+                "<tr>"
+                "<td class='assumption-detail'>"
+                f"<strong>{_safe(assumption.get('name'))}</strong>"
+                f"<br>{_safe(item.get('name'))}"
+                f"<br><span>근거: {_safe(assumption.get('basis'))}</span></td>"
+                f"<td class='assumption-value'>{_safe(value_text)}</td>"
+                "</tr></tbody></table>"
             )
-    assumption_html = "".join(assumption_rows) or "<tr><td colspan='4' class='empty'>전제값 없음</td></tr>"
+    assumption_html = "".join(assumption_rows) or "<p class='empty'>전제값 없음</p>"
 
     excluded_reason_rows = []
     for article in triggers:
@@ -471,16 +475,17 @@ def render_assembly(result: dict[str, Any]) -> str:
 <title>{bill_name} - 비용추계서 (국회)</title>
 <style>
   @page {{ size: A4; margin: 18mm; }}
-  body {{ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; color:#111; line-height:1.55; font-size:10.5pt; }}
-  .doc-title {{ text-align:center; margin: 12px 0 18px; }}
-  .doc-title .bill {{ font-size: 15pt; font-weight: 700; margin-bottom: 6px; }}
-  .doc-title .label {{ font-size: 13pt; font-weight: 700; }}
-  .block {{ margin: 18px 0 22px; page-break-inside: avoid; }}
-  h3 {{ font-size: 12pt; margin: 0 0 8px; }}
-  h4 {{ font-size: 10.5pt; margin: 12px 0 4px; }}
+  body {{ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; color:#111; line-height:1.45; font-size:9.7pt; }}
+  p {{ margin: 4px 0; }}
+  .doc-title {{ text-align:center; margin: 8px 0 14px; }}
+  .doc-title .bill {{ font-size: 14pt; font-weight: 700; margin-bottom: 4px; }}
+  .doc-title .label {{ font-size: 12pt; font-weight: 700; }}
+  .block {{ margin: 14px 0 16px; }}
+  h3 {{ font-size: 11.5pt; margin: 0 0 6px; }}
+  h4 {{ font-size: 10pt; margin: 9px 0 3px; }}
   .result {{ margin: 6px 0 10px; }}
-  table {{ width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 6px; }}
-  th, td {{ border: 1px solid #555; padding: 5px 6px; text-align: left; vertical-align: top; }}
+  table {{ width: 100%; border-collapse: collapse; font-size: 8.8pt; margin-top: 5px; }}
+  th, td {{ border: 1px solid #555; padding: 4px 5px; text-align: left; vertical-align: top; }}
   th {{ background: #f1f5f9; font-weight: 700; text-align: center; }}
   .fixed-table {{ table-layout: fixed; }}
   .fixed-table th, .fixed-table td {{ word-break: keep-all; overflow-wrap: break-word; }}
@@ -490,10 +495,17 @@ def render_assembly(result: dict[str, Any]) -> str:
   .unit {{ text-align:right; font-size:8.5pt; color:#444; margin-top: 2px; }}
   .small {{ font-size: 8.5pt; color:#444; font-weight: 400; }}
   .formula {{ margin: 3px 0 6px; }}
-  .bullet {{ margin: 5px 0; }}
+  .bullet {{ margin: 3px 0; }}
+  .assumption-list {{ margin-top: 7px; }}
+  table.assumption-item {{ margin: 0 0 5px; page-break-inside: avoid; font-size: 8.8pt; }}
+  .assumption-item .assumption-detail {{ width: 76%; background: #f8fafc; }}
+  .assumption-item .assumption-value {{ text-align: right; font-weight: 700; white-space: nowrap; }}
+  .assumption-item .assumption-detail {{ color: #444; font-size: 8.3pt; }}
+  .assumption-item .assumption-detail strong {{ color: #111; font-size: 8.8pt; }}
+  .assumption-item .assumption-detail span {{ color: #555; }}
   .detail-block {{ margin-top: 10px; }}
   .subtable {{ margin-top: 6px; font-size: 9pt; }}
-  .signature {{ margin-top: 40px; text-align: center; font-size: 10pt; }}
+  .signature {{ margin-top: 26px; text-align: center; font-size: 9pt; }}
   .footnote {{ font-size: 8.5pt; color: #555; margin-top: 4px; }}
 </style></head>
 <body>
@@ -537,10 +549,7 @@ def render_assembly(result: dict[str, Any]) -> str:
 
   <h4>2. 비용추계의 총괄적 전제</h4>
   {general_assumptions}
-  <table>
-    <thead><tr><th style="width:24%">비용항목</th><th style="width:18%">전제</th><th style="width:18%">값</th><th>근거</th></tr></thead>
-    <tbody>{assumption_html}</tbody>
-  </table>
+  <div class="assumption-list">{assumption_html}</div>
 
   {f'''
   <h4>2-1. 추계 제외 또는 일부추계 사유</h4>
