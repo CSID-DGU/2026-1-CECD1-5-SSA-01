@@ -126,7 +126,7 @@ def build_constitution_special_committee_estimate() -> dict[str, Any]:
                 "confidence": 0.98,
                 "source": tpl["source_doc"],
                 "tag_formula_evidence": [],
-                "notes": "2126636 비용추계서의 헌법특별위원회 신설 추계 구조를 적용했습니다.",
+                "notes": "동일 유형의 국회 특별위원회 신설 추계 구조를 적용했습니다.",
             },
             "assumptions": [
                 {
@@ -225,7 +225,7 @@ def build_constitution_special_committee_estimate() -> dict[str, Any]:
                 "year": idx + 1,
                 "year_label": year,
                 "amount_thousand": million_to_thousand(totals[year]),
-                "note": "2126636 비용추계서 전제 기반 특별위원회 신설 템플릿",
+                "note": "국회 특별위원회 신설 추계 기준 적용",
                 "missing_vars": [],
                 "requires_review": False,
             }

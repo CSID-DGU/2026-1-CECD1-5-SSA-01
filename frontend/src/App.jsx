@@ -4,23 +4,23 @@ import './App.css'
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
 
 const PIPELINE_STEPS = [
-  { number: 1, title: 'PDF 파싱 + 조문 분할', tech: 'PyMuPDF' },
-  { number: 2, title: '조문별 비용유발 판단', tech: 'Gemini + 법령 RAG' },
-  { number: 3, title: '유사 사례 검색',       tech: 'pgvector ANN' },
-  { number: 4, title: '추계서 자동 생성',     tech: 'Gemini + TAG' },
+  { number: 1, title: '문서 구조 분석', tech: '본문과 개정 조문 식별' },
+  { number: 2, title: '재정수반 조문 판단', tech: '법령 기준과 조문별 검토' },
+  { number: 3, title: '유사 사례 및 기준값 확인', tech: '국회 추계서와 근거 문서 검색' },
+  { number: 4, title: '비용 산출 및 추계서 작성', tech: '산식 계산과 문서 양식 생성' },
 ]
 
 const VERDICT_META = {
-  '추계서':    { label: '비용추계서',                     color: 'red',   emoji: '💰', desc: 'NABO 기준: 연 10억 이상 또는 한시 30억 이상 — 추계서 작성 필수' },
-  '미첨부_1호': { label: '미첨부 1호 (비용 미미)',         color: 'green', emoji: '⚪', desc: 'NABO 기준: 연평균 10억 미만 또는 한시 30억 미만' },
-  '미첨부_2호': { label: '미첨부 2호 (안보·기밀)',         color: 'gray',  emoji: '🔒', desc: 'NABO 기준: 국가안전보장·군사기밀 관련' },
-  '미첨부_3호': { label: '미첨부 3호 (기술적 곤란)',        color: 'amber', emoji: '🟡', desc: 'NABO 기준: 선언적·권고적 또는 시행령 위임 등' },
-  '미대상':    { label: '미대상 (재정변화 없음)',           color: 'blue',  emoji: '🔵', desc: 'NABO 기준: 정의 조항, 명칭 변경 등 재정규모 변화 없음' },
+  '추계서':    { label: '비용추계서 작성 대상', color: 'red', desc: '재정지출 또는 수입 변화가 예상되어 비용추계서를 작성합니다.' },
+  '미첨부_1호': { label: '미첨부 1호', color: 'green', desc: '예상 비용이 첨부 기준보다 적어 미첨부 사유서를 작성합니다.' },
+  '미첨부_2호': { label: '미첨부 2호', color: 'gray', desc: '국가안전보장 또는 군사기밀 사유로 추계서를 첨부하지 않습니다.' },
+  '미첨부_3호': { label: '미첨부 3호', color: 'amber', desc: '시행계획 등이 확정되지 않아 기술적으로 추계하기 곤란합니다.' },
+  '미대상':    { label: '비용추계 미대상', color: 'blue', desc: '새로운 재정지출 또는 수입 변화가 확인되지 않았습니다.' },
   // 기존 분류와의 하위 호환 (legacy)
-  '추계필요': { label: '추계 필요',         color: 'red',   emoji: '💰', desc: '비용 발생' },
-  '미첨부_A': { label: '비용 없음 (A유형)', color: 'green', emoji: '⚪', desc: '비용 미수반' },
-  '미첨부_B': { label: '추계 곤란 (B유형)', color: 'amber', emoji: '🟡', desc: '기술적 곤란' },
-  '미첨부_C': { label: '예산 흡수 (C유형)', color: 'blue',  emoji: '🔵', desc: '기존 예산 범위' },
+  '추계필요': { label: '추계 필요', color: 'red', desc: '비용 발생' },
+  '미첨부_A': { label: '비용 없음', color: 'green', desc: '비용 미수반' },
+  '미첨부_B': { label: '추계 곤란', color: 'amber', desc: '기술적 곤란' },
+  '미첨부_C': { label: '기존 예산 활용', color: 'blue', desc: '기존 예산 범위' },
 }
 
 const TRIGGER_TYPE_COLOR = {
@@ -50,6 +50,33 @@ function asList(value) {
     return [value.reason || value.item || JSON.stringify(value)]
   }
   return [String(value)]
+}
+
+function cleanExtractedText(value) {
+  return String(value || '')
+    .replace(/\r/g, '')
+    .replace(/([가-힣])\s*\n\s*([가-힣])/g, '$1$2')
+    .replace(/[ \t]*\n[ \t]*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+}
+
+function evidenceModal(item, kind = 'bill') {
+  const similarity = Math.round((item.similarity || 0) * 100)
+  if (kind === 'legal') {
+    return {
+      title: '비용추계 기준 근거',
+      sourceLabel: '법령 및 작성 기준',
+      meta: `관련도 ${similarity}% · 근거 ID ${item.chunk_id?.slice(-12) || '-'}`,
+      body: cleanExtractedText(item.content),
+    }
+  }
+  return {
+    title: item.bill_name || '유사 비용추계 사례',
+    sourceLabel: `국회 의안 ${item.bill_no || '-'}`,
+    meta: `관련도 ${similarity}%`,
+    body: cleanExtractedText(item.content),
+  }
 }
 
 function App() {
@@ -119,10 +146,10 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="header-logo">
-          <div className="header-logo-icon">⚖️</div>
+          <div className="header-logo-icon">CE</div>
           <div>
             <h1>비용추계 자동화 시스템</h1>
-            <span>RAG + TAG 기반 조례안 분석</span>
+            <span>의안 분석 및 비용추계서 작성</span>
           </div>
         </div>
         <div className="header-right">
@@ -149,12 +176,10 @@ function App() {
           <>
             <section className="hero">
               <h2>
-                <span className="gradient-text">조례안 PDF</span> 한 장이면<br />
-                <span className="gradient-text">비용추계서</span>가 자동으로
+                의안 PDF에서 비용추계서까지
               </h2>
               <p>
-                과거 의안 819건 + 비용추계 법령 PDF + AI가 함께 분석합니다.<br />
-                조문별 판단 · 종합 결론 · 산식 생성 · 근거 추적까지.
+                조문별 재정수반 여부를 검토하고 산식, 전제값, 판단 근거를 함께 제공합니다.
               </p>
             </section>
 
@@ -169,15 +194,15 @@ function App() {
                 <input ref={fileRef} type="file" accept=".pdf"
                   onChange={(e) => { setFile(e.target.files[0]); setError('') }}
                   style={{ display: 'none' }} />
-                <div className="upload-icon">📑</div>
+                <div className="upload-icon">PDF</div>
                 <h3>조례안 PDF를 끌어다 놓거나 클릭하세요</h3>
-                <p>입법예고문, 조례안 원문 — 어떤 형식이든 OK</p>
+                <p>텍스트가 포함된 의안 원문 PDF를 지원합니다.</p>
                 <div className="upload-formats"><span>PDF</span></div>
               </div>
 
               {file && (
                 <div className="file-selected animate-fade-in">
-                  <span className="file-selected-icon">📄</span>
+                  <span className="file-selected-icon">PDF</span>
                   <div className="file-selected-info">
                     <div className="name">{file.name}</div>
                     <div className="size">{(file.size / 1024).toFixed(1)} KB</div>
@@ -190,7 +215,7 @@ function App() {
               {error && <div className="status-banner error">{error}</div>}
 
               <button className="start-btn" disabled={!file || isProcessing} onClick={start}>
-                {isProcessing ? '분석 중...' : '비용추계 분석 시작 →'}
+                {isProcessing ? '분석 중...' : '비용추계 분석 시작'}
               </button>
             </section>
           </>
@@ -199,8 +224,7 @@ function App() {
         {currentStep >= 0 && !result && (
           <section className="pipeline-section animate-fade-in">
             <div className="pipeline-header">
-              <span>⚙️</span>
-              <h3>AI가 4단계로 분석 중</h3>
+              <h3>비용추계 분석 진행</h3>
             </div>
             <div className="pipeline-steps">
               {PIPELINE_STEPS.map((step, idx) => (
@@ -231,9 +255,9 @@ function App() {
               <button className="back-btn" onClick={reset}>← 새 조례안 분석</button>
               <h2 className="result-title">{result.billName}</h2>
               <div className="result-meta">
-                <span>📅 {result.generatedAt}</span>
-                <span>⚡ {result.elapsedSec}s</span>
-                <span>📋 {result.totalArticles}개 조문 분석</span>
+                <span>분석 시각 {result.generatedAt}</span>
+                <span>소요 시간 {result.elapsedSec}s</span>
+                <span>검토 조문 {result.totalArticles}개</span>
               </div>
             </div>
 
@@ -243,19 +267,19 @@ function App() {
             <div className="tab-bar">
               <button className={`tab ${activeTab === 'articles' ? 'active' : ''}`}
                 onClick={() => setActiveTab('articles')}>
-                📋 조문별 분석 <span className="tab-count">{(result.articles || []).length}</span>
+                조문별 분석 <span className="tab-count">{(result.articles || []).length}</span>
               </button>
               <button className={`tab ${activeTab === 'estimate' ? 'active' : ''}`}
                 onClick={() => setActiveTab('estimate')}>
-                💰 추계서 / 사유서
+                추계 결과
               </button>
               <button className={`tab ${activeTab === 'form' ? 'active' : ''}`}
                 onClick={() => setActiveTab('form')}>
-                📄 추계서 양식 <span className="tab-count">{formType === 'gyeonggi' ? '경기도' : '국회'}</span>
+                추계서 양식 <span className="tab-count">{formType === 'gyeonggi' ? '경기도' : '국회'}</span>
               </button>
               <button className={`tab ${activeTab === 'evidence' ? 'active' : ''}`}
                 onClick={() => setActiveTab('evidence')}>
-                📚 RAG 근거
+                판단 근거
               </button>
             </div>
 
@@ -306,7 +330,9 @@ function QaReport({ report }) {
         {report.issues.map((iss, i) => (
           <div key={i} className={`qa-issue qa-level-${iss.level}`}>
             <div className="qa-issue-head">
-              <span className="qa-issue-badge">{iss.level === 'error' ? '❌' : iss.level === 'warn' ? '⚠️' : 'ℹ️'}</span>
+              <span className="qa-issue-badge">
+                {iss.level === 'error' ? '오류' : iss.level === 'warn' ? '확인' : '안내'}
+              </span>
               <span className="qa-issue-cat">{iss.category}</span>
             </div>
             <div className="qa-issue-detail">{iss.detail}</div>
@@ -337,17 +363,20 @@ function QaReport({ report }) {
 
 function VerdictCard({ verdict, field }) {
   const meta = VERDICT_META[verdict.type] || {
-    label: verdict.label, color: 'gray', emoji: '❓', desc: ''
+    label: verdict.label, color: 'gray', desc: ''
   }
   const confPct = Math.round((verdict.confidence || 0) * 100)
   return (
     <div className={`verdict-card verdict-${meta.color}`}>
-      <div className="verdict-emoji">{meta.emoji}</div>
+      <div className="verdict-status">
+        <span className="verdict-status-dot" />
+        분석 결과
+      </div>
       <div className="verdict-body">
         <div className="verdict-label">{meta.label}</div>
         <div className="verdict-desc">{meta.desc}</div>
         {field && field.field && (
-          <div className="verdict-field">📂 분야: <b>{field.field}</b></div>
+          <div className="verdict-field">분야 <b>{field.field}</b></div>
         )}
         <div className="verdict-summary">{verdict.summary}</div>
         {verdict.nabo_reason && (
@@ -357,7 +386,7 @@ function VerdictCard({ verdict, field }) {
           </div>
         )}
         <div className="verdict-confidence">
-          <span>AI 신뢰도</span>
+          <span>판단 신뢰도</span>
           <div className="confidence-bar">
             <div className="confidence-fill" style={{ width: `${confPct}%` }} />
           </div>
@@ -407,7 +436,8 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
     >
       <div className="article-row-main">
         <div className="article-row-no">
-          {art.cost_trigger ? '🔴' : '⚪'} {art.no}
+          <span className={`article-status-dot ${art.cost_trigger ? 'cost' : 'none'}`} />
+          {art.no}
         </div>
         <div className="article-row-meta">
           {art.cost_trigger ? (
@@ -430,18 +460,18 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
       {isExpanded && (
         <div className="article-detail">
           <div className="detail-block">
-            <div className="detail-label">📄 AI 판단 근거</div>
-            <div className="article-text-box">{art.reason}</div>
+            <div className="detail-label">판단 근거</div>
+            <div className="article-text-box">{cleanExtractedText(art.reason)}</div>
           </div>
 
           <div className="detail-block">
-            <div className="detail-label">📜 조문 원문</div>
-            <div className="article-text-box">{art.text}</div>
+            <div className="detail-label">관련 조문</div>
+            <div className="article-text-box article-source-text">{cleanExtractedText(art.text)}</div>
           </div>
 
           {art.legal_refs && art.legal_refs.length > 0 && (
             <div className="detail-block">
-              <div className="detail-label">⚖️ 비용추계와 이해 (법령 PDF) 인용</div>
+              <div className="detail-label">비용추계 기준 근거</div>
               <div className="ref-list">
                 {art.legal_refs.map((r, i) => (
                   <div
@@ -449,18 +479,14 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
                     className="ref-card"
                     onClick={(e) => {
                       e.stopPropagation()
-                      openModal({
-                        title: '비용추계 이해 (법령 PDF)',
-                        meta: `청크 ${r.chunk_id?.slice(-12) || ''} · 유사도 ${Math.round((r.similarity || 0) * 100)}%`,
-                        body: r.content,
-                      })
+                      openModal(evidenceModal(r, 'legal'))
                     }}
                   >
                     <div className="ref-card-top">
-                      <span className="ref-card-title">📘 법령 PDF · {r.chunk_id?.slice(-8) || ''}</span>
-                      <span className="ref-card-sim">{Math.round((r.similarity || 0) * 100)}%</span>
+                      <span className="ref-card-title">법령 및 작성 기준</span>
+                      <span className="ref-card-sim">관련도 {Math.round((r.similarity || 0) * 100)}%</span>
                     </div>
-                    <div className="ref-card-preview">{r.content?.slice(0, 100)}</div>
+                    <div className="ref-card-preview">{cleanExtractedText(r.content).slice(0, 150)}</div>
                   </div>
                 ))}
               </div>
@@ -469,7 +495,7 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
 
           {art.similar_refs && art.similar_refs.length > 0 && (
             <div className="detail-block">
-              <div className="detail-label">📚 유사 의안 추계서 사례</div>
+              <div className="detail-label">유사 비용추계 사례</div>
               <div className="ref-list">
                 {art.similar_refs.map((r, i) => (
                   <div
@@ -477,18 +503,14 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
                     className="ref-card"
                     onClick={(e) => {
                       e.stopPropagation()
-                      openModal({
-                        title: `${r.bill_no} ${r.bill_name || ''}`,
-                        meta: `유사도 ${Math.round((r.similarity || 0) * 100)}%`,
-                        body: r.content,
-                      })
+                      openModal(evidenceModal(r, 'bill'))
                     }}
                   >
                     <div className="ref-card-top">
-                      <span className="ref-card-title">📋 {r.bill_no} · {r.bill_name?.slice(0, 25) || ''}</span>
-                      <span className="ref-card-sim">{Math.round((r.similarity || 0) * 100)}%</span>
+                      <span className="ref-card-title">{r.bill_no} · {r.bill_name?.slice(0, 36) || ''}</span>
+                      <span className="ref-card-sim">관련도 {Math.round((r.similarity || 0) * 100)}%</span>
                     </div>
-                    <div className="ref-card-preview">{r.content?.slice(0, 100)}</div>
+                    <div className="ref-card-preview">{cleanExtractedText(r.content).slice(0, 150)}</div>
                   </div>
                 ))}
               </div>
@@ -523,11 +545,7 @@ function SimilarCasesTable({ items, openModal }) {
               <td>
                 <button
                   className="sim-view-btn"
-                  onClick={() => openModal({
-                    title: `${it.bill_no} ${it.bill_name || ''}`,
-                    meta: `유사도 ${Math.round((it.similarity || 0) * 100)}%`,
-                    body: it.content,
-                  })}
+                  onClick={() => openModal(evidenceModal(it, 'bill'))}
                 >
                   보기
                 </button>
@@ -623,7 +641,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
     return (
       <div className="animate-fade-in">
         <div className="non-attach-card">
-          <h3>📋 비용추계서 미첨부 사유서</h3>
+          <h3>비용추계서 미첨부 사유서</h3>
           <div className="na-type-badge">{nonAttachment.type}유형</div>
           <p className="na-reason">{nonAttachment.reason_text}</p>
         </div>
@@ -639,7 +657,12 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
   }
   return (
     <div className="estimate-view animate-fade-in">
-      <h3>💰 자동 생성 비용추계서</h3>
+      <div className="section-heading">
+        <div>
+          <h3>비용추계 결과</h3>
+          <p>산식, 전제값과 연도별 추계액을 검토할 수 있습니다.</p>
+        </div>
+      </div>
       {estimate.calculation_status && (
         <div className={`calc-status ${
           estimate.calculation_status.startsWith('computed')
@@ -653,7 +676,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
             {estimate.calculation_status === 'computed_by_python'
               ? 'Python 계산기가 산출했습니다.'
               : estimate.calculation_status === 'computed_by_special_template'
-                ? '국회 특별위원회 신설 템플릿으로 산출했습니다.'
+                ? '국회 비용추계 기준과 확정된 전제값으로 산출했습니다.'
               : estimate.calculation_status === 'estimated_by_tag'
                 ? '유사 비용추계서 기반 초안입니다. 확인이 필요합니다.'
               : estimate.calculation_status === 'blocked_missing_variables'
@@ -728,7 +751,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
             )}
             {item.assumptions && item.assumptions.length > 0 && (
               <div className="assumptions-block">
-                <div className="assumptions-label">📐 전제조건 (가정)</div>
+                <div className="assumptions-label">추계 전제</div>
                 {item.assumptions.map((a, j) => {
                   const needInput = a.needs_user_confirm || a.value === null || a.value === undefined
                   return (
@@ -750,7 +773,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
             {(item.reference_unit_costs || (item.reference_unit_cost ? [item.reference_unit_cost] : [])).length > 0 && (
               <div className="ref-cost-block">
                 <span className="ref-cost-label">
-                  {formType === 'assembly' ? '💡 추천 단가 후보' : '💡 국회 단가 참고값'}
+                  {formType === 'assembly' ? '추천 단가 후보' : '국회 단가 참고값'}
                 </span>
                 <div className="ref-cost-list">
                   {(item.reference_unit_costs || [item.reference_unit_cost]).slice(0, 3).map((ref, refIdx) => (
@@ -909,7 +932,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
             )}
             {item.kosis_lookups && item.kosis_lookups.length > 0 && (
               <div className="kosis-block">
-                <div className="kosis-label">📊 KOSIS 자동 조회값</div>
+                <div className="kosis-label">KOSIS 조회값</div>
                 {item.kosis_lookups.map((k, j) => (
                   <div key={j} className="kosis-row">
                     <div className="kosis-name">
@@ -986,13 +1009,19 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
 function EvidenceView({ refs, openModal }) {
   return (
     <div className="animate-fade-in">
-      <EvidenceSection title="📋 유사 비용추계서 사례"
+      <div className="section-heading">
+        <div>
+          <h3>판단 근거</h3>
+          <p>분석에 사용된 유사 의안과 비용추계 작성 기준입니다.</p>
+        </div>
+      </div>
+      <EvidenceSection title="유사 비용추계서"
         items={refs.similar_bills_cost_estimate || []}
         openModal={openModal} kind="bill" />
-      <EvidenceSection title="📄 유사 미첨부 사유서"
+      <EvidenceSection title="유사 미첨부 사유서"
         items={refs.similar_bills_non_attachment || []}
         openModal={openModal} kind="bill" />
-      <EvidenceSection title="⚖️ 비용추계와 이해 (법령 PDF) 인용"
+      <EvidenceSection title="법령 및 작성 기준"
         items={refs.legal_references || []}
         openModal={openModal} kind="legal" />
     </div>
@@ -1009,25 +1038,18 @@ function EvidenceSection({ title, items, openModal, kind }) {
           <div
             key={i}
             className="ref-card"
-            onClick={() => openModal(kind === 'bill' ? {
-              title: `${it.bill_no} ${it.bill_name || ''}`,
-              meta: `유사도 ${Math.round((it.similarity || 0) * 100)}%`,
-              body: it.content,
-            } : {
-              title: '비용추계 이해 (법령 PDF)',
-              meta: `청크 ${it.chunk_id?.slice(-12) || ''} · 유사도 ${Math.round((it.similarity || 0) * 100)}%`,
-              body: it.content,
-            })}
+            onClick={() => openModal(evidenceModal(it, kind))}
           >
             <div className="ref-card-top">
               <span className="ref-card-title">
                 {kind === 'bill'
-                  ? `📋 ${it.bill_no} · ${(it.bill_name || '').slice(0, 35)}`
-                  : `📘 법령 PDF · ${it.chunk_id?.slice(-12) || ''}`}
+                  ? `${it.bill_no} · ${(it.bill_name || '').slice(0, 45)}`
+                  : '비용추계 법령 및 작성 기준'}
               </span>
-              <span className="ref-card-sim">{Math.round((it.similarity || 0) * 100)}%</span>
+              <span className="ref-card-sim">관련도 {Math.round((it.similarity || 0) * 100)}%</span>
             </div>
-            <div className="ref-card-preview">{(it.content || '').slice(0, 120)}</div>
+            <div className="ref-card-preview">{cleanExtractedText(it.content).slice(0, 180)}</div>
+            <div className="ref-card-action">근거 상세보기</div>
           </div>
         ))}
       </div>
@@ -1038,6 +1060,7 @@ function EvidenceSection({ title, items, openModal, kind }) {
 function FormView({ result, formType, setFormType }) {
   const renderKey = `${formType}:${result?.generatedAt || ''}:${result?.billName || ''}`
   const [rendered, setRendered] = useState({ key: '', html: '', err: '' })
+  const [downloadingPdf, setDownloadingPdf] = useState(false)
   const html = rendered.key === renderKey ? rendered.html : ''
   const err = rendered.key === renderKey ? rendered.err : ''
   const loading = rendered.key !== renderKey
@@ -1080,6 +1103,38 @@ function FormView({ result, formType, setFormType }) {
     URL.revokeObjectURL(url)
   }
 
+  const handleDownloadPdf = async () => {
+    setDownloadingPdf(true)
+    try {
+      const response = await fetch(`${API_BASE}/api/export/pdf`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ result, format: formType }),
+      })
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}))
+        throw new Error(payload.error || 'PDF 생성에 실패했습니다.')
+      }
+      const blob = await response.blob()
+      const disposition = response.headers.get('Content-Disposition') || ''
+      const matchedName = disposition.match(/filename\*=UTF-8''([^;]+)/i)
+      const fallbackName = `${result?.billName || '비용추계서'}_비용추계서_${formType === 'assembly' ? '국회' : '경기도'}.pdf`
+      const downloadName = matchedName ? decodeURIComponent(matchedName[1]) : fallbackName
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = downloadName
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      window.alert(e.message)
+    } finally {
+      setDownloadingPdf(false)
+    }
+  }
+
   return (
     <div className="form-view animate-fade-in">
       <div className="form-toolbar">
@@ -1088,18 +1143,21 @@ function FormView({ result, formType, setFormType }) {
             className={`pickr-btn ${formType === 'gyeonggi' ? 'active' : ''}`}
             onClick={() => setFormType('gyeonggi')}
           >
-            🟦 경기도 별지 제1호
+            경기도 양식
           </button>
           <button
             className={`pickr-btn ${formType === 'assembly' ? 'active' : ''}`}
             onClick={() => setFormType('assembly')}
           >
-            🟥 국회 별지 제2호
+            국회 양식
           </button>
         </div>
         <div className="form-actions">
-          <button className="form-btn" onClick={handlePrint}>🖨️ 인쇄 / PDF</button>
-          <button className="form-btn" onClick={handleDownloadHtml}>📥 HTML 다운로드</button>
+          <button className="form-btn" onClick={handleDownloadPdf} disabled={loading || downloadingPdf}>
+            {downloadingPdf ? 'PDF 생성 중...' : 'PDF 다운로드'}
+          </button>
+          <button className="form-btn" onClick={handlePrint}>인쇄</button>
+          <button className="form-btn" onClick={handleDownloadHtml}>HTML 다운로드</button>
         </div>
       </div>
 
@@ -1129,11 +1187,17 @@ function Modal({ data, onClose }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h3>{data.title}</h3>
+          <div>
+            {data.sourceLabel && <div className="modal-source">{data.sourceLabel}</div>}
+            <h3>{data.title}</h3>
+          </div>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
         {data.meta && <div className="modal-meta">{data.meta}</div>}
-        <div className="modal-body">{data.body}</div>
+        <div className="modal-content-label">근거 원문</div>
+        <div className="modal-body">
+          {data.sourceLabel ? cleanExtractedText(data.body) : data.body}
+        </div>
       </div>
     </div>
   )

@@ -482,6 +482,8 @@ def render_assembly(result: dict[str, Any]) -> str:
   table {{ width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 6px; }}
   th, td {{ border: 1px solid #555; padding: 5px 6px; text-align: left; vertical-align: top; }}
   th {{ background: #f1f5f9; font-weight: 700; text-align: center; }}
+  .fixed-table {{ table-layout: fixed; }}
+  .fixed-table th, .fixed-table td {{ word-break: keep-all; overflow-wrap: break-word; }}
   td.amount {{ text-align: right; font-variant-numeric: tabular-nums; }}
   td.center {{ text-align: center; }}
   td.empty {{ text-align: center; color: #999; padding: 12px; }}
@@ -517,8 +519,9 @@ def render_assembly(result: dict[str, Any]) -> str:
 
 <section class="block">
   <h3>Ⅱ. 재정수반요인</h3>
-  <table>
-    <thead><tr><th style="width:6%">연번</th><th style="width:24%">조·항(조제목)</th><th>주요내용</th><th style="width:16%">비고</th></tr></thead>
+  <table class="fixed-table">
+    <colgroup><col width="7%"><col width="23%"><col width="58%"><col width="12%"></colgroup>
+    <thead><tr><th>연번</th><th>조·항(조제목)</th><th>주요내용</th><th>비고</th></tr></thead>
     <tbody>{trigger_html}</tbody>
   </table>
 </section>
@@ -526,8 +529,9 @@ def render_assembly(result: dict[str, Any]) -> str:
 <section class="block">
   <h3>Ⅲ. 비용추계의 전제와 상세내역</h3>
   <h4>1. 재정수반요인별 추계 여부</h4>
-  <table>
-    <thead><tr><th style="width:6%">연번</th><th>조·항(조제목)</th><th style="width:12%">추계여부</th><th>비고(추계 미실시 사유)</th></tr></thead>
+  <table class="fixed-table">
+    <colgroup><col width="7%"><col width="24%"><col width="12%"><col width="57%"></colgroup>
+    <thead><tr><th>연번</th><th>조·항(조제목)</th><th>추계여부</th><th>비고(추계 미실시 사유)</th></tr></thead>
     <tbody>{estimate_review_html}</tbody>
   </table>
 

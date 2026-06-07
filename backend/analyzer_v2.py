@@ -2598,9 +2598,9 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         )
         workflow_issues.append({
             "level": "info",
-            "category": "국회 특별위원회 신설 템플릿 적용",
-            "detail": "2126636 비용추계서 전제와 산식을 기준으로 헌법특별위원회 신설 비용을 산출했습니다.",
-            "action": "같은 유형의 특별위원회 신설안은 소요인력과 사업비 전제를 확인해 조정해야 합니다.",
+            "category": "국회 특별위원회 산출 기준 적용",
+            "detail": "특별위원회 신설에 필요한 인력과 운영비 항목을 국회 비용추계 기준에 따라 산출했습니다.",
+            "action": "위원회 구성과 지원인력 규모가 달라지는 경우 전제값을 확인해야 합니다.",
         })
     if estimate and estimate.get("items"):
         for item in estimate["items"]:

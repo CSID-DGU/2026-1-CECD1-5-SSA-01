@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import json
+import re
+import tempfile
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import unquote, urlparse
+from urllib.parse import quote, unquote, urlparse
+
+import fitz
 
 from .analyzer import analyze_document
 from .analyzer_v2 import analyze_v2, recompute_with_user_inputs
@@ -15,10 +19,35 @@ from .config import GENERATED_DIR, GEMINI_API_KEY, HOST, PORT
 class ApiHandler(BaseHTTPRequestHandler):
     server_version = "EstimateAutomationHTTP/0.1"
 
+    @staticmethod
+    def _download_name(value: object, fallback: str) -> str:
+        name = re.sub(r'[\\/:*?"<>|\r\n]+', "_", str(value or "").strip())
+        return (name[:120] or fallback).strip(" .")
+
+    def _send_bytes(
+        self,
+        data: bytes,
+        *,
+        content_type: str,
+        download_name: str | None = None,
+    ) -> None:
+        self.send_response(200)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(data)))
+        if download_name:
+            encoded_name = quote(download_name)
+            self.send_header(
+                "Content-Disposition",
+                f"attachment; filename*=UTF-8''{encoded_name}",
+            )
+        self.end_headers()
+        self.wfile.write(data)
+
     def end_headers(self) -> None:
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Expose-Headers", "Content-Disposition")
         super().end_headers()
 
     def _send_json(self, payload: dict[str, object], status: int = 200) -> None:
@@ -74,7 +103,13 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         parsed = urlparse(self.path)
-        if parsed.path not in ("/api/analyze", "/api/analyze_v2", "/api/render", "/api/recompute"):
+        if parsed.path not in (
+            "/api/analyze",
+            "/api/analyze_v2",
+            "/api/render",
+            "/api/export/pdf",
+            "/api/recompute",
+        ):
             self._send_json({"error": "지원하지 않는 경로입니다."}, status=404)
             return
 
@@ -105,6 +140,54 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+            return
+
+        # ── /api/export/pdf: 양식 HTML을 A4 PDF 파일로 변환 ──
+        if parsed.path == "/api/export/pdf":
+            result = payload.get("result")
+            fmt = str(payload.get("format") or "gyeonggi").strip()
+            if fmt not in ("gyeonggi", "assembly"):
+                fmt = "gyeonggi"
+            if not isinstance(result, dict):
+                self._send_json({"error": "result 객체가 필요합니다."}, status=400)
+                return
+
+            try:
+                html = render_form(result, format=fmt)
+                with tempfile.TemporaryDirectory(prefix="cost-estimate-pdf-") as tmp:
+                    pdf_path = Path(tmp) / "estimate.pdf"
+                    media_box = fitz.paper_rect("a4")
+                    content_box = media_box + (38, 38, -38, -38)
+                    writer = fitz.DocumentWriter(str(pdf_path))
+
+                    def rectfn(_rect_num: int, _filled: bool):
+                        return media_box, content_box, None
+
+                    try:
+                        story = fitz.Story(
+                            html=html,
+                            user_css=(
+                                "body { font-family: sans-serif; } "
+                                "table { break-inside: avoid; } "
+                                "h1, h2, h3 { break-after: avoid; }"
+                            ),
+                        )
+                        story.write(writer, rectfn)
+                    finally:
+                        writer.close()
+                    pdf_data = pdf_path.read_bytes()
+            except Exception as exc:
+                self._send_json({"error": str(exc)}, status=500)
+                return
+
+            bill_name = self._download_name(result.get("billName"), "비용추계서")
+            suffix = "국회" if fmt == "assembly" else "경기도"
+            download_name = f"{bill_name}_비용추계서_{suffix}.pdf"
+            self._send_bytes(
+                pdf_data,
+                content_type="application/pdf",
+                download_name=download_name,
+            )
             return
 
         # ── /api/recompute: 사용자 입력값으로 비용추계서 재계산 ──

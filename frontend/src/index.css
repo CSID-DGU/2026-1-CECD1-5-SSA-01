@@ -2,27 +2,27 @@
 
 :root {
   /* === Light Theme === */
-  --bg:          #f8fafc;
+  --bg:          #f5f6f8;
   --bg-card:     #ffffff;
-  --bg-subtle:   #f1f5f9;
-  --bg-hover:    #f8fafc;
+  --bg-subtle:   #f3f4f6;
+  --bg-hover:    #f8f9fb;
 
-  --text:        #0f172a;
-  --text-muted:  #64748b;
-  --text-soft:   #94a3b8;
+  --text:        #17191c;
+  --text-muted:  #626872;
+  --text-soft:   #9399a2;
 
-  --border:       #e2e8f0;
-  --border-strong:#cbd5e1;
+  --border:       #e1e4e8;
+  --border-strong:#c7ccd3;
 
-  --primary:        #4f46e5;
-  --primary-light:  #6366f1;
-  --primary-soft:   #eef2ff;
+  --primary:        #175cd3;
+  --primary-light:  #2e6edb;
+  --primary-soft:   #eff6ff;
 
   --red:    #ef4444;
   --green:  #10b981;
   --amber:  #f59e0b;
   --blue:   #3b82f6;
-  --purple: #a855f7;
+  --purple: #175cd3;
   --orange: #f97316;
 
   --red-soft:    #fef2f2;
@@ -35,11 +35,11 @@
   --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
   --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.08), 0 4px 8px rgba(15, 23, 42, 0.04);
 
-  --radius-sm: 6px;
-  --radius:    10px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
+  --radius-sm: 4px;
+  --radius:    6px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
 
   --font-sans: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
 }
