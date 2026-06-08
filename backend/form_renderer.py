@@ -9,6 +9,7 @@ analyzer_v2 결과를 경기도/국회 비용추계서 양식 HTML로 렌더링.
 """
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from html import escape
 from typing import Any
@@ -24,6 +25,26 @@ def _fmt_amount(value: int | None) -> str:
 
 def _safe(text: Any) -> str:
     return escape(str(text or ""))
+
+
+def _display_bill_name(value: Any) -> str:
+    name = str(value or "")
+    replacements = {
+        "기반조성및": "기반조성 및 ",
+        "국방정보자원관리에관한": "국방정보자원관리에 관한 ",
+        "일부개정법률안": " 일부개정법률안",
+        "전부개정법률안": " 전부개정법률안",
+    }
+    for old, new in replacements.items():
+        name = name.replace(old, new)
+    return " ".join(name.split())
+
+
+def _public_reason_text(value: Any) -> str:
+    text = str(value or "")
+    text = re.sub(r"유사\s*입법사례\([^)]*\)에서도\s*", "유사 입법사례에서도 ", text)
+    text = re.sub(r"유사\s*입법사례\s*\d+\s*", "유사 입법사례 ", text)
+    return " ".join(text.split())
 
 
 # ── 경기도 별지 제1호서식 ─────────────────────────────────────────────────────
@@ -176,6 +197,105 @@ def render_gyeonggi(result: dict[str, Any]) -> str:
 
 # ── 국회 별지 제2호서식 ─────────────────────────────────────────────────────────
 
+def _render_assembly_non_attachment(result: dict[str, Any]) -> str:
+    bill_name = _safe(_display_bill_name(result.get("billName")))
+    today = datetime.now().strftime("%Y년 %m월 %d일")
+    non_at = result.get("nonAttachment") or {}
+    articles = result.get("articles") or []
+    triggers = [article for article in articles if article.get("cost_trigger")]
+
+    def article_ref(value: Any) -> str:
+        raw = " ".join(str(value or "").split())
+        return raw if raw.startswith("안 ") else f"안 {raw}" if raw.startswith("제") else raw
+
+    def plain(value: Any, limit: int = 420) -> str:
+        return _safe(" ".join(str(value or "").split())[:limit])
+
+    type_text = str(non_at.get("type") or "3호")
+    if "1" in type_text:
+        legal_reason = "제1호: 예상되는 비용이 비용추계서 첨부 기준 미만인 경우"
+    elif "2" in type_text:
+        legal_reason = "제2호: 국가안전보장 또는 군사기밀에 관한 사항으로 비용추계서 첨부가 곤란한 경우"
+    else:
+        legal_reason = "제3호: 의안의 내용이 선언적·권고적인 형식으로 규정되는 등 기술적으로 추계가 어려운 경우"
+
+    factor_rows = []
+    reason_rows = []
+    for idx, article in enumerate(triggers, 1):
+        ref = article_ref(article.get("no"))
+        factor_rows.append(
+            f"<tr><td>{idx}</td><td>{_safe(ref)}</td>"
+            f"<td>{plain(article.get('text'))}</td><td>의무규정</td></tr>"
+        )
+        reason_rows.append(
+            f"<tr><td>{idx}</td><td>{_safe(ref)}</td><td>{_safe(legal_reason)}</td></tr>"
+        )
+    factor_html = "".join(factor_rows) or "<tr><td colspan='4' class='empty'>해당 없음</td></tr>"
+    reason_html = "".join(reason_rows) or (
+        f"<tr><td>1</td><td>재정수반요인</td><td>{_safe(legal_reason)}</td></tr>"
+    )
+    primary_ref = article_ref(triggers[0].get("no")) if triggers else "재정수반요인"
+    primary_name = primary_ref
+    if "(" in primary_ref and ")" in primary_ref:
+        primary_name = primary_ref.split("(", 1)[1].rsplit(")", 1)[0]
+
+    reason_text = _safe(_public_reason_text(non_at.get("reason_text")))
+
+    return f"""<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>{bill_name} - 비용추계서 미첨부 사유서</title>
+<style>
+  @page {{ size: A4; margin: 18mm; }}
+  body {{ font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; color:#111; line-height:1.5; font-size:9.8pt; }}
+  .doc-title {{ text-align:center; margin: 12px 0 22px; }}
+  .doc-title .bill {{ font-size:14pt; font-weight:700; margin-bottom:5px; }}
+  .doc-title .label {{ font-size:12pt; font-weight:700; }}
+  h3 {{ font-size:11.5pt; margin:18px 0 7px; }}
+  h4 {{ font-size:10pt; margin:12px 0 5px; }}
+  table {{ width:100%; border-collapse:collapse; table-layout:fixed; font-size:8.9pt; }}
+  th, td {{ border:1px solid #555; padding:5px 6px; vertical-align:top; word-break:keep-all; overflow-wrap:break-word; }}
+  th {{ background:#f1f5f9; text-align:center; }}
+  td.center, td:first-child {{ text-align:center; }}
+  td.empty {{ text-align:center; color:#888; }}
+  .detail {{ margin-top:8px; padding:10px 12px; border-top:1px solid #555; border-bottom:1px solid #555; }}
+  .detail-title {{ font-weight:700; margin-bottom:5px; }}
+  .detail p {{ margin:0; line-height:1.65; }}
+  .signature {{ margin-top:34px; text-align:center; font-size:9pt; }}
+</style></head>
+<body>
+<div class="doc-title">
+  <div class="bill">{bill_name}</div>
+  <div class="label">【비용추계서 미첨부 사유서】</div>
+</div>
+
+<h3>Ⅰ. 재정수반요인</h3>
+<table>
+  <colgroup><col width="7%"><col width="25%"><col width="56%"><col width="12%"></colgroup>
+  <thead><tr><th>연번</th><th>조·항(조제목)</th><th>주요내용</th><th>비고</th></tr></thead>
+  <tbody>{factor_html}</tbody>
+</table>
+
+<h3>Ⅱ. 미첨부 근거 규정 및 상세 사유</h3>
+<h4>1. 근거 규정</h4>
+<table>
+  <colgroup><col width="7%"><col width="28%"><col width="65%"></colgroup>
+  <thead><tr><th>연번</th><th>조·항(조제목)</th><th>미첨부 근거 규정</th></tr></thead>
+  <tbody>{reason_html}</tbody>
+</table>
+
+<h4>2. 상세 사유</h4>
+<div class="detail">
+  <div class="detail-title">□ {primary_name}({_safe(primary_ref)})</div>
+  <p>○ {reason_text}</p>
+</div>
+
+<div class="signature">
+  국회예산정책처 작성 형식 참고<br>
+  {today}
+</div>
+</body></html>"""
+
+
 def render_assembly(result: dict[str, Any]) -> str:
     """국회 비용추계서 원문 흐름에 가깝게 렌더링한다."""
     bill_name = _safe(result.get("billName"))
@@ -187,6 +307,13 @@ def render_assembly(result: dict[str, Any]) -> str:
     non_at   = result.get("nonAttachment")
     articles = result.get("articles", [])
     workflow = ((result.get("workflow") or {}).get("issues") or [])
+    verdict_type = str((result.get("verdict") or {}).get("type") or "")
+    has_amount = any(
+        isinstance(row, dict) and row.get("amount_thousand") is not None
+        for row in years
+    )
+    if non_at and (verdict_type.startswith("미첨부") or not items or not has_amount):
+        return _render_assembly_non_attachment(result)
 
     def _million(value: Any) -> int | None:
         if value is None:

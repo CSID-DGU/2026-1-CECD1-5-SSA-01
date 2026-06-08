@@ -246,6 +246,31 @@ def _sync_estimate_amount_totals(estimate: dict[str, Any]) -> None:
     estimate["average_amount_thousand"] = int(round(total / len(amounts)))
 
 
+def _has_computed_amounts(estimate: dict[str, Any] | None) -> bool:
+    if not isinstance(estimate, dict):
+        return False
+    return any(
+        isinstance(row, dict) and row.get("amount_thousand") is not None
+        for row in estimate.get("year_estimates") or []
+    )
+
+
+def _non_attachment_verdict(type_text: Any) -> tuple[str, str]:
+    raw = str(type_text or "").strip()
+    if "1" in raw:
+        return "미첨부_1호", "미첨부 1호 (비용 미미)"
+    if "2" in raw:
+        return "미첨부_2호", "미첨부 2호 (안보·기밀)"
+    return "미첨부_3호", "미첨부 3호 (기술적 곤란)"
+
+
+def _public_non_attachment_text(value: Any) -> str:
+    text = str(value or "")
+    text = re.sub(r"유사\s*입법사례\([^)]*\)에서도\s*", "유사 입법사례에서도 ", text)
+    text = re.sub(r"유사\s*입법사례\s*\d+\s*", "유사 입법사례 ", text)
+    return " ".join(text.split())
+
+
 def _cap_confidence(value: Any, cap: float) -> float:
     try:
         confidence = float(value)
@@ -771,6 +796,7 @@ _FORMULA_READY_RE = re.compile(
 )
 _DATA_GAP_RISK_RE = re.compile(
     r"(지원할수있다|사업계획|대통령령으로정하는|구체적사업|범위와.{0,30}필요한사항|"
+    r"구체적방안|체계적방안|필요한사항은.{0,30}정한다|장관이정한다|"
     r"자료|신청률|대상자|지원금액|감면|세액|세입)"
 )
 
@@ -824,6 +850,10 @@ def _rule_candidate_profile(compact: str, rule: dict[str, Any], window: str) -> 
     if _DATA_GAP_RISK_RE.search(compact[:1100]) and strength != "strong":
         feasibility = "non_attachment_review"
         non_attachment_risk = "medium" if non_attachment_risk == "low" else non_attachment_risk
+        review_reason = (
+            "구체적인 사업 범위, 수행 방식, 대상 및 규모가 하위규정이나 소관 기관 결정에 위임되어 "
+            "현 단계에서 기술적으로 비용추계가 곤란합니다."
+        )
 
     return {
         "candidate_strength": strength,
@@ -2098,12 +2128,18 @@ def _extract_bill_name(text: str, fallback: str) -> str:
     """PDF 앞부분에서 실제 의안명을 우선 추출한다."""
     lines = [line.strip() for line in text[:2500].splitlines() if line.strip()]
     ignore = re.compile(r"(의안|번호|발의|의원|대표|연월일|제안이유|주요내용|[-―]\s*\d+\s*[-―]?)")
+    suffix_only = {"일부개정법률안", "전부개정법률안", "개정법률안"}
+    previous_candidate = ""
     for line in lines[:40]:
         compact = re.sub(r"\s+", "", line)
         if len(compact) < 4 or ignore.fullmatch(compact):
             continue
+        if compact in suffix_only and previous_candidate:
+            return previous_candidate + compact
         if compact.endswith(("일부개정법률안", "전부개정법률안", "개정법률안", "법률안", "법안", "조례안")):
             return compact
+        if not compact.startswith("(") and not ignore.search(compact):
+            previous_candidate = compact
     for line in lines[:20]:
         compact = re.sub(r"\s+", "", line)
         if compact and not ignore.search(compact) and not compact.startswith("("):
@@ -2730,6 +2766,63 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             "category": "NABO 금액 게이트 자동 보정",
             "detail": gate_note,
             "action": "AI 판단을 NABO 공식 금액 기준에 따라 자동 보정했습니다.",
+        })
+
+    # 5-2.6) 미첨부 사유서 정합성 보정.
+    # 추계 곤란 후보인데 실제 산출 금액이 없으면 공식 문서는 미첨부 사유서가 맞다.
+    non_attachment_candidates = [
+        article for article in article_results
+        if article.get("cost_trigger")
+        and article.get("estimate_feasibility") == "non_attachment_review"
+    ]
+    strong_formula_candidates = [
+        article for article in article_results
+        if article.get("cost_trigger")
+        and article.get("cost_candidate_strength") == "strong"
+        and article.get("estimate_feasibility") == "formula_ready"
+    ]
+    if (
+        form_type == "assembly"
+        and not final.get("if_non_attachment")
+        and not _has_computed_amounts(estimate)
+        and non_attachment_candidates
+        and not strong_formula_candidates
+    ):
+        primary = non_attachment_candidates[0]
+        ref = primary.get("no") or "해당 조문"
+        reason = (
+            primary.get("review_reason")
+            or (primary.get("rule_cost_trigger") or {}).get("review_reason")
+            or "구체적인 사업 범위와 산식 전제값이 법률안에 명시되지 않아 기술적으로 비용추계가 곤란합니다."
+        )
+        final["if_non_attachment"] = {
+            "type": "3호",
+            "reason_text": (
+                f"개정안 {ref}는 재정수반 가능성이 있으나, 구체적인 사업 범위, 수행 방식, "
+                f"대상 및 규모 등 비용 산정에 필요한 전제가 법률안에 명시되어 있지 않습니다. "
+                f"따라서 {reason} 이는 「의안의 비용추계 등에 관한 규칙」 제3조제1항제3호에 따른 "
+                "기술적으로 추계가 어려운 경우에 해당합니다."
+            ),
+        }
+
+    # 미첨부 사유와 비용추계서가 동시에 생성된 경우에도 실제 계산 금액이 없으면 미첨부 사유서를 우선한다.
+    non_attachment = final.get("if_non_attachment")
+    if isinstance(non_attachment, dict) and not _has_computed_amounts(estimate):
+        non_attachment["reason_text"] = _public_non_attachment_text(non_attachment.get("reason_text"))
+        na_verdict, na_label = _non_attachment_verdict(non_attachment.get("type"))
+        final["verdict"] = na_verdict
+        final["verdict_label"] = na_label
+        final["reason_summary"] = non_attachment.get("reason_text") or final.get("reason_summary", "")
+        final["verdict_reason_nabo"] = (
+            f"{na_label}: {non_attachment.get('reason_text') or '비용추계서 미첨부 사유에 해당함.'}"
+        )
+        final["if_needs_estimate"] = None
+        estimate = None
+        workflow_issues.append({
+            "level": "info",
+            "category": "미첨부 사유서 우선 보정",
+            "detail": "미첨부 사유가 생성되었고 실제 산출 금액이 없어 비용추계서가 아닌 미첨부 사유서로 정리했습니다.",
+            "action": "재정수반요인은 남기되, 추계 곤란 사유를 공식 양식에 표시합니다.",
         })
 
     # 5-3) QA 리포트 — 무엇이 부족한지 사용자에게 명시
