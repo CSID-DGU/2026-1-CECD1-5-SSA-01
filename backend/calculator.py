@@ -136,7 +136,9 @@ def compute_year_estimates(
 
     Supported item calculation schema:
       {
+        "mode": "base_growth" | "yearly_series",
         "base_amount_thousand": 120000,
+        "yearly_amounts_thousand": [120000, 122000, 124000, 126000, 128000],
         "recurrence": "annual" | "one_time",
         "start_year": 1,
         "end_year": 5,
@@ -160,13 +162,32 @@ def compute_year_estimates(
         if not isinstance(calc, dict):
             calc = {}
 
+        mode = str(calc.get("mode") or "base_growth")
+        yearly_series = calc.get("yearly_amounts_thousand")
+        item_name = str(item.get("name") or f"항목 {index}")
+        if mode == "yearly_series" and isinstance(yearly_series, list):
+            values = [_to_float(value) for value in yearly_series[:years]]
+            if len(values) != years or any(value is None for value in values):
+                issues.append({
+                    "item": item_name,
+                    "level": "error",
+                    "reason": f"yearly_amounts_thousand는 {years}개 숫자여야 함",
+                })
+                item["year_amounts_thousand"] = [None] * years
+                continue
+            item_amounts = [int(round(value or 0)) for value in values]
+            item["year_amounts_thousand"] = item_amounts
+            for year_index, amount in enumerate(item_amounts):
+                totals[year_index] += amount
+            any_computed = True
+            continue
+
         base_amount = _to_float(calc.get("base_amount_thousand"))
         recurrence = str(calc.get("recurrence") or "unknown")
         start_year = int(_to_float(calc.get("start_year")) or 1)
         end_year = int(_to_float(calc.get("end_year")) or years)
         growth_variable = calc.get("growth_variable")
 
-        item_name = str(item.get("name") or f"항목 {index}")
         if base_amount is None and allow_estimated:
             base_amount = _apply_tag_fallback(item, tag_patterns or [], years)
             if base_amount is not None:

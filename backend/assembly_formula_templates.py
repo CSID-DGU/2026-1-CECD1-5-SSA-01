@@ -70,8 +70,8 @@ TEMPLATES: dict[str, dict[str, Any]] = {
         "calculation_type": "unit_cost_times_frequency",
         "variables": ["용역 단가", "수행 횟수", "수행 주기", "소비자물가상승률"],
         "recurrence": "periodic_or_one_time",
-        "growth_variable": "소비자물가상승률",
-        "notes": "기본계획/실태조사는 수행 주기와 최초 수행연도가 핵심 변수입니다.",
+        "growth_variable": None,
+        "notes": "기본계획/실태조사는 수행 주기와 최초 수행연도가 핵심 변수이며, 물가상승률은 근거가 있을 때만 적용합니다.",
     },
     "subsidy_payment": {
         "label": "지원금 지급 산식",
@@ -89,9 +89,9 @@ RULES: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("employer_contribution", re.compile(r"기관부담|부담요율|부담금")),
     ("basic_expense", re.compile(r"기본경비|인건비대비|보수액대비")),
     ("asset_acquisition", re.compile(r"자산취득|비품|집기|PC")),
-    ("committee_operation", re.compile(r"위원회|심의회|협의회|회의수당|운영비|운영경비")),
-    ("research_service", re.compile(r"연구용역|실태조사|기본계획|조사")),
     ("personnel_compensation", re.compile(r"보수|인건비|직급|봉급|급여")),
+    ("research_service", re.compile(r"연구용역|실태조사|기본계획|조사")),
+    ("committee_operation", re.compile(r"위원회|심의회|협의회|회의수당|위원회운영|위원회사업비")),
     ("subsidy_payment", re.compile(r"지원금|보조금|수당|급여|감면|지급")),
 )
 
@@ -185,7 +185,8 @@ def build_formula_template(
     item: dict[str, Any],
     tag_patterns: list[dict[str, Any]],
 ) -> dict[str, Any] | None:
-    template_key = infer_template_key(item)
+    explicit_family = str(item.get("formula_family") or "")
+    template_key = explicit_family if explicit_family in TEMPLATES else infer_template_key(item)
     if not template_key:
         return None
 

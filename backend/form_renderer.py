@@ -389,22 +389,16 @@ def render_assembly(result: dict[str, Any]) -> str:
         if not items:
             return []
         paragraphs: list[str] = []
-        special = estimate.get("applied_special_template") or {}
-        if special.get("template_key") == "assembly_constitution_special_committee":
-            staff_total = ((special.get("staffing") or {}).get("total")) or _assumption_value(items[0], "소요인력")
+        analogy = estimate.get("analogy_selection") or {}
+        if analogy:
             paragraphs.append(
-                "헌법특별위원회 신설에 따른 증원인력은 현 시점에서 업무량 등을 알 수 없으므로 "
-                "타 상임위원회 인력 현황을 참고하여 추정함."
+                "법률안만으로 조직의 실제 업무량과 지원인력 규모를 확정하기 어려우므로, "
+                "조직 유형과 직무가 유사한 국회 비용추계 사례를 기준선으로 적용함."
             )
             paragraphs.append(
-                f"개정안에 따르면 헌법특별위원회 위원 정수는 30명으로, 위원 정수가 30명인 "
-                f"국토교통위원회 및 산업통상자원중소벤처기업위원회 인력현황 등을 참고하여 "
-                f"특별위원회 소요인력을 {staff_total}명으로 가정함."
-            )
-            paragraphs.append(
-                "특별위원회 신설에 따라 회의 및 사무실 공간, 회의장 마련을 위한 공사비 및 비품 등이 "
-                "소요될 수 있으나 국회 내 유휴공간 및 기존 예산 범위에서 충당 가능한 것으로 보아 "
-                "본 추계 대상에서 제외함."
+                f"유사사례는 {analogy.get('bill_no') or ''} "
+                f"{analogy.get('bill_name') or '국회 비용추계서'}이며, "
+                "해당 사례의 항목별 산식과 전제값은 적용 적합성을 확인할 필요가 있음."
             )
             paragraphs.append(f"추계기간은 {first_year_text}부터 {last_year_text}까지 5년으로 함.")
             return paragraphs

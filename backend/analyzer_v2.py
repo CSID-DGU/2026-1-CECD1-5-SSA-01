@@ -32,8 +32,15 @@ from typing import Any
 import fitz  # PyMuPDF
 
 from .assembly_assumptions import find_assumption_candidates
+from .assembly_analogy_engine import build_analogical_committee_estimate
+from .assembly_case_policy import apply_validated_case_policy
+from .assembly_formula_engine import (
+    apply_tag_formula_evidence,
+    build_generalized_estimate,
+    classify_estimation_status,
+    merge_generalized_estimate,
+)
 from .assembly_formula_templates import build_formula_template
-from .assembly_special_templates import apply_special_assembly_template
 from .calculator import compute_year_estimates
 from .config import PROJECT_ROOT, SCRIPT_DIR, get_env
 
@@ -189,7 +196,14 @@ def _missing_formula_variables(estimate: dict | None) -> dict[str, list[str]]:
     missing: dict[str, list[str]] = {}
     for item in estimate.get("items") or []:
         calc = item.get("calculation") or {}
-        if isinstance(calc, dict) and calc.get("base_amount_thousand") is not None:
+        if isinstance(calc, dict) and (
+            calc.get("base_amount_thousand") is not None
+            or (
+                calc.get("mode") == "yearly_series"
+                and isinstance(calc.get("yearly_amounts_thousand"), list)
+                and calc.get("yearly_amounts_thousand")
+            )
+        ):
             continue
         item_name = str(item.get("name") or "?")
         looked_up = {str(k.get("variable")) for k in item.get("kosis_lookups") or []}
@@ -359,6 +373,7 @@ _SUPPLEMENTARY_RE = re.compile(r"(?m)^\s*부\s*칙\s*$")
 ANALYZE_MAX_ARTICLES = int(get_env("ANALYZE_MAX_ARTICLES", "0") or "0")
 ARTICLE_WORKERS = max(1, int(get_env("ANALYZE_ARTICLE_WORKERS", "2") or "2"))
 MIN_AVG_SIMILARITY = float(get_env("MIN_AVG_SIMILARITY", "0.45") or "0.45")
+_GEMINI_BACKOFF_UNTIL = 0.0
 
 
 # ── HTTP 헬퍼 ─────────────────────────────────────────────────────────────────
@@ -764,7 +779,7 @@ _RULE_COST_TRIGGERS: tuple[dict[str, Any], ...] = (
         "pattern": re.compile(
             r"(실태조사|기본계획|종합계획|연구|용역|교육)"
             r".{0,80}?"
-            r"(수립|실시|시행|수행|위탁)",
+            r"(수립|실시|시행|수행|위탁|조사)",
             re.DOTALL,
         ),
         "trigger_type": "의무부과",
@@ -1253,6 +1268,8 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
         if not _is_committee_meeting_item(item):
             continue
         calc = item.setdefault("calculation", {})
+        if item.get("analogy_evidence") or calc.get("mode") == "yearly_series":
+            continue
         if isinstance(calc, dict) and calc.get("base_amount_thousand") is not None and item.get("committee_formula"):
             continue
 
@@ -1752,6 +1769,7 @@ def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
         if a["item_id"] in by_item:
             by_item[a["item_id"]]["amounts"].append({
                 "year_label":      a["year_label"],
+                "year_offset":     a.get("year_offset"),
                 "amount_thousand": a["amount_thousand"],
                 "formula":         a["formula_text"],
                 "is_total":        a["is_total"],
@@ -1903,23 +1921,47 @@ def format_tag_patterns(patterns: list[dict]) -> str:
 # ── Gemini ────────────────────────────────────────────────────────────────────
 
 def gemini_json(prompt: str, temperature: float = 0.1) -> dict | None:
-    url = f"{GEMINI_BASE_URL}/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    try:
-        data = _post(url, {"Content-Type": "application/json"}, {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "responseMimeType": "application/json",
-                "temperature": temperature,
-            },
-        }, timeout=180)
-        text = data["candidates"][0]["content"]["parts"][0]["text"]
-        parsed = json.loads(text)
-        if isinstance(parsed, list):
-            parsed = next((x for x in parsed if isinstance(x, dict)), None)
-        return parsed if isinstance(parsed, dict) else None
-    except Exception as exc:
-        sys.stderr.write(f"[Gemini 오류] {exc}\n")
+    global _GEMINI_BACKOFF_UNTIL
+    if time.time() < _GEMINI_BACKOFF_UNTIL:
         return None
+    url = f"{GEMINI_BASE_URL}/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "temperature": temperature,
+        },
+    }
+    for attempt in range(3):
+        try:
+            data = _post(url, {"Content-Type": "application/json"}, payload, timeout=180)
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            parsed = json.loads(text)
+            if isinstance(parsed, list):
+                parsed = next((x for x in parsed if isinstance(x, dict)), None)
+            return parsed if isinstance(parsed, dict) else None
+        except urllib.error.HTTPError as exc:
+            if exc.code == 429:
+                if attempt < 1:
+                    time.sleep(3)
+                    continue
+                _GEMINI_BACKOFF_UNTIL = time.time() + 30
+            elif 500 <= exc.code < 600 and attempt < 2:
+                time.sleep(2 ** attempt * 3)
+                continue
+            sys.stderr.write(f"[Gemini 오류] HTTP {exc.code}: {exc.reason}\n")
+            return None
+        except (TimeoutError, urllib.error.URLError) as exc:
+            if attempt < 2:
+                time.sleep(2 ** attempt * 2)
+                continue
+            _GEMINI_BACKOFF_UNTIL = time.time() + 30
+            sys.stderr.write(f"[Gemini 오류] {exc}\n")
+            return None
+        except Exception as exc:
+            sys.stderr.write(f"[Gemini 오류] {exc}\n")
+            return None
+    return None
 
 
 # ── 프롬프트 ──────────────────────────────────────────────────────────────────
@@ -2241,6 +2283,7 @@ def recompute_with_user_inputs(
         if "base_amount_thousand" in u:
             try:
                 calc["base_amount_thousand"] = int(float(u["base_amount_thousand"]))
+                calc["mode"] = "base_growth"
             except (TypeError, ValueError):
                 pass
         # 변수 단위 (단가 × 대상)
@@ -2251,6 +2294,7 @@ def recompute_with_user_inputs(
                 target = float(vals.get("대상") or vals.get("target") or 1)
                 if unit_cost > 0 and target > 0:
                     calc["base_amount_thousand"] = int(round(unit_cost * target))
+                    calc["mode"] = "base_growth"
                     # 사용자 입력값을 assumptions에도 반영
                     for a in item.get("assumptions") or []:
                         nm = str(a.get("name") or "")
@@ -2285,6 +2329,7 @@ def recompute_with_user_inputs(
             missing_by_item.setdefault(name, []).append(reason)
         estimate["calculation_status"] = "awaiting_user_input"
         estimate["year_estimates"] = _blocked_year_estimates(missing_by_item or {"계산 항목": ["base_amount_thousand"]})
+    estimate["estimation_status"] = classify_estimation_status(estimate)
     # 양식 게이트 재적용
     yr = estimate.get("year_estimates")
     raw_v = estimate.get("verdict_after_recompute") or "추계서"
@@ -2404,6 +2449,19 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
 
     # 3-B. 조문별 처리 함수 (각 worker 안에서 vector_search 2번 + gemini 1번)
     def process_article(idx: int, art: dict[str, str], art_emb: list[float] | None) -> dict[str, Any]:
+        compact_article = re.sub(r"\s+", "", str(art.get("text") or ""))
+        if _NON_COST_ARTICLE_RE.search(compact_article) and not _rule_cost_trigger(art.get("text") or ""):
+            return {
+                "_idx": idx,
+                **art,
+                "cost_trigger": False,
+                "trigger_type": "없음",
+                "obligation_strength": "aspirational",
+                "reason": "목적·정의·관계·벌칙 등 독립적인 비용산식이 없는 조문으로 규칙 분류했습니다.",
+                "legal_refs": [],
+                "similar_refs": [],
+                "analysis_source": "deterministic_non_cost_rule",
+            }
         art_legal = vector_search(art_emb, source="legal_reference", k=2) if art_emb else []
         art_similar = (
             vector_search(art_emb, source="national_assembly", doc_type="cost_estimate", k=2)
@@ -2454,6 +2512,7 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
     for r in article_results:
         r.pop("_idx", None)
     article_results = _apply_rule_cost_trigger_overrides(article_results)
+    article_results = apply_validated_case_policy(article_results)
     override_count = sum(1 for a in article_results if a.get("rule_cost_trigger"))
     candidate_summary = _cost_candidate_summary(article_results)
     if override_count:
@@ -2539,7 +2598,13 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         for s in similar_non_attach[:2]
     )
     # 5-0) 유사 의안 TAG 구조 패턴 조회
-    similar_bill_ids = [s.get("bill_id") for s in similar_estimates[:3] if s.get("bill_id")]
+    similar_bill_ids: list[str] = []
+    for similar in similar_estimates:
+        bill_id = str(similar.get("bill_id") or "")
+        if bill_id and bill_id not in similar_bill_ids:
+            similar_bill_ids.append(bill_id)
+        if len(similar_bill_ids) >= 3:
+            break
     tag_patterns = fetch_tag_patterns(similar_bill_ids, limit=3)
     tag_patterns_text = format_tag_patterns(tag_patterns)
     if not tag_patterns:
@@ -2594,6 +2659,27 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
 
     # 5-1) KOSIS 변수값 자동 채우기 + 단가 후보 제시
     estimate = final.get("if_needs_estimate")
+    generalized_estimate = build_generalized_estimate(article_results, years=5)
+    estimate = merge_generalized_estimate(estimate, generalized_estimate)
+    if estimate is not final.get("if_needs_estimate"):
+        final["if_needs_estimate"] = estimate
+        if estimate and estimate.get("items"):
+            final["verdict"] = "추계서"
+            final["verdict_label"] = "비용추계서"
+            final["if_non_attachment"] = None
+            final["reason_summary"] = (
+                "재정수반 조문을 범용 비용유형으로 분류하여 산식 후보를 구성했습니다. "
+                "금액 확정 여부는 산식별 기준값과 외부자료 확보 상태를 별도로 표시합니다."
+            )
+            final["verdict_reason_nabo"] = (
+                "재정지출 또는 재정수입 변화를 유발하는 비용항목과 계산 구조가 확인되어 비용추계 검토 대상입니다."
+            )
+            workflow_issues.append({
+                "level": "info",
+                "category": "범용 산식 구조 적용",
+                "detail": "재정수반 조문을 조사·지원·시설·기관설립 등 상위 계산구조로 변환했습니다.",
+                "action": "외부자료와 정책 전제의 충족 여부에 따라 자동계산 또는 입력대기로 구분합니다.",
+            })
     rule_based_estimate = _make_rule_based_estimate(article_results, form_type=form_type)
     if rule_based_estimate and (
         not estimate
@@ -2617,26 +2703,33 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             "detail": "명확한 비용유발 후보가 있어 미대상 판단을 추계 검토 대상으로 보정했습니다.",
             "action": "TAG/RAG 기준값 또는 사용자 입력으로 회의횟수·단가·인원 전제를 확정해야 합니다.",
         })
-    special_estimate = apply_special_assembly_template(
-        text=text,
-        articles=article_results,
-        estimate=estimate,
-        form_type=form_type,
+    analogical_estimate = (
+        build_analogical_committee_estimate(
+            text=text,
+            articles=article_results,
+            years=5,
+        )
+        if form_type == "assembly"
+        else None
     )
-    if special_estimate:
-        estimate = special_estimate
+    if analogical_estimate:
+        estimate = analogical_estimate
         final["if_needs_estimate"] = estimate
         final["verdict"] = "추계서"
         final["verdict_label"] = "비용추계서"
         final["reason_summary"] = (
-            "헌법특별위원회 신설에 따라 소요인력 15명에 대한 인건비등과 "
-            "위원회 운영 사업비가 발생하므로 비용추계서 작성 대상입니다."
+            "위원회 신설에 따른 인건비·기본경비·자산취득비·사업비를 "
+            "구조가 유사한 국회 비용추계 사례의 전제와 산식을 기준으로 추계했습니다."
         )
         workflow_issues.append({
-            "level": "info",
-            "category": "국회 특별위원회 산출 기준 적용",
-            "detail": "특별위원회 신설에 필요한 인력과 운영비 항목을 국회 비용추계 기준에 따라 산출했습니다.",
-            "action": "위원회 구성과 지원인력 규모가 달라지는 경우 전제값을 확인해야 합니다.",
+            "level": "warn",
+            "category": "유사 비용추계 사례 기반 가정",
+            "detail": (
+                f"{analogical_estimate['analogy_selection']['bill_no']} "
+                f"{analogical_estimate['analogy_selection']['bill_name']}의 "
+                "항목·산식·전제를 기준선으로 적용했습니다."
+            ),
+            "action": "위원회 직무, 위원 정수와 지원인력 규모의 동등성을 확인한 뒤 전제값을 확정해야 합니다.",
         })
     if estimate and estimate.get("items"):
         for item in estimate["items"]:
@@ -2665,6 +2758,14 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 if assumption_candidates:
                     item["assumption_candidates"] = assumption_candidates
         if form_type == "assembly":
+            tag_amount_count = apply_tag_formula_evidence(estimate, tag_patterns)
+            if tag_amount_count:
+                workflow_issues.append({
+                    "level": "warn",
+                    "category": "TAG 유사산식 금액 적용",
+                    "detail": f"동일 계산유형의 유사 추계서에서 {tag_amount_count}개 항목의 기준금액 후보를 연결했습니다.",
+                    "action": "유사사례 기반 금액이므로 사업 범위와 단가의 적합성을 최종 확인해야 합니다.",
+                })
             enhanced_committee_items = _enhance_committee_meeting_formulas(estimate, article_results)
             if enhanced_committee_items:
                 workflow_issues.append({
@@ -2696,7 +2797,14 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         missing_by_item = _missing_formula_variables(estimate)
         has_calculable_items = any(
             isinstance(item.get("calculation"), dict)
-            and item["calculation"].get("base_amount_thousand") is not None
+            and (
+                item["calculation"].get("base_amount_thousand") is not None
+                or (
+                    item["calculation"].get("mode") == "yearly_series"
+                    and isinstance(item["calculation"].get("yearly_amounts_thousand"), list)
+                    and item["calculation"].get("yearly_amounts_thousand")
+                )
+            )
             for item in estimate.get("items") or []
         )
         if missing_by_item and not has_calculable_items:
@@ -2746,6 +2854,38 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         if review_vars:
             estimate["verification_needed"] = review_vars
 
+        estimation_status = classify_estimation_status(estimate)
+        estimate["estimation_status"] = estimation_status
+        status_code = estimation_status.get("code")
+        if status_code == "needs_external_data":
+            estimate["calculation_status"] = "needs_external_data"
+            final["confidence"] = max(float(final.get("confidence") or 0), 0.65)
+            workflow_issues.append({
+                "level": "warn",
+                "category": "외부 통계·기준자료 필요",
+                "detail": estimation_status.get("reason"),
+                "action": "대상 규모·단가·실적 자료를 연결하면 동일 산식으로 재계산할 수 있습니다.",
+                "items": estimation_status.get("missing"),
+            })
+        elif status_code == "needs_policy_input":
+            estimate["calculation_status"] = "needs_policy_input"
+            final["confidence"] = max(float(final.get("confidence") or 0), 0.6)
+            workflow_issues.append({
+                "level": "warn",
+                "category": "정책 전제 입력 필요",
+                "detail": estimation_status.get("reason"),
+                "action": "사업 규모·지급 주기·운영방식 전제를 확정한 뒤 재계산해야 합니다.",
+                "items": estimation_status.get("missing"),
+            })
+        elif status_code == "computed_with_estimates":
+            estimate["calculation_status"] = "computed_with_evidence"
+            final["confidence"] = max(float(final.get("confidence") or 0), 0.72)
+        elif status_code == "partially_computed":
+            estimate["calculation_status"] = "computed_partial_by_python"
+            final["confidence"] = max(float(final.get("confidence") or 0), 0.68)
+        elif status_code == "computed":
+            final["confidence"] = max(float(final.get("confidence") or 0), 0.85)
+
     # 5-2.5) NABO 금액 게이트 - verdict와 계산 결과가 일치하는지 검증
     raw_verdict = final.get("verdict", "unknown")
     year_ests_for_gate = (estimate or {}).get("year_estimates") if estimate else None
@@ -2785,6 +2925,7 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         form_type == "assembly"
         and not final.get("if_non_attachment")
         and not _has_computed_amounts(estimate)
+        and not (estimate and estimate.get("items"))
         and non_attachment_candidates
         and not strong_formula_candidates
     ):
@@ -2807,7 +2948,11 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
 
     # 미첨부 사유와 비용추계서가 동시에 생성된 경우에도 실제 계산 금액이 없으면 미첨부 사유서를 우선한다.
     non_attachment = final.get("if_non_attachment")
-    if isinstance(non_attachment, dict) and not _has_computed_amounts(estimate):
+    if (
+        isinstance(non_attachment, dict)
+        and not _has_computed_amounts(estimate)
+        and not (estimate and estimate.get("items"))
+    ):
         non_attachment["reason_text"] = _public_non_attachment_text(non_attachment.get("reason_text"))
         na_verdict, na_label = _non_attachment_verdict(non_attachment.get("type"))
         final["verdict"] = na_verdict

@@ -23,6 +23,20 @@ const VERDICT_META = {
   '미첨부_C': { label: '기존 예산 활용', color: 'blue', desc: '기존 예산 범위' },
 }
 
+const CALC_STATUS_TEXT = {
+  computed_by_python: '확정된 기준값으로 계산했습니다.',
+  computed_by_special_template: '국회 비용추계 기준과 확정된 전제값으로 산출했습니다.',
+  computed_with_tag_estimates: '유사 비용추계서의 동일 산식 금액을 적용한 검토용 추계입니다.',
+  computed_with_evidence: '공식 비용추계 사례의 산식과 전제를 적용한 검토용 추계입니다.',
+  computed_partial_by_python: '계산 가능한 항목만 산출했으며 나머지 항목은 자료 보완이 필요합니다.',
+  estimated_by_tag: '유사 비용추계서 기반 초안입니다. 확인이 필요합니다.',
+  needs_external_data: '산식은 구성됐지만 대상 규모·단가·실적 등 외부 자료가 필요합니다.',
+  needs_policy_input: '산식은 구성됐지만 사업 규모나 운영방식에 대한 정책 전제가 필요합니다.',
+  blocked_missing_variables: '필수 변수가 부족해 금액 계산을 차단했습니다.',
+  blocked_no_structured_formula: '적용할 수 있는 구조화 산식을 찾지 못했습니다.',
+  awaiting_user_input: '단가·대상 입력 후 재계산이 필요합니다.',
+}
+
 const TRIGGER_TYPE_COLOR = {
   '직접지원': 'red', '위탁대행': 'orange', '시설구축': 'amber',
   '조직설치': 'purple', '대상확대': 'pink', '의무부과': 'rose',
@@ -672,19 +686,13 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
               : 'blocked'
         }`}>
           <span className="calc-status-label">계산 상태</span>
-          <span>
-            {estimate.calculation_status === 'computed_by_python'
-              ? 'Python 계산기가 산출했습니다.'
-              : estimate.calculation_status === 'computed_by_special_template'
-                ? '국회 비용추계 기준과 확정된 전제값으로 산출했습니다.'
-              : estimate.calculation_status === 'estimated_by_tag'
-                ? '유사 비용추계서 기반 초안입니다. 확인이 필요합니다.'
-              : estimate.calculation_status === 'blocked_missing_variables'
-                ? '필수 변수가 부족해 금액 계산을 차단했습니다.'
-              : estimate.calculation_status === 'awaiting_user_input'
-                ? '단가·대상 입력 후 재계산이 필요합니다.'
-                : '구조화 산식이 없어 금액 계산을 차단했습니다.'}
-          </span>
+          <span>{CALC_STATUS_TEXT[estimate.calculation_status] || '계산 상태를 확인해야 합니다.'}</span>
+        </div>
+      )}
+      {estimate.estimation_status && (
+        <div className={`calc-status ${estimate.estimation_status.blocking ? 'blocked' : 'ok'}`}>
+          <span className="calc-status-label">{estimate.estimation_status.label}</span>
+          <span>{estimate.estimation_status.reason}</span>
         </div>
       )}
       {estimate.verification_needed && Object.keys(estimate.verification_needed).length > 0 && (
@@ -969,6 +977,22 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
                     })}
                   >
                     근거 보기
+                  </button>
+                )}
+                {item.analogy_evidence && (
+                  <button
+                    className="evidence-mini-btn"
+                    onClick={() => openModal({
+                      title: `${item.name} 유사사례 근거`,
+                      meta: `${item.analogy_evidence.bill_no || ''} ${item.analogy_evidence.bill_name || ''}`,
+                      body:
+                        `기준 항목: ${item.analogy_evidence.item_name || '-'}\n` +
+                        `근거 조문: ${item.analogy_evidence.trigger_ref || '-'}\n` +
+                        `적용 방식: ${item.analogy_evidence.application || '-'}\n` +
+                        `구조 유사도: ${Math.round((item.analogy_evidence.score || 0) * 100)}%`,
+                    })}
+                  >
+                    유사사례 근거
                   </button>
                 )}
               </div>
