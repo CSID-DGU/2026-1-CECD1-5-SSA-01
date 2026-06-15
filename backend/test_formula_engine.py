@@ -67,6 +67,110 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         result = apply_validated_case_policy(articles)
         self.assertEqual(result[0]["cost_candidate_strength"], "weak")
 
+    def test_transitional_provision_marks_existing_center_as_no_incremental_cost(self) -> None:
+        articles = [{
+            "no": "제32조(지원센터의 설치 및 운영)",
+            "text": "장관은 지역별 지원센터를 설치·운영할 수 있다.",
+            "cost_trigger": True,
+            "trigger_type": "조직설치",
+            "cost_candidate_strength": "medium",
+        }]
+        document = (
+            "부칙 제5조(지원센터에 관한 경과조치) 이 법 시행 당시 종전의 법률에 따라 "
+            "설치·운영 중인 취업교육센터는 이 법 제32조에 따른 지원센터로 본다."
+        )
+        result = apply_validated_case_policy(articles, document_text=document)
+        self.assertEqual(result[0]["estimate_feasibility"], "no_incremental_cost")
+        self.assertEqual(result[0]["incremental_cost_status"], "existing_program_continuation")
+
+    def test_deleted_legacy_provision_with_same_title_is_treated_as_transfer(self) -> None:
+        articles = [{
+            "no": "제16조(교육전담인력)",
+            "text": "국가는 교육전담인력 운영에 필요한 비용을 지원할 수 있다.",
+            "cost_trigger": True,
+            "trigger_type": "직접지원",
+            "cost_candidate_strength": "medium",
+            "similar_refs": [{
+                "bill_no": "2200000",
+                "content": "제41조의2(교육전담인력) ① 기관에는 교육전담인력을 두어야 한다.",
+            }],
+        }]
+        result = apply_validated_case_policy(
+            articles,
+            document_text="다른 법률의 개정 법률 제12345호 제41조의2를 삭제한다.",
+        )
+        self.assertEqual(result[0]["estimate_feasibility"], "no_incremental_cost")
+        self.assertEqual(result[0]["incremental_cost_status"], "transferred_existing_provision")
+
+    def test_linked_plan_and_survey_are_absorbed_by_existing_admin_framework(self) -> None:
+        articles = [
+            {
+                "no": "제10조(종합계획)",
+                "text": "장관은 현행 보건계획과 연계하여 종합계획을 수립하여야 한다.",
+                "cost_trigger": True,
+                "trigger_type": "의무부과",
+                "cost_candidate_strength": "medium",
+            },
+            {
+                "no": "제11조(시행계획)",
+                "text": "장관은 종합계획에 따라 매년 시행계획을 수립하여야 한다.",
+                "cost_trigger": True,
+                "trigger_type": "의무부과",
+                "cost_candidate_strength": "medium",
+            },
+            {
+                "no": "제12조(실태조사)",
+                "text": "장관은 실태조사를 실시하고 그 결과를 종합계획과 시행계획에 반영하여야 한다.",
+                "cost_trigger": True,
+                "trigger_type": "의무부과",
+                "cost_candidate_strength": "medium",
+            },
+        ]
+        result = apply_validated_case_policy(articles)
+        self.assertTrue(all(row["cost_candidate_strength"] == "weak" for row in result))
+        self.assertTrue(all(row["estimate_feasibility"] == "no_incremental_cost" for row in result))
+
+    def test_unquantified_discretionary_subsidy_is_not_auto_calculated(self) -> None:
+        articles = [{
+            "no": "제20조(경비 보조)",
+            "text": "장관은 필요하다고 인정할 때 관련 단체의 운영 경비를 보조할 수 있다.",
+            "cost_trigger": True,
+            "trigger_type": "직접지원",
+            "cost_candidate_strength": "medium",
+        }]
+        result = apply_validated_case_policy(articles)
+        self.assertEqual(result[0]["cost_candidate_strength"], "weak")
+        self.assertEqual(result[0]["incremental_cost_status"], "discretionary_unquantified")
+
+    def test_declarative_government_duty_is_review_only(self) -> None:
+        articles = [{
+            "no": "제3조(국가 및 지방자치단체의 책무)",
+            "text": "국가와 지방자치단체는 재정지원 등 필요한 시책을 마련하여야 한다.",
+            "cost_trigger": True,
+            "trigger_type": "의무부과",
+            "cost_candidate_strength": "medium",
+        }]
+        result = apply_validated_case_policy(articles)
+        self.assertEqual(result[0]["cost_candidate_strength"], "weak")
+        self.assertEqual(result[0]["incremental_cost_status"], "declarative_unquantified")
+
+    def test_existing_referenced_service_is_not_treated_as_new_program(self) -> None:
+        articles = [{
+            "no": "제27조(통합서비스 등의 제공 등)",
+            "text": "국가는 의료법 제4조의2에 따른 통합서비스 확대를 지원하여야 한다.",
+            "cost_trigger": True,
+            "trigger_type": "의무부과",
+            "cost_candidate_strength": "medium",
+            "similar_refs": [{
+                "bill_no": "2200000",
+                "content": "제4조의2(통합서비스 제공 등) 기존 통합서비스를 제공한다.",
+            }],
+        }]
+        document = "부칙 다른 법령에서 종전의 의료법 규정을 인용한 경우 이 법의 해당 규정으로 갈음한다."
+        result = apply_validated_case_policy(articles, document_text=document)
+        self.assertEqual(result[0]["estimate_feasibility"], "no_incremental_cost")
+        self.assertEqual(result[0]["incremental_cost_status"], "referenced_existing_program")
+
     def test_research_service_uses_compatible_tag_amount(self) -> None:
         articles = [{
             "no": "제10조의4(발생 및 사용 실태조사)",

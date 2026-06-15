@@ -753,6 +753,17 @@ _RULE_COST_TRIGGERS: tuple[dict[str, Any], ...] = (
         "reason": "위원회·센터·사무처 등 조직의 설치·운영 의무는 회의수당, 운영비 또는 인건비 발생 가능성이 높음.",
     },
     {
+        "name": "broad_support_obligation",
+        "pattern": re.compile(
+            r"(재정지원|필요한지원|그에따른지원|지원을하여야|지원하여야)"
+            r".{0,80}?"
+            r"(시책|정책|제공|실시|수립|마련|하여야|한다)?",
+            re.DOTALL,
+        ),
+        "trigger_type": "의무부과",
+        "reason": "재정지원 또는 지원 의무를 포함한 정책 규정은 추가재정소요 여부 검토가 필요함.",
+    },
+    {
         "name": "payment_or_subsidy",
         "pattern": re.compile(
             r"(지원금|보조금|급여|수당|비용|경비|보상금|부담금|장려금)"
@@ -2512,7 +2523,10 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
     for r in article_results:
         r.pop("_idx", None)
     article_results = _apply_rule_cost_trigger_overrides(article_results)
-    article_results = apply_validated_case_policy(article_results)
+    article_results = apply_validated_case_policy(
+        article_results,
+        document_text=raw_text,
+    )
     override_count = sum(1 for a in article_results if a.get("rule_cost_trigger"))
     candidate_summary = _cost_candidate_summary(article_results)
     if override_count:
