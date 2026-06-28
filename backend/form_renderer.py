@@ -14,7 +14,6 @@ from datetime import datetime
 from html import escape
 from typing import Any
 
-
 # ── 공통 헬퍼 ─────────────────────────────────────────────────────────────────
 
 def _fmt_amount(value: int | None) -> str:
@@ -338,6 +337,26 @@ def render_assembly(result: dict[str, Any]) -> str:
             return f"안 {raw}"
         return raw
 
+    def _display_article_ref(text: Any) -> str:
+        raw = _article_ref(text)
+        replacements = (
+            ("국가및지방자치단체", "국가 및 지방자치단체"),
+            ("간호정책종합계획", "간호정책 종합계획"),
+            ("연도별시행계획", "연도별 시행계획"),
+            ("간호정책심의위원회", "간호정책심의위원회"),
+            ("간호ㆍ간병통합서비스", "간호·간병통합서비스"),
+            ("간호인력지원센터", "간호인력 지원센터"),
+            ("설치및운영", "설치 및 운영"),
+            ("수립ㆍ시행", "수립·시행"),
+            ("경비보조등", "경비 보조 등"),
+            ("의수립등", "의 수립 등"),
+            ("의제공등", "의 제공 등"),
+            ("의책무등", "의 책무 등"),
+        )
+        for old, new in replacements:
+            raw = raw.replace(old, new)
+        return raw
+
     def _plain(text: Any, limit: int = 240) -> str:
         cleaned = " ".join(str(text or "").split())
         return _safe(cleaned[:limit])
@@ -348,12 +367,32 @@ def render_assembly(result: dict[str, Any]) -> str:
 
     def _article_reason(article: dict[str, Any], *, estimated: bool) -> str:
         rule = article.get("rule_cost_trigger") or {}
+        policy = str(article.get("case_policy") or article.get("incremental_cost_status") or "")
         if estimated:
+            if article.get("estimate_feasibility") == "formula_ready":
+                return "유사사례를 참고하여 추계"
             return (
                 rule.get("review_reason")
                 or rule.get("reason")
+                or article.get("reason")
                 or "산식과 전제값을 적용할 수 있어 비용추계 대상으로 보았습니다."
             )
+        if policy in {
+            "transferred_existing_provision",
+            "referenced_existing_program",
+            "existing_program_continuation",
+            "linked_existing_survey",
+        }:
+            return "기시행 사업으로 추가 비용을 수반하지 않음"
+        if policy == "integrated_plan_basic_expense":
+            return "각 기관의 기본경비로 수행할 수 있을 것으로 예상되어 추계 대상에서 제외"
+        if policy == "declarative_unquantified":
+            return "제3호: 의안의 내용이 선언적·권고적인 형식으로 규정되는 등 기술적으로 추계가 어려운 경우"
+        if policy == "discretionary_unquantified":
+            return "제3호: 재량적 규정으로 지원 여부 및 규모를 합리적으로 예측하기 어려운 경우"
+        policy_reason = _public_reason_text(article.get("reason"))
+        if policy_reason:
+            return policy_reason
         if article.get("estimate_feasibility") == "non_attachment_review":
             return (
                 rule.get("review_reason")
@@ -362,6 +401,47 @@ def render_assembly(result: dict[str, Any]) -> str:
         if article.get("cost_candidate_strength") == "weak":
             return "계획·조사·행정절차 성격이 강해 직접적인 추가재정소요 산정 대상에서 제외 검토합니다."
         return rule.get("review_reason") or rule.get("reason") or "추가 전제값 확인이 필요합니다."
+
+    def _article_summary(article: dict[str, Any]) -> str:
+        supplied = article.get("summary") or article.get("content_summary")
+        if supplied:
+            return _public_reason_text(supplied)
+        title = str(article.get("no") or "")
+        title_text = title.split("(", 1)[1].rsplit(")", 1)[0] if "(" in title and ")" in title else title
+        policy = str(article.get("case_policy") or article.get("incremental_cost_status") or "")
+        trigger_type = str(article.get("trigger_type") or "")
+        compact_text = re.sub(r"\s+", "", str(article.get("text") or ""))
+        if policy == "integrated_plan_basic_expense":
+            if "시행계획" in title_text:
+                return f"{title_text}을 매년 수립·시행하고 추진실적을 평가하도록 규정함"
+            return f"{title_text}을 수립하고 기존 법정계획과 연계하도록 규정함"
+        if policy == "linked_existing_survey" or "실태조사" in title_text:
+            return f"{title_text}를 정기적으로 실시하고 그 결과를 정책계획에 반영하도록 규정함"
+        if policy in {"transferred_existing_provision", "referenced_existing_program"}:
+            return f"현행 법률에서 시행 중인 {title_text} 관련 제도와 지원 근거를 이 법에 규정함"
+        if policy == "existing_program_continuation":
+            return f"기존 {title_text} 제도를 승계하여 설치·운영 및 비용 지원 근거를 규정함"
+        if policy == "declarative_unquantified":
+            return f"국가와 지방자치단체가 {title_text} 관련 정책과 필요한 지원을 마련하도록 규정함"
+        if policy == "discretionary_unquantified":
+            return f"{title_text}에 필요한 시설비·운영비·조사연구비 등을 보조할 수 있도록 규정함"
+        if trigger_type == "조직설치":
+            member_match = re.search(r"(\d+)명이내", compact_text)
+            member_text = f" {member_match.group(1)}명 이내로 구성되는" if member_match else ""
+            return f"{title_text} 관련 사항을 심의하기 위하여{member_text} 위원회 또는 조직을 설치·운영하도록 규정함"
+        if trigger_type == "직접지원":
+            return f"{title_text}의 시행에 필요한 비용의 전부 또는 일부를 지원할 수 있도록 규정함"
+        return f"{title_text}에 관한 의무와 지원 근거를 규정함"
+
+    def _article_rule_note(article: dict[str, Any]) -> str:
+        text = re.sub(r"\s+", "", str(article.get("text") or ""))
+        has_mandatory = bool(re.search(r"(하여야한다|두어야한다|실시하여야한다|수립하여야한다)", text))
+        has_discretionary = bool(re.search(r"(할수있다|지원할수있다|보조할수있다)", text))
+        if has_mandatory and has_discretionary:
+            return "의무·재량규정"
+        if has_discretionary:
+            return "재량규정"
+        return "의무규정"
 
     def _item_formula_reason(item: dict[str, Any]) -> str:
         committee = item.get("committee_formula") or {}
@@ -378,6 +458,20 @@ def render_assembly(result: dict[str, Any]) -> str:
             return str(source_note)
         template = item.get("formula_template") or {}
         return template.get("notes") or "구조화 산식과 전제값을 적용했습니다."
+
+    def _korean_object_particle(value: Any) -> str:
+        text = re.sub(r"[^가-힣]", "", str(value or ""))
+        if not text:
+            return "을"
+        code = ord(text[-1]) - 0xAC00
+        return "을" if 0 <= code <= 11171 and code % 28 else "를"
+
+    def _fmt_result_amount(value: int | None) -> str:
+        if value is None:
+            return "산정 불가"
+        if abs(value) < 100:
+            return f"{value * 100:,}만원"
+        return f"{value:,}백만원"
 
     def _assumption_value(item: dict[str, Any], name: str) -> Any:
         for assumption in item.get("assumptions") or []:
@@ -409,19 +503,52 @@ def render_assembly(result: dict[str, Any]) -> str:
             meeting_count = committee.get("meeting_count")
             paid_members = committee.get("paid_members")
             allowance = committee.get("allowance_won")
+            trace = committee.get("evidence_trace") or {}
             paragraphs.append(
-                f"{_article_ref(committee_item.get('trigger_ref'))}에 따라 위원회를 설치·운영하는 경우 "
-                "회의 참석수당 등 추가재정소요가 발생할 것으로 보아 이를 추계 대상으로 함."
+                "재정수반요인 중 추가재정소요 산출이 어렵거나 기시행 사업으로 추가 비용이 수반되지 않는 "
+                f"경우를 제외하고, 추계가 가능한 {_article_ref(committee_item.get('trigger_ref'))}의 비용을 산출함."
             )
-            if excluded_reason_html:
+            paragraphs.append(
+                "위원회 설치 및 운영 비용은 기능과 구성 방식이 유사한 위원회 사례를 준용하며, "
+                "별도의 사무조직 운영비가 확인되지 않는 경우 회의수당만 반영함."
+            )
+            paragraphs.append(
+                f"위원회는 연 {meeting_count}회 개최하고, 위원장과 관계 공무원을 제외한 "
+                f"수당 지급 대상 위촉위원은 {paid_members}명으로 가정함."
+            )
+            paid_trace = trace.get("paid_members") or {}
+            if paid_trace.get("method") == "tag_candidates_mode":
+                paid_stat = paid_trace.get("statistic") or {}
                 paragraphs.append(
-                    "다른 재정수반요인은 지원 대상, 지원 규모, 설치·운영 방식 등 구체적인 사업계획이 "
-                    "확정되지 않아 합리적인 추계에 한계가 있으므로 일부 재정수반요인만 추계함."
+                    f"수당 지급 대상 인원은 유사 비용추계서 {paid_stat.get('n')}건의 민간·위촉위원 수 분포 "
+                    f"(최빈값 {paid_stat.get('mode')}명, 중앙값 {paid_stat.get('median')}명)에서 도출함."
+                )
+            elif paid_trace.get("method", "").startswith("ratio"):
+                paragraphs.append(
+                    f"수당 지급 대상 인원은 위원 정수 중 위원장·관계공무원을 제외한 위촉위원 비율을 적용하여 산출함."
                 )
             paragraphs.append(
-                f"위원회는 연 {meeting_count}회 개최하고, 수당지급대상 인원은 {paid_members}명으로 가정하며, "
-                f"회의수당 단가는 1인당 {int(allowance or 0):,}원으로 가정함."
+                f"회의수당 단가는 1인당 {int(allowance or 0):,}원으로 하고 추계기간 중 동일하게 유지되는 것으로 가정함."
             )
+            allowance_trace = trace.get("allowance_won") or {}
+            if allowance_trace.get("method") == "guideline_anchored_with_tag_validation":
+                stat = allowance_trace.get("statistic") or {}
+                paragraphs.append(
+                    f"단가는 「예산안 편성 및 기금운용계획안 작성 세부지침」 위원회 회의참석비 기준액을 채택하며, "
+                    f"유사 비용추계서 {stat.get('n')}건의 회의수당 단가 분포"
+                    f"(중앙값 {int(stat.get('median') or 0):,}원, 최빈값 {int(stat.get('mode') or 0):,}원)"
+                    f"와 교차 비교하여 합리성을 검증함."
+                )
+            elif allowance_trace.get("method") == "tag_candidates_mode":
+                stat = allowance_trace.get("statistic") or {}
+                paragraphs.append(
+                    f"단가는 유사 비용추계서 {stat.get('n')}건의 회의수당 분포에서 최빈값을 적용함."
+                )
+            elif allowance_trace.get("method") == "budget_guideline_fallback":
+                paragraphs.append(
+                    "단가는 「예산안 편성 및 기금운용계획안 작성 세부지침」상 위원회 회의참석비 "
+                    "기본 150,000원에 장시간 회의 추가 50,000원을 더한 보수적 기준액을 적용함."
+                )
             paragraphs.append(f"추계기간은 {first_year_text}부터 {last_year_text}까지 5년으로 함.")
             return paragraphs
 
@@ -445,10 +572,10 @@ def render_assembly(result: dict[str, Any]) -> str:
     last_year = year_labels[-1] if year_labels else "5차년도"
     first_year_text = f"{first_year}년" if str(first_year).isdigit() else str(first_year)
     last_year_text = f"{last_year}년" if str(last_year).isdigit() else str(last_year)
-    first_amount = f"{year_amounts[0]:,}백만원" if year_amounts and year_amounts[0] is not None else "산정 불가"
-    last_amount = f"{year_amounts[-1]:,}백만원" if year_amounts and year_amounts[-1] is not None else "산정 불가"
-    total_text = f"{total_million:,}백만원" if total_million is not None else "산정 불가"
-    avg_text = f"{average_million:,}백만원" if average_million is not None else "산정 불가"
+    first_amount = _fmt_result_amount(year_amounts[0] if year_amounts else None)
+    last_amount = _fmt_result_amount(year_amounts[-1] if year_amounts else None)
+    total_text = _fmt_result_amount(total_million)
+    avg_text = _fmt_result_amount(average_million)
 
     primary_trigger = next((a for a in triggers if a.get("cost_candidate_strength") == "strong"), triggers[0] if triggers else {})
     primary_title = str(primary_trigger.get("no") or items[0].get("trigger_ref") if items else "")
@@ -458,19 +585,38 @@ def render_assembly(result: dict[str, Any]) -> str:
         for issue in workflow
     )
     prefix = "(일부추계) " if partial else ""
+    doc_type = str(result.get("docType") or "의안")
+    action_text = "운영할 경우" if any(item.get("committee_formula") for item in items) else "시행할 경우"
+    object_particle = _korean_object_particle(primary_name)
     result_sentence = (
-        f"❑{prefix}{bill_name}에 따라 {primary_name} 관련 추가재정소요는 "
+        f"❑{prefix}{doc_type}에 따라 {primary_name}{object_particle} {action_text} 추가재정소요는 "
         f"{first_year_text} {first_amount}, {last_year_text} {last_amount} 등 "
         f"{first_year_text}부터 {last_year_text}까지 총 {total_text}(연평균 {avg_text})으로 추계됨"
     )
-    result_reason = (
-        f"◦{_safe(_article_ref(primary_trigger.get('no') or (items[0].get('trigger_ref') if items else '')))}는 "
-        "위원회·조직 설치 또는 운영에 관한 직접 근거로서 회의수당, 인건비 또는 운영비 발생 가능성이 있어 추계 대상으로 보았습니다."
-        if primary_trigger or items else ""
+    committee_item = next((item for item in items if item.get("committee_formula")), None)
+    if committee_item:
+        meeting_count = (committee_item.get("committee_formula") or {}).get("meeting_count")
+        result_reason = f"<p class='reason'>◦연 {int(meeting_count or 0)}회 위원회를 개최하는 것으로 가정</p>"
+    else:
+        result_reason = (
+            f"<p class='reason'>◦{_safe(_article_ref(primary_trigger.get('no') or (items[0].get('trigger_ref') if items else '')))}는 "
+            "구조화 산식과 전제값을 적용할 수 있어 추계 대상으로 봄.</p>"
+            if primary_trigger or items else ""
+        )
+    result_notes = [
+        "본 추계는 유사사례와 구조화 산식을 준용한 결과로, 실제 사업 규모와 운영 방법 등에 따라 추가재정소요가 달라질 수 있음"
+    ]
+    if partial:
+        result_notes.append(
+            "다른 재정수반요인은 추계가 곤란하거나 기시행 사업으로 판단하여 일부 재정수반요인만 추계한 것으로, 전체 재정소요액은 추계된 금액을 상회할 수 있음"
+        )
+    result_note_html = "".join(
+        f"<p class='footnote'>주: {idx}. {_safe(note)}</p>"
+        for idx, note in enumerate(result_notes, 1)
     )
 
     cost_row_label = (
-        f"{primary_name}<br><span class='small'>({_safe(_article_ref(items[0].get('trigger_ref') if items else primary_trigger.get('no')) )})</span>"
+        f"{_safe(_display_article_ref(_trigger_ref_key(items[0].get('trigger_ref') if items else primary_trigger.get('no'))))}에 따른 추가재정소요"
         if items or primary_trigger else "추가재정소요"
     )
     cost_table_header = "".join(f"<th>{_safe(label)}</th>" for label in year_labels)
@@ -481,18 +627,11 @@ def render_assembly(result: dict[str, Any]) -> str:
 
     trigger_rows = []
     for idx, article in enumerate(triggers, 1):
-        feasibility = article.get("estimate_feasibility")
-        strength = article.get("cost_candidate_strength")
-        if _trigger_ref_key(article.get("no")) in estimated_refs:
-            note = "의무규정"
-        elif feasibility == "non_attachment_review" or strength == "weak":
-            note = "추계 제외 검토"
-        else:
-            note = "재정수반요인"
+        note = _article_rule_note(article)
         trigger_rows.append(
             f"<tr><td>{idx}</td>"
-            f"<td>{_safe(_article_ref(article.get('no')))}</td>"
-            f"<td>{_plain(article.get('text'), 360)}</td>"
+            f"<td>{_safe(_display_article_ref(article.get('no')))}</td>"
+            f"<td>{_safe(_article_summary(article))}</td>"
             f"<td>{_safe(note)}</td></tr>"
         )
     trigger_html = "".join(trigger_rows) or "<tr><td colspan='4' class='empty'>해당 없음</td></tr>"
@@ -503,48 +642,21 @@ def render_assembly(result: dict[str, Any]) -> str:
         if is_estimated:
             mark = "○"
             reason = _article_reason(article, estimated=True)
-        elif article.get("estimate_feasibility") == "non_attachment_review":
-            mark = "△"
-            reason = _article_reason(article, estimated=False)
         else:
-            mark = "검토"
+            mark = "×"
             reason = _article_reason(article, estimated=False)
         estimate_review_rows.append(
-            f"<tr><td>{idx}</td><td>{_safe(_article_ref(article.get('no')))}</td>"
+            f"<tr><td>{idx}</td><td>{_safe(_display_article_ref(article.get('no')))}</td>"
             f"<td class='center'>{mark}</td><td>{_safe(reason)}</td></tr>"
         )
     estimate_review_html = "".join(estimate_review_rows) or "<tr><td colspan='4' class='empty'>해당 없음</td></tr>"
 
-    assumption_rows = []
-    for item in items:
-        for assumption in item.get("assumptions") or []:
-            value = assumption.get("value")
-            unit = assumption.get("unit") or ""
-            value_text = "확인 필요" if value is None else f"{value:,}{unit}" if isinstance(value, int) else f"{value}{unit}"
-            assumption_rows.append(
-                "<table class='assumption-item'><tbody>"
-                "<tr>"
-                "<td class='assumption-detail'>"
-                f"<strong>{_safe(assumption.get('name'))}</strong>"
-                f"<br>{_safe(item.get('name'))}"
-                f"<br><span>근거: {_safe(assumption.get('basis'))}</span></td>"
-                f"<td class='assumption-value'>{_safe(value_text)}</td>"
-                "</tr></tbody></table>"
-            )
-    assumption_html = "".join(assumption_rows) or "<p class='empty'>전제값 없음</p>"
-
-    excluded_reason_rows = []
-    for article in triggers:
-        if _trigger_ref_key(article.get("no")) in estimated_refs:
-            continue
-        if article.get("estimate_feasibility") != "non_attachment_review" and article.get("cost_candidate_strength") != "weak":
-            continue
-        excluded_reason_rows.append(
-            f"<tr><td>{_safe(_article_ref(article.get('no')))}</td>"
-            f"<td>{_plain(article.get('text'), 220)}</td>"
-            f"<td>{_safe(_article_reason(article, estimated=False))}</td></tr>"
-        )
-    excluded_reason_html = "".join(excluded_reason_rows)
+    exclusion_detail_html = "".join(
+        f"<p class='case-detail'>❑({_safe(_display_article_ref(_trigger_ref_key(article.get('no'))))}) "
+        f"{_safe(_public_reason_text(article.get('reason') or _article_reason(article, estimated=False)))}</p>"
+        for article in triggers
+        if _trigger_ref_key(article.get("no")) not in estimated_refs
+    )
     general_assumptions = "".join(
         f"<p class='bullet'>❑{_safe(paragraph)}</p>"
         for paragraph in _general_assumption_paragraphs()
@@ -591,6 +703,16 @@ def render_assembly(result: dict[str, Any]) -> str:
         </section>
         """
 
+    side_opinion_html = ""
+    if partial:
+        side_opinion_html = (
+            '<section class="block"><h3>Ⅳ. 부대의견</h3>'
+            "<p class='case-detail'>❑본 비용추계서의 추가재정소요액은 유사사례를 준용하여 추계한 결과로, "
+            "향후 실제 추가재정소요액은 달라질 수 있음.</p>"
+            "<p class='case-detail'>❑다른 재정수반요인은 추계가 곤란하거나 기존 사업으로 판단하여 제외한 것이므로, "
+            "전체 재정소요액은 추계된 금액을 상회할 수 있음.</p></section>"
+        )
+
     return f"""<!doctype html>
 <html lang="ko"><head><meta charset="utf-8">
 <title>{bill_name} - 비용추계서 (국회)</title>
@@ -628,6 +750,7 @@ def render_assembly(result: dict[str, Any]) -> str:
   .subtable {{ margin-top: 6px; font-size: 9pt; }}
   .signature {{ margin-top: 26px; text-align: center; font-size: 9pt; }}
   .footnote {{ font-size: 8.5pt; color: #555; margin-top: 4px; }}
+  .case-detail {{ margin: 7px 0; line-height: 1.55; }}
 </style></head>
 <body>
 
@@ -639,7 +762,7 @@ def render_assembly(result: dict[str, Any]) -> str:
 <section class="block">
   <h3>Ⅰ. 비용추계 결과</h3>
   <p class="result">{result_sentence}</p>
-  <p class="reason">{result_reason}</p>
+  {result_reason}
   <div class="unit">(단위: 백만원)</div>
   <table>
     <thead><tr><th>구분</th>{cost_table_header}<th>합계</th><th>연평균</th></tr></thead>
@@ -647,7 +770,7 @@ def render_assembly(result: dict[str, Any]) -> str:
       <tr><td>{cost_row_label}</td>{cost_table_cells}<td class="amount">{'—' if total_million is None else f'{total_million:,}'}</td><td class="amount">{'—' if average_million is None else f'{average_million:,}'}</td></tr>
     </tbody>
   </table>
-  <p class="footnote">주: 본 추계 결과는 유사사례 및 구조화 산식 전제에 따른 것으로 실제 운영 규모 등에 따라 달라질 수 있음</p>
+  {result_note_html}
 </section>
 
 <section class="block">
@@ -667,18 +790,10 @@ def render_assembly(result: dict[str, Any]) -> str:
     <thead><tr><th>연번</th><th>조·항(조제목)</th><th>추계여부</th><th>비고(추계 미실시 사유)</th></tr></thead>
     <tbody>{estimate_review_html}</tbody>
   </table>
+  {exclusion_detail_html}
 
   <h4>2. 비용추계의 총괄적 전제</h4>
   {general_assumptions}
-  <div class="assumption-list">{assumption_html}</div>
-
-  {f'''
-  <h4>2-1. 추계 제외 또는 일부추계 사유</h4>
-  <table>
-    <thead><tr><th style="width:24%">조·항(조제목)</th><th>주요내용</th><th>추계 제외 사유</th></tr></thead>
-    <tbody>{excluded_reason_html}</tbody>
-  </table>
-  ''' if excluded_reason_html else ''}
 
   <h4>3. 재정수반요인별 상세 추계내역</h4>
   <div class="unit">(단위: 백만원)</div>
@@ -686,6 +801,7 @@ def render_assembly(result: dict[str, Any]) -> str:
 </section>
 
 {non_attach_block}
+{side_opinion_html}
 
 <div class="signature">
   국회예산정책처 작성 형식 참고<br/>

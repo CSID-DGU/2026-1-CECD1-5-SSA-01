@@ -313,4 +313,53 @@ def apply_validated_case_policy(
             and not re.search(r"(매월|연1회|매년|\d+명|\d+개소|\d+원|\d+만원)", text)
         ):
             article["case_policy"] = "delegated_scope_technical_difficulty"
+
+    # LLM 단독 후보는 공공 재정지출 근거가 조문이나 결정 규칙에서 확인될 때만 유지한다.
+    # 면허·등록·교육·신고 같은 통상 행정과 민간기관 자체 의무를 재정수반요인으로
+    # 과대 분류하는 것을 막되, 규칙 엔진이 포착한 지원·조직·조사 후보는 보존한다.
+    public_fiscal_signal = re.compile(
+        r"(국가|정부|지방자치단체|장관).{0,80}"
+        r"(비용|경비|예산|재정지원|보조|지원금|수당|인건비|설치.{0,20}운영|사업을실시)"
+        r"|"
+        r"(비용의전부또는일부|경비를보조|예산의범위|국고|보조금|지원금을지급)"
+    )
+    private_obligation = re.compile(
+        r"(기관|시설|의료기관|사용자|사업주)의장.{0,100}"
+        r"(하여야한다|조치를강구|채용|배치)"
+    )
+    routine_administration = re.compile(
+        r"국가시험"
+        r"|(?:면허|자격).{0,50}(?:등록|발급|조건)"
+        r"|보수교육"
+        r"|실태및취업상황.{0,30}신고"
+    )
+    for article in articles:
+        if not article.get("cost_trigger") or article.get("rule_cost_trigger"):
+            continue
+        text = _compact(article.get("text"))
+        policy = str(article.get("case_policy") or "")
+        has_public_fiscal_signal = bool(public_fiscal_signal.search(text))
+        is_private_obligation = bool(private_obligation.search(text))
+        is_routine_administration = bool(routine_administration.search(
+            _article_title(article.get("no")) + text
+        ))
+        transferred_without_fiscal_signal = (
+            policy == "transferred_existing_provision"
+            and not has_public_fiscal_signal
+        )
+        if (
+            transferred_without_fiscal_signal
+            or is_routine_administration
+            or (is_private_obligation and not has_public_fiscal_signal)
+            or (not policy and not has_public_fiscal_signal)
+        ):
+            article["cost_trigger"] = False
+            article["trigger_type"] = "없음"
+            article["cost_candidate_strength"] = "none"
+            article["estimate_feasibility"] = "not_applicable"
+            article["case_policy"] = "unverified_ai_candidate_suppressed"
+            article["reason"] = (
+                "공공 재정지출을 직접 수반하는 지원·지급·조직·사업 근거가 확인되지 않아 "
+                "통상 행정 또는 민간 부담 규정으로 분류했습니다."
+            )
     return articles

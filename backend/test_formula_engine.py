@@ -10,9 +10,92 @@ from backend.assembly_formula_engine import (
 from backend.assembly_analogy_engine import build_analogical_committee_estimate
 from backend.assembly_case_policy import apply_validated_case_policy
 from backend.calculator import compute_year_estimates
+from backend.form_renderer import render_form
 
 
 class AssemblyFormulaEngineTest(unittest.TestCase):
+    def test_assembly_form_uses_final_article_exclusion_reason(self) -> None:
+        result = {
+            "billName": "보건인력지원법안",
+            "docType": "제정안",
+            "verdict": {"type": "비용추계서 작성 대상"},
+            "articles": [{
+                "no": "제16조(교육전담간호사)",
+                "text": "교육전담간호사를 지원할 수 있다.",
+                "cost_trigger": True,
+                "cost_candidate_strength": "weak",
+                "estimate_feasibility": "no_incremental_cost",
+                "case_policy": "transferred_existing_provision",
+                "reason": "종전 법률의 동일 제도를 옮긴 것으로 기존 사업의 계속 수행에 해당합니다.",
+            }],
+            "estimate": {
+                "items": [{
+                    "name": "간호정책심의위원회 운영비",
+                    "trigger_ref": "제26조(간호정책심의위원회)",
+                    "year_amounts_thousand": [4000] * 5,
+                }],
+                "year_estimates": [
+                    {"year": year, "amount_thousand": 4000}
+                    for year in range(1, 6)
+                ],
+            },
+        }
+
+        html = render_form(result, format="assembly")
+
+        self.assertIn("기시행 사업으로 추가 비용을 수반하지 않음", html)
+        self.assertIn(">×<", html)
+        self.assertNotIn("계획·조사·행정절차 성격이 강해", html)
+
+    def test_ai_only_routine_administration_is_not_a_cost_factor(self) -> None:
+        articles = [
+            {
+                "no": "제8조(국가시험)",
+                "text": "장관은 국가시험 관리를 위탁하고 필요한 예산을 지원할 수 있다.",
+                "cost_trigger": True,
+                "trigger_type": "위탁대행",
+                "case_policy": "transferred_existing_provision",
+                "reason": "기존 국가시험 제도를 이전함",
+            },
+            {
+                "no": "제10조(면허 또는 자격의 등록과 조건)",
+                "text": "보건복지부장관은 면허등록대장을 작성하고 면허증을 발급하여야 한다.",
+                "cost_trigger": True,
+                "trigger_type": "의무부과",
+                "reason": "행정 비용이 발생할 수 있음",
+            },
+            {
+                "no": "제31조(일·가정 양립 지원)",
+                "text": "의료기관의 장은 대체인력 채용 등 필요한 조치를 강구하여야 한다.",
+                "cost_trigger": True,
+                "trigger_type": "의무부과",
+                "reason": "채용 비용이 발생할 수 있음",
+            },
+        ]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertFalse(result[0]["cost_trigger"])
+        self.assertFalse(result[1]["cost_trigger"])
+        self.assertFalse(result[2]["cost_trigger"])
+        self.assertEqual(result[0]["case_policy"], "unverified_ai_candidate_suppressed")
+
+    def test_rule_confirmed_public_support_survives_ai_candidate_filter(self) -> None:
+        articles = [{
+            "no": "제20조(운영비 지원)",
+            "text": "국가는 센터 운영에 필요한 비용의 전부 또는 일부를 지원할 수 있다.",
+            "cost_trigger": True,
+            "trigger_type": "직접지원",
+            "rule_cost_trigger": {
+                "rule": "payment_or_subsidy",
+                "force_cost": True,
+            },
+        }]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertTrue(result[0]["cost_trigger"])
+
     def test_special_committee_uses_analogous_official_case(self) -> None:
         articles = [{
             "no": "제45조의2(헌법특별위원회)",

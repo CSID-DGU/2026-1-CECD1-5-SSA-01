@@ -1184,18 +1184,209 @@ def _extract_committee_total_members(article_text: str) -> int | None:
     return None
 
 
-def _extract_committee_meetings(article_text: str) -> tuple[int, str, str]:
+# TAG 후보 source_text에서 정량값을 도출하기 위한 패턴
+# [^가-힣\n\d]는 한글/줄바꿈/숫자 제외 → 숫자가 욕심 매칭에 먹히는 버그 방지
+_TAG_UNIT_COST_MAN_PAT = re.compile(
+    r"(회의수당|회의참석수당|회의비|참석수당|수당)(?:\s*단가)?[^가-힣\n\d]{0,8}(\d{1,3}(?:,\d{3})*|\d+)\s*만\s*원"
+)
+_TAG_UNIT_COST_WON_PAT = re.compile(
+    r"(회의수당|회의참석수당|회의비|참석수당|수당)(?:\s*단가)?[^가-힣\n\d]{0,8}(\d{2,3}(?:,\d{3}))\s*원"
+)
+_TAG_MEETING_COUNT_PAT = re.compile(r"(?:연(?:간)?|매년|연도별)\s*(\d{1,2})\s*회|분기별\s*1\s*회")
+_TAG_PAID_MEMBER_PAT = re.compile(
+    r"(?:민간위원|위촉위원|수당지급(?:의)?대상|회의참석수당지급대상)\s*(?:수)?[\(\s]*(\d{1,2})\s*명"
+)
+
+
+def _stat_summary(values: list[int]) -> dict[str, Any]:
+    """리스트의 n/중앙값/최빈값/평균을 단순 산출."""
+    if not values:
+        return {}
+    sorted_vals = sorted(values)
+    n = len(sorted_vals)
+    if n % 2:
+        median = sorted_vals[n // 2]
+    else:
+        median = (sorted_vals[n // 2 - 1] + sorted_vals[n // 2]) // 2
+    counts: dict[int, int] = {}
+    for value in values:
+        counts[value] = counts.get(value, 0) + 1
+    mode_value, mode_count = max(counts.items(), key=lambda row: (row[1], -row[0]))
+    return {
+        "n": n,
+        "min": int(min(values)),
+        "max": int(max(values)),
+        "median": int(median),
+        "mode": int(mode_value),
+        "mode_count": int(mode_count),
+        "mean": int(round(sum(values) / n)),
+    }
+
+
+def _extract_unit_costs_from_candidates(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """assumption_candidates의 source_text에서 회의수당 단가(원)를 직접 추출."""
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[Any, int]] = set()
+    for candidate in candidates:
+        src = str(candidate.get("source_text") or "")
+        if not src:
+            continue
+        for match in _TAG_UNIT_COST_MAN_PAT.finditer(src):
+            try:
+                value = int(match.group(2).replace(",", "")) * 10_000
+            except ValueError:
+                continue
+            if not (30_000 <= value <= 1_000_000):
+                continue
+            sig = (candidate.get("bill_no"), value)
+            if sig in seen:
+                continue
+            seen.add(sig)
+            out.append({
+                "value": value,
+                "bill_no": candidate.get("bill_no"),
+                "bill_name": candidate.get("bill_name"),
+                "item_name": candidate.get("item_name"),
+                "snippet": src[max(0, match.start() - 16):match.end() + 16].strip(),
+            })
+        for match in _TAG_UNIT_COST_WON_PAT.finditer(src):
+            try:
+                value = int(match.group(2).replace(",", ""))
+            except ValueError:
+                continue
+            if not (30_000 <= value <= 1_000_000):
+                continue
+            sig = (candidate.get("bill_no"), value)
+            if sig in seen:
+                continue
+            seen.add(sig)
+            out.append({
+                "value": value,
+                "bill_no": candidate.get("bill_no"),
+                "bill_name": candidate.get("bill_name"),
+                "item_name": candidate.get("item_name"),
+                "snippet": src[max(0, match.start() - 16):match.end() + 16].strip(),
+            })
+    return out
+
+
+def _extract_meeting_counts_from_candidates(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[Any, int]] = set()
+    for candidate in candidates:
+        src = str(candidate.get("source_text") or "")
+        if not src:
+            continue
+        for match in _TAG_MEETING_COUNT_PAT.finditer(src):
+            value = None
+            if match.group(1):
+                try:
+                    value = int(match.group(1))
+                except ValueError:
+                    continue
+            else:
+                value = 4  # 분기별 1회 → 연 4회
+            if not value or not (1 <= value <= 12):
+                continue
+            sig = (candidate.get("bill_no"), value)
+            if sig in seen:
+                continue
+            seen.add(sig)
+            out.append({
+                "value": value,
+                "bill_no": candidate.get("bill_no"),
+                "bill_name": candidate.get("bill_name"),
+                "snippet": src[max(0, match.start() - 10):match.end() + 10].strip(),
+            })
+    return out
+
+
+def _extract_paid_member_counts_from_candidates(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    seen: set[tuple[Any, int]] = set()
+    for candidate in candidates:
+        src = str(candidate.get("source_text") or "")
+        if not src:
+            continue
+        for match in _TAG_PAID_MEMBER_PAT.finditer(src):
+            try:
+                value = int(match.group(1))
+            except ValueError:
+                continue
+            if not (1 <= value <= 50):
+                continue
+            sig = (candidate.get("bill_no"), value)
+            if sig in seen:
+                continue
+            seen.add(sig)
+            out.append({
+                "value": value,
+                "bill_no": candidate.get("bill_no"),
+                "bill_name": candidate.get("bill_name"),
+                "snippet": src[max(0, match.start() - 10):match.end() + 10].strip(),
+            })
+    return out
+
+
+def _extract_committee_meetings(
+    article_text: str,
+    candidates: list[dict[str, Any]] | None = None,
+) -> tuple[int, str, str, dict[str, Any]]:
+    """회의횟수 도출. 우선순위: 조문 명시 > TAG 후보 통계 > 보수적 기본값."""
     compact = _compact_korean(article_text)
     match = re.search(r"연(?:간)?(\d+)회", compact)
     if match:
-        return int(match.group(1)), "document", "조문에 명시된 연간 회의 횟수"
+        value = int(match.group(1))
+        trace = {
+            "method": "article_explicit",
+            "value": value,
+            "samples": [],
+            "basis": "조문에 명시된 연간 회의 횟수",
+        }
+        return value, "document", "조문에 명시된 연간 회의 횟수", trace
     match = re.search(r"분기별(?:로)?1회", compact)
     if match:
-        return 4, "document", "조문상 분기별 1회 개최 규정"
-    return 2, "similar_case", "회의횟수 미규정: 단순 중앙행정기관 소속 심의위원회 유사사례 기준 연 2회 가정"
+        trace = {
+            "method": "article_explicit",
+            "value": 4,
+            "samples": [],
+            "basis": "조문상 분기별 1회 개최 → 연 4회",
+        }
+        return 4, "document", "조문상 분기별 1회 개최 규정", trace
+
+    samples = _extract_meeting_counts_from_candidates(candidates or [])
+    if samples:
+        stat = _stat_summary([s["value"] for s in samples])
+        chosen = stat["mode"]
+        basis = (
+            f"유사사례 {stat['n']}건의 회의횟수 분포에서 최빈값(연 {chosen}회) 채택 "
+            f"(중앙값 {stat['median']}회, 범위 {stat['min']}~{stat['max']}회)"
+        )
+        trace = {
+            "method": "tag_candidates_mode",
+            "value": chosen,
+            "samples": samples[:5],
+            "statistic": stat,
+            "basis": basis,
+        }
+        return chosen, "tag_statistic", basis, trace
+
+    trace = {
+        "method": "conservative_default",
+        "value": 2,
+        "samples": [],
+        "basis": "조문 미규정 + 유사사례 후보의 source_text에 회의횟수 정보 부재 → 중앙행정기관 소속 심의위원회 통상 운영 관행상 연 2회 보수적 채택",
+        "reference_hint": "유사 위원회 운영현황·예산편성지침 권고 관행",
+    }
+    return 2, "similar_case", "회의횟수 미규정: 단순 중앙행정기관 소속 심의위원회 유사사례 기준 연 2회 가정", trace
 
 
-def _extract_paid_committee_members(article_text: str, total_members: int | None) -> tuple[int | None, str, str]:
+def _extract_paid_committee_members(
+    article_text: str,
+    total_members: int | None,
+    candidates: list[dict[str, Any]] | None = None,
+) -> tuple[int | None, str, str, dict[str, Any]]:
+    """수당 지급 대상 인원 도출. 조문 명시 > TAG 후보 통계 > 위원 정수 비율 추론."""
     compact = _compact_korean(article_text)
     explicit_patterns = (
         r"(?:수당지급(?:의)?대상|회의참석수당(?:지급)?(?:대상)?|위촉위원|민간위원).*?(\d+)명",
@@ -1204,22 +1395,125 @@ def _extract_paid_committee_members(article_text: str, total_members: int | None
     for pattern in explicit_patterns:
         match = re.search(pattern, compact)
         if match:
-            return int(match.group(1)), "document", "조문 또는 분석 결과에 명시된 수당 지급 대상 인원"
+            value = int(match.group(1))
+            trace = {
+                "method": "article_explicit",
+                "value": value,
+                "samples": [],
+                "basis": "조문 또는 분석 결과에 명시된 수당 지급 대상 인원",
+            }
+            return value, "document", "조문 또는 분석 결과에 명시된 수당 지급 대상 인원", trace
+
+    samples = _extract_paid_member_counts_from_candidates(candidates or [])
+    if samples and total_members and any(1 <= s["value"] <= total_members for s in samples):
+        filtered = [s for s in samples if 1 <= s["value"] <= total_members]
+        stat = _stat_summary([s["value"] for s in filtered])
+        chosen = stat["mode"]
+        basis = (
+            f"유사사례 {stat['n']}건의 민간·위촉위원 수 분포 최빈값 {chosen}명 채택 "
+            f"(중앙값 {stat['median']}, 위원 정수 {total_members}명 내)"
+        )
+        trace = {
+            "method": "tag_candidates_mode",
+            "value": chosen,
+            "samples": filtered[:5],
+            "statistic": stat,
+            "basis": basis,
+        }
+        return chosen, "tag_statistic", basis, trace
+
     if total_members:
         if "공무원이아닌사람이과반" in compact:
-            return total_members // 2 + 1, "formula_assumption", "공무원이 아닌 위원이 과반수가 되도록 하는 규정에 따라 과반 인원을 수당 지급 대상으로 가정"
+            value = total_members // 2 + 1
+            trace = {
+                "method": "statutory_ratio_majority",
+                "value": value,
+                "samples": [],
+                "basis": "공무원이 아닌 위원이 과반수가 되도록 하는 규정 적용",
+            }
+            return value, "formula_assumption", "공무원이 아닌 위원이 과반수가 되도록 하는 규정에 따라 과반 인원을 수당 지급 대상으로 가정", trace
         if total_members <= 15:
-            return round(total_members * 2 / 3), "formula_assumption", "위원장 및 관계 공무원을 제외한 위촉위원 비율을 유사사례 기준으로 가정"
-        return max(1, total_members // 2), "formula_assumption", "위원 정수 중 수당 지급 대상 민간·위촉위원 수를 유사사례 기준으로 가정"
-    return None, "user_input", "위원 정수 또는 수당 지급 대상 인원 확인 필요"
+            value = round(total_members * 2 / 3)
+            trace = {
+                "method": "ratio_two_thirds",
+                "value": value,
+                "samples": [],
+                "basis": f"위원 정수 {total_members}명 중 위원장·관계공무원 제외 위촉위원 비율(2/3) 적용",
+            }
+            return value, "formula_assumption", "위원장 및 관계 공무원을 제외한 위촉위원 비율을 유사사례 기준으로 가정", trace
+        value = max(1, total_members // 2)
+        trace = {
+            "method": "ratio_half",
+            "value": value,
+            "samples": [],
+            "basis": f"위원 정수 {total_members}명 중 절반을 민간·위촉위원으로 가정",
+        }
+        return value, "formula_assumption", "위원 정수 중 수당 지급 대상 민간·위촉위원 수를 유사사례 기준으로 가정", trace
+
+    trace = {
+        "method": "user_input_required",
+        "value": None,
+        "samples": [],
+        "basis": "위원 정수 또는 수당 지급 대상 인원 확인 필요",
+    }
+    return None, "user_input", "위원 정수 또는 수당 지급 대상 인원 확인 필요", trace
 
 
-def _committee_allowance_unit(item: dict[str, Any]) -> tuple[int, str, str]:
+def _committee_allowance_unit(item: dict[str, Any]) -> tuple[int, str, str, dict[str, Any]]:
+    """회의수당 단가 도출. TAG source_text 정량값 통계 > 구조화 후보 > 보수적 기본값."""
     candidates = item.get("assumption_candidates") or []
+    committee_candidates = [
+        c for c in candidates
+        if c.get("assumption_key") == "committee_operating_cost"
+    ]
+
+    # 1) source_text 정량값 통계 + 외부 기준(예산편성지침) 교차 검증
+    #    - 외부 기준이 통계 분포와 큰 편차 없으면 기준 우선 (표준값, 안정성)
+    #    - 통계가 기준과 ±50%를 벗어나면 통계 채택 (지침 갱신/특수 케이스)
+    unit_samples = _extract_unit_costs_from_candidates(committee_candidates)
+    guideline_value = 200_000
+    guideline_reference = (
+        "「예산안 편성 및 기금운용계획안 작성 세부지침」상 위원회 회의참석비 "
+        "기본 150,000원 + 장시간(4시간 이상) 회의 추가 50,000원"
+    )
+    if unit_samples:
+        stat = _stat_summary([s["value"] for s in unit_samples])
+        tag_mode = stat["mode"]
+        deviation = abs(tag_mode - guideline_value) / guideline_value if guideline_value else 1.0
+        if deviation <= 0.5:
+            basis = (
+                f"예산편성지침 기준 {guideline_value:,}원/인 채택. "
+                f"유사사례 {stat['n']}건 분포(최빈값 {tag_mode:,}원, 중앙값 {stat['median']:,}원, "
+                f"편차 ±{deviation:.0%})로 합리성 교차 검증."
+            )
+            trace = {
+                "method": "guideline_anchored_with_tag_validation",
+                "value": guideline_value,
+                "samples": unit_samples[:5],
+                "statistic": stat,
+                "deviation": round(deviation, 3),
+                "reference": guideline_reference,
+                "basis": basis,
+            }
+            return guideline_value, "guideline_validated", basis, trace
+        basis = (
+            f"유사사례 {stat['n']}건 통계 최빈값 {tag_mode:,}원/인 채택 "
+            f"(중앙값 {stat['median']:,}원, 예산편성지침 기준 {guideline_value:,}원과 편차 ±{deviation:.0%}로 통계값 우선)"
+        )
+        trace = {
+            "method": "tag_candidates_mode",
+            "value": tag_mode,
+            "samples": unit_samples[:5],
+            "statistic": stat,
+            "deviation": round(deviation, 3),
+            "reference": guideline_reference,
+            "basis": basis,
+        }
+        return tag_mode, "tag_statistic", basis, trace
+
+    # 2) 후보 value 필드가 단가 범위에 있는 경우 (구조화 후보 직접 사용)
     ranked: list[tuple[float, int, dict[str, Any]]] = []
-    for candidate in candidates:
-        if candidate.get("assumption_key") != "committee_operating_cost":
-            continue
+    for candidate in committee_candidates:
         raw_value = candidate.get("value")
         try:
             value = float(raw_value)
@@ -1246,12 +1540,29 @@ def _committee_allowance_unit(item: dict[str, Any]) -> tuple[int, str, str]:
     if ranked:
         ranked.sort(key=lambda row: row[0], reverse=True)
         _, value, candidate = ranked[0]
-        return (
-            value,
-            "tag_reference",
-            f"TAG 유사사례 회의수당 단가 후보: {candidate.get('bill_no')} {candidate.get('item_name')}",
-        )
-    return 200_000, "formula_assumption", "예산안 편성지침상 위원회 참석비 기본 15만원 및 장시간 회의 추가 5만원을 반영한 20만원 가정"
+        basis = f"TAG 유사사례 회의수당 단가 후보 직접 사용: {candidate.get('bill_no')} {candidate.get('item_name')}"
+        trace = {
+            "method": "tag_reference_single",
+            "value": value,
+            "samples": [{
+                "value": value,
+                "bill_no": candidate.get("bill_no"),
+                "bill_name": candidate.get("bill_name"),
+                "item_name": candidate.get("item_name"),
+            }],
+            "basis": basis,
+        }
+        return value, "tag_reference", basis, trace
+
+    # 3) 보수적 기본값 + 외부 인용 명시
+    trace = {
+        "method": "budget_guideline_fallback",
+        "value": 200_000,
+        "samples": [],
+        "basis": "유사사례에서 회의수당 단가 정보를 확인하지 못하여 예산편성지침 기준으로 보수적 채택",
+        "reference": "「예산안 편성 및 기금운용계획안 작성 세부지침」상 위원회 회의참석비 기본 150,000원 + 장시간(4시간 이상) 회의 추가 50,000원",
+    }
+    return 200_000, "formula_assumption", "예산안 편성지침상 위원회 참석비 기본 15만원 및 장시간 회의 추가 5만원을 반영한 20만원 가정", trace
 
 
 def _is_committee_meeting_item(item: dict[str, Any]) -> bool:
@@ -1294,10 +1605,15 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 item.get("name"),
             ]
         )
+        candidates = item.get("assumption_candidates") or []
         total_members = _extract_committee_total_members(article_text)
-        meeting_count, meeting_source, meeting_basis = _extract_committee_meetings(article_text)
-        paid_members, paid_source, paid_basis = _extract_paid_committee_members(article_text, total_members)
-        allowance_won, allowance_source, allowance_basis = _committee_allowance_unit(item)
+        meeting_count, meeting_source, meeting_basis, meeting_trace = _extract_committee_meetings(
+            article_text, candidates=candidates
+        )
+        paid_members, paid_source, paid_basis, paid_trace = _extract_paid_committee_members(
+            article_text, total_members, candidates=candidates
+        )
+        allowance_won, allowance_source, allowance_basis, allowance_trace = _committee_allowance_unit(item)
         if not paid_members:
             continue
 
@@ -1317,6 +1633,7 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 "basis": meeting_basis,
                 "source_type": meeting_source,
                 "needs_user_confirm": meeting_source != "document",
+                "evidence": meeting_trace,
             },
             {
                 "name": "수당지급대상 인원",
@@ -1325,6 +1642,7 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 "basis": paid_basis,
                 "source_type": paid_source,
                 "needs_user_confirm": paid_source != "document",
+                "evidence": paid_trace,
             },
             {
                 "name": "회의수당 단가",
@@ -1333,8 +1651,20 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 "basis": allowance_basis,
                 "source_type": allowance_source,
                 "needs_user_confirm": True,
+                "evidence": allowance_trace,
             },
         ]
+        pipeline_stages: list[str] = []
+        for stage_trace in (meeting_trace, paid_trace, allowance_trace):
+            method = str(stage_trace.get("method") or "")
+            if method.startswith("article"):
+                pipeline_stages.append("document_extraction")
+            elif method.startswith("tag_"):
+                pipeline_stages.append("tag_candidates")
+            elif method.startswith("ratio") or method.startswith("statutory"):
+                pipeline_stages.append("structural_inference")
+            else:
+                pipeline_stages.append("budget_guideline_fallback")
         item["committee_formula"] = {
             "formula": "회의횟수 × 수당지급대상 인원 × 회의수당 단가",
             "meeting_count": meeting_count,
@@ -1343,6 +1673,13 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
             "amount_thousand": amount_thousand,
             "source": "structured_committee_meeting_formula",
             "requires_review": True,
+            "evidence_trace": {
+                "meeting_count": meeting_trace,
+                "paid_members": paid_trace,
+                "allowance_won": allowance_trace,
+                "pipeline": pipeline_stages,
+                "candidate_pool_size": len(candidates),
+            },
         }
         item["calculation"] = {
             "base_amount_thousand": amount_thousand,
