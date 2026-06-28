@@ -5,7 +5,8 @@
 **LLM의 추론과 결정적 계산을 분리한 TAG 아키텍처로,**
 **국회예산정책처 표준 양식의 비용추계서를 자동 생성합니다.**
 
-[![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![tests](https://github.com/CSID-DGU/2026-1-CECD1-5-SSA-01/actions/workflows/test.yml/badge.svg)](https://github.com/CSID-DGU/2026-1-CECD1-5-SSA-01/actions/workflows/test.yml)
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5_Pro-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![Supabase](https://img.shields.io/badge/Supabase-pgvector-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
@@ -183,7 +184,7 @@ cp backend/.env.example backend/.env
 | `AZURE_OPENAI_*` | OpenAI 임베딩 폴백 | 선택 |
 | `BACKEND_PORT` | 백엔드 포트 (기본 8010) | 선택 |
 
-### 실행
+### 실행 — 옵션 A: 로컬
 
 ```bash
 # 1) 백엔드 (별도 터미널)
@@ -195,7 +196,21 @@ cd frontend && npm run dev
 # → http://localhost:5173
 ```
 
-브라우저에서 `http://localhost:5173` 접속 → PDF 업로드 → 분석 결과 + 추계서 다운로드.
+### 실행 — 옵션 B: Docker
+
+```bash
+docker compose up --build
+# → 백엔드 http://localhost:8010
+```
+
+브라우저에서 `http://localhost:5173` (또는 Docker는 별도 정적 서빙) 접속 → PDF 업로드 → 분석 결과 + 추계서 다운로드.
+
+### 테스트
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest backend/test_formula_engine.py -v
+```
 
 ---
 

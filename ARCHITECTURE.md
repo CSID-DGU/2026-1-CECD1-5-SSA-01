@@ -385,9 +385,42 @@ api/
 | **계산** | Python (결정적, calculator.py) |
 | **통계** | KOSIS Open API |
 | **PDF** | PyMuPDF |
-| **백엔드** | Python http.server (Vercel serverless) |
+| **백엔드** | Python `http.server` (Vercel serverless) |
 | **프론트** | React + Vite |
 | **배포** | Vercel |
+
+---
+
+## 설계 선택 (Design Choices)
+
+### 왜 FastAPI/Flask가 아니라 `http.server`인가
+
+본 시스템은 **Vercel serverless 함수**로 배포됩니다. 각 요청이 짧게 살았다 죽는 환경이라:
+
+1. **Cold-start latency 최소화** — FastAPI는 Starlette + Pydantic 의존성을 로드하느라 첫 요청에 0.5~1초 지연. `http.server`는 stdlib라 import 비용 0.
+2. **의존성 표면적 축소** — Vercel 함수당 50MB zip 제한. SDK 안 쓰면 PyMuPDF + requests만 들어가 여유.
+3. **엔드포인트가 단순** — `/api/analyze_v2`, `/api/render`, `/api/export/pdf` 3개. 라우터 프레임워크가 과합니다.
+
+→ "기능을 위한 최소 도구"라는 결정. 트래픽/엔드포인트가 늘어나면 FastAPI 전환 예정.
+
+### 왜 Gemini/OpenAI/Supabase SDK를 안 쓰는가
+
+같은 이유. **모든 외부 호출을 `urllib.request.urlopen`으로 직접** 처리합니다.
+
+- ✅ Cold-start 비용 0
+- ✅ SDK 보안 패치 따라가는 부담 없음
+- ✅ 호출 경로가 한 함수(`_post`)에 집중되어 디버깅 쉬움
+- ⚠️ 트레이드오프: 재시도·rate-limit 정책은 직접 구현 (백오프 로직 `_GEMINI_BACKOFF_UNTIL`)
+
+### 왜 LLM과 계산을 분리하나
+
+LLM은 산술에서 환각이 발생합니다. 비용추계는 **한 자릿수 차이가 정책 결정을 바꿀** 수 있어 치명적.
+
+- LLM: 조문에서 **변수만 추출** (회의횟수, 위촉위원, 단가 등)
+- Python `calculator.py`: 추출된 변수로 **결정적 곱셈/복리**
+- 같은 입력 → 항상 같은 출력 보장
+
+이 분리가 본 시스템의 신뢰성 핵심입니다.
 
 ---
 
