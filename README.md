@@ -5,7 +5,6 @@
 **LLM의 추론과 결정적 계산을 분리한 TAG 아키텍처로,**
 **국회예산정책처 표준 양식의 비용추계서를 자동 생성합니다.**
 
-[![tests](https://github.com/CSID-DGU/2026-1-CECD1-5-SSA-01/actions/workflows/test.yml/badge.svg)](https://github.com/CSID-DGU/2026-1-CECD1-5-SSA-01/actions/workflows/test.yml)
 [![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5_Pro-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
@@ -29,10 +28,10 @@
 
 | 기존 현실 | ORCA의 해결 |
 |---|---|
-| NABO 분석관이 추계서 한 건에 **1~3주** 소요 | PDF 업로드 → **수 분 내** 초안 생성 |
+| NABO 분석관이 추계서 한 건에 사안에 따라 **수일~수주** 소요 | PDF 업로드 → **수 분 내** 초안 생성 |
 | 가정값 출처 추적 어려움 ("이 단가 어디서?") | 모든 가정값에 `evidence_trace` 자동 기록 |
 | LLM에 통째로 맡기면 **숫자에서 환각** | LLM은 변수 추출만, **Python이 결정적 계산** |
-| 지자체 조례안은 자체 추계 체계조차 부재 | NABO 양식과 동일 구조로 즉시 적용 가능 |
+| 지자체 조례안은 자체 추계 체계가 미비한 곳도 다수 | NABO 양식과 동일 구조로 즉시 적용 가능 |
 
 ---
 
@@ -184,7 +183,7 @@ cp backend/.env.example backend/.env
 | `AZURE_OPENAI_*` | OpenAI 임베딩 폴백 | 선택 |
 | `BACKEND_PORT` | 백엔드 포트 (기본 8010) | 선택 |
 
-### 실행 — 옵션 A: 로컬
+### 실행
 
 ```bash
 # 1) 백엔드 (별도 터미널)
@@ -196,20 +195,14 @@ cd frontend && npm run dev
 # → http://localhost:5173
 ```
 
-### 실행 — 옵션 B: Docker
-
-```bash
-docker compose up --build
-# → 백엔드 http://localhost:8010
-```
-
-브라우저에서 `http://localhost:5173` (또는 Docker는 별도 정적 서빙) 접속 → PDF 업로드 → 분석 결과 + 추계서 다운로드.
+브라우저에서 `http://localhost:5173` 접속 → PDF 업로드 → 분석 결과 + 추계서 다운로드.
 
 ### 테스트
 
 ```bash
-pip install -r requirements-dev.txt
+pip install pytest
 python -m pytest backend/test_formula_engine.py -v
+# → 18 passed (로컬 검증)
 ```
 
 ---
@@ -243,7 +236,7 @@ python -m pytest backend/test_formula_engine.py -v
 │  ├─ assembly_case_policy.py   # NABO 정책 분류기
 │  ├─ assembly_formula_engine.py # TAG 산식 엔진
 │  ├─ assembly_assumptions.py   # 가정값 후보 검색
-│  ├─ server.py                 # /api/analyze_v2, /api/render, /api/export/pdf
+│  ├─ server.py                 # /api/health, analyze, analyze_v2, render, export/pdf, recompute
 │  ├─ supabase_schema.sql       # DB 스키마
 │  └─ scripts/                  # 데이터 수집·임베딩·TAG 추출 파이프라인
 ├─ frontend/

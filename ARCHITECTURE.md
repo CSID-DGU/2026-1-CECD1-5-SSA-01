@@ -218,17 +218,22 @@ kosis_stat_candidates
 
 ---
 
-## KOSIS 자동 조회 변수 (7개)
+## KOSIS 자동 조회 변수 (10개)
 
-| 변수 | KOSIS 표 | 단위 |
-|------|---------|------|
-| 소비자물가상승률 | DT_1J22003 | % |
-| 명목임금상승률 | DT_118N_LCE0001 | % |
-| 공무원임금상승률 | 인사혁신처 고시 | % |
-| 주민등록인구 | DT_1B04005N | 명 |
-| 65세이상인구 | DT_1B04005N | 명 |
-| 등록장애인수 | DT_110001_A045 | 명 |
-| 기초생활수급자수 | DT_110001_A045 | 명 |
+| 변수 | 출처 | 단위 |
+|------|------|------|
+| 소비자물가상승률 | KOSIS | % |
+| 명목임금상승률 | KOSIS | % |
+| 주민등록인구 | KOSIS | 명 |
+| 65세이상인구 | KOSIS | 명 |
+| 영유아인구 | KOSIS | 명 |
+| 아동인구 | KOSIS | 명 |
+| 청년인구 | KOSIS | 명 |
+| 등록장애인수 | KOSIS | 명 |
+| 기초생활수급자수 | KOSIS | 명 |
+| 공무원임금상승률 | 인사혁신처 고시 (정적) | % |
+
+> 실제 매핑은 `backend/kosis_lookup.py` 의 `KOSIS_MAP` / `STATIC_VALUES` 참고.
 
 → `variables_needed`에 정확히 이 이름으로 들어가면 시스템이 자동 조회.
 
@@ -395,29 +400,23 @@ api/
 
 ### 왜 FastAPI/Flask가 아니라 `http.server`인가
 
-본 시스템은 **Vercel serverless 함수**로 배포됩니다. 각 요청이 짧게 살았다 죽는 환경이라:
-
-1. **Cold-start latency 최소화** — FastAPI는 Starlette + Pydantic 의존성을 로드하느라 첫 요청에 0.5~1초 지연. `http.server`는 stdlib라 import 비용 0.
-2. **의존성 표면적 축소** — Vercel 함수당 50MB zip 제한. SDK 안 쓰면 PyMuPDF + requests만 들어가 여유.
-3. **엔드포인트가 단순** — `/api/analyze_v2`, `/api/render`, `/api/export/pdf` 3개. 라우터 프레임워크가 과합니다.
-
-→ "기능을 위한 최소 도구"라는 결정. 트래픽/엔드포인트가 늘어나면 FastAPI 전환 예정.
+본 시스템은 Vercel serverless 함수로 배포되며, 엔드포인트는 6개(`/api/health`, `/api/analyze`, `/api/analyze_v2`, `/api/render`, `/api/export/pdf`, `/api/recompute`)에 불과합니다. 라우터·검증 프레임워크의 이점보다 의존성 부담을 줄이고 stdlib만으로 처리하는 단순성을 우선했습니다.
+→ 트래픽/엔드포인트가 늘어나면 FastAPI 전환 예정.
 
 ### 왜 Gemini/OpenAI/Supabase SDK를 안 쓰는가
 
-같은 이유. **모든 외부 호출을 `urllib.request.urlopen`으로 직접** 처리합니다.
+모든 외부 호출은 stdlib `urllib.request.urlopen`로 직접 처리합니다 (`_post` 헬퍼 1개).
 
-- ✅ Cold-start 비용 0
-- ✅ SDK 보안 패치 따라가는 부담 없음
-- ✅ 호출 경로가 한 함수(`_post`)에 집중되어 디버깅 쉬움
-- ⚠️ 트레이드오프: 재시도·rate-limit 정책은 직접 구현 (백오프 로직 `_GEMINI_BACKOFF_UNTIL`)
+- ✅ 외부 의존성 표면적이 `pymupdf + requests` 두 개로 축소
+- ✅ 호출 경로가 한 함수에 집중되어 디버깅 쉬움
+- ⚠️ 트레이드오프: 재시도·rate-limit 정책은 직접 구현 (`_GEMINI_BACKOFF_UNTIL` — 429/5xx 시 30초 백오프, `backend/analyzer_v2.py`)
 
 ### 왜 LLM과 계산을 분리하나
 
-LLM은 산술에서 환각이 발생합니다. 비용추계는 **한 자릿수 차이가 정책 결정을 바꿀** 수 있어 치명적.
+LLM은 산술에서 환각이 발생합니다. 비용추계는 한 자릿수 차이가 정책 결정을 바꿀 수 있어 치명적.
 
 - LLM: 조문에서 **변수만 추출** (회의횟수, 위촉위원, 단가 등)
-- Python `calculator.py`: 추출된 변수로 **결정적 곱셈/복리**
+- Python `calculator.py`: `amount = base_amount * ((1 + growth_rate) ** (year_no - start_year))` 의 결정적 복리 계산
 - 같은 입력 → 항상 같은 출력 보장
 
 이 분리가 본 시스템의 신뢰성 핵심입니다.
