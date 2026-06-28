@@ -379,7 +379,6 @@ function VerdictCard({ verdict, field }) {
   const meta = VERDICT_META[verdict.type] || {
     label: verdict.label, color: 'gray', desc: ''
   }
-  const confPct = Math.round((verdict.confidence || 0) * 100)
   return (
     <div className={`verdict-card verdict-${meta.color}`}>
       <div className="verdict-status">
@@ -399,13 +398,6 @@ function VerdictCard({ verdict, field }) {
             <div className="verdict-nabo-text">{verdict.nabo_reason}</div>
           </div>
         )}
-        <div className="verdict-confidence">
-          <span>판단 신뢰도</span>
-          <div className="confidence-bar">
-            <div className="confidence-fill" style={{ width: `${confPct}%` }} />
-          </div>
-          <span className="confidence-pct">{confPct}%</span>
-        </div>
       </div>
     </div>
   )
