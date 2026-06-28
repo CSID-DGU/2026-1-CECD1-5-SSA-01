@@ -734,6 +734,34 @@
   font-size: 0.85rem;
   color: var(--text);
 }
+.selected-formula-block {
+  margin: 8px 0 10px;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+}
+.selected-formula-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #334155;
+}
+.selected-formula-block code {
+  display: block;
+  padding: 7px 9px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  color: var(--text);
+}
 .formula-template-block {
   margin: 8px 0 10px;
   padding: 9px 12px;
@@ -965,6 +993,13 @@
   padding: 10px 12px;
   background: #fefce8;
   border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+}
+.assumption-strategy-block {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
   border-radius: var(--radius-sm);
 }
 .assumptions-label {

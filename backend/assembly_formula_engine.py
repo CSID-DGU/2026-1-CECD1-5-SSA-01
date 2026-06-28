@@ -361,6 +361,281 @@ def _research_subtype(text: Any) -> str | None:
     return None
 
 
+def _tag_formula_candidates(
+    item: dict[str, Any],
+    tag_patterns: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    template_key = str(item.get("formula_family") or infer_template_key(item) or "")
+    candidates: list[dict[str, Any]] = []
+    for pattern in tag_patterns:
+        for tagged in pattern.get("items") or []:
+            tagged_probe = {
+                "name": tagged.get("name"),
+                "category": tagged.get("category"),
+                "formula": " ".join(
+                    str(row.get("formula") or "") for row in tagged.get("amounts") or []
+                ),
+                "variables_needed": [v.get("name") for v in tagged.get("variables") or []],
+            }
+            tagged_key = infer_template_key(tagged_probe)
+            if template_key and tagged_key and tagged_key != template_key:
+                continue
+            annual = [
+                float(row["amount_thousand"])
+                for row in tagged.get("amounts") or []
+                if not row.get("is_total")
+                and row.get("amount_thousand") is not None
+                and float(row["amount_thousand"]) > 0
+            ]
+            if not annual:
+                continue
+            item_name = str(item.get("name") or "")
+            tagged_name = str(tagged.get("name") or "")
+            name_overlap = _token_overlap(item_name, tagged_name)
+            if template_key == "research_service":
+                item_subtype = _research_subtype(item_name)
+                tagged_subtype = _research_subtype(tagged_name)
+                if item_subtype and tagged_subtype and item_subtype != tagged_subtype:
+                    continue
+            if name_overlap < 0.12:
+                continue
+            score = name_overlap
+            if item.get("category") == tagged.get("category"):
+                score += 0.25
+            if tagged_key == template_key:
+                score += 0.4
+            formulas = [
+                str(row.get("formula") or "")
+                for row in tagged.get("amounts") or []
+                if row.get("formula")
+            ]
+            variables = [
+                {
+                    "name": variable.get("name"),
+                    "value": variable.get("value"),
+                    "unit": variable.get("unit"),
+                }
+                for variable in tagged.get("variables") or []
+                if variable.get("name")
+            ]
+            candidates.append({
+                "score": round(score, 3),
+                "base_amount_thousand": int(round(median(annual))),
+                "bill_no": pattern.get("bill_no"),
+                "bill_name": pattern.get("bill_name"),
+                "item_name": tagged.get("name"),
+                "item_category": tagged.get("category"),
+                "formula": formulas[0] if formulas else None,
+                "formula_candidates": formulas[:3],
+                "variables": variables[:8],
+            })
+
+    candidates.sort(key=lambda row: float(row["score"]), reverse=True)
+    return candidates
+
+
+def _best_tag_formula_candidate(
+    item: dict[str, Any],
+    tag_patterns: list[dict[str, Any]],
+    *,
+    threshold: float = 0.45,
+) -> dict[str, Any] | None:
+    candidates = _tag_formula_candidates(item, tag_patterns)
+    if not candidates:
+        return None
+    best = candidates[0]
+    if float(best.get("score") or 0) < threshold:
+        return None
+    return best
+
+
+def _find_named_assumption(item: dict[str, Any], variable: str) -> dict[str, Any] | None:
+    target = _compact(variable)
+    for assumption in item.get("assumptions") or []:
+        name = _compact(assumption.get("name"))
+        if target and (target == name or target in name or name in target):
+            return assumption
+    return None
+
+
+def _find_kosis_lookup(item: dict[str, Any], variable: str) -> dict[str, Any] | None:
+    target = _compact(variable)
+    for lookup in item.get("kosis_lookups") or []:
+        name = _compact(lookup.get("variable"))
+        if target and (target == name or target in name or name in target):
+            return lookup
+    return None
+
+
+def _find_assumption_candidate(item: dict[str, Any], variable: str) -> dict[str, Any] | None:
+    target = _compact(variable)
+    for candidate in item.get("assumption_candidates") or []:
+        probe = _compact(" ".join(
+            str(part or "")
+            for part in [
+                candidate.get("label"),
+                candidate.get("variable_name"),
+                candidate.get("item_name"),
+            ]
+        ))
+        if target and (target in probe or probe in target):
+            return candidate
+    return None
+
+
+def _find_tag_variable(candidate: dict[str, Any] | None, variable: str) -> dict[str, Any] | None:
+    if not candidate:
+        return None
+    target = _compact(variable)
+    for tag_variable in candidate.get("variables") or []:
+        name = _compact(tag_variable.get("name"))
+        if target and (target == name or target in name or name in target):
+            return tag_variable
+    return None
+
+
+def _variable_strategy(
+    item: dict[str, Any],
+    variable: str,
+    tag_candidate: dict[str, Any] | None,
+) -> dict[str, Any]:
+    assumption = _find_named_assumption(item, variable)
+    if assumption and assumption.get("value") is not None:
+        return {
+            "variable": variable,
+            "source_type": assumption.get("source_type") or "document_or_standard",
+            "status": "resolved",
+            "value": assumption.get("value"),
+            "unit": assumption.get("unit"),
+            "basis": assumption.get("basis") or "조문 또는 표준 전제값에서 확인",
+            "requires_review": bool(assumption.get("needs_user_confirm")),
+        }
+
+    kosis = _find_kosis_lookup(item, variable)
+    if kosis:
+        return {
+            "variable": variable,
+            "source_type": "kosis_api",
+            "status": "resolved",
+            "value": None,
+            "unit": kosis.get("unit"),
+            "basis": f"{kosis.get('source') or 'KOSIS'} 조회값 사용",
+            "requires_review": False,
+        }
+
+    candidate = _find_assumption_candidate(item, variable)
+    if candidate:
+        return {
+            "variable": variable,
+            "source_type": "similar_assumption_pool",
+            "status": "candidate",
+            "value": candidate.get("value"),
+            "unit": candidate.get("unit"),
+            "basis": (
+                f"{candidate.get('bill_no') or ''} {candidate.get('bill_name') or ''} "
+                f"유사 전제값 후보, 점수 {candidate.get('score')}"
+            ).strip(),
+            "requires_review": True,
+        }
+
+    tag_variable = _find_tag_variable(tag_candidate, variable)
+    if tag_variable:
+        return {
+            "variable": variable,
+            "source_type": "tag_similar_case",
+            "status": "candidate",
+            "value": tag_variable.get("value"),
+            "unit": tag_variable.get("unit"),
+            "basis": (
+                f"{tag_candidate.get('bill_no') or ''} {tag_candidate.get('bill_name') or ''} "
+                "TAG 변수 후보"
+            ).strip(),
+            "requires_review": True,
+        }
+
+    if assumption:
+        return {
+            "variable": variable,
+            "source_type": assumption.get("source_type") or "policy_input",
+            "status": "missing",
+            "value": None,
+            "unit": assumption.get("unit"),
+            "basis": assumption.get("basis") or "정책 입력 또는 외부 자료 확인 필요",
+            "requires_review": True,
+        }
+
+    return {
+        "variable": variable,
+        "source_type": "policy_input",
+        "status": "missing",
+        "value": None,
+        "unit": None,
+        "basis": "조문·표준자료·유사사례에서 확정값을 찾지 못해 사용자 확인 필요",
+        "requires_review": True,
+    }
+
+
+def apply_formula_source_strategy(
+    estimate: dict[str, Any],
+    tag_patterns: list[dict[str, Any]],
+) -> int:
+    """Record formula choice and variable assumption strategy for each item."""
+    updated = 0
+    for item in estimate.get("items") or []:
+        calc = item.get("calculation") or {}
+        base_ready = isinstance(calc, dict) and calc.get("base_amount_thousand") is not None
+        tag_candidate = _best_tag_formula_candidate(item, tag_patterns)
+        if tag_candidate:
+            item["tag_formula_candidate"] = tag_candidate
+
+        committee = item.get("committee_formula") or {}
+        if committee:
+            selected = {
+                "source_type": "standard_structured_formula",
+                "formula": committee.get("formula") or item.get("formula"),
+                "label": "표준 위원회 회의수당 산식",
+                "confidence": 0.9,
+                "basis": "위원회 운영비는 회의횟수·수당지급대상 인원·회의수당 단가로 구조화",
+                "requires_review": True,
+            }
+        elif base_ready and item.get("tag_amount_evidence"):
+            selected = {
+                "source_type": "tag_similar_formula",
+                "formula": item.get("tag_amount_evidence", {}).get("formula") or item.get("formula"),
+                "label": "TAG 유사 비용추계 산식",
+                "confidence": min(0.85, 0.55 + float(item.get("tag_amount_evidence", {}).get("score") or 0) / 2),
+                "basis": "표준산식만으로 기준금액이 확정되지 않아 유사 비용추계 TAG 산식·금액을 적용",
+                "requires_review": True,
+            }
+        elif tag_candidate and not base_ready:
+            selected = {
+                "source_type": "tag_similar_formula_candidate",
+                "formula": tag_candidate.get("formula") or item.get("formula"),
+                "label": "TAG 유사 산식 후보",
+                "confidence": min(0.8, 0.5 + float(tag_candidate.get("score") or 0) / 2),
+                "basis": "표준산식의 일부 전제값이 비어 있어 가장 유사한 공식 추계 사례의 산식을 후보로 제시",
+                "requires_review": True,
+            }
+        else:
+            selected = {
+                "source_type": "standard_formula",
+                "formula": item.get("formula"),
+                "label": "비용유형별 표준산식",
+                "confidence": 0.65 if item.get("formula") else 0.4,
+                "basis": "조문 비용유형에서 도출한 표준 산식",
+                "requires_review": bool(item.get("requires_review")),
+            }
+
+        item["selected_formula"] = selected
+        variables = [str(v) for v in item.get("variables_needed") or [] if str(v).strip()]
+        item["assumption_strategy"] = [
+            _variable_strategy(item, variable, tag_candidate)
+            for variable in variables
+        ]
+        updated += 1
+    return updated
+
+
 def apply_tag_formula_evidence(
     estimate: dict[str, Any],
     tag_patterns: list[dict[str, Any]],
@@ -374,61 +649,8 @@ def apply_tag_formula_evidence(
     for item in estimate.get("items") or []:
         if not item.get("allow_tag_estimate"):
             continue
-        template_key = str(item.get("formula_family") or infer_template_key(item) or "")
-        candidates: list[dict[str, Any]] = []
-        for pattern in tag_patterns:
-            for tagged in pattern.get("items") or []:
-                tagged_probe = {
-                    "name": tagged.get("name"),
-                    "category": tagged.get("category"),
-                    "formula": " ".join(
-                        str(row.get("formula") or "") for row in tagged.get("amounts") or []
-                    ),
-                    "variables_needed": [v.get("name") for v in tagged.get("variables") or []],
-                }
-                tagged_key = infer_template_key(tagged_probe)
-                if template_key and tagged_key and tagged_key != template_key:
-                    continue
-                annual = [
-                    float(row["amount_thousand"])
-                    for row in tagged.get("amounts") or []
-                    if not row.get("is_total")
-                    and row.get("amount_thousand") is not None
-                    and float(row["amount_thousand"]) > 0
-                ]
-                if not annual:
-                    continue
-                item_name = str(item.get("name") or "")
-                tagged_name = str(tagged.get("name") or "")
-                name_overlap = _token_overlap(item_name, tagged_name)
-                if template_key == "research_service":
-                    item_subtype = _research_subtype(item_name)
-                    tagged_subtype = _research_subtype(tagged_name)
-                    if item_subtype and tagged_subtype and item_subtype != tagged_subtype:
-                        continue
-                if name_overlap < 0.12:
-                    continue
-                score = name_overlap
-                if item.get("category") == tagged.get("category"):
-                    score += 0.25
-                if tagged_key == template_key:
-                    score += 0.4
-                candidates.append({
-                    "score": score,
-                    "base_amount_thousand": int(round(median(annual))),
-                    "bill_no": pattern.get("bill_no"),
-                    "bill_name": pattern.get("bill_name"),
-                    "item_name": tagged.get("name"),
-                    "formula": next(
-                        (row.get("formula") for row in tagged.get("amounts") or [] if row.get("formula")),
-                        None,
-                    ),
-                })
-        if not candidates:
-            continue
-        candidates.sort(key=lambda row: float(row["score"]), reverse=True)
-        best = candidates[0]
-        if float(best["score"]) < 0.45:
+        best = _best_tag_formula_candidate(item, tag_patterns)
+        if not best:
             continue
         calc = item.setdefault("calculation", {})
         if calc.get("base_amount_thousand") is None:

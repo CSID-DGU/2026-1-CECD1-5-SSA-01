@@ -35,6 +35,7 @@ from .assembly_assumptions import find_assumption_candidates
 from .assembly_analogy_engine import build_analogical_committee_estimate
 from .assembly_case_policy import apply_validated_case_policy
 from .assembly_formula_engine import (
+    apply_formula_source_strategy,
     apply_tag_formula_evidence,
     build_generalized_estimate,
     classify_estimation_status,
@@ -3109,14 +3110,6 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 if assumption_candidates:
                     item["assumption_candidates"] = assumption_candidates
         if form_type == "assembly":
-            tag_amount_count = apply_tag_formula_evidence(estimate, tag_patterns)
-            if tag_amount_count:
-                workflow_issues.append({
-                    "level": "warn",
-                    "category": "TAG 유사산식 금액 적용",
-                    "detail": f"동일 계산유형의 유사 추계서에서 {tag_amount_count}개 항목의 기준금액 후보를 연결했습니다.",
-                    "action": "유사사례 기반 금액이므로 사업 범위와 단가의 적합성을 최종 확인해야 합니다.",
-                })
             enhanced_committee_items = _enhance_committee_meeting_formulas(estimate, article_results)
             if enhanced_committee_items:
                 workflow_issues.append({
@@ -3125,6 +3118,15 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                     "detail": f"위원회 운영비 {enhanced_committee_items}개 항목을 회의횟수 × 수당지급대상 인원 × 회의수당 단가 산식으로 구조화했습니다.",
                     "action": "유사사례 기반 가정값이므로 회의횟수, 수당 지급 대상, 수당 단가를 확인해야 합니다.",
                 })
+            tag_amount_count = apply_tag_formula_evidence(estimate, tag_patterns)
+            if tag_amount_count:
+                workflow_issues.append({
+                    "level": "warn",
+                    "category": "TAG 유사산식 금액 적용",
+                    "detail": f"표준산식으로 기준금액이 확정되지 않은 {tag_amount_count}개 항목에 유사 추계서 기준금액 후보를 연결했습니다.",
+                    "action": "유사사례 기반 금액이므로 사업 범위와 단가의 적합성을 최종 확인해야 합니다.",
+                })
+            apply_formula_source_strategy(estimate, tag_patterns)
         # 사용자 입력 필요한 전제조건 수집
         needs_input = []
         for item in estimate["items"]:

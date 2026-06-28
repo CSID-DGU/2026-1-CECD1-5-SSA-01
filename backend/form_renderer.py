@@ -456,6 +456,9 @@ def render_assembly(result: dict[str, Any]) -> str:
         source_note = calc.get("source_note")
         if source_note:
             return str(source_note)
+        selected = item.get("selected_formula") or {}
+        if selected.get("basis"):
+            return str(selected.get("basis"))
         template = item.get("formula_template") or {}
         return template.get("notes") or "구조화 산식과 전제값을 적용했습니다."
 

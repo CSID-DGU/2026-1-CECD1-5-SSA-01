@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 
 from backend.assembly_formula_engine import (
+    apply_formula_source_strategy,
     apply_tag_formula_evidence,
     build_generalized_estimate,
     classify_estimation_status,
@@ -279,6 +280,11 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
             }],
         }]
         self.assertEqual(apply_tag_formula_evidence(estimate, patterns), 1)
+        self.assertEqual(apply_formula_source_strategy(estimate, patterns), 1)
+        item = estimate["items"][0]
+        self.assertEqual(item["selected_formula"]["source_type"], "tag_similar_formula")
+        self.assertEqual(item["tag_formula_candidate"]["formula"], "용역 단가 × 연 1회")
+        self.assertTrue(any(row["variable"] == "용역 단가" for row in item["assumption_strategy"]))
         calculated, issues = compute_year_estimates(
             estimate,
             tag_patterns=patterns,
@@ -287,6 +293,76 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertFalse(issues)
         self.assertEqual([row["amount_thousand"] for row in calculated], [190_000] * 5)
         self.assertEqual(classify_estimation_status(estimate)["code"], "computed_with_estimates")
+
+    def test_standard_committee_formula_takes_precedence_over_tag_amount(self) -> None:
+        articles = [{
+            "no": "제26조(정책심의위원회)",
+            "text": "정책을 심의하기 위하여 정책심의위원회를 둔다. 위원회는 위원장 1명을 포함한 15명 이내의 위원으로 구성한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "strong",
+            "trigger_type": "조직설치",
+            "rule_cost_trigger": {"rule": "committee_or_body_operation"},
+        }]
+        estimate = build_generalized_estimate(articles)
+        self.assertIsNotNone(estimate)
+
+        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+
+        self.assertEqual(_enhance_committee_meeting_formulas(estimate, articles), 1)
+        patterns = [{
+            "bill_no": "2299999",
+            "bill_name": "고액 위원회 운영 사례",
+            "items": [{
+                "category": "운영비",
+                "name": "정책심의위원회 운영비",
+                "variables": [],
+                "amounts": [
+                    {"amount_thousand": 99_000, "formula": "유사 위원회 연간 운영비", "is_total": False},
+                ],
+            }],
+        }]
+
+        self.assertEqual(apply_tag_formula_evidence(estimate, patterns), 0)
+        self.assertEqual(apply_formula_source_strategy(estimate, patterns), 1)
+        item = estimate["items"][0]
+        self.assertEqual(item["calculation"]["base_amount_thousand"], 4_000)
+        self.assertEqual(item["committee_formula"]["amount_thousand"], 4_000)
+        self.assertEqual(item["selected_formula"]["source_type"], "standard_structured_formula")
+
+    def test_tag_formula_candidate_is_kept_when_variables_are_missing(self) -> None:
+        articles = [{
+            "no": "제12조(정책연구)",
+            "text": "장관은 정책연구를 실시할 수 있다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "medium",
+            "trigger_type": "의무부과",
+            "rule_cost_trigger": {"rule": "survey_or_plan_service"},
+        }]
+        estimate = build_generalized_estimate(articles)
+        self.assertIsNotNone(estimate)
+        patterns = [{
+            "bill_no": "2200100",
+            "bill_name": "정책연구 법률안",
+            "items": [{
+                "category": "위탁비",
+                "name": "정책연구 연구용역비",
+                "variables": [
+                    {"name": "용역 단가", "value": "120000", "unit": "천원/회"},
+                    {"name": "수행 횟수", "value": "1", "unit": "회/년"},
+                ],
+                "amounts": [
+                    {"amount_thousand": 120_000, "formula": "용역 단가 × 수행 횟수", "is_total": False},
+                ],
+            }],
+        }]
+
+        self.assertEqual(apply_formula_source_strategy(estimate, patterns), 1)
+
+        item = estimate["items"][0]
+        self.assertEqual(item["selected_formula"]["source_type"], "tag_similar_formula_candidate")
+        self.assertEqual(item["tag_formula_candidate"]["formula"], "용역 단가 × 수행 횟수")
+        self.assertEqual(item["assumption_strategy"][0]["source_type"], "tag_similar_case")
+        self.assertTrue(item["assumption_strategy"][0]["requires_review"])
 
     def test_research_service_rejects_different_subtype_amount(self) -> None:
         articles = [{

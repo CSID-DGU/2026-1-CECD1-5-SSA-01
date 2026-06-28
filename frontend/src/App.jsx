@@ -714,6 +714,18 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
               <span className="formula-label">산식</span>
               <code>{item.formula}</code>
             </div>
+            {item.selected_formula && (
+              <div className="selected-formula-block">
+                <div className="selected-formula-head">
+                  <span>{item.selected_formula.label || '산식 선택 근거'}</span>
+                  <span>{Math.round((item.selected_formula.confidence || 0) * 100)}%</span>
+                </div>
+                <code>{item.selected_formula.formula || item.formula || '-'}</code>
+                {item.selected_formula.basis && (
+                  <div className="formula-template-note">{item.selected_formula.basis}</div>
+                )}
+              </div>
+            )}
             {item.formula_template && (
               <div className="formula-template-block">
                 <div className="formula-template-head">
@@ -768,6 +780,27 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
                     </div>
                   )
                 })}
+              </div>
+            )}
+            {item.assumption_strategy && item.assumption_strategy.length > 0 && (
+              <div className="assumption-strategy-block">
+                <div className="assumptions-label">변수 가정 경로</div>
+                {item.assumption_strategy.map((row, j) => (
+                  <div key={j} className={`assumption-row ${row.requires_review ? 'need-input' : ''}`}>
+                    <div className="assumption-head">
+                      <span className="assumption-name">{row.variable}</span>
+                      <span className="assumption-input-badge">
+                        {row.status === 'resolved' ? '확정' : row.status === 'candidate' ? '후보' : '확인 필요'}
+                      </span>
+                    </div>
+                    <div className="assumption-basis">
+                      {row.basis || '-'}
+                      {row.value !== null && row.value !== undefined
+                        ? ` · ${row.value}${row.unit ? ` ${row.unit}` : ''}`
+                        : ''}
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
             {(item.reference_unit_costs || (item.reference_unit_cost ? [item.reference_unit_cost] : [])).length > 0 && (
