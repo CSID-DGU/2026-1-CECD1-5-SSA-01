@@ -9,7 +9,7 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5_Pro-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![Supabase](https://img.shields.io/badge/Supabase-pgvector-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com/)
-[![License](https://img.shields.io/badge/License-Educational-blue.svg)](#-라이선스)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 [데모 결과](#-검증-결과--간호법안-2126640) · [아키텍처](#-아키텍처) · [빠른 시작](#-빠른-시작) · [기술 스택](#-기술-스택)
 
@@ -262,7 +262,8 @@ cd frontend && npm run dev
 
 ## 📄 라이선스
 
-본 프로젝트는 **동국대학교 컴퓨터공학과 캡스톤(2026-1-CECD1)**의 일환으로 진행되었으며, 학술·교육 목적 사용을 우선합니다.
+본 프로젝트는 **MIT 라이선스** 하에 배포됩니다. 자세한 내용은 [`LICENSE`](./LICENSE) 파일을 참고하세요.
+동국대학교 컴퓨터공학과 캡스톤(2026-1-CECD1-5-SSA-01)의 일환으로 시작되었습니다.
 
 ---
 
