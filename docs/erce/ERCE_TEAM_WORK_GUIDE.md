@@ -125,6 +125,93 @@ python3 -m unittest discover -s backend/erce/tests -p 'test_*.py' -v
 
 조건이 맞지 않으면 후보를 제외한다. 적절한 값이 없을 때는 숫자를 임의 생성하지 않고 `근거 부족`으로 남긴다.
 
+#### 단가표를 기존과 동일하게 추가하는 방법
+
+ERCE의 단가표는 최종 추계액을 저장하는 표가 아니다. 산식의 빈칸을 채울 수 있는 **원자 단위 변수 근거표**다.
+단가 외에도 대상 인원, 횟수, 비율, 기존 지출, 사업 규모를 저장할 수 있지만 각각의 역할을 구분한다.
+
+새 근거는 관련 `*_evidence*.py` 파일에 `evidence_row()` 형식으로 추가한다. 적절한 파일이 없으면
+`backend/erce/{업무명}_evidence.py`를 만들고, 해당 행 생성 함수를
+`backend/erce/scripts/build_variable_table.py`에 연결한다.
+
+```python
+from backend.erce.reviewed_variable_rows import evidence_row
+
+
+def example_rows():
+    return [
+        evidence_row(
+            evidence_key="official:example_unit_cost:2026:v1",
+            variable_key="unit_cost",
+            value=100_000,
+            unit="KRW/person",
+            source_bill_no="official:example-guideline-2026",
+            available_at="2026-01-01",
+            source_ref="2026년 ○○지침 p.10 표3",
+            source_url="공식 원문 URL 또는 저장 위치",
+            agency="담당 기관",
+            policy_domain="정책 분야",
+            scope="이 단가가 적용되는 대상과 업무 범위",
+            service_function="실제 제공되는 서비스",
+            variable_role="unit_rate",
+            reuse_policy="same_scope",
+            source_class="official_standard",
+            price_year=2026,
+            limitation="적용할 수 없는 경우와 주의사항",
+        )
+    ]
+```
+
+필수 필드는 다음과 같다.
+
+| 필드 | 의미 |
+|---|---|
+| `evidence_key` | 중복되지 않는 근거 ID. 출처·변수·연도·버전을 포함한다. |
+| `variable_key` | 산식에서 요구하는 변수명과 정확히 일치해야 한다. |
+| `value` | 숫자 또는 연도별 숫자 배열이다. 최종 추계 합계를 넣지 않는다. |
+| `unit` | `KRW/person`, `person/year`, `ratio`처럼 분모와 기간까지 명시한다. |
+| `source_bill_no` | 출처 의안번호 또는 `official:`로 시작하는 공식자료 ID다. |
+| `available_at` | 이 근거가 공개되어 사용할 수 있게 된 날짜다. |
+| `source_ref` | 문서명·페이지·표 번호까지 사람이 다시 확인할 수 있게 작성한다. |
+| `agency` | 근거를 생산하거나 집행한 기관이다. |
+| `policy_domain` | 근거가 속한 정책 분야다. |
+| `scope` | 대상 집단, 지역, 규모, 포함 비용 등 실제 적용 범위다. |
+| `service_function` | 비용이 지급되는 실제 업무·서비스다. |
+| `variable_role` | 단가·수량·기존비용·가정·상한 등 변수의 역할이다. |
+| `reuse_policy` | 다른 의안에서 재사용할 수 있는 범위다. |
+| `source_class` | 법안 명시값·실제자료·공식값·선례 중 근거 계층이다. |
+
+`reuse_policy`는 다음 셋 중 하나를 사용한다.
+
+- `target_only`: 해당 의안에서만 사용한다. 대상 인원, 해당 사업 예산처럼 다른 의안에 옮길 수 없는 값이다.
+- `same_scope`: 기관·서비스·대상 범위가 동일할 때만 사용한다.
+- `comparable`: 다른 범위에서도 검토할 수 있지만 AI가 적용 이유를 별도로 기록해야 한다.
+
+`source_class`는 근거의 실제 성격과 일치해야 한다.
+
+- `official_standard`: 시행 중인 공식 원문을 직접 확인한 단가·기준
+- `target_current_actual`: 대상 기관이나 대상 사업의 실제 실적·예산
+- `precedent_assumption`: 기존 비용추계서에서 사용한 가정
+
+다음 규칙을 반드시 지킨다.
+
+- 공식 지침을 인용한 선례와 공식 원문을 직접 확인한 값은 구분한다.
+- 지급 상한은 `variable_role="constraint"`로 저장하며 실제 지급 단가로 자동 사용하지 않는다.
+- 배열 값은 `value_years=[...]`를 함께 저장하고 추계기간과 정확히 일치할 때만 사용한다.
+- 동일 단위여도 서비스 내용이 다르면 같은 단가로 사용하지 않는다.
+- 전국 총액, 대상 인원, 특정 사업 총예산을 다른 사업의 단가로 바꾸지 않는다.
+- 정답에서 확인한 값은 `obtained_from="reviewed_answer"`와 한계를 기록한다.
+- 가격이나 기준이 바뀌면 기존 행을 덮어쓰지 않고 새 `evidence_key` 버전을 추가한다.
+
+행을 추가한 뒤 반드시 DB를 다시 구축한다.
+
+```bash
+python3 -m backend.erce.scripts.build_variable_table
+```
+
+출력 행 수가 증가했는지 확인하고, `find_variable_candidates()`가 공개일·적용연도·재사용 정책에 따라
+후보를 포함하거나 제외하는 테스트를 추가한다. DB에서 후보를 찾았다는 이유만으로 자동 선택해서는 안 된다.
+
 ### 5단계: 최초 결과 고정
 
 정답을 보기 전에 다음 내용을 `docs/erce/cases/ERCE_CASE_{의안번호}.md`에 기록하고 저장한다.
