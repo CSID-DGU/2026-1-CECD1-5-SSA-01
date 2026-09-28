@@ -24,13 +24,14 @@ def evidence_row(*, evidence_key: str, variable_key: str, value: Any, unit: str,
                  source_bill_no: str, available_at: str, source_ref: str,
                  agency: str, policy_domain: str, scope: str, service_function: str,
                  variable_role: str, reuse_policy: str = "comparable",
-                 source_class: str = "precedent_assumption", **context: Any) -> dict[str, Any]:
+                 source_class: str = "precedent_assumption", reviewed_at: str = "2026-09-27",
+                 **context: Any) -> dict[str, Any]:
     return dict(evidence_key=evidence_key, variable_key=variable_key, value=value, unit=unit,
                 source_bill_no=source_bill_no, available_at=available_at, source_ref=source_ref,
                 agency=agency, policy_domain=policy_domain, scope=scope,
                 service_function=service_function, variable_role=variable_role,
                 reuse_policy=reuse_policy, source_class=source_class,
-                review_status="reviewed", reviewed_at="2026-09-27", **context)
+                review_status="reviewed", reviewed_at=reviewed_at, **context)
 
 
 def reviewed_variable_rows() -> list[dict[str, Any]]:

@@ -8,6 +8,7 @@ from backend.erce.engine import estimate_routed_item
 from backend.erce.reviewed_variable_rows import reviewed_variable_rows, burial_comparable_rows
 from backend.erce.interagency_meeting_evidence import interagency_meeting_rows, unification_council_annual_rows
 from backend.erce.legislative_committee_evidence import legislative_committee_rows, policy_review_committee_rows, POLICY_REVIEW_STAFF_GRADES
+from backend.erce.transfer_payment_evidence import transfer_payment_rows
 from backend.erce.variable_evidence_store import save_variable_rows, find_variable_candidates
 
 
@@ -25,6 +26,44 @@ class VariableEvidenceStoreTest(unittest.TestCase):
         return dict(bill_no=bill, route_key=route, start_year=start, years=5,
             cutoff_date="2026-09-27", evidence_mode="development_review",
             variable_db_path=str(self.path), selected_evidence_keys=keys, **extra)
+
+    def test_transfer_adjusted_population_preserves_first_run_and_answer_cutoff(self):
+        save_variable_rows(transfer_payment_rows(), self.path)
+        answer_keys = ["2200563:excluded_recipients:2024",
+                       "2200563:additional_recipients:2024"]
+        self.assertEqual(find_variable_candidates(
+            cutoff_date="2024-06-18", variable_key="excluded_recipients",
+            target_bill_no="2200563", evidence_mode="development_review",
+            db_path=self.path, start_year=2024, years=1), [])
+        base = dict(bill_no="2200563", start_year=2024, years=1,
+                    cutoff_date="2024-06-18", variable_db_path=str(self.path),
+                    route_path=["이전지출", "개인지원", "일반급여"],
+                    selected_evidence_keys=["mois:registered_population:2024-05"],
+                    explicit_inputs={"benefit_per_recipient":250000, "payments_per_year":1})
+        self.assertEqual(estimate_routed_item(base).annual_amounts_thousand, (12819336750,))
+        adjusted = {**base, "cutoff_date":"2024-07-11", "evidence_mode":"development_review",
+                    "route_path":["이전지출", "개인지원", "대상인구가감급여"],
+                    "selected_evidence_keys":["mois:base_population:2024-05", *answer_keys]}
+        result = estimate_routed_item(adjusted)
+        self.assertEqual(result.annual_amounts_thousand, (13322742750,))
+        for changes, reason in (
+            ({"cutoff_date":"2024-06-18"}, "future"),
+            ({"evidence_mode":"holdout"}, "target answer"),
+            ({"bill_no":"NEW"}, "different target"),
+        ):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, reason):
+                estimate_routed_item({**adjusted, **changes})
+
+        synthetic = dict(route_key="transfer_recipient_adjusted", start_year=2024, years=1,
+                         explicit_inputs={"base_population":100, "excluded_recipients":10,
+                                          "additional_recipients":5, "benefit_per_recipient":1000})
+        self.assertEqual(estimate_routed_item(synthetic).annual_amounts_thousand, (95,))
+        with self.assertRaisesRegex(ValueError, "excluded_recipients"):
+            estimate_routed_item({**synthetic, "explicit_inputs":{
+                **synthetic["explicit_inputs"], "excluded_recipients":101}})
+        with self.assertRaisesRegex(ValueError, "missing ERCE formula variables"):
+            estimate_routed_item({**synthetic, "explicit_inputs":{
+                "base_population":100, "benefit_per_recipient":1000}})
 
     def test_missing_four_cases_calculate_from_saved_ids_not_inline_gold_values(self):
         cases = [

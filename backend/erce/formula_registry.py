@@ -76,6 +76,7 @@ DIRECT_FORMULA_ROUTE_KEYS = {
     "information_system_operation_staff": ("INFORMATION_SYSTEM_OPERATION_STAFF_V1", "goods_services"),
     "committee_components": ("COMMITTEE_MEETING_ALLOWANCE_V1", "goods_services"),
     "transfer_recipient": ("TRANSFER_RECIPIENT_V1", "transfer"),
+    "transfer_recipient_adjusted": ("TRANSFER_RECIPIENT_ADJUSTED_V1", "transfer"),
     "transfer_subsidy_rate": ("TRANSFER_SUBSIDY_RATE_V1", "transfer"),
     "capital_area": ("CAPITAL_AREA_V1", "capital"),
     "capital_asset": ("CAPITAL_ASSET_V1", "capital"),

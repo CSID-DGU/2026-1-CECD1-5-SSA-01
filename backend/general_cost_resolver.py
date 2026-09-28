@@ -167,6 +167,12 @@ FORMULAS: dict[str, dict[str, Any]] = {
         "required": ("recipient_count", "benefit_per_recipient"),
         "optional": ("participation_rate", "payments_per_year", "growth_rate"),
     },
+    "TRANSFER_RECIPIENT_ADJUSTED_V1": {
+        "expression": "(기준 인구 − 제외 인원 + 추가 대상자) × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "required": ("base_population", "excluded_recipients", "additional_recipients",
+                     "benefit_per_recipient"),
+        "optional": ("participation_rate", "payments_per_year"),
+    },
     "TRANSFER_SUBSIDY_RATE_V1": {
         "expression": "적격 사업비 × 보조율",
         "required": ("project_cost", "subsidy_rate"),
@@ -604,6 +610,34 @@ def resolve_general_cost(request: GeneralCostRequest) -> GeneralCostResolution:
             if right in {"employer_contribution_rate","basic_expense_ratio"} and any(value > 1 for value in prices):
                 raise ValueError(right)
             annual_won = [quantity * price for quantity, price in zip(quantities, prices)]
+        elif request.formula_key == "TRANSFER_RECIPIENT_ADJUSTED_V1":
+            from math import isfinite
+            operands = {
+                key: _year_values(inputs[key].value, request.years, name=key)
+                for key in formula["required"]
+            }
+            for key, values in operands.items():
+                if any(not isfinite(value) or value < 0 for value in values):
+                    raise ValueError(key)
+            participation = _year_values(
+                inputs["participation_rate"].value if "participation_rate" in inputs else 1.0,
+                request.years, name="participation_rate")
+            payments = _year_values(
+                inputs["payments_per_year"].value if "payments_per_year" in inputs else 1.0,
+                request.years, name="payments_per_year")
+            if any(not isfinite(value) or not 0 <= value <= 1 for value in participation):
+                raise ValueError("participation_rate")
+            if any(not isfinite(value) or value < 0 for value in payments):
+                raise ValueError("payments_per_year")
+            annual_won = []
+            for i in range(request.years):
+                recipients = (operands["base_population"][i]
+                              - operands["excluded_recipients"][i]
+                              + operands["additional_recipients"][i])
+                if operands["excluded_recipients"][i] > operands["base_population"][i]:
+                    raise ValueError("excluded_recipients")
+                annual_won.append(recipients * operands["benefit_per_recipient"][i]
+                                  * participation[i] * payments[i])
         elif request.formula_key == "TRANSFER_SUBSIDY_RATE_V1":
             from math import isfinite
             costs = _year_values(inputs["project_cost"].value, request.years, name="project_cost")

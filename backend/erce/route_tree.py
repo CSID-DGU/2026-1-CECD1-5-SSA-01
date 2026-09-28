@@ -40,7 +40,8 @@ ERCE_ROUTE_TREE = {
         "검증된연간금액": "direct_annual_amount",
     },
     "이전지출": {
-        "개인지원": {"일반급여": "transfer_recipient", "진단검사비순증지원": "diagnostic_test_subsidy"},
+        "개인지원": {"일반급여": "transfer_recipient", "대상인구가감급여": "transfer_recipient_adjusted",
+                 "진단검사비순증지원": "diagnostic_test_subsidy"},
         "사업보조": "transfer_subsidy_rate",
     },
     "자본지출": {
