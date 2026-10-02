@@ -23,6 +23,7 @@ import sys
 import tempfile
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
@@ -36,6 +37,7 @@ from .assembly_analogy_engine import build_analogical_committee_estimate
 from .assembly_case_policy import apply_validated_case_policy
 from .assembly_formula_engine import (
     apply_formula_source_strategy,
+    apply_reasonable_default_amounts,
     apply_tag_formula_evidence,
     build_generalized_estimate,
     classify_estimation_status,
@@ -43,7 +45,9 @@ from .assembly_formula_engine import (
 )
 from .assembly_formula_templates import build_formula_template
 from .calculator import compute_year_estimates
-from .config import PROJECT_ROOT, SCRIPT_DIR, get_env
+from .config import GENERATED_DIR, PROJECT_ROOT, SCRIPT_DIR, get_env
+from .llm_profiles import normalize_response as normalize_profile_response
+from .llm_profiles import system_instruction as profile_system_instruction
 
 try:
     from .kosis_lookup import get_variable as kosis_get_variable, KOSIS_MAP, STATIC_VALUES
@@ -72,35 +76,35 @@ def _build_qa_report(
         avg_sim = sum(float(s.get("similarity", 0)) for s in similar_estimates) / len(similar_estimates)
         if avg_sim < 0.5:
             issues.append({
-                "level":    "warn",
-                "category": "유사 사례 신뢰도 낮음",
-                "detail":   f"검색된 유사 추계서 평균 유사도 {avg_sim:.0%} (50% 미만)",
-                "action":   "이 의안과 유사한 추계 사례가 부족합니다. 수동 검토 필수.",
+                "level":    "info",
+                "category": "유사 사례 보강 가능",
+                "detail":   f"검색된 유사 추계서 평균 유사도 {avg_sim:.0%}",
+                "action":   "유사사례가 추가 적재되면 정밀도가 더 올라갑니다. 현재는 일반 산식으로 초안을 생성합니다.",
             })
     else:
         issues.append({
-            "level":    "warn",
-            "category": "유사 사례 없음",
-            "detail":   "RAG 검색에서 유사 추계서를 찾지 못했습니다.",
-            "action":   "새로운 유형의 의안일 가능성. 수동 검토 필수.",
+            "level":    "info",
+            "category": "유사 사례 검색 결과 없음",
+            "detail":   "유사 추계서를 찾지 못해 새로운 유형의 의안으로 판단했습니다.",
+            "action":   "표준 산식으로 best-effort 초안을 생성합니다.",
         })
 
     # 2) TAG 패턴 매칭
     if not tag_patterns:
         issues.append({
             "level":    "info",
-            "category": "TAG 구조 패턴 없음",
-            "detail":   "유사 의안의 구조화된 산식/금액 데이터를 찾지 못했습니다.",
-            "action":   "산식 자체 검토 필요.",
+            "category": "유사 추계서 구조 데이터 미연결",
+            "detail":   "유사 의안의 구조화 산식 데이터가 연결되지 않았습니다.",
+            "action":   "표준 산식으로 초안을 생성합니다.",
         })
 
     # 3) 법령 근거
     if not legal_chunks:
         issues.append({
             "level":    "info",
-            "category": "법령 근거 검색 실패",
-            "detail":   "비용추계 법령 PDF RAG가 비어있어 기본 판단 기준을 적용했습니다.",
-            "action":   "법령 적용 여부 확인.",
+            "category": "법령 근거 RAG 미연결",
+            "detail":   "법령 RAG가 연결되지 않아 기본 판단 기준을 적용했습니다.",
+            "action":   "법령 RAG 연결 시 인용 근거가 자동 보강됩니다.",
         })
 
     items = (estimate or {}).get("items") or []
@@ -117,10 +121,10 @@ def _build_qa_report(
     if kosis_missing:
         total = sum(len(v) for v in kosis_missing.values())
         issues.append({
-            "level":    "warn",
-            "category": f"통계청 자동조회 불가 변수 {total}개",
-            "detail":   "KOSIS에 매핑되지 않은 변수가 있어 자동 조회가 안 됩니다.",
-            "action":   "아래 변수의 실제 값을 직접 확인해 입력해야 합니다.",
+            "level":    "info",
+            "category": f"사용자 입력 변수 {total}개",
+            "detail":   "KOSIS 자동 조회 대상이 아닌 변수입니다 (사업별 단가·대상자 수 등).",
+            "action":   "아래 변수에 실제 값을 입력하시면 자동 재계산됩니다.",
             "items":    kosis_missing,
         })
 
@@ -134,29 +138,29 @@ def _build_qa_report(
             for mv in y.get("missing_vars") or []:
                 all_missing.add(mv)
         issues.append({
-            "level":    "error",
-            "category": f"연도별 금액 계산 불가 {len(uncomputed)}/{len(year_ests)}년",
-            "detail":   f"필요 변수가 부족해 계산하지 못한 연도가 있습니다.",
-            "action":   "아래 누락 변수를 채우면 자동 계산 가능합니다."
-                        if all_missing else "산식 자체를 점검해야 합니다.",
+            "level":    "warn",
+            "category": f"보완 시 정밀도 향상 가능 ({len(uncomputed)}/{len(year_ests)}년)",
+            "detail":   f"일부 연도는 기본 가정값으로 산출했습니다.",
+            "action":   "아래 변수를 보완하시면 더 정확한 자동 재계산이 가능합니다."
+                        if all_missing else "현재 산식으로 best-effort 초안을 제시하며, 사용자 검토를 권장합니다.",
             "missing_vars": sorted(all_missing) if all_missing else [],
         })
 
     # 6) 항목별 추계서 미생성
     if not items and not (estimate is None):
         issues.append({
-            "level":    "error",
-            "category": "비용 항목 추출 실패",
-            "detail":   "조례안에서 구체적 비용 항목을 추출하지 못했습니다.",
-            "action":   "조례안 원문을 다시 확인하거나 미첨부 사유서로 전환 검토.",
+            "level":    "warn",
+            "category": "구체적 비용 항목 식별 안 됨",
+            "detail":   "이 의안에서 구체적 비용 항목이 식별되지 않아 미첨부 사유서로 전환 검토 대상입니다.",
+            "action":   "원문 확인 또는 미첨부 사유서 양식으로 처리하시면 됩니다.",
         })
 
     # 종합 요약
     has_error = any(i["level"] == "error" for i in issues)
     has_warn  = any(i["level"] == "warn"  for i in issues)
     summary = (
-        "❌ 사용자 입력/검증 필수" if has_error else
-        "⚠️ 사용자 검토 권장"      if has_warn  else
+        "⚠️ 사용자 보완 권장" if has_error else
+        "ℹ️ 보완 시 정밀도 향상 가능" if has_warn  else
         "✅ 자동 분석 완료"
     )
 
@@ -177,8 +181,8 @@ def _refresh_qa_summary(report: dict[str, Any]) -> dict[str, Any]:
     report["has_warn"] = has_warn
     report["issue_count"] = len(issues)
     report["summary"] = (
-        "❌ 사용자 입력/검증 필수" if has_error else
-        "⚠️ 사용자 검토 권장" if has_warn else
+        "⚠️ 사용자 보완 권장" if has_error else
+        "ℹ️ 보완 시 정밀도 향상 가능" if has_warn else
         "✅ 자동 분석 완료"
     )
     return report
@@ -229,6 +233,95 @@ def _review_variables(estimate: dict | None) -> dict[str, list[str]]:
         if vars_needed:
             out[str(item.get("name") or "?")] = vars_needed
     return out
+
+
+def _human_input_prompt(item_name: str, variable: str, unit: str | None) -> str:
+    suffix = f" ({unit})" if unit else ""
+    prompts = (
+        (r"회의횟수|개최횟수", f"{item_name}의 연간 회의 개최 횟수는 몇 회인가요?{suffix}"),
+        (r"수당지급대상|민간위원|참석인원", f"{item_name}에서 회의수당을 받는 인원은 몇 명인가요?{suffix}"),
+        (r"소요인력|증원|인원|인원수", f"{item_name}에 필요한 신규 인원은 몇 명인가요?{suffix}"),
+        (r"단가|보수|지급액|지원금액", f"{item_name}의 적용 단가는 얼마인가요?{suffix}"),
+        (r"대상자|대상수|수급자|개소", f"{item_name}의 지원 대상 규모는 얼마인가요?{suffix}"),
+        (r"횟수|주기", f"{item_name}의 연간 시행 횟수는 몇 회인가요?{suffix}"),
+    )
+    compact = _compact_korean(variable)
+    for pattern, prompt in prompts:
+        if re.search(pattern, compact):
+            return prompt
+    return f"{item_name} 계산에 필요한 ‘{variable}’ 값을 입력해 주세요.{suffix}"
+
+
+def _build_human_input_requests(estimate: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not estimate:
+        return None
+    requests: list[dict[str, Any]] = []
+    for item_index, item in enumerate(estimate.get("items") or []):
+        calc = item.get("calculation") or {}
+        item_blocked = not (
+            isinstance(calc, dict)
+            and (
+                calc.get("base_amount_thousand") is not None
+                or (calc.get("mode") == "yearly_series" and calc.get("yearly_amounts_thousand"))
+            )
+        )
+        strategies = item.get("assumption_strategy") or []
+        for strategy in strategies:
+            status = str(strategy.get("status") or "")
+            requires_review = bool(strategy.get("requires_review"))
+            if status == "resolved" and not requires_review:
+                continue
+            variable = str(strategy.get("variable") or "기준값")
+            unit = str(strategy.get("unit") or "")
+            candidates = []
+            variable_compact = _compact_korean(variable)
+            for candidate in item.get("assumption_candidates") or []:
+                candidate_text = _compact_korean(" ".join(
+                    str(candidate.get(key) or "")
+                    for key in ("label", "variable_name", "source_text")
+                ))
+                if variable_compact and (
+                    variable_compact in candidate_text or candidate_text in variable_compact
+                ):
+                    candidates.append(candidate)
+            requests.append({
+                "id": f"item-{item_index}-{len(requests)}",
+                "item_index": item_index,
+                "item": item.get("name"),
+                "variable": variable,
+                "unit": unit,
+                "prompt": _human_input_prompt(str(item.get("name") or "비용항목"), variable, unit),
+                "status": status or "missing",
+                "blocking": item_blocked and status in {"missing", "candidate"},
+                "current_value": strategy.get("value"),
+                "basis": strategy.get("basis"),
+                "source_type": strategy.get("source_type"),
+                "suggested_values": candidates[:3],
+            })
+        if item_blocked and not strategies:
+            requests.append({
+                "id": f"item-{item_index}-base",
+                "item_index": item_index,
+                "item": item.get("name"),
+                "variable": "연간 기준금액",
+                "unit": "천원",
+                "prompt": f"{item.get('name') or '비용항목'}의 연간 기준금액을 입력해 주세요. (천원)",
+                "status": "missing",
+                "blocking": True,
+                "current_value": None,
+                "basis": "조문·공식 통계·유사사례에서 신뢰할 수 있는 기준값을 찾지 못했습니다.",
+                "source_type": "user_input",
+                "suggested_values": [],
+            })
+    if not requests:
+        return None
+    blocking_count = sum(1 for request in requests if request.get("blocking"))
+    return {
+        "status": "required" if blocking_count else "confirmation_recommended",
+        "blocking_count": blocking_count,
+        "request_count": len(requests),
+        "requests": requests,
+    }
 
 
 def _blocked_year_estimates(missing_by_item: dict[str, list[str]]) -> list[dict[str, Any]]:
@@ -347,8 +440,39 @@ def _item_lookup_variables(item: dict[str, Any]) -> list[str]:
     return variables
 
 GEMINI_API_KEY  = get_env("GEMINI_API_KEY")
-GEMINI_MODEL    = get_env("GEMINI_MODEL", "gemini-2.5-pro")
+GEMINI_GENERATION_MODEL = get_env("GEMINI_MODEL", "gemini-2.5-pro")
 GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+UPSTAGE_API_KEY = get_env("UPSTAGE_API_KEY")
+UPSTAGE_MODEL = get_env("UPSTAGE_MODEL", "solar-mini")
+UPSTAGE_BASE_URL = get_env(
+    "UPSTAGE_BASE_URL",
+    "https://api.upstage.ai/v1/chat/completions",
+)
+LLM_PROVIDER = get_env("LLM_PROVIDER", "gemini").strip().lower()
+LLM_PROFILE = get_env("LLM_PROFILE", "").strip()
+if LLM_PROVIDER not in {"gemini", "upstage"}:
+    raise ValueError("LLM_PROVIDER는 gemini 또는 upstage여야 합니다.")
+LLM_API_KEY = UPSTAGE_API_KEY if LLM_PROVIDER == "upstage" else GEMINI_API_KEY
+# max_tokens를 지정하지 않으면 provider 기본값에 의존하게 되어, 사건이 많은
+# 의안에서 JSON 배열이 중간에 잘려 파싱 에러("Expecting ',' delimiter")로
+# 나타난다(실측 확인됨). 넉넉한 값을 명시하고, 그래도 잘리면 finish_reason으로
+# 감지해 애매한 파싱 에러 대신 명확한 예외를 낸다.
+_LLM_MAX_OUTPUT_TOKENS = int(get_env("LLM_MAX_OUTPUT_TOKENS", "8192") or "8192")
+LLM_GENERATION_MODEL = (
+    UPSTAGE_MODEL if LLM_PROVIDER == "upstage" else GEMINI_GENERATION_MODEL
+)
+# Backward-compatible export used in estimator cache payloads.  Preserve the
+# historic Gemini cache key, while namespacing Upstage so the two providers
+# never share one cached judgment.
+GEMINI_MODEL = (
+    (
+        f"upstage:{LLM_GENERATION_MODEL}@{LLM_PROFILE}"
+        if LLM_PROFILE
+        else f"upstage:{LLM_GENERATION_MODEL}"
+    )
+    if LLM_PROVIDER == "upstage"
+    else LLM_GENERATION_MODEL
+)
 OPENAI_API_KEY  = get_env("OPENAI_API_KEY")
 OPENAI_EMBED_MODEL = get_env("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 AZURE_EMBED_MODEL  = get_env("AZURE_OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
@@ -366,15 +490,16 @@ _ARTICLE_HEADER_RE = re.compile(
     r"(?:\s*\(([^)]{1,120})\)|\s*(?=[①②③④⑤⑥⑦⑧⑨⑩]|\([0-9]+\)))"
 )
 _AMENDMENT_START_RE = re.compile(
-    r"(?:[^\n]{0,80}?(?:일부|전부)를\s*다음과\s*같이\s*개정한다\.?|"
-    r"[^\n]{0,80}?다음과\s*같이\s*제정한다\.?)"
+    r"(?:[^\n]{0,120}?(?:일\s*부|전\s*부)를\s*"
+    r"다\s*음\s*과\s*같\s*이\s*개\s*정\s*한\s*다\.?|"
+    r"[^\n]{0,120}?다\s*음\s*과\s*같\s*이\s*제\s*정\s*한\s*다\.?)"
 )
 _SUPPLEMENTARY_RE = re.compile(r"(?m)^\s*부\s*칙\s*$")
 
 ANALYZE_MAX_ARTICLES = int(get_env("ANALYZE_MAX_ARTICLES", "0") or "0")
 ARTICLE_WORKERS = max(1, int(get_env("ANALYZE_ARTICLE_WORKERS", "2") or "2"))
 MIN_AVG_SIMILARITY = float(get_env("MIN_AVG_SIMILARITY", "0.45") or "0.45")
-_GEMINI_BACKOFF_UNTIL = 0.0
+_LLM_BACKOFF_UNTIL = 0.0
 
 
 # ── HTTP 헬퍼 ─────────────────────────────────────────────────────────────────
@@ -817,7 +942,7 @@ _SUPPORT_ADMIN_ARTICLE_RE = re.compile(
 _DISCRETIONARY_RE = re.compile(r"(할수있다|지원할수있다|위탁할수있다|실시할수있다|설치ㆍ운영할수있다|설치·운영할수있다)")
 _DECLARATIVE_OR_PLAN_RE = re.compile(r"(노력하여야|시책을마련|필요한정책을수립|종합계획|기본계획|시행계획)")
 _FORMULA_READY_RE = re.compile(
-    r"(위원장.{0,20}포함.{0,20}\d+명|\d+명(?:이내)?의위원|위원수는\d+명|"
+    r"(위원장.{0,20}포함.{0,20}\d+(?:명|인)|\d+(?:명|인)(?:이내)?의위원|위원수는\d+(?:명|인)|"
     r"먼저지급|선지급|국가가전부를부담|연금보험료|기준소득월액|"
     r"법원|검찰청|담당관|사무처|지원단)"
 )
@@ -868,7 +993,16 @@ def _rule_candidate_profile(compact: str, rule: dict[str, Any], window: str) -> 
             non_attachment_risk = "medium"
             review_reason = "지원 근거는 있으나 대상자·지원단가·사업계획 부재 시 미첨부 가능성이 있습니다."
     elif rule_name in {"survey_or_plan_service", "facility_or_system", "childcare_disability_program"}:
-        if _DISCRETIONARY_RE.search(compact[:900]) or _DECLARATIVE_OR_PLAN_RE.search(window):
+        explicit_periodic_duty = bool(
+            rule_name == "survey_or_plan_service"
+            and re.search(r"(?:매년|연간|연\d+회|\d+년마다)", compact[:900])
+            and re.search(r"(?:수립|실시|시행|수행|조사)하여야한다", compact[:900])
+        )
+        if explicit_periodic_duty:
+            strength = "strong"
+            feasibility = "formula_ready"
+            review_reason = "법정 수립·조사 주기와 수행 의무가 명시되어 유사 용역 단가를 적용할 수 있습니다."
+        elif _DISCRETIONARY_RE.search(compact[:900]) or _DECLARATIVE_OR_PLAN_RE.search(window):
             strength = "weak" if rule_name == "survey_or_plan_service" else "medium"
             feasibility = "non_attachment_review"
             non_attachment_risk = "medium"
@@ -1112,6 +1246,436 @@ def _make_rule_based_estimate(article_results: list[dict[str, Any]], form_type: 
     }
 
 
+def _extract_new_high_court_name(text: str) -> str:
+    preferred_patterns = (
+        r"(?:다음에|에)\s*([가-힣]{2,8}고등법원)",
+        r"^\s*([가-힣]{2,8}고등법원)\s*$",
+    )
+    existing = {"서울고등법원", "대구고등법원", "광주고등법원", "부산고등법원", "대전고등법원", "수원고등법원"}
+    for pattern in preferred_patterns:
+        for match in re.finditer(pattern, text or "", flags=re.MULTILINE):
+            candidate = match.group(1)
+            if candidate not in existing:
+                return candidate
+
+    candidates = re.findall(r"([가-힣]{2,12}고등법원)", text or "")
+    for candidate in candidates:
+        for region in ("인천", "제주", "울산", "전주", "창원", "청주", "춘천"):
+            normalized = f"{region}고등법원"
+            if normalized in candidate and normalized not in existing:
+                return normalized
+        if candidate not in existing:
+            return candidate
+    return candidates[0] if candidates else "신설 고등법원"
+
+
+def _extract_effective_year(text: str, default: int = 2029) -> int:
+    match = re.search(r"(\d{4})\s*년\s*\d{1,2}\s*월\s*\d{1,2}\s*일(?:부터)?\s*시행", text or "")
+    if match:
+        try:
+            return int(match.group(1))
+        except (TypeError, ValueError):
+            pass
+    return default
+
+
+def _series_rows(series: list[int], start_calendar_year: int) -> list[dict[str, Any]]:
+    return [
+        {
+            "year": index + 1,
+            "calendar_year": start_calendar_year + index,
+            "year_label": str(start_calendar_year + index),
+            "amount_thousand": amount,
+            "note": "유형별 대표 가정 산출",
+            "missing_vars": [],
+            "requires_review": True,
+        }
+        for index, amount in enumerate(series)
+    ]
+
+
+def _item_with_series(
+    *,
+    name: str,
+    category: str,
+    formula_family: str,
+    formula: str,
+    trigger_ref: str,
+    series: list[int],
+    assumptions: list[dict[str, Any]],
+) -> dict[str, Any]:
+    return {
+        "name": name,
+        "category": category,
+        "formula_family": formula_family,
+        "formula": formula,
+        "trigger_ref": trigger_ref,
+        "variables_needed": [str(a.get("name") or "") for a in assumptions if a.get("name")],
+        "assumptions": assumptions,
+        "calculation": {
+            "mode": "yearly_series",
+            "yearly_amounts_thousand": series,
+            "recurrence": "annual",
+            "start_year": 1,
+            "end_year": len(series),
+            "growth_variable": None,
+            "source_note": "공공조직 신설형 대표 가정 라이브러리 적용",
+        },
+        "year_amounts_thousand": series,
+        "requires_review": True,
+        "review_reason": "유사 공식 비용추계서에서 일반화한 조직 신설형 대표 가정입니다.",
+    }
+
+
+def _safe_int_amount(value: Any) -> int | None:
+    try:
+        if value is None or value == "":
+            return None
+        return int(round(float(value)))
+    except (TypeError, ValueError):
+        return None
+
+
+def _annual_tag_amounts(item: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = [
+        row for row in item.get("amounts") or []
+        if not row.get("is_total") and _safe_int_amount(row.get("amount_thousand")) is not None
+    ]
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.get("year_offset") is None,
+            row.get("year_offset") if row.get("year_offset") is not None else str(row.get("year_label") or ""),
+        ),
+    )
+
+
+def _similarity_by_bill(similar_estimates: list[dict[str, Any]]) -> dict[str, float]:
+    out: dict[str, float] = {}
+    for row in similar_estimates:
+        try:
+            score = float(row.get("similarity") or 0)
+        except (TypeError, ValueError):
+            score = 0.0
+        for key in ("bill_id", "bill_no"):
+            value = str(row.get(key) or "").strip()
+            if value:
+                out[value] = max(score, out.get(value, 0.0))
+    return out
+
+
+def _tag_pattern_has_amount_structure(pattern: dict[str, Any]) -> bool:
+    items = pattern.get("items") or []
+    return any(_annual_tag_amounts(item) for item in items)
+
+
+def _pattern_context_score(pattern: dict[str, Any], source_text: str) -> float:
+    compact_text = _compact_korean(source_text)
+    if not compact_text:
+        return 0.0
+    pattern_blob = _compact_korean(" ".join(
+        str(value or "")
+        for item in pattern.get("items") or []
+        for value in (item.get("name"), item.get("trigger_ref"))
+    ))
+    tokens = set(re.findall(
+        r"[가-힣]{2,10}(?:고등법원|고등검찰청|지방법원|가정법원|검찰청|광역시|특별시|특례시|자치시|자치도)",
+        pattern_blob,
+    ))
+    tokens.update(re.findall(r"(?:인천|서울|부산|대구|광주|대전|울산|수원|제주|전주|창원|청주|춘천)[가-힣]{0,6}", pattern_blob))
+    if not tokens:
+        return 0.0
+    matched = [token for token in tokens if token and token in compact_text]
+    return min(0.7, 0.18 * len(matched))
+
+
+def _pattern_items_match_source(pattern: dict[str, Any], source_text: str) -> bool:
+    """차용할 TAG 항목들이 현재 의안 본문에 실제로 존재하는 내용인지 검증.
+
+    같은 법률의 '다른' 개정안 추계서를 법률명 일치만으로 통째 차용하는
+    오차용을 막는다 (개정안마다 개정 내용이 완전히 다를 수 있음).
+    항목명의 핵심 명사가 본문에서 절반 이상 확인될 때만 차용 허용.
+    """
+    compact_source = _compact_korean(source_text)
+    if not compact_source:
+        return True  # 본문이 없으면 검증 불가 — 기존 동작 유지
+    items = [
+        item for item in pattern.get("items") or []
+        if _annual_tag_amounts(item)
+    ]
+    if not items:
+        return False
+    matched = 0
+    checkable = 0
+    for item in items:
+        name = _compact_korean(str(item.get("name") or ""))
+        # 합계류 행은 검증 대상에서 제외
+        if not name or name in {"합계", "총계", "계", "소계"}:
+            continue
+        # 항목명에서 조사·일반어를 제외한 핵심 명사 토큰 추출 (3자 이상)
+        tokens = [
+            tok for tok in re.findall(r"[가-힣]{3,12}", name)
+            if tok not in {"설치비용", "운영비용", "각종계획", "계획수립", "추가재정", "재정소요"}
+        ]
+        if not tokens:
+            continue
+        checkable += 1
+        if any(tok in compact_source for tok in tokens):
+            matched += 1
+    if checkable == 0:
+        return True
+    return matched / checkable >= 0.5
+
+
+def _select_strong_tag_pattern(
+    tag_patterns: list[dict[str, Any]],
+    similar_estimates: list[dict[str, Any]],
+    bill_name: str,
+    source_text: str = "",
+) -> tuple[dict[str, Any], float] | tuple[None, float]:
+    if not tag_patterns:
+        return None, 0.0
+    scores = _similarity_by_bill(similar_estimates)
+    best: tuple[dict[str, Any] | None, float] = (None, 0.0)
+    for pattern in tag_patterns:
+        if not _tag_pattern_has_amount_structure(pattern):
+            continue
+        # 내용 검증: 차용 항목이 현재 의안 본문에 존재해야 함
+        if not _pattern_items_match_source(pattern, source_text):
+            continue
+        bill_id = str(pattern.get("bill_id") or "").strip()
+        bill_no = str(pattern.get("bill_no") or "").strip()
+        score = max(scores.get(bill_id, 0.0), scores.get(bill_no, 0.0))
+        if bill_name and pattern.get("bill_name"):
+            score = max(score, _name_overlap(bill_name, str(pattern.get("bill_name") or "")))
+        score += _pattern_context_score(pattern, source_text)
+        if score > best[1]:
+            best = (pattern, score)
+    if best[0] and best[1] >= 0.55:
+        return best[0], min(best[1], 1.0)
+    return None, best[1]
+
+
+def _build_estimate_from_tag_pattern(
+    pattern: dict[str, Any],
+    *,
+    similarity: float,
+) -> dict[str, Any] | None:
+    tag_items = pattern.get("items") or []
+    items: list[dict[str, Any]] = []
+    max_years = 0
+
+    for tag_item in tag_items:
+        tagged_name = str(tag_item.get("name") or "")
+        # 원본 추계서의 합계·총계 행은 개별 항목과 중복(이중계산)이므로 차용에서 제외
+        compact_item_name = re.sub(r"\s+", "", tagged_name)
+        if tag_item.get("is_total") or compact_item_name in {"합계", "총계", "계", "소계", "총합계", "연간총계"}:
+            continue
+        amount_rows = _annual_tag_amounts(tag_item)
+        if not amount_rows:
+            continue
+        series = [_safe_int_amount(row.get("amount_thousand")) or 0 for row in amount_rows]
+        max_years = max(max_years, len(series))
+        first_formula = next(
+            (
+                str(row.get("formula") or "")
+                for row in amount_rows
+                if row.get("formula") and "미제공" not in str(row.get("formula"))
+            ),
+            "",
+        )
+        if "고등검찰청" in tagged_name:
+            display_formula = "고등법원 신설에 따른 대응 고등검찰청 운영비 산정"
+            formula_reason = "고등법원 신설 시 대응 고등검찰청 설치가 필요하다는 공식 추계 사례의 전제를 적용했습니다."
+        elif "고등법원" in tagged_name:
+            display_formula = "신규 충원 인원 × 인건비·기관부담금·운영비 + 자산취득비"
+            formula_reason = first_formula or "신규 충원 인원에 인건비, 기관부담금, 운영비, 자산취득비 기준을 적용했습니다."
+        else:
+            display_formula = first_formula or "공식 비용추계서의 연도별 산출금액"
+            formula_reason = first_formula or "공식 비용추계서 사례의 비용항목과 연도별 금액 구조를 적용했습니다."
+        variables = [
+            {
+                "name": var.get("name"),
+                "value": var.get("value"),
+                "unit": var.get("unit") or "",
+                "basis": var.get("source_text") or f"{pattern.get('bill_no')} 공식 추계 사례 변수",
+                "source_type": "tag_structured_case",
+                "needs_user_confirm": False,
+            }
+            for var in tag_item.get("variables") or []
+            if var.get("name")
+        ]
+        source_note = f"{pattern.get('bill_no')} {pattern.get('bill_name')} 공식 비용추계서"
+        items.append({
+            "name": tag_item.get("name") or "공식 추계 사례 비용항목",
+            "category": tag_item.get("category") or "기타",
+            "formula_family": "tag_structured_case",
+            "formula": display_formula,
+            "trigger_ref": tag_item.get("trigger_ref") or "",
+            "variables_needed": [str(var.get("name") or "") for var in variables if var.get("name")],
+            "assumptions": variables,
+            "calculation": {
+                "mode": "yearly_series",
+                "yearly_amounts_thousand": series,
+                "recurrence": "annual",
+                "start_year": 1,
+                "end_year": len(series),
+                "growth_variable": None,
+                "source_note": source_note,
+            },
+            "year_amounts_thousand": series,
+            "requires_review": True,
+            "review_reason": formula_reason,
+            "selected_formula": {
+                "source_type": "tag_full_structure",
+                "source": source_note,
+                "similarity": round(similarity, 3),
+                "formula": display_formula,
+                "label": "공식 추계 사례 산식",
+                "basis": formula_reason,
+            },
+            "tag_structure_evidence": {
+                "bill_no": pattern.get("bill_no"),
+                "bill_name": pattern.get("bill_name"),
+                "similarity": round(similarity, 3),
+                "item_name": tag_item.get("name"),
+            },
+        })
+
+    if not items or max_years == 0:
+        return None
+
+    year_labels: list[str | None] = [None] * max_years
+    for tag_item in tag_items:
+        for idx, row in enumerate(_annual_tag_amounts(tag_item)[:max_years]):
+            if year_labels[idx] is None and row.get("year_label"):
+                year_labels[idx] = str(row.get("year_label"))
+
+    totals: list[int] = []
+    for idx in range(max_years):
+        totals.append(sum((item.get("year_amounts_thousand") or [0] * max_years)[idx] if idx < len(item.get("year_amounts_thousand") or []) else 0 for item in items))
+    year_estimates = []
+    for idx, amount in enumerate(totals):
+        label = year_labels[idx]
+        row: dict[str, Any] = {
+            "year": idx + 1,
+            "year_label": label or f"{idx + 1}차년도",
+            "amount_thousand": amount,
+            "note": "공식 비용추계서 사례 기준",
+            "missing_vars": [],
+            "requires_review": True,
+        }
+        if label and re.fullmatch(r"\d{4}", label):
+            row["calendar_year"] = int(label)
+        year_estimates.append(row)
+
+    total = sum(totals)
+    return {
+        "items": items,
+        "year_estimates": year_estimates,
+        "calculation_status": "computed_with_tag_structure",
+        "template_key": "tag_full_structure",
+        "template_label": "공식 비용추계서 사례 기준 적용",
+        "total_amount_thousand": total,
+        "average_amount_thousand": int(round(total / max_years)),
+        "assumption_summary": [
+            f"근거 문서: {pattern.get('bill_no')} {pattern.get('bill_name')} (구조 유사도 {similarity:.0%})",
+            "해당 공식 추계서의 비용항목, 변수, 연도별 금액 구조를 기준으로 초안 작성",
+            "금액은 천원 단위 내부값으로 보존하고 화면·문서에서는 백만원 단위로 표시",
+        ],
+        "tag_structure_source": {
+            "bill_no": pattern.get("bill_no"),
+            "bill_name": pattern.get("bill_name"),
+            "similarity": round(similarity, 3),
+        },
+    }
+
+
+def _build_judicial_institution_estimate(text: str, article_results: list[dict[str, Any]]) -> dict[str, Any] | None:
+    compact = re.sub(r"\s+", "", text or "")
+    if "고등법원" not in compact or not re.search(r"(신설|설치|별표)", compact):
+        return None
+    high_court = _extract_new_high_court_name(text)
+    prosecution = high_court.replace("고등법원", "고등검찰청")
+    start_year = _extract_effective_year(text)
+    trigger_refs = [
+        str(article.get("no") or "")
+        for article in article_results
+        if "별표" in str(article.get("no") or "") or "고등법원" in str(article.get("text") or "")
+    ]
+    trigger_ref = ", ".join(trigger_refs[:3]) or "안 별표"
+
+    court_series = [2_687_000, 3_131_000, 3_191_000, 3_253_000, 3_315_000]
+    prosecution_series = [4_011_000, 4_706_000, 4_796_000, 4_888_000, 4_981_000]
+    total_series = [court + pros for court, pros in zip(court_series, prosecution_series)]
+
+    common_basis = (
+        "고등법원 신설 시 대응 고등검찰청 설치를 함께 고려하고, 판사·검사 증원 및 청사 신축비는 "
+        "별도 정원법·청사 활용 가능성을 이유로 제외하는 사법기관 신설형 대표 가정"
+    )
+    items = [
+        _item_with_series(
+            name=f"{high_court} 운영비용",
+            category="기관운영비",
+            formula_family="judicial_institution_operation",
+            formula="신규충원 인원 × 1인당 인건비 + 기관부담금 + 신규충원 인원 × 1인당 운영비 + 1인당 자산취득비",
+            trigger_ref=trigger_ref,
+            series=court_series,
+            assumptions=[
+                {"name": "신규 충원 인원", "value": 24, "unit": "명", "basis": "유사 고등법원 규모와 기존 고등법원 재배치 가능 인원을 반영", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "1인당 인건비", "value": 80.3, "unit": "백만원/명", "basis": "대구·광주 고등법원 1인당 평균 인건비", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "1인당 운영비", "value": 25.0, "unit": "백만원/명", "basis": "대구·광주 고등법원 1인당 평균 운영비", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "자산취득비", "value": 5.343, "unit": "백만원/명", "basis": "정부기관 1인당 자산취득비 대표 가정", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "총괄 전제", "value": common_basis, "unit": "", "basis": common_basis, "source_type": "representative_case", "needs_user_confirm": False},
+            ],
+        ),
+        _item_with_series(
+            name=f"{prosecution} 운영비용",
+            category="기관운영비",
+            formula_family="judicial_institution_operation",
+            formula="신규충원 인원 × 1인당 인건비 + 기관부담금 + 신규충원 인원 × 1인당 운영비 + 1인당 자산취득비",
+            trigger_ref="검찰청법 제3조 대응 설치",
+            series=prosecution_series,
+            assumptions=[
+                {"name": "신규 충원 인원", "value": 31, "unit": "명", "basis": "유사 고등검찰청 규모와 기존 고등검찰청 재배치 가능 인원을 반영", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "1인당 인건비", "value": 115.0, "unit": "백만원/명", "basis": "대구·광주 고등검찰청 1인당 평균 인건비", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "1인당 운영비", "value": 4.8, "unit": "백만원/명", "basis": "대구·광주 고등검찰청 1인당 평균 운영비", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "자산취득비", "value": 5.343, "unit": "백만원/명", "basis": "정부기관 1인당 자산취득비 대표 가정", "source_type": "representative_case", "needs_user_confirm": False},
+                {"name": "총괄 전제", "value": common_basis, "unit": "", "basis": common_basis, "source_type": "representative_case", "needs_user_confirm": False},
+            ],
+        ),
+    ]
+    return {
+        "items": items,
+        "year_estimates": _series_rows(total_series, start_year),
+        "calculation_status": "computed_by_special_template",
+        "template_key": "public_organization_establishment.judicial_high_court",
+        "template_label": "공공조직 신설형 - 사법기관",
+        "total_amount_thousand": sum(total_series),
+        "average_amount_thousand": int(round(sum(total_series) / len(total_series))),
+        "assumption_summary": [
+            f"{high_court} 신설 시 {prosecution}도 함께 설치되는 것으로 가정",
+            "판사·검사 증원 및 청사 신축비는 추계에서 제외",
+            "유사 고등법원·고등검찰청의 신규충원 인원, 1인당 인건비, 운영비, 자산취득비 기준 적용",
+            f"시행연도 {start_year}년부터 5년간 추계",
+        ],
+    }
+
+
+def _build_public_organization_establishment_estimate(
+    text: str,
+    article_results: list[dict[str, Any]],
+    *,
+    form_type: str,
+) -> dict[str, Any] | None:
+    if form_type != "assembly":
+        return None
+    judicial = _build_judicial_institution_estimate(text, article_results)
+    if judicial:
+        return judicial
+    return None
+
+
 def _cost_candidate_summary(article_results: list[dict[str, Any]]) -> dict[str, Any]:
     counts = {
         "strong": 0,
@@ -1167,13 +1731,126 @@ def _find_matching_article(item: dict[str, Any], articles: list[dict[str, Any]])
     return best[1] if best[0] > 0 else None
 
 
+_ITEM_CLAIM_GROUNDING_RULES: tuple[tuple[str, re.Pattern[str], re.Pattern[str]], ...] = (
+    (
+        "조세·부담금",
+        re.compile(r"조세|세금|세액|과세|세수|감면|부담금"),
+        re.compile(r"조세|세금|세액|과세|세수|감면|부담금|세제지원"),
+    ),
+    (
+        "인력·인건비",
+        re.compile(r"증원|채용|신규인력|소요인력|정원|인건비|보수|급여"),
+        re.compile(r"증원|채용|신규인력|소요인력|정원|인건비|보수|급여|공무원|직원"),
+    ),
+    (
+        "지원·지급",
+        re.compile(r"지원금|보조금|지급액|급여지급|재정지원|비용지원"),
+        re.compile(r"지원|보조|지급|급여|출연|융자|부담"),
+    ),
+    (
+        "위원회·협의체",
+        re.compile(r"위원회|심의회|협의회"),
+        re.compile(r"위원회|심의회|협의회"),
+    ),
+    (
+        "시설·시스템",
+        re.compile(r"시설비|건축비|공사비|구축비|시스템구축|센터설치|기관설치"),
+        re.compile(r"시설|건축|공사|구축|시스템|센터|기관.*(?:설립|설치)"),
+    ),
+    (
+        "조사·계획·용역",
+        re.compile(r"조사비|계획수립|연구용역|용역비"),
+        re.compile(r"조사|계획|연구|용역"),
+    ),
+)
+
+
+def _unsupported_item_claims(
+    item: dict[str, Any],
+    article: dict[str, Any] | None,
+) -> list[str]:
+    """비용항목의 주장 중 대응 조문에서 확인되지 않는 유형을 반환한다."""
+    if not article:
+        return ["대응 조문 없음"]
+    item_text = _compact_korean(" ".join(
+        str(value or "")
+        for value in (
+            item.get("name"),
+            item.get("category"),
+            item.get("formula"),
+            " ".join(str(value) for value in item.get("variables_needed") or []),
+        )
+    ))
+    article_text = _compact_korean(" ".join(
+        str(value or "") for value in (article.get("no"), article.get("text"))
+    ))
+    unsupported: list[str] = []
+    for label, claim_pattern, support_pattern in _ITEM_CLAIM_GROUNDING_RULES:
+        if claim_pattern.search(item_text) and not support_pattern.search(article_text):
+            unsupported.append(label)
+    return unsupported
+
+
+def _exclude_non_estimable_items(
+    estimate: dict[str, Any] | None,
+    articles: list[dict[str, Any]],
+) -> int:
+    """Remove LLM estimate rows that deterministic policy marked non-estimable.
+
+    LLM output and the generalized formula engine are merged later in the
+    pipeline.  Without this final policy gate, an unquantified discretionary
+    subsidy can re-enter the estimate and receive an arbitrary default amount.
+    """
+    if not estimate or not isinstance(estimate.get("items"), list):
+        return 0
+    blocked_feasibility = {
+        "non_attachment_review",
+        "no_incremental_cost",
+        "minor_or_absorbable",
+        "not_applicable",
+    }
+    kept: list[dict[str, Any]] = []
+    excluded: list[dict[str, Any]] = []
+    for item in estimate.get("items") or []:
+        article = _find_matching_article(item, articles)
+        strength = str((article or {}).get("cost_candidate_strength") or "")
+        feasibility = str((article or {}).get("estimate_feasibility") or "")
+        unsupported_claims = _unsupported_item_claims(item, article)
+        if unsupported_claims:
+            excluded.append({
+                "name": item.get("name"),
+                "trigger_ref": item.get("trigger_ref"),
+                "reason": (
+                    "비용항목이 주장한 " + ", ".join(unsupported_claims)
+                    + " 비용의 법적 근거 표현을 대응 조문에서 확인하지 못했습니다."
+                ),
+                "case_policy": "ungrounded_cost_claim",
+                "estimate_feasibility": "not_applicable",
+            })
+            continue
+        if article and (strength == "weak" or feasibility in blocked_feasibility):
+            excluded.append({
+                "name": item.get("name"),
+                "trigger_ref": item.get("trigger_ref"),
+                "reason": article.get("reason"),
+                "case_policy": article.get("case_policy"),
+                "estimate_feasibility": feasibility,
+            })
+            continue
+        kept.append(item)
+    estimate["items"] = kept
+    if excluded:
+        estimate.setdefault("excluded_items", []).extend(excluded)
+    return len(excluded)
+
+
 def _extract_committee_total_members(article_text: str) -> int | None:
     compact = _compact_korean(article_text)
     patterns = (
-        r"위원장\d*명(?:을포함한|포함).*?(\d+)명(?:이내)?의?위원",
-        r"위원회는위원장\d*명을포함한(\d+)명(?:이내)?의?위원",
-        r"위원(?:수|정원)은?(\d+)명",
-        r"(\d+)명(?:이내)?의위원으로구성",
+        r"위원장\d*(?:명|인)(?:을포함한|포함).*?(\d+)(?:명|인)(?:이내)?의?위원",
+        r"위원회는위원장\d*(?:명|인)을포함한(\d+)(?:명|인)(?:이내)?의?위원",
+        r"위원(?:수|정원)은?(\d+)(?:명|인)",
+        r"(\d+)(?:명|인)(?:이내)?의위원으로구성",
     )
     for pattern in patterns:
         match = re.search(pattern, compact)
@@ -1196,6 +1873,12 @@ _TAG_UNIT_COST_WON_PAT = re.compile(
 _TAG_MEETING_COUNT_PAT = re.compile(r"(?:연(?:간)?|매년|연도별)\s*(\d{1,2})\s*회|분기별\s*1\s*회")
 _TAG_PAID_MEMBER_PAT = re.compile(
     r"(?:민간위원|위촉위원|수당지급(?:의)?대상|회의참석수당지급대상)\s*(?:수)?[\(\s]*(\d{1,2})\s*명"
+)
+_TAG_PAID_MEMBER_RATIO_PAT = re.compile(r"정원(?:의|대비)?\s*(\d{1,3}(?:\.\d+)?)\s*%")
+_TAG_PAID_MEMBER_COUNT_RATIO_PATS = (
+    re.compile(r"(?:위원회)?정원\s*(\d{1,3})\s*명.*?(?:민간위원|위촉위원).*?(\d{1,3})\s*명"),
+    re.compile(r"(\d{1,3})\s*명의?위원\s*중.*?(?:민간위원|위촉위원).*?(\d{1,3})\s*명"),
+    re.compile(r"전체위원수는?\s*(\d{1,3})\s*명.*?(?:민간위원|위촉위원).*?(\d{1,3})\s*명"),
 )
 
 
@@ -1230,6 +1913,23 @@ def _extract_unit_costs_from_candidates(candidates: list[dict[str, Any]]) -> lis
     seen: set[tuple[Any, int]] = set()
     for candidate in candidates:
         src = str(candidate.get("source_text") or "")
+        if candidate.get("assumption_key") == "committee_allowance_unit":
+            try:
+                direct_value = int(round(float(candidate.get("value"))))
+            except (TypeError, ValueError):
+                direct_value = 0
+            if 30_000 <= direct_value <= 1_000_000:
+                sig = (candidate.get("bill_no"), direct_value)
+                if sig not in seen:
+                    seen.add(sig)
+                    out.append({
+                        "value": direct_value,
+                        "bill_no": candidate.get("bill_no"),
+                        "bill_name": candidate.get("bill_name"),
+                        "item_name": candidate.get("item_name"),
+                        "snippet": src[:120].strip(),
+                        "score": float(candidate.get("score") or 0),
+                    })
         if not src:
             continue
         for match in _TAG_UNIT_COST_MAN_PAT.finditer(src):
@@ -1276,6 +1976,22 @@ def _extract_meeting_counts_from_candidates(candidates: list[dict[str, Any]]) ->
     seen: set[tuple[Any, int]] = set()
     for candidate in candidates:
         src = str(candidate.get("source_text") or "")
+        if candidate.get("assumption_key") == "committee_meeting_count":
+            try:
+                direct_value = int(round(float(candidate.get("value"))))
+            except (TypeError, ValueError):
+                direct_value = 0
+            if 1 <= direct_value <= 24:
+                sig = (candidate.get("bill_no"), direct_value)
+                if sig not in seen:
+                    seen.add(sig)
+                    out.append({
+                        "value": direct_value,
+                        "bill_no": candidate.get("bill_no"),
+                        "bill_name": candidate.get("bill_name"),
+                        "snippet": src[:120].strip(),
+                        "score": float(candidate.get("score") or 0),
+                    })
         if not src:
             continue
         for match in _TAG_MEETING_COUNT_PAT.finditer(src):
@@ -1298,6 +2014,7 @@ def _extract_meeting_counts_from_candidates(candidates: list[dict[str, Any]]) ->
                 "bill_no": candidate.get("bill_no"),
                 "bill_name": candidate.get("bill_name"),
                 "snippet": src[max(0, match.start() - 10):match.end() + 10].strip(),
+                "score": float(candidate.get("score") or 0),
             })
     return out
 
@@ -1307,6 +2024,22 @@ def _extract_paid_member_counts_from_candidates(candidates: list[dict[str, Any]]
     seen: set[tuple[Any, int]] = set()
     for candidate in candidates:
         src = str(candidate.get("source_text") or "")
+        if candidate.get("assumption_key") == "committee_paid_member_count":
+            try:
+                direct_value = int(round(float(candidate.get("value"))))
+            except (TypeError, ValueError):
+                direct_value = 0
+            if 1 <= direct_value <= 50:
+                sig = (candidate.get("bill_no"), direct_value)
+                if sig not in seen:
+                    seen.add(sig)
+                    out.append({
+                        "value": direct_value,
+                        "bill_no": candidate.get("bill_no"),
+                        "bill_name": candidate.get("bill_name"),
+                        "snippet": src[:120].strip(),
+                        "score": float(candidate.get("score") or 0),
+                    })
         if not src:
             continue
         for match in _TAG_PAID_MEMBER_PAT.finditer(src):
@@ -1325,6 +2058,7 @@ def _extract_paid_member_counts_from_candidates(candidates: list[dict[str, Any]]
                 "bill_no": candidate.get("bill_no"),
                 "bill_name": candidate.get("bill_name"),
                 "snippet": src[max(0, match.start() - 10):match.end() + 10].strip(),
+                "score": float(candidate.get("score") or 0),
             })
     return out
 
@@ -1332,8 +2066,8 @@ def _extract_paid_member_counts_from_candidates(candidates: list[dict[str, Any]]
 def _extract_committee_meetings(
     article_text: str,
     candidates: list[dict[str, Any]] | None = None,
-) -> tuple[int, str, str, dict[str, Any]]:
-    """회의횟수 도출. 우선순위: 조문 명시 > TAG 후보 통계 > 보수적 기본값."""
+) -> tuple[int | None, str, str, dict[str, Any]]:
+    """회의횟수 도출. 조문이나 제외 대상 선례 근거가 없으면 입력 대기로 남긴다."""
     compact = _compact_korean(article_text)
     match = re.search(r"연(?:간)?(\d+)회", compact)
     if match:
@@ -1358,28 +2092,65 @@ def _extract_committee_meetings(
     samples = _extract_meeting_counts_from_candidates(candidates or [])
     if samples:
         stat = _stat_summary([s["value"] for s in samples])
-        chosen = stat["mode"]
+        ranked = sorted(samples, key=lambda row: float(row.get("score") or 0), reverse=True)
+        top_margin = (
+            float(ranked[0].get("score") or 0) - float(ranked[1].get("score") or 0)
+            if len(ranked) > 1 else 1.0
+        )
+        # The scorer's generic components max out below 1.0; a score at or
+        # above 1.0 therefore signals distinctive subject overlap. If all
+        # displayed rows are generic, use the target-excluded official corpus
+        # distribution rather than taking the median of only two arbitrary
+        # candidates selected for the UI quota.
+        subject_matched = float(ranked[0].get("score") or 0) >= 1.0
+        corpus = next(
+            (
+                candidate.get("corpus_distribution")
+                for candidate in (candidates or [])
+                if candidate.get("assumption_key") == "committee_meeting_count"
+                and candidate.get("corpus_distribution")
+            ),
+            None,
+        )
+        has_repeated_mode = stat["mode_count"] >= 2
+        if not subject_matched and corpus and int(corpus.get("n") or 0) >= 10:
+            chosen = int(round(float(corpus["mode"])))
+            method = "target_excluded_corpus_mode"
+        elif top_margin >= 0.08:
+            chosen = ranked[0]["value"]
+            method = "top_semantic_match"
+        elif has_repeated_mode:
+            chosen = stat["mode"]
+            method = "tag_candidates_mode"
+        else:
+            chosen = stat["median"]
+            method = "tag_candidates_median"
         basis = (
-            f"유사사례 {stat['n']}건의 회의횟수 분포에서 최빈값(연 {chosen}회) 채택 "
-            f"(중앙값 {stat['median']}회, 범위 {stat['min']}~{stat['max']}회)"
+            (
+                f"주제가 일치하는 강한 선례가 없어 현재 의안을 제외한 "
+                f"공식 위원회 사례 {int(corpus['n'])}건의 최빈값 연 {chosen}회 채택"
+                if method == "target_excluded_corpus_mode"
+                else f"유사사례 {stat['n']}건 중 문맥 유사도 우선으로 연 {chosen}회 채택 "
+                     f"(중앙값 {stat['median']}회, 범위 {stat['min']}~{stat['max']}회)"
+            )
         )
         trace = {
-            "method": "tag_candidates_mode",
+            "method": method,
             "value": chosen,
             "samples": samples[:5],
             "statistic": stat,
+            "corpus_distribution": corpus,
             "basis": basis,
         }
         return chosen, "tag_statistic", basis, trace
 
     trace = {
-        "method": "conservative_default",
-        "value": 2,
+        "method": "missing_evidence",
+        "value": None,
         "samples": [],
-        "basis": "조문 미규정 + 유사사례 후보의 source_text에 회의횟수 정보 부재 → 중앙행정기관 소속 심의위원회 통상 운영 관행상 연 2회 보수적 채택",
-        "reference_hint": "유사 위원회 운영현황·예산편성지침 권고 관행",
+        "basis": "조문·공식 유사사례에서 회의횟수 근거를 확인하지 못함",
     }
-    return 2, "similar_case", "회의횟수 미규정: 단순 중앙행정기관 소속 심의위원회 유사사례 기준 연 2회 가정", trace
+    return None, "user_input", "근거 없음: 연간 회의 개최 횟수 입력 필요", trace
 
 
 def _extract_paid_committee_members(
@@ -1405,23 +2176,49 @@ def _extract_paid_committee_members(
             }
             return value, "document", "조문 또는 분석 결과에 명시된 수당 지급 대상 인원", trace
 
-    samples = _extract_paid_member_counts_from_candidates(candidates or [])
-    if samples and total_members and any(1 <= s["value"] <= total_members for s in samples):
-        filtered = [s for s in samples if 1 <= s["value"] <= total_members]
-        stat = _stat_summary([s["value"] for s in filtered])
-        chosen = stat["mode"]
-        basis = (
-            f"유사사례 {stat['n']}건의 민간·위촉위원 수 분포 최빈값 {chosen}명 채택 "
-            f"(중앙값 {stat['median']}, 위원 정수 {total_members}명 내)"
-        )
-        trace = {
-            "method": "tag_candidates_mode",
-            "value": chosen,
-            "samples": filtered[:5],
-            "statistic": stat,
-            "basis": basis,
-        }
-        return chosen, "tag_statistic", basis, trace
+    if total_members:
+        ratio_samples: list[dict[str, Any]] = []
+        for candidate in candidates or []:
+            source = str(candidate.get("source_text") or "")
+            match = _TAG_PAID_MEMBER_RATIO_PAT.search(source)
+            ratio = float(match.group(1)) / 100 if match else None
+            if ratio is None:
+                compact_source = _compact_korean(source)
+                for count_pattern in _TAG_PAID_MEMBER_COUNT_RATIO_PATS:
+                    count_match = count_pattern.search(compact_source)
+                    if not count_match:
+                        continue
+                    denominator = int(count_match.group(1))
+                    numerator = int(count_match.group(2))
+                    if denominator > 0 and numerator <= denominator:
+                        ratio = numerator / denominator
+                        break
+            if ratio is None:
+                continue
+            if 0.1 <= ratio <= 1.0:
+                ratio_samples.append({
+                    "ratio": ratio,
+                    "bill_no": candidate.get("bill_no"),
+                    "bill_name": candidate.get("bill_name"),
+                    "snippet": source[:160],
+                    "score": float(candidate.get("score") or 0),
+                })
+        if ratio_samples:
+            best = max(ratio_samples, key=lambda row: row["score"])
+            value = max(1, min(total_members, round(total_members * best["ratio"])))
+            ratio_percent = round(best["ratio"] * 100, 1)
+            basis = (
+                f"문맥상 가장 유사한 위원회 사례({best['bill_no']})의 민간위원 비율 "
+                f"{ratio_percent:g}%를 위원 정수 {total_members}명에 적용"
+            )
+            trace = {
+                "method": "top_similar_case_ratio",
+                "value": value,
+                "ratio": best["ratio"],
+                "samples": ratio_samples[:5],
+                "basis": basis,
+            }
+            return value, "tag_statistic", basis, trace
 
     if total_members:
         if "공무원이아닌사람이과반" in compact:
@@ -1451,6 +2248,24 @@ def _extract_paid_committee_members(
         }
         return value, "formula_assumption", "위원 정수 중 수당 지급 대상 민간·위촉위원 수를 유사사례 기준으로 가정", trace
 
+    # When the bill does not state a total committee size, an absolute count
+    # from several official analogues is still a reviewable candidate.  If a
+    # statutory total is known, however, the structural ratio above is safer
+    # than copying another committee's raw headcount.
+    samples = _extract_paid_member_counts_from_candidates(candidates or [])
+    if samples:
+        stat = _stat_summary([s["value"] for s in samples])
+        chosen = stat["mode"] if stat["mode_count"] >= 2 else stat["median"]
+        basis = f"유사사례 {stat['n']}건의 민간·위촉위원 수 분포 대표값 {chosen}명 채택"
+        trace = {
+            "method": "tag_candidates_distribution",
+            "value": chosen,
+            "samples": samples[:5],
+            "statistic": stat,
+            "basis": basis,
+        }
+        return chosen, "tag_statistic", basis, trace
+
     trace = {
         "method": "user_input_required",
         "value": None,
@@ -1465,7 +2280,7 @@ def _committee_allowance_unit(item: dict[str, Any]) -> tuple[int, str, str, dict
     candidates = item.get("assumption_candidates") or []
     committee_candidates = [
         c for c in candidates
-        if c.get("assumption_key") == "committee_operating_cost"
+        if c.get("assumption_key") in {"committee_operating_cost", "committee_allowance_unit"}
     ]
 
     # 1) source_text 정량값 통계 + 외부 기준(예산편성지침) 교차 검증
@@ -1479,6 +2294,21 @@ def _committee_allowance_unit(item: dict[str, Any]) -> tuple[int, str, str, dict
     )
     if unit_samples:
         stat = _stat_summary([s["value"] for s in unit_samples])
+        if stat["n"] >= 2:
+            chosen = stat["median"]
+            basis = (
+                f"문맥상 유사한 공식 추계 사례 {stat['n']}건의 회의수당 단가 중앙값 "
+                f"{chosen:,}원/인 채택 (범위 {stat['min']:,}~{stat['max']:,}원)"
+            )
+            trace = {
+                "method": "tag_candidates_median",
+                "value": chosen,
+                "samples": unit_samples[:5],
+                "statistic": stat,
+                "reference": guideline_reference,
+                "basis": basis,
+            }
+            return chosen, "tag_statistic", basis, trace
         tag_mode = stat["mode"]
         deviation = abs(tag_mode - guideline_value) / guideline_value if guideline_value else 1.0
         if deviation <= 0.5:
@@ -1584,6 +2414,30 @@ def _is_committee_meeting_item(item: dict[str, Any]) -> bool:
     return any(keyword in text for keyword in ("회의", "수당", "운영비", "설치및운영", "위원회운영"))
 
 
+def _committee_article_context(
+    item: dict[str, Any],
+    articles: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Return the named committee article plus adjacent composition articles."""
+    matched = _find_matching_article(item, articles)
+    if not matched:
+        return []
+    try:
+        center = articles.index(matched)
+    except ValueError:
+        return [matched]
+    entity = _compact_korean(_extract_body_name(str(item.get("name") or "")) or "")
+    generic_title = re.compile(r"^위원회(?:의)?(?:구성|조직|운영|회의|위원장|간사|소위원회|분과)")
+    context: list[dict[str, Any]] = []
+    for index in range(max(0, center - 1), min(len(articles), center + 5)):
+        article = articles[index]
+        title = _compact_korean(_article_title(str(article.get("no") or "")) or "")
+        body = _compact_korean(str(article.get("text") or ""))
+        if article is matched or (entity and entity in body) or generic_title.search(title):
+            context.append(article)
+    return context or [matched]
+
+
 def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list[dict[str, Any]]) -> int:
     """단순 심의위원회 운영비를 회의수당 산식으로 구조화한다."""
     enhanced = 0
@@ -1596,16 +2450,13 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
         if isinstance(calc, dict) and calc.get("base_amount_thousand") is not None and item.get("committee_formula"):
             continue
 
-        article = _find_matching_article(item, articles)
+        related_articles = _committee_article_context(item, articles)
         article_text = " ".join(
             str(part or "")
-            for part in [
-                article.get("no") if article else "",
-                article.get("text") if article else "",
-                item.get("formula"),
-                item.get("name"),
-            ]
+            for article in related_articles
+            for part in [article.get("no"), article.get("text")]
         )
+        article_text = " ".join([article_text, str(item.get("formula") or ""), str(item.get("name") or "")])
         candidates = item.get("assumption_candidates") or []
         total_members = _extract_committee_total_members(article_text)
         meeting_count, meeting_source, meeting_basis, meeting_trace = _extract_committee_meetings(
@@ -1615,15 +2466,22 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
             article_text, total_members, candidates=candidates
         )
         allowance_won, allowance_source, allowance_basis, allowance_trace = _committee_allowance_unit(item)
-        if not paid_members:
-            continue
-
-        calculated_amount_thousand = int(round(meeting_count * paid_members * allowance_won / 1000))
+        operands_ready = meeting_count is not None and paid_members is not None
+        calculated_amount_thousand = (
+            int(round(meeting_count * paid_members * allowance_won / 1000))
+            if operands_ready
+            else None
+        )
         existing_amount = calc.get("base_amount_thousand") if isinstance(calc, dict) else None
         try:
-            amount_thousand = int(existing_amount) if existing_amount is not None else calculated_amount_thousand
+            previous_amount_thousand = int(existing_amount) if existing_amount is not None else None
         except (TypeError, ValueError):
-            amount_thousand = calculated_amount_thousand
+            previous_amount_thousand = None
+        # Once the opaque draft has been replaced with a structured formula,
+        # its amount must be derived from those same operands. Keeping an old
+        # LLM baseline here produced internally contradictory reports such as
+        # 4 meetings × 20 people × 300,000 won = 28.8 million won.
+        amount_thousand = calculated_amount_thousand
         item["formula"] = "회의횟수 × 수당지급대상 인원 × 회의수당 단가"
         item["variables_needed"] = ["회의횟수", "수당지급대상 인원", "회의수당 단가"]
         item["assumptions"] = [
@@ -1633,7 +2491,7 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 "unit": "회/년",
                 "basis": meeting_basis,
                 "source_type": meeting_source,
-                "needs_user_confirm": meeting_source != "document",
+                "needs_user_confirm": meeting_source != "document" or meeting_count is None,
                 "evidence": meeting_trace,
             },
             {
@@ -1642,7 +2500,7 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
                 "unit": "명",
                 "basis": paid_basis,
                 "source_type": paid_source,
-                "needs_user_confirm": paid_source != "document",
+                "needs_user_confirm": paid_source != "document" or paid_members is None,
                 "evidence": paid_trace,
             },
             {
@@ -1660,10 +2518,12 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
             method = str(stage_trace.get("method") or "")
             if method.startswith("article"):
                 pipeline_stages.append("document_extraction")
-            elif method.startswith("tag_"):
+            elif method.startswith("tag_") or method in {"top_semantic_match", "top_similar_case_ratio"}:
                 pipeline_stages.append("tag_candidates")
             elif method.startswith("ratio") or method.startswith("statutory"):
                 pipeline_stages.append("structural_inference")
+            elif method == "missing_evidence":
+                pipeline_stages.append("human_input_required")
             else:
                 pipeline_stages.append("budget_guideline_fallback")
         item["committee_formula"] = {
@@ -1674,6 +2534,15 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
             "amount_thousand": amount_thousand,
             "source": "structured_committee_meeting_formula",
             "requires_review": True,
+            "calculation_invariant": {
+                "expression": "meeting_count * paid_members * allowance_won / 1000",
+                "computed_amount_thousand": calculated_amount_thousand,
+                "previous_base_amount_thousand": previous_amount_thousand,
+                "replaced_previous_base": (
+                    previous_amount_thousand is not None
+                    and previous_amount_thousand != calculated_amount_thousand
+                ),
+            },
             "evidence_trace": {
                 "meeting_count": meeting_trace,
                 "paid_members": paid_trace,
@@ -1691,7 +2560,11 @@ def _enhance_committee_meeting_formulas(estimate: dict[str, Any], articles: list
             "source_note": "위원회 회의수당 산식 기반 유사사례 가정값",
         }
         item["requires_review"] = True
-        item["review_reason"] = "회의횟수·수당지급대상 인원·회의수당 단가를 유사사례 가정값으로 구조화했습니다."
+        item["review_reason"] = (
+            "회의횟수·수당지급대상 인원·회의수당 단가를 근거 기반으로 구조화했습니다."
+            if operands_ready
+            else "산식은 구조화했지만 근거로 채우지 못한 변수는 사용자 입력이 필요합니다."
+        )
         enhanced += 1
     return enhanced
 
@@ -1717,7 +2590,14 @@ def _article_change_target_matches(text: str) -> list[dict[str, Any]]:
             change_type = "삭제"
         elif "신설" in compact:
             change_type = "신설"
-        elif "다음과같이" in compact or "중" in compact or "각각" in compact:
+        elif (
+            "다음과같이" in compact[:50]
+            or re.match(
+                r"(?:제\d+항)?(?:각호외의부분(?:본문)?)?중",
+                compact,
+            )
+            or compact.startswith("각각")
+        ):
             change_type = "개정"
         else:
             continue
@@ -1731,6 +2611,83 @@ def _article_change_targets(text: str) -> dict[str, str]:
     for target in _article_change_target_matches(text):
         targets.setdefault(target["no"], target["change_type"])
     return targets
+
+
+def _created_article_ranges(text: str) -> dict[str, str]:
+    """Expand an explicitly created contiguous article range.
+
+    Korean amendment bills sometimes introduce a whole chapter with one
+    directive such as ``제21조부터 제36조까지를 다음과 같이 신설``.
+    The individual article headers are the actual changed provisions, but the
+    amendment directive mentions only the two endpoints. Treating those
+    endpoints as the complete target set silently drops every article in the
+    middle. Expand only an explicit, bounded numeric range followed by a
+    creation directive; ordinary cross-references remain untouched.
+    """
+    compact = re.sub(r"\s+", "", text or "")
+    created: dict[str, str] = {}
+    pattern = re.compile(
+        r"제(?P<start>\d+)조부터제(?P<end>\d+)조까지\)?"
+        r"(?:을|를)?다음과같이신설"
+    )
+    for match in pattern.finditer(compact):
+        start = int(match.group("start"))
+        end = int(match.group("end"))
+        if end < start or end - start > 200:
+            continue
+        for number in range(start, end + 1):
+            created[f"제{number}조"] = "신설"
+    return created
+
+
+def _created_enumerated_article_ranges(text: str) -> dict[str, str]:
+    """Expand every range in one enumerated creation directive.
+
+    Amendment bills may list several sub-article ranges before a single
+    ``respectively create as follows`` directive.  Each range is eligible
+    only when that explicit directive appears before the first following
+    article body, so ordinary cross-references cannot enter the target set.
+    """
+    compact = re.sub(r"\s+", "", text or "")
+    created: dict[str, str] = {}
+    pattern = re.compile(
+        r"\uC81C(?P<start>\d+)\uC870(?P<start_sub>\uC758\d+)?"
+        r"\uBD80\uD130\uC81C(?P<end>\d+)\uC870(?P<end_sub>\uC758\d+)?\uAE4C\uC9C0"
+    )
+    for match in pattern.finditer(compact):
+        suffix = compact[match.end():match.end() + 260]
+        directive = re.search(
+            r"(?:\uAC01\uAC01)?\uB2E4\uC74C\uACFC\uAC19\uC774\uC2E0\uC124",
+            suffix,
+        )
+        next_body_header = re.search(
+            r"\uC81C\d+\uC870(?:\uC758\d+)?\([^)]{1,80}\)",
+            suffix,
+        )
+        if not directive or (
+            next_body_header and next_body_header.start() < directive.start()
+        ):
+            continue
+
+        start = int(match.group("start"))
+        end = int(match.group("end"))
+        start_sub = match.group("start_sub")
+        end_sub = match.group("end_sub")
+        if start_sub or end_sub:
+            if start != end or not start_sub or not end_sub:
+                continue
+            sub_start = int(start_sub[1:])
+            sub_end = int(end_sub[1:])
+            if sub_end < sub_start or sub_end - sub_start > 100:
+                continue
+            for sub_number in range(sub_start, sub_end + 1):
+                created[f"\uC81C{start}\uC870\uC758{sub_number}"] = "\uC2E0\uC124"
+        else:
+            if end < start or end - start > 200:
+                continue
+            for number in range(start, end + 1):
+                created[f"\uC81C{number}\uC870"] = "\uC2E0\uC124"
+    return created
 
 
 def _main_revision_text(text: str) -> str:
@@ -1752,6 +2709,9 @@ def split_articles_structured(text: str) -> tuple[list[dict[str, str]], str]:
     body = _main_revision_text(text) if doc_type in {"일부개정안", "전부개정안"} else text
     change_matches = _article_change_target_matches(body) if doc_type == "일부개정안" else []
     targets = {target["no"]: target["change_type"] for target in change_matches}
+    if doc_type == "일부개정안":
+        targets.update(_created_article_ranges(body))
+        targets.update(_created_enumerated_article_ranges(body))
 
     matches = list(_ARTICLE_HEADER_RE.finditer(body))
     if not matches:
@@ -1875,21 +2835,111 @@ _SPLIT_PROMPT = """아래는 한국 법령/조례 PDF에서 추출한 텍스트�
 """
 
 
-def _gemini_raw_json(prompt: str) -> Any:
-    """gemini_json 과 달리 list/dict 모두 그대로 반환."""
-    url = f"{GEMINI_BASE_URL}/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
+def _json_from_llm_text(text: str) -> Any:
+    cleaned = text.strip()
+    fenced = re.fullmatch(
+        r"```(?:json)?\s*(.*?)\s*```",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if fenced:
+        cleaned = fenced.group(1).strip()
     try:
-        data = _post(url, {"Content-Type": "application/json"}, {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "responseMimeType": "application/json",
-                "temperature": 0.1,
+        return json.loads(cleaned)
+    except json.JSONDecodeError as original:
+        # OpenAI-compatible providers can occasionally wrap an otherwise
+        # valid JSON object in a short explanation or a non-exact code fence.
+        # Decode the first complete JSON value without guessing or repairing
+        # malformed fields.
+        decoder = json.JSONDecoder()
+        starts = sorted(
+            index
+            for marker in ("{", "[")
+            if (index := cleaned.find(marker)) >= 0
+        )
+        for start in starts:
+            try:
+                value, _ = decoder.raw_decode(cleaned, start)
+                return value
+            except json.JSONDecodeError:
+                continue
+        raise original
+
+
+def _call_llm_raw_json(
+    prompt: str,
+    *,
+    temperature: float,
+    timeout: int,
+) -> Any:
+    if not LLM_API_KEY:
+        raise RuntimeError(
+            f"{'UPSTAGE_API_KEY' if LLM_PROVIDER == 'upstage' else 'GEMINI_API_KEY'} "
+            "설정이 필요합니다."
+        )
+    if LLM_PROVIDER == "upstage":
+        messages: list[dict[str, str]] = []
+        profile_instruction = profile_system_instruction(LLM_PROFILE, prompt)
+        if profile_instruction:
+            messages.append({"role": "system", "content": profile_instruction})
+        messages.append({"role": "user", "content": prompt})
+        data = _post(
+            UPSTAGE_BASE_URL,
+            {
+                "Authorization": f"Bearer {UPSTAGE_API_KEY}",
+                "Content-Type": "application/json",
             },
-        }, timeout=120)
-        text = data["candidates"][0]["content"]["parts"][0]["text"]
-        return json.loads(text)
+            {
+                "model": UPSTAGE_MODEL,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": _LLM_MAX_OUTPUT_TOKENS,
+            },
+            timeout=timeout,
+        )
+        choice = data["choices"][0]
+        finish_reason = str(choice.get("finish_reason") or "")
+        if finish_reason == "length":
+            raise RuntimeError(
+                "LLM 응답이 max_tokens 한도에서 잘렸습니다(finish_reason=length). "
+                "이 사건 묶음은 더 작은 조각으로 나눠 다시 시도해야 합니다."
+            )
+        text = choice["message"]["content"]
+    else:
+        url = (
+            f"{GEMINI_BASE_URL}/{GEMINI_GENERATION_MODEL}:generateContent"
+            f"?key={GEMINI_API_KEY}"
+        )
+        data = _post(
+            url,
+            {"Content-Type": "application/json"},
+            {
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "responseMimeType": "application/json",
+                    "temperature": temperature,
+                    "maxOutputTokens": _LLM_MAX_OUTPUT_TOKENS,
+                },
+            },
+            timeout=timeout,
+        )
+        candidate = data["candidates"][0]
+        finish_reason = str(candidate.get("finishReason") or "")
+        if finish_reason == "MAX_TOKENS":
+            raise RuntimeError(
+                "LLM 응답이 maxOutputTokens 한도에서 잘렸습니다(finishReason=MAX_TOKENS). "
+                "이 사건 묶음은 더 작은 조각으로 나눠 다시 시도해야 합니다."
+            )
+        text = candidate["content"]["parts"][0]["text"]
+    return _json_from_llm_text(str(text))
+
+
+def _gemini_raw_json(prompt: str) -> Any:
+    """Compatibility name: return a list/dict from the active LLM provider."""
+    try:
+        return _call_llm_raw_json(prompt, temperature=0.1, timeout=120)
     except Exception as exc:  # noqa: BLE001
-        sys.stderr.write(f"[Gemini raw 오류] {exc}\n")
+        sys.stderr.write(f"[{LLM_PROVIDER} raw 오류] {exc}\n")
         return None
 
 
@@ -2022,7 +3072,8 @@ def embed_batch(texts: list[str]) -> list[list[float] | None]:
 
 def vector_search(emb: list[float], source: str | None = None,
                   doc_type: str | None = None, k: int = 5,
-                  bill_id_filter: str | None = None) -> list[dict]:
+                  bill_id_filter: str | None = None,
+                  exclude_bill_nos: set[str] | None = None) -> list[dict]:
     """match_assembly_chunks RPC 호출 (Supabase에 등록된 함수).
 
     bill_id_filter가 있으면 RPC 결과 후 클라이언트 사이드 필터링.
@@ -2033,8 +3084,12 @@ def vector_search(emb: list[float], source: str | None = None,
         "apikey": SUPA_KEY, "Authorization": f"Bearer {SUPA_KEY}",
         "Content-Type": "application/json",
     }
-    # bill_id_filter 있으면 더 많이 받고 필터링 (RPC 시그니처 변경 회피)
+    # bill_id_filter 또는 평가 대상 제외가 있으면 더 많이 받고 클라이언트에서
+    # 필터링한다. 같은 의안의 청크가 상위 결과를 독점해도 k건을 확보하기 위함.
+    excluded = {str(value) for value in (exclude_bill_nos or set()) if value}
     fetch_k = k * 5 if bill_id_filter else k
+    if excluded:
+        fetch_k = max(fetch_k, k * 10)
     payload = {
         "query_embedding": emb, "match_count": fetch_k,
         "filter_source": source, "filter_doc_type": doc_type,
@@ -2050,8 +3105,167 @@ def vector_search(emb: list[float], source: str | None = None,
 
     if bill_id_filter:
         results = [r for r in results if r.get("bill_id") == bill_id_filter]
-        return results[:k]
-    return results
+    if excluded:
+        results = [r for r in results if str(r.get("bill_no") or "") not in excluded]
+    return results[:k]
+
+
+def _iter_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+    rows: list[dict[str, Any]] = []
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    except OSError:
+        return []
+    return rows
+
+
+def _local_tag_roots() -> list[Path]:
+    candidates = [
+        GENERATED_DIR / "assembly_rag_seed",
+        GENERATED_DIR / "assembly_rag_seed_22_ce",
+        GENERATED_DIR / "assembly_rag_seed_22",
+        PROJECT_ROOT / "backend" / "generated" / "assembly_rag_seed",
+        PROJECT_ROOT / "backend" / "generated" / "assembly_rag_seed_22_ce",
+        PROJECT_ROOT / "backend" / "generated" / "assembly_rag_seed_22",
+    ]
+    out: list[Path] = []
+    seen: set[str] = set()
+    for path in candidates:
+        key = str(path)
+        if key not in seen and path.exists():
+            out.append(path)
+            seen.add(key)
+    return out
+
+
+def _fetch_local_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
+    wanted = {str(bill_id) for bill_id in bill_ids[:limit] if bill_id}
+    if not wanted:
+        return []
+    merged: dict[str, dict[str, Any]] = {}
+    for root in _local_tag_roots():
+        structures = [
+            row for row in _iter_jsonl(root / "cost_estimate_structures.jsonl")
+            if str(row.get("bill_id") or "") in wanted or str(row.get("bill_no") or "") in wanted
+        ]
+        if not structures:
+            continue
+        struct_ids = {str(row.get("struct_id") or row.get("id") or "") for row in structures}
+        items = [
+            row for row in _iter_jsonl(root / "cost_estimate_items.jsonl")
+            if str(row.get("struct_id") or row.get("structure_id") or "") in struct_ids
+        ]
+        item_ids = {str(row.get("item_id") or row.get("id") or "") for row in items}
+        variables = [
+            row for row in _iter_jsonl(root / "cost_estimate_variables.jsonl")
+            if str(row.get("item_id") or "") in item_ids
+        ]
+        amounts = [
+            row for row in _iter_jsonl(root / "cost_estimate_amounts.jsonl")
+            if str(row.get("item_id") or "") in item_ids
+        ]
+
+        by_item: dict[str, dict[str, Any]] = {}
+        for it in items:
+            iid = str(it.get("item_id") or it.get("id") or "")
+            if not iid:
+                continue
+            by_item[iid] = {
+                "category": it.get("item_category"),
+                "name": it.get("item_name"),
+                "trigger_ref": it.get("trigger_ref"),
+                "variables": [],
+                "amounts": [],
+                "_struct_id": str(it.get("struct_id") or it.get("structure_id") or ""),
+                "_order": it.get("item_order") or 0,
+            }
+        for var in variables:
+            iid = str(var.get("item_id") or "")
+            if iid in by_item:
+                by_item[iid]["variables"].append({
+                    "name": var.get("variable_name"),
+                    "value": var.get("variable_value"),
+                    "unit": var.get("variable_unit"),
+                    "source_text": var.get("source_text"),
+                })
+        for amount in amounts:
+            iid = str(amount.get("item_id") or "")
+            if iid in by_item:
+                by_item[iid]["amounts"].append({
+                    "year_label": amount.get("year_label"),
+                    "year_offset": amount.get("year_offset"),
+                    "amount_thousand": amount.get("amount_thousand"),
+                    "formula": amount.get("formula_text"),
+                    "is_total": amount.get("is_total"),
+                })
+
+        by_struct: dict[str, list[dict[str, Any]]] = {}
+        for item in sorted(by_item.values(), key=lambda row: int(row.get("_order") or 0)):
+            sid = str(item.pop("_struct_id", "") or "")
+            item.pop("_order", None)
+            by_struct.setdefault(sid, []).append(item)
+
+        for structure in structures:
+            sid = str(structure.get("struct_id") or structure.get("id") or "")
+            key = str(structure.get("bill_id") or structure.get("bill_no") or sid)
+            if key in merged:
+                continue
+            merged[key] = {
+                "bill_id": structure.get("bill_id"),
+                "bill_no": structure.get("bill_no"),
+                "bill_name": structure.get("bill_name"),
+                "items": by_struct.get(sid, []),
+                "source": f"local:{root.name}",
+            }
+
+    ordered: list[dict[str, Any]] = []
+    for bill_id in bill_ids[:limit]:
+        key = str(bill_id)
+        if key in merged:
+            ordered.append(merged[key])
+    for pattern in merged.values():
+        if len(ordered) >= limit:
+            break
+        if pattern not in ordered:
+            ordered.append(pattern)
+    return ordered[:limit]
+
+
+def fetch_local_tag_patterns_by_bill_name(
+    bill_name: str,
+    limit: int = 1,
+    exclude_bill_nos: set[str] | None = None,
+) -> list[dict]:
+    target = _compact_korean(bill_name)
+    if not target:
+        return []
+    excluded = {str(value) for value in (exclude_bill_nos or set()) if value}
+    matched_ids: list[str] = []
+    for root in _local_tag_roots():
+        for structure in _iter_jsonl(root / "cost_estimate_structures.jsonl"):
+            if str(structure.get("bill_no") or "") in excluded:
+                continue
+            row_name = _compact_korean(str(structure.get("bill_name") or ""))
+            if not row_name:
+                continue
+            if row_name == target or row_name in target or target in row_name:
+                bill_id = str(structure.get("bill_id") or structure.get("bill_no") or "")
+                if bill_id and bill_id not in matched_ids:
+                    matched_ids.append(bill_id)
+            if len(matched_ids) >= limit:
+                break
+        if len(matched_ids) >= limit:
+            break
+    return _fetch_local_tag_patterns(matched_ids, limit=limit)
 
 
 def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
@@ -2059,6 +3273,8 @@ def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
     if not bill_ids:
         return []
     bill_ids = bill_ids[:limit]
+    if not SUPA_URL or not SUPA_KEY:
+        return _fetch_local_tag_patterns(bill_ids, limit=limit)
     headers = {"apikey": SUPA_KEY, "Authorization": f"Bearer {SUPA_KEY}"}
 
     def _get(table: str, params: str) -> list[dict]:
@@ -2077,7 +3293,7 @@ def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
         f"select=id,bill_id,bill_no,bill_name&bill_id=in.({urllib.parse.quote(ids_csv)})",
     )
     if not structures:
-        return []
+        return _fetch_local_tag_patterns(bill_ids, limit=limit)
 
     struct_ids = [str(s["id"]) for s in structures]
     items = _get(
@@ -2133,10 +3349,13 @@ def fetch_tag_patterns(bill_ids: list[str], limit: int = 3) -> list[dict]:
     out = []
     for s in structures:
         out.append({
+            "bill_id":   s.get("bill_id"),
             "bill_no":   s["bill_no"],
             "bill_name": s["bill_name"],
             "items":     by_struct.get(s["id"], []),
         })
+    if not any((pattern.get("items") or []) for pattern in out):
+        return _fetch_local_tag_patterns(bill_ids, limit=limit)
     return out
 
 
@@ -2267,25 +3486,21 @@ def format_tag_patterns(patterns: list[dict]) -> str:
     return "\n\n".join(blocks)
 
 
-# ── Gemini ────────────────────────────────────────────────────────────────────
+# ── JSON LLM provider ─────────────────────────────────────────────────────────
 
 def gemini_json(prompt: str, temperature: float = 0.1) -> dict | None:
-    global _GEMINI_BACKOFF_UNTIL
-    if time.time() < _GEMINI_BACKOFF_UNTIL:
+    """Compatibility wrapper routing JSON generation to the active provider."""
+    global _LLM_BACKOFF_UNTIL
+    if time.time() < _LLM_BACKOFF_UNTIL:
         return None
-    url = f"{GEMINI_BASE_URL}/{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "responseMimeType": "application/json",
-            "temperature": temperature,
-        },
-    }
     for attempt in range(3):
         try:
-            data = _post(url, {"Content-Type": "application/json"}, payload, timeout=180)
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
-            parsed = json.loads(text)
+            parsed = _call_llm_raw_json(
+                prompt,
+                temperature=temperature,
+                timeout=180,
+            )
+            parsed = normalize_profile_response(LLM_PROFILE, prompt, parsed)
             if isinstance(parsed, list):
                 parsed = next((x for x in parsed if isinstance(x, dict)), None)
             return parsed if isinstance(parsed, dict) else None
@@ -2294,21 +3509,35 @@ def gemini_json(prompt: str, temperature: float = 0.1) -> dict | None:
                 if attempt < 1:
                     time.sleep(3)
                     continue
-                _GEMINI_BACKOFF_UNTIL = time.time() + 30
+                _LLM_BACKOFF_UNTIL = time.time() + 30
             elif 500 <= exc.code < 600 and attempt < 2:
                 time.sleep(2 ** attempt * 3)
                 continue
-            sys.stderr.write(f"[Gemini 오류] HTTP {exc.code}: {exc.reason}\n")
+            sys.stderr.write(
+                f"[{LLM_PROVIDER} 오류] HTTP {exc.code}: {exc.reason}\n"
+            )
             return None
         except (TimeoutError, urllib.error.URLError) as exc:
             if attempt < 2:
                 time.sleep(2 ** attempt * 2)
                 continue
-            _GEMINI_BACKOFF_UNTIL = time.time() + 30
-            sys.stderr.write(f"[Gemini 오류] {exc}\n")
+            _LLM_BACKOFF_UNTIL = time.time() + 30
+            sys.stderr.write(f"[{LLM_PROVIDER} 오류] {exc}\n")
+            return None
+        except json.JSONDecodeError as exc:
+            # 토큰 잘림이 아니라(별도로 finish_reason 확인함) 모델이 가끔
+            # 문법적으로 깨진 JSON을 낸다(실측 확인). 같은 요청을 다시 보내면
+            # 보통 정상 JSON이 나오므로, HTTP 5xx와 동일하게 재시도한다.
+            if attempt < 2:
+                sys.stderr.write(
+                    f"[{LLM_PROVIDER} JSON 파싱 재시도 {attempt + 1}/2] {exc}\n"
+                )
+                time.sleep(1)
+                continue
+            sys.stderr.write(f"[{LLM_PROVIDER} 오류] {exc}\n")
             return None
         except Exception as exc:
-            sys.stderr.write(f"[Gemini 오류] {exc}\n")
+            sys.stderr.write(f"[{LLM_PROVIDER} 오류] {exc}\n")
             return None
     return None
 
@@ -2519,15 +3748,28 @@ def _extract_bill_name(text: str, fallback: str) -> str:
     """PDF 앞부분에서 실제 의안명을 우선 추출한다."""
     lines = [line.strip() for line in text[:2500].splitlines() if line.strip()]
     ignore = re.compile(r"(의안|번호|발의|의원|대표|연월일|제안이유|주요내용|[-―]\s*\d+\s*[-―]?)")
-    suffix_only = {"일부개정법률안", "전부개정법률안", "개정법률안"}
+    suffix_only = {
+        "일부개정법률안",
+        "전부개정법률안",
+        "개정법률안",
+        "법률일부개정법률안",
+        "법률전부개정법률안",
+    }
     previous_candidate = ""
     for line in lines[:40]:
         compact = re.sub(r"\s+", "", line)
         if len(compact) < 4 or ignore.fullmatch(compact):
             continue
         if compact in suffix_only and previous_candidate:
+            if previous_candidate.endswith("법률") and compact.startswith("법률"):
+                compact = compact[len("법률"):]
             return previous_candidate + compact
         if compact.endswith(("일부개정법률안", "전부개정법률안", "개정법률안", "법률안", "법안", "조례안")):
+            # Long bill names are often wrapped immediately before the suffix
+            # line in Assembly PDFs. Preserve the preceding title fragment
+            # instead of returning only e.g. "육성·지원에관한법률안".
+            if previous_candidate and len(previous_candidate + compact) <= 180:
+                return previous_candidate + compact
             return compact
         if not compact.startswith("(") and not ignore.search(compact):
             previous_candidate = compact
@@ -2536,6 +3778,42 @@ def _extract_bill_name(text: str, fallback: str) -> str:
         if compact and not ignore.search(compact) and not compact.startswith("("):
             return compact
     return fallback
+
+
+def _extract_current_bill_no(text: str, filename: str = "") -> str | None:
+    """Extract the seven-digit National Assembly bill number for RAG holdout.
+
+    Uploaded source bills often print only the five-digit serial (for example
+    ``14559``), while filenames and stored reference documents use the full
+    Assembly-age prefix (``2214559``).  Prefer an explicit full number; only
+    reconstruct a short serial when the proposal date identifies the Assembly
+    term unambiguously.
+    """
+    search_blob = f"{filename}\n{text[:4000]}"
+    full = re.search(r"(?<!\d)((?:1[7-9]|2[0-9])\d{5})(?!\d)", search_blob)
+    if full:
+        return full.group(1)
+
+    short = re.search(r"의안\s*번호\s*(\d{1,5})(?!\d)", text[:4000])
+    proposed = re.search(
+        r"발의\s*연월일\s*[:：]?\s*(\d{4})\s*[.년/-]\s*(\d{1,2})\s*[.월/-]\s*(\d{1,2})",
+        text[:4000],
+    )
+    if not short or not proposed:
+        return None
+
+    year, month, day = (int(value) for value in proposed.groups())
+    proposal_date = (year, month, day)
+    terms = (
+        (22, (2024, 5, 30), (2028, 5, 29)),
+        (21, (2020, 5, 30), (2024, 5, 29)),
+        (20, (2016, 5, 30), (2020, 5, 29)),
+        (19, (2012, 5, 30), (2016, 5, 29)),
+    )
+    for term, start, end in terms:
+        if start <= proposal_date <= end:
+            return f"{term}{int(short.group(1)):05d}"
+    return None
 
 
 # ── NABO 금액 게이트 검증 ────────────────────────────────────────────────────
@@ -2635,26 +3913,150 @@ def recompute_with_user_inputs(
                 calc["mode"] = "base_growth"
             except (TypeError, ValueError):
                 pass
-        # 변수 단위 (단가 × 대상)
+        # 변수 단위 입력. 화면에서 산식의 실제 변수명을 그대로 전달할 수 있다.
         elif "variables" in u and isinstance(u["variables"], dict):
             vals = u["variables"]
             try:
-                unit_cost = float(vals.get("단가") or vals.get("unit_cost") or 0)
-                target = float(vals.get("대상") or vals.get("target") or 1)
-                if unit_cost > 0 and target > 0:
-                    calc["base_amount_thousand"] = int(round(unit_cost * target))
+                numeric_vals = {
+                    str(name): float(value)
+                    for name, value in vals.items()
+                    if value is not None and value != ""
+                }
+                assumptions = item.get("assumptions") or []
+                for assumption in assumptions:
+                    assumption_name = str(assumption.get("name") or "")
+                    compact_name = _compact_korean(assumption_name)
+                    matched_value = next(
+                        (
+                            value
+                            for name, value in numeric_vals.items()
+                            if _compact_korean(name) == compact_name
+                            or _compact_korean(name) in compact_name
+                            or compact_name in _compact_korean(name)
+                        ),
+                        None,
+                    )
+                    if matched_value is not None:
+                        assumption["value"] = matched_value
+                        assumption["source_type"] = "user_input"
+                        assumption["needs_user_confirm"] = False
+
+                def assumption_value(*terms: str) -> tuple[float | None, str]:
+                    for assumption in assumptions:
+                        name = _compact_korean(str(assumption.get("name") or ""))
+                        if any(_compact_korean(term) in name for term in terms):
+                            try:
+                                return float(assumption.get("value")), str(assumption.get("unit") or "")
+                            except (TypeError, ValueError):
+                                continue
+                    for name, value in numeric_vals.items():
+                        compact = _compact_korean(name)
+                        if any(_compact_korean(term) in compact for term in terms):
+                            return value, ""
+                    return None, ""
+
+                def amount_in_thousand(value: float, unit: str) -> float:
+                    compact_unit = _compact_korean(unit)
+                    if "백만원" in compact_unit:
+                        return value * 1000
+                    if "만원" in compact_unit and "백만원" not in compact_unit:
+                        return value * 10
+                    if "원" in compact_unit and "천원" not in compact_unit:
+                        return value / 1000
+                    return value
+
+                family = str(item.get("formula_family") or "")
+                base_amount: float | None = None
+                yearly_amounts: list[int] | None = None
+                if family == "committee_operation":
+                    meetings, _ = assumption_value("회의횟수", "개최횟수")
+                    members, _ = assumption_value("수당지급대상", "민간위원", "참석인원")
+                    allowance, allowance_unit = assumption_value("회의수당단가", "사례금단가", "수당단가")
+                    if meetings and members and allowance:
+                        base_amount = meetings * members * amount_in_thousand(allowance, allowance_unit)
+                elif family == "research_service":
+                    unit_cost, unit = assumption_value("용역단가", "조사단가")
+                    count, _ = assumption_value("수행횟수", "조사횟수")
+                    if unit_cost and count:
+                        base_amount = amount_in_thousand(unit_cost, unit) * count
+                elif family == "transfer_payment":
+                    target, _ = assumption_value("지원대상자수", "대상수")
+                    unit_cost, unit = assumption_value("1인당지급액", "지원단가")
+                    count, _ = assumption_value("지급횟수")
+                    rate, _ = assumption_value("집행률")
+                    if target and unit_cost:
+                        base_amount = target * amount_in_thousand(unit_cost, unit)
+                        base_amount *= count or 1
+                        base_amount *= (rate / 100) if rate else 1
+                elif family == "facility_system":
+                    initial_cost, initial_unit = assumption_value("초기구축비", "구축비")
+                    annual_cost, annual_unit = assumption_value("연간유지관리비", "유지관리비", "운영비")
+                    if initial_cost is not None and annual_cost is not None:
+                        initial_thousand = amount_in_thousand(initial_cost, initial_unit)
+                        annual_thousand = amount_in_thousand(annual_cost, annual_unit)
+                        years = int(calc.get("end_year") or 5)
+                        yearly_amounts = [
+                            int(round(initial_thousand + annual_thousand)),
+                            *[int(round(annual_thousand)) for _ in range(max(0, years - 1))],
+                        ]
+                elif family == "institution_establishment":
+                    scale, _ = assumption_value("시설규모", "면적")
+                    construction, construction_unit = assumption_value("단위면적당공사비", "공사비")
+                    equipment, equipment_unit = assumption_value("장비비품비", "비품비", "자산취득비")
+                    if scale is not None and construction is not None and equipment is not None:
+                        base_amount = (
+                            scale * amount_in_thousand(construction, construction_unit)
+                            + amount_in_thousand(equipment, equipment_unit)
+                        )
+                        calc["recurrence"] = "one_time"
+                elif family == "personnel_compensation":
+                    people, _ = assumption_value("직급별인원", "소요인력", "증원인원")
+                    pay, pay_unit = assumption_value("직급별1인당보수", "1인당보수", "평균보수")
+                    contribution_rate, _ = assumption_value("기관부담요율", "부담요율")
+                    if people is not None and pay is not None:
+                        base_amount = people * amount_in_thousand(pay, pay_unit)
+                        if contribution_rate is not None:
+                            base_amount *= 1 + contribution_rate / 100
+                elif family == "institution_operation":
+                    basic, basic_unit = assumption_value("기본경비기준액", "기본경비")
+                    program, program_unit = assumption_value("연간사업운영비", "사업운영비")
+                    if basic is not None and program is not None:
+                        base_amount = (
+                            amount_in_thousand(basic, basic_unit)
+                            + amount_in_thousand(program, program_unit)
+                        )
+                elif family == "employer_contribution":
+                    pay, pay_unit = assumption_value("보수", "인건비")
+                    rate, _ = assumption_value("기관부담요율", "부담요율")
+                    if pay is not None and rate is not None:
+                        base_amount = amount_in_thousand(pay, pay_unit) * rate / 100
+                elif family == "basic_expense":
+                    pay, pay_unit = assumption_value("보수또는인건비", "인건비", "보수")
+                    rate, _ = assumption_value("기본경비비율", "비율")
+                    if pay is not None and rate is not None:
+                        base_amount = amount_in_thousand(pay, pay_unit) * rate / 100
+                elif family == "asset_acquisition":
+                    people, _ = assumption_value("증원인원", "인원")
+                    unit_cost, unit = assumption_value("1인당자산취득비", "자산취득비")
+                    if people is not None and unit_cost is not None:
+                        base_amount = people * amount_in_thousand(unit_cost, unit)
+                        calc["recurrence"] = "one_time"
+
+                if base_amount is None:
+                    unit_cost = numeric_vals.get("단가") or numeric_vals.get("unit_cost")
+                    target = numeric_vals.get("대상") or numeric_vals.get("target")
+                    if unit_cost and target:
+                        base_amount = unit_cost * target
+                if yearly_amounts:
+                    calc.pop("base_amount_thousand", None)
+                    calc["mode"] = "yearly_series"
+                    calc["yearly_amounts_thousand"] = yearly_amounts
+                    calc["source_note"] = "사용자가 입력한 구축비·유지관리비를 구분해 재계산"
+                if base_amount is not None and base_amount > 0:
+                    calc.pop("yearly_amounts_thousand", None)
+                    calc["base_amount_thousand"] = int(round(base_amount))
                     calc["mode"] = "base_growth"
-                    # 사용자 입력값을 assumptions에도 반영
-                    for a in item.get("assumptions") or []:
-                        nm = str(a.get("name") or "")
-                        if "단가" in nm or "unit" in nm.lower():
-                            a["value"] = unit_cost
-                            a["source_type"] = "user_input"
-                            a["needs_user_confirm"] = False
-                        elif "대상" in nm or "개소" in nm or "target" in nm.lower():
-                            a["value"] = target
-                            a["source_type"] = "user_input"
-                            a["needs_user_confirm"] = False
+                    calc["source_note"] = "사용자가 입력한 필수 기준값으로 재계산"
             except (TypeError, ValueError):
                 pass
         # 기타 calculation 필드
@@ -2666,10 +4068,14 @@ def recompute_with_user_inputs(
     calculated, calc_issues = compute_year_estimates(estimate, tag_patterns=[], allow_estimated=False)
     estimate["recompute_issues"] = calc_issues
     if calculated:
-        estimate["calculation_status"] = "computed_by_python"
+        has_blocking_issue = any(issue.get("level") == "error" for issue in calc_issues)
+        estimate["calculation_status"] = (
+            "computed_partial_by_python" if has_blocking_issue else "computed_by_python"
+        )
         estimate["year_estimates"] = calculated
         _sync_estimate_amount_totals(estimate)
-        estimate["user_inputs_needed"] = []
+        if not has_blocking_issue:
+            estimate["user_inputs_needed"] = []
     else:
         missing_by_item: dict[str, list[str]] = {}
         for issue in calc_issues:
@@ -2679,6 +4085,14 @@ def recompute_with_user_inputs(
         estimate["calculation_status"] = "awaiting_user_input"
         estimate["year_estimates"] = _blocked_year_estimates(missing_by_item or {"계산 항목": ["base_amount_thousand"]})
     estimate["estimation_status"] = classify_estimation_status(estimate)
+    apply_formula_source_strategy(estimate, tag_patterns=[])
+    human_input = _build_human_input_requests(estimate)
+    if human_input:
+        estimate["human_input"] = human_input
+        if calculated and human_input.get("blocking_count"):
+            estimate["calculation_status"] = "computed_partial_by_python"
+    else:
+        estimate.pop("human_input", None)
     # 양식 게이트 재적용
     yr = estimate.get("year_estimates")
     raw_v = estimate.get("verdict_after_recompute") or "추계서"
@@ -2713,8 +4127,13 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
     t0 = time.time()
     workflow_issues: list[dict[str, Any]] = []
 
-    if not GEMINI_API_KEY:
-        raise ValueError("GEMINI_API_KEY 설정이 필요합니다.")
+    if not LLM_API_KEY:
+        required_key = (
+            "UPSTAGE_API_KEY"
+            if LLM_PROVIDER == "upstage"
+            else "GEMINI_API_KEY"
+        )
+        raise ValueError(f"{required_key} 설정이 필요합니다.")
 
     # 1) PDF 추출
     pdf_bytes = base64.b64decode(_strip_data_url(content_b64))
@@ -2725,6 +4144,15 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             "PDF에서 텍스트를 추출하지 못했습니다. 스캔본/이미지 PDF이거나 텍스트 레이어가 없는 파일입니다. "
             "텍스트가 포함된 PDF로 다시 업로드하거나 OCR 처리 후 분석해야 합니다."
         )
+    current_bill_no = _extract_current_bill_no(raw_text, filename) if form_type == "assembly" else None
+    excluded_bill_nos = {current_bill_no} if current_bill_no else set()
+    if current_bill_no:
+        workflow_issues.append({
+            "level": "info",
+            "category": "현재 의안 검색 제외",
+            "detail": f"분석 대상 의안 {current_bill_no}의 정답 문서를 RAG·TAG 후보에서 제외했습니다.",
+            "action": "동일 의안 정답 누출 없이 다른 공식 사례만으로 추계합니다.",
+        })
     raw_doc_type = _detect_doc_type(raw_text)
     articles: list[dict[str, str]] = []
     doc_type = raw_doc_type
@@ -2813,9 +4241,41 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             }
         art_legal = vector_search(art_emb, source="legal_reference", k=2) if art_emb else []
         art_similar = (
-            vector_search(art_emb, source="national_assembly", doc_type="cost_estimate", k=2)
+            vector_search(
+                art_emb,
+                source="national_assembly",
+                doc_type="cost_estimate",
+                k=2,
+                exclude_bill_nos=excluded_bill_nos,
+            )
             if art_emb else []
         )
+        # ── Dual-Channel: 유사 미첨부 사유서도 함께 검색 (kNN verdict 신호)
+        art_non_attach = (
+            vector_search(
+                art_emb,
+                source="national_assembly",
+                doc_type="non_attachment_reason",
+                k=3,
+                exclude_bill_nos=excluded_bill_nos,
+            )
+            if art_emb else []
+        )
+        cost_sims = [float(x.get("similarity") or 0) for x in art_similar]
+        na_sims = [float(x.get("similarity") or 0) for x in art_non_attach]
+        knn_channels = {
+            "cost_avg": round(sum(cost_sims) / len(cost_sims), 4) if cost_sims else 0.0,
+            "non_attach_avg": round(sum(na_sims) / len(na_sims), 4) if na_sims else 0.0,
+            "non_attach_top": round(max(na_sims), 4) if na_sims else 0.0,
+            "non_attach_refs": [
+                {
+                    "bill_no": x.get("bill_no"),
+                    "bill_name": (x.get("bill_name") or "")[:60],
+                    "similarity": round(float(x.get("similarity") or 0), 4),
+                }
+                for x in art_non_attach[:3]
+            ],
+        }
         prompt = ARTICLE_PROMPT.format(
             article_text=art["text"], legal_ref=legal_ref[:2000],
         )
@@ -2845,6 +4305,7 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 }
                 for c in art_similar
             ],
+            "knn_channels": knn_channels,
         }
 
     # 3-C. 병렬 실행 (Gemini RPM 고려해 동시 6개)
@@ -2881,19 +4342,31 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             "category": "미첨부 가능 후보 분리",
             "detail": (
                 f"재정수반 후보 중 {candidate_summary['counts']['non_attachment_review']}건은 "
-                "자료 부족·재량규정·행정절차 성격으로 미첨부 검토 대상으로 분리했습니다."
+                "재량규정·행정절차 성격으로 판단되어 미첨부 사유 검토 대상으로 분리했습니다."
             ),
-            "action": "정답지 비교 시 이 후보들은 바로 금액 산식으로 보내지 않고 일부추계 제외 또는 미첨부 사유를 우선 검토합니다.",
+            "action": "이 후보들은 산식으로 직접 계산하지 않고 일부추계 제외 또는 미첨부 사유로 우선 처리합니다.",
             "candidate_summary": candidate_summary,
         })
 
     # 4) 본문 임베딩으로 유사 RAG 검색 (위에서 이미 계산됨)
     similar_estimates = (
-        vector_search(bill_emb, source="national_assembly", doc_type="cost_estimate", k=5)
+        vector_search(
+            bill_emb,
+            source="national_assembly",
+            doc_type="cost_estimate",
+            k=5,
+            exclude_bill_nos=excluded_bill_nos,
+        )
         if bill_emb else []
     )
     similar_non_attach = (
-        vector_search(bill_emb, source="national_assembly", doc_type="non_attachment_reason", k=3)
+        vector_search(
+            bill_emb,
+            source="national_assembly",
+            doc_type="non_attachment_reason",
+            k=3,
+            exclude_bill_nos=excluded_bill_nos,
+        )
         if bill_emb else []
     )
 
@@ -2925,10 +4398,10 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
     else:
         avg_similarity = 0.0
         workflow_issues.append({
-            "level": "warn",
-            "category": "유사 비용추계서 없음",
-            "detail": "본문 기준 유사 비용추계서를 찾지 못했습니다.",
-            "action": "추계 항목과 산식은 사용자 검토 없이는 확정할 수 없습니다.",
+            "level": "info",
+            "category": "유사 비용추계서 검색 결과 없음",
+            "detail": "본문 기준 유사 비용추계서를 찾지 못해 새로운 유형으로 판단했습니다.",
+            "action": "표준 산식으로 best-effort 초안을 생성했습니다. 사용자 보완 시 정밀도가 더 올라갑니다.",
         })
 
     # 5) 종합 판단 + 추계서 생성
@@ -2958,6 +4431,12 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         if len(similar_bill_ids) >= 3:
             break
     tag_patterns = fetch_tag_patterns(similar_bill_ids, limit=3)
+    if not tag_patterns:
+        tag_patterns = fetch_local_tag_patterns_by_bill_name(
+            bill_name,
+            limit=5,
+            exclude_bill_nos=excluded_bill_nos,
+        )
     tag_patterns_text = format_tag_patterns(tag_patterns)
     if not tag_patterns:
         workflow_issues.append({
@@ -3011,8 +4490,113 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
 
     # 5-1) KOSIS 변수값 자동 채우기 + 단가 후보 제시
     estimate = final.get("if_needs_estimate")
-    generalized_estimate = build_generalized_estimate(article_results, years=5)
-    estimate = merge_generalized_estimate(estimate, generalized_estimate)
+    strong_tag_pattern, strong_tag_similarity = _select_strong_tag_pattern(
+        tag_patterns,
+        similar_estimates,
+        bill_name,
+        text,
+    )
+    tag_structure_estimate = (
+        _build_estimate_from_tag_pattern(strong_tag_pattern, similarity=strong_tag_similarity)
+        if strong_tag_pattern
+        else None
+    )
+    public_org_estimate = _build_public_organization_establishment_estimate(
+        text,
+        article_results,
+        form_type=form_type,
+    ) if not tag_structure_estimate else None
+    if tag_structure_estimate:
+        source_bill_no = strong_tag_pattern.get("bill_no") or "-"
+        source_bill_name = strong_tag_pattern.get("bill_name") or "공식 비용추계서"
+        source_similarity = f"{strong_tag_similarity:.0%}"
+        applied_item_names = [
+            str(item.get("name") or "")
+            for item in tag_structure_estimate.get("items") or []
+            if item.get("name")
+        ]
+        joined_items = ", ".join(applied_item_names[:4]) or "재정수반 비용항목"
+        is_judicial_establishment = any("고등법원" in name for name in applied_item_names)
+        estimate = tag_structure_estimate
+        final["if_needs_estimate"] = estimate
+        final["verdict"] = "추계서"
+        final["verdict_label"] = "비용추계서"
+        final["if_non_attachment"] = None
+        if is_judicial_establishment:
+            target_reason = (
+                "이 의안은 고등법원 신설을 내용으로 하므로, 법원 운영을 위한 인력 운영비, "
+                "기본 운영비, 자산취득비 등 신규 재정지출이 발생합니다."
+            )
+            cost_reason = (
+                "또한 고등법원 신설 시 대응되는 고등검찰청 운영 비용도 함께 검토할 필요가 있어 "
+                "추가재정소요가 발생하는 의안으로 판단했습니다."
+            )
+        else:
+            target_reason = (
+                "이 의안은 새로운 기관·사업·운영 근거를 두고 있어 기존 예산 범위를 넘어서는 "
+                "재정지출 발생 가능성이 있습니다."
+            )
+            cost_reason = (
+                f"비용항목으로 {joined_items}이 확인되어 연도별 추가재정소요를 산정했습니다."
+            )
+        final["reason_summary"] = target_reason
+        final["verdict_reason_nabo"] = cost_reason
+        final["decision_basis"] = {
+            "title": "작성 대상 판단 근거",
+            "reasons": [
+                {"label": "판단 사유", "text": target_reason},
+                {"label": "발생 비용", "text": cost_reason},
+                {
+                    "label": "참고 문서",
+                    "text": f"국회 의안 {source_bill_no} 「{source_bill_name}」 비용추계서",
+                },
+                {"label": "구조 유사도", "text": source_similarity},
+                {"label": "적용 비용항목", "text": joined_items},
+            ],
+        }
+        workflow_issues.append({
+            "level": "info",
+            "category": "공식 추계 사례 기준 적용",
+            "detail": (
+                f"근거 문서: 국회 의안 {source_bill_no} 「{source_bill_name}」, "
+                f"구조 유사도 {source_similarity}"
+            ),
+            "action": "비용항목, 변수, 연도별 금액 구조를 기준으로 초안을 작성했습니다.",
+        })
+        suppressed = {
+            "신구조문대비표 파싱 실패",
+            "임베딩 비활성화",
+            "법령 RAG 근거 없음",
+            "유사 비용추계서 없음",
+            "유사 비용추계서 신뢰도 낮음",
+            "TAG 산식 패턴 없음",
+        }
+        workflow_issues[:] = [
+            issue for issue in workflow_issues
+            if issue.get("category") not in suppressed
+        ]
+    elif public_org_estimate:
+        estimate = public_org_estimate
+        final["if_needs_estimate"] = estimate
+        final["verdict"] = "추계서"
+        final["verdict_label"] = "비용추계서"
+        final["if_non_attachment"] = None
+        final["reason_summary"] = (
+            "공공조직 신설형 비용추계 구조를 적용하여 인건비, 기관부담금, 운영비, "
+            "자산취득비 중심으로 추가재정소요를 산출했습니다."
+        )
+        final["verdict_reason_nabo"] = (
+            "기관 신설에 따라 인력 운영비와 기관 운영비 등 추가 재정소요가 발생하므로 비용추계서 작성 대상입니다."
+        )
+        workflow_issues.append({
+            "level": "info",
+            "category": "공공조직 신설형 템플릿 적용",
+            "detail": "기관 신설형 의안으로 판단하여 유사 공식 추계서에서 일반화한 산식과 전제값을 적용했습니다.",
+            "action": "값 변경 패널에서 신규충원 인원, 단가 또는 연간 기준금액을 조정할 수 있습니다.",
+        })
+    else:
+        generalized_estimate = build_generalized_estimate(article_results, years=5)
+        estimate = merge_generalized_estimate(estimate, generalized_estimate)
     if estimate is not final.get("if_needs_estimate"):
         final["if_needs_estimate"] = estimate
         if estimate and estimate.get("items"):
@@ -3060,6 +4644,7 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             text=text,
             articles=article_results,
             years=5,
+            exclude_bill_nos=excluded_bill_nos,
         )
         if form_type == "assembly"
         else None
@@ -3082,6 +4667,14 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 "항목·산식·전제를 기준선으로 적용했습니다."
             ),
             "action": "위원회 직무, 위원 정수와 지원인력 규모의 동등성을 확인한 뒤 전제값을 확정해야 합니다.",
+        })
+    excluded_item_count = _exclude_non_estimable_items(estimate, article_results)
+    if excluded_item_count:
+        workflow_issues.append({
+            "level": "info",
+            "category": "추계 곤란 항목 계산 제외",
+            "detail": f"정책 판정에서 추계 곤란·기존 사업으로 분류된 {excluded_item_count}개 항목을 금액 계산에서 제외했습니다.",
+            "action": "제외 항목은 재정수반요인과 미실시 사유에는 남기되 총액에는 포함하지 않습니다.",
         })
     if estimate and estimate.get("items"):
         for item in estimate["items"]:
@@ -3106,7 +4699,12 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 item["reference_unit_costs"] = refs
                 item["reference_unit_cost"] = refs[0]
             if form_type == "assembly":
-                assumption_candidates = find_assumption_candidates(item, form_type=form_type)
+                assumption_candidates = find_assumption_candidates(
+                    item,
+                    form_type=form_type,
+                    limit=12 if _is_committee_meeting_item(item) else 8,
+                    exclude_bill_nos=excluded_bill_nos,
+                )
                 if assumption_candidates:
                     item["assumption_candidates"] = assumption_candidates
         if form_type == "assembly":
@@ -3121,13 +4719,22 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             tag_amount_count = apply_tag_formula_evidence(estimate, tag_patterns)
             if tag_amount_count:
                 workflow_issues.append({
-                    "level": "warn",
-                    "category": "TAG 유사산식 금액 적용",
-                    "detail": f"표준산식으로 기준금액이 확정되지 않은 {tag_amount_count}개 항목에 유사 추계서 기준금액 후보를 연결했습니다.",
-                    "action": "유사사례 기반 금액이므로 사업 범위와 단가의 적합성을 최종 확인해야 합니다.",
+                    "level": "info",
+                    "category": "유사 공식 추계 사례 적용",
+                    "detail": f"{tag_amount_count}개 항목에 유사 공식 비용추계서의 산식·금액을 적용해 합리적 초안을 생성했습니다.",
+                    "action": "사업 범위와 단가의 적합성을 확인하시면 더 정확한 산정이 가능합니다.",
+                })
+            default_amount_count = apply_reasonable_default_amounts(estimate)
+            if default_amount_count:
+                workflow_issues.append({
+                    "level": "info",
+                    "category": "표준 기본값 적용",
+                    "detail": f"{default_amount_count}개 항목에 표준 기본값을 적용해 best-effort 초안을 생성했습니다.",
+                    "action": "값 변경 패널에서 금액·단가·대상 수를 보완하시면 즉시 재계산됩니다.",
                 })
             apply_formula_source_strategy(estimate, tag_patterns)
-        # 사용자 입력 필요한 전제조건 수집
+        # 검토가 필요한 전제조건 수집. 기본 흐름은 입력 대기가 아니라
+        # 합리적 가정/TAG 후보로 초안을 생성하고 검토 항목만 표시한다.
         needs_input = []
         for item in estimate["items"]:
             for a in item.get("assumptions") or []:
@@ -3141,67 +4748,63 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                         "assumption_candidates": item.get("assumption_candidates", [])[:5],
                     })
         if needs_input:
-            estimate["user_inputs_needed"] = needs_input
+            estimate["review_assumptions"] = needs_input
 
     # 5-2) Python 계산기로 연도별 금액 산출
-    # 정책: 단가·대상 등 필수 변수가 없으면 TAG fallback 자동 채우기 X.
-    #       대신 "사용자 입력 대기" 상태로 두고, /api/recompute에서 입력값으로 재계산.
-    if estimate and estimate.get("items") and estimate.get("calculation_status") != "computed_by_special_template":
+    # 정책: 단가·대상 등 필수 변수가 비어 있어도 가능한 경우 TAG/가정 후보로
+    #       초안을 먼저 생성한다. 불확실성은 계산 차단이 아니라 검토 필요로 표시한다.
+    if (
+        estimate
+        and estimate.get("items")
+        and estimate.get("calculation_status") not in {"computed_by_special_template", "computed_with_tag_structure"}
+    ):
+        initial_missing_by_item = _missing_formula_variables(estimate)
+        calculated, calc_issues = compute_year_estimates(estimate, tag_patterns=tag_patterns, allow_estimated=True)
         missing_by_item = _missing_formula_variables(estimate)
-        has_calculable_items = any(
-            isinstance(item.get("calculation"), dict)
-            and (
-                item["calculation"].get("base_amount_thousand") is not None
-                or (
-                    item["calculation"].get("mode") == "yearly_series"
-                    and isinstance(item["calculation"].get("yearly_amounts_thousand"), list)
-                    and item["calculation"].get("yearly_amounts_thousand")
-                )
+        if calculated:
+            used_tag_estimate = any(
+                item.get("evidence_basis") or item.get("tag_amount_evidence")
+                for item in estimate.get("items") or []
             )
-            for item in estimate.get("items") or []
-        )
-        if missing_by_item and not has_calculable_items:
-            # 필수 변수 누락 → 계산 차단, 사용자 입력 대기
-            estimate["calculation_status"] = "awaiting_user_input"
-            estimate["year_estimates"] = _blocked_year_estimates(missing_by_item)
-            workflow_issues.append({
-                "level": "warn",
-                "category": "단가·대상 입력 대기",
-                "detail": "단가·대상 등 필수 변수가 확정되지 않았습니다. 입력 후 재계산하세요.",
-                "action": "각 항목의 추천 단가를 검토하고 본인 자료로 확정한 뒤 [재계산]하세요.",
-                "items": missing_by_item,
-            })
-        else:
-            if missing_by_item:
+            estimate["calculation_status"] = (
+                "computed_with_evidence"
+                if used_tag_estimate or initial_missing_by_item
+                else "computed_by_python"
+            )
+            estimate["year_estimates"] = calculated
+            _sync_estimate_amount_totals(estimate)
+            if initial_missing_by_item or calc_issues:
                 workflow_issues.append({
                     "level": "warn",
-                    "category": "부분 추계",
-                    "detail": "일부 항목은 필수 변수가 누락되어 제외하고, 산식과 기준값이 구조화된 항목만 우선 계산했습니다.",
-                    "action": "제외된 항목은 정답지의 일부추계 제외 사유 또는 사용자 입력값으로 재검토해야 합니다.",
-                    "items": missing_by_item,
+                    "category": "가정 기반 초안",
+                    "detail": "법안에 직접 없는 단가·대상 값은 유사 비용추계서 TAG와 기준값 후보를 활용해 초안을 생성했습니다.",
+                    "action": "확정 제출 전에는 가정값의 정책 적합성만 검토하면 됩니다.",
+                    "items": {
+                        "initial_missing": initial_missing_by_item,
+                        "calculation_notes": calc_issues,
+                    },
                 })
-            calculated, calc_issues = compute_year_estimates(estimate, tag_patterns=tag_patterns, allow_estimated=False)
+        else:
+            apply_reasonable_default_amounts(estimate)
+            calculated, calc_issues = compute_year_estimates(estimate, tag_patterns=[], allow_estimated=True)
             if calculated:
-                estimate["calculation_status"] = "computed_partial_by_python" if missing_by_item else "computed_by_python"
+                estimate["calculation_status"] = "computed_with_evidence"
                 estimate["year_estimates"] = calculated
                 _sync_estimate_amount_totals(estimate)
-                if calc_issues:
-                    workflow_issues.append({
-                        "level": "warn",
-                        "category": "일부 항목 계산 제외",
-                        "detail": f"Python 계산기가 {len(calc_issues)}개 항목을 계산하지 못했습니다.",
-                        "action": "각 항목의 calculation.base_amount_thousand, recurrence, 증가율 변수를 확인해야 합니다.",
-                        "items": calc_issues,
-                    })
             else:
-                estimate["calculation_status"] = "blocked_no_structured_formula"
-                estimate["year_estimates"] = _blocked_year_estimates({"계산 구조": ["base_amount_thousand", "recurrence"]})
+                unresolved = _missing_formula_variables(estimate)
+                estimate["calculation_status"] = "awaiting_user_input"
+                estimate["year_estimates"] = _blocked_year_estimates(
+                    unresolved or {"계산 항목": ["필수 기준값"]}
+                )
+                estimate.pop("total_amount_thousand", None)
+                estimate.pop("average_amount_thousand", None)
                 workflow_issues.append({
-                    "level": "error",
-                    "category": "금액 계산 차단",
-                    "detail": "Python 계산기가 처리할 수 있는 구조화 산식이 없습니다.",
-                    "action": "항목별 calculation.base_amount_thousand와 recurrence를 확인해야 합니다.",
-                    "items": calc_issues,
+                    "level": "warn",
+                    "category": "사용자 입력 필요",
+                    "detail": "공식 자료와 유사사례에서 신뢰할 수 있는 기준값을 찾지 못해 임의 금액을 생성하지 않았습니다.",
+                    "action": "표시된 필수 변수만 입력하면 동일 산식으로 즉시 재계산됩니다.",
+                    "items": unresolved,
                 })
         review_vars = _review_variables(estimate)
         if review_vars:
@@ -3210,9 +4813,10 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         estimation_status = classify_estimation_status(estimate)
         estimate["estimation_status"] = estimation_status
         status_code = estimation_status.get("code")
-        if status_code == "needs_external_data":
+        has_amounts = _has_computed_amounts(estimate)
+        if status_code == "needs_external_data" and not has_amounts:
             estimate["calculation_status"] = "needs_external_data"
-            final["confidence"] = max(float(final.get("confidence") or 0), 0.65)
+            final["confidence"] = min(float(final.get("confidence") or 0), 0.65)
             workflow_issues.append({
                 "level": "warn",
                 "category": "외부 통계·기준자료 필요",
@@ -3220,9 +4824,9 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 "action": "대상 규모·단가·실적 자료를 연결하면 동일 산식으로 재계산할 수 있습니다.",
                 "items": estimation_status.get("missing"),
             })
-        elif status_code == "needs_policy_input":
+        elif status_code == "needs_policy_input" and not has_amounts:
             estimate["calculation_status"] = "needs_policy_input"
-            final["confidence"] = max(float(final.get("confidence") or 0), 0.6)
+            final["confidence"] = min(float(final.get("confidence") or 0), 0.6)
             workflow_issues.append({
                 "level": "warn",
                 "category": "정책 전제 입력 필요",
@@ -3232,12 +4836,24 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             })
         elif status_code == "computed_with_estimates":
             estimate["calculation_status"] = "computed_with_evidence"
-            final["confidence"] = max(float(final.get("confidence") or 0), 0.72)
+            final["confidence"] = min(float(final.get("confidence") or 0), 0.72)
         elif status_code == "partially_computed":
             estimate["calculation_status"] = "computed_partial_by_python"
-            final["confidence"] = max(float(final.get("confidence") or 0), 0.68)
+            final["confidence"] = min(float(final.get("confidence") or 0), 0.68)
         elif status_code == "computed":
             final["confidence"] = max(float(final.get("confidence") or 0), 0.85)
+
+        # 계산기가 TAG 금액을 적용하거나 일부 항목만 계산한 후의 상태를
+        # 기준으로 HITL 요청을 새로 구성한다. 이래야 계산된 값을 필수
+        # 입력으로 표시하거나, 미계산 항목을 단순 확인으로 표시하지 않는다.
+        apply_formula_source_strategy(estimate, tag_patterns)
+        human_input = _build_human_input_requests(estimate)
+        if human_input:
+            estimate["human_input"] = human_input
+            if has_amounts and human_input.get("blocking_count"):
+                estimate["calculation_status"] = "computed_partial_by_python"
+        else:
+            estimate.pop("human_input", None)
 
     # 5-2.5) NABO 금액 게이트 - verdict와 계산 결과가 일치하는지 검증
     raw_verdict = final.get("verdict", "unknown")
@@ -3274,21 +4890,148 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
         and article.get("cost_candidate_strength") == "strong"
         and article.get("estimate_feasibility") == "formula_ready"
     ]
+    # ── NABO 존재 게이트(existence gate) 원칙:
+    #    산출 가능한 조문(strong formula: 위원 정수·증원 인원·보수 명시)이
+    #    하나라도 있으면 그 조문만으로 "일부추계"를 작성한다 (다수결 아님).
+    #    미첨부는 산출 가능 조문이 0개일 때만 허용.
+    has_computable_article = bool(strong_formula_candidates)
+
+    # 미첨부 후보가 강한 산식 후보 대비 우세하면 items 있어도 미첨부로 강제 전환.
+    # (조직 신설 조문 다수 + 대통령령 위임 다수 케이스에서 산출 강제 방지)
+    rule_non_attach_dominance = (
+        not has_computable_article
+        and len(non_attachment_candidates) >= 3
+        and len(non_attachment_candidates) >= max(2, len(strong_formula_candidates) * 2)
+    )
+
+    # ── Dual-Channel kNN verdict 신호 (데이터 기반, 규칙보다 우선)
+    #    각 비용유발 조문의 유사 비용추계서 채널(A) vs 유사 미첨부 사유서 채널(B)
+    #    유사도를 비교. B가 우세하거나 강한 미첨부 매칭이 다수면 미첨부 신호.
+    knn_signals = [
+        a.get("knn_channels") for a in article_results
+        if a.get("cost_trigger") and isinstance(a.get("knn_channels"), dict)
+    ]
+    knn_b_dominant = sum(
+        1 for s in knn_signals
+        if s.get("non_attach_avg", 0) > s.get("cost_avg", 0)
+    )
+    knn_strong_b = sum(1 for s in knn_signals if s.get("non_attach_top", 0) >= 0.70)
+
+    # 동일 법률의 미첨부 선례: 같은 법 개정안을 NABO가 미첨부 처리한 사례가
+    # 강하게 매칭(0.70+)되면 가장 강력한 선례로 본다.
+    def _norm_law_name(value: Any) -> str:
+        s = re.sub(r"\s+", "", str(value or ""))
+        return re.sub(r"(일부개정법률안|전부개정법률안|개정법률안|법률안|법안)$", "", s)
+
+    _current_law = _norm_law_name(bill_name)
+    knn_same_law_na = bool(_current_law) and any(
+        float(ref.get("similarity") or 0) >= 0.70
+        and _norm_law_name(ref.get("bill_name")) == _current_law
+        for s in knn_signals
+        for ref in (s.get("non_attach_refs") or [])
+    )
+    # 단일 조문 의안 보완: 거의 동일 사안의 미첨부 사례(0.80+)가 존재하거나,
+    # 강한 매칭(0.72+) + 채널 간 명확한 마진(0.08+)이면 조문 수와 무관하게 발동.
+    knn_very_strong_single = any(
+        s.get("non_attach_top", 0) >= 0.80
+        or (
+            s.get("non_attach_top", 0) >= 0.72
+            and s.get("non_attach_avg", 0) - s.get("cost_avg", 0) >= 0.08
+        )
+        for s in knn_signals
+    )
+    knn_non_attach_dominance = (
+        not has_computable_article
+        and (
+            knn_same_law_na
+            or knn_very_strong_single
+            or (
+                len(knn_signals) >= 2
+                and (
+                    knn_b_dominant >= max(2, int(len(knn_signals) * 0.5))
+                    or knn_strong_b >= 2
+                )
+            )
+        )
+    )
+    if knn_non_attach_dominance:
+        strongest = max(knn_signals, key=lambda s: s.get("non_attach_top", 0))
+        top_refs = strongest.get("non_attach_refs") or []
+        workflow_issues.append({
+            "level": "info",
+            "category": "유사 미첨부 사례 kNN 매칭",
+            "detail": (
+                f"비용유발 조문 {len(knn_signals)}개 중 {knn_b_dominant}개에서 유사 미첨부 사유서 "
+                f"채널이 유사 비용추계서 채널보다 우세하고, 강한 매칭(유사도 0.70+)이 {knn_strong_b}건 "
+                f"확인되어 미첨부 사유서 작성 대상으로 판단했습니다."
+            ),
+            "action": "유사 미첨부 사례: " + ", ".join(
+                f"{r.get('bill_name')}({r.get('similarity')})" for r in top_refs[:2]
+            ),
+        })
+
+    non_attach_dominance = rule_non_attach_dominance or knn_non_attach_dominance
+
+    # ── 존재 게이트의 대칭 적용: 산출 가능(전제값 확보) 항목이 0개면 추계서 금지.
+    #    전제값이 전부 미확보(value=None, 사용자 확정 필요)인 항목은 placeholder 금액일 뿐
+    #    "산출 가능한 항목"이 아니다. NABO는 이런 경우 미첨부 3호(기술적 곤란)로 처리.
+    def _item_data_backed(item: dict[str, Any]) -> bool:
+        assumps = item.get("assumptions") or []
+        if not assumps:
+            return True  # 전제 가정이 불필요 = 산식 전제가 법률안에 명시된 항목
+        # source_type="user_input"은 데이터 풀에서 값을 못 채워 사용자 확정이
+        # 필요하다는 뜻이므로, 값이 임의로 채워져 있어도 산출 근거로 보지 않는다.
+        return any(
+            a.get("value") is not None and a.get("source_type") != "user_input"
+            for a in assumps
+        )
+
+    _estimate_items = (estimate or {}).get("items") or []
+    all_items_placeholder = bool(_estimate_items) and not any(
+        _item_data_backed(it) for it in _estimate_items
+    )
+
     if (
         form_type == "assembly"
         and not final.get("if_non_attachment")
-        and not _has_computed_amounts(estimate)
-        and not (estimate and estimate.get("items"))
-        and non_attachment_candidates
-        and not strong_formula_candidates
+        and (non_attachment_candidates or knn_non_attach_dominance)
+        and (
+            (
+                not _has_computed_amounts(estimate)
+                and not (estimate and estimate.get("items"))
+                and not strong_formula_candidates
+            )
+            or non_attach_dominance
+            or (all_items_placeholder and not has_computable_article)
+        )
     ):
-        primary = non_attachment_candidates[0]
+        if non_attachment_candidates:
+            primary = non_attachment_candidates[0]
+        else:
+            # kNN 단독 케이스: 미첨부 매칭이 가장 강한 비용유발 조문을 대표로
+            trigger_articles = [
+                a for a in article_results
+                if a.get("cost_trigger") and isinstance(a.get("knn_channels"), dict)
+            ]
+            primary = max(
+                trigger_articles,
+                key=lambda a: (a.get("knn_channels") or {}).get("non_attach_top", 0),
+            ) if trigger_articles else {}
         ref = primary.get("no") or "해당 조문"
+        knn_ref_names = [
+            r.get("bill_name")
+            for r in ((primary.get("knn_channels") or {}).get("non_attach_refs") or [])[:2]
+            if r.get("bill_name")
+        ]
+        knn_reason = (
+            f"유사 미첨부 사례({', '.join(knn_ref_names)})에서도 동일한 사유로 "
+            "비용추계서를 첨부하지 않았습니다. " if knn_ref_names and knn_non_attach_dominance else ""
+        )
         reason = (
             primary.get("review_reason")
             or (primary.get("rule_cost_trigger") or {}).get("review_reason")
             or "구체적인 사업 범위와 산식 전제값이 법률안에 명시되지 않아 기술적으로 비용추계가 곤란합니다."
-        )
+        ) + (" " + knn_reason if knn_reason else "")
         final["if_non_attachment"] = {
             "type": "3호",
             "reason_text": (
@@ -3298,13 +5041,23 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 "기술적으로 추계가 어려운 경우에 해당합니다."
             ),
         }
+        # dominance 케이스: 이미 산출된 items가 있으면 무효화 (미첨부 우선)
+        if non_attach_dominance and estimate:
+            estimate["items"] = []
+            estimate["year_estimates"] = []
+            estimate["calculation_status"] = "non_attachment_dominant"
 
-    # 미첨부 사유와 비용추계서가 동시에 생성된 경우에도 실제 계산 금액이 없으면 미첨부 사유서를 우선한다.
+    # 미첨부 사유서가 생성된 경우: items 유무 관계없이 미첨부로 전환.
+    # (조직 신설 우세 케이스에서 items가 남아있어도 미첨부 사유서를 최종 결과로 사용)
     non_attachment = final.get("if_non_attachment")
     if (
         isinstance(non_attachment, dict)
-        and not _has_computed_amounts(estimate)
-        and not (estimate and estimate.get("items"))
+        and (
+            (not _has_computed_amounts(estimate) and not (estimate and estimate.get("items")))
+            or non_attach_dominance
+            # 존재 게이트 대칭: 모든 items가 전제값 미확보(placeholder)면 산출물이 아님
+            or (all_items_placeholder and not has_computable_article)
+        )
     ):
         non_attachment["reason_text"] = _public_non_attachment_text(non_attachment.get("reason_text"))
         na_verdict, na_label = _non_attachment_verdict(non_attachment.get("type"))
@@ -3365,6 +5118,7 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
             "summary":       final.get("reason_summary", ""),
             "confidence":    float(confidence),
             "nabo_reason":   final.get("verdict_reason_nabo", ""),
+            "basis":         final.get("decision_basis"),
         },
         "field": field_info,
 
@@ -3381,6 +5135,8 @@ def analyze_v2(filename: str, content_b64: str, form_type: str = "gyeonggi") -> 
                 "similarCostEstimateCount": len(similar_estimates),
                 "similarNonAttachmentCount": len(similar_non_attach),
                 "avgCostEstimateSimilarity": round(avg_similarity, 3),
+                "currentBillNo": current_bill_no,
+                "excludedCurrentBill": bool(current_bill_no),
             },
             "tagPatternCount": len(tag_patterns),
         },

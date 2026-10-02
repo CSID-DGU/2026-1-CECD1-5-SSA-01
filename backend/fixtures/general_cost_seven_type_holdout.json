@@ -1,0 +1,158 @@
+{
+  "benchmark_version": "general-cost-seven-type-holdout-v1",
+  "cases": [
+    {
+      "case_id": "personnel_2216681",
+      "label": "인건비",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2216681",
+        "bill_name": "한미 전략적 투자 관리를 위한 특별법안",
+        "propose_date": "2026-02-09",
+        "cutoff_date": "2026-02-09",
+        "committee": "대미투자특별법 처리를 위한 특별위원회",
+        "cost_nature": "personnel",
+        "component": "salary",
+        "item_name": "사업관리단 인건비",
+        "mechanism": "salary",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["한미전략투자", "사업관리단", "경제공급망"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:3d0af77a616fdf347b69b2ed56694a3b",
+        "annual_representative_won": 1290000000
+      }
+    },
+    {
+      "case_id": "goods_services_2219945",
+      "label": "물건비",
+      "evaluation_mode": "strict_source_only",
+      "target_path": "backend/generated/goods_holdout_2219945/target_profile_v2.json",
+      "gold": {
+        "annual_representative_won": 100000000
+      }
+    },
+    {
+      "case_id": "transfers_2217750",
+      "label": "이전지출",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2217750",
+        "bill_name": "국민연금법 일부개정법률안",
+        "propose_date": "2026-03-25",
+        "cutoff_date": "2026-03-25",
+        "committee": "보건복지위원회",
+        "cost_nature": "transfers",
+        "component": "subsidy",
+        "item_name": "군복무크레딧 지원",
+        "mechanism": "subsidy",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["국민연금", "군복무크레딧", "병역"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:5beb56d9680fc1f6948054fb8b152817",
+        "annual_representative_won": 710400000000
+      }
+    },
+    {
+      "case_id": "capital_2216681",
+      "label": "자본지출",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2216681",
+        "bill_name": "한미 전략적 투자 관리를 위한 특별법안",
+        "propose_date": "2026-02-09",
+        "cutoff_date": "2026-02-09",
+        "committee": "대미투자특별법 처리를 위한 특별위원회",
+        "cost_nature": "capital",
+        "component": "equipment_asset",
+        "item_name": "사업관리단 자산취득비",
+        "mechanism": "equipment_asset",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["한미전략투자", "사업관리단", "경제공급망"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:11d6c2a79c0562738a773dfd1bc1fde7",
+        "annual_representative_won": 100000000
+      }
+    },
+    {
+      "case_id": "tax_expenditure_2218721",
+      "label": "조세감면",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2218721",
+        "bill_name": "지방세특례제한법 일부개정법률안",
+        "propose_date": "2026-04-30",
+        "cutoff_date": "2026-04-30",
+        "committee": "행정안전위원회",
+        "cost_nature": "tax_expenditure",
+        "component": "other_tax_expenditure",
+        "item_name": "농기계류 등에 대한 지방세 감면",
+        "mechanism": "other_tax_expenditure",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["농기계", "지방세", "감면"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:b2826df0d03cb95ee708d141a4789de0",
+        "annual_representative_won": 910000000
+      }
+    },
+    {
+      "case_id": "non_tax_revenue_loss_2215482",
+      "label": "세외수입 감소",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2215482",
+        "bill_name": "부동산등기법 일부개정법률안",
+        "propose_date": "2025-12-22",
+        "cutoff_date": "2025-12-22",
+        "committee": "법제사법위원회",
+        "cost_nature": "non_tax_revenue_loss",
+        "component": "fee_reduction",
+        "item_name": "전자적 방법 등기기록 열람 및 증명서 발급 수수료 면제",
+        "mechanism": "fee_reduction",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["부동산등기", "등기기록", "수수료면제"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:08a986a33e4ee8e0bf2238e51e217513",
+        "annual_representative_won": 74541000000
+      }
+    },
+    {
+      "case_id": "equity_contribution_2216681",
+      "label": "출자·출연",
+      "evaluation_mode": "leave_one_bill_out",
+      "target": {
+        "bill_no": "2216681",
+        "bill_name": "한미 전략적 투자 관리를 위한 특별법안",
+        "propose_date": "2026-02-09",
+        "cutoff_date": "2026-02-09",
+        "committee": "대미투자특별법 처리를 위한 특별위원회",
+        "cost_nature": "equity_contribution",
+        "component": "equity_investment",
+        "item_name": "한미전략투자공사 자본금 출자",
+        "mechanism": "equity_investment",
+        "estimated_scopes": [],
+        "implementing_agencies": [],
+        "policy_domains": ["한미전략투자", "자본금", "공사"],
+        "years": 5
+      },
+      "gold": {
+        "profile_key": "costitem:5656d5109252d5131806b6f22d6acb72",
+        "annual_representative_won": 9500000000000
+      }
+    }
+  ]
+}

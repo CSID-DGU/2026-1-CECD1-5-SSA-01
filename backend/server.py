@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import tempfile
 from http import HTTPStatus
@@ -10,10 +11,12 @@ from urllib.parse import quote, unquote, urlparse
 
 import fitz
 
-from .analyzer import analyze_document
-from .analyzer_v2 import analyze_v2, recompute_with_user_inputs
+from .erce.ai_pdf_analysis import MODEL as ERCE_AI_MODEL, analyze_erce_pdf
+from .erce.ai_pdf_analysis import REASONING_EFFORT as ERCE_REASONING_EFFORT
+from .erce.web_bridge import calculate_erce_web_item
+from .erce.draft_report import generate_draft
 from .form_renderer import render_form
-from .config import GENERATED_DIR, GEMINI_API_KEY, HOST, PORT
+from .config import GENERATED_DIR, HOST, LLM_API_KEY, LLM_MODEL_ID, LLM_PROVIDER, PORT
 
 
 class ApiHandler(BaseHTTPRequestHandler):
@@ -88,7 +91,13 @@ class ApiHandler(BaseHTTPRequestHandler):
             self._send_json(
                 {
                     "status": "ok",
-                    "llmConfigured": bool(GEMINI_API_KEY),
+                    "llmConfigured": bool(LLM_API_KEY),
+                    "llmProvider": LLM_PROVIDER,
+                    "llmModel": LLM_MODEL_ID,
+                    "erceAiMode": os.getenv("ERCE_AI_MODE", "manual"),
+                    "erceAiModel": ERCE_AI_MODEL,
+                    "erceAiReasoningEffort": ERCE_REASONING_EFFORT,
+                    "erceAiConfigured": bool(os.getenv("OPENAI_API_KEY", "").strip()),
                 }
             )
             return
@@ -109,6 +118,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             "/api/render",
             "/api/export/pdf",
             "/api/recompute",
+            "/api/analyze_committee",
+            "/api/recompute_committee",
+            "/api/erce/estimate",
+            "/api/erce/draft",
         ):
             self._send_json({"error": "지원하지 않는 경로입니다."}, status=404)
             return
@@ -120,6 +133,19 @@ class ApiHandler(BaseHTTPRequestHandler):
             payload = json.loads(raw_body.decode("utf-8"))
         except json.JSONDecodeError:
             self._send_json({"error": "JSON 요청 본문이 필요합니다."}, status=400)
+            return
+
+        if parsed.path in ("/api/erce/estimate", "/api/erce/draft"):
+            if not isinstance(payload, dict):
+                self._send_json({"error": "JSON 객체가 필요합니다."}, status=400)
+                return
+            try:
+                erce_result = (generate_draft(payload) if parsed.path == "/api/erce/draft"
+                               else calculate_erce_web_item(payload))
+            except (KeyError, ValueError, TypeError) as exc:
+                self._send_json({"error": str(exc)}, status=400)
+                return
+            self._send_json(erce_result, status=HTTPStatus.OK)
             return
 
         # ── /api/render: 양식 HTML 반환 ──
@@ -207,6 +233,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": "userInputs 배열이 필요합니다."}, status=400)
                 return
             try:
+                from .analyzer_v2 import recompute_with_user_inputs
                 recomputed = recompute_with_user_inputs(estimate, user_inputs, form_type=fmt)
             except Exception as exc:
                 self._send_json({"error": str(exc)}, status=500)
@@ -222,6 +249,32 @@ class ApiHandler(BaseHTTPRequestHandler):
                 self._send_json({"estimate": recomputed}, status=HTTPStatus.OK)
             return
 
+        if parsed.path == "/api/recompute_committee":
+            result = payload.get("result")
+            user_inputs = payload.get("userInputs") or payload.get("user_inputs") or []
+            if not isinstance(result, dict):
+                self._send_json({"error": "result object is required."}, status=400)
+                return
+            if not isinstance(user_inputs, list):
+                self._send_json({"error": "userInputs array is required."}, status=400)
+                return
+            try:
+                from .committee_channel import recompute_committee_result
+                from .hitl_feedback import collect_committee_feedback
+                recomputed = recompute_committee_result(result, user_inputs)
+                recomputed["feedbackQueue"] = collect_committee_feedback(
+                    recomputed,
+                    user_inputs,
+                )
+            except ValueError as exc:
+                self._send_json({"error": str(exc)}, status=400)
+                return
+            except Exception as exc:
+                self._send_json({"error": str(exc)}, status=500)
+                return
+            self._send_json(recomputed, status=HTTPStatus.OK)
+            return
+
         filename = str(payload.get("filename") or "").strip()
         content = str(payload.get("content") or "").strip()
         if not filename or not content:
@@ -232,12 +285,16 @@ class ApiHandler(BaseHTTPRequestHandler):
             content = content.split(",", 1)[1]
 
         try:
-            if parsed.path == "/api/analyze_v2":
-                form_type = str(payload.get("formType") or "gyeonggi").strip()
-                if form_type not in ("gyeonggi", "assembly"):
-                    form_type = "gyeonggi"
-                result = analyze_v2(filename, content, form_type=form_type)
+            if parsed.path == "/api/analyze_committee":
+                from .committee_channel import analyze_committee_document
+                result = analyze_committee_document(filename, content)
+            elif parsed.path == "/api/analyze_v2":
+                ai_draft = payload.get("aiDraft")
+                if ai_draft is not None and not isinstance(ai_draft, dict):
+                    raise ValueError("aiDraft는 JSON 객체여야 합니다.")
+                result = analyze_erce_pdf(filename, content, ai_draft=ai_draft)
             else:
+                from .analyzer import analyze_document
                 result = analyze_document(filename, content)
         except ValueError as exc:
             self._send_json({"error": str(exc)}, status=400)
