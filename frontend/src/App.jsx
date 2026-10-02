@@ -1,14 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import ErceChat from './ErceChat'
 import './App.css'
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
-
-const PIPELINE_STEPS = [
-  { number: 1, title: '문서 구조 분석', tech: '본문과 개정 조문 식별' },
-  { number: 2, title: '재정수반 조문 판단', tech: '법령 기준과 조문별 검토' },
-  { number: 3, title: '유사 사례 및 기준값 확인', tech: '국회 추계서와 근거 문서 검색' },
-  { number: 4, title: '비용 산출 및 추계서 작성', tech: '산식 계산과 문서 양식 생성' },
-]
 
 const VERDICT_META = {
   '추계서':    { label: '비용추계서 작성 대상', color: 'red', desc: '재정지출 또는 수입 변화가 예상되어 비용추계서를 작성합니다.' },
@@ -33,9 +27,9 @@ const CALC_STATUS_TEXT = {
   estimated_by_tag: '유사 비용추계서 기반 초안입니다.',
   needs_external_data: '대상 규모·단가·실적 자료가 있으면 더 정밀하게 보정할 수 있습니다.',
   needs_policy_input: '사업 규모나 운영방식 전제를 보정하면 더 정밀하게 재계산할 수 있습니다.',
-  blocked_missing_variables: '기본 가정값으로 초안을 구성했습니다.',
-  blocked_no_structured_formula: '기본 산식 구조로 초안을 구성했습니다.',
-  awaiting_user_input: '추가 전제를 보완하면 재계산할 수 있습니다.',
+  blocked_missing_variables: '필수 기준값 입력이 필요합니다.',
+  blocked_no_structured_formula: '산식을 구성할 근거가 부족합니다.',
+  awaiting_user_input: '근거 없는 금액을 생성하지 않았습니다. 표시된 필수 값을 입력하면 재계산합니다.',
 }
 
 const TRIGGER_TYPE_COLOR = {
@@ -76,6 +70,20 @@ function cleanExtractedText(value) {
     .trim()
 }
 
+function comparableInputValue(candidate, request) {
+  const value = Number(candidate?.value)
+  if (!Number.isFinite(value)) return null
+  const sourceUnit = String(candidate?.unit || '').replace(/\s+/g, '')
+  const targetUnit = String(request?.unit || '').replace(/\s+/g, '')
+  if (!sourceUnit || !targetUnit) return null
+  if (sourceUnit === targetUnit) return value
+  const moneyFactors = { 원: 1, 천원: 1000, 만원: 10000, 백만원: 1000000 }
+  const source = sourceUnit.match(/^(백만원|만원|천원|원)(.*)$/)
+  const target = targetUnit.match(/^(백만원|만원|천원|원)(.*)$/)
+  if (!source || !target || source[2] !== target[2]) return null
+  return value * moneyFactors[source[1]] / moneyFactors[target[1]]
+}
+
 function evidenceModal(item, kind = 'bill') {
   const similarity = Math.round((item.similarity || 0) * 100)
   if (kind === 'legal') {
@@ -99,22 +107,27 @@ function App() {
   const [isDragging, setIsDragging] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [currentStep, setCurrentStep] = useState(-1)
+  const [processingProgress, setProcessingProgress] = useState(0)
   const [result, setResult] = useState(null)
-  const [activeTab, setActiveTab] = useState('estimate')
   const [expanded, setExpanded] = useState(null)
   const [modal, setModal] = useState(null)
   const [error, setError] = useState('')
-  const [formType, setFormType] = useState(() =>
-    localStorage.getItem('formType') || 'gyeonggi'
-  )
-  useEffect(() => {
-    localStorage.setItem('formType', formType)
-  }, [formType])
+  const formType = 'assembly'
   const fileRef = useRef(null)
 
   useEffect(() => {
+    if (!import.meta.env.DEV || new URLSearchParams(window.location.search).get('demo') !== '2200555') return
+    const controller = new AbortController()
+    fetch('/erce_demo_2200555.json', { signal: controller.signal })
+      .then(response => { if (!response.ok) throw new Error('예시를 불러오지 못했어요.'); return response.json() })
+      .then(data => { if (!controller.signal.aborted) setResult(data) })
+      .catch(error => { if (!controller.signal.aborted) setError(error.message) })
+    return () => controller.abort()
+  }, [])
+
+  useEffect(() => {
     if (!isProcessing) return
-    const t = setInterval(() => setCurrentStep(p => (p < 3 ? p + 1 : p)), 2500)
+    const t = setInterval(() => setProcessingProgress(value => Math.min(90, value + (90 - value) * 0.07)), 900)
     return () => clearInterval(t)
   }, [isProcessing])
 
@@ -127,9 +140,10 @@ function App() {
 
   const start = async () => {
     if (!file) return
-    setIsProcessing(true); setResult(null); setError(''); setCurrentStep(0)
+    setIsProcessing(true); setResult(null); setError(''); setCurrentStep(0); setProcessingProgress(6)
     try {
       const content = await fileToDataUrl(file)
+      setCurrentStep(1)
       const res = await fetch(`${API_BASE}/api/analyze_v2`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -143,10 +157,11 @@ function App() {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || '분석 실패')
       setCurrentStep(4)
+      setProcessingProgress(100)
       setResult(data)
-      setActiveTab('estimate')
     } catch (e) {
       setCurrentStep(-1)
+      setProcessingProgress(0)
       setError(e.message)
     } finally {
       setIsProcessing(false)
@@ -155,6 +170,7 @@ function App() {
 
   const reset = () => {
     setFile(null); setResult(null); setError(''); setCurrentStep(-1)
+    setProcessingProgress(0)
     setExpanded(null); setModal(null)
   }
 
@@ -169,33 +185,19 @@ function App() {
           </div>
         </div>
         <div className="header-right">
-          <div className="form-toggle">
-            <span className="form-toggle-label">양식</span>
-            <button
-              className={`form-toggle-btn ${formType === 'gyeonggi' ? 'active' : ''}`}
-              onClick={() => setFormType('gyeonggi')}
-            >
-              경기도
-            </button>
-            <button
-              className={`form-toggle-btn ${formType === 'assembly' ? 'active' : ''}`}
-              onClick={() => setFormType('assembly')}
-            >
-              국회
-            </button>
-          </div>
+          <span className="form-toggle-label">국회 의안 · ERCE</span>
         </div>
       </header>
 
       <main className="main">
-        {!result && (
+        {!result && !isProcessing && (
           <>
             <section className="hero">
               <h2>
-                의안 PDF에서 비용추계서까지
+                의안 PDF에서 ERCE 산식 검토까지
               </h2>
               <p>
-                조문별 재정수반 여부를 검토하고 산식, 전제값, 판단 근거를 함께 제공합니다.
+                비용유발 조문을 확인하고, ERCE 산식에 필요한 값과 근거를 검토합니다.
               </p>
             </section>
 
@@ -204,15 +206,15 @@ function App() {
                 className={`upload-zone ${isDragging ? 'dragging' : ''}`}
                 onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
                 onDragLeave={() => setIsDragging(false)}
-                onDrop={handleDrop}
-                onClick={() => fileRef.current?.click()}
+                onDrop={event => { if (isProcessing) { event.preventDefault(); return } handleDrop(event) }}
+                onClick={() => { if (!isProcessing) fileRef.current?.click() }}
               >
-                <input ref={fileRef} type="file" accept=".pdf"
+                <input ref={fileRef} type="file" accept=".pdf" disabled={isProcessing}
                   onChange={(e) => { setFile(e.target.files[0]); setError('') }}
                   style={{ display: 'none' }} />
                 <div className="upload-icon">PDF</div>
-                <h3>조례안 PDF를 끌어다 놓거나 클릭하세요</h3>
-                <p>텍스트가 포함된 의안 원문 PDF를 지원합니다.</p>
+                <h3>의안 PDF를 올려주세요</h3>
+                <p>파일을 끌어오거나 눌러서 선택해 주세요. 텍스트가 포함된 PDF를 지원합니다.</p>
                 <div className="upload-formats"><span>PDF</span></div>
               </div>
 
@@ -224,6 +226,7 @@ function App() {
                     <div className="size">{(file.size / 1024).toFixed(1)} KB</div>
                   </div>
                   <button className="file-selected-remove"
+                    disabled={isProcessing}
                     onClick={(e) => { e.stopPropagation(); reset() }}>✕</button>
                 </div>
               )}
@@ -231,97 +234,43 @@ function App() {
               {error && <div className="status-banner error">{error}</div>}
 
               <button className="start-btn" disabled={!file || isProcessing} onClick={start}>
-                {isProcessing ? '분석 중...' : '비용추계 분석 시작'}
+                {isProcessing ? <><span className="spinner" /> 분석하고 있어요</> : '분석 시작'}
               </button>
             </section>
           </>
         )}
 
-        {currentStep >= 0 && !result && (
-          <section className="pipeline-section animate-fade-in">
-            <div className="pipeline-header">
-              <h3>비용추계 분석 진행</h3>
+        {isProcessing && !result && (
+          <section className="analysis-progress-card animate-fade-in" role="status" aria-live="polite">
+            <div className="analysis-document" aria-hidden="true"><span>PDF</span><i /><i /><i /><div className="analysis-scan" /></div>
+            <span className="analysis-progress-tag">GPT-6.1 Sol · Medium</span>
+            <h3>{currentStep === 0 ? '분석할 문서를 준비하고 있어요' : '법안 내용을 꼼꼼히 살펴보고 있어요'}</h3>
+            <p>{processingProgress < 75 ? '비용이 발생하는 조문과 계산에 필요한 값을 확인해요.' : '분석을 기다리고 있어요. 문서에 따라 조금 더 걸릴 수 있어요.'}</p>
+            <div className="analysis-gauge" role="progressbar" aria-label="분석 대기 진행 표시" aria-valuetext="분석 응답 대기 중 · 예상 진행 표시">
+              <div style={{ width: `${processingProgress}%` }} />
             </div>
-            <div className="pipeline-steps">
-              {PIPELINE_STEPS.map((step, idx) => (
-                <div key={step.number} className={`pipeline-step ${
-                  currentStep === idx ? 'active' : currentStep > idx ? 'completed' : ''
-                }`}>
-                  <div className="pipeline-step-number">
-                    {currentStep > idx ? '✓' : step.number}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <div className="pipeline-step-title">{step.title}</div>
-                    <div className="pipeline-step-tech">{step.tech}</div>
-                  </div>
-                  {currentStep === idx && isProcessing && (
-                    <div className="pipeline-step-spinner">
-                      <div className="spinner" />처리 중
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+            <div className="analysis-progress-footer"><span>분석 중<span className="analysis-dots">…</span></span><small>예상 진행 표시 · 완료되면 자동으로 넘어가요</small></div>
           </section>
         )}
 
         {result && (
-          <section className="animate-fade-in">
+          <section className="result-flow animate-fade-in">
             <div className="result-hero">
-              <button className="back-btn" onClick={reset}>← 새 조례안 분석</button>
-              <h2 className="result-title">{result.billName}</h2>
-              <div className="result-meta">
-                <span>분석 시각 {result.generatedAt}</span>
-                <span>소요 시간 {result.elapsedSec}s</span>
-                <span>검토 조문 {result.totalArticles}개</span>
-              </div>
+              <button className="back-btn" onClick={reset}>← 새 의안 분석</button>
+              <div className="result-analysis-label">분석 완료{result.erce?.billNo ? ` · 의안 ${result.erce.billNo}` : ''}</div>
+              <h2 className="result-title">함께 비용추계 초안을 만들어볼게요</h2>
+              {result.analysisMode === 'manual_demo' && <p>개발 예시 · 2200555 정부 적립금 항목의 확인한 값을 미리 채웠어요. 실제 PDF 자동 분석 결과는 아닙니다.</p>}
             </div>
-
-            <VerdictCard verdict={result.verdict} field={result.field} />
-            <div className="tab-bar">
-              <button className={`tab ${activeTab === 'estimate' ? 'active' : ''}`}
-                onClick={() => setActiveTab('estimate')}>
-                비용추계서
-              </button>
-              <button className={`tab ${activeTab === 'articles' ? 'active' : ''}`}
-                onClick={() => setActiveTab('articles')}>
-                조문 분석 <span className="tab-count">{(result.articles || []).length}</span>
-              </button>
-              <button className={`tab ${activeTab === 'form' ? 'active' : ''}`}
-                onClick={() => setActiveTab('form')}>
-                문서 출력 <span className="tab-count">{formType === 'gyeonggi' ? '경기도' : '국회'}</span>
-              </button>
-              <button className={`tab ${activeTab === 'evidence' ? 'active' : ''}`}
-                onClick={() => setActiveTab('evidence')}>
-                판단 근거
-              </button>
-            </div>
-
-            {activeTab === 'articles' && (
+            <ErceChat key={`${result.analysisMode}-${result.generatedAt}`} result={result} />
+            <details className="chat-article-details">
+              <summary>분석한 조문 자세히 보기 ({(result.articles || []).length}개)</summary>
               <ArticlesView
                 articles={result.articles || []}
                 expanded={expanded}
                 setExpanded={setExpanded}
                 openModal={setModal}
               />
-            )}
-            {activeTab === 'estimate' && (
-              <EstimateView
-                result={result}
-                estimate={result.estimate}
-                nonAttachment={result.nonAttachment}
-                refs={result.references}
-                formType={formType}
-                onResult={setResult}
-                openModal={setModal}
-              />
-            )}
-            {activeTab === 'form' && (
-              <FormView result={result} formType={formType} setFormType={setFormType} />
-            )}
-            {activeTab === 'evidence' && (
-              <EvidenceView result={result} refs={result.references} openModal={setModal} />
-            )}
+            </details>
           </section>
         )}
       </main>
@@ -331,22 +280,153 @@ function App() {
   )
 }
 
+function GuidedMissingInputs({ estimate, drafts, setVariableDraft, recompute, isRecomputing, recomputeError }) {
+  const requests = (estimate?.human_input?.requests || []).filter(request => request.blocking)
+  const [openSuggestions, setOpenSuggestions] = useState({})
+  const [chosenSources, setChosenSources] = useState({})
+  if (!requests.length) return null
+  const entered = requests.filter(request =>
+    String(drafts[request.item_index]?.variables?.[request.variable] ?? '').trim() !== ''
+  ).length
+
+  return (
+    <section className="guided-input" aria-label="추계에 필요한 정보">
+      <div className="guided-input-header">
+        <div className="guided-input-eyebrow">한 걸음만 더</div>
+        <h3>기존 추계 계산에 필요한 정보를 확인해 주세요</h3>
+        <p>찾을 수 있는 근거는 먼저 반영했습니다. 아래 값은 확인되지 않아 임의로 채우지 않았어요.</p>
+        <div className="guided-input-progress">{entered} / {requests.length}개 입력</div>
+      </div>
+
+      <div className="guided-input-cards">
+        {requests.map((request, index) => {
+          const candidates = (request.suggested_values || []).filter(candidate =>
+            Number.isFinite(Number(candidate?.value)) && (candidate?.bill_no || candidate?.source_text)
+          )
+          const draft = drafts[request.item_index]?.variables?.[request.variable] ?? ''
+          const showCandidates = Boolean(openSuggestions[request.id])
+          const chosen = chosenSources[request.id]
+          return (
+            <div className="guided-input-card" key={request.id}>
+              <div className="guided-input-card-top">
+                <span className="guided-input-index">{index + 1}</span>
+                <span className="guided-input-item">{request.item || '비용 항목'}</span>
+                {draft !== '' && <span className="guided-input-done">입력됨</span>}
+              </div>
+              <h4>{request.prompt}</h4>
+              <p className="guided-input-explain">
+                {request.basis || '의안과 현재 연결된 자료만으로는 이 값을 확인할 수 없어요.'}
+              </p>
+              <div className="guided-input-control">
+                <label htmlFor={`guided-${request.id}`}>
+                  {request.variable}{request.unit ? ` · ${request.unit}` : ''}
+                </label>
+                <input
+                  id={`guided-${request.id}`}
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  placeholder="값을 입력해 주세요"
+                  value={draft}
+                  onChange={event => {
+                    setVariableDraft(request.item_index, request.variable, event.target.value)
+                    setChosenSources(prev => ({ ...prev, [request.id]: null }))
+                  }}
+                />
+              </div>
+              <button
+                className="guided-suggestion-toggle"
+                type="button"
+                aria-expanded={showCandidates}
+                onClick={() => setOpenSuggestions(prev => ({ ...prev, [request.id]: !prev[request.id] }))}
+              >
+                {showCandidates ? '추천값 접기' : '유사 사례 값 제시받기'} <span aria-hidden="true">→</span>
+              </button>
+              {showCandidates && (
+                <div className="guided-suggestions">
+                  {candidates.length ? (
+                    <>
+                      <p>유사 사례의 참고값이에요. 현재 의안에 맞는지 확인한 뒤 선택해 주세요.</p>
+                      {candidates.map((candidate, candidateIndex) => {
+                        const value = comparableInputValue(candidate, request)
+                        return (
+                          <div className="guided-suggestion" key={`${request.id}-${candidate.bill_no || 'source'}-${candidateIndex}`}>
+                            <div className="guided-suggestion-head">
+                              <strong>{Number(candidate.value).toLocaleString()}{candidate.unit || ''}</strong>
+                              <span>{candidate.bill_name || `의안 ${candidate.bill_no || '-'}`}</span>
+                            </div>
+                            <div className="guided-suggestion-source">
+                              {candidate.bill_no && <span>의안 {candidate.bill_no}</span>}
+                              {candidate.year && <span>{candidate.year}년 기준</span>}
+                            </div>
+                            {candidate.source_text && (
+                              <p className="guided-suggestion-evidence">{cleanExtractedText(candidate.source_text)}</p>
+                            )}
+                            {value !== null ? (
+                              <button type="button" className="guided-suggestion-use" onClick={() => {
+                                setVariableDraft(request.item_index, request.variable, String(value))
+                                setChosenSources(prev => ({ ...prev, [request.id]: candidate.bill_no ? `의안 ${candidate.bill_no}` : '근거 문서' }))
+                              }}>
+                                이 값 입력하기
+                              </button>
+                            ) : (
+                              <span className="guided-suggestion-unit-note">단위가 달라 직접 확인이 필요해요</span>
+                            )}
+                          </div>
+                        )
+                      })}
+                    </>
+                  ) : (
+                    <p>지금은 이 값에 맞는 유사 사례를 찾지 못했어요. 자료가 없다면 미확정으로 남겨둘 수 있습니다.</p>
+                  )}
+                </div>
+              )}
+              {chosen && <p className="guided-selected-note">{chosen}의 값을 참고해 입력했어요. 재계산 전 다시 확인해 주세요.</p>}
+            </div>
+          )
+        })}
+      </div>
+      <div className="guided-input-footer">
+        <div>
+          <strong>{entered === requests.length ? '필요한 값을 모두 입력했어요.' : '모르는 값은 비워두셔도 됩니다.'}</strong>
+          <span>입력하지 않은 항목은 금액을 확정하지 않고 남겨둡니다.</span>
+        </div>
+        <button type="button" className="guided-recompute-btn" disabled={!entered || isRecomputing} onClick={recompute}>
+          {isRecomputing ? '계산 중...' : '입력한 값으로 다시 계산'}
+        </button>
+      </div>
+      {recomputeError && <div className="recompute-error" role="alert">{recomputeError}</div>}
+    </section>
+  )
+}
+
 function VariableEditorPanel({
   estimate,
   drafts,
   setDraft,
+  setVariableDraft,
   recompute,
   isRecomputing,
   recomputeError,
 }) {
   const items = estimate?.items || []
+  const allRequests = estimate?.human_input?.requests || []
+  const blockingRequests = allRequests.filter(request => request.blocking)
+  const requests = blockingRequests.length > 0 ? blockingRequests : allRequests
+  const needsRequiredInput = blockingRequests.length > 0
   if (!items.length) return null
   return (
     <div className="variable-editor-panel">
       <div className="variable-editor-head">
         <div>
-          <div className="variable-editor-title">값 변경</div>
-          <div className="variable-editor-desc">초안은 자동 생성됩니다. 값이 맞지 않을 때만 보정하세요.</div>
+          <div className="variable-editor-title">
+            {needsRequiredInput ? '필수 값 입력 후 재계산' : '계산에 쓴 가정값 확인'}
+          </div>
+          <div className="variable-editor-desc">
+            {needsRequiredInput
+              ? '아래 값만 입력하면 기존 산식으로 바로 다시 계산합니다.'
+              : '자동 산출된 전제값을 확인하거나 필요한 경우 보정하세요.'}
+          </div>
         </div>
         <button
           type="button"
@@ -354,11 +434,48 @@ function VariableEditorPanel({
           disabled={isRecomputing}
           onClick={recompute}
         >
-          {isRecomputing ? '재계산 중' : '수정값 반영'}
+          {isRecomputing ? '재계산 중' : '입력값으로 바로 재계산'}
         </button>
       </div>
+      {requests.length > 0 && (
+        <div className="human-input-list">
+          <div className="human-input-summary">
+            <strong>{needsRequiredInput ? `${blockingRequests.length}개 값 입력 필요` : '선택 확인'}</strong>
+            <span>{needsRequiredInput ? '근거 없는 금액은 자동으로 채우지 않습니다.' : '현재 값을 바꾸고 싶을 때만 입력하세요.'}</span>
+          </div>
+          {requests.map((request) => (
+            <div key={request.id} className={`human-input-row ${request.blocking ? 'blocking' : ''}`}>
+              <div className="human-input-copy">
+                <div className="human-input-item">{request.item}</div>
+                <div className="human-input-prompt">{request.prompt}</div>
+                {request.basis && <div className="human-input-basis">{request.basis}</div>}
+                {request.suggested_values?.length > 0 && (
+                  <div className="human-input-suggestions">
+                    참고 후보 {request.suggested_values.map((candidate, index) => (
+                      <span key={`${request.id}-${index}`}>
+                        {Number(candidate.value).toLocaleString()}{candidate.unit || ''}
+                        {candidate.bill_no ? ` · ${candidate.bill_no}` : ''}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <label>
+                <span>{request.variable}{request.unit ? ` (${request.unit})` : ''}</span>
+                <input
+                  type="number"
+                  inputMode="decimal"
+                  placeholder={request.current_value != null ? String(request.current_value) : '값 입력'}
+                  value={drafts[request.item_index]?.variables?.[request.variable] ?? ''}
+                  onChange={(e) => setVariableDraft(request.item_index, request.variable, e.target.value)}
+                />
+              </label>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="variable-editor-table">
-        {items.map((item, i) => {
+        {requests.length === 0 && items.map((item, i) => {
           const calc = item.calculation || {}
           const variables = item.assumption_strategy?.length
             ? item.assumption_strategy.map(row => row.variable)
@@ -412,6 +529,7 @@ function VariableEditorPanel({
                 >
                   <option value="annual">매년</option>
                   <option value="one_time">1회성</option>
+                  <option value="periodic">주기적</option>
                 </select>
               </label>
             </div>
@@ -423,6 +541,8 @@ function VariableEditorPanel({
   )
 }
 
+// Legacy views are retained in source but disconnected from the ERCE web flow.
+// eslint-disable-next-line no-unused-vars
 function VerdictCard({ verdict, field }) {
   const meta = VERDICT_META[verdict.type] || {
     label: verdict.label, color: 'gray', desc: ''
@@ -493,6 +613,8 @@ function ArticlesView({ articles, expanded, setExpanded, openModal }) {
 
 function ArticleRow({ art, isExpanded, onToggle, openModal }) {
   const tColor = TRIGGER_TYPE_COLOR[art.trigger_type] || 'gray'
+  const articleReason = art.reason || art.route_reason || art.change_summary || '추가 검토가 필요합니다.'
+  const triggerLabel = art.trigger_type || (art.route_key ? 'ERCE 산식 후보' : '산식 선택 필요')
   return (
     <div
       className={`article-row ${art.cost_trigger ? 'triggered' : 'safe'} ${isExpanded ? 'expanded' : ''}`}
@@ -506,9 +628,9 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
         <div className="article-row-meta">
           {art.cost_trigger ? (
             <>
-              <span className={`badge badge-${tColor}`}>{art.trigger_type}</span>
+              <span className={`badge badge-${tColor}`}>{triggerLabel}</span>
               <span className="strength-text">
-                {STRENGTH_LABEL[art.obligation_strength] || art.obligation_strength}
+                {STRENGTH_LABEL[art.obligation_strength] || art.obligation_strength || (art.quote_verified ? '원문 확인' : '원문 확인 필요')}
               </span>
             </>
           ) : (
@@ -516,7 +638,7 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
           )}
         </div>
         {!isExpanded && (
-          <div className="article-row-reason">{art.reason}</div>
+          <div className="article-row-reason">{articleReason}</div>
         )}
         <div className="article-row-chevron">›</div>
       </div>
@@ -525,12 +647,14 @@ function ArticleRow({ art, isExpanded, onToggle, openModal }) {
         <div className="article-detail">
           <div className="detail-block">
             <div className="detail-label">판단 근거</div>
-            <div className="article-text-box">{cleanExtractedText(art.reason)}</div>
+            <div className="article-text-box">{cleanExtractedText(articleReason)}</div>
           </div>
 
           <div className="detail-block">
             <div className="detail-label">관련 조문</div>
-            <div className="article-text-box article-source-text">{cleanExtractedText(art.text)}</div>
+            <div className="article-text-box article-source-text">
+              {cleanExtractedText(art.text)}{art.source_page ? ` (PDF ${art.source_page}쪽)` : ''}
+            </div>
           </div>
 
           {art.legal_refs && art.legal_refs.length > 0 && (
@@ -622,6 +746,336 @@ function SimilarCasesTable({ items, openModal }) {
   )
 }
 
+function ErceConnection({ erce, result, file, onResult }) {
+  const staffingLabels = {
+    planned_staff_total: '계획 정원',
+    existing_staff_total: '기존 인원',
+    incoming_staff_total: '전입·재배치 인원',
+    parent_staff_total: '모기관 정원',
+    target_population: '대상 관할인구',
+    parent_population: '모기관 관할인구',
+    population_per_staff: '공무원 1인당 관할인구',
+    planned_staff_by_grade: '직급별 계획 인원',
+    existing_staff_by_grade: '직급별 기존 인원',
+    incoming_staff_by_grade: '직급별 전입 인원',
+  }
+  const [drafts, setDrafts] = useState(() => Object.fromEntries(
+    (erce.items || []).map(item => [item.itemIndex, Object.fromEntries(
+      Object.entries(item.explicitInputs || {}).map(([key, row]) => [key, {
+        value: typeof row.value === 'number' ? String(row.value) : JSON.stringify(row.value),
+        unit: row.unit,
+        source_ref: row.source_ref,
+      }])
+    )])
+  ))
+  const [results, setResults] = useState(() => Object.fromEntries(
+    (erce.items || []).filter(item => item.calculation).map(item => [item.itemIndex, item.calculation])
+  ))
+  const [errors, setErrors] = useState({})
+  const [staffingDrafts, setStaffingDrafts] = useState({})
+  const [running, setRunning] = useState(null)
+  const [manualRoutes, setManualRoutes] = useState({})
+  const [aiDraftText, setAiDraftText] = useState('')
+  const [aiDraftError, setAiDraftError] = useState('')
+  const routeOptions = erce.routeOptions || []
+  const manualItems = (erce.unmappedArticles || []).flatMap(article => {
+    const option = routeOptions.find(row => row.routeKey === manualRoutes[article.itemIndex])
+    return option ? [{
+      ...option,
+      itemIndex: article.itemIndex,
+      name: article.name,
+      scopeNote: '사용자가 선택한 산식입니다. 해당 조문에 적용 가능한지 확인해 주세요.',
+    }] : []
+  })
+  const routedItems = [...(erce.items || []), ...manualItems]
+
+  const updateField = (itemIndex, variable, field, value) => {
+    setDrafts(previous => ({
+      ...previous,
+      [itemIndex]: {
+        ...(previous[itemIndex] || {}),
+        [variable]: {
+          ...(previous[itemIndex]?.[variable] || {}),
+          [field]: value,
+        },
+      },
+    }))
+  }
+
+  const updateStaffingField = (itemIndex, variable, field, value) => {
+    setStaffingDrafts(previous => ({
+      ...previous,
+      [itemIndex]: {
+        ...(previous[itemIndex] || {}),
+        [variable]: { ...(previous[itemIndex]?.[variable] || {}), [field]: value },
+      },
+    }))
+  }
+
+  const applyStaffingCandidate = (item, scenario) => {
+    const isGrade = item.routeKey === 'personnel_grade'
+    if (isGrade ? !scenario.netStaffByGrade : scenario.netStaff == null) return
+    const key = isGrade ? 'headcount_by_grade' : 'headcount'
+    setDrafts(previous => ({
+      ...previous,
+      [item.itemIndex]: {
+        ...(previous[item.itemIndex] || {}),
+        [key]: {
+          value: isGrade ? JSON.stringify(scenario.netStaffByGrade) : String(scenario.netStaff),
+          unit: isGrade ? 'person/grade' : 'person',
+          source_ref: `순증 인원 산정(${scenario.formula}): ${scenario.sourceRefs.join('; ')}`,
+        },
+      },
+    }))
+  }
+
+  const calculate = async item => {
+    const itemDraft = drafts[item.itemIndex] || {}
+    const explicitInputs = {}
+    const staffingInputs = { ...(item.staffingInputs || {}) }
+    try {
+      for (const variable of item.requiredVariables) {
+        const row = itemDraft[variable] || {}
+        if (!String(row.value || '').trim()) continue
+        const raw = String(row.value).trim()
+        const value = raw.startsWith('{') || raw.startsWith('[')
+          ? JSON.parse(raw)
+          : Number(raw.replace(/,/g, ''))
+        if (typeof value === 'number' && !Number.isFinite(value)) {
+          throw new Error(`${variable}: 숫자 또는 JSON 형식으로 입력해 주세요.`)
+        }
+        explicitInputs[variable] = {
+          value,
+          unit: String(row.unit || '').trim(),
+          source_ref: String(row.source_ref || '').trim(),
+        }
+      }
+      for (const [key, row] of Object.entries(staffingDrafts[item.itemIndex] || {})) {
+        if (!String(row.value || '').trim()) continue
+        const value = key.endsWith('_by_grade')
+          ? JSON.parse(String(row.value))
+          : Number(String(row.value).replace(/,/g, ''))
+        if (!String(row.source_ref || '').trim()
+          || (key.endsWith('_by_grade') ? !value || Array.isArray(value) || typeof value !== 'object'
+            : !Number.isFinite(value) || value < 0)) {
+          throw new Error(`${staffingLabels[key] || key}: 유효한 값과 근거가 필요합니다.`)
+        }
+        staffingInputs[key] = {
+          value, unit: key.endsWith('_by_grade') ? 'person/grade'
+            : key === 'population_per_staff' ? 'person/staff' : 'person',
+          source_ref: String(row.source_ref).trim(), source_kind: 'user_confirmed',
+        }
+      }
+    } catch (error) {
+      setErrors(previous => ({ ...previous, [item.itemIndex]: error.message }))
+      return
+    }
+    setRunning(item.itemIndex)
+    setErrors(previous => ({ ...previous, [item.itemIndex]: '' }))
+    try {
+      const response = await fetch(`${API_BASE}/api/erce/estimate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          route_key: item.routeKey,
+          bill_no: erce.billNo,
+          years: 5,
+          explicit_inputs: explicitInputs,
+          cutoff_date: item.proposeDate || '',
+          staffing_context: item.staffingContext || {},
+          staffing_inputs: staffingInputs,
+        }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'ERCE 계산에 실패했습니다.')
+      setResults(previous => ({ ...previous, [item.itemIndex]: data }))
+    } catch (error) {
+      setErrors(previous => ({ ...previous, [item.itemIndex]: error.message }))
+    } finally {
+      setRunning(null)
+    }
+  }
+
+  const submitAiDraft = async () => {
+    setAiDraftError('')
+    try {
+      if (!file) throw new Error('PDF 파일을 다시 선택해 주세요.')
+      const aiDraft = JSON.parse(aiDraftText)
+      const content = await fileToDataUrl(file)
+      const response = await fetch(`${API_BASE}/api/analyze_v2`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: file.name, content, aiDraft }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'AI 분석 결과 검증에 실패했습니다.')
+      onResult(data)
+    } catch (error) {
+      setAiDraftError(error.message)
+    }
+  }
+
+  return (
+    <section className="erce-connection">
+      <h4>ERCE 엔진</h4>
+      {result?.analysisMode === 'manual_required' && (
+        <div className="erce-connection-item">
+          <strong>개발용 AI 분석 결과 입력</strong>
+          <p>현재는 API 크레딧을 사용하지 않습니다. 이 의안의 조문·산식·명시 변수를 AI와 검토한 JSON을 붙여넣어 주세요.</p>
+          <textarea
+            aria-label="AI 분석 JSON"
+            value={aiDraftText}
+            onChange={event => setAiDraftText(event.target.value)}
+            placeholder="AI 분석 JSON"
+            rows={10}
+          />
+          <button type="button" onClick={submitAiDraft}>ERCE에 반영</button>
+          {aiDraftError && <p className="erce-error">{aiDraftError}</p>}
+        </div>
+      )}
+      <p>의안에서 확인된 변수와 근거만 계산에 사용합니다. 부족한 값은 입력이 필요하며, 금액은 원 단위로 입력해 주세요.</p>
+      <p>아래 필수 변수는 ERCE 산식 기준이며, 계산 요청 시 ERCE가 부족한 값을 다시 확인합니다.</p>
+      {(erce.reviewCandidates || []).length > 0 && (
+        <div className="erce-connection-item">
+          <strong>추가 비용 검토 후보</strong>
+          {erce.reviewCandidates.map(candidate => (
+            <p key={`${candidate.routeKey}-${candidate.triggerRef}`}>
+              {candidate.routeKey === 'personnel_asset' ? '신규 자산취득비' : candidate.routeKey}: {candidate.reason}
+              <small>근거 조문: {candidate.triggerRef} · 확인할 값: {candidate.missingVariables.join(', ')}</small>
+            </p>
+          ))}
+        </div>
+      )}
+      {(erce.unmappedArticles || []).length > 0 && (
+        <div className="erce-connection-item">
+          <strong>산식 선택이 필요한 조문</strong>
+          <p>자동으로 확정하기 어려워 기존 추계 로직으로 넘기지 않았습니다. 해당하는 ERCE 산식을 직접 선택할 수 있습니다.</p>
+          {erce.unmappedArticles.map(article => (
+            <div className="erce-manual-route" key={article.itemIndex}>
+              <label htmlFor={`erce-route-${article.itemIndex}`}>{article.name}</label>
+              <span>{article.text}</span>
+              {article.reason && <small>{article.reason}</small>}
+              <select
+                id={`erce-route-${article.itemIndex}`}
+                value={manualRoutes[article.itemIndex] || ''}
+                onChange={event => {
+                  setManualRoutes(previous => ({ ...previous, [article.itemIndex]: event.target.value }))
+                  setDrafts(previous => ({ ...previous, [article.itemIndex]: {} }))
+                  setResults(previous => ({ ...previous, [article.itemIndex]: null }))
+                  setErrors(previous => ({ ...previous, [article.itemIndex]: '' }))
+                }}
+              >
+                <option value="">산식 선택</option>
+                {routeOptions.map(option => (
+                  <option value={option.routeKey} key={option.routeKey}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+      )}
+      {routedItems.length === 0 && <p>연결된 산식이 없습니다. 비용유발 조문과 산식 선택을 확인해 주세요.</p>}
+      {routedItems.map(item => {
+        const output = results[item.itemIndex]
+        return (
+          <div className="erce-connection-item" key={item.itemIndex}>
+            <strong>{item.name}</strong>
+            <p>{item.formula}</p>
+            <small>{item.scopeNote}</small>
+            {(item.observedVariables || []).length > 0 && (
+              <div className="erce-observed">
+                <strong>의안에서 확인한 값</strong>
+                {item.observedVariables.map((row, index) => (
+                  <p key={`${row.key}-${index}`}>
+                    {row.key}: {String(row.value)} {row.unit} · {row.source_ref}
+                  </p>
+                ))}
+              </div>
+            )}
+            {item.requiredVariables.map(variable => (
+              <div className="erce-variable-row" key={variable}>
+                <label>{variable}</label>
+                <input
+                  aria-label={`${variable} 값`}
+                  placeholder="값 (숫자 또는 JSON)"
+                  value={drafts[item.itemIndex]?.[variable]?.value || ''}
+                  onChange={event => updateField(item.itemIndex, variable, 'value', event.target.value)}
+                />
+                <input
+                  aria-label={`${variable} 단위`}
+                  placeholder="단위"
+                  value={drafts[item.itemIndex]?.[variable]?.unit || ''}
+                  onChange={event => updateField(item.itemIndex, variable, 'unit', event.target.value)}
+                />
+                <input
+                  aria-label={`${variable} 근거`}
+                  placeholder="근거 문서·조문"
+                  value={drafts[item.itemIndex]?.[variable]?.source_ref || ''}
+                  onChange={event => updateField(item.itemIndex, variable, 'source_ref', event.target.value)}
+                />
+              </div>
+            ))}
+            <button type="button" onClick={() => calculate(item)} disabled={running === item.itemIndex}>
+              {running === item.itemIndex ? '계산 중…' : 'ERCE로 계산'}
+            </button>
+            {errors[item.itemIndex] && <p className="erce-error">{errors[item.itemIndex]}</p>}
+            {output?.status === 'needs_input' && (
+              <p>추가 입력 필요: {output.missingVariables.join(', ')}</p>
+            )}
+            {(output?.staffingScenarios || []).length > 0 && (
+              <div className="erce-observed">
+                <strong>순증 인원 산정 방법 후보</strong>
+                {output.staffingScenarios.map(scenario => (
+                  <p key={scenario.methodKey}>
+                    {scenario.label} ({scenario.candidateRole}): {scenario.formula}
+                    {scenario.grossStaff != null && ` · 예상 정원 ${scenario.approximateInputs.length ? '약 ' : ''}${scenario.grossStaff}명`}
+                    {scenario.netStaff != null && ` · 순증 ${scenario.netStaff}명`}
+                    {scenario.netStaffByGrade && ` · 직급별 ${JSON.stringify(scenario.netStaffByGrade)}`}
+                    {scenario.missingInputs.length > 0 && ` · 확인 필요: ${scenario.missingInputs.map(key => staffingLabels[key] || key).join(', ')}`}
+                    {scenario.warning && ` · ${scenario.warning}`}
+                    <small>적용 가정: {scenario.assumption}. {scenario.nextStep}. 근거: {scenario.sourceRefs.join('; ') || '입력 대기'}</small>
+                    {((scenario.status === 'ready_for_salary_calculation' && item.routeKey === 'personnel_grade')
+                      || (scenario.status === 'ready_for_grade_breakdown' && item.routeKey === 'personnel_average')) && (
+                      <button type="button" onClick={() => applyStaffingCandidate(item, scenario)}>
+                        이 순증 인원 사용
+                      </button>
+                    )}
+                  </p>
+                ))}
+                {[...new Set(output.staffingScenarios.flatMap(scenario => scenario.missingInputs))].map(key => (
+                  <div className="erce-variable-row" key={key}>
+                    <label>{staffingLabels[key] || key}</label>
+                    <input
+                      aria-label={`${staffingLabels[key] || key} 값`}
+                      placeholder={key.endsWith('_by_grade') ? '{"5급": 1, "6급": 2}' : '인원 또는 인구'}
+                      value={staffingDrafts[item.itemIndex]?.[key]?.value || ''}
+                      onChange={event => updateStaffingField(item.itemIndex, key, 'value', event.target.value)}
+                    />
+                    <input
+                      aria-label={`${staffingLabels[key] || key} 근거`}
+                      placeholder="근거 문서·쪽수"
+                      value={staffingDrafts[item.itemIndex]?.[key]?.source_ref || ''}
+                      onChange={event => updateStaffingField(item.itemIndex, key, 'source_ref', event.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            {output?.status === 'needs_review' && (
+              <p className="erce-error">계산 전 검토 필요: {output.reason}</p>
+            )}
+            {output?.status === 'computed_review' && (
+              <p>연도별 금액(백만원): {output.annualAmountsThousand.map(value => value == null ? '—' : (value / 1000).toLocaleString()).join(' / ')}</p>
+            )}
+          </div>
+        )
+      })}
+      {erce.unmappedCount > 0 && <small>{erce.unmappedCount}개 조문은 자동 연결하지 않았습니다.</small>}
+    </section>
+  )
+}
+
+// eslint-disable-next-line no-unused-vars
 function EstimateView({ result, estimate, nonAttachment, refs, formType, onResult, openModal }) {
   const similarCE = refs?.similar_bills_cost_estimate || []
   const similarNA = refs?.similar_bills_non_attachment || []
@@ -639,6 +1093,19 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
     }))
   }
 
+  const setVariableDraft = (index, variable, value) => {
+    setDrafts(prev => ({
+      ...prev,
+      [index]: {
+        ...(prev[index] || {}),
+        variables: {
+          ...(prev[index]?.variables || {}),
+          [variable]: value,
+        },
+      },
+    }))
+  }
+
   const toNumber = value => {
     if (value === '' || value === null || value === undefined) return null
     const parsed = Number(String(value).replace(/,/g, ''))
@@ -652,6 +1119,12 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
       const baseAmount = toNumber(draft.base_amount_thousand)
       const unitCost = toNumber(draft.unit_cost)
       const target = toNumber(draft.target)
+      const exactVariables = Object.fromEntries(
+        Object.entries(draft.variables || {})
+          .map(([name, value]) => [name, toNumber(value)])
+          .filter(([, value]) => value !== null)
+      )
+      const requestedBase = exactVariables['연간 기준금액']
       const calc = item.calculation || {}
       const input = {
         item_index: index,
@@ -660,8 +1133,10 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
         end_year: toNumber(draft.end_year) || calc.end_year || 5,
         growth_variable: draft.growth_variable ?? calc.growth_variable ?? null,
       }
-      if (baseAmount !== null) {
-        input.base_amount_thousand = baseAmount
+      if (baseAmount !== null || requestedBase !== undefined) {
+        input.base_amount_thousand = baseAmount ?? requestedBase
+      } else if (Object.keys(exactVariables).length > 0) {
+        input.variables = exactVariables
       } else if (unitCost !== null || target !== null) {
         input.variables = {
           unit_cost: unitCost || 0,
@@ -720,12 +1195,15 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
     return <div className="empty">생성된 추계서가 없습니다.</div>
   }
   const yearRows = estimate.year_estimates || []
-  const totalAmount = estimate.total_amount_thousand ?? yearRows.reduce((sum, row) => (
-    row.amount_thousand != null ? sum + Number(row.amount_thousand) : sum
-  ), 0)
-  const averageAmount = estimate.average_amount_thousand ?? (
-    yearRows.length ? Math.round(totalAmount / yearRows.length) : 0
-  )
+  const computedYearRows = yearRows.filter(row => row.amount_thousand != null)
+  const hasComputedAmount = computedYearRows.length > 0
+  const hasBlockingInput = Number(estimate.human_input?.blocking_count || 0) > 0
+  const totalAmount = hasComputedAmount
+    ? estimate.total_amount_thousand ?? computedYearRows.reduce((sum, row) => sum + Number(row.amount_thousand), 0)
+    : null
+  const averageAmount = hasComputedAmount
+    ? estimate.average_amount_thousand ?? Math.round(totalAmount / computedYearRows.length)
+    : null
   return (
     <div className="estimate-view animate-fade-in">
       <div className="section-heading">
@@ -734,14 +1212,27 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
           <p>추계 결과와 산출 근거를 한 화면에서 확인합니다.</p>
         </div>
       </div>
+      {formType === 'assembly' && result?.erce && (
+        <ErceConnection erce={result.erce} />
+      )}
+      {hasBlockingInput && (
+        <GuidedMissingInputs
+          estimate={estimate}
+          drafts={drafts}
+          setVariableDraft={setVariableDraft}
+          recompute={recompute}
+          isRecomputing={isRecomputing}
+          recomputeError={recomputeError}
+        />
+      )}
       <div className="estimate-summary">
         <div className="summary-main">
-          <span>총 추가재정소요</span>
-          <strong>{(totalAmount / 1000).toLocaleString()}백만원</strong>
+          <span>{hasBlockingInput && hasComputedAmount ? '계산된 항목 부분합' : '총 추가재정소요'}</span>
+          <strong>{totalAmount != null ? `${(totalAmount / 1000).toLocaleString()}백만원` : '미확정'}</strong>
         </div>
         <div className="summary-sub">
-          <span>연평균</span>
-          <strong>{(averageAmount / 1000).toLocaleString()}백만원</strong>
+          <span>{hasBlockingInput && hasComputedAmount ? '계산된 항목 연평균' : '연평균'}</span>
+          <strong>{averageAmount != null ? `${(averageAmount / 1000).toLocaleString()}백만원` : '미확정'}</strong>
         </div>
         {estimate.template_label && (
           <div className="summary-source">
@@ -1002,17 +1493,20 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
           </div>
         ))}
       </div>
-      <details className="estimate-tools">
-        <summary>값 변경 및 재계산</summary>
-        <VariableEditorPanel
-          estimate={estimate}
-          drafts={drafts}
-          setDraft={setDraft}
-          recompute={recompute}
-          isRecomputing={isRecomputing}
-          recomputeError={recomputeError}
-        />
-      </details>
+      {!hasBlockingInput && (
+        <details className="estimate-tools">
+          <summary>가정값 확인·수정</summary>
+          <VariableEditorPanel
+            estimate={estimate}
+            drafts={drafts}
+            setDraft={setDraft}
+            setVariableDraft={setVariableDraft}
+            recompute={recompute}
+            isRecomputing={isRecomputing}
+            recomputeError={recomputeError}
+          />
+        </details>
+      )}
       {similarCE.length > 0 && (
         <details className="estimate-tools">
           <summary>유사 비용추계서</summary>
@@ -1023,6 +1517,7 @@ function EstimateView({ result, estimate, nonAttachment, refs, formType, onResul
   )
 }
 
+// eslint-disable-next-line no-unused-vars
 function EvidenceView({ result, refs, openModal }) {
   const hasReferenceItems = Boolean(
     refs?.similar_bills_cost_estimate?.length ||
@@ -1142,6 +1637,7 @@ function EvidenceSection({ title, items, openModal, kind }) {
   )
 }
 
+// eslint-disable-next-line no-unused-vars
 function FormView({ result, formType, setFormType }) {
   const renderKey = `${formType}:${result?.generatedAt || ''}:${result?.billName || ''}`
   const [rendered, setRendered] = useState({ key: '', html: '', err: '' })

@@ -1,0 +1,100 @@
+{
+  "analysisMode": "manual_demo",
+  "generatedAt": "demo-2200555-2026-10-02",
+  "billName": "아동복지법 일부개정법률안 (2200555)",
+  "articles": [],
+  "erce": {
+    "billNo": "2200555",
+    "items": [
+      {
+        "itemIndex": 0,
+        "name": "우리아이자립펀드 정부 적립금",
+        "triggerRef": "제44조의2",
+        "routeKey": "transfer_child_asset_monthly",
+        "formula": "연도별 18세 미만 아동 수 × 1인당 월 적립액 × 연간 지원개월 수",
+        "explicitInputs": {
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "의안 2200486 비용추계서(24C0887), PDF p.3~4, 표 2; 대상·기간 일치 확인"
+          },
+          "recipient_count": {
+            "value": [
+              6358000,
+              6136000,
+              5931000,
+              5700000,
+              5486000
+            ],
+            "unit": "person/year",
+            "source_ref": "의안 2200486 비용추계서(24C0887), PDF p.3~4, 표 2; 대상·기간 일치 확인"
+          },
+          "benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "2200555 의안 원문 3쪽 제44조의2: 매월10만원"
+          }
+        },
+        "startYear": 2026,
+        "proposeDate": "2024-06-17",
+        "calculation": {
+          "status": "computed_review",
+          "routeKey": "transfer_child_asset_monthly",
+          "formulaKey": "TRANSFER_CHILD_ASSET_MONTHLY_V1",
+          "formula": "연도별 18세 미만 아동 수 × 1인당 월 적립액 × 연간 지원개월 수",
+          "annualAmountsThousand": [
+            7629600000,
+            7363200000,
+            7117200000,
+            6840000000,
+            6583200000
+          ],
+          "sourceRefs": [
+            "의안 2200486 비용추계서(24C0887), PDF p.3~4, 표 2; 대상·기간 일치 확인",
+            "2200555 의안 원문 3쪽 제44조의2: 매월10만원"
+          ],
+          "resolvedVariables": {
+            "recipient_count": {
+              "key": "recipient_count",
+              "value": [
+                6358000,
+                6136000,
+                5931000,
+                5700000,
+                5486000
+              ],
+              "unit": "person/year",
+              "source_class": "target_explicit",
+              "source_ref": "의안 2200486 비용추계서(24C0887), PDF p.3~4, 표 2; 대상·기간 일치 확인",
+              "is_assumption": false
+            },
+            "benefit_per_recipient": {
+              "key": "benefit_per_recipient",
+              "value": 100000,
+              "unit": "KRW/person/month",
+              "source_class": "target_explicit",
+              "source_ref": "2200555 의안 원문 3쪽 제44조의2: 매월10만원",
+              "is_assumption": false
+            },
+            "payments_per_year": {
+              "key": "payments_per_year",
+              "value": 12,
+              "unit": "month/year",
+              "source_class": "target_explicit",
+              "source_ref": "의안 2200486 비용추계서(24C0887), PDF p.3~4, 표 2; 대상·기간 일치 확인",
+              "is_assumption": false
+            }
+          }
+        }
+      }
+    ],
+    "deferredItems": [
+      {
+        "name": "제44조의4 평가·교육",
+        "reason": "운영 규모와 단가 별도 검토 필요"
+      }
+    ],
+    "unmappedArticles": [],
+    "reviewCandidates": []
+  }
+}

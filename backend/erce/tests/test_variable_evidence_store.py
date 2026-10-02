@@ -8,7 +8,10 @@ from backend.erce.engine import estimate_routed_item
 from backend.erce.reviewed_variable_rows import reviewed_variable_rows, burial_comparable_rows
 from backend.erce.interagency_meeting_evidence import interagency_meeting_rows, unification_council_annual_rows
 from backend.erce.legislative_committee_evidence import legislative_committee_rows, policy_review_committee_rows, POLICY_REVIEW_STAFF_GRADES
-from backend.erce.transfer_payment_evidence import transfer_payment_rows
+from backend.erce.transfer_payment_evidence import transfer_payment_rows, veteran_allowance_rows
+from backend.erce.insurance_premium_evidence import insurance_premium_rows
+from backend.erce.spouse_leave_evidence import spouse_leave_rows
+from backend.erce.village_enterprise_evidence import village_enterprise_rows
 from backend.erce.variable_evidence_store import save_variable_rows, find_variable_candidates
 
 
@@ -26,6 +29,67 @@ class VariableEvidenceStoreTest(unittest.TestCase):
         return dict(bill_no=bill, route_key=route, start_year=start, years=5,
             cutoff_date="2026-09-27", evidence_mode="development_review",
             variable_db_path=str(self.path), selected_evidence_keys=keys, **extra)
+
+    def test_spouse_leave_pre_cutoff_sources_require_explicit_cap_scenario(self):
+        save_variable_rows(spouse_leave_rows(), self.path)
+        keys = ["official:kostat:medium_births:2025-2029",
+                "official:nabo:spouse_leave_recipients:2022",
+                "official:kostat:births:2022",
+                "official:moel:spouse_leave_cap_5days:2024"]
+        base = dict(bill_no="2200258", cutoff_date="2024-06-10", start_year=2025,
+                    years=5, evidence_mode="holdout", variable_db_path=str(self.path),
+                    route_path=["이전지출", "개인지원", "배우자출산휴가급여기간확대"],
+                    selected_evidence_keys=keys,
+                    explicit_inputs={"funded_days_before":5, "funded_days_after":20,
+                                     "reference_days":5})
+        with self.assertRaisesRegex(ValueError, "constraint is not an automatic payment"):
+            estimate_routed_item(base)
+        scenario = {**base, "use_upper_limit_as_scenario":True,
+                    "upper_limit_scenario_note":"2024년 5일 상한액을 2025~2029년에도 동일하게 적용하는 최대지급 시나리오"}
+        result = estimate_routed_item(scenario)
+        self.assertEqual(result.formula_key, "TRANSFER_SPOUSE_LEAVE_EXTENSION_V1")
+        self.assertEqual(result.annual_amounts_thousand,
+                         (17054509, 17915058, 18697375, 19401460, 20105545))
+        self.assertEqual(round(sum(result.annual_amounts_thousand)/100000), 932)
+        with self.assertRaisesRegex(ValueError, "future"):
+            estimate_routed_item({**scenario, "cutoff_date":"2023-12-01"})
+
+    def test_village_enterprise_partial_estimate_is_answer_only(self):
+        save_variable_rows(village_enterprise_rows(), self.path)
+        base = dict(bill_no="2200039", cutoff_date="2024-07-02",
+                    start_year=2026, years=5, evidence_mode="development_review",
+                    variable_db_path=str(self.path))
+        plan_keys = ["2200039:mois_plan_research_unit_cost:2021-2023",
+                     "2200039:plan_cpi_rates:2024-2030",
+                     "2200039:plan_base_year:2023"]
+        plan = estimate_routed_item({**base,
+            "route_path":["물건비", "연구용역", "기본계획"],
+            "selected_evidence_keys":plan_keys,
+            "explicit_inputs":{"recurrence_interval_years":5}})
+        committee = estimate_routed_item({**base,
+            "route_path":["물건비", "위원회", "구성요소입력"],
+            "selected_evidence_keys":["2200039:central_committee_components:2026-2030"]})
+        self.assertEqual(plan.annual_amounts_thousand, (217543, 0, 0, 0, 0))
+        self.assertEqual(committee.annual_amounts_thousand, (14000,) * 5)
+        self.assertEqual(round((sum(plan.annual_amounts_thousand)
+                                + sum(committee.annual_amounts_thousand)) / 1000), 288)
+        with self.assertRaisesRegex(ValueError, "future"):
+            estimate_routed_item({**base, "cutoff_date":"2024-05-30",
+                "route_key":"research_plan", "selected_evidence_keys":plan_keys,
+                "explicit_inputs":{"recurrence_interval_years":5}})
+        with self.assertRaisesRegex(ValueError, "target answer"):
+            estimate_routed_item({**base, "evidence_mode":"holdout",
+                "route_key":"committee_components",
+                "selected_evidence_keys":["2200039:central_committee_components:2026-2030"]})
+        future = {**base, "bill_no":"NEW_MOIS_PLAN", "cutoff_date":"2024-08-01",
+                  "evidence_mode":"holdout", "route_key":"research_plan",
+                  "selected_evidence_keys":plan_keys[:1],
+                  "explicit_inputs":{"recurrence_interval_years":5}}
+        with self.assertRaisesRegex(ValueError, "applicability reason"):
+            estimate_routed_item(future)
+        later = estimate_routed_item({**future, "evidence_selection_reasons":{
+            plan_keys[0]:"같은 행정안전부의 5년 종합계획 연구용역이며 과업범위·규모를 검토함"}})
+        self.assertEqual(later.annual_amounts_thousand, (203000, 0, 0, 0, 0))
 
     def test_transfer_adjusted_population_preserves_first_run_and_answer_cutoff(self):
         save_variable_rows(transfer_payment_rows(), self.path)
@@ -64,6 +128,134 @@ class VariableEvidenceStoreTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "missing ERCE formula variables"):
             estimate_routed_item({**synthetic, "explicit_inputs":{
                 "base_population":100, "benefit_per_recipient":1000}})
+
+    def test_farmer_allowance_post_answer_reconstruction_is_not_holdout(self):
+        save_variable_rows(transfer_payment_rows(), self.path)
+        keys = ["2200431:recipient_count:2026-2030",
+                "2200431:benefit_per_recipient:2026-2030",
+                "2200431:subsidy_rate:2026-2030"]
+        payload = dict(bill_no="2200431", route_path=["이전지출", "수급자기반국비분담"],
+                       start_year=2026, years=5, cutoff_date="2024-07-05",
+                       evidence_mode="development_review", variable_db_path=str(self.path),
+                       selected_evidence_keys=keys)
+        result = estimate_routed_item(payload)
+        self.assertEqual(result.formula_key, "TRANSFER_RECIPIENT_SUBSIDY_V1")
+        self.assertEqual(sum(result.annual_amounts_thousand), 32525195178)
+        gross = estimate_routed_item({**payload,
+            "route_path":["이전지출", "개인지원", "일반급여"],
+            "selected_evidence_keys":keys[:2]})
+        self.assertEqual(sum(gross.annual_amounts_thousand), 65050390356)
+        for changes, reason in (({"cutoff_date":"2024-06-13"}, "future"),
+                                ({"evidence_mode":"holdout"}, "target answer"),
+                                ({"bill_no":"NEW"}, "different target")):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, reason):
+                estimate_routed_item({**payload, **changes})
+        lower_bound = estimate_routed_item(dict(
+            route_path=["이전지출", "수급자기반국비분담"], years=1,
+            explicit_inputs={"recipient_count":100, "benefit_per_recipient":1000,
+                             "subsidy_rate":0.4}))
+        self.assertEqual(lower_bound.annual_amounts_thousand, (40,))
+        for bad_inputs, variable in (({"subsidy_rate":1.1}, "subsidy_rate"),
+                                     ({"recipient_count":[100, 200]}, "recipient_count")):
+            with self.subTest(bad_inputs=bad_inputs), self.assertRaisesRegex(ValueError, variable):
+                estimate_routed_item({"route_key":"transfer_recipient_subsidy", "years":1,
+                    "explicit_inputs":{"recipient_count":100, "benefit_per_recipient":1000,
+                                       "subsidy_rate":0.4, **bad_inputs}})
+
+    def test_veteran_allowance_split_and_post_answer_gates(self):
+        save_variable_rows(veteran_allowance_rows(), self.path)
+        base = dict(bill_no="2200169", start_year=2025, years=5,
+                    cutoff_date="2024-08-09", evidence_mode="development_review",
+                    variable_db_path=str(self.path))
+        def run(route, suffixes, **extra):
+            return estimate_routed_item({**base, "route_key":route,
+                "selected_evidence_keys":[f"2200169:{suffix}:2025-2029" for suffix in suffixes],
+                **extra})
+        components = {}
+        for level in (32, 60):
+            benefit = f"new_monthly_benefit_{level}pct"
+            shared = dict(benefit_scenario=f"{level}pct",
+                          explicit_inputs={"payments_per_year":12})
+            components[level] = [
+                run("transfer_recipient", ["concurrent_new_recipients", benefit], **shared),
+                run("transfer_recipient_delta", ["existing_recipients", benefit,
+                                                 "existing_monthly_benefit"], **shared),
+                run("transfer_recipient", ["surviving_spouses", benefit], **shared),
+            ]
+        self.assertEqual(components[32][1].formula_key, "TRANSFER_RECIPIENT_DELTA_V1")
+        medical = [run("transfer_service_use",
+                       [f"{channel}_{part}" for part in ("recipients", "visits", "cost_per_visit")],
+                       care_channel=channel)
+                   for channel in ("veterans_hospital", "contract_hospital")]
+        transport = estimate_routed_item({**base, "route_key":"transfer_recipient",
+            "selected_evidence_keys":["2200169:transport_recipients:2025-2029",
+                                      "2200169:transport_unit_cost:2023"]})
+        for level, gold_eok in ((32, 74886), (60, 160000)):
+            predicted_thousand = sum(sum(r.annual_amounts_thousand)
+                                     for r in [*components[level], *medical, transport])
+            self.assertLess(abs(predicted_thousand - gold_eok * 100000), 25 * 100000)
+        blocked = {**base, "route_key":"transfer_recipient_delta",
+                   "selected_evidence_keys":["2200169:existing_recipients:2025-2029",
+                                             "2200169:new_monthly_benefit_32pct:2025-2029",
+                                             "2200169:existing_monthly_benefit:2025-2029"],
+                   "benefit_scenario":"32pct", "explicit_inputs":{"payments_per_year":12}}
+        for changes, reason in (({"cutoff_date":"2024-06-05"}, "future"),
+                                ({"evidence_mode":"holdout"}, "target answer"),
+                                ({"benefit_scenario":"60pct"}, "scenario")):
+            with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, reason):
+                estimate_routed_item({**blocked, **changes})
+        with self.assertRaisesRegex(ValueError, "care_channel"):
+            run("transfer_service_use", ["veterans_hospital_recipients",
+                "contract_hospital_visits", "veterans_hospital_cost_per_visit"],
+                care_channel="veterans_hospital")
+        with self.assertRaisesRegex(ValueError, "missing ERCE formula variables"):
+            estimate_routed_item({"bill_no":"2200169", "route_key":"transfer_recipient_delta",
+                                  "start_year":2025, "years":5, "cutoff_date":"2024-06-05"})
+        comparable = dict(bill_no="NEW", route_key="transfer_recipient", start_year=2025,
+                          years=1, cutoff_date="2024-08-09", variable_db_path=str(self.path),
+                          selected_evidence_keys=["2200169:transport_unit_cost:2023"],
+                          explicit_inputs={"recipient_count":1})
+        with self.assertRaisesRegex(ValueError, "applicability reason"):
+            estimate_routed_item(comparable)
+        accepted = estimate_routed_item({**comparable, "evidence_selection_reasons":{
+            "2200169:transport_unit_cost:2023":"같은 국가보훈부 수송할인 범위와 2023년 단가 연도 확인"}})
+        self.assertEqual(accepted.annual_amounts_thousand, (90,))
+
+    def test_insurance_premium_subsidy_delta_keeps_national_and_local_signs(self):
+        save_variable_rows(insurance_premium_rows(), self.path)
+        base = dict(bill_no="2200116", route_path=["이전지출", "보험료지원", "기준선차감"],
+                    cutoff_date="2024-06-14", start_year=2025, years=5,
+                    evidence_mode="development_review", variable_db_path=str(self.path))
+        totals = [0] * 5
+        for line in ("crop", "livestock", "aquaculture"):
+            for payer in ("national", "local"):
+                keys = [f"2200116:{line}:premium_base:2024",
+                        f"2200116:{line}:{payer}:existing_support_amount:2024",
+                        f"2200116:{payer}:new_support_rate:2025-2029"]
+                if line == "crop":
+                    keys += ["2200116:crop:growth_rates_by_year:2025-2029",
+                             "2200116:crop:base_year:2024"]
+                payload = {**base, "insurance_line":line, "payer":payer,
+                           "selected_evidence_keys":keys}
+                result = estimate_routed_item(payload)
+                self.assertEqual(result.formula_key, "TRANSFER_PREMIUM_SUBSIDY_DELTA_V1")
+                if payer == "local" and line != "livestock":
+                    self.assertTrue(all(value < 0 for value in result.annual_amounts_thousand))
+                totals = [a+b for a,b in zip(totals, result.annual_amounts_thousand)]
+                if line == "crop" and payer == "national":
+                    for changes, reason in (({"cutoff_date":"2024-06-04"}, "future"),
+                                            ({"evidence_mode":"holdout"}, "target answer"),
+                                            ({"payer":"local"}, "payer"),
+                                            ({"insurance_line":"livestock"}, "insurance_line")):
+                        with self.subTest(changes=changes), self.assertRaisesRegex(ValueError, reason):
+                            estimate_routed_item({**payload, **changes})
+        self.assertEqual([round(value/1000) for value in totals],
+                         [98195, 101039, 104150, 107554, 111278])
+        self.assertLess(abs(sum(totals) - 522216000), 2_000)
+        with self.assertRaisesRegex(ValueError, "missing ERCE formula variables"):
+            estimate_routed_item({"bill_no":"2200116", "route_key":"transfer_premium_subsidy_delta",
+                                  "cutoff_date":"2024-06-04", "start_year":2025, "years":5,
+                                  "explicit_inputs":{"new_support_rate":.7}})
 
     def test_missing_four_cases_calculate_from_saved_ids_not_inline_gold_values(self):
         cases = [

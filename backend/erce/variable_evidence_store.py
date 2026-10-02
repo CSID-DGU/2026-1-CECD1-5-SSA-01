@@ -131,10 +131,26 @@ def evidence_payload_from_db(payload: Mapping[str, Any]) -> Mapping[str, Any]:
             same_target = row["source_bill_no"] == str(payload.get("bill_no") or "")
             if row.get("reuse_policy") == "target_only" and not same_target:
                 raise ValueError(f"selected DB evidence belongs to a different target: {key}")
+            if row.get("requires_applicability_note") and not same_target and not str(reasons.get(key) or "").strip():
+                raise ValueError(f"selected comparable evidence needs applicability reason: {key}")
             if row.get("variable_role") == "constraint" or row.get("value_kind") == "upper_limit":
-                raise ValueError(f"constraint is not an automatic payment amount: {key}")
+                cap_scenario = (
+                    row.get("variable_key") == "grant_cap_per_reference_period"
+                    and route == "transfer_spouse_leave_extension"
+                    and payload.get("use_upper_limit_as_scenario") is True
+                    and str(payload.get("upper_limit_scenario_note") or "").strip()
+                )
+                if not cap_scenario:
+                    raise ValueError(f"constraint is not an automatic payment amount: {key}")
             if row.get("allowed_routes") and route not in row["allowed_routes"]:
                 raise ValueError(f"selected DB evidence service/formula mismatch: {key}")
+            for row_field, payload_field in (("care_channel", "care_channel"),
+                                             ("scenario_key", "benefit_scenario"),
+                                             ("insurance_line", "insurance_line"),
+                                             ("system_kind", "system_kind"),
+                                             ("payer", "payer")):
+                if row.get(row_field) and row[row_field] != payload.get(payload_field):
+                    raise ValueError(f"selected DB evidence {payload_field} mismatch: {key}")
             for feature, required in (row.get("required_workload_features") or {}).items():
                 actual_feature = (payload.get("workload_features") or {}).get(feature)
                 if actual_feature is not required:

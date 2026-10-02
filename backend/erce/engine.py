@@ -54,6 +54,8 @@ def _estimate_hydrated_item(payload: Mapping[str, Any]) -> ERCEEstimate:
     formula = formula_for_route(route_key)
     if route_key in DIRECT_FORMULA_ROUTE_KEYS:
         return _estimate_direct_formula_item(payload, formula)
+    if route_key == "committee_operation" and "committee_components" in (payload.get("explicit_inputs") or {}):
+        return _estimate_direct_formula_item(payload, formula)
     if route_key == "information_system_project_plan":
         return _estimate_project_plan_item(payload, formula)
     if route_key == "diagnostic_test_subsidy":
@@ -419,8 +421,11 @@ def _estimate_research_item(payload: Mapping[str, Any], formula: Any) -> ERCEEst
     )
     # Phase is independent of statutory recurrence: an existing survey may
     # put the next occurrence after the first estimation year.
+    optional_keys = ("first_occurrence_offset_years", "growth_rate", "growth_rates_by_year", "base_year")
+    if route == "research_plan":
+        optional_keys += ("repeat_plan_unit_cost",)
     optional, _ = resolve_formula_variables(
-        ("first_occurrence_offset_years",),
+        optional_keys,
         target_explicit=payload.get("explicit_inputs"),
         target_current_actual=payload.get("actual_inputs"),
         official_standard=payload.get("official_inputs"),
@@ -441,6 +446,8 @@ def _estimate_research_item(payload: Mapping[str, Any], formula: Any) -> ERCEEst
             for key, row in resolved.items()
         },
     }))
+    if result.status != "computed_review":
+        raise ValueError("invalid ERCE research variables: " + ", ".join(result.missing_variables))
     refs = tuple(dict.fromkeys(row.source_ref for row in resolved.values()))
     keys = benchmark.get(unit_key, {}).get("evidence_keys", [])
     return ERCEEstimate(

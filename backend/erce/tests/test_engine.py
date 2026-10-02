@@ -97,12 +97,34 @@ class ERCEEngineTest(unittest.TestCase):
                       "historical_annual_fee_revenues": [1000000, 2000000],
                       "other_channel_base_year": 2024, "other_channel_growth_rate": 0,
                       "committee_components": [{"paid_members": 2, "annual_meetings": 3,
-                                                "meeting_unit_price": 100000}]}
+                                                "meeting_unit_price": 100000}],
+                      "insurance_benefit_cohorts": [{"eligible_cases": 10,
+                          "covered_days_per_case": 2, "insurer_daily_benefit": 100000}],
+                      "premium_receipts_by_year": {str(y): 1000000 for y in range(2025, 2029)},
+                      "current_support_end_year": 2027,
+                      "infertility_population_basis": {
+                          "base_year": 2023, "priority_company_share": .5,
+                          "priority_share_growth_rate": 0,
+                          "insured_cohorts": [{"insured_population": 100, "insured_growth_rate": 0,
+                                              "civil_leave_users": 1, "civil_staff": 10}],
+                          "historical_infertility_patients": [100, 100],
+                          "employee_share": .5, "insurance_enrollment_share": .5,
+                          "leave_uptake_rate": .5}}
         with patch("backend.erce.engine.select_committee_pack", side_effect=AssertionError("no search")), \
              patch("backend.erce.engine.research_service_formula_inputs", side_effect=AssertionError("no search")):
             for route, (key, _) in DIRECT_FORMULA_ROUTE_KEYS.items():
                 values = {name: {"value": structured.get(name, 1), "source_ref": "synthetic connection test"}
                           for name in FORMULAS[key]["required"]}
+                if "daily_leave_benefit" in values:
+                    values["daily_leave_benefit"]["unit"] = "KRW/person/day"
+                if key == "TRANSFER_CHILD_ASSET_MONTHLY_V1":
+                    values["benefit_per_recipient"]["unit"] = "KRW/person/month"
+                if key == "TRANSFER_BENEFIT_ABOLITION_V1":
+                    values["existing_benefit_per_recipient"]["unit"] = "KRW/person/month"
+                if "premium_receipts_by_year" in values:
+                    values["premium_receipts_by_year"]["unit"] = "KRW/year"
+                    values["new_general_support_rate"]["unit"] = "ratio"
+                    values["current_general_support_rate"]["unit"] = "ratio"
                 with self.subTest(route=route):
                     result = estimate_routed_item({"route_key": route, "years": 2, "start_year": 2027,
                                                   "explicit_inputs": values})
@@ -110,6 +132,45 @@ class ERCEEngineTest(unittest.TestCase):
                     self.assertNotIn(None, result.annual_amounts_thousand)
                     with self.assertRaisesRegex(ValueError, "missing ERCE"):
                         estimate_routed_item({"route_key": route})
+
+    def test_health_insurance_costs_only_treasury_share_of_selected_scenario(self) -> None:
+        path = ["이전지출", "사회보험", "건강보험급여증가국고지원"]
+        self.assertEqual(route_for_path(path), "health_insurance_treasury_support")
+        result = estimate_routed_item({
+            "route_path": path, "bill_no": "synthetic", "start_year": 2025,
+            "years": 2, "subtype": "A형 시나리오",
+            "explicit_inputs": {
+                "insurance_benefit_cohorts": {"value": [
+                    {"eligible_cases": [100, 120], "covered_days_per_case": 10,
+                     "insurer_daily_benefit": 100000},
+                    {"eligible_cases": 50, "covered_days_per_case": [20, 10],
+                     "insurer_daily_benefit": 50000},
+                ], "unit": "cohort_bundle", "source_ref": "독립적인 합성 입력"},
+                "government_support_rate": {"value": .2, "unit": "ratio",
+                                            "source_ref": "합성 국고지원 가정"},
+                "existing_insurance_benefit_cost": {"value": 10_000_000,
+                    "unit": "KRW/year", "source_ref": "합성 기존 급여비"},
+            },
+        })
+        # Insurer: [150m,145m]; incremental insurer: [140m,135m]; treasury: 20%.
+        self.assertEqual(result.annual_amounts_thousand, (28000, 27000))
+        self.assertEqual(result.subtype, "A형 시나리오")
+
+        base = {"route_key": "health_insurance_treasury_support", "years": 2,
+                "explicit_inputs": {
+                    "insurance_benefit_cohorts": [{"eligible_cases": 1,
+                        "covered_days_per_case": 1, "insurer_daily_benefit": 1000}],
+                    "government_support_rate": .2,
+                }}
+        for bad in (
+            {"government_support_rate": 1.2},
+            {"insurance_benefit_cohorts": [{"eligible_cases": 1,
+                "covered_days_per_case": -1, "insurer_daily_benefit": 1000}]},
+            {"insurance_benefit_cohorts": [{"eligible_cases": [1, 2, 3],
+                "covered_days_per_case": 1, "insurer_daily_benefit": 1000}]},
+        ):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                estimate_routed_item({**base, "explicit_inputs": {**base["explicit_inputs"], **bad}})
 
     def test_system_operation_tree_path_and_evidence_priority(self) -> None:
         path = ["물건비", "정보시스템", "운영", "연간총액기반"]
