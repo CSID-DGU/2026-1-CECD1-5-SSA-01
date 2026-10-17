@@ -7,7 +7,7 @@ from typing import Any
 
 import fitz
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _article_title,
     _detect_doc_type,
     _extract_pdf_text_from_bytes,

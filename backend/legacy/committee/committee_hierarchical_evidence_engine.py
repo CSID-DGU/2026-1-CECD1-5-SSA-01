@@ -16,7 +16,7 @@ from backend.legacy.committee.committee_component_evidence_engine import (
     ComponentEvidenceResult,
     recommend as recommend_components,
 )
-from backend.committee_precedent_resolver import (
+from backend.erce_web.committee_precedent_resolver import (
     PrecedentResolution,
     resolve as resolve_package,
 )

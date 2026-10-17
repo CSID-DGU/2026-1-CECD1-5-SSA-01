@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from backend.general_cost_resolver import request_from_dict, resolve_general_cost
+from backend.erce_web.general_cost_resolver import request_from_dict, resolve_general_cost
 
 
 def main() -> None:

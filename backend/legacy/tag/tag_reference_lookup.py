@@ -57,7 +57,7 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import Callable
 
-from backend.committee_channel import _read_jsonl_records, _tag_roots
+from backend.erce_web.committee_channel import _read_jsonl_records, _tag_roots
 
 TAG_REFERENCE_LOOKUP_VERSION = "tag-reference-lookup-v3"
 

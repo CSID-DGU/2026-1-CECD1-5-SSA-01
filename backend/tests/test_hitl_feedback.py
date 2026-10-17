@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from backend.hitl_feedback import collect_committee_feedback
+from backend.erce_web.hitl_feedback import collect_committee_feedback
 
 
 class HitlFeedbackTest(unittest.TestCase):

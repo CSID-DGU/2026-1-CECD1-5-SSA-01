@@ -14,12 +14,12 @@ from pathlib import Path
 import statistics
 from typing import Any
 
-from backend.general_cost_resolver import request_from_dict, resolve_general_cost
+from backend.erce_web.general_cost_resolver import request_from_dict, resolve_general_cost
 
 
 ROOT = Path(__file__).resolve().parents[3]
 SIDECAR = ROOT / "backend/generated/general_cost_sidecar_v1"
-DEFAULT_AUDIT = ROOT / "backend/fixtures/goods_services_committee_dev_audit.json"
+DEFAULT_AUDIT = ROOT / "backend/legacy/fixtures/goods_services_committee_dev_audit.json"
 DEFAULT_OUTPUT = ROOT / "backend/generated/general_cost_v2_pilot_goods_services/committee_formula_benchmark.json"
 
 

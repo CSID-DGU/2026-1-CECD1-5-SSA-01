@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 
-BACKEND_DIR = Path(__file__).resolve().parent
+BACKEND_DIR = Path(__file__).resolve().parents[1]  # backend/ (this file lives in backend/erce_web/)
 PROJECT_ROOT = BACKEND_DIR.parent
 SCRIPT_DIR = BACKEND_DIR / "scripts"
 

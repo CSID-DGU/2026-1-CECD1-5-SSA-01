@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from backend.hitl_feedback import FEEDBACK_PATH, FEEDBACK_SCHEMA_VERSION
+from backend.erce_web.hitl_feedback import FEEDBACK_PATH, FEEDBACK_SCHEMA_VERSION
 
 
 def _load(path: Path) -> list[dict[str, Any]]:

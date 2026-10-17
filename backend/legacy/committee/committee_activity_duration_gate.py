@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 
-from backend.article_extraction_engine import _call_upstage_json
+from backend.erce_web.article_extraction_engine import _call_upstage_json
 
 COMMITTEE_ACTIVITY_DURATION_GATE_VERSION = "committee-activity-duration-gate-v1"
 

@@ -1,7 +1,7 @@
 """Deterministic, review-only committee component recommendations.
 
 This module is deliberately isolated from ``tag_pipeline`` and ``server``.
-It fills the gap below :mod:`backend.committee_precedent_resolver`:
+It fills the gap below :mod:`backend.erce_web.committee_precedent_resolver`:
 
 * the existing resolver may execute only a complete, strongly related package;
 * this module may *recommend* a meeting-cost component from structurally
@@ -23,12 +23,12 @@ import re
 import statistics
 from typing import Any
 
-from backend.article_extraction_engine import extract_pdf_text, split_articles_regex
-from backend.committee_estimator_v3.pipeline import (
+from backend.erce_web.article_extraction_engine import extract_pdf_text, split_articles_regex
+from backend.erce_web.committee_estimator_v3.pipeline import (
     _function_compatibility,
     _operating_function,
 )
-from backend.committee_size_extract import (
+from backend.erce_web.committee_size_extract import (
     extract_committee_size,
     extract_meeting_frequency,
     extract_paid_member_count,

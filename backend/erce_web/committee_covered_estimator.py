@@ -26,8 +26,8 @@ from pathlib import Path
 import re
 from typing import Any
 
-from backend.article_extraction_engine import extract_pdf_text
-from backend.committee_precedent_resolver import (
+from backend.erce_web.article_extraction_engine import extract_pdf_text
+from backend.erce_web.committee_precedent_resolver import (
     EvidenceItem,
     PrecedentResolution,
     _BODY,
@@ -223,7 +223,7 @@ def _recurrence(item: EvidenceItem) -> str:
 
 
 def _variables(item: EvidenceItem) -> tuple[dict[str, Any], ...]:
-    from backend.estimator import tag_db
+    from backend.erce_web.estimator import tag_db
 
     raw = [dict(value, source="precedent_tag_variable") for value in tag_db._load()["vars"].get(item.item_id, [])]
     existing = {

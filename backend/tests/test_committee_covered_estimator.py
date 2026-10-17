@@ -1,4 +1,4 @@
-from backend.committee_covered_estimator import (
+from backend.erce_web.committee_covered_estimator import (
     _expand,
     extract_finite_activity_months,
 )

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from backend.research_service_unit_cost_registry import (
+from backend.erce_web.research_service_unit_cost_registry import (
     get_research_service_benchmark,
     research_service_formula_inputs,
 )

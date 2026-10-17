@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from typing import Any
 
-from backend.estimator_v2.types import TagCandidate
+from backend.erce_web.estimator_v2.types import TagCandidate
 
 
 _EVIDENCE_PATH = Path("backend/generated/committee_evidence_v1/committee_evidence_atoms.jsonl")

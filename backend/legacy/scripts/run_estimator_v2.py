@@ -9,9 +9,9 @@ from pathlib import Path
 
 import fitz
 
-from backend.estimator_v2 import estimate_from_pdf
-from backend.estimator_v2.evidence_fallback import attach_narrative_evidence_shadow
-from backend.estimator_v2.harness import audit_missed_evidence
+from backend.erce_web.estimator_v2 import estimate_from_pdf
+from backend.erce_web.estimator_v2.evidence_fallback import attach_narrative_evidence_shadow
+from backend.erce_web.estimator_v2.harness import audit_missed_evidence
 from backend.legacy.scripts.evaluate_assembly_batch import _parse_first_cost_table
 
 
@@ -241,7 +241,7 @@ def main() -> None:
         return
 
     if args.draft_doc:
-        from backend.estimator_v2.draft_document import render_draft_document
+        from backend.erce_web.estimator_v2.draft_document import render_draft_document
 
         print(render_draft_document(result))
         return

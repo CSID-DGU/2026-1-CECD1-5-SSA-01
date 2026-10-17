@@ -6,9 +6,9 @@ import json
 import os
 from pathlib import Path
 
-from backend.estimator_v2 import estimate_from_pdf
-from backend.estimator_v2.harness import audit_missed_evidence
-from backend.estimator_v2.regression import (
+from backend.erce_web.estimator_v2 import estimate_from_pdf
+from backend.erce_web.estimator_v2.harness import audit_missed_evidence
+from backend.erce_web.estimator_v2.regression import (
     REGRESSION_CASES,
     REGRESSION_MANIFEST_VERSION,
     audit_formula_expectations,

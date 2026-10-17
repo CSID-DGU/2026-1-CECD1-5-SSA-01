@@ -5,20 +5,20 @@ import re
 import statistics
 from typing import Any
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _extract_bill_name,
     _extract_current_bill_no,
     _extract_pdf_text_from_bytes,
     split_articles,
     strip_appendices,
 )
-from backend.estimator_v2.retrieval import (
+from backend.erce_web.estimator_v2.retrieval import (
     search_companion_formula_candidates,
     search_cost_candidates,
     target_metadata,
 )
-from backend.estimator_v2.types import AtomicEvent, TagCandidate
-from backend.estimator_v2.variable_selection import (
+from backend.erce_web.estimator_v2.types import AtomicEvent, TagCandidate
+from backend.erce_web.estimator_v2.variable_selection import (
     _committee_function,
     _is_second_order_analogy,
     _target_member_cap,

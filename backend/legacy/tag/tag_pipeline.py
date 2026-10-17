@@ -17,9 +17,9 @@ from dataclasses import replace
 import re
 
 from backend.legacy.tag import tag_rule_engine as rule_engine
-from backend.article_extraction_engine import extract_bill_title, extract_pdf_text, split_articles
+from backend.erce_web.article_extraction_engine import extract_bill_title, extract_pdf_text, split_articles
 from backend.legacy.committee.committee_assembly_internal_gate import is_assembly_internal_committee
-from backend.committee_evidence_adapter import build_evidence_workflow
+from backend.erce_web.committee_evidence_adapter import build_evidence_workflow
 from backend.legacy.committee.committee_gate import CommitteeEntity, group_committee_articles
 from backend.legacy.committee.committee_increment_gate import detect_member_increments, extract_member_increment_llm
 from backend.legacy.engines.analogy_estimator import estimate_by_analogy_llm, compute_analogy

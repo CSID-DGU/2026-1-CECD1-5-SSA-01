@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import re
 
-from backend.estimator import tag_db
+from backend.erce_web.estimator import tag_db
 
 COMMITTEE_SEARCH_VERSION = "committee-search-v1"
 

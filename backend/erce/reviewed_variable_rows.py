@@ -17,7 +17,7 @@ from backend.erce.service_industry_variable_registry import (
     SERVICE_INDUSTRY_VARIABLES, SERVICE_INDUSTRY_POST_ANSWER_VARIABLES,
 )
 from backend.erce.meeting_allowance_rules import MEETING_ALLOWANCE_RULES
-from backend.research_service_unit_cost_registry import RESEARCH_SERVICE_BENCHMARKS
+from backend.erce_web.research_service_unit_cost_registry import RESEARCH_SERVICE_BENCHMARKS
 
 
 def evidence_row(*, evidence_key: str, variable_key: str, value: Any, unit: str,

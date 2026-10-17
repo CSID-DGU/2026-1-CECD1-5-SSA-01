@@ -11,10 +11,10 @@ from urllib.parse import quote, unquote, urlparse
 
 import fitz
 
-from .erce.ai_pdf_analysis import MODEL as ERCE_AI_MODEL, analyze_erce_pdf
-from .erce.ai_pdf_analysis import REASONING_EFFORT as ERCE_REASONING_EFFORT
-from .erce.web_bridge import calculate_erce_web_item
-from .erce.draft_report import generate_draft
+from backend.erce.ai_pdf_analysis import MODEL as ERCE_AI_MODEL, analyze_erce_pdf
+from backend.erce.ai_pdf_analysis import REASONING_EFFORT as ERCE_REASONING_EFFORT
+from backend.erce.web_bridge import calculate_erce_web_item
+from backend.erce.draft_report import generate_draft
 from .form_renderer import render_form
 from .config import GENERATED_DIR, HOST, LLM_API_KEY, LLM_MODEL_ID, LLM_PROVIDER, PORT
 

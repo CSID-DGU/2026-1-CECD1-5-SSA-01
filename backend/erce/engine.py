@@ -7,9 +7,9 @@ from typing import Any, Mapping
 from backend.erce.evidence_registry import select_committee_pack
 from backend.erce.formula_registry import formula_for_route, DIRECT_FORMULA_ROUTE_KEYS
 from backend.erce.variable_resolver import ResolvedVariable, resolve_formula_variables, selected_precedent_inputs
-from backend.economic_forecast_registry import get_forecast_series
-from backend.general_cost_resolver import FORMULAS, request_from_dict, resolve_general_cost
-from backend.research_service_unit_cost_registry import research_service_formula_inputs
+from backend.erce_web.economic_forecast_registry import get_forecast_series
+from backend.erce_web.general_cost_resolver import FORMULAS, request_from_dict, resolve_general_cost
+from backend.erce_web.research_service_unit_cost_registry import research_service_formula_inputs
 from backend.erce.evaluation_evidence_registry import evaluation_formula_inputs
 from backend.erce.notification_evidence_registry import notification_formula_inputs
 from backend.erce.diagnostic_evidence_registry import diagnostic_formula_inputs

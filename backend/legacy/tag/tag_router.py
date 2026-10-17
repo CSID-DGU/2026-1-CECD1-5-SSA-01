@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 
-from backend.article_extraction_engine import extract_pdf_text, split_articles
+from backend.erce_web.article_extraction_engine import extract_pdf_text, split_articles
 
 TAG_ROUTER_VERSION = "tag-router-v1"
 

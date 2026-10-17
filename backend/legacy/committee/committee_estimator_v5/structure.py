@@ -4,7 +4,7 @@ from dataclasses import replace
 import re
 from typing import Any
 
-from backend.committee_estimator_v3.pipeline import _actor
+from backend.erce_web.committee_estimator_v3.pipeline import _actor
 from backend.legacy.committee.committee_estimator_v4.structure import (
     extract_committee_nodes,
     select_formula_plan as select_v4_formula_plan,

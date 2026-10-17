@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 
 from backend.legacy.committee.committee_hierarchical_evidence_engine import evaluate
-from backend.committee_precedent_resolver import PrecedentResolution
+from backend.erce_web.committee_precedent_resolver import PrecedentResolution
 
 
 def _resolution(decision: str) -> PrecedentResolution:

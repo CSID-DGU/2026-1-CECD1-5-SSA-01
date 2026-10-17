@@ -25,8 +25,8 @@ from functools import lru_cache
 import re
 from typing import Any
 
-from backend.committee_estimator_v3.evidence_store import profiles_by_item
-from backend.estimator import tag_db
+from backend.erce_web.committee_estimator_v3.evidence_store import profiles_by_item
+from backend.erce_web.estimator import tag_db
 from backend.scripts import evaluate_committee_precedent_routes as routes
 
 

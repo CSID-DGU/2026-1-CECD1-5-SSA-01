@@ -9,7 +9,7 @@ from pathlib import Path
 
 os.environ.setdefault("ANALYZE_ARTICLE_WORKERS", "1")
 
-from backend.committee_channel import analyze_committee_document
+from backend.erce_web.committee_channel import analyze_committee_document
 
 FILES = Path("backend/generated/assembly_rag_seed_age21_50/files")
 

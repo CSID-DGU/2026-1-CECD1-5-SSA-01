@@ -4,8 +4,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from backend.analyzer_v2 import embed_batch
-from backend.estimator.tag_db import _load
+from backend.erce_web.analyzer_v2 import embed_batch
+from backend.erce_web.estimator.tag_db import _load
 
 OUT = Path("backend/generated/tag_item_embeddings.jsonl")
 

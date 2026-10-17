@@ -1,4 +1,4 @@
-from backend.llm_profiles import (
+from backend.erce_web.llm_profiles import (
     SOLAR_PRO2_PROFILE_ID,
     dedicated_staff_value_prompt,
     normalize_response,

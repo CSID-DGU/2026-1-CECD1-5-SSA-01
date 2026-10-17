@@ -10,8 +10,8 @@ os.environ.setdefault("ANALYZE_ARTICLE_WORKERS", "1")
 
 import fitz
 
-from backend.estimator.pipeline import estimate_from_pdf
-from backend.estimator.types import RowStatus
+from backend.erce_web.estimator.pipeline import estimate_from_pdf
+from backend.erce_web.estimator.types import RowStatus
 from backend.legacy.scripts.evaluate_assembly_batch import _parse_first_cost_table
 
 FILES = Path("backend/generated/assembly_rag_seed_age21_50/files")

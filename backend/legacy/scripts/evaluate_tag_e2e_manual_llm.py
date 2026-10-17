@@ -15,7 +15,7 @@ from pathlib import Path
 import re
 from unittest.mock import patch
 
-from backend.article_extraction_engine import extract_pdf_text, split_articles_regex
+from backend.erce_web.article_extraction_engine import extract_pdf_text, split_articles_regex
 from backend.legacy.tag.tag_parsers import (
     CapitalExpenditureVars,
     CommitteeVars,

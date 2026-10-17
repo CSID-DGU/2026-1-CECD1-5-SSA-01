@@ -18,7 +18,7 @@ import re
 import statistics
 from typing import Any
 
-from backend.committee_component_recommender import (
+from backend.erce_web.committee_component_recommender import (
     _Target,
     _available_dates,
     _build_target,

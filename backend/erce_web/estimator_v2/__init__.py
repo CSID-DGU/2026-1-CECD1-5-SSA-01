@@ -1,6 +1,6 @@
 """Evidence-first experimental estimator.
 
-This package is intentionally separate from ``backend.estimator`` and the
+This package is intentionally separate from ``backend.erce_web.estimator`` and the
 production API.  It keeps the same broad detect -> retrieve -> calculate
 workflow while making evidence, additionality, recurrence, and reproducibility
 explicit.

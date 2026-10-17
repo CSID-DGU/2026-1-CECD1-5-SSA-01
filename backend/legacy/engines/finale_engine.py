@@ -22,7 +22,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _call_llm_raw_json,
     _extract_bill_name,
     _extract_current_bill_no,
@@ -32,9 +32,9 @@ from backend.analyzer_v2 import (
     try_embed,
 )
 from backend.legacy.committee.committee_search import search_committee
-from backend.committee_size_extract import extract_committee_size
-from backend.estimator import tag_db
-from backend.estimator_v2.retrieval import target_metadata
+from backend.erce_web.committee_size_extract import extract_committee_size
+from backend.erce_web.estimator import tag_db
+from backend.erce_web.estimator_v2.retrieval import target_metadata
 
 FINALE_ENGINE_VERSION = "finale-engine-v2"
 

@@ -25,7 +25,7 @@ from backend.legacy.committee.committee_component_evidence_engine import (
 )
 
 
-GOLD_PATH = ROOT / "backend/fixtures/committee_component_dev_gold.json"
+GOLD_PATH = ROOT / "backend/legacy/fixtures/committee_component_dev_gold.json"
 
 
 def _jsonl(path: Path) -> list[dict[str, Any]]:

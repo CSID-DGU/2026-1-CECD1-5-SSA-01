@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from backend.committee_component_recommender import ENGINE_VERSION, recommend
+from backend.erce_web.committee_component_recommender import ENGINE_VERSION, recommend
 
 
 def _sha256(path: Path) -> str:

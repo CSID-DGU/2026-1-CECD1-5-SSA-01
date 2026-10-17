@@ -20,7 +20,7 @@ import urllib.error
 import urllib.request
 from typing import Any, Iterable
 
-from backend.config import GENERATED_DIR, get_env
+from backend.erce_web.config import GENERATED_DIR, get_env
 
 
 EXTRACTION_VERSION = "committee-evidence-backfill-v1.1"

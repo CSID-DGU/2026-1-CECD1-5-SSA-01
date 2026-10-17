@@ -16,7 +16,7 @@ import re
 import statistics
 from typing import Any, Iterable
 
-from backend.config import GENERATED_DIR
+from backend.erce_web.config import GENERATED_DIR
 from backend.legacy.scripts.audit_org_admin_variables import DEFAULT_SEED_DIRS
 
 

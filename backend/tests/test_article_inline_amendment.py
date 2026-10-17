@@ -1,4 +1,4 @@
-from backend.article_extraction_engine import (
+from backend.erce_web.article_extraction_engine import (
     extract_inline_amendment_articles,
     split_articles_regex,
 )

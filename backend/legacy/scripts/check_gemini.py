@@ -8,8 +8,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from backend.config import GEMINI_MODEL
-from backend.gemini_client import GeminiClient
+from backend.erce_web.config import GEMINI_MODEL
+from backend.erce_web.gemini_client import GeminiClient
 
 
 def main() -> None:

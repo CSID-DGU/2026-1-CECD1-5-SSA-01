@@ -1,6 +1,6 @@
 import unittest
 
-from backend.estimator_v2.precedent_first import (
+from backend.erce_web.estimator_v2.precedent_first import (
     FiscalFactor,
     LLMConclusion,
     LLMFactorDecision,
@@ -10,7 +10,7 @@ from backend.estimator_v2.precedent_first import (
     build_decision_prompt,
     route_llm_decisions,
 )
-from backend.estimator_v2.top_level_router import FinalDisposition, ROUTE_REVENUE
+from backend.erce_web.estimator_v2.top_level_router import FinalDisposition, ROUTE_REVENUE
 
 
 def _precedent(*, bill_no="2120001", date="2023-01-01"):

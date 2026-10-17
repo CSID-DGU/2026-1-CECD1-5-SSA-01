@@ -13,7 +13,7 @@ ET.register_namespace("hp", HP_NS)
 ET.register_namespace("opf", OPF_NS)
 
 NS = {"hp": HP_NS, "opf": OPF_NS}
-TEMPLATE_PATH = PROJECT_ROOT / "비용추계서" / "[별지 제1호서식] 비용추계서(경기도 의안의 비용 추계에 관한 조례).hwpx"
+TEMPLATE_PATH = PROJECT_ROOT / "archive" / "forms" / "비용추계서" / "[별지 제1호서식] 비용추계서(경기도 의안의 비용 추계에 관한 조례).hwpx"
 
 
 def _text_of_paragraph(paragraph: ET.Element) -> str:

@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import patch
 
-import backend.committee_component_recommender as recommender
-from backend.committee_component_recommender import (
+import backend.erce_web.committee_component_recommender as recommender
+from backend.erce_web.committee_component_recommender import (
     StructuralCandidate,
     _bounded_governance_articles,
     _build_target,

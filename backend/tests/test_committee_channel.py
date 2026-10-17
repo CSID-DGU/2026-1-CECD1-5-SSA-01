@@ -4,7 +4,7 @@ import copy
 import unittest
 from unittest.mock import patch
 
-from backend.committee_channel import (
+from backend.erce_web.committee_channel import (
     _build_committee,
     _calculate_committee,
     _entity_from_body,
@@ -211,7 +211,7 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertEqual([group["entity"] for group in groups], ["국가데이터진흥위원회"])
         self.assertEqual(len(groups[0]["articles"]), 2)
 
-    @patch("backend.committee_channel._gemini_raw_json")
+    @patch("backend.erce_web.committee_channel._gemini_raw_json")
     def test_llm_groups_definition_and_generic_followup_articles(self, llm_mock) -> None:
         articles = [
             {
@@ -262,7 +262,7 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertEqual(groups, [])
         self.assertTrue(rejected)
 
-    @patch("backend.committee_channel._gemini_raw_json")
+    @patch("backend.erce_web.committee_channel._gemini_raw_json")
     def test_llm_precedent_ranking_can_only_select_grounded_candidates(self, llm_mock) -> None:
         def candidate(key: str, bill_no: str, value: int) -> dict:
             return {
@@ -386,7 +386,7 @@ class CommitteeChannelTest(unittest.TestCase):
             "multi_body_meeting_allowance",
         )
 
-    @patch("backend.committee_channel._gemini_raw_json")
+    @patch("backend.erce_web.committee_channel._gemini_raw_json")
     def test_llm_formula_selection_is_restricted_to_grounded_candidates(self, llm_mock) -> None:
         candidates = [
             {
@@ -503,7 +503,7 @@ class CommitteeChannelTest(unittest.TestCase):
             _token_overlap(query, generic_other),
         )
 
-    @patch("backend.committee_channel._committee_documents_by_bill")
+    @patch("backend.erce_web.committee_channel._committee_documents_by_bill")
     def test_missing_tag_values_are_recovered_from_all_rag_cases(self, documents_mock) -> None:
         documents_mock.return_value = {
             "2210001": "민간위원은 6명으로 하고 회의는 연 3회 개최하며 참석수당 단가는 20만원으로 한다."
@@ -516,7 +516,7 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertEqual(values["committee_paid_member_count"], 6)
         self.assertEqual(values["committee_allowance_unit"], 200_000)
 
-    @patch("backend.committee_channel._committee_documents_by_bill")
+    @patch("backend.erce_web.committee_channel._committee_documents_by_bill")
     def test_recovered_operands_bind_to_the_nearest_target_committee(self, documents_mock) -> None:
         documents_mock.return_value = {
             "2210002": (
@@ -535,8 +535,8 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertEqual(values["committee_paid_member_count"]["candidate_total_members"], 15)
         self.assertEqual(values["committee_allowance_unit"]["value"], 200_000)
 
-    @patch("backend.committee_channel._hybrid_rag_search")
-    @patch("backend.committee_channel.find_assumption_candidates")
+    @patch("backend.erce_web.committee_channel._hybrid_rag_search")
+    @patch("backend.erce_web.committee_channel.find_assumption_candidates")
     def test_new_committee_calculates_preview_but_requires_tag_confirmation(
         self,
         assumption_mock,
@@ -611,8 +611,8 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertEqual(row["annual_amount_thousand"], 11_200)
         self.assertEqual(row["total_amount_thousand"], 56_000)
 
-    @patch("backend.committee_channel._hybrid_rag_search", return_value=[])
-    @patch("backend.committee_channel.find_assumption_candidates", return_value=[])
+    @patch("backend.erce_web.committee_channel._hybrid_rag_search", return_value=[])
+    @patch("backend.erce_web.committee_channel.find_assumption_candidates", return_value=[])
     def test_existing_committee_without_current_baseline_is_blocked(self, *_mocks) -> None:
         articles = copy.deepcopy(self.articles)
         for article in articles:
@@ -628,8 +628,8 @@ class CommitteeChannelTest(unittest.TestCase):
         self.assertIsNone(committee["variables"]["paid_members"]["value"])
         self.assertEqual(committee["status"], "blocked_missing_variables")
 
-    @patch("backend.committee_channel._hybrid_rag_search", return_value=[])
-    @patch("backend.committee_channel.find_assumption_candidates", return_value=[])
+    @patch("backend.erce_web.committee_channel._hybrid_rag_search", return_value=[])
+    @patch("backend.erce_web.committee_channel.find_assumption_candidates", return_value=[])
     def test_secretariat_cost_is_explicitly_out_of_scope(self, *_mocks) -> None:
         articles = copy.deepcopy(self.articles)
         articles.append({

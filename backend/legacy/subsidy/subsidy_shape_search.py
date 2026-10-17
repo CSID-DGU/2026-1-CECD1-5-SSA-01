@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import re
 
-from backend.estimator import tag_db
+from backend.erce_web.estimator import tag_db
 from backend.legacy.subsidy.subsidy_shape import classify_subsidy_shape
 
 SUBSIDY_SHAPE_SEARCH_VERSION = "subsidy-shape-search-v1"

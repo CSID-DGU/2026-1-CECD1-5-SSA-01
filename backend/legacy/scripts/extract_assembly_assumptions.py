@@ -18,7 +18,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from backend.config import GENERATED_DIR
+from backend.erce_web.config import GENERATED_DIR
 
 
 DEFAULT_SEED_DIR = GENERATED_DIR / "assembly_rag_seed_22_ce"

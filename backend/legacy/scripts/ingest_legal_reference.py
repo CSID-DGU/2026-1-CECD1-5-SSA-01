@@ -25,7 +25,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from backend.config import SCRIPT_DIR, get_env
+from backend.erce_web.config import SCRIPT_DIR, get_env
 
 EMBED_MODEL  = get_env("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 

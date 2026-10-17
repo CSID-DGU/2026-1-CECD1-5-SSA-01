@@ -1,4 +1,4 @@
-from backend.committee_precedent_resolver import (
+from backend.erce_web.committee_precedent_resolver import (
     _body_is_bundled_in_profile,
     _composition_flags,
     _formula_implied_thousand,

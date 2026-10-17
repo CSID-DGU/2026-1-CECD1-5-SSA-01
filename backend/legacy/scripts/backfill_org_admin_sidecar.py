@@ -16,7 +16,7 @@ import urllib.error
 import urllib.request
 from typing import Any, Iterable
 
-from backend.config import GENERATED_DIR, get_env
+from backend.erce_web.config import GENERATED_DIR, get_env
 from backend.legacy.scripts.audit_org_admin_variables import (
     DEFAULT_SEED_DIRS,
     build_candidates,

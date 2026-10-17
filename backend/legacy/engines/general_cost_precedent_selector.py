@@ -24,8 +24,8 @@ import re
 import statistics
 from typing import Any, Iterable, Mapping
 
-from backend.general_cost_resolver import FORMULAS
-from backend.research_service_unit_cost_registry import (
+from backend.erce_web.general_cost_resolver import FORMULAS
+from backend.erce_web.research_service_unit_cost_registry import (
     research_service_formula_inputs,
 )
 

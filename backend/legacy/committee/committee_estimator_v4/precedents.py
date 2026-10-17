@@ -11,9 +11,9 @@ from dataclasses import dataclass, replace
 import re
 import statistics
 
-from backend.committee_estimator_v3.evidence_store import candidate_profile
-from backend.estimator_v2.retrieval import search_cost_candidates
-from backend.estimator_v2.types import TagCandidate
+from backend.erce_web.committee_estimator_v3.evidence_store import candidate_profile
+from backend.erce_web.estimator_v2.retrieval import search_cost_candidates
+from backend.erce_web.estimator_v2.types import TagCandidate
 
 from .structure import CommitteeNode
 

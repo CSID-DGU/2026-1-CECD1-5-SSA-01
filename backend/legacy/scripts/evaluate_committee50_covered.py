@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from backend.committee_covered_estimator import estimate
+from backend.erce_web.committee_covered_estimator import estimate
 from backend.legacy.scripts.build_committee50_hierarchical_cases import build_cases
 from backend.legacy.scripts.evaluate_committee_covered_estimator import _gold
 

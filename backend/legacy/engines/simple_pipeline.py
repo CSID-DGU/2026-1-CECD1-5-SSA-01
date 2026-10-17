@@ -4,14 +4,14 @@
 """
 from __future__ import annotations
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _call_llm_raw_json,
     split_articles,
     strip_appendices,
     _extract_pdf_text_from_bytes,
     try_embed,
 )
-from backend.estimator import tag_db
+from backend.erce_web.estimator import tag_db
 
 _ITEM_PROMPT = """다음 조문을 보고, 비용이 발생하는 조문이면 그 비용항목을
 한 문장으로 설명하라. "설치한다·둔다·지급한다·지원한다·증원한다·인원을

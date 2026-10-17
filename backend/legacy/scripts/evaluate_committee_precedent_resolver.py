@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from backend.committee_precedent_resolver import resolve
+from backend.erce_web.committee_precedent_resolver import resolve
 
 
 def evaluate(cases_path: Path) -> dict[str, Any]:

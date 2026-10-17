@@ -25,7 +25,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
-from backend.article_extraction_engine import _json_from_llm_text  # noqa: E402
+from backend.erce_web.article_extraction_engine import _json_from_llm_text  # noqa: E402
 
 OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 DEFAULT_MODEL = "gpt-5.6-sol"
@@ -95,7 +95,7 @@ def run_bill(pdf_path: str, model: str, base_year: int = 2027) -> dict:
     # 파이프라인 전체에서 LLM을 호출하는 4개 바인딩을 모두 OpenAI로 교체.
     # (같은 _call_upstage_json 함수가 4개 모듈에 각각 import돼 있어 각각 패치)
     patches = [
-        patch("backend.article_extraction_engine._call_upstage_json", side_effect=openai_json),
+        patch("backend.erce_web.article_extraction_engine._call_upstage_json", side_effect=openai_json),
         patch("backend.legacy.tag.tag_parsers._call_upstage_json", side_effect=openai_json),
         patch("backend.legacy.committee.committee_assembly_internal_gate._call_upstage_json", side_effect=openai_json),
         patch("backend.legacy.committee.committee_activity_duration_gate._call_upstage_json", side_effect=openai_json),

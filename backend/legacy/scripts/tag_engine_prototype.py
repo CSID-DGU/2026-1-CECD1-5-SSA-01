@@ -26,7 +26,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
-from backend.committee_channel import _read_jsonl_records, _tag_roots  # noqa: E402
+from backend.erce_web.committee_channel import _read_jsonl_records, _tag_roots  # noqa: E402
 
 
 @dataclass(frozen=True)

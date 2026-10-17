@@ -27,7 +27,7 @@ from backend.legacy.engines.general_cost_precedent_selector import infer_mechani
 
 
 ROOT = Path(__file__).resolve().parents[3]
-SCHEMA_PATH = ROOT / "backend/migrations/20260927_general_cost_v2_pilot.sqlite.sql"
+SCHEMA_PATH = ROOT / "backend/legacy/migrations/20260927_general_cost_v2_pilot.sqlite.sql"
 SIDECAR_DIR = ROOT / "backend/generated/general_cost_sidecar_v1"
 PDF_ROOT = ROOT / "backend/generated/assembly_22_pdfs/by_bill"
 HOLDOUT_MANIFEST = ROOT / "backend/generated/assembly_22_validation_holdout_v1/manifest.jsonl"

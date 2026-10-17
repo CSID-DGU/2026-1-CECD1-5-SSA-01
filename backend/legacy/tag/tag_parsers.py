@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from backend.article_extraction_engine import _call_upstage_json
-from backend.committee_size_extract import (
+from backend.erce_web.article_extraction_engine import _call_upstage_json
+from backend.erce_web.committee_size_extract import (
     extract_committee_size,
     extract_designated_ex_officio_chair,
     extract_meeting_frequency,

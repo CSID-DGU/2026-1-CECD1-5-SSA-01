@@ -9,7 +9,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from backend.config import get_env
+from backend.erce_web.config import get_env
 
 api_key  = get_env("AZURE_OPENAI_API_KEY")
 endpoint = get_env("AZURE_OPENAI_ENDPOINT").rstrip("/")

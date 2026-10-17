@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from backend.estimator import tag_db
+from backend.erce_web.estimator import tag_db
 
 
 PROFILE_PATH = ROOT / "backend/generated/committee_evidence_v1/committee_profiles.jsonl"

@@ -15,7 +15,7 @@ from backend.legacy.committee.committee_replication import detect_replication
 from backend.legacy.committee.committee_membership import derive_paid_members
 from backend.legacy.committee.committee_activity_duration_gate import extract_activity_duration_months_llm
 from backend.legacy.tag.tag_reference_lookup import basic_expense_ratio_reference, standing_member_salary_reference
-from backend.committee_size_extract import (
+from backend.erce_web.committee_size_extract import (
     extract_activity_duration_months,
     extract_paid_member_count,
     extract_paid_member_ratio_floor,
@@ -26,7 +26,7 @@ from backend.legacy.committee.committee_type_gate import (
     TYPE_3_SIMPLE_ADVISORY,
     TYPE_4_ASSEMBLY_INTERNAL,
 )
-from backend.estimator_v2.grade_salary import grade_salary_table_thousand
+from backend.erce_web.estimator_v2.grade_salary import grade_salary_table_thousand
 from backend.legacy.tag.tag_parsers import (
     CapitalExpenditureVars,
     CommitteeVars,

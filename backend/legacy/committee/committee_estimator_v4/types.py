@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-from backend.committee_estimator_v3.types import CandidateAudit, EvidenceValue
+from backend.erce_web.committee_estimator_v3.types import CandidateAudit, EvidenceValue
 
 
 @dataclass(frozen=True)

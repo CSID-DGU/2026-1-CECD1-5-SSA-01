@@ -15,8 +15,8 @@ from typing import Any
 
 import fitz
 
-from backend.config import GENERATED_DIR
-from backend.estimator_v2.org_admin_resolver import (
+from backend.erce_web.config import GENERATED_DIR
+from backend.erce_web.estimator_v2.org_admin_resolver import (
     OrgAdminPlanRequest,
     load_sidecar,
     resolve_org_admin_plan,
@@ -25,7 +25,7 @@ from backend.legacy.scripts.evaluate_assembly_batch import _parse_first_cost_tab
 
 
 ROOT = Path(__file__).resolve().parents[3]
-CATALOG = ROOT / "backend/fixtures/org_admin_target_excluded_cases.json"
+CATALOG = ROOT / "backend/legacy/fixtures/org_admin_target_excluded_cases.json"
 DEFAULT_SIDECAR = GENERATED_DIR / "org_admin_sidecar_v1"
 
 

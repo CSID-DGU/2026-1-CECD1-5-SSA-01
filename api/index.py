@@ -16,7 +16,7 @@ if str(ROOT) not in sys.path:
 
 _IMPORT_ERROR: str | None = None
 try:
-    from backend.server import ApiHandler
+    from backend.erce_web.server import ApiHandler
     _BASE = ApiHandler
 except Exception:
     _IMPORT_ERROR = traceback.format_exc()

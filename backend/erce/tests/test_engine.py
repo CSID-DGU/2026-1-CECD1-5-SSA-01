@@ -7,7 +7,7 @@ from backend.erce.evidence_registry import select_committee_pack
 from backend.erce.formula_registry import formula_for_route
 from backend.erce.formula_registry import ERCE_FORMULA_ROUTES, DIRECT_FORMULA_ROUTE_KEYS
 from backend.erce.route_tree import formula_leaf_routes, route_for_path
-from backend.general_cost_resolver import FORMULAS
+from backend.erce_web.general_cost_resolver import FORMULAS
 
 
 class ERCEEngineTest(unittest.TestCase):

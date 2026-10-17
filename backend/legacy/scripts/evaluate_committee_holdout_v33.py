@@ -12,8 +12,8 @@ import json
 import re
 import statistics
 
-from backend.committee_estimator_v3 import estimate_committee_from_pdf
-from backend.committee_estimator_v3.pipeline import ENGINE_VERSION
+from backend.erce_web.committee_estimator_v3 import estimate_committee_from_pdf
+from backend.erce_web.committee_estimator_v3.pipeline import ENGINE_VERSION
 from backend.legacy.scripts.run_estimator_v2 import _pdf
 
 

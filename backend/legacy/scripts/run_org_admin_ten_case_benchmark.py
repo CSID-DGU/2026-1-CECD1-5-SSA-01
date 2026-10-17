@@ -15,14 +15,14 @@ import os
 from pathlib import Path
 from typing import Any
 
-from backend.estimator_v2 import (
+from backend.erce_web.estimator_v2 import (
     CanonicalInput,
     OrgAdminPlanRequest,
     estimate_from_pdf,
     resolve_org_admin_plan,
 )
-from backend.estimator_v2.harness import audit_missed_evidence
-from backend.estimator_v2.regression import REGRESSION_CASES
+from backend.erce_web.estimator_v2.harness import audit_missed_evidence
+from backend.erce_web.estimator_v2.regression import REGRESSION_CASES
 from backend.legacy.scripts.evaluate_assembly_batch import _parse_first_cost_table
 from backend.legacy.scripts.run_estimator_v2 import _pdf
 

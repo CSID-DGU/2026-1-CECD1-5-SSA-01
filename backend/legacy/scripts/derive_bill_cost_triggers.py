@@ -22,7 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from backend.config import get_env
+from backend.erce_web.config import get_env
 
 SUPA_URL = get_env("SUPABASE_URL").rstrip("/")
 SUPA_KEY = get_env("SUPABASE_SERVICE_ROLE_KEY")

@@ -19,7 +19,7 @@ from urllib import error, request
 import fitz
 
 from backend.erce.web_bridge import route_options, calculate_erce_web_item
-from backend.general_cost_resolver import FORMULAS
+from backend.erce_web.general_cost_resolver import FORMULAS
 from backend.erce.web_evidence_selection import (
     CitationReviewRequired, advance_clause_candidates, evidence_catalog, selected_web_context,
 )

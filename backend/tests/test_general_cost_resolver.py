@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import unittest
 
-from backend.economic_forecast_registry import growth_input_from_series
-from backend.general_cost_resolver import request_from_dict, resolve_general_cost
+from backend.erce_web.economic_forecast_registry import growth_input_from_series
+from backend.erce_web.general_cost_resolver import request_from_dict, resolve_general_cost
 
 
 class GeneralCostResolverTest(unittest.TestCase):

@@ -12,7 +12,7 @@ from pathlib import Path
 import re
 import statistics
 
-from backend.committee_estimator_v3 import estimate_committee_from_pdf
+from backend.erce_web.committee_estimator_v3 import estimate_committee_from_pdf
 from backend.legacy.scripts.evaluate_committee_hierarchical_pilot import (
     CASES,
     _eligible_draft,

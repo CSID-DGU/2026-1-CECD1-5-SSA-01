@@ -16,8 +16,8 @@ import re
 import tempfile
 from typing import Any
 
-from backend.committee_component_recommender import recommend
-from backend.committee_covered_estimator import estimate
+from backend.erce_web.committee_component_recommender import recommend
+from backend.erce_web.committee_covered_estimator import estimate
 
 
 def _compact(value: str) -> str:

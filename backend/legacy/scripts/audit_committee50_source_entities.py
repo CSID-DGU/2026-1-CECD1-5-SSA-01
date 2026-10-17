@@ -13,7 +13,7 @@ from pathlib import Path
 import re
 from typing import Any
 
-from backend.article_extraction_engine import extract_pdf_text, split_articles_regex
+from backend.erce_web.article_extraction_engine import extract_pdf_text, split_articles_regex
 from backend.legacy.committee.committee_gate import group_committee_articles
 from backend.legacy.scripts.build_committee50_manifest import build_manifest
 

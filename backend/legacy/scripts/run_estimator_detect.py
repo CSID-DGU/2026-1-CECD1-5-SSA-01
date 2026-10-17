@@ -13,14 +13,14 @@ from pathlib import Path
 
 os.environ.setdefault("ANALYZE_ARTICLE_WORKERS", "1")
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _extract_bill_name,
     _extract_current_bill_no,
     _extract_pdf_text_from_bytes,
     split_articles,
     strip_appendices,
 )
-from backend.estimator.detect import detect_cost_items
+from backend.erce_web.estimator.detect import detect_cost_items
 
 FILES = Path("backend/generated/assembly_rag_seed_age21_50/files")
 

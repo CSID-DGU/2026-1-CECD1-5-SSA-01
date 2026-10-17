@@ -8,13 +8,13 @@ import statistics
 import time
 from typing import Any
 
-from backend.config import get_env
+from backend.erce_web.config import get_env
 from backend.legacy.scripts.build_general_cost_v2_pilot import DEFAULT_DB, DEFAULT_OUTPUT_DIR
 from backend.legacy.scripts.search_general_cost_v2_pilot import search
 
 
 ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_FIXTURE = ROOT / "backend/fixtures/general_cost_v2_goods_pilot_queries.json"
+DEFAULT_FIXTURE = ROOT / "backend/legacy/fixtures/general_cost_v2_goods_pilot_queries.json"
 DEFAULT_OUTPUT = DEFAULT_OUTPUT_DIR / "retrieval_benchmark.json"
 
 

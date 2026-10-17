@@ -11,7 +11,7 @@ from backend.legacy.engines.general_cost_precedent_selector import (
     select_precedent,
     target_from_dict,
 )
-from backend.general_cost_resolver import request_from_dict, resolve_general_cost
+from backend.erce_web.general_cost_resolver import request_from_dict, resolve_general_cost
 
 
 def _write(path: Path, payload: object) -> None:

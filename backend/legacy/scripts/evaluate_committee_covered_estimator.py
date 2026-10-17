@@ -11,13 +11,13 @@ import json
 from pathlib import Path
 from typing import Any
 
-from backend.committee_covered_estimator import (
+from backend.erce_web.committee_covered_estimator import (
     _full_year_amount,
     _is_committee_item,
     _year_values,
     estimate,
 )
-from backend.committee_precedent_resolver import _bill_items
+from backend.erce_web.committee_precedent_resolver import _bill_items
 
 
 ROOT = Path(__file__).resolve().parents[3]

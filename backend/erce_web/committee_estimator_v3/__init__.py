@@ -1,6 +1,6 @@
 """Evidence-gated estimator for statutory committee meeting costs.
 
-This package is intentionally isolated from ``backend.estimator_v2``.  It
+This package is intentionally isolated from ``backend.erce_web.estimator_v2``.  It
 reuses the local TAG index and PDF parser, but owns its extraction, evidence
 gates, review contract, and calculation result.
 """

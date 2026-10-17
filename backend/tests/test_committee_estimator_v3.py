@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from backend.committee_estimator_v3.pipeline import (
+from backend.erce_web.committee_estimator_v3.pipeline import (
     _CommitteeTarget,
     _candidate_audit,
     _cohort_paid_member_count,
@@ -12,10 +12,10 @@ from backend.committee_estimator_v3.pipeline import (
     _organization_scope_context,
     _precedent_disagreement,
 )
-from backend.committee_estimator_v3 import pipeline as committee_pipeline
-from backend.committee_estimator_v3 import evidence_store
-from backend.estimator_v2.types import AtomicEvent, TagCandidate
-from backend.committee_estimator_v3.types import CandidateAudit
+from backend.erce_web.committee_estimator_v3 import pipeline as committee_pipeline
+from backend.erce_web.committee_estimator_v3 import evidence_store
+from backend.erce_web.estimator_v2.types import AtomicEvent, TagCandidate
+from backend.erce_web.committee_estimator_v3.types import CandidateAudit
 
 
 def _target(context: str, name: str = "발전위원회") -> _CommitteeTarget:

@@ -1,4 +1,4 @@
-from backend.committee_evidence_adapter import apply_evidence_workflow
+from backend.erce_web.committee_evidence_adapter import apply_evidence_workflow
 
 
 def _committee() -> dict:

@@ -7,13 +7,13 @@ from pathlib import Path
 import re
 from typing import Any
 
-from backend.article_extraction_engine import extract_pdf_text, split_articles_regex
+from backend.erce_web.article_extraction_engine import extract_pdf_text, split_articles_regex
 from backend.legacy.scripts.build_committee50_manifest import build_manifest
 from backend.scripts.evaluate_committee_precedent_routes import _load_metadata
 
 
 ROOT = Path(__file__).resolve().parents[3]
-TARGET_LABELS = ROOT / "backend/fixtures/committee50_target_terms.json"
+TARGET_LABELS = ROOT / "backend/legacy/fixtures/committee50_target_terms.json"
 
 
 def _compact(value: str) -> str:

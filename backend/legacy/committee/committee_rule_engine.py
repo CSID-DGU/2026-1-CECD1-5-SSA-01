@@ -27,7 +27,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from backend.analyzer_v2 import _extract_pdf_text_from_bytes, _gemini_raw_json, split_articles
+from backend.erce_web.analyzer_v2 import _extract_pdf_text_from_bytes, _gemini_raw_json, split_articles
 
 COMMITTEE_RULE_ENGINE_VERSION = "committee-rule-engine-v2"
 

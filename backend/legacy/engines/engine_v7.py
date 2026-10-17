@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from backend.estimator_v2.grade_salary import _decomposed_series, normalize_grade_composition
+from backend.erce_web.estimator_v2.grade_salary import _decomposed_series, normalize_grade_composition
 from backend.legacy.engines.finale_engine import FormulaSuggestion, FINALE_ENGINE_VERSION, suggest_formulas
 
 ENGINE_V7_VERSION = "engine-v7-unified-v1"

@@ -4,8 +4,8 @@ from dataclasses import dataclass
 import re
 from typing import Any
 
-from backend.committee_estimator_v3.pipeline import _CommitteeTarget, _actor
-from backend.estimator_v2.types import AtomicEvent
+from backend.erce_web.committee_estimator_v3.pipeline import _CommitteeTarget, _actor
+from backend.erce_web.estimator_v2.types import AtomicEvent
 
 from .types import CommitteeRelation, FormulaPlan
 

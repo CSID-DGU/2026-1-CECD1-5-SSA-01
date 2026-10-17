@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import re
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _extract_pdf_text_from_bytes,
     split_articles,
     strip_appendices,

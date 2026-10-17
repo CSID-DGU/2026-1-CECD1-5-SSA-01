@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _extract_bill_name,
     _extract_current_bill_no,
     _extract_pdf_text_from_bytes,

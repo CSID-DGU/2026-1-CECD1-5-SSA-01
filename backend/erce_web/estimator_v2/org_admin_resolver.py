@@ -18,7 +18,7 @@ import json
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from backend.config import GENERATED_DIR
+from backend.erce_web.config import GENERATED_DIR
 
 
 RESOLVER_VERSION = "org-admin-resolver-v2"

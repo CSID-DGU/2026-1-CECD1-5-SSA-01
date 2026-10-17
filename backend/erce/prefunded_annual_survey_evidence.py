@@ -2,7 +2,7 @@
 from math import isfinite, prod
 from backend.erce.reviewed_variable_rows import evidence_row
 from backend.erce.variable_resolver import resolve_formula_variables, selected_precedent_inputs
-from backend.economic_forecast_registry import get_forecast_series
+from backend.erce_web.economic_forecast_registry import get_forecast_series
 
 PROFILE = "prefunded_annual_survey_delta"
 NOTES = ("prefunded_survey_scope_note","prefunded_survey_baseline_note","prefunded_survey_price_note")

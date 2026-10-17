@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from backend.analyzer_v2 import split_articles_structured
-from backend.estimator_v2.calculation import estimate_event_amount, estimate_selected_precedent
-from backend.estimator_v2.detect import (
+from backend.erce_web.analyzer_v2 import split_articles_structured
+from backend.erce_web.estimator_v2.calculation import estimate_event_amount, estimate_selected_precedent
+from backend.erce_web.estimator_v2.detect import (
     _augment_explicit_support_office_events,
     _chunk_segments,
     _failure_recovery_limit,
@@ -18,8 +18,8 @@ from backend.estimator_v2.detect import (
     merge_revision_body_articles,
     segment_articles,
 )
-from backend.estimator_v2.gates import assess_event
-from backend.estimator_v2.organization import (
+from backend.erce_web.estimator_v2.gates import assess_event
+from backend.erce_web.estimator_v2.organization import (
     _all_staff_cost_bundles,
     _bundle_organization_form,
     _coherent_bundle_series,
@@ -46,9 +46,9 @@ from backend.estimator_v2.organization import (
     select_typed_structure_case,
     OrganizationCase,
 )
-from backend.estimator_v2.prior_scope import assess_prior_scope
-from backend.estimator_v2.recurrence import resolve_recurrence, schedule_amount
-from backend.estimator_v2.selection import (
+from backend.erce_web.estimator_v2.prior_scope import assess_prior_scope
+from backend.erce_web.estimator_v2.recurrence import resolve_recurrence, schedule_amount
+from backend.erce_web.estimator_v2.selection import (
     _choose_committee_companion_scorecard_candidate,
     _choose_research_scorecard_candidate,
     _committee_companion_scorecard_candidate_payload,
@@ -57,8 +57,8 @@ from backend.estimator_v2.selection import (
     select_precedent,
     usable_candidates,
 )
-from backend.estimator_v2.types import AtomicEvent, RowStatus, Segment, TagCandidate
-from backend.estimator_v2.variable_selection import (
+from backend.erce_web.estimator_v2.types import AtomicEvent, RowStatus, Segment, TagCandidate
+from backend.erce_web.estimator_v2.variable_selection import (
     _committee_function,
     _compatible_options,
     _latest_general_budget_guideline_option,
@@ -829,10 +829,10 @@ def test_same_law_partial_prior_can_block_unpriced_matching_event() -> None:
         ]
     }
     with patch(
-        "backend.estimator_v2.prior_scope._latest_same_law_prior",
+        "backend.erce_web.estimator_v2.prior_scope._latest_same_law_prior",
         return_value=prior,
     ), patch(
-        "backend.estimator_v2.prior_scope.get_or_create_json",
+        "backend.erce_web.estimator_v2.prior_scope.get_or_create_json",
         return_value=(response, False),
     ):
         decisions, warning = assess_prior_scope(
@@ -872,10 +872,10 @@ def test_partial_prior_without_grounded_event_quote_stays_unknown() -> None:
         ]
     }
     with patch(
-        "backend.estimator_v2.prior_scope._latest_same_law_prior",
+        "backend.erce_web.estimator_v2.prior_scope._latest_same_law_prior",
         return_value=prior,
     ), patch(
-        "backend.estimator_v2.prior_scope.get_or_create_json",
+        "backend.erce_web.estimator_v2.prior_scope.get_or_create_json",
         return_value=(response, False),
     ):
         decisions, _ = assess_prior_scope(
@@ -903,7 +903,7 @@ def test_law_text_controls_recurrence_before_precedent() -> None:
 
 
 def test_displayed_formula_uses_target_recurrence_not_precedent_cycle() -> None:
-    from backend.estimator_v2.pipeline import _formula_with_target_recurrence
+    from backend.erce_web.estimator_v2.pipeline import _formula_with_target_recurrence
 
     recurrence = resolve_recurrence(
         _event(
@@ -1008,7 +1008,7 @@ def test_formula_count_beats_a_generative_cap_arithmetic_mistake() -> None:
     # The count is resolved before the generative selector can incorrectly
     # claim that 20 exceeds the statutory cap of 25.
     with patch(
-        "backend.estimator_v2.variable_selection.gemini_json",
+        "backend.erce_web.estimator_v2.variable_selection.gemini_json",
         return_value={
             "option_id": "DISTRACTOR:V1",
             "reason": "잘못된 산술 판단",
@@ -1040,7 +1040,7 @@ def test_strong_number_blind_formula_selection_keeps_one_coherent_case() -> None
     distractor.bill_no = "DISTRACTOR_BILL"
 
     with patch(
-        "backend.estimator_v2.variable_selection.gemini_json"
+        "backend.erce_web.estimator_v2.variable_selection.gemini_json"
     ) as model_call:
         amount, _, evidence, reason = estimate_committee_formula_first(
             _event(),
@@ -1115,7 +1115,7 @@ def test_variable_units_are_normalised_before_calculation() -> None:
 def test_variable_semantic_selector_payload_hides_operand_values() -> None:
     import json
 
-    from backend.estimator_v2.variable_selection import _masked_option_payload
+    from backend.erce_web.estimator_v2.variable_selection import _masked_option_payload
 
     candidate = _candidate("HIDDEN", 11, 250_000, 4)
     candidate.variables[2]["source_text"] = "매년 4회 회의를 개최"
@@ -2407,7 +2407,7 @@ def test_organization_search_allows_older_same_law_but_excludes_target() -> None
     # No network is used when k=0 is not possible, so inspect the pre-filtered
     # local case pool through the public function only when embeddings exist.
     # The structural invariant itself is covered by checking the source pool:
-    from backend.estimator_v2.organization import _all_complete_cases
+    from backend.erce_web.estimator_v2.organization import _all_complete_cases
 
     cases = _all_complete_cases()
     assert any(case.bill_no == "2124204" for case in cases)
@@ -2419,7 +2419,7 @@ def test_organization_search_allows_older_same_law_but_excludes_target() -> None
 
 
 def test_item_search_allows_older_same_law_precedent() -> None:
-    from backend.estimator_v2.retrieval import search_cost_candidates
+    from backend.erce_web.estimator_v2.retrieval import search_cost_candidates
 
     item_id = "PRIOR::item1"
     loaded = {
@@ -2436,19 +2436,19 @@ def test_item_search_allows_older_same_law_precedent() -> None:
         "vars": {item_id: []},
     }
     with patch(
-        "backend.estimator_v2.retrieval._query_embedding",
+        "backend.erce_web.estimator_v2.retrieval._query_embedding",
         return_value=([1.0, 0.0], True),
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._load",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._load",
         return_value=loaded,
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._load_embeddings",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._load_embeddings",
         return_value={item_id: [1.0, 0.0]},
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._formula_by_item",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._formula_by_item",
         return_value={item_id: "인원×수당×횟수"},
     ), patch(
-        "backend.estimator_v2.retrieval._amount_rows",
+        "backend.erce_web.estimator_v2.retrieval._amount_rows",
         return_value={item_id: [{"amount_thousand": 4_000}]},
     ):
         candidates, _ = search_cost_candidates(
@@ -2462,7 +2462,7 @@ def test_item_search_allows_older_same_law_precedent() -> None:
 
 
 def test_query_embedding_reuses_legacy_vector_across_retrieval_policy_versions() -> None:
-    from backend.estimator_v2.retrieval import _query_embedding
+    from backend.erce_web.estimator_v2.retrieval import _query_embedding
 
     versions: list[str] = []
 
@@ -2474,7 +2474,7 @@ def test_query_embedding_reuses_legacy_vector_across_retrieval_policy_versions()
         return None, False
 
     with patch(
-        "backend.estimator_v2.retrieval.get_or_create_json",
+        "backend.erce_web.estimator_v2.retrieval.get_or_create_json",
         side_effect=fake_cache,
     ):
         vector, cache_hit = _query_embedding("정책위원회 운영")
@@ -2487,7 +2487,7 @@ def test_query_embedding_reuses_legacy_vector_across_retrieval_policy_versions()
 def test_committee_formula_reranker_payload_hides_candidate_numbers() -> None:
     import json
 
-    from backend.estimator_v2.selection import _candidate_payload
+    from backend.erce_web.estimator_v2.selection import _candidate_payload
 
     candidate = _candidate("FORMULA", 11, 250_000, 4)
     candidate.context_families = ["committee", "research"]
@@ -2556,7 +2556,7 @@ def test_committee_companion_plan_period_is_a_structural_gate() -> None:
         }, True
 
     with patch(
-        "backend.estimator_v2.selection.get_or_create_json",
+        "backend.erce_web.estimator_v2.selection.get_or_create_json",
         side_effect=fake_cache,
     ):
         selected, reason, confidence, _ = select_precedent(
@@ -2640,7 +2640,7 @@ def test_committee_companion_scorecard_chooses_structure_not_amount_or_embedding
 
 
 def test_variable_search_crosses_family_but_keeps_temporal_holdout() -> None:
-    from backend.estimator_v2.retrieval import search_variable_candidates
+    from backend.erce_web.estimator_v2.retrieval import search_variable_candidates
 
     prior_id = "PRIOR::frequency"
     target_id = "TARGET::frequency"
@@ -2686,23 +2686,23 @@ def test_variable_search_crosses_family_but_keeps_temporal_holdout() -> None:
         },
     }
     with patch(
-        "backend.estimator_v2.retrieval._variable_query_embedding",
+        "backend.erce_web.estimator_v2.retrieval._variable_query_embedding",
         return_value=([1.0, 0.0], True),
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._load",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._load",
         return_value=loaded,
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._load_embeddings",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._load_embeddings",
         return_value={
             prior_id: [1.0, 0.0],
             target_id: [1.0, 0.0],
             future_id: [1.0, 0.0],
         },
     ), patch(
-        "backend.estimator_v2.retrieval.tag_db._formula_by_item",
+        "backend.erce_web.estimator_v2.retrieval.tag_db._formula_by_item",
         return_value={},
     ), patch(
-        "backend.estimator_v2.retrieval._amount_rows",
+        "backend.erce_web.estimator_v2.retrieval._amount_rows",
         return_value={},
     ):
         candidates, _ = search_variable_candidates(
@@ -2812,7 +2812,7 @@ def test_frequency_uses_top_three_semantic_precedent_agreement() -> None:
 
 
 def test_evidence_harness_extracts_named_source_without_generic_body() -> None:
-    from backend.estimator_v2.harness import _source_anchors
+    from backend.erce_web.estimator_v2.harness import _source_anchors
 
     anchors = _source_anchors(
         "최저임금위원회 전문위원회 5년 평균 운영비와 사무국 운영예산"
@@ -2823,7 +2823,7 @@ def test_evidence_harness_extracts_named_source_without_generic_body() -> None:
 
 
 def test_2126685_harness_finds_missed_independent_db_evidence() -> None:
-    from backend.estimator_v2.harness import audit_missed_evidence
+    from backend.erce_web.estimator_v2.harness import audit_missed_evidence
 
     audit = audit_missed_evidence("2126685")
     assert audit["target_excluded_from_candidate_search"] is True
@@ -2840,7 +2840,7 @@ def test_2126685_harness_finds_missed_independent_db_evidence() -> None:
 
 
 def test_regression_gate_rejects_amount_damage_and_target_leak() -> None:
-    from backend.estimator_v2.regression import (
+    from backend.erce_web.estimator_v2.regression import (
         REGRESSION_CASES,
         evaluate_regression_case,
     )
@@ -2876,11 +2876,11 @@ def test_regression_gate_rejects_amount_damage_and_target_leak() -> None:
 def test_formula_regression_gate_rejects_compensating_operands() -> None:
     from types import SimpleNamespace
 
-    from backend.estimator_v2.regression import (
+    from backend.erce_web.estimator_v2.regression import (
         REGRESSION_CASES,
         audit_formula_expectations,
     )
-    from backend.estimator_v2.types import EstimateRow
+    from backend.erce_web.estimator_v2.types import EstimateRow
 
     case = next(case for case in REGRESSION_CASES if case.bill_no == "2126334")
     committee = EstimateRow(
@@ -2913,7 +2913,7 @@ def test_formula_regression_gate_rejects_compensating_operands() -> None:
 
 
 def test_multi_organization_regression_input_is_target_keyed() -> None:
-    from backend.estimator_v2.regression import REGRESSION_CASES
+    from backend.erce_web.estimator_v2.regression import REGRESSION_CASES
 
     case = next(case for case in REGRESSION_CASES if case.bill_no == "2213937")
     assert case.organization_net_staff_count == 60
@@ -2921,7 +2921,7 @@ def test_multi_organization_regression_input_is_target_keyed() -> None:
 
 
 def test_offline_cache_mode_never_calls_producer() -> None:
-    from backend.estimator_v2.cache import get_or_create_json
+    from backend.erce_web.estimator_v2.cache import get_or_create_json
 
     with patch.dict("os.environ", {"ESTIMATOR_V2_OFFLINE": "1"}):
         value, cache_hit = get_or_create_json(
@@ -2934,7 +2934,7 @@ def test_offline_cache_mode_never_calls_producer() -> None:
 
 
 def test_evidence_index_lifts_2125446_budget_table_from_narrative() -> None:
-    from backend.estimator_v2.evidence_index import evidence_atoms
+    from backend.erce_web.estimator_v2.evidence_index import evidence_atoms
 
     matches = [
         atom
@@ -2954,15 +2954,15 @@ def test_evidence_index_lifts_2125446_budget_table_from_narrative() -> None:
 
 
 def test_narrative_fallback_is_shadow_only_and_groups_related_rows() -> None:
-    from backend.estimator_v2.evidence_fallback import (
+    from backend.erce_web.estimator_v2.evidence_fallback import (
         attach_narrative_evidence_shadow,
         build_shadow_groups,
     )
-    from backend.estimator_v2.evidence_index import (
+    from backend.erce_web.estimator_v2.evidence_index import (
         EvidenceAtom,
         EvidenceSearchHit,
     )
-    from backend.estimator_v2.types import EstimateResult, EstimateRow
+    from backend.erce_web.estimator_v2.types import EstimateResult, EstimateRow
 
     unresolved = EstimateRow(
         event=_event(
@@ -3035,13 +3035,13 @@ def test_narrative_fallback_is_shadow_only_and_groups_related_rows() -> None:
     hit = EvidenceSearchHit(atom, 0.61, 0.05)
     before = result.total_thousand()
     with patch(
-        "backend.estimator_v2.evidence_fallback.target_metadata",
+        "backend.erce_web.estimator_v2.evidence_fallback.target_metadata",
         return_value=("2024-05-24", ""),
     ), patch(
-        "backend.estimator_v2.evidence_fallback.search_evidence_atoms",
+        "backend.erce_web.estimator_v2.evidence_fallback.search_evidence_atoms",
         return_value=[hit],
     ) as search, patch(
-        "backend.estimator_v2.evidence_fallback._select_for_group",
+        "backend.erce_web.estimator_v2.evidence_fallback._select_for_group",
         return_value=(
             {
                 "E006": {
@@ -3066,13 +3066,13 @@ def test_narrative_fallback_is_shadow_only_and_groups_related_rows() -> None:
 
 
 def test_unavailable_negative_channel_is_not_treated_as_no_evidence() -> None:
-    from backend.estimator_v2.retrieval import search_non_attachment_evidence
+    from backend.erce_web.estimator_v2.retrieval import search_non_attachment_evidence
 
     with patch(
-        "backend.estimator_v2.retrieval._query_embedding",
+        "backend.erce_web.estimator_v2.retrieval._query_embedding",
         return_value=([0.1, 0.2], True),
     ), patch(
-        "backend.estimator_v2.retrieval.get_or_create_json",
+        "backend.erce_web.estimator_v2.retrieval.get_or_create_json",
         return_value=(None, False),
     ):
         evidence, available = search_non_attachment_evidence(
@@ -3084,7 +3084,7 @@ def test_unavailable_negative_channel_is_not_treated_as_no_evidence() -> None:
 
 
 def test_non_attachment_search_excludes_future_and_enriches_reason() -> None:
-    from backend.estimator_v2.retrieval import search_non_attachment_evidence
+    from backend.erce_web.estimator_v2.retrieval import search_non_attachment_evidence
 
     index = {
         "OLD": {
@@ -3119,16 +3119,16 @@ def test_non_attachment_search_excludes_future_and_enriches_reason() -> None:
         },
     ]
     with patch(
-        "backend.estimator_v2.retrieval._query_embedding",
+        "backend.erce_web.estimator_v2.retrieval._query_embedding",
         return_value=([0.1, 0.2], True),
     ), patch(
-        "backend.estimator_v2.retrieval._non_attachment_index",
+        "backend.erce_web.estimator_v2.retrieval._non_attachment_index",
         return_value=index,
     ), patch(
-        "backend.estimator_v2.retrieval.vector_search",
+        "backend.erce_web.estimator_v2.retrieval.vector_search",
         return_value=hits,
     ), patch(
-        "backend.estimator_v2.retrieval.get_or_create_json",
+        "backend.erce_web.estimator_v2.retrieval.get_or_create_json",
         side_effect=lambda _namespace, _key, producer, refresh=False: (
             producer(),
             False,
@@ -3146,7 +3146,7 @@ def test_non_attachment_search_excludes_future_and_enriches_reason() -> None:
 
 
 def test_strong_scale_blocker_requires_structured_technical_reason() -> None:
-    from backend.estimator_v2.retrieval import strongest_scale_blocker
+    from backend.erce_web.estimator_v2.retrieval import strongest_scale_blocker
 
     event = _event(
         event_type="organization_change",
@@ -3172,7 +3172,7 @@ def test_strong_scale_blocker_requires_structured_technical_reason() -> None:
 
 
 def test_facility_scale_blocker_rejects_revenue_reason_that_mentions_facility() -> None:
-    from backend.estimator_v2.retrieval import strongest_scale_blocker
+    from backend.erce_web.estimator_v2.retrieval import strongest_scale_blocker
 
     event = _event(
         event_type="organization_change",
@@ -3200,7 +3200,7 @@ def test_facility_scale_blocker_rejects_revenue_reason_that_mentions_facility() 
 
 
 def test_organization_scale_blocker_rejects_workload_driven_staffing() -> None:
-    from backend.estimator_v2.retrieval import strongest_scale_blocker
+    from backend.erce_web.estimator_v2.retrieval import strongest_scale_blocker
 
     event = _event(
         event_type="organization_change",
@@ -3228,7 +3228,7 @@ def test_organization_scale_blocker_rejects_workload_driven_staffing() -> None:
 
 
 def test_scale_blocker_rejects_high_similarity_with_different_missing_role() -> None:
-    from backend.estimator_v2.retrieval import strongest_scale_blocker
+    from backend.erce_web.estimator_v2.retrieval import strongest_scale_blocker
 
     event = _event(
         event_type="organization_change",
@@ -3253,7 +3253,7 @@ def test_scale_blocker_rejects_high_similarity_with_different_missing_role() -> 
 
 
 def test_non_attachment_role_parser_does_not_call_system_scale_an_org_scale() -> None:
-    from backend.estimator_v2.retrieval import (
+    from backend.erce_web.estimator_v2.retrieval import (
         classify_non_attachment_missing_roles,
     )
 
@@ -3312,7 +3312,7 @@ def test_missing_whole_organization_budget_requests_user_input() -> None:
         ),
     )
     with patch(
-        "backend.estimator_v2.organization._operating_budget_candidates",
+        "backend.erce_web.estimator_v2.organization._operating_budget_candidates",
         return_value=[],
     ):
         rows = build_organization_operating_budget_rows(

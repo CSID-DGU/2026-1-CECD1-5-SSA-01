@@ -1,19 +1,19 @@
 from __future__ import annotations
 
-from backend.analyzer_v2 import (
+from backend.erce_web.analyzer_v2 import (
     _extract_bill_name,
     _extract_current_bill_no,
     _extract_pdf_text_from_bytes,
     split_articles,
     strip_appendices,
 )
-from backend.committee_estimator_v3.pipeline import _estimate_target
-from backend.committee_estimator_v3.types import (
+from backend.erce_web.committee_estimator_v3.pipeline import _estimate_target
+from backend.erce_web.committee_estimator_v3.types import (
     CandidateAudit,
     CommitteeEstimate,
     EvidenceValue,
 )
-from backend.estimator_v2.retrieval import target_metadata
+from backend.erce_web.estimator_v2.retrieval import target_metadata
 
 from .precedents import resolve_support_bundle
 from .structure import CommitteeNode, extract_committee_nodes, select_formula_plan

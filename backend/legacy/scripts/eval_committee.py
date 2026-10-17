@@ -21,7 +21,7 @@ os.environ.setdefault("ANALYZE_ARTICLE_WORKERS", "1")
 
 import fitz  # noqa: E402
 
-from backend.committee_channel import analyze_committee_document  # noqa: E402
+from backend.erce_web.committee_channel import analyze_committee_document  # noqa: E402
 from backend.legacy.scripts.evaluate_assembly_batch import _parse_first_cost_table  # noqa: E402
 
 FILES = Path("backend/generated/assembly_rag_seed_age21_50/files")

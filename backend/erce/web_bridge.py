@@ -15,7 +15,7 @@ from backend.erce.method_evidence_store import find_method_candidates, validate_
 from backend.erce.formula_registry import formula_for_route
 from backend.erce.net_staffing import court_upgrade_precedent_inputs, net_staffing_scenarios
 from backend.erce.route_tree import ERCE_ROUTE_TREE
-from backend.general_cost_resolver import FORMULAS
+from backend.erce_web.general_cost_resolver import FORMULAS
 
 
 def route_options(node: Any = ERCE_ROUTE_TREE, path: tuple[str, ...] = ()) -> list[dict[str, Any]]:

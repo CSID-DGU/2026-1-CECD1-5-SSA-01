@@ -30,8 +30,8 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from backend.estimator import tag_db
-from backend.analyzer_v2 import split_articles, strip_appendices
+from backend.erce_web.estimator import tag_db
+from backend.erce_web.analyzer_v2 import split_articles, strip_appendices
 from backend.legacy.committee.committee_estimator_v5.structure import extract_committee_events
 from backend.scripts import evaluate_committee_precedent_routes as routes
 

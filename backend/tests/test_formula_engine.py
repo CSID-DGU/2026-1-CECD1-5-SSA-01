@@ -3,22 +3,22 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-from backend.assembly_formula_engine import (
+from backend.erce_web.assembly_formula_engine import (
     apply_formula_source_strategy,
     apply_reasonable_default_amounts,
     apply_tag_formula_evidence,
     build_generalized_estimate,
     classify_estimation_status,
 )
-from backend.assembly_analogy_engine import build_analogical_committee_estimate
-from backend.assembly_case_policy import apply_validated_case_policy
-from backend.calculator import compute_year_estimates
-from backend.form_renderer import render_form
+from backend.erce_web.assembly_analogy_engine import build_analogical_committee_estimate
+from backend.erce_web.assembly_case_policy import apply_validated_case_policy
+from backend.erce_web.calculator import compute_year_estimates
+from backend.erce_web.form_renderer import render_form
 
 
 class AssemblyFormulaEngineTest(unittest.TestCase):
     def test_split_bill_title_is_reconstructed(self) -> None:
-        from backend.analyzer_v2 import _extract_bill_name
+        from backend.erce_web.analyzer_v2 import _extract_bill_name
 
         text = (
             "친환경농어업육성및유기식품등의관리ㆍ지원에관한\n"
@@ -31,7 +31,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         )
 
     def test_current_bill_number_is_reconstructed_for_rag_holdout(self) -> None:
-        from backend.analyzer_v2 import _extract_current_bill_no
+        from backend.erce_web.analyzer_v2 import _extract_current_bill_no
 
         text = """
         의안 번호 14559
@@ -42,7 +42,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(_extract_current_bill_no(text, "2214559_의안원문.pdf"), "2214559")
 
     def test_vector_search_excludes_current_bill_and_refills_results(self) -> None:
-        from backend.analyzer_v2 import vector_search
+        from backend.erce_web.analyzer_v2 import vector_search
 
         returned = [
             {"bill_no": "2214559", "chunk_id": "target:1"},
@@ -50,7 +50,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
             {"bill_no": "2216569", "chunk_id": "other:1"},
             {"bill_no": "2213486", "chunk_id": "other:2"},
         ]
-        with patch("backend.analyzer_v2._post", return_value=returned) as post:
+        with patch("backend.erce_web.analyzer_v2._post", return_value=returned) as post:
             matches = vector_search(
                 [0.0, 0.1],
                 source="national_assembly",
@@ -63,7 +63,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(post.call_args.args[2]["match_count"], 20)
 
     def test_korean_person_counter_is_parsed_for_committee_size(self) -> None:
-        from backend.analyzer_v2 import _extract_committee_total_members, _rule_cost_trigger
+        from backend.erce_web.analyzer_v2 import _extract_committee_total_members, _rule_cost_trigger
 
         article = "위원장과 부위원장 각 1인을 포함한 25인 이내의 위원으로 구성한다."
         self.assertEqual(_extract_committee_total_members(article), 25)
@@ -77,7 +77,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(rule["estimate_feasibility"], "formula_ready")
 
     def test_non_estimable_llm_item_is_removed_before_defaults(self) -> None:
-        from backend.analyzer_v2 import _exclude_non_estimable_items
+        from backend.erce_web.analyzer_v2 import _exclude_non_estimable_items
 
         estimate = {
             "items": [
@@ -103,7 +103,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(estimate["excluded_items"][0]["trigger_ref"], "안 제3조")
 
     def test_ungrounded_llm_cost_claim_is_removed(self) -> None:
-        from backend.analyzer_v2 import _exclude_non_estimable_items
+        from backend.erce_web.analyzer_v2 import _exclude_non_estimable_items
 
         estimate = {
             "items": [{
@@ -125,7 +125,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertIn("조세·부담금", estimate["excluded_items"][0]["reason"])
 
     def test_missing_evidence_creates_targeted_human_input_requests(self) -> None:
-        from backend.analyzer_v2 import _build_human_input_requests
+        from backend.erce_web.analyzer_v2 import _build_human_input_requests
 
         estimate = {
             "items": [{
@@ -163,7 +163,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         )
 
     def test_missing_net_staff_shows_sourced_staffing_candidate(self) -> None:
-        from backend.analyzer_v2 import _build_human_input_requests
+        from backend.erce_web.analyzer_v2 import _build_human_input_requests
 
         estimate = {"items": [{
             "name": "지방법원 신설 인건비",
@@ -198,7 +198,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertIsNone(calculated)
 
     def test_human_inputs_recompute_transfer_formula_without_hidden_default(self) -> None:
-        from backend.analyzer_v2 import recompute_with_user_inputs
+        from backend.erce_web.analyzer_v2 import recompute_with_user_inputs
 
         articles = [{
             "no": "제4조(지원금의 지급)",
@@ -228,7 +228,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertNotIn("human_input", updated)
 
     def test_human_inputs_keep_initial_and_maintenance_costs_separate(self) -> None:
-        from backend.analyzer_v2 import recompute_with_user_inputs
+        from backend.erce_web.analyzer_v2 import recompute_with_user_inputs
 
         estimate = {
             "items": [{
@@ -257,7 +257,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(updated["calculation_status"], "computed_by_python")
 
     def test_committee_assumptions_transfer_ratio_and_use_robust_unit_cost(self) -> None:
-        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+        from backend.erce_web.analyzer_v2 import _enhance_committee_meeting_formulas
 
         item = {
             "name": "녹색산업발전위원회 운영비",
@@ -333,7 +333,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         )
 
     def test_generic_committee_candidates_use_target_excluded_corpus_mode(self) -> None:
-        from backend.analyzer_v2 import _extract_committee_meetings
+        from backend.erce_web.analyzer_v2 import _extract_committee_meetings
 
         corpus = {
             "n": 119,
@@ -368,7 +368,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(trace["corpus_distribution"]["excluded_bill_nos"], ["2199999"])
 
     def test_subject_matched_committee_candidates_beat_corpus_mode(self) -> None:
-        from backend.analyzer_v2 import _extract_committee_meetings
+        from backend.erce_web.analyzer_v2 import _extract_committee_meetings
 
         corpus = {"n": 100, "mode": 4, "mode_count": 40}
         candidates = [
@@ -394,7 +394,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(trace["method"], "tag_candidates_median")
 
     def test_generalized_merge_deduplicates_same_article_and_cost_family(self) -> None:
-        from backend.assembly_formula_engine import merge_generalized_estimate
+        from backend.erce_web.assembly_formula_engine import merge_generalized_estimate
 
         current = {
             "items": [
@@ -435,7 +435,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertTrue(all(item.get("merged_llm_drafts") for item in merged["items"]))
 
     def test_plan_draft_merges_into_research_service_item(self) -> None:
-        from backend.assembly_formula_engine import merge_generalized_estimate
+        from backend.erce_web.assembly_formula_engine import merge_generalized_estimate
 
         current = {"items": [{
             "name": "발전종합계획 수립",
@@ -459,7 +459,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(merged["items"][0]["merged_llm_drafts"][0]["name"], "발전종합계획 수립")
 
     def test_committee_creation_and_composition_articles_are_one_cost_item(self) -> None:
-        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+        from backend.erce_web.analyzer_v2 import _enhance_committee_meeting_formulas
 
         articles = [
             {
@@ -487,7 +487,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(estimate["items"][0]["committee_formula"]["paid_members"], 12)
 
     def test_explicit_five_year_plan_is_formula_ready_and_periodic(self) -> None:
-        from backend.analyzer_v2 import _rule_cost_trigger
+        from backend.erce_web.analyzer_v2 import _rule_cost_trigger
 
         text = (
             "제21조(발전종합계획) 장관은 사업의 발전을 위한 "
@@ -848,7 +848,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         estimate = build_generalized_estimate(articles)
         self.assertIsNotNone(estimate)
 
-        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+        from backend.erce_web.analyzer_v2 import _enhance_committee_meeting_formulas
 
         self.assertEqual(_enhance_committee_meeting_formulas(estimate, articles), 1)
         patterns = [{
@@ -1085,7 +1085,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertTrue([issue for issue in issues if issue.get("level") == "error"])
 
     def test_high_court_establishment_uses_judicial_institution_template(self) -> None:
-        from backend.analyzer_v2 import _build_public_organization_establishment_estimate
+        from backend.erce_web.analyzer_v2 import _build_public_organization_establishment_estimate
 
         text = (
             "각급 법원의 설치와 관할구역에 관한 법률 일부개정법률안 "
@@ -1113,7 +1113,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual([item["name"] for item in estimate["items"]], ["인천고등법원 운영비용", "인천고등검찰청 운영비용"])
 
     def test_tag_full_structure_is_promoted_to_estimate(self) -> None:
-        from backend.analyzer_v2 import _build_estimate_from_tag_pattern
+        from backend.erce_web.analyzer_v2 import _build_estimate_from_tag_pattern
 
         pattern = {
             "bill_no": "2126648",
