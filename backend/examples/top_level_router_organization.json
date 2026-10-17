@@ -1,0 +1,59 @@
+{
+  "form_type": "assembly",
+  "years": 5,
+  "cost_profile": "recurring",
+  "routes": [
+    {
+      "event_id": "ORG-1",
+      "route": "organization_administration",
+      "description": "특별지방자치단체 조직 신설",
+      "readiness": "ready",
+      "payload": {
+        "components": [
+          "personnel",
+          "employer_contribution",
+          "basic_expense",
+          "asset",
+          "operating_expense"
+        ],
+        "inputs": {
+          "headcount": {
+            "value": 60,
+            "unit": "person",
+            "source": "user_input",
+            "source_ref": "검토자 확인"
+          },
+          "salary_per_person": {
+            "value": 65460000,
+            "unit": "KRW/person/year",
+            "source": "comparable_precedent_review_required",
+            "source_ref": "2211844"
+          },
+          "employer_contribution_rate": {
+            "value": 0.13066,
+            "unit": "ratio",
+            "source": "official_standard"
+          },
+          "basic_expense_ratio": {
+            "value": 0.23,
+            "unit": "ratio",
+            "source": "comparable_precedent_review_required",
+            "source_ref": "2211844"
+          },
+          "asset_unit_price_per_person": {
+            "value": 4980000,
+            "unit": "KRW/person",
+            "source": "comparable_precedent_review_required",
+            "source_ref": "2211844"
+          },
+          "annual_operating_amount": {
+            "value": 4000000000,
+            "unit": "KRW/year",
+            "source": "user_input",
+            "source_ref": "검토자 확인"
+          }
+        }
+      }
+    }
+  ]
+}

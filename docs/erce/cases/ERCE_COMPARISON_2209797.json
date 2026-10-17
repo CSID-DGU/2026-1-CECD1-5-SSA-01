@@ -1,0 +1,32 @@
+{
+  "bill_no": "2209797",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2209797.json",
+  "gold": {
+    "estimate_no": "25C2159",
+    "reply_date": "2025-04-28",
+    "total_eok": 1,
+    "annual_million": [
+      50,
+      0,
+      0,
+      50,
+      0
+    ],
+    "survey_unit_cost_won": 50000000,
+    "reference": "2025보건복지부 장애인정책모니터링 사업예산.정책·언론모니터링 조사분석",
+    "price_mode": "freeze",
+    "existing_agency_no_expansion_assumed": true
+  },
+  "first_run": {
+    "formula_match": true,
+    "cycle_match": true,
+    "phase_match": true,
+    "total_eok": null,
+    "error_percent": null,
+    "required_slots": 2,
+    "filled_slots": 1,
+    "missing_slots": 1
+  },
+  "difference": "주기적조사 산식 및2026/2029 실시연도는 맞음. 동일모니터링 과업 단가를 찾지못해금액미산출. 다른주제의5천만원단가를 금액만같다는이유로 선택하지않음",
+  "reinforcement_done": false
+}

@@ -1,0 +1,360 @@
+{
+  "bill_no": "2216665",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "reference_scenario": true,
+  "runs": {
+    "law_under18": {
+      "payload": {
+        "bill_no": "2216665",
+        "route_key": "protected_child_insurance_population_share",
+        "support_derivation": "protected_child_insurance_population_share",
+        "payer": "government",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-14",
+        "start_year": 2027,
+        "years": 5,
+        "protected_child_model_confirmed": true,
+        "protected_child_premium_mode": "freeze_reference_premium",
+        "protected_child_age_basis": "under18_law",
+        "protected_child_scope_note": "기존가정위탁보험지원분 제외. 시설·공동생활 보호아동을 비중대리로 산출하는 가정",
+        "protected_child_share_note": "본문2020~2024평균비중0.17%의 표시값 준용. 원관측·실제평균의추가자릿수미검증. 정밀도를맞춰역산하지 않음",
+        "protected_child_premium_note": "공식2025보험료연68500원내외 시설아동준용·연1회전액·가격동결. 실제단체보험견적 아님",
+        "explicit_inputs": {},
+        "selected_evidence_keys": [
+          "2216665:protected_child:annual_premium:2025",
+          "2216665:protected_child:published_population_share"
+        ],
+        "selected_method_keys": [
+          "2216665:protected_child_insurance_population_share"
+        ],
+        "method_selection_reasons": {
+          "2216665:protected_child_insurance_population_share": "고정인원 대신 비중과장래인구를 분리"
+        },
+        "method_confirmations": {
+          "2216665:protected_child_insurance_population_share": {
+            "protected_child_scope_note": "기존가정위탁보험지원분 제외. 시설·공동생활 보호아동을 비중대리로 산출하는 가정",
+            "protected_child_share_note": "본문2020~2024평균비중0.17%의 표시값 준용. 원관측·실제평균의추가자릿수미검증. 정밀도를맞춰역산하지 않음",
+            "protected_child_premium_note": "공식2025보험료연68500원내외 시설아동준용·연1회전액·가격동결. 실제단체보험견적 아님"
+          }
+        },
+        "evidence_selection_reasons": {
+          "2216665:protected_child:annual_premium:2025": "법적연령기준과표시비중·공식보험료 준용가정 확인",
+          "2216665:protected_child:published_population_share": "법적연령기준과표시비중·공식보험료 준용가정 확인"
+        }
+      },
+      "result": {
+        "route_key": "protected_child_insurance_population_share",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2216665:protected_child:annual_premium:2025,2216665:protected_child:published_population_share",
+        "annual_amounts_thousand": [
+          714524,
+          690686,
+          663765,
+          638831,
+          615815
+        ],
+        "source_refs": [
+          "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+          "2216665 비용추계서26C0846 PDF3쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              714523500,
+              690685500,
+              663765000,
+              638831000,
+              615815000
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2216665:protected_child_insurance_population_share"
+        ]
+      }
+    },
+    "answer_reference": {
+      "payload": {
+        "bill_no": "2216665",
+        "route_key": "protected_child_insurance_population_share",
+        "support_derivation": "protected_child_insurance_population_share",
+        "payer": "government",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-14",
+        "start_year": 2027,
+        "years": 5,
+        "protected_child_model_confirmed": true,
+        "protected_child_premium_mode": "freeze_reference_premium",
+        "protected_child_age_basis": "under19_answer_reference",
+        "protected_child_scope_note": "기존가정위탁보험지원분 제외. 시설·공동생활 보호아동을 비중대리로 산출하는 가정",
+        "protected_child_share_note": "본문2020~2024평균비중0.17%의 표시값 준용. 원관측·실제평균의추가자릿수미검증. 정밀도를맞춰역산하지 않음",
+        "protected_child_premium_note": "공식2025보험료연68500원내외 시설아동준용·연1회전액·가격동결. 실제단체보험견적 아님",
+        "explicit_inputs": {},
+        "selected_evidence_keys": [
+          "2216665:protected_child:annual_premium:2025",
+          "2216665:protected_child:published_population_share"
+        ],
+        "selected_method_keys": [
+          "2216665:protected_child_insurance_population_share"
+        ],
+        "method_selection_reasons": {
+          "2216665:protected_child_insurance_population_share": "고정인원 대신 비중과장래인구를 분리"
+        },
+        "method_confirmations": {
+          "2216665:protected_child_insurance_population_share": {
+            "protected_child_scope_note": "기존가정위탁보험지원분 제외. 시설·공동생활 보호아동을 비중대리로 산출하는 가정",
+            "protected_child_share_note": "본문2020~2024평균비중0.17%의 표시값 준용. 원관측·실제평균의추가자릿수미검증. 정밀도를맞춰역산하지 않음",
+            "protected_child_premium_note": "공식2025보험료연68500원내외 시설아동준용·연1회전액·가격동결. 실제단체보험견적 아님"
+          }
+        },
+        "evidence_selection_reasons": {
+          "2216665:protected_child:annual_premium:2025": "법적연령기준과표시비중·공식보험료 준용가정 확인",
+          "2216665:protected_child:published_population_share": "법적연령기준과표시비중·공식보험료 준용가정 확인"
+        },
+        "estimate_purpose": "reference_scenario",
+        "protected_child_age_conflict_approved": true,
+        "protected_child_age_conflict_note": "정답5개년인원은0~18세×0.17%로모두재현되나 본문은18세미만.참고재현만하고법적연령기준바꾸지않음"
+      },
+      "result": {
+        "route_key": "protected_child_insurance_population_share",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2216665:protected_child:annual_premium:2025,2216665:protected_child:published_population_share",
+        "annual_amounts_thousand": [
+          767063,
+          742403,
+          719661,
+          693768,
+          669588
+        ],
+        "source_refs": [
+          "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+          "2216665 비용추계서26C0846 PDF3쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              767063000,
+              742403000,
+              719661000,
+              693768000,
+              669587500
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2216665:protected_child_insurance_population_share"
+        ]
+      }
+    }
+  },
+  "total_eok": 35.92483,
+  "gold_display_total_eok": 35.93,
+  "raw_error_percent": 0.014389089897021083,
+  "annual_million_display": [
+    767,
+    742,
+    720,
+    694,
+    670
+  ],
+  "annual_display_matches": 5,
+  "law_under18_total_eok": 33.23621,
+  "survey_expansion_review": {
+    "decision": "not_estimated",
+    "amount": null,
+    "source_decision_label": "조사대상 추가 표본·선정방법·조사항목 미확정으로 미추계",
+    "decision_evidence_key": "2216665:protected_child_survey_expansion_not_estimated",
+    "reason": "보호아동 추가로 조사원·기간·표본이 늘 수 있지만 확정조사설계가 없어 추가분 산정불가",
+    "source_ref": "2216665 비용추계서26C0846 PDF2쪽",
+    "source_quote": "표본크기와 선정 방법, 관련 조사항목 등이 구체화되지 않았으므로 추가재정소요를 합리적으로 추계하는 데 한계가 있음",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "protected_survey_scope_note": "제11조대상추가에추가조사원·기간비용가능성",
+      "protected_survey_design_review_note": "정답PDF2쪽표본크기·선정·문항 미확정 근거확인.새설계확보되면재추계"
+    },
+    "confirmed_facts": {
+      "expanded_sample_size_confirmed": false,
+      "sampling_design_confirmed": false,
+      "additional_survey_items_confirmed": false
+    },
+    "reestimate_when": "추가표본·선정설계·문항·조사원·기간 또는 별도추가견적 확보시 순증분추계",
+    "limitation": "정답의 일부추계 사유. 미첨부3호 번호 새로단정안함. 미추계금액은0원이 아님"
+  },
+  "web_interface_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "",
+    "routeKey": "protected_child_insurance_population_share",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      767063,
+      742403,
+      719661,
+      693768,
+      669588
+    ],
+    "derivationTrace": [
+      {
+        "year": 2027,
+        "population": 6587080,
+        "population_age_max": 18,
+        "population_vintage": "2023-12",
+        "published_protected_child_share": 0.0017,
+        "estimated_protected_children": 11198,
+        "annual_premium_won": 68500,
+        "amount_won": 767063000,
+        "age_basis": "under19_answer_reference",
+        "answer_age_conflict": true
+      },
+      {
+        "year": 2028,
+        "population": 6375398,
+        "population_age_max": 18,
+        "population_vintage": "2023-12",
+        "published_protected_child_share": 0.0017,
+        "estimated_protected_children": 10838,
+        "annual_premium_won": 68500,
+        "amount_won": 742403000,
+        "age_basis": "under19_answer_reference",
+        "answer_age_conflict": true
+      },
+      {
+        "year": 2029,
+        "population": 6180123,
+        "population_age_max": 18,
+        "population_vintage": "2023-12",
+        "published_protected_child_share": 0.0017,
+        "estimated_protected_children": 10506,
+        "annual_premium_won": 68500,
+        "amount_won": 719661000,
+        "age_basis": "under19_answer_reference",
+        "answer_age_conflict": true
+      },
+      {
+        "year": 2030,
+        "population": 5957457,
+        "population_age_max": 18,
+        "population_vintage": "2023-12",
+        "published_protected_child_share": 0.0017,
+        "estimated_protected_children": 10128,
+        "annual_premium_won": 68500,
+        "amount_won": 693768000,
+        "age_basis": "under19_answer_reference",
+        "answer_age_conflict": true
+      },
+      {
+        "year": 2031,
+        "population": 5750273,
+        "population_age_max": 18,
+        "population_vintage": "2023-12",
+        "published_protected_child_share": 0.0017,
+        "estimated_protected_children": 9775,
+        "annual_premium_won": 68500,
+        "amount_won": 669587500,
+        "age_basis": "under19_answer_reference",
+        "answer_age_conflict": true
+      }
+    ],
+    "sourceRefs": [
+      "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+      "2216665 비용추계서26C0846 PDF3쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2216665:protected_child_insurance_population_share"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2216665:protected_child_insurance_population_share",
+        "source_bill_no": "2216665",
+        "available_at": "2026-04-15",
+        "reviewed_at": "2026-10-14",
+        "payer": "government",
+        "family_key": "protected_child_insurance_population_share",
+        "source_ref": "2216665 비용추계서26C0846 PDF3쪽",
+        "match_groups": [
+          [
+            "보호대상아동",
+            "아동복지시설"
+          ],
+          [
+            "상해보험",
+            "보험료"
+          ]
+        ],
+        "allowed_routes": [
+          "protected_child_insurance_population_share"
+        ],
+        "support_derivation": "protected_child_insurance_population_share",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2216665:protected_child:annual_premium:2025",
+          "2216665:protected_child:published_population_share"
+        ],
+        "required_confirmations": [
+          "protected_child_scope_note",
+          "protected_child_share_note",
+          "protected_child_premium_note"
+        ],
+        "baseline_check": "가정위탁 기존지원분 제외. 같은시점시설인원을 영구동결하지 않고 보호비중과 아동전망인구로 추계",
+        "method_steps": [
+          "시설보호아동 비중0.17% 표시값 및 보장범위 확인",
+          "같은관측버전 연령별 장래인구로 보호대상인원을 연도별 산출",
+          "아동1인 연68500원 동결·전액지원 가정 적용",
+          "기본은0~17세.정답표0~18세 대응은 불일치표시 참고모드만"
+        ],
+        "limitation": "비중원2020~2024관측·정밀도미검증.정답본문18세미만과 숫자재현연령이달라 범용연령기준 수정금지",
+        "lower_variable_keys": [
+          "protected_child_annual_premium",
+          "protected_child_population_share"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "고정인원 대신 비중과장래인구를 분리",
+        "confirmed_assumptions": {
+          "protected_child_scope_note": "기존가정위탁보험지원분 제외. 시설·공동생활 보호아동을 비중대리로 산출하는 가정",
+          "protected_child_share_note": "본문2020~2024평균비중0.17%의 표시값 준용. 원관측·실제평균의추가자릿수미검증. 정밀도를맞춰역산하지 않음",
+          "protected_child_premium_note": "공식2025보험료연68500원내외 시설아동준용·연1회전액·가격동결. 실제단체보험견적 아님"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          767063000,
+          742403000,
+          719661000,
+          693768000,
+          669587500
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "공식2025복지안내책자 아동·청소년 가정위탁아동상해보험료; 2216665 비용추계서26C0846 PDF3쪽; 저장된KOSIS2023.12중위추계 연령별남녀인구 합산",
+        "is_assumption": true
+      }
+    }
+  },
+  "limitation": "정답숫자는0~18세대리와재현되지만본문18세미만과불일치. 원평균비중미검증.참고재현을법적기준완성·독립성과로주장안함"
+}

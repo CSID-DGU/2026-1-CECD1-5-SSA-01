@@ -1,0 +1,71 @@
+{
+  "bill_no": "2200209",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24B0612",
+  "gold_date": "2024-08-29",
+  "first_total_won": null,
+  "gold_display_total_won": 206000000000,
+  "error_percent": null,
+  "evaluation_status": "routing_and_operands_need_reinforcement",
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "first_fiscal_effect": "부담금 기금수입증가 위주",
+  "gold_fiscal_effect": "국가·지자체가 사업주로서 납부하는 부담금 지출증가, 기금수입과 상계하지 않음",
+  "routing_match": false,
+  "gold_scope": "정부고용주 공무원·비공무원 장애인고용부담금 추가지출",
+  "gold_horizon": [
+    2026,
+    2030
+  ],
+  "first_candidate_horizon": [
+    2025,
+    2029
+  ],
+  "gold_operand_basis": {
+    "old_minimum_ratios": [
+      0.6,
+      0.636,
+      0.72,
+      0.84,
+      1
+    ],
+    "new_minimum_ratios": [
+      0.8,
+      0.818,
+      0.86,
+      0.92,
+      1
+    ],
+    "civil_service_unfilled_by_band": [
+      542,
+      3988,
+      4055,
+      0,
+      1
+    ],
+    "non_civil_service_share": 0.064,
+    "payment_months": 12,
+    "lag_years": 1
+  },
+  "gold_annual_display_eok": [
+    386,
+    399,
+    412,
+    425,
+    438
+  ],
+  "gold_excluded_scope": {
+    "grant_use_restriction": "용도규정은 추가재정에 직접영향없음으로 미대상",
+    "grant_recovery": "환수수입의 순증은 비용추계 대상아님으로 미대상",
+    "levy_receipts": "기금수입 순증은 비용추계 대상아님, 정부고용주 지출증가를 별도로 추계"
+  },
+  "well_handled": "무고용구간100% 유지와 고용률별 기초액 차등 파악, 모든부담금을 동일20%인상하지 않음",
+  "first_gaps": [
+    "정부도 고용부담금 납부자라는 지출유발요인 탐지",
+    "5개고용구간별 미고용인원 및 가중치",
+    "공무원지출+비공무원비중6.4%",
+    "2025의무고용분2026납부라는1년 시차",
+    "장려금용도규정·순수수입증가 미대상 근거"
+  ],
+  "reinforcement_performed": false
+}

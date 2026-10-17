@@ -1,0 +1,292 @@
+{
+  "bill_no": "2207435",
+  "bill_name": "사회복지사 등의 처우 및 지위 향상을 위한 법률 일부개정법률안",
+  "proposer": "김예지",
+  "propose_date": "2025-01-10",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "article": "제3조의2제1항",
+      "page": 3,
+      "quote": "수립하여야한다.",
+      "verified": true
+    },
+    {
+      "article": "제3조제4항",
+      "page": 3,
+      "quote": "근로여건, 보수수준",
+      "verified": true
+    },
+    {
+      "article": "제3조의3제2항",
+      "page": 4,
+      "quote": "기본계획의수립에관한사항",
+      "verified": true
+    }
+  ],
+  "ai_decisions": [
+    {
+      "article": "제3조의2",
+      "decision": "estimate_when_inputs_available",
+      "route_key": "research_plan",
+      "reason": "새 3년주기 처우개선 기본계획, 다음 보수실태조사2026과 연결하는 조건부 시점. 연간 상시사업비와 구분"
+    },
+    {
+      "article": "제3조제4항",
+      "decision": "additional_cost_unconfirmed",
+      "reason": "기존3년 보수조사에 근로여건 조사범위 확대. 기존조사 전체사업비를 신규비용으로 잡지 않고 추가과업 단가 확인 필요"
+    },
+    {
+      "article": "제3조의3",
+      "decision": "existing_organization_task",
+      "reason": "위원회 신설 아닌 기존위원회 심의대상 추가. 새위원 수·회의횟수 생성하지 않음"
+    }
+  ],
+  "rejected_price_candidates": [
+    {
+      "key": "borderline_intelligence_plan_2024_10_22:plan_unit_cost",
+      "value": 70000000,
+      "scope": "중앙정부 연구용역",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "moe_plan_research_2024_07_25:plan_unit_cost",
+      "value": 32000000,
+      "scope": "중앙정부 연구용역",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2214690:plan_unit_cost:reviewed",
+      "value": 130000000,
+      "scope": "중앙정부 법정 산업발전계획",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2200039:mois_plan_research_unit_cost:2021-2023",
+      "value": 203000000,
+      "scope": "행정안전부 5년 종합계획 수립 연구용역",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211999:first_plan_unit_cost:2027",
+      "value": 220000000,
+      "scope": "스포츠지능정보화 3년 기본계획 수립 연구",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211348:research_sample:school_meal_policy_2020",
+      "value": 40000000,
+      "scope": "학교급식정책연구",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211348:research_sample:education_facility_plan_2020",
+      "value": 40000000,
+      "scope": "교육시설 안전·유지관리 계획",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211348:research_sample:lifelong_education_plan_2021",
+      "value": 30000000,
+      "scope": "제5차 평생교육 기본계획 비전·과제",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211348:research_sample:preschool_plan_2021",
+      "value": 36000000,
+      "scope": "제3차 유아교육 기본계획",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2211348:plan_schedule",
+      "value": {
+        "2025": 42000000,
+        "2028": 44000000
+      },
+      "scope": "2025·2028년 각1회 적용한 참고 추계",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2212766:plan:plan_unit_cost:reviewed",
+      "value": 40000000,
+      "scope": "전국장애인활동지원 연구용역",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    },
+    {
+      "key": "2215239:governance_plan:plan_unit_cost",
+      "value": 90000000,
+      "scope": "당사자관계·서비스고도화발전방안 정책연구",
+      "reason": "행안부·스포츠·학교급식·장애인활동지원 등 과업과 포함범위가 다름. 사회복지사 처우개선 계획의 충분히 검토된 단가로 확정할 근거 부족"
+    }
+  ],
+  "payload": {
+    "bill_no": "2207435",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "research_plan",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "2207435 원문PDF3쪽 제3조의2제1항"
+      }
+    },
+    "selected_evidence_keys": [],
+    "selected_method_keys": [
+      "2200039:periodic_plan_research"
+    ],
+    "method_selection_reasons": {
+      "2200039:periodic_plan_research": "3년마다 중앙 기본계획 수립의 외부연구용역 구조만 준용. 행안부 가격은 과업·범위가 달라 미선택"
+    },
+    "method_confirmations": {
+      "2200039:periodic_plan_research": {
+        "external_research_scope": "보건복지부 전국 사회복지사 근로여건·보수·재원조달 기본계획. 별도 정책연구용역 가정이며 법정 외주 의무는 아님. 다음2026 보수조사에 맞춰 첫계획 수립 후보, 원문 확정연도 아님"
+      }
+    }
+  },
+  "web_result": {
+    "status": "needs_input",
+    "routeKey": "research_plan",
+    "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "missingVariables": [
+      "plan_unit_cost"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [
+      {
+        "method_key": "2200039:periodic_plan_research",
+        "source_bill_no": "2200039",
+        "family_key": "village_enterprise_basic_plan",
+        "available_at": "2024-07-02",
+        "source_ref": "의안2200039 비용추계서24D0282, PDF4~6쪽",
+        "match_groups": [
+          [
+            "계획",
+            "plan"
+          ],
+          [
+            "수립",
+            "용역",
+            "research"
+          ]
+        ],
+        "allowed_routes": [
+          "research_plan"
+        ],
+        "payer": "government",
+        "baseline_check": "내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.",
+        "method_steps": [
+          "계획 수립 주기와 첫 수립시점을 확인",
+          "과업·규모가 유사한 연구용역 단가 선택",
+          "수립연도에만 비용 반영"
+        ],
+        "required_confirmations": [
+          "external_research_scope"
+        ],
+        "variable_keys": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2200039:mois_plan_research_unit_cost:2021-2023"
+        ],
+        "limitation": "행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.",
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "reviewed_at": "2026-10-03",
+        "applicability_reason": "3년마다 중앙 기본계획 수립의 외부연구용역 구조만 준용. 행안부 가격은 과업·범위가 달라 미선택",
+        "confirmed_assumptions": {
+          "external_research_scope": "보건복지부 전국 사회복지사 근로여건·보수·재원조달 기본계획. 별도 정책연구용역 가정이며 법정 외주 의무는 아님. 다음2026 보수조사에 맞춰 첫계획 수립 후보, 원문 확정연도 아님"
+        }
+      }
+    ],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200039:mois_plan_research_unit_cost:2021-2023",
+        "variableKey": "plan_unit_cost",
+        "value": 203000000,
+        "unit": "KRW/plan",
+        "sourceRef": "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-07-02",
+        "limitation": "2024-07-02 정답에서 처음 확인한 행안부 제출자료. 이 대상의 블라인드 입력 아님. 다른 계획에는 범위·규모 비교 필요",
+        "scope": "행정안전부 5년 종합계획 수립 연구용역",
+        "serviceFunction": "기본계획 수립 연구용역",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:education_facility_plan_2020",
+        "variableKey": "plan_unit_cost",
+        "value": 40000000,
+        "unit": "KRW/plan",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "교육시설 안전·유지관리 계획",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:lifelong_education_plan_2021",
+        "variableKey": "plan_unit_cost",
+        "value": 30000000,
+        "unit": "KRW/plan",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "제5차 평생교육 기본계획 비전·과제",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:preschool_plan_2021",
+        "variableKey": "plan_unit_cost",
+        "value": 36000000,
+        "unit": "KRW/plan",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "제3차 유아교육 기본계획",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:school_meal_policy_2020",
+        "variableKey": "plan_unit_cost",
+        "value": 40000000,
+        "unit": "KRW/plan",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "학교급식정책연구",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "plan_unit_cost": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "first_total_eok": null,
+  "error_percent": null
+}

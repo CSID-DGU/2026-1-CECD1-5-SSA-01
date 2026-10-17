@@ -1,0 +1,78 @@
+{
+  "bill_no": "2204756",
+  "answer_seen": false,
+  "run_by": "Claude(AI 역할 대행) 2026-10-15 세션",
+  "saved_at": "2026-10-15T13:50:15",
+  "bill_reading": "제26조제2항 단서에 환경부 추가 → 환경부 차관 1명→2명(정무직). 부칙 공포일 시행. 보좌인력·하부조직·예산 명시 없음.",
+  "strict_db_only_run": {
+    "personnel_grade": "needs_input(salary_by_grade 후보0)",
+    "personnel_employer_contribution": "needs_input",
+    "personnel_basic_expense": "needs_input",
+    "personnel_asset": "needs_input",
+    "computed_total_thousand": 0
+  },
+  "items": [
+    {
+      "route_path": [
+        "인건비",
+        "보수",
+        "직급별"
+      ],
+      "route_key": "personnel_grade",
+      "annualAmountsThousand": [
+        141140,
+        141140,
+        141140,
+        141140,
+        141140
+      ],
+      "inputs": {
+        "headcount_by_grade": {
+          "차관": 1,
+          "src": "원문"
+        },
+        "salary_by_grade": {
+          "차관": 141140000,
+          "src": "뉴시스 2024-01-02 2024 정무직 연봉표 보도(법령 별표 원문 미확인)"
+        },
+        "growth_rate": {
+          "value": 0,
+          "src": "참고가정 동결"
+        }
+      }
+    },
+    {
+      "route_path": [
+        "인건비",
+        "기관부담금"
+      ],
+      "route_key": "personnel_employer_contribution",
+      "annualAmountsThousand": [
+        18509,
+        18645,
+        18779,
+        18911,
+        19045
+      ],
+      "inputs": {
+        "employer_contribution_rate": "DB 2200010:central_government_employer_rate:2025-2029 (precedent_assumption, 부총리 겸임 사례)"
+      },
+      "note": "agency='환경부'로는 scope mismatch 거부 → '중앙행정기관'으로 맞춰 실행"
+    }
+  ],
+  "unestimated": [
+    "비서관·수행비서 등 보좌인력(직제 대통령령 사항, 원문 근거 없음)",
+    "기본경비",
+    "차량·사무실 등 자산취득",
+    "하부조직 신설 여부"
+  ],
+  "start_year_assumption": "2025 (공포일 시행, 2024 잔여기간 제외)",
+  "first_total_thousand": 799589,
+  "first_annual_thousand": [
+    159649,
+    159785,
+    159919,
+    160051,
+    160185
+  ]
+}

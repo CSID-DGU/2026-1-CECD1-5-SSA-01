@@ -53,6 +53,18 @@ ASSUMPTION_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
         re.compile(r"1인당\s*자산취득비|자산취득비.*(단가|1인당)|정부기관\s*1인당\s*자산취득비"),
     ),
     (
+        "committee_meeting_count",
+        re.compile(r"(연간\s*)?회의.*(개최\s*)?(횟수|빈도)|회의.*연\s*\d+\s*회|분기별.*회의"),
+    ),
+    (
+        "committee_paid_member_count",
+        re.compile(r"(민간|외부|위촉).*위원.*(수|인원)|수당\s*지급.*(대상|인원)|회의참석수당.*지급대상"),
+    ),
+    (
+        "committee_allowance_unit",
+        re.compile(r"회의.*(참석)?(수당|사례금|회의비).*단가|1인당.*회의.*(수당|사례금)|민간위원.*수당"),
+    ),
+    (
         "staffing_count",
         re.compile(r"소요인력|증원인력|증원.*인력|지원인력|정원|배치|채용|인원"),
     ),
@@ -165,12 +177,23 @@ def value_matches_assumption(assumption_key: str, unit: str | None) -> bool:
         return unit == "원"
     if assumption_key == "staffing_count":
         return bool(unit and "명" in unit)
+    if assumption_key == "committee_meeting_count":
+        return bool(unit and "회" in unit)
+    if assumption_key == "committee_paid_member_count":
+        return bool(unit and "명" in unit)
+    if assumption_key == "committee_allowance_unit":
+        return bool(unit and "원" in unit)
     if assumption_key == "committee_operating_cost":
         return bool(unit and ("원" in unit or unit in {"만원", "백만원", "억원", "천원"}))
     return True
 
 
-def build_candidates(seed_dir: Path) -> list[dict[str, Any]]:
+def build_candidates(
+    seed_dir: Path,
+    *,
+    exclude_bill_nos: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    exclude_bill_nos = exclude_bill_nos or set()
     structures = {
         row["struct_id"]: row
         for row in read_jsonl(seed_dir / "cost_estimate_structures.jsonl")
@@ -197,6 +220,8 @@ def build_candidates(seed_dir: Path) -> list[dict[str, Any]]:
 
         item = items.get(variable.get("item_id"), {})
         structure = structures.get(variable.get("struct_id"), {})
+        if str(structure.get("bill_no") or "") in exclude_bill_nos:
+            continue
         years = extract_years(
             variable.get("variable_name"),
             variable.get("source_text"),
@@ -274,12 +299,21 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Extract assembly assumption candidates from TAG JSONL.")
     parser.add_argument("--seed-dir", type=Path, default=DEFAULT_SEED_DIR)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument(
+        "--exclude-bill-no",
+        action="append",
+        default=[],
+        help="Bill number to hold out from the assumption pool; repeatable.",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
-    candidates = build_candidates(args.seed_dir)
+    candidates = build_candidates(
+        args.seed_dir,
+        exclude_bill_nos={str(value) for value in args.exclude_bill_no},
+    )
     summary = summarize(candidates)
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -292,6 +326,7 @@ def main() -> None:
     print(json.dumps({
         "seed_dir": str(args.seed_dir),
         "output_dir": str(args.output_dir),
+        "excluded_bill_nos": sorted({str(value) for value in args.exclude_bill_no}),
         "total_candidates": len(candidates),
         "by_assumption_key": {
             key: value["count"]

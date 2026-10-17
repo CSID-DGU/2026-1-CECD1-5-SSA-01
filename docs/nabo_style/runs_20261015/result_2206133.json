@@ -1,0 +1,33 @@
+{
+  "bill_no": "2206133",
+  "cutoff": "2024-12-02",
+  "years": [
+    2025,
+    2026,
+    2027,
+    2028,
+    2029
+  ],
+  "result_type": "미첨부(전 항목 추계곤란)",
+  "annual_million": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "total_million": 0,
+  "items": [],
+  "scope": [
+    {
+      "clause": "제23조의2 지원협의체",
+      "decision": "not_estimated",
+      "reason": "구성방법 대통령령 위임, 협의체 수·회의수·수당 규정 없음(3호). 주민지원사업 재원 자체는 기존 금강수계관리기금"
+    },
+    {
+      "clause": "제21조 주민지원사업 협의절차 추가",
+      "decision": "not_applicable",
+      "reason": "절차 추가로 기존 사업 규모 불변"
+    }
+  ]
+}

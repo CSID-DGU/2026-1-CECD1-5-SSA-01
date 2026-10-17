@@ -1,0 +1,886 @@
+{
+  "bill_no": "2211669",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "published_answer_budget_used_as_input": false,
+  "pooled_total_thousand": 25215335710,
+  "runs": [
+    {
+      "model": "standard_amount_ablation",
+      "payload": {
+        "bill_no": "2211669",
+        "route_key": "transfer_population_amount_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "phased_couple_pension_types",
+        "pension_standard_vintage": "2025_03_reviewed_forecast",
+        "pension_trend_model": "ols_2021_2024",
+        "couple_recovery_model": "standard_amount_proxy",
+        "support_derivation_note": "원문75%확대·2026~2030부부감액10·5·0·0·0% 일정.단독수급과부부1인에부부감액적용금지",
+        "pension_trend_note": "공식2021~2024관측비율의명시적OLS또는동결후보.정답의구체추세방식은미확인",
+        "couple_recovery_note": "기준액×부부수급비율×감액률회복의후보.국민연금연계·소득역전감액으로제한되는실제차액은아직미확인",
+        "selected_evidence_keys": [
+          "mohw_pension_2024:recipient_history:2021-2024:phased:types",
+          "2211669:standard_monthly:2026-2030:202503:types"
+        ],
+        "evidence_selection_reasons": {
+          "mohw_pension_2024:recipient_history:2021-2024:phased:types": "유형별공식관측실적·기간·전망버전일치.감액집단급여분리는명시적가정",
+          "2211669:standard_monthly:2026-2030:202503:types": "유형별공식관측실적·기간·전망버전일치.감액집단급여분리는명시적가정"
+        },
+        "explicit_inputs": {
+          "new_eligibility_share": {
+            "value": 0.75,
+            "unit": "ratio",
+            "source_ref": "원문제3조75%"
+          },
+          "old_eligibility_share": {
+            "value": 0.7,
+            "unit": "ratio",
+            "source_ref": "현행제3조70%"
+          },
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "원문신구대비표현행20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.1,
+              0.05,
+              0,
+              0,
+              0
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2026년10%·2027년5%이후폐지"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "2026-01-01시행·월급여"
+          }
+        },
+        "pension_distribution_basis": "payment_household_types_2021_2024",
+        "reduced_couple_recovery": "standard_amount_ablation",
+        "pension_type_trend_note": "공식전액/감액×부부수급4집단의2021~2024구성비를각각OLS전망.정답미공개NR별교차표와동일분류라는주장아님",
+        "reduced_group_split_note": "감액수급자의단독/부부각평균급여미공개.관측총지급액과전액집단실적으로공통감액전지급비율을조건부식별.같은NR/소득역전제약비율준용가정"
+      },
+      "result": {
+        "route_key": "transfer_population_amount_delta",
+        "subtype": "",
+        "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "evidence_key": "mohw_pension_2024:recipient_history:2021-2024:phased:types,2211669:standard_monthly:2026-2030:202503:types",
+        "annual_amounts_thousand": [
+          3429914959,
+          4412325985,
+          5520052715,
+          5781391728,
+          6078057963
+        ],
+        "source_refs": [
+          "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+          "2026-01-01시행·월급여"
+        ],
+        "resolved_variables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              7996600.623611837,
+              8266713.933310045,
+              8570941.7465692,
+              8776130.823984869,
+              9020322.396368673
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              7463493.915371047,
+              7715599.671089374,
+              7999545.630131252,
+              8191055.435719211,
+              8418967.569944093
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              318393.3170542844,
+              331527.2520324358,
+              345182.76830024057,
+              350939.41982499516,
+              356791.60995713115
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              302839.12290263886,
+              307551.87188288954,
+              312334.8652085045,
+              317188.381405567,
+              322114.38010016247
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "2026-01-01시행·월급여",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      },
+      "total_thousand": 25221743350,
+      "difference_percent": 16.206832724252493,
+      "group_trace": [
+        {
+          "type_key": "full_single_or_couple_one",
+          "historical_counts": [
+            3134850,
+            3232240,
+            3316185,
+            3368571
+          ],
+          "forecast_share": [
+            0.48197930861422256,
+            0.4731984212316519,
+            0.4644175338490812,
+            0.45563664646651053,
+            0.4468557590839399
+          ],
+          "existing_recipients": [
+            3597249.6371769942,
+            3651009.5832149447,
+            3715129.2534587504,
+            3732145.0297523835,
+            3762064.1441704403
+          ],
+          "new_recipients": [
+            3854196.039832494,
+            3911795.9820160125,
+            3980495.6287058042,
+            3998726.8175918395,
+            4030783.011611187
+          ],
+          "existing_monthly": [
+            349010,
+            355990,
+            363110,
+            370372,
+            377780
+          ],
+          "new_monthly": [
+            349010,
+            355990,
+            363110,
+            370372,
+            377780
+          ],
+          "eligibility_expansion_won": [
+            1076122367889.5526,
+            1114048201310.3057,
+            1156286214191.4924,
+            1184813159108.1,
+            1218199364901.183
+          ],
+          "reduction_recovery_won": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": false
+        },
+        {
+          "type_key": "full_couple_two",
+          "historical_counts": [
+            2242918,
+            2342419,
+            2444400,
+            2484187
+          ],
+          "forecast_share": [
+            0.3652243008717294,
+            0.362852856575938,
+            0.3604814122801467,
+            0.3581099679843553,
+            0.35573852368856396
+          ],
+          "existing_recipients": [
+            2725849.347301797,
+            2799627.380851147,
+            2883687.5063491897,
+            2933298.5998434857,
+            2994951.0943138083
+          ],
+          "new_recipients": [
+            2920552.8721090686,
+            2999600.765197658,
+            3089665.185374132,
+            3142819.928403735,
+            3208876.1724790814
+          ],
+          "existing_monthly": [
+            279208,
+            284792,
+            290488,
+            296297.60000000003,
+            302224
+          ],
+          "new_monthly": [
+            314109,
+            338190.5,
+            363110,
+            370372,
+            377780
+          ],
+          "eligibility_expansion_won": [
+            652353381052.6641,
+            683409840897.7379,
+            718008528295.169,
+            744968001614.5603,
+            775839513881.0583
+          ],
+          "reduction_recovery_won": [
+            1223162589473.7432,
+            1922090177524.8857,
+            2692531981106.8823,
+            2793630006054.594,
+            2909398177053.9536
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": false
+        },
+        {
+          "type_key": "reduced_single_or_couple_one",
+          "historical_counts": [
+            273315,
+            312164,
+            357273,
+            421256
+          ],
+          "forecast_share": [
+            0.0723545456694514,
+            0.07781181033765791,
+            0.08326907500586445,
+            0.08872633967407095,
+            0.09418360434227749
+          ],
+          "existing_recipients": [
+            540017.7113533871,
+            600364.7782481022,
+            666114.7650882344,
+            726762.366878768,
+            792928.7105780798
+          ],
+          "new_recipients": [
+            578590.4050214862,
+            643247.9766943953,
+            713694.3911659655,
+            778673.9645129656,
+            849566.4756193714
+          ],
+          "existing_monthly": [
+            238830.00745949024,
+            243729.8842975049,
+            248730.5008047799,
+            253833.37327984584,
+            259041.39218218805
+          ],
+          "new_monthly": [
+            238830.00745949024,
+            243729.8842975049,
+            248730.5008047799,
+            253833.37327984584,
+            259041.39218218805
+          ],
+          "eligibility_expansion_won": [
+            110547800597.81694,
+            125423003947.4636,
+            142014050669.01843,
+            158122751278.01355,
+            176058306076.60605
+          ],
+          "reduction_recovery_won": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": true
+        },
+        {
+          "type_key": "reduced_couple_two",
+          "historical_counts": [
+            321976,
+            351975,
+            390716,
+            484473
+          ],
+          "forecast_share": [
+            0.0804418448445966,
+            0.08613691185475209,
+            0.0918319788649076,
+            0.09752704587506308,
+            0.10322211288521857
+          ],
+          "existing_recipients": [
+            600377.2195388685,
+            664597.9287751797,
+            734614.1052350771,
+            798849.4392445723,
+            869023.6208817634
+          ],
+          "new_recipients": [
+            643261.3066487878,
+            712069.2094019783,
+            787086.541323297,
+            855910.1134763275,
+            931096.7366590324
+          ],
+          "existing_monthly": [
+            191064.0059675922,
+            194983.90743800392,
+            198984.40064382393,
+            203066.69862387667,
+            207233.11374575045
+          ],
+          "new_monthly": [
+            225965.0059675922,
+            248382.40743800392,
+            271606.4006438239,
+            277141.0986238767,
+            282789.11374575045
+          ],
+          "eligibility_expansion_won": [
+            98323265705.81235,
+            111073629452.39056,
+            125294354944.02945,
+            139045472849.94046,
+            154363260749.0871
+          ],
+          "reduction_recovery_won": [
+            269405554360.1921,
+            456281132139.0185,
+            685917585647.7654,
+            760812337316.2908,
+            844199340420.1183
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": true
+        },
+        {
+          "historical_shared_unreduced_factor": [
+            0.6750598497168999,
+            0.6894698473208021,
+            0.6927095215590866,
+            0.6751355483510229
+          ],
+          "projected_shared_unreduced_factor": [
+            0.6843070612861816,
+            0.6846537383002469,
+            0.6850004153143122,
+            0.6853470923283775,
+            0.6856937693424429
+          ],
+          "eligibility_expansion_won": [
+            1937346815245.8477,
+            2033954675607.8984,
+            2141603148099.711,
+            2226949384850.6133,
+            2324460445607.9297
+          ],
+          "reduction_recovery_won": [
+            1492568143833.9336,
+            2378371309663.9062,
+            3378449566754.6445,
+            3554442343370.8906,
+            3753597517474.0703
+          ],
+          "total_increment_won": [
+            3429914959079.7812,
+            4412325985271.805,
+            5520052714854.355,
+            5781391728221.504,
+            6078057963082
+          ],
+          "limitation": "유형별가격은관측된전국총지급액에서조건부공통감액전비율을도출.정답총액역산아님.NR연계·소득역전원인분리는여전히미확인"
+        }
+      ],
+      "synthetic_web_status": "computed_review"
+    },
+    {
+      "model": "shared_unreduced_proxy",
+      "payload": {
+        "bill_no": "2211669",
+        "route_key": "transfer_population_amount_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "phased_couple_pension_types",
+        "pension_standard_vintage": "2025_03_reviewed_forecast",
+        "pension_trend_model": "ols_2021_2024",
+        "couple_recovery_model": "standard_amount_proxy",
+        "support_derivation_note": "원문75%확대·2026~2030부부감액10·5·0·0·0% 일정.단독수급과부부1인에부부감액적용금지",
+        "pension_trend_note": "공식2021~2024관측비율의명시적OLS또는동결후보.정답의구체추세방식은미확인",
+        "couple_recovery_note": "기준액×부부수급비율×감액률회복의후보.국민연금연계·소득역전감액으로제한되는실제차액은아직미확인",
+        "selected_evidence_keys": [
+          "mohw_pension_2024:recipient_history:2021-2024:phased:types",
+          "2211669:standard_monthly:2026-2030:202503:types"
+        ],
+        "evidence_selection_reasons": {
+          "mohw_pension_2024:recipient_history:2021-2024:phased:types": "유형별공식관측실적·기간·전망버전일치.감액집단급여분리는명시적가정",
+          "2211669:standard_monthly:2026-2030:202503:types": "유형별공식관측실적·기간·전망버전일치.감액집단급여분리는명시적가정"
+        },
+        "explicit_inputs": {
+          "new_eligibility_share": {
+            "value": 0.75,
+            "unit": "ratio",
+            "source_ref": "원문제3조75%"
+          },
+          "old_eligibility_share": {
+            "value": 0.7,
+            "unit": "ratio",
+            "source_ref": "현행제3조70%"
+          },
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "원문신구대비표현행20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.1,
+              0.05,
+              0,
+              0,
+              0
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2026년10%·2027년5%이후폐지"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "2026-01-01시행·월급여"
+          }
+        },
+        "pension_distribution_basis": "payment_household_types_2021_2024",
+        "reduced_couple_recovery": "shared_unreduced_proxy",
+        "pension_type_trend_note": "공식전액/감액×부부수급4집단의2021~2024구성비를각각OLS전망.정답미공개NR별교차표와동일분류라는주장아님",
+        "reduced_group_split_note": "감액수급자의단독/부부각평균급여미공개.관측총지급액과전액집단실적으로공통감액전지급비율을조건부식별.같은NR/소득역전제약비율준용가정"
+      },
+      "result": {
+        "route_key": "transfer_population_amount_delta",
+        "subtype": "",
+        "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "evidence_key": "mohw_pension_2024:recipient_history:2021-2024:phased:types,2211669:standard_monthly:2026-2030:202503:types",
+        "annual_amounts_thousand": [
+          3344865528,
+          4268439436,
+          5303988960,
+          5541999914,
+          5812720850
+        ],
+        "source_refs": [
+          "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+          "2026-01-01시행·월급여"
+        ],
+        "resolved_variables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              7996600.623611837,
+              8266713.933310045,
+              8570941.7465692,
+              8776130.823984869,
+              9020322.396368673
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              7463493.915371047,
+              7715599.671089374,
+              7999545.630131252,
+              8191055.435719211,
+              8418967.569944093
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              317507.00886779214,
+              330076.79107877525,
+              343082.0291497058,
+              348666.28622612444,
+              354340.3199611304
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              302839.12290263886,
+              307551.87188288954,
+              312334.8652085045,
+              317188.381405567,
+              322114.38010016247
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구;PDF13·40~42쪽전액·감액별수급자실적; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문신구대비표현행20%; 원문부칙2026년10%·2027년5%이후폐지; 현행제3조70%; 원문제3조75%;유형별추세·공통감액전비율가정",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "2026-01-01시행·월급여",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      },
+      "total_thousand": 24272014688,
+      "difference_percent": 19.362077448504984,
+      "group_trace": [
+        {
+          "type_key": "full_single_or_couple_one",
+          "historical_counts": [
+            3134850,
+            3232240,
+            3316185,
+            3368571
+          ],
+          "forecast_share": [
+            0.48197930861422256,
+            0.4731984212316519,
+            0.4644175338490812,
+            0.45563664646651053,
+            0.4468557590839399
+          ],
+          "existing_recipients": [
+            3597249.6371769942,
+            3651009.5832149447,
+            3715129.2534587504,
+            3732145.0297523835,
+            3762064.1441704403
+          ],
+          "new_recipients": [
+            3854196.039832494,
+            3911795.9820160125,
+            3980495.6287058042,
+            3998726.8175918395,
+            4030783.011611187
+          ],
+          "existing_monthly": [
+            349010,
+            355990,
+            363110,
+            370372,
+            377780
+          ],
+          "new_monthly": [
+            349010,
+            355990,
+            363110,
+            370372,
+            377780
+          ],
+          "eligibility_expansion_won": [
+            1076122367889.5526,
+            1114048201310.3057,
+            1156286214191.4924,
+            1184813159108.1,
+            1218199364901.183
+          ],
+          "reduction_recovery_won": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": false
+        },
+        {
+          "type_key": "full_couple_two",
+          "historical_counts": [
+            2242918,
+            2342419,
+            2444400,
+            2484187
+          ],
+          "forecast_share": [
+            0.3652243008717294,
+            0.362852856575938,
+            0.3604814122801467,
+            0.3581099679843553,
+            0.35573852368856396
+          ],
+          "existing_recipients": [
+            2725849.347301797,
+            2799627.380851147,
+            2883687.5063491897,
+            2933298.5998434857,
+            2994951.0943138083
+          ],
+          "new_recipients": [
+            2920552.8721090686,
+            2999600.765197658,
+            3089665.185374132,
+            3142819.928403735,
+            3208876.1724790814
+          ],
+          "existing_monthly": [
+            279208,
+            284792,
+            290488,
+            296297.60000000003,
+            302224
+          ],
+          "new_monthly": [
+            314109,
+            338190.5,
+            363110,
+            370372,
+            377780
+          ],
+          "eligibility_expansion_won": [
+            652353381052.6641,
+            683409840897.7379,
+            718008528295.169,
+            744968001614.5603,
+            775839513881.0583
+          ],
+          "reduction_recovery_won": [
+            1223162589473.7432,
+            1922090177524.8857,
+            2692531981106.8823,
+            2793630006054.594,
+            2909398177053.9536
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": false
+        },
+        {
+          "type_key": "reduced_single_or_couple_one",
+          "historical_counts": [
+            273315,
+            312164,
+            357273,
+            421256
+          ],
+          "forecast_share": [
+            0.0723545456694514,
+            0.07781181033765791,
+            0.08326907500586445,
+            0.08872633967407095,
+            0.09418360434227749
+          ],
+          "existing_recipients": [
+            540017.7113533871,
+            600364.7782481022,
+            666114.7650882344,
+            726762.366878768,
+            792928.7105780798
+          ],
+          "new_recipients": [
+            578590.4050214862,
+            643247.9766943953,
+            713694.3911659655,
+            778673.9645129656,
+            849566.4756193714
+          ],
+          "existing_monthly": [
+            238830.00745949024,
+            243729.8842975049,
+            248730.5008047799,
+            253833.37327984584,
+            259041.39218218805
+          ],
+          "new_monthly": [
+            238830.00745949024,
+            243729.8842975049,
+            248730.5008047799,
+            253833.37327984584,
+            259041.39218218805
+          ],
+          "eligibility_expansion_won": [
+            110547800597.81694,
+            125423003947.4636,
+            142014050669.01843,
+            158122751278.01355,
+            176058306076.60605
+          ],
+          "reduction_recovery_won": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": true
+        },
+        {
+          "type_key": "reduced_couple_two",
+          "historical_counts": [
+            321976,
+            351975,
+            390716,
+            484473
+          ],
+          "forecast_share": [
+            0.0804418448445966,
+            0.08613691185475209,
+            0.0918319788649076,
+            0.09752704587506308,
+            0.10322211288521857
+          ],
+          "existing_recipients": [
+            600377.2195388685,
+            664597.9287751797,
+            734614.1052350771,
+            798849.4392445723,
+            869023.6208817634
+          ],
+          "new_recipients": [
+            643261.3066487878,
+            712069.2094019783,
+            787086.541323297,
+            855910.1134763275,
+            931096.7366590324
+          ],
+          "existing_monthly": [
+            191064.0059675922,
+            194983.90743800392,
+            198984.40064382393,
+            203066.69862387667,
+            207233.11374575045
+          ],
+          "new_monthly": [
+            214947.00671354122,
+            231543.39008262966,
+            248730.5008047799,
+            253833.37327984584,
+            259041.39218218805
+          ],
+          "eligibility_expansion_won": [
+            98323265705.81235,
+            111073629452.39056,
+            125294354944.02945,
+            139045472849.94046,
+            154363260749.0871
+          ],
+          "reduction_recovery_won": [
+            184356123198.39764,
+            312394582834.84796,
+            469853831040.10974,
+            521420523187.2764,
+            578862227809.0748
+          ],
+          "direct_group_count_verified": true,
+          "group_price_is_proxy": true
+        },
+        {
+          "historical_shared_unreduced_factor": [
+            0.6750598497168999,
+            0.6894698473208021,
+            0.6927095215590866,
+            0.6751355483510229
+          ],
+          "projected_shared_unreduced_factor": [
+            0.6843070612861816,
+            0.6846537383002469,
+            0.6850004153143122,
+            0.6853470923283775,
+            0.6856937693424429
+          ],
+          "eligibility_expansion_won": [
+            1937346815245.8477,
+            2033954675607.8984,
+            2141603148099.711,
+            2226949384850.6133,
+            2324460445607.9297
+          ],
+          "reduction_recovery_won": [
+            1407518712672.1367,
+            2234484760359.7344,
+            3162385812146.9883,
+            3315050529241.875,
+            3488260404863.0312
+          ],
+          "total_increment_won": [
+            3344865527917.9844,
+            4268439435967.633,
+            5303988960246.699,
+            5541999914092.488,
+            5812720850470.961
+          ],
+          "limitation": "유형별가격은관측된전국총지급액에서조건부공통감액전비율을도출.정답총액역산아님.NR연계·소득역전원인분리는여전히미확인"
+        }
+      ],
+      "synthetic_web_status": "computed_review"
+    }
+  ],
+  "decomposition": {
+    "type_trend_and_price_mixture_effect_thousand": 6407640,
+    "reduced_group_retention_effect_thousand": -949728662,
+    "total_change_thousand": -943321022
+  },
+  "gold_effect_comparison": {
+    "eligibility_expansion_trillion": 10.664314469412,
+    "reduction_recovery_trillion": 13.607700219283766,
+    "gold_display_expansion_trillion": 13.4,
+    "gold_display_recovery_trillion": 16.7,
+    "expansion_gap_trillion": -2.7356855305880003,
+    "recovery_gap_trillion": -3.0922997807162336,
+    "limitation": "정답표4항목별연도표시값합계와비교,0.1조원표시반올림불확실성있음"
+  },
+  "limitation": "우리모형교체효과및정답표의재정요인2개별차이는분해했으나인원·단가각각의유일한오차기여도는미확정.전액/감액유형은NR원인별교차유형과다름.감액집단별가격은공통감액전비율가정"
+}

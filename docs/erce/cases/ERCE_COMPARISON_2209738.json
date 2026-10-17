@@ -1,0 +1,53 @@
+{
+  "bill_no": "2209738",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2209738.json",
+  "gold": {
+    "estimate_no": "25C2156",
+    "reply_date": "2025-04-28",
+    "government_deposit_total_eok": 267670,
+    "education_total_eok": 35,
+    "whole_total_eok": 267705,
+    "government_deposit_annual_eok": [
+      57564,
+      55605,
+      53730,
+      51702,
+      49068
+    ],
+    "education_annual_eok": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "education_reference": "2025 장애인식개선교육 사업예산700백만원,콘텐츠제작·전문강사육성·교육 포함.매년실시·단가동결"
+  },
+  "first_run": {
+    "deposit_total_eok": 267669.708,
+    "deposit_error_percent_vs_display": 0.00010908955057191038,
+    "deposit_annual_eok": [
+      57564,
+      55605,
+      53730,
+      51702,
+      49068
+    ],
+    "deposit_formula_match": true,
+    "population_counts_match": "5/5",
+    "deposit_amount_display_match": "5/5",
+    "whole_total_eok": null,
+    "whole_total_error_percent": null,
+    "education_status": "needs_input",
+    "filled_slots": 3,
+    "missing_slots": 2
+  },
+  "difference": [
+    "정부적립금 산식·8~18세 인구·월10만원·12개월가정·부모사적적립 제외가 정답과 일치",
+    "교육업무 탐지는 했지만 유사 콘텐츠제작·강사양성·교육 통합예산7억원 후보를 확보하지 못함",
+    "이번 교육은2025사업예산을5년동결. 직전 아동인식개선 홍보예산7.77억원×물가 경로를 그대로 쓰면 다름"
+  ],
+  "reinforcement_done": false,
+  "independent_primary_execution": true,
+  "whole_bill_success": false
+}

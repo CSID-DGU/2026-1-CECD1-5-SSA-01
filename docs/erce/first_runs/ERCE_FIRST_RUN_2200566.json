@@ -1,0 +1,51 @@
+{
+  "bill_no": "2200566", "run_date": "2026-10-04",
+  "evaluation_type": "pre_answer_development_first_run", "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2200566", "bill_name": "아동수당법 일부개정법률안",
+    "document_type": "amendment", "propose_date": "2024-06-18",
+    "articles": [
+      {"article_ref": "제4조제1항제2호", "change_summary": "8~17세 아동에게 월20만원 신규 지급,8세미만 월10만원 유지",
+       "source_quote": "1. 8세미만의아동: 매월10만원\n2. 8세이상18세미만의아동: 매월20만원", "source_page": 3,
+       "cost_trigger": true, "estimation_decision": "estimate_now",
+       "decision_reason": "8~17세 신규 급여만 순증으로 산정. 기존8세미만과2세미만 추가 부모급여는 유지하므로 변경 비용으로 다시 합산하지 않음",
+       "route_key": "transfer_recipient", "route_reason": "8~17세 인구×확인한 아동수당 지급률×월20만원×지급개월수",
+       "variables": [{"key": "effective_year", "value_json": "2025", "unit": "year", "source_quote": "이법은2025년1월1일부터시행한다.", "source_page": 4}]},
+      {"article_ref": "제7조제6항·제13조제2항/신청각하 및 지급정지 통지", "change_summary": "8~17세 당사자에게 신청각하와 지급정지 사실 통지",
+       "source_quote": "이경우수급아동이8세이상18세미만인경우그아동에게아동수당지급정지의사실을알려야한다.", "source_page": 4,
+       "cost_trigger": true, "estimation_decision": "needs_review",
+       "decision_reason": "알려야 한다는 규정만으로 유상 우편 송달·신규 시스템 구축비를 만들지 않음. 기존 처리방식·신규 대상건수·전달방식이 없어 별도 순증 행정비 여부는 확인 필요",
+       "route_key": "legal_notification", "route_reason": "별도 송달비가 실제 발생하는 경우에만 추가대상건수×통지횟수×전달방식 단가를 검토", "variables": []}
+    ]
+  },
+  "calculation_payload": {
+    "bill_no": "2200566", "route_key": "transfer_recipient", "cutoff_date": "2026-10-04",
+    "start_year": 2025, "years": 5,
+    "estimation_start_note": "원문 시행일2025-01-01과 신규 지급 규정에 따라2025~2029년 각 완전연도 지급을 확인한 계산 시나리오",
+    "explicit_inputs": {
+      "benefit_per_recipient": {"value": 200000, "unit": "KRW/person/month", "source_ref": "원문3쪽 제4조제1항제2호 월20만원=200000원, 단위 정규화는 개발 에이전트가 수행"},
+      "payments_per_year": {"value": 12, "unit": "month/year", "source_ref": "시행일2025-01-01부터 매월 지급하는 각 완전연도12개월 시나리오"}
+    },
+    "selected_evidence_keys": ["2200147:age8to17_population:2025-2029", "2200147:child_allowance_payment_rate:2024"],
+    "evidence_selection_reasons": {
+      "2200147:age8to17_population:2025-2029": "전국8~17세·동일2025~2029년·2023년12월 중위전망 인구를 타 의안 근거에서 재사용. 실제 수급자 수 아님",
+      "2200147:child_allowance_payment_rate:2024": "같은 아동수당의97.2% 지급률 동결 선례 가정. 신규8~17세 실측 지급률·최신 공식률로 선언하지 않음"
+    }
+  },
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item",
+    "quote_verified": [true,true], "calculated_cost_item_count": 1, "review_pending_item_count": 1,
+    "formula_key": "TRANSFER_RECIPIENT_V1", "status": "computed_review",
+    "required_variables_filled": 2, "required_variable_count": 2,
+    "annual_amounts_thousand": [10376294400,10059033600,9758102400,9408182400,8929958400],
+    "total_thousand": 48531571200, "scope": "8~17세 신규 아동수당 지급비"
+  },
+  "scope_notes": [
+    "2200527과 달리2세미만 추가급여의 추가로 문구 삭제가 없으므로 under2_parent_only 산식을 적용하지 않음",
+    "기존 아동수당과 부모급여의 지출은 유지되는 것으로 보고 순증 계산에서 제외",
+    "이번 금액은 신규 아동수당 지급비이며 행정 통지비는 별도 검토 보류",
+    "현재 개발 DB를 사용한 정답 미열람 첫 실행이며 발의시점 제한·동일가족 완전 격리 독립 평가가 아님"
+  ]
+}

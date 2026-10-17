@@ -1,0 +1,782 @@
+{
+  "bill_no": "2208360",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "parts": [
+    {
+      "route": "government_employment_levy_delta",
+      "payload": {
+        "bill_no": "2208360",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "government_employment_levy_delta",
+        "support_derivation": "employment_levy_sector_delta",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "levy_sector_model": "direct_sector_counts",
+        "levy_sector_scenario_confirmed": true,
+        "fiscal_reporting": "separate_revenue_and_expenditure",
+        "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+        "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+        "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+        "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지",
+        "selected_evidence_keys": [
+          "2208360:levy_sector_unfilled:reviewed",
+          "2208360:levy_old_bands:reviewed",
+          "2208360:levy_minimum_monthly_base:reviewed",
+          "2208360:levy_price_base_year:reviewed",
+          "2208360:levy_old_floor_share:reviewed",
+          "2208360:levy_new_floor_share:reviewed",
+          "2208360:levy_band_difference_weight:reviewed",
+          "2208360:levy_zero_employment_share:reviewed",
+          "2208360:levy_payment_months:reviewed",
+          "2207081:minimum_monthly_forecast:202411:sector_levy"
+        ],
+        "evidence_selection_reasons": {
+          "2208360:levy_sector_unfilled:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_old_bands:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_minimum_monthly_base:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_price_base_year:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_old_floor_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_new_floor_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_band_difference_weight:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_zero_employment_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_payment_months:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2207081:minimum_monthly_forecast:202411:sector_levy": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인"
+        },
+        "selected_method_keys": [
+          "2208360:sector_levy:expense"
+        ],
+        "method_selection_reasons": {
+          "2208360:sector_levy:expense": "직접부문별 산정 및 정부지출/참고수입 구분"
+        },
+        "method_confirmations": {
+          "2208360:sector_levy:expense": {
+            "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+            "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+            "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+            "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지"
+          }
+        }
+      },
+      "result": {
+        "route_key": "government_employment_levy_delta",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2208360:levy_sector_unfilled:reviewed,2208360:levy_old_bands:reviewed,2208360:levy_minimum_monthly_base:reviewed,2208360:levy_price_base_year:reviewed,2208360:levy_old_floor_share:reviewed,2208360:levy_new_floor_share:reviewed,2208360:levy_band_difference_weight:reviewed,2208360:levy_zero_employment_share:reviewed,2208360:levy_payment_months:reviewed,2207081:minimum_monthly_forecast:202411:sector_levy",
+        "annual_amounts_thousand": [
+          48121785,
+          49975222,
+          51865343,
+          53818615,
+          55847665
+        ],
+        "source_refs": [
+          "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+          "2208360 비용추계서25B1029 PDF8~13쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              48121784604.000015,
+              49975221788.686325,
+              51865342516.90337,
+              53818614952.412704,
+              55847664845.49087
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2208360:sector_levy:expense"
+        ]
+      },
+      "web_result": {
+        "status": "computed_review",
+        "routeKey": "government_employment_levy_delta",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          48121785,
+          49975222,
+          51865343,
+          53818615,
+          55847665
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "liability_year": 2025,
+            "sector_amounts_won": {
+              "civil": 43514794260.000015,
+              "non_civil": 4606990344.000002,
+              "public_institution": 6941896416.000002,
+              "private": 155972569884.00006
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 48121784604.000015,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": false
+          },
+          {
+            "year": 2027,
+            "liability_year": 2026,
+            "sector_amounts_won": {
+              "civil": 45190790660.15751,
+              "non_civil": 4784431128.528815,
+              "public_institution": 7209267401.002613,
+              "private": 161979939793.34583
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 49975221788.686325,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": false
+          },
+          {
+            "year": 2028,
+            "liability_year": 2027,
+            "sector_amounts_won": {
+              "civil": 46899958665.70337,
+              "non_civil": 4965383851.200002,
+              "public_institution": 7481930237.948327,
+              "private": 168106208588.17612
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 51865342516.90337,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": false
+          },
+          {
+            "year": 2029,
+            "liability_year": 2028,
+            "sector_amounts_won": {
+              "civil": 48666232482.527954,
+              "non_civil": 5152382469.8847475,
+              "public_institution": 7763703140.41061,
+              "private": 174437165013.77484
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 53818614952.412704,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": false
+          },
+          {
+            "year": 2030,
+            "liability_year": 2029,
+            "sector_amounts_won": {
+              "civil": 50501029121.246796,
+              "non_civil": 5346635724.244069,
+              "public_institution": 8056407459.183394,
+              "private": 181013731715.33374
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 55847664845.49087,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": false
+          }
+        ],
+        "sourceRefs": [
+          "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+          "2208360 비용추계서25B1029 PDF8~13쪽"
+        ],
+        "methodEvidenceKeys": [
+          "2208360:sector_levy:expense"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2208360:sector_levy:expense",
+            "source_bill_no": "2208360",
+            "available_at": "2025-06-23",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "employment_levy_sector_delta",
+            "source_ref": "2208360 비용추계서25B1029 PDF8~13쪽",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "부담기초액",
+                "부담금"
+              ],
+              [
+                "80",
+                "최저임금"
+              ]
+            ],
+            "allowed_routes": [
+              "government_employment_levy_delta"
+            ],
+            "support_derivation": "employment_levy_sector_delta",
+            "levy_sector_model": "direct_sector_counts",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2208360:levy_sector_unfilled:reviewed",
+              "2208360:levy_old_bands:reviewed",
+              "2208360:levy_minimum_monthly_base:reviewed",
+              "2208360:levy_price_base_year:reviewed",
+              "2208360:levy_old_floor_share:reviewed",
+              "2208360:levy_new_floor_share:reviewed",
+              "2208360:levy_band_difference_weight:reviewed",
+              "2208360:levy_zero_employment_share:reviewed",
+              "2208360:levy_payment_months:reviewed",
+              "2207081:minimum_monthly_forecast:202411:sector_levy"
+            ],
+            "required_confirmations": [
+              "levy_sector_scope_note",
+              "levy_band_allocation_note",
+              "levy_sector_timing_note",
+              "levy_unpriced_zero_band_note"
+            ],
+            "method_steps": [
+              "2024미고용인원을 공무원·비공무원·공공기관·민간으로 분리",
+              "현행단가비중과60%기준 대비 가산차이를 사용해80%기초액 산출",
+              "전년도고용분 월단가차이×12개월×부문별인원",
+              "지출은정부2부문, 참고수입은4부문. 별도표시·상계금지",
+              "무고용 최저임금 이상 인상수준 미확정은 별도 미추계, 나머지산식에서 현행1배 유지"
+            ],
+            "baseline_check": "비공무원 직접인원이 있으면6.4%대리비율 금지. 참고수입을 공식 비용지출에 합산하지 않음",
+            "limitation": "정답표시대비 정밀가격·비율 표기차이는 별도검증. 일부추계와 미추계·수입참고를 분리",
+            "lower_variable_keys": [
+              "levy_sector_unfilled",
+              "levy_old_bands",
+              "levy_minimum_monthly_base",
+              "levy_price_base_year",
+              "levy_old_floor_share",
+              "levy_new_floor_share",
+              "levy_band_difference_weight",
+              "levy_zero_employment_share",
+              "levy_payment_months",
+              "levy_monthly_forecast_levels"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접부문별 산정 및 정부지출/참고수입 구분",
+            "confirmed_assumptions": {
+              "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+              "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+              "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+              "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              48121784604.000015,
+              49975221788.686325,
+              51865342516.90337,
+              53818614952.412704,
+              55847664845.49087
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+            "is_assumption": true
+          }
+        }
+      },
+      "total_eok": 2596.2863,
+      "gold_display_total_eok": 2596,
+      "error_percent": 0.011028505392920274,
+      "annual_display_eok": [
+        481,
+        500,
+        519,
+        538,
+        558
+      ],
+      "annual_display_matches": 5,
+      "engine_and_web_same": true
+    },
+    {
+      "route": "employment_levy_reference_receipts",
+      "payload": {
+        "bill_no": "2208360",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "employment_levy_reference_receipts",
+        "support_derivation": "employment_levy_sector_delta",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "levy_sector_model": "direct_sector_counts",
+        "levy_sector_scenario_confirmed": true,
+        "fiscal_reporting": "separate_revenue_and_expenditure",
+        "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+        "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+        "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+        "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지",
+        "selected_evidence_keys": [
+          "2208360:levy_sector_unfilled:reviewed",
+          "2208360:levy_old_bands:reviewed",
+          "2208360:levy_minimum_monthly_base:reviewed",
+          "2208360:levy_price_base_year:reviewed",
+          "2208360:levy_old_floor_share:reviewed",
+          "2208360:levy_new_floor_share:reviewed",
+          "2208360:levy_band_difference_weight:reviewed",
+          "2208360:levy_zero_employment_share:reviewed",
+          "2208360:levy_payment_months:reviewed",
+          "2207081:minimum_monthly_forecast:202411:sector_levy"
+        ],
+        "evidence_selection_reasons": {
+          "2208360:levy_sector_unfilled:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_old_bands:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_minimum_monthly_base:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_price_base_year:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_old_floor_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_new_floor_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_band_difference_weight:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_zero_employment_share:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2208360:levy_payment_months:reviewed": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인",
+          "2207081:minimum_monthly_forecast:202411:sector_levy": "2024부문별직접인원·2025고시·2024.11가격전망·가산배분 가정 확인"
+        },
+        "selected_method_keys": [
+          "2208360:sector_levy:reference_receipts"
+        ],
+        "method_selection_reasons": {
+          "2208360:sector_levy:reference_receipts": "직접부문별 산정 및 정부지출/참고수입 구분"
+        },
+        "method_confirmations": {
+          "2208360:sector_levy:reference_receipts": {
+            "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+            "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+            "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+            "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지"
+          }
+        },
+        "estimate_purpose": "reference_scenario",
+        "reference_notice": "법적 비용추계 첨부대상 여부와 별도인 부담금수입 참고추계. 정부지출과 합산·상계하지 않음"
+      },
+      "result": {
+        "route_key": "employment_levy_reference_receipts",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2208360:levy_sector_unfilled:reviewed,2208360:levy_old_bands:reviewed,2208360:levy_minimum_monthly_base:reviewed,2208360:levy_price_base_year:reviewed,2208360:levy_old_floor_share:reviewed,2208360:levy_new_floor_share:reviewed,2208360:levy_band_difference_weight:reviewed,2208360:levy_zero_employment_share:reviewed,2208360:levy_payment_months:reviewed,2207081:minimum_monthly_forecast:202411:sector_levy",
+        "annual_amounts_thousand": [
+          211036251,
+          219164429,
+          227453481,
+          236019483,
+          244917804
+        ],
+        "source_refs": [
+          "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+          "2208360 비용추계서25B1029 PDF8~13쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              211036250904.0001,
+              219164428983.03476,
+              227453481343.0278,
+              236019483106.59814,
+              244917804020.008
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2208360:sector_levy:reference_receipts"
+        ]
+      },
+      "web_result": {
+        "status": "computed_review",
+        "estimatePurpose": "reference_scenario",
+        "referenceNotice": "법적 비용추계 첨부대상 여부와 별도인 부담금수입 참고추계. 정부지출과 합산·상계하지 않음",
+        "routeKey": "employment_levy_reference_receipts",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          211036251,
+          219164429,
+          227453481,
+          236019483,
+          244917804
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "liability_year": 2025,
+            "sector_amounts_won": {
+              "civil": 43514794260.000015,
+              "non_civil": 4606990344.000002,
+              "public_institution": 6941896416.000002,
+              "private": 155972569884.00006
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 211036250904.0001,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": true
+          },
+          {
+            "year": 2027,
+            "liability_year": 2026,
+            "sector_amounts_won": {
+              "civil": 45190790660.15751,
+              "non_civil": 4784431128.528815,
+              "public_institution": 7209267401.002613,
+              "private": 161979939793.34583
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 219164428983.03476,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": true
+          },
+          {
+            "year": 2028,
+            "liability_year": 2027,
+            "sector_amounts_won": {
+              "civil": 46899958665.70337,
+              "non_civil": 4965383851.200002,
+              "public_institution": 7481930237.948327,
+              "private": 168106208588.17612
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 227453481343.0278,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": true
+          },
+          {
+            "year": 2029,
+            "liability_year": 2028,
+            "sector_amounts_won": {
+              "civil": 48666232482.527954,
+              "non_civil": 5152382469.8847475,
+              "public_institution": 7763703140.41061,
+              "private": 174437165013.77484
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 236019483106.59814,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": true
+          },
+          {
+            "year": 2030,
+            "liability_year": 2029,
+            "sector_amounts_won": {
+              "civil": 50501029121.246796,
+              "non_civil": 5346635724.244069,
+              "public_institution": 8056407459.183394,
+              "private": 181013731715.33374
+            },
+            "old_shares": {
+              "1": 0.6001135349931068,
+              "2": 0.6361203470926932,
+              "3": 0.7201362419917282,
+              "4": 0.8401589489903495,
+              "5": 1
+            },
+            "new_shares": {
+              "1": 0.8,
+              "2": 0.8180601735463466,
+              "3": 0.8600681209958642,
+              "4": 0.9200794744951748,
+              "5": 1
+            },
+            "amount_won": 244917804020.008,
+            "zero_band_increment_excluded": true,
+            "zero_band_effect_status": "not_estimated",
+            "reference_receipts": true
+          }
+        ],
+        "sourceRefs": [
+          "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+          "2208360 비용추계서25B1029 PDF8~13쪽"
+        ],
+        "methodEvidenceKeys": [
+          "2208360:sector_levy:reference_receipts"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2208360:sector_levy:reference_receipts",
+            "source_bill_no": "2208360",
+            "available_at": "2025-06-23",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "employment_levy_sector_delta",
+            "source_ref": "2208360 비용추계서25B1029 PDF8~13쪽",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "부담기초액",
+                "부담금"
+              ],
+              [
+                "80",
+                "최저임금"
+              ]
+            ],
+            "allowed_routes": [
+              "employment_levy_reference_receipts"
+            ],
+            "support_derivation": "employment_levy_sector_delta",
+            "levy_sector_model": "direct_sector_counts",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2208360:levy_sector_unfilled:reviewed",
+              "2208360:levy_old_bands:reviewed",
+              "2208360:levy_minimum_monthly_base:reviewed",
+              "2208360:levy_price_base_year:reviewed",
+              "2208360:levy_old_floor_share:reviewed",
+              "2208360:levy_new_floor_share:reviewed",
+              "2208360:levy_band_difference_weight:reviewed",
+              "2208360:levy_zero_employment_share:reviewed",
+              "2208360:levy_payment_months:reviewed",
+              "2207081:minimum_monthly_forecast:202411:sector_levy"
+            ],
+            "required_confirmations": [
+              "levy_sector_scope_note",
+              "levy_band_allocation_note",
+              "levy_sector_timing_note",
+              "levy_unpriced_zero_band_note"
+            ],
+            "method_steps": [
+              "2024미고용인원을 공무원·비공무원·공공기관·민간으로 분리",
+              "현행단가비중과60%기준 대비 가산차이를 사용해80%기초액 산출",
+              "전년도고용분 월단가차이×12개월×부문별인원",
+              "지출은정부2부문, 참고수입은4부문. 별도표시·상계금지",
+              "무고용 최저임금 이상 인상수준 미확정은 별도 미추계, 나머지산식에서 현행1배 유지"
+            ],
+            "baseline_check": "비공무원 직접인원이 있으면6.4%대리비율 금지. 참고수입을 공식 비용지출에 합산하지 않음",
+            "limitation": "정답표시대비 정밀가격·비율 표기차이는 별도검증. 일부추계와 미추계·수입참고를 분리",
+            "lower_variable_keys": [
+              "levy_sector_unfilled",
+              "levy_old_bands",
+              "levy_minimum_monthly_base",
+              "levy_price_base_year",
+              "levy_old_floor_share",
+              "levy_new_floor_share",
+              "levy_band_difference_weight",
+              "levy_zero_employment_share",
+              "levy_payment_months",
+              "levy_monthly_forecast_levels"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접부문별 산정 및 정부지출/참고수입 구분",
+            "confirmed_assumptions": {
+              "levy_sector_scope_note": "2024공무원·비공무원·공공기관·민간 직접구간인원. 지출은공무원+비공무원, 참고수입은4부문. 정부지출과상계금지",
+              "levy_band_allocation_note": "기초60→80%·차이가산0.5. 정답표의 차이기준60%를 사용, 고시원단가/월최저임금의 비중 유지. 무고용구간 인상수준 미정은 별도제외",
+              "levy_sector_timing_note": "2025월최저임금2096270원·2024.11정밀전망, 전년도고용분을다음해납부해2026에는2025가격 사용. 감면·고용행태변화 미반영",
+              "levy_unpriced_zero_band_note": "무고용 최저임금이상 인상배수 미확정이라 그효과는 미추계하고 기본80%변경계산에서는 현행1배 유지"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              211036250904.0001,
+              219164428983.03476,
+              227453481343.0278,
+              236019483106.59814,
+              244917804020.008
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208360 비용추계서25B1029 PDF5·8~13쪽; 2207081 비용추계서24B6384 PDF9쪽 표7 현행i=5 월최저임금전망;2025기준은고용부2024-99호 인용",
+            "is_assumption": true
+          }
+        }
+      },
+      "total_eok": 11385.91448,
+      "gold_display_total_eok": 11383,
+      "error_percent": 0.02560379513308844,
+      "annual_display_eok": [
+        2110,
+        2192,
+        2275,
+        2360,
+        2449
+      ],
+      "annual_display_matches": 3,
+      "engine_and_web_same": true
+    }
+  ],
+  "zero_band_review_payload": {
+    "bill_no": "2208360",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "decision_evidence_key": "2208360:zero_employment_floor_change_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "zero_employment_floor_changed": true,
+      "zero_employment_new_multiplier_confirmed": false
+    },
+    "decision_confirmations": {
+      "zero_band_scope_note": "제33조 단서 최저임금이상 변경의 증분만 분리, 기본80%인상은 계산",
+      "zero_band_rate_basis_note": "정답PDF5·13쪽의 구체인상수준미정 근거. 원문2배등 확정배수없으며0원증분이라는뜻아님"
+    }
+  },
+  "zero_band_decision": {
+    "decision": "not_estimated",
+    "amount": null,
+    "source_decision_label": "미추계",
+    "decision_evidence_key": "2208360:zero_employment_floor_change_not_estimated",
+    "reason": "무고용 기초액을 최저임금 이상으로 바꾸지만 구체 인상수준이 미확정이라 해당 증분은 추계하지 않음",
+    "source_ref": "2208360 비용추계서25B1029 PDF5·13쪽",
+    "source_quote": "세부적인 내용이 확정되지 않아 현시점에서 이에 대해 합리적으로 산출하기 곤란하므로 추계대상에서 제외함",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_revenue_and_expenditure_increase",
+    "confirmed_conditions": {
+      "zero_band_scope_note": "제33조 단서 최저임금이상 변경의 증분만 분리, 기본80%인상은 계산",
+      "zero_band_rate_basis_note": "정답PDF5·13쪽의 구체인상수준미정 근거. 원문2배등 확정배수없으며0원증분이라는뜻아님"
+    },
+    "confirmed_facts": {
+      "zero_employment_floor_changed": true,
+      "zero_employment_new_multiplier_confirmed": false
+    },
+    "reestimate_when": "무고용사업주 적용월기초액이나 합리적인 승인시나리오가 확보되면 해당 증분 재추계",
+    "limitation": "새의안에서 인상배수가 명시되거나 승인된 근거가 있으면 적용하지 않음"
+  },
+  "limitation": "정답확인후 보강 회귀. 공개고시·정밀거시전망과 표의 단가/비율표기 차이 남음. 참고수입은 지출과 합산하거나 완전일치로 표시하지 않음"
+}

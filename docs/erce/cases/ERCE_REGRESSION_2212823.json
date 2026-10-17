@@ -1,0 +1,308 @@
+{
+  "bill_no": "2212823",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "birth_payload": {
+    "bill_no": "2212823",
+    "route_key": "transfer_population_amount_delta",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2026,
+    "years": 5,
+    "support_derivation": "child_allowance_birth_order_weighted",
+    "support_derivation_note": "원문18세미만확대·둘째5만원셋째10만원추가에동일월액/전국범위의기존순위가중산식준용.한부모추가금미포함",
+    "child_population_geography": "전국",
+    "parent_benefit_unchanged": true,
+    "birth_order_population_basis": "birth_share_proxy",
+    "birth_order_share_scenario": "table4_fixed2026",
+    "birth_order_scope_note": "정답PDF5쪽첫째10·둘째15·셋째20만원 및 한부모10만원별도가산;부모급여유지",
+    "birth_order_scenario_note": "사후정답표준용:인원표는2026비율동결과유사.표3연변화설명과구분",
+    "estimation_start_note": "원문2026-01-01시행,2026~2030년각12개월",
+    "explicit_inputs": {
+      "birth_amount_first": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문3쪽first월액"
+      },
+      "birth_amount_second": {
+        "value": 150000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문3쪽second월액"
+      },
+      "birth_amount_third_plus": {
+        "value": 200000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문3쪽third_plus월액"
+      },
+      "existing_benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문5쪽현행월10만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2026-01-01시행·월지급"
+      }
+    },
+    "selected_evidence_keys": [
+      "2208381:under18_population:2026-2030",
+      "2208381:under8_population:2026-2030",
+      "2208381:child_execution_factor:2025",
+      "2208381:birth_share_first:table4_fixed2026",
+      "2208381:birth_share_second:table4_fixed2026",
+      "2208381:birth_share_third_plus:table4_fixed2026"
+    ],
+    "evidence_selection_reasons": {
+      "2208381:under18_population:2026-2030": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강",
+      "2208381:under8_population:2026-2030": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강",
+      "2208381:child_execution_factor:2025": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강",
+      "2208381:birth_share_first:table4_fixed2026": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강",
+      "2208381:birth_share_second:table4_fixed2026": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강",
+      "2208381:birth_share_third_plus:table4_fixed2026": "기존근거를유지,정답계산표와맞는동결시나리오로선택변경.사후보강"
+    },
+    "payer": "government",
+    "additive_support_note": "정답의 별도추가지급가정을확인;한부모추가금은별도항목으로한번만합산",
+    "selected_method_keys": [
+      "2212823:birth_order_table_calculation_policy"
+    ],
+    "method_selection_reasons": {
+      "2212823:birth_order_table_calculation_policy": "정답의계산표준용정책확인"
+    },
+    "method_confirmations": {
+      "2212823:birth_order_table_calculation_policy": {
+        "birth_order_scenario_note": "사후정답표준용:인원표는2026비율동결과유사.표3연변화설명과구분",
+        "additive_support_note": "정답의 별도추가지급가정을확인;한부모추가금은별도항목으로한번만합산"
+      }
+    }
+  },
+  "single_parent_payload": {
+    "bill_no": "2212823",
+    "evidence_mode": "development_review",
+    "route_key": "transfer_recipient",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2026,
+    "years": 5,
+    "payer": "government",
+    "support_derivation": "single_parent_survey_children",
+    "single_parent_population_scope": "under18_children_residing_with_single_parent",
+    "single_parent_projection": "freeze_2024_survey",
+    "single_parent_support_additive": true,
+    "child_population_geography": "전국",
+    "support_derivation_note": "정답확인후2024실태조사의모집단가구수와평균자녀수준용",
+    "survey_scope_note": "소득요건있는복지급여수급가구가아닌18세미만자녀동거한부모322천가구",
+    "additive_support_note": "정답PDF5쪽한부모10만원을순위수당과별도가산하는가정확인",
+    "explicit_inputs": {
+      "benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문제4조5항4호월10만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2026년1월시행·월급여"
+      }
+    },
+    "selected_evidence_keys": [
+      "2212823:single_parent_households:survey2024",
+      "2212823:children_per_household:survey2024",
+      "2208381:child_execution_factor:2025:single_parent"
+    ],
+    "evidence_selection_reasons": {
+      "2212823:single_parent_households:survey2024": "동일법정대상·조사범위·집행계수검토후사후준용",
+      "2212823:children_per_household:survey2024": "동일법정대상·조사범위·집행계수검토후사후준용",
+      "2208381:child_execution_factor:2025:single_parent": "동일법정대상·조사범위·집행계수검토후사후준용"
+    },
+    "selected_method_keys": [
+      "2212823:single_parent_survey_support"
+    ],
+    "method_selection_reasons": {
+      "2212823:single_parent_survey_support": "가구수와평균자녀수로한부모아동대상계산"
+    },
+    "method_confirmations": {
+      "2212823:single_parent_survey_support": {
+        "survey_scope_note": "2024모집단18세미만자녀동거322천가구",
+        "additive_support_note": "순위지원과별도의한부모추가지원을합산"
+      }
+    }
+  },
+  "birth_result": {
+    "route_key": "transfer_population_amount_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "evidence_key": "2208381:under18_population:2026-2030,2208381:under8_population:2026-2030,2208381:child_execution_factor:2025,2208381:birth_share_first:table4_fixed2026,2208381:birth_share_second:table4_fixed2026,2208381:birth_share_third_plus:table4_fixed2026",
+    "annual_amounts_thousand": [
+      6814601900,
+      6601629058,
+      6369618288,
+      6064638456,
+      5756611129
+    ],
+    "source_refs": [
+      "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+      "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+      "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+      "원문5쪽현행월10만원",
+      "원문2026-01-01시행·월지급",
+      "2212823 비용추계서25C4933 PDF4~6쪽 표3·4"
+    ],
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6332884.728,
+          6111539.664,
+          5907495.12,
+          5677459.956,
+          5464223.328
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2037785.124,
+          1945553.532,
+          1890267.564,
+          1864119.576,
+          1860980.184
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          121850,
+          121850,
+          121850,
+          121850,
+          121850
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽현행월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2026-01-01시행·월지급",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2212823:birth_order_table_calculation_policy"
+    ]
+  },
+  "single_parent_result": {
+    "route_key": "transfer_recipient",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "evidence_key": "2212823:single_parent_households:survey2024,2212823:children_per_household:survey2024,2208381:child_execution_factor:2025:single_parent",
+    "annual_amounts_thousand": [
+      577281600,
+      577281600,
+      577281600,
+      577281600,
+      577281600
+    ],
+    "source_refs": [
+      "2212823 비용추계서25C4933 PDF4쪽;2024한부모가족실태조사 인용; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+      "원문제4조5항4호월10만원",
+      "원문2026년1월시행·월급여",
+      "2212823 비용추계서25C4933 PDF4~6쪽"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": 481068,
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2212823 비용추계서25C4933 PDF4쪽;2024한부모가족실태조사 인용; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문제4조5항4호월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2026년1월시행·월급여",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2212823:single_parent_survey_support"
+    ]
+  },
+  "synthetic_web_status": [
+    "computed_review",
+    "computed_review"
+  ],
+  "single_parent_trace": [
+    {
+      "households": 322000,
+      "children_per_household": 1.5,
+      "gross_children": 483000,
+      "execution_factor": 0.996,
+      "effective_recipients": 481068,
+      "expression": "18세미만동거자녀한부모가구×평균자녀수×집행계수",
+      "projection": "freeze_2024_survey"
+    }
+  ],
+  "annual_thousand": [
+    7391883500,
+    7178910658,
+    6946899888,
+    6641920056,
+    6333892729
+  ],
+  "total_trillion": 34.493506831,
+  "gold_display_total_trillion": 34.8,
+  "difference_percent": 0.8807274971264353,
+  "birth_partial_trillion": 31.607098831,
+  "single_parent_trillion": 2.886408,
+  "component_raw_trillion": {
+    "first": 22.2617713904208,
+    "second": 16.191987935004,
+    "third_plus": 4.671786682886401,
+    "single_parent": 2.886408,
+    "existing_total": 11.518447176
+  },
+  "component_gold_display_trillion": {
+    "first": 22.3,
+    "second": 16.2,
+    "third_plus": 4.7,
+    "single_parent": 3,
+    "existing_total": 11.4
+  },
+  "limitation": "정답표부문표시합계와원시계산의차이는남김.34.8조원에맞춘보정계수/인원역산없음"
+}

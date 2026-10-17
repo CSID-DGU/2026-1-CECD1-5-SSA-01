@@ -1,0 +1,20 @@
+{
+  "bill_no": "2212685",
+  "gold_opened": true,
+  "post_answer_comparison": true,
+  "original_partial_total_trillion": 32.528650449,
+  "gold_partial_total_trillion": 35.2,
+  "absolute_error_percent": 7.589061224431834,
+  "signed_difference_trillion": -2.671349551000006,
+  "population_and_execution_match": true,
+  "formula_base_match": true,
+  "full_assumption_match": false,
+  "missed_gold_assumption": "정답은개정월액에첫해부터연2%물가반영.첫실행은원문검토보고규정만으로자동인상하지않아20만원동결",
+  "diagnostic_only_cpi_applied_trillion": 35.15155162922797,
+  "diagnostic_error_percent": 0.13763741696601076,
+  "diagnostic_not_independent": true,
+  "diagnostic_not_db_reinforcement": true,
+  "regional_supplement_gold_decision": "사유3호미추계(조례금액·대상범위미정)",
+  "regional_supplement_first_decision": "보류;법정미추계검증까지는미완료",
+  "whole_bill_total": null
+}

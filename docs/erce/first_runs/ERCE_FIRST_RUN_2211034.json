@@ -1,0 +1,95 @@
+{
+  "bill_no": "2211034",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2211034",
+    "bill_name": "아이돌봄 지원법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-06-24",
+    "articles": [
+      {
+        "article_ref": "제19조의3제2~3항",
+        "source_quote": "연령,수등을고려하여손자녀돌봄수당을지급할수있다.",
+        "source_page": 3,
+        "change_summary": "교육등록조부모 손자녀돌봄수당,아이연령·수에따라지급기준위임.양육수당과중복금지.등록조부모수와아이수를혼동하지않음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "등록돌보미에게현금지원가능하나대상/단가/참여·대체범위미확정",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "신규돌봄수당지출−양육수당대체지출.단순모든고령인구×아동수당단가아님",
+        "variables": []
+      },
+      {
+        "article_ref": "제9조·제19조의3제1항",
+        "source_quote": "손자녀돌보미가되려는사람은제9조에따른교육기관에서교육과정을이",
+        "source_page": 3,
+        "change_summary": "등록조부모교육이수의무.기존교육기관수행인지교육비개인부담인지추가지원계획확인필요",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "순증교육수요및부담주체검토",
+        "route_key": "quantity_unit",
+        "route_reason": "순증수강자×교육단가×공공부담,등록교육주기/기존교육활동과구분",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "calculations": [
+    {
+      "article_ref": "제19조의3제2~3항",
+      "payload": {
+        "bill_no": "2211034",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1"
+      }
+    },
+    {
+      "article_ref": "제9조·제19조의3제1항",
+      "payload": {
+        "bill_no": "2211034",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1"
+      }
+    }
+  ],
+  "total_amount": null,
+  "required_slots_filled": 0,
+  "required_slot_count": 7,
+  "limitation": "수당/교육의순증범위미확정.2026-04-23시행이므로첫해지급기간검토필요.양육수당중복금지의실제대체재정미검증.관련단가없다고기술적미추계확정하지않음"
+}

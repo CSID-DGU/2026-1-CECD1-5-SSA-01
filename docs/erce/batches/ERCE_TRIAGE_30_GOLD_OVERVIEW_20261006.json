@@ -1,0 +1,368 @@
+{
+  "batch_id": "ERCE_TRIAGE_30_20261006",
+  "post_answer_overview": true,
+  "originals_frozen_before_gold": true,
+  "records": [
+    {
+      "bill_no": "2200061",
+      "report_pages": 17,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 소득인정액과 생활조정수당을 합한 금액이 기준 중위소 득의 60%가 되도록 생활조정수당 월지급액을 인상하고, 부양의무자 유 무와 관계없이 생활조정수당을 지급하도록 할 경우, 추가재정소요는 2025~2029년 기간 동안 220억 8,200만원(연평균 44억 1,600만원)으 로 추계됨 ",
+      "gold_sha256": "aa2d09686d600bb857038785cff40725d397b30624577b47879975918977c4da",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200062",
+      "report_pages": 18,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 소득인정액과 생활조정수당을 합한 금액이 기준 중위소 득의 60%가 되도록 생활조정수당 월지급액을 인상하고, 부양의무자 유 무와 관계없이 생활조정수당을 지급하도록 할 경우, 추가재정소요는 2025~2029년 기간 동안 9,503억 400만원(연평균 1,900억 6,100만 원)으로 추계됨 ",
+      "gold_sha256": "1881384e18acc5db93c1b75f14acf141d6b75950e4f7d07896981e4dac3a2615",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200063",
+      "report_pages": 16,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 소득인정액과 생활조정수당을 합한 금액이 기준 중위소 득의 60%가 되도록 생활조정수당 월지급액을 인상하고, 부양의무자 유 무와 관계없이 생활조정수당을 지급하도록 할 경우, 추가재정소요는 2025~2029년 기간 동안 161억 2,000만원(연평균 32억 2,400만원)으 로 추계됨 ",
+      "gold_sha256": "fd2e801c700524ec32d21721d218cdc475b9cf45cf00b89ae7e0ad722778f9f5",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200101",
+      "report_pages": 11,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 의료급여 수급자에 대해 요양기관 간병 급여를 제공할 경우 국가 및 지방자치단체의 추가재정소요는 시범사업 유형(A형, B형, C형)에 따라 2025년 437억 7,800만원~643억 8,400만원, 2029년 563억 900만원~829억 3,200만원 등 5년간 총 2,511억 7,500만 원~3,693억 9,900만원으로 추계됨 ◦본 추계는 보건복지부의 “요양병원 간병지원 1단계 시범사업”의 간병비 급 여 기간과 환자 1인당 간병비를 준용하되, 시범사업이 일부 요양병원의 선 정된 입원환자에게만 급여를 제공하는 것과 달리, 요양병원 입원환자 중 의료최고도 및 의료고도 환자 전체에게 본인부담금을 면제하여 급여를 제 공하는 것으로 가정 －향후 보건복지부령에 따라 정해지는 간병급여의 방법·절차·범위·상한 등의 기준에 따라 추계 결과는 달라질 수 있음 구 분 ",
+      "gold_sha256": "a8c13bf98164add70e5081dd8cf9e043af82cd310e05e4ce3b8520cc580217f6",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200444",
+      "report_pages": 5,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 장애인 활동지원사에게 장애인전용주차구역 주차표지를 발급하는 경우, 추가재정소요는 2025년 1억 5,300만원, 2029년 1,700 만원 등 2025년부터 2029년까지 5년간 총 2억 1,200만원(연평균 4,200만원)으로 추계됨1) ",
+      "gold_sha256": "1159839b52cdb5616afec711ac1d1fb4c65edb5d45c98b0fed3954dcfd3da047",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200492",
+      "report_pages": 9,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "1) ❑개정안에 따라 국가유공자단체에 6·25참전소년소녀병전우회를 추가하 는 경우 추가재정소요는 2026년 30억 4,800만원, 2030년 33억 4,200만원 등 2026년부터 2030년까지 5년간 총 159억 6,400만원(연 평균 31억 9,300만원)이 발생할 것으로 추계됨 ",
+      "gold_sha256": "cc047cf15ffab231846ce2aa839c7d80315ab580006d40f2d60a095994ebbd42",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200568",
+      "report_pages": 7,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 6·25전몰군경자녀수당(이하 “자녀수당”)에 대해 유족의 보상금 수급권 소멸시점을 사유로 차등을 두지 않을 경우, 추가재정소 요는 2025년 2,140억원, 2026년 2,293억원 등 향후 5년간 총 1조 2,344억원, 연평균 2,469억원으로 추계됨 ",
+      "gold_sha256": "7757f9416ecc55f44009aacc405f9747c95ee0c7e29bb401a34b8a9d54f8ae22",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200602",
+      "report_pages": 5,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 장애인 활동지원사와 요양보호사에게 장애인전용주차구역 주차표지를 발급하는 경우, 추가재정소요는 2025년 9억 7,800만원, 2029년1억 100만원 등 2025년부터 2029년까지 5년간 총 13억 3,100만원(연평균2억 6,600만원)으로 추계됨1) ",
+      "gold_sha256": "3f40cafb2a849e838c73430ca06089d51c769f4816aa351652ca4a584208d2a7",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200622",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 상이등급 7급 유공자의 유족에게 보상금을 승계할 경우, 2025~2029년까지 추가재정소요는 승계보상금을 유공자 본인 보상금의 40%를 지급할 경우 2,731억원(연평균 546억원), 유공자 본인 보상금의 80%를 지급할 경우 5,462억원(연평균 1,092억원)으로 추계됨 ",
+      "gold_sha256": "34c7d049e2a856df1c29eedadb9a179966f5cd83c2b1ffc7187d29c739cc88e8",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200626",
+      "report_pages": 8,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 취학전 아동 및 초등학생에 대한 교육비 지출의 세액공제 한 도를 1인당 200만원 상향할경우 재정수입 감소는 다음과 같음 ◦2026년 554억원 등 2026~2030년 5년간 총 2,508억원(연평균 502억원) 으로 소득세수가 감소할 것으로 예상 －개정안 중 취학전 아동 아이돌봄서비스 이용비에 대한 세액공제 추가는 현재 관련 공식자료가 집계되고 있지 않아 추계대상에서 제외함 2026 2027 2028 2029 2030 누적 연평균 교육비 세액공제 대상범위 확대 및 공제한도 상향 (안 제59조의4제3항) -554 -526 -498 -474 -456 -2,508 -502 ",
+      "gold_sha256": "b34f079c6be67dcb7678f6fcc3d720515af3ab7c4d0a6e21e4ccb2ab208cbcec",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200830",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 위탁 의료기관에서 감면진료혜택을 받을 수 있는 대상자 의 기준연령을 현행 75세에서 65세로 조정하는 경우 감면대상자 증가 에 따른 추가재정소요는 2025년 1,300만원, 2029년 2,900만원 등 2025년부터 2029년까지 5년간 총 1억 100만원(연평균 2,000만원)이 발생할 것으로 추계됨 ",
+      "gold_sha256": "4fc1bfad08d9bc6230e9908e00e3e3c29daf2bbd817ffa88be5a4ce988661bed",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200929",
+      "report_pages": 7,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑(일부추계) 개정안에 따라 참전유공자에게 공공요금을 전액 지원하는 경우, 공공요금 추가재정소요액은 2026년 592억원, 2030년 415억원 등 2026년부터 2030년까지 5년간 총 2,502억원(연평균 500억원)이 발생할 것으로 추계됨 ◦개정안의 다른 재정수반요인에 대해서는 추계가 곤란하여 일부 재정수반요 인에 대해서만 추계한 것임 ◦이에 개정안의 전체적인 재정소요액은 추계된 금액을 상회할 것임 ",
+      "gold_sha256": "3c197a3b254d2242f1eecac4502b78650e22a99429799a74d32da465555e8cf7",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2200933",
+      "report_pages": 7,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 60세 이상 보국수훈자1)에게 보훈영예수당을 지급하는 경우 추가재정소요는 2025년 1,336억원, 2029년 2,064 억원 등 2025년부터 2029년까지 5년 간 총 8,408억원(연평균 1,682억원)으로 추계됨 ",
+      "gold_sha256": "f76ae2ee6f10c348479ec4aaf0844e84a19939309eaa9b3265041d9bd3ae2862",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201069",
+      "report_pages": 9,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 부양의무자 유무와 관계없이 생활조정수당을 지급하도록 할 경우, 추가재정소요는 2025~2029년 기간 동안 3억 3,500만원으로 추계됨 ",
+      "gold_sha256": "333b8a0eb220c89571624c18eb9de6a914090c92f420cb40bf9bc84b3f5e9dec",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201081",
+      "report_pages": 9,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 부양의무자 유무와 관계없이 생활조정수당을 지급하도록 할 경우, 추가재정소요는 2025~2029년 기간 동안 8억 2,300만원으로 추계됨 ",
+      "gold_sha256": "d0779935d847633b98e2884ba12975d48c71d73a62c0fbd84fb7691796ec2d82",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201108",
+      "report_pages": 5,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 6·25전쟁과 월남전에 모두 참전한 참전유공자에게 각각에 관한 참전명예수당을 지급할 경우, 2026~2030년까지 추가재정소요는 86 억 8,900만원(연평균 17억 3,800만원)으로 추계됨 ",
+      "gold_sha256": "0ff0099ffecda83c0585e43b1d92e34f3136600e0e5c72cf0aa52640f627bd41",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201112",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 참전유공자 사망 시 배우자에게 참전명예수당의 70%를 지급(추계에서는 기 사망 참전유공자 제외)할 경우, 2026~2030년 기간 동안 추가재정소요는 3,973억원(연평균 795억원)으로 추계됨 ",
+      "gold_sha256": "8a15b66af30d67608dcd63a22fa9a7381a135379a62a462ded4686a84d2c1ec3",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201497",
+      "report_pages": 8,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 양육비 대지급 제도 도입에 소요되는 추가재정소요는 2026년 633억 3,500만원, 2030년 652억 5,100만원 등 2026년부터 2030년까지 5년간 총 3,216억 9,100만원(연평균 643억 3,800만원)으 로 추계됨 (단위: 백만원) 2026 2027 2028 2029 2030 합계 연평균 양육비 대지급 신청 (안 제5조) 63,333 63,881 64,382 64,836 65,249 321,681 64,336 양육비결정위원회 (안 제7조) 2 2 2 2 2 10 2 합계 63,335 63,883 64,384 64,838 65,251 321,691 64,338 자료: 국회예산정책처 ",
+      "gold_sha256": "10cad5e461de4f068ee270deec88991c787abf5703bcaa1631c17cc85d8c7f73",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201629",
+      "report_pages": 5,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 참전유공자에게 생계지원금을 지급하는 경우, 추가재정 소요는 2026년 212억 2,900만원, 2030년 26억 8,600만원 등 2026 년부터 2030년까지 5년간 총 567억 2,600만원(연평균 113억 4,500만 원)이 발생할 것으로 추계됨 ",
+      "gold_sha256": "6b6cd5d27f7fa18e6a72b1b826f4ed9253be4f8c70ff90afee4761e14335b5bf",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2201639",
+      "report_pages": 7,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 보훈보상대상자1)가 사망 시 장제보조비를 지원하고, 보 훈보상대상자가 국민기초생활수급자인 경우에는 장례서비스를 의무화하 는 경우 추가재정소요는 2026년 3,100만원, 2030년 5,400만원 등 2026년부터 2030년까지 5년 간 총 2억 1,000만원(연평균 4,200만원) 으로 추계됨 ",
+      "gold_sha256": "48774ba9e3f39a0c9cb7977faa7ec0c6230586099adade385f003a6113d02827",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2202818",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 국민건강보험공단이 출산수당을 지급하고 국고에서 그 금 액을 지원할 경우 발생하는 추가재정소요는 2026년 2026년 829억원, 2030년 983억원 등 5년간 총 4,529억원(연평균 906억원)으로 추계됨 구 분 2026 2027 2028 2029 2030 합계 연평균 출산수당 및 정부지원 (안 제49조의2·제108조의2) 829 868 906 944 983 4,529 906 ",
+      "gold_sha256": "733e86d68cf0878d135edc2a83229458c065404d93f08a362ba3dd5f4e91788f",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2202905",
+      "report_pages": 11,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 취학 전 아동을 위한 아이돌봄 서비스 이용료에 대해 특 별세액공제를 적용할 경우 소득세 수입은 2026년 73억원 등 2026~2030년까지 5년간 총 399억원(연평균 80억원) 감소할 것으로 추계 2026 2027 2028 2029 2030 합계 연평균 미취학 아동 돌봄서비스 이용료에 대한 특별세액공제 (안 제59조의4) -73 -75 -78 -83 -90 -399 -80 ",
+      "gold_sha256": "64625ae8bdba6c44f8b1c45da1e94142d264b66c70da30216f750b67cad6abf1",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2203404",
+      "report_pages": 9,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 보청기 급여를 실시할 경우 국가의 추가재정소요는 2025 년 1,557억원~1.5조원, 2029년 140억원~1,331억원 등 5년간 총 2,157억원~2.1조원으로 추계됨 ◦본 추계는 현행 보건복지부 “장애인보장구” 사업의 보청기 단가와 급여율 (100%)을 준용한 결과로 향후 보건복지부령 따라 정해지는 보청기 급여의 방법·절차·범위·상한 등의 기준에 따라 추계결과는 달라질 수 있음 구 분 ",
+      "gold_sha256": "30dc3dcd605e3080674a5960910d6824ceb7ae2ceefdc2cc4dfeaaed987c1f38",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2203838",
+      "report_pages": 8,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑제정안에 따라 양육비 대지급 제도 도입에 소요되는 추가재정소요는 2026년 633억 3,500만원, 2030년 652억 5,100만원 등 2026년부터 2030년까지 5년간 총 3,216억 9,100만원(연평균 643억 3,800만원)으 로 추계됨 (단위: 백만원) 2026 2027 2028 2029 2030 합계 연평균 양육비 대지급 신청 (안 제5조) 63,333 63,881 64,382 64,836 65,249 321,681 64,336 양육비대지급결정위원회 (안 제6조) 2 2 2 2 2 10 2 합계 63,335 63,883 64,384 64,838 65,251 321,691 64,338 자료: 국회예산정책처 ",
+      "gold_sha256": "34268f7206f156553368ab74f5c4700185539af151374ca0c345b2285a978f6a",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204026",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑(일부추계) 개정안에 따라 생계급여의 선정기준을 상향 조정하는 경우 발생하는 추가재정소요는 2026년부터 2030년까지 5년간 총 8,246억원 (연평균 1,649억원) 이상으로 추계됨 구 분 2026 2027 2028 2029 2030 합 계 연평균 생계급여 선정기준 상향 조정 (안 제8조) 1,488 1,563 1,643 1,730 1,823 8,246 1,649 자료: 국회예산정책처 ",
+      "gold_sha256": "6cdf42c4c63d3360ef75d820fbcfbf04a08757618e22d47a7d682dc45ec55ca9",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204112",
+      "report_pages": 7,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑대한민국순직군경유족회를 설립·지원하는 경우 동 단체의 인건비, 운영 비, 사업비 등 보조금 지원에 따른 추가재정소요는 2026년부터 2030년 까지 5년간 41억 5,200만원(연평균 8억 3,000만원)으로 추계됨 자료: 국회예산정책처 ",
+      "gold_sha256": "5a882cd6f6294c826ad8daf4f7e5f6d663bcf2125f10ce7b752cff45160ea0f2",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204393",
+      "report_pages": 4,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 매년 자활급여에 대한 실태조사를 실시하는 경우 추가재 정소요는 2026년부터 2030년까지 5년간 총 2억원(연평균 4,000만원) 으로 추계됨 구 분 2026 2027 2028 2029 2030 합계 연평균 자활급여 실태조사(안 제20조의2) 40 40 40 40 40 200 40 자료: 국회예산정책처 ",
+      "gold_sha256": "ec7e20deec584f8816cb3f2e68b7afa3b4195ca48d2a5000d5daa769b7fd47e9",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204731",
+      "report_pages": 8,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 주거급여에 관리비를 포함하여, 관리비를 납부하기 어려 운 가구에 대하여 지급할 경우 추가재정소요는 2026년 628억원, 2030 년 702억원 등 향후 5년 동안 3,323억원(연평균 665억원)으로 추계됨 ◦국 비: 향후 5년 동안 2,779억원(연평균 556억원) ◦지방비: 향후 5년 동안 545억원(연평균 109억원) ",
+      "gold_sha256": "a33b6f3938ed74168d0a12b24002f953b3d99f5a46122041786f4048f86058ef",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204762",
+      "report_pages": 5,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 국가유공자등단체에 순국선열유족회를 추가하여 보조금 을 지원1)하는 경우 추가재정소요는 2025년 7억 8,800만원, 2029년 9 억 700만원 등 2025년부터 2029년까지 5년간42억 3,300만원(연평균 8억 4,700만원)으로 추계됨 ",
+      "gold_sha256": "bb3efa55f4dea4e36ae3f5248cb19135d2dcbef7d1e50e5ad3cac5d942c7e304",
+      "verification_status": "headline_only_not_full_formula_validation"
+    },
+    {
+      "bill_no": "2204827",
+      "report_pages": 6,
+      "pages_extracted": [
+        1,
+        2,
+        3
+      ],
+      "overview": "❑개정안에 따라 생계급여 수급자 선정을 위한 개별가구의 소득평가액에서 기초연금 수급액의 50%를 제외할 경우 발생하는 추가재정소요는 2025년 1조 3,489억원, 2029년 1조 8,573억원등 2025년부터 2029년까지 5 년간 총 8조 1,670억원(연평균 1조 6,334억원)으로 추계됨 ",
+      "gold_sha256": "2a357b77d66512ede293facb2b47dff7746e68fee91eb0439fdf6c1ff7e44b26",
+      "verification_status": "headline_only_not_full_formula_validation"
+    }
+  ],
+  "limitation": "정답결과개요만수집.전체산식/변수/항목검증아님.금액미산출이므로오차율계산불가"
+}

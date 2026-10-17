@@ -1,0 +1,38 @@
+{
+  "bill_no": "2204056",
+  "cutoff": "2024-09-19",
+  "years": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "result_type": "미첨부(전 항목 추계곤란)",
+  "annual_million": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "total_million": 0,
+  "items": [],
+  "scope": [
+    {
+      "clause": "제47조의2 7·8·9·12호 노인·장애인·사회복지시설·어린이집",
+      "decision": "not_estimated",
+      "reason": "'대통령령으로 정하는 규모 이상' 위임으로 대상 시설 수 불명(3호)"
+    },
+    {
+      "clause": "10·11호 대규모점포·전통시장",
+      "decision": "not_applicable",
+      "reason": "민간 소유자·상인회 부담"
+    },
+    {
+      "clause": "13호 유치원·초중고·대학",
+      "decision": "not_estimated",
+      "reason": "국공립 학교 수는 있으나 기존 AED 보유현황·장비단가 근거가 공개 선례에 없음(자료부재, 3호)"
+    }
+  ]
+}

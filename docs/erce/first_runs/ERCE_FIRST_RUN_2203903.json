@@ -1,0 +1,179 @@
+{
+  "bill_no": "2203903",
+  "run_date": "2026-10-09",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2203903",
+    "bill_name": "장애인활동 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-11",
+    "articles": [
+      {
+        "article_ref": "제3조의2",
+        "source_quote": "관한조사를3년마다실시하",
+        "source_page": 5,
+        "change_summary": "3년실태조사신설.장애실태조사에포함실시가능하므로독립계약실시시가격후보와기존조사통합경우구분",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "3년실태조사신설.장애실태조사에포함실시가능하므로독립계약실시시가격후보와기존조사통합경우구분",
+        "route_key": "research_survey",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제32조제2항",
+        "source_quote": "정인건비기준을정하고제1항에따라급여비용을정할때이를",
+        "source_page": 7,
+        "change_summary": "적정인건비기준·급여비반영수준미명시.기존동일유형의조건부3호미추계근거검토",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "적정인건비기준·급여비반영수준미명시.기존동일유형의조건부3호미추계근거검토",
+        "route_key": "",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제31조제1항",
+        "source_quote": "운영비를구분하여청구하고",
+        "source_page": 6,
+        "change_summary": "인건비운영비분리청구는그자체로급여총액증가아님.전산/시정/과징금집행의순증계획미확정",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "인건비운영비분리청구는그자체로급여총액증가아님.전산/시정/과징금집행의순증계획미확정",
+        "route_key": "",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    false
+  ],
+  "survey_payload": {
+    "bill_no": "2203903",
+    "cutoff_date": "2026-10-08",
+    "evidence_mode": "holdout",
+    "route_key": "research_survey",
+    "start_year": 2025,
+    "years": 5,
+    "payer": "government",
+    "agency": "보건복지부",
+    "policy_domain": "장애인활동지원",
+    "research_service_function": "activity_support_survey",
+    "research_cost_scope": "research_contract_only",
+    "selected_evidence_keys": [
+      "2212766:survey:survey_unit_cost:reviewed",
+      "2212766:survey:recurrence:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2212766:survey:survey_unit_cost:reviewed": "같은활동지원조사의연구계약단가를현재개발DB에서준용.현장조사전체비/통합실시경우추가비는별도",
+      "2212766:survey:recurrence:reviewed": "같은활동지원조사의연구계약단가를현재개발DB에서준용.현장조사전체비/통합실시경우추가비는별도"
+    },
+    "selected_method_keys": [
+      "2212766:research_survey"
+    ],
+    "method_selection_reasons": {
+      "2212766:research_survey": "동일과업에대한유사연구계약범위검토"
+    },
+    "method_confirmations": {
+      "2212766:research_survey": {
+        "research_contract_scope_note": "조사현장수행비750백만원아닌연구용역분만;계획은신규서비스정책연구",
+        "recurrence_phase_note": "2025시행첫해·2028년독립조사실시후보.기존장애조사에포함시추가계약비재검토",
+        "price_freeze_note": "과거계약9000/4000만원준용동결,최신고시단가아님"
+      }
+    },
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "원문제3조의2제1항3년마다"
+      }
+    }
+  },
+  "survey_result": {
+    "route_key": "research_survey",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "evidence_key": "2212766:survey:survey_unit_cost:reviewed,2212766:survey:recurrence:reviewed",
+    "annual_amounts_thousand": [
+      90000,
+      0,
+      0,
+      90000,
+      0
+    ],
+    "source_refs": [
+      "2212766 비용추계서25C4872 PDF4~5쪽",
+      "원문제3조의2제1항3년마다"
+    ],
+    "resolved_variables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 90000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "원문제3조의2제1항3년마다",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": [
+      "2212766:research_survey"
+    ]
+  },
+  "conditional_standalone_survey_thousand": 180000,
+  "survey_assumption_confirmed": false,
+  "pay_non_estimation_payload": {
+    "bill_no": "2203903",
+    "cutoff_date": "2026-10-08",
+    "evidence_mode": "holdout",
+    "decision_evidence_key": "2212766:pay_standard_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "pay_standard_confirmed": false,
+      "benefit_reflection_method_confirmed": false
+    },
+    "decision_confirmations": {
+      "pay_standard_scope_review": "원문제32조제2항에적정임금수치/수준이없음.원문기반역사적계획미확정시나리오",
+      "benefit_reflection_review": "사업급여반영수준/방법이원문미명시,후속확정계획있으면이판정재사용안함"
+    }
+  },
+  "pay_non_estimation": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2212766:pay_standard_not_estimated",
+    "reason": "급여비용변동가능성은있으나적정인건비수준과급여산정반영방식미확정으로인건비영향미추계",
+    "source_ref": "2212766 비용추계서25C4872 PDF3쪽",
+    "source_quote": "현시점에서 활동지원인력의 적정 인건비수준과 급여비용 산정 시 반영 방식 등을 합리적으로 예측할 수 없어 비용추계의 대상에서 제외",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "pay_standard_scope_review": "원문제32조제2항에적정임금수치/수준이없음.원문기반역사적계획미확정시나리오",
+      "benefit_reflection_review": "사업급여반영수준/방법이원문미명시,후속확정계획있으면이판정재사용안함"
+    },
+    "confirmed_facts": {
+      "pay_standard_confirmed": false,
+      "benefit_reflection_method_confirmed": false
+    },
+    "reestimate_when": "적정인건비고시/시급과급여비반영기준·서비스시간/대상규모가확보되면증분계산",
+    "limitation": "역사적정답의자료부족확인.현재기준고시가없음을전수검색한주장아님"
+  },
+  "whole_bill_total": null,
+  "limitation": "현재개발DB동일유형단가/근거로미사용의안추계.독립계약조사실시후보180백만원은통합조사비0이라는확정판정과다름.2024당시정보만쓴시점격리평가아님"
+}

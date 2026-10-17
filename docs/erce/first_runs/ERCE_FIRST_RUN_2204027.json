@@ -1,0 +1,198 @@
+{
+  "bill_no": "2204027",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "ai_draft": {
+    "bill_no": "2204027",
+    "bill_name": "기초연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-13",
+    "articles": [
+      {
+        "article_ref": "제8조제1항~제3항",
+        "source_quote": "제8조제1항을삭제하고",
+        "source_page": 3,
+        "change_summary": "부부동시수급20%감액폐지.소득역전방지감액유지;제2·3항참조변경은중복추계금지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "부부2인수급자에게발생하는실제급여차액.국민연금연계와소득역전감액을추가확인해야함",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "같은대상에개정후급여−현행급여",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "payload": {
+    "bill_no": "2204027",
+    "route_key": "transfer_recipient_delta",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문3쪽2025-01-01시행 및매월급여"
+      }
+    },
+    "calculated_inputs": {
+      "recipient_count": {
+        "value": [
+          3153416.3178951615,
+          3336705.0889117387,
+          3478286.455979065,
+          3636733.0809349725,
+          3755496.516796247
+        ],
+        "unit": "person",
+        "source_ref": "KOSIS2023.12전망65세이상×70%×2021~2023대상대비실수급률×공식부부2인수급자비율;보건복지부통계PDF11~12쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "value": [
+          343180.24999999994,
+          350387.0352499999,
+          357394.77595499996,
+          364542.6714740999,
+          371833.52490358194
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "2024기초연금기준334810원및기존2203602역사물가연동2.5·2.1·2·2·2%;국민연금연계감액전최대액",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "value": [
+          274544.19999999995,
+          280309.6281999999,
+          285915.820764,
+          291634.13717927993,
+          297466.81992286554
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "원문5쪽20%부부감액;소득역전감액추가반영전최대회복시나리오",
+        "is_assumption": true
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_recipient_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "evidence_key": "target_formula_inputs",
+    "annual_amounts_thousand": [
+      2597256481,
+      2805931689,
+      2983491381,
+      3181786543,
+      3351406818
+    ],
+    "source_refs": [
+      "KOSIS2023.12전망65세이상×70%×2021~2023대상대비실수급률×공식부부2인수급자비율;보건복지부통계PDF11~12쪽",
+      "2024기초연금기준334810원및기존2203602역사물가연동2.5·2.1·2·2·2%;국민연금연계감액전최대액",
+      "원문5쪽20%부부감액;소득역전감액추가반영전최대회복시나리오",
+      "원문3쪽2025-01-01시행 및매월급여"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          3153416.3178951615,
+          3336705.0889117387,
+          3478286.455979065,
+          3636733.0809349725,
+          3755496.516796247
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS2023.12전망65세이상×70%×2021~2023대상대비실수급률×공식부부2인수급자비율;보건복지부통계PDF11~12쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          343180.24999999994,
+          350387.0352499999,
+          357394.77595499996,
+          364542.6714740999,
+          371833.52490358194
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2024기초연금기준334810원및기존2203602역사물가연동2.5·2.1·2·2·2%;국민연금연계감액전최대액",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": [
+          274544.19999999995,
+          280309.6281999999,
+          285915.820764,
+          291634.13717927993,
+          297466.81992286554
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "원문5쪽20%부부감액;소득역전감액추가반영전최대회복시나리오",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽2025-01-01시행 및매월급여",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": []
+  },
+  "total_thousand": 14919872912,
+  "required_variables_filled": 3,
+  "required_variable_count": 3,
+  "scenario_only": true,
+  "scenario": "부부기준액20%전체회복 상한방향 후보;국민연금·소득역전감액후실제순증미산정",
+  "unresolved": [
+    "국민연금연계에따른부부기초연금액분포",
+    "증액후소득역전감액에따른회복제한"
+  ],
+  "population_trace": {
+    "historical_recipients": [
+      5973059,
+      6238798,
+      6508574
+    ],
+    "historical_couple_both": [
+      2564894,
+      2694394,
+      2835116
+    ],
+    "historical_elderly": [
+      8569865,
+      8981133,
+      9435816
+    ],
+    "take_up": 0.9911492092683307,
+    "couple_both_share": 0.4322948886806812,
+    "forecast_elderly": [
+      10513907,
+      11125016,
+      11597067,
+      12125349,
+      12521322
+    ]
+  },
+  "limitations": [
+    "현재개발DB·공식기존자료재사용,발의일시점독립평가아님",
+    "개발AI수동근거매핑+Python엔진계산,웹자동선택평가아님",
+    "부부1인수급은제외;인원명단위여서2배하지않음",
+    "정확한전체상한증명아님.동결비율과예측대상인원에조건부인최대회복후보"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "bill_no": "2200703",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C1121",
+  "gold_date": "2024-07-05",
+  "gold_scope": "제21조의6 양육비 선지급 추가재정소요",
+  "evaluation_status": "official_scope_reproduced",
+  "independent_first_run": true,
+  "evaluation_limit": "대상 정답 미열람 개발 첫 실행. 동일 법률·동일 정부계획의 다른 의안 근거 재사용. 발의 당시 공개시점 격리나 유형격리 평가가 아님.",
+  "first_total_eok": 3216.806,
+  "gold_total_eok": 3216.81,
+  "raw_error_percent": 0.00012434679076182346,
+  "annual_display_matches": 5,
+  "annual_display_total": 5,
+  "formula_match": true,
+  "operand_count": 9,
+  "operands_available": 9,
+  "operand_match_count": 9,
+  "quote_verified_count": 6,
+  "quote_total": 6,
+  "system_upgrade_included": false,
+  "recovery_netted": false,
+  "assumption_comparison": {
+    "cohort_filters": "정답과 동일",
+    "monthly_amount": "월20만원 동일. 정답은 기존 긴급지원 단가와 2024년3월 정부계획을 근거로 함. 첫 실행에서는 다른 의안의 정책 참고 후보로 선택.",
+    "participation": "예측 불가로 필요 대상 전원지원 가정 동일",
+    "months": "연12개월 동일",
+    "legacy_budget": "연16억100만원 동결 차감 동일",
+    "horizon": "2026~2030년 동일. 최초에는 조건부 준비 시나리오로 표시했고 정답도 공포 후1년 시행을 고려하여 이 기간을 가정."
+  },
+  "scope_note": "정답은 급여 추가지출만 계산했다. 원문의 별도 효과를 검토 보류한 것은 공식 추계범위 재현 미완료 사유로 표시하지 않는다. 별도 금액이 없는 효과를 0원 또는 공식 미추계로 단정하지 않는다.",
+  "reinforcement_performed": false
+}

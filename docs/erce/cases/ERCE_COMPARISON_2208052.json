@@ -1,0 +1,26 @@
+{
+  "bill_no": "2208052",
+  "post_answer_comparison": true,
+  "gold_partial_total_eok": 68167,
+  "first_candidates": [
+    {
+      "new_months": 8.3,
+      "amount_eok": 48633.86511,
+      "error_percent": 28.654825487405933,
+      "confirmed": false
+    },
+    {
+      "new_months": 12,
+      "amount_eok": 83048.55129,
+      "error_percent": 21.83101983364385,
+      "confirmed": false
+    }
+  ],
+  "gold_additional_months": 5.2,
+  "gold_effective_total_months": 10.4,
+  "correct_existing_price_component_eok": 19799.93882,
+  "corrected_rule": "현행실지급평균/현행법정최대 × 법정기간증가분",
+  "confirmed_total": null,
+  "confirmed_total_error_percent": null,
+  "reinforcement_completed": false
+}

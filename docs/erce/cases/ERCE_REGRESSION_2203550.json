@@ -1,0 +1,277 @@
+{
+  "bill_no": "2203550",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "attached_reference_identity_verified": false,
+  "payload": {
+    "bill_no": "2203550",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "elderly_public_activity_wage_delta",
+    "support_derivation": "elderly_public_activity_minimum_wage_delta",
+    "payer": "government",
+    "start_year": 2024,
+    "years": 5,
+    "elderly_job_type": "public_activity",
+    "law_effective_date": "2024-11-01",
+    "use_unmatched_source_as_reference": true,
+    "unmatched_source_reference_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인.",
+    "public_activity_scope_note": "공익활동형만 최저시급 적용 참고 가정. 사회서비스·민간형 이미최저임금 이상으로 제외.",
+    "activity_projection_note": "참여자2019~2023·최저시급2021~2025 CAGR, 월29만원·30시간·11개월 동결, 부대경비 양쪽 동일.",
+    "activity_timing_note": "원문2024-11-01시행. 첫2024년2개월·2025이후11개월, 2024~2028참고기간.",
+    "selected_evidence_keys": [
+      "2203550:public_activity:public_activity_participant_history",
+      "2203550:public_activity:minimum_wage_history",
+      "2203550:public_activity:current_monthly_activity_pay",
+      "2203550:public_activity:monthly_activity_hours",
+      "2203550:public_activity:normal_activity_months",
+      "2203550:public_activity:ancillary_annual_cost"
+    ],
+    "evidence_selection_reasons": {
+      "2203550:public_activity:public_activity_participant_history": "버전불일치를 명시한 동일 공익활동형 과업 참고",
+      "2203550:public_activity:minimum_wage_history": "버전불일치를 명시한 동일 공익활동형 과업 참고",
+      "2203550:public_activity:current_monthly_activity_pay": "버전불일치를 명시한 동일 공익활동형 과업 참고",
+      "2203550:public_activity:monthly_activity_hours": "버전불일치를 명시한 동일 공익활동형 과업 참고",
+      "2203550:public_activity:normal_activity_months": "버전불일치를 명시한 동일 공익활동형 과업 참고",
+      "2203550:public_activity:ancillary_annual_cost": "버전불일치를 명시한 동일 공익활동형 과업 참고"
+    },
+    "selected_method_keys": [
+      "2203550:public_activity_minimum_wage_reference"
+    ],
+    "method_selection_reasons": {
+      "2203550:public_activity_minimum_wage_reference": "확정대상정답이아닌 공익활동형 임금증분 참고"
+    },
+    "method_confirmations": {
+      "2203550:public_activity_minimum_wage_reference": {
+        "unmatched_source_reference_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인.",
+        "public_activity_scope_note": "공익활동형만 최저시급 적용 참고 가정. 사회서비스·민간형 이미최저임금 이상으로 제외.",
+        "activity_projection_note": "참여자2019~2023·최저시급2021~2025 CAGR, 월29만원·30시간·11개월 동결, 부대경비 양쪽 동일.",
+        "activity_timing_note": "원문2024-11-01시행. 첫2024년2개월·2025이후11개월, 2024~2028참고기간."
+      }
+    }
+  },
+  "result": {
+    "route_key": "elderly_public_activity_wage_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2203550:public_activity:public_activity_participant_history,2203550:public_activity:minimum_wage_history,2203550:public_activity:current_monthly_activity_pay,2203550:public_activity:monthly_activity_hours,2203550:public_activity:normal_activity_months,2203550:public_activity:ancillary_annual_cost",
+    "annual_amounts_thousand": [
+      7947496,
+      86056906,
+      178734624,
+      283419099,
+      401203975
+    ],
+    "source_refs": [
+      "2203550 폴더 첨부24C2515 PDF3~5쪽; 복지부2019~2023사업 실적·2021~2025최저임금 고시 인용",
+      "2203550첨부24C2515 PDF3~5쪽, 의안신원미확인"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          7947496400,
+          86056906100,
+          178734624420,
+          283419098710,
+          401203974600
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203550 폴더 첨부24C2515 PDF3~5쪽; 복지부2019~2023사업 실적·2021~2025최저임금 고시 인용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2203550:public_activity_minimum_wage_reference"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "elderly_public_activity_wage_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      7947496,
+      86056906,
+      178734624,
+      283419099,
+      401203975
+    ],
+    "derivationTrace": [
+      {
+        "year": 2024,
+        "public_activity_participants": 685129,
+        "minimum_hourly_wage": 9860,
+        "participant_cagr": 0.04759756352554856,
+        "minimum_wage_cagr": 0.03560970581087597,
+        "payment_months": 2,
+        "current_monthly_pay": 290000,
+        "new_monthly_pay": 295800,
+        "ancillary_per_person_both_sides": 32727.272727272728,
+        "baseline_won": 419797223636.36365,
+        "amended_won": 427744720036.36365,
+        "additional_won": 7947496400,
+        "source_version_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인."
+      },
+      {
+        "year": 2025,
+        "public_activity_participants": 717739,
+        "minimum_hourly_wage": 10030,
+        "participant_cagr": 0.04759756352554856,
+        "minimum_wage_cagr": 0.03560970581087597,
+        "payment_months": 11,
+        "current_monthly_pay": 290000,
+        "new_monthly_pay": 300900,
+        "ancillary_per_person_both_sides": 180000,
+        "baseline_won": 2418780430000,
+        "amended_won": 2504837336100,
+        "additional_won": 86056906100,
+        "source_version_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인."
+      },
+      {
+        "year": 2026,
+        "public_activity_participants": 751902,
+        "minimum_hourly_wage": 10387,
+        "participant_cagr": 0.04759756352554856,
+        "minimum_wage_cagr": 0.03560970581087597,
+        "payment_months": 11,
+        "current_monthly_pay": 290000,
+        "new_monthly_pay": 311610,
+        "ancillary_per_person_both_sides": 180000,
+        "baseline_won": 2533909740000,
+        "amended_won": 2712644364420,
+        "additional_won": 178734624420,
+        "source_version_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인."
+      },
+      {
+        "year": 2027,
+        "public_activity_participants": 787691,
+        "minimum_hourly_wage": 10757,
+        "participant_cagr": 0.04759756352554856,
+        "minimum_wage_cagr": 0.03560970581087597,
+        "payment_months": 11,
+        "current_monthly_pay": 290000,
+        "new_monthly_pay": 322710,
+        "ancillary_per_person_both_sides": 180000,
+        "baseline_won": 2654518670000,
+        "amended_won": 2937937768710,
+        "additional_won": 283419098710,
+        "source_version_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인."
+      },
+      {
+        "year": 2028,
+        "public_activity_participants": 825183,
+        "minimum_hourly_wage": 11140,
+        "participant_cagr": 0.04759756352554856,
+        "minimum_wage_cagr": 0.03560970581087597,
+        "payment_months": 11,
+        "current_monthly_pay": 290000,
+        "new_monthly_pay": 334200,
+        "ancillary_per_person_both_sides": 180000,
+        "baseline_won": 2780866710000,
+        "amended_won": 3182070684600,
+        "additional_won": 401203974600,
+        "source_version_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인."
+      }
+    ],
+    "sourceRefs": [
+      "2203550 폴더 첨부24C2515 PDF3~5쪽; 복지부2019~2023사업 실적·2021~2025최저임금 고시 인용",
+      "2203550첨부24C2515 PDF3~5쪽, 의안신원미확인"
+    ],
+    "methodEvidenceKeys": [
+      "2203550:public_activity_minimum_wage_reference"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2203550:public_activity_minimum_wage_reference",
+        "source_bill_no": "2203550",
+        "available_at": "2024-08-08",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "elderly_public_activity_minimum_wage_delta",
+        "source_ref": "2203550첨부24C2515 PDF3~5쪽, 의안신원미확인",
+        "match_groups": [
+          [
+            "노인일자리",
+            "공익활동"
+          ],
+          [
+            "최저임금",
+            "최저시급"
+          ]
+        ],
+        "allowed_routes": [
+          "elderly_public_activity_wage_delta"
+        ],
+        "support_derivation": "elderly_public_activity_minimum_wage_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2203550:public_activity:public_activity_participant_history",
+          "2203550:public_activity:minimum_wage_history",
+          "2203550:public_activity:current_monthly_activity_pay",
+          "2203550:public_activity:monthly_activity_hours",
+          "2203550:public_activity:normal_activity_months",
+          "2203550:public_activity:ancillary_annual_cost"
+        ],
+        "required_confirmations": [
+          "unmatched_source_reference_note",
+          "public_activity_scope_note",
+          "activity_projection_note",
+          "activity_timing_note"
+        ],
+        "method_steps": [
+          "사회서비스형·민간형 기존최저임금 적용은 제외하고 공익활동형만 참고 계산",
+          "2019~2023참여자·2021~2025최저임금 CAGR 및 알려진고시값 사용",
+          "월29만원 동결·30시간·11개월, 첫2024년2개월",
+          "양쪽 부대경비 동일유지 후 개정총비용−현행총비용"
+        ],
+        "baseline_check": "시간당29만원이라고 읽지 않음. 버전불일치출처 승인필요, 확정대상정답으로 보고금지",
+        "limitation": "참고계산 전용. 회답일이대상발의일보다빠르고의안번호공란, 역사적전망 가정",
+        "lower_variable_keys": [
+          "public_activity_participant_history",
+          "minimum_wage_history",
+          "current_monthly_activity_pay",
+          "monthly_activity_hours",
+          "normal_activity_months",
+          "ancillary_annual_cost"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "확정대상정답이아닌 공익활동형 임금증분 참고",
+        "confirmed_assumptions": {
+          "unmatched_source_reference_note": "첨부24C2515 회답2024-08-08이발의2024-09-03보다빠르고표지번호공란. 동일 조문·시행일 참고시나리오로만 승인.",
+          "public_activity_scope_note": "공익활동형만 최저시급 적용 참고 가정. 사회서비스·민간형 이미최저임금 이상으로 제외.",
+          "activity_projection_note": "참여자2019~2023·최저시급2021~2025 CAGR, 월29만원·30시간·11개월 동결, 부대경비 양쪽 동일.",
+          "activity_timing_note": "원문2024-11-01시행. 첫2024년2개월·2025이후11개월, 2024~2028참고기간."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          7947496400,
+          86056906100,
+          178734624420,
+          283419098710,
+          401203974600
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203550 폴더 첨부24C2515 PDF3~5쪽; 복지부2019~2023사업 실적·2021~2025최저임금 고시 인용",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 9573.621,
+  "reference_display_total_eok": 9574,
+  "reference_error_percent": 0.0039586379778652064,
+  "annual_display_matches": 5,
+  "limitation": "버전불일치 첨부자료 참고시나리오 재현. 확정대상 정답 정확도 및 독립 성과 아님"
+}

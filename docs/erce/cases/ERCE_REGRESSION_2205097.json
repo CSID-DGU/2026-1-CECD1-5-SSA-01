@@ -1,0 +1,271 @@
+{
+  "bill_no": "2205097",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2205097",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "mobile_identity_system_lifecycle",
+    "support_derivation": "mobile_identity_lifecycle",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "mobile_plan_scope_confirmed": true,
+    "mobile_build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음.",
+    "mobile_operation_scope_note": "2023모바일공무원증 본인확인·콜센터·보안운영837백만원, 유지관리233백만원을 각각 준용.",
+    "mobile_warranty_note": "2025구축·2026운영시작과무상유지관리·2027유지관리시작. 운영과 유지관리는 다른비용.",
+    "mobile_price_timing_note": "2023단가를2024부터발생연도까지전망CPI 적용, 2025~2029정답기간. 구축비는2025예산안이므로중복물가가산없음.",
+    "selected_evidence_keys": [
+      "2205097:mobile_build_components:reviewed",
+      "2205097:mobile_operation_base:reviewed",
+      "2205097:mobile_maintenance_base:reviewed",
+      "2205097:mobile_recurring_price_year:reviewed",
+      "2205097:mobile_operation_start_offset:reviewed",
+      "2205097:mobile_maintenance_start_offset:reviewed",
+      "2205097:mobile_cpi:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2205097:mobile_build_components:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_operation_base:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_maintenance_base:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_recurring_price_year:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_operation_start_offset:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_maintenance_start_offset:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정",
+      "2205097:mobile_cpi:reviewed": "발급플랫폼·과업·규모·가격년·무상보수 기간 검토한 참고 가정"
+    },
+    "selected_method_keys": [
+      "2205097:mobile_identity_lifecycle"
+    ],
+    "method_selection_reasons": {
+      "2205097:mobile_identity_lifecycle": "모바일등록증 구축운영생애주기 선택"
+    },
+    "method_confirmations": {
+      "2205097:mobile_identity_lifecycle": {
+        "mobile_build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음.",
+        "mobile_operation_scope_note": "2023모바일공무원증 본인확인·콜센터·보안운영837백만원, 유지관리233백만원을 각각 준용.",
+        "mobile_warranty_note": "2025구축·2026운영시작과무상유지관리·2027유지관리시작. 운영과 유지관리는 다른비용.",
+        "mobile_price_timing_note": "2023단가를2024부터발생연도까지전망CPI 적용, 2025~2029정답기간. 구축비는2025예산안이므로중복물가가산없음."
+      }
+    }
+  },
+  "result": {
+    "route_key": "mobile_identity_system_lifecycle",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2205097:mobile_build_components:reviewed,2205097:mobile_operation_base:reviewed,2205097:mobile_maintenance_base:reviewed,2205097:mobile_recurring_price_year:reviewed,2205097:mobile_operation_start_offset:reviewed,2205097:mobile_maintenance_start_offset:reviewed,2205097:mobile_cpi:reviewed",
+    "annual_amounts_thousand": [
+      6778000,
+      893460,
+      1165021,
+      1188321,
+      1212088
+    ],
+    "source_refs": [
+      "2205097 비용추계서24C4867 PDF3~5쪽; 2025복지부 구축예산안·2023행안부 모바일공무원증 운영예산",
+      "2205097 비용추계서24C4867 PDF3~5쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          6778000000,
+          893460253.4999998,
+          1165020932.6999998,
+          1188321351.3539999,
+          1212087778.38108
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205097 비용추계서24C4867 PDF3~5쪽; 2025복지부 구축예산안·2023행안부 모바일공무원증 운영예산",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2205097:mobile_identity_lifecycle"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "mobile_identity_system_lifecycle",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      6778000,
+      893460,
+      1165021,
+      1188321,
+      1212088
+    ],
+    "derivationTrace": [
+      {
+        "year": 2025,
+        "build_won": 6778000000,
+        "operation_won": 0,
+        "maintenance_won": 0,
+        "operation_start_year": 2026,
+        "maintenance_start_year": 2027,
+        "maintenance_warranty_year": false,
+        "recurring_price_year": 2023,
+        "build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음."
+      },
+      {
+        "year": 2026,
+        "build_won": 0,
+        "operation_won": 893460253.4999998,
+        "maintenance_won": 0,
+        "operation_start_year": 2026,
+        "maintenance_start_year": 2027,
+        "maintenance_warranty_year": true,
+        "recurring_price_year": 2023,
+        "build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음."
+      },
+      {
+        "year": 2027,
+        "build_won": 0,
+        "operation_won": 911329458.5699998,
+        "maintenance_won": 253691474.12999994,
+        "operation_start_year": 2026,
+        "maintenance_start_year": 2027,
+        "maintenance_warranty_year": false,
+        "recurring_price_year": 2023,
+        "build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음."
+      },
+      {
+        "year": 2028,
+        "build_won": 0,
+        "operation_won": 929556047.7413999,
+        "maintenance_won": 258765303.61259997,
+        "operation_start_year": 2026,
+        "maintenance_start_year": 2027,
+        "maintenance_warranty_year": false,
+        "recurring_price_year": 2023,
+        "build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음."
+      },
+      {
+        "year": 2029,
+        "build_won": 0,
+        "operation_won": 948147168.6962279,
+        "maintenance_won": 263940609.68485197,
+        "operation_start_year": 2026,
+        "maintenance_start_year": 2027,
+        "maintenance_warranty_year": false,
+        "recurring_price_year": 2023,
+        "build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음."
+      }
+    ],
+    "sourceRefs": [
+      "2205097 비용추계서24C4867 PDF3~5쪽; 2025복지부 구축예산안·2023행안부 모바일공무원증 운영예산",
+      "2205097 비용추계서24C4867 PDF3~5쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2205097:mobile_identity_lifecycle"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2205097:mobile_identity_lifecycle",
+        "source_bill_no": "2205097",
+        "available_at": "2024-11-22",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "mobile_identity_lifecycle",
+        "source_ref": "2205097 비용추계서24C4867 PDF3~5쪽",
+        "match_groups": [
+          [
+            "모바일"
+          ],
+          [
+            "등록증",
+            "신분증"
+          ],
+          [
+            "발급",
+            "회수",
+            "시스템"
+          ]
+        ],
+        "allowed_routes": [
+          "mobile_identity_system_lifecycle"
+        ],
+        "support_derivation": "mobile_identity_lifecycle",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2205097:mobile_build_components:reviewed",
+          "2205097:mobile_operation_base:reviewed",
+          "2205097:mobile_maintenance_base:reviewed",
+          "2205097:mobile_recurring_price_year:reviewed",
+          "2205097:mobile_operation_start_offset:reviewed",
+          "2205097:mobile_maintenance_start_offset:reviewed",
+          "2205097:mobile_cpi:reviewed"
+        ],
+        "required_confirmations": [
+          "mobile_build_scope_note",
+          "mobile_operation_scope_note",
+          "mobile_warranty_note",
+          "mobile_price_timing_note"
+        ],
+        "method_steps": [
+          "발급·접수·등록·전자회수 과업과 개발HW/SW·장비·감리 구성분리",
+          "사업계획 구축규모와 모바일공무원증 운영과업 준용 적합성 확인",
+          "구축 첫해·운영차년도·유지관리차차년도 분리",
+          "2023운영·유지관리단가를 해당발생년도까지 물가반영, 단가에15%중복가산 금지",
+          "무상유지관리여도 본인확인·콜센터·보안 운영비 발생"
+        ],
+        "baseline_check": "구축범위·발급대상규모가다르면원계획금액자동재사용금지. 전자회수별도구축비 중복가산금지",
+        "limitation": "2025등록증 구축예산안·2023공무원증 운영비의 조건부 참고모형. 벌칙수입 공식미추계는정답미명시",
+        "lower_variable_keys": [
+          "mobile_build_components",
+          "mobile_operation_base",
+          "mobile_maintenance_base",
+          "mobile_recurring_price_year",
+          "mobile_operation_start_offset",
+          "mobile_maintenance_start_offset",
+          "mobile_cpi"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "모바일등록증 구축운영생애주기 선택",
+        "confirmed_assumptions": {
+          "mobile_build_scope_note": "2025장애인등록증 발급·접수등록·전자회수, 개발HW/SW·3586주민센터장비·감리 등6개구성 참고. 다른신분증 규모에자동적용하지않음.",
+          "mobile_operation_scope_note": "2023모바일공무원증 본인확인·콜센터·보안운영837백만원, 유지관리233백만원을 각각 준용.",
+          "mobile_warranty_note": "2025구축·2026운영시작과무상유지관리·2027유지관리시작. 운영과 유지관리는 다른비용.",
+          "mobile_price_timing_note": "2023단가를2024부터발생연도까지전망CPI 적용, 2025~2029정답기간. 구축비는2025예산안이므로중복물가가산없음."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          6778000000,
+          893460253.4999998,
+          1165020932.6999998,
+          1188321351.3539999,
+          1212087778.38108
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205097 비용추계서24C4867 PDF3~5쪽; 2025복지부 구축예산안·2023행안부 모바일공무원증 운영예산",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 112.3689,
+  "gold_display_total_eok": 112.37,
+  "error_percent": 0.000978908961473787,
+  "displayed_annual_million": [
+    6778,
+    893,
+    1165,
+    1189,
+    1212
+  ],
+  "annual_display_matches": 5,
+  "raw_annual_rounding_matches": 4,
+  "limitation": "정답 확인 후 사업계획·운영사례 준용 보강회귀. 새의안의 독립 자동성능아님."
+}

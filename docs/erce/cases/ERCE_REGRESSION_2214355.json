@@ -1,0 +1,505 @@
+{
+  "bill_no": "2214355",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "runs": {
+    "public_total": {
+      "payload": {
+        "bill_no": "2214355",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-13",
+        "route_key": "regional_resident_benefit_trend",
+        "support_derivation": "regional_resident_benefit_trend",
+        "payer": "government",
+        "start_year": 2027,
+        "years": 5,
+        "regional_population_scope": "declining_regions_89_notice_2024_15",
+        "regional_model_confirmed": true,
+        "regional_residence_filter_omission_approved": true,
+        "regional_exclusion_filter_omission_approved": true,
+        "regional_benefit_price_mode": "freeze_legal_floor",
+        "regional_fiscal_component": "public_total",
+        "regional_trend_precision_mode": "published_percent_two_decimals",
+        "regional_trend_precision_note": "정답 표2 표시−0.49%를 적용해 표3과대응. %소수2자리에서먼저반올림하는 계산가정이며 보편정밀도규칙아님",
+        "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+        "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+        "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+        "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오",
+        "explicit_inputs": {
+          "regional_annual_benefit": {
+            "value": 2400000,
+            "unit": "KRW/person/year",
+            "source_ref": "2214355 원문제6조제1항 법정연간하한을 적용하는 가정"
+          },
+          "regional_national_share": {
+            "value": 0.8,
+            "unit": "ratio",
+            "source_ref": "2214355 원문제6조제2항 국비하한80% 준용가정"
+          }
+        },
+        "selected_evidence_keys": [
+          "2214355:regional_population_history:2021-2024"
+        ],
+        "evidence_selection_reasons": {
+          "2214355:regional_population_history:2021-2024": "지정지역·통계기준·전연령·관측기간 확인"
+        },
+        "selected_method_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ],
+        "method_selection_reasons": {
+          "2214355:regional_resident_benefit_trend": "지역전체인구 대리전망·연간하한급여·분담금 분리"
+        },
+        "method_confirmations": {
+          "2214355:regional_resident_benefit_trend": {
+            "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+            "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+            "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+            "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오"
+          }
+        }
+      },
+      "result": {
+        "route_key": "regional_resident_benefit_trend",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2214355:regional_population_history:2021-2024",
+        "annual_amounts_thousand": [
+          11151240000,
+          11096599200,
+          11042224800,
+          10988119200,
+          10934277600
+        ],
+        "source_refs": [
+          "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+          "2214355 비용추계서25D6242 PDF2~5쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              11151240000000,
+              11096599200000,
+              11042224800000,
+              10988119200000,
+              10934277600000
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ]
+      }
+    },
+    "national": {
+      "payload": {
+        "bill_no": "2214355",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-13",
+        "route_key": "regional_resident_benefit_trend",
+        "support_derivation": "regional_resident_benefit_trend",
+        "payer": "government",
+        "start_year": 2027,
+        "years": 5,
+        "regional_population_scope": "declining_regions_89_notice_2024_15",
+        "regional_model_confirmed": true,
+        "regional_residence_filter_omission_approved": true,
+        "regional_exclusion_filter_omission_approved": true,
+        "regional_benefit_price_mode": "freeze_legal_floor",
+        "regional_fiscal_component": "national",
+        "regional_trend_precision_mode": "published_percent_two_decimals",
+        "regional_trend_precision_note": "정답 표2 표시−0.49%를 적용해 표3과대응. %소수2자리에서먼저반올림하는 계산가정이며 보편정밀도규칙아님",
+        "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+        "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+        "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+        "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오",
+        "explicit_inputs": {
+          "regional_annual_benefit": {
+            "value": 2400000,
+            "unit": "KRW/person/year",
+            "source_ref": "2214355 원문제6조제1항 법정연간하한을 적용하는 가정"
+          },
+          "regional_national_share": {
+            "value": 0.8,
+            "unit": "ratio",
+            "source_ref": "2214355 원문제6조제2항 국비하한80% 준용가정"
+          }
+        },
+        "selected_evidence_keys": [
+          "2214355:regional_population_history:2021-2024"
+        ],
+        "evidence_selection_reasons": {
+          "2214355:regional_population_history:2021-2024": "지정지역·통계기준·전연령·관측기간 확인"
+        },
+        "selected_method_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ],
+        "method_selection_reasons": {
+          "2214355:regional_resident_benefit_trend": "지역전체인구 대리전망·연간하한급여·분담금 분리"
+        },
+        "method_confirmations": {
+          "2214355:regional_resident_benefit_trend": {
+            "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+            "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+            "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+            "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오"
+          }
+        }
+      },
+      "result": {
+        "route_key": "regional_resident_benefit_trend",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2214355:regional_population_history:2021-2024",
+        "annual_amounts_thousand": [
+          8920992000,
+          8877279360,
+          8833779840,
+          8790495360,
+          8747422080
+        ],
+        "source_refs": [
+          "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+          "2214355 비용추계서25D6242 PDF2~5쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              8920992000000,
+              8877279360000,
+              8833779840000,
+              8790495360000,
+              8747422080000
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ]
+      }
+    },
+    "local": {
+      "payload": {
+        "bill_no": "2214355",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-13",
+        "route_key": "regional_resident_benefit_trend",
+        "support_derivation": "regional_resident_benefit_trend",
+        "payer": "government",
+        "start_year": 2027,
+        "years": 5,
+        "regional_population_scope": "declining_regions_89_notice_2024_15",
+        "regional_model_confirmed": true,
+        "regional_residence_filter_omission_approved": true,
+        "regional_exclusion_filter_omission_approved": true,
+        "regional_benefit_price_mode": "freeze_legal_floor",
+        "regional_fiscal_component": "local",
+        "regional_trend_precision_mode": "published_percent_two_decimals",
+        "regional_trend_precision_note": "정답 표2 표시−0.49%를 적용해 표3과대응. %소수2자리에서먼저반올림하는 계산가정이며 보편정밀도규칙아님",
+        "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+        "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+        "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+        "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오",
+        "explicit_inputs": {
+          "regional_annual_benefit": {
+            "value": 2400000,
+            "unit": "KRW/person/year",
+            "source_ref": "2214355 원문제6조제1항 법정연간하한을 적용하는 가정"
+          },
+          "regional_national_share": {
+            "value": 0.8,
+            "unit": "ratio",
+            "source_ref": "2214355 원문제6조제2항 국비하한80% 준용가정"
+          }
+        },
+        "selected_evidence_keys": [
+          "2214355:regional_population_history:2021-2024"
+        ],
+        "evidence_selection_reasons": {
+          "2214355:regional_population_history:2021-2024": "지정지역·통계기준·전연령·관측기간 확인"
+        },
+        "selected_method_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ],
+        "method_selection_reasons": {
+          "2214355:regional_resident_benefit_trend": "지역전체인구 대리전망·연간하한급여·분담금 분리"
+        },
+        "method_confirmations": {
+          "2214355:regional_resident_benefit_trend": {
+            "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+            "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+            "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+            "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오"
+          }
+        }
+      },
+      "result": {
+        "route_key": "regional_resident_benefit_trend",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2214355:regional_population_history:2021-2024",
+        "annual_amounts_thousand": [
+          2230248000,
+          2219319840,
+          2208444960,
+          2197623840,
+          2186855520
+        ],
+        "source_refs": [
+          "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+          "2214355 비용추계서25D6242 PDF2~5쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              2230247999999.9995,
+              2219319839999.9995,
+              2208444959999.9995,
+              2197623839999.9995,
+              2186855519999.9995
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2214355:regional_resident_benefit_trend"
+        ]
+      }
+    }
+  },
+  "total_eok": {
+    "public_total": 552124.608,
+    "national": 441699.6864,
+    "local": 110424.9216
+  },
+  "expected_display_total_eok": {
+    "public_total": 552125,
+    "national": 441700,
+    "local": 110425
+  },
+  "raw_error_percent": {
+    "public_total": 0.00007099841521259669,
+    "national": 0.00007099841521259669,
+    "local": 0.00007099841521259669
+  },
+  "annual_display_matches": {
+    "public_total": 5,
+    "national": 5,
+    "local": 5
+  },
+  "web_interface_result": {
+    "status": "computed_review",
+    "routeKey": "regional_resident_benefit_trend",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      11151240000,
+      11096599200,
+      11042224800,
+      10988119200,
+      10934277600
+    ],
+    "derivationTrace": [
+      {
+        "year": 2027,
+        "population": 4646350,
+        "population_base_year": 2024,
+        "population_base_count": 4715326,
+        "raw_mean_growth_rate": -0.0049168690888933275,
+        "applied_growth_rate": -0.0049,
+        "trend_precision": "published_percent_two_decimals",
+        "public_total_won": 11151240000000,
+        "national_won": 8920992000000,
+        "local_won": 2230247999999.9995,
+        "selected_component": "public_total",
+        "residence_filter_omitted": true,
+        "exclusion_filters_omitted": true
+      },
+      {
+        "year": 2028,
+        "population": 4623583,
+        "population_base_year": 2024,
+        "population_base_count": 4715326,
+        "raw_mean_growth_rate": -0.0049168690888933275,
+        "applied_growth_rate": -0.0049,
+        "trend_precision": "published_percent_two_decimals",
+        "public_total_won": 11096599200000,
+        "national_won": 8877279360000,
+        "local_won": 2219319839999.9995,
+        "selected_component": "public_total",
+        "residence_filter_omitted": true,
+        "exclusion_filters_omitted": true
+      },
+      {
+        "year": 2029,
+        "population": 4600927,
+        "population_base_year": 2024,
+        "population_base_count": 4715326,
+        "raw_mean_growth_rate": -0.0049168690888933275,
+        "applied_growth_rate": -0.0049,
+        "trend_precision": "published_percent_two_decimals",
+        "public_total_won": 11042224800000,
+        "national_won": 8833779840000,
+        "local_won": 2208444959999.9995,
+        "selected_component": "public_total",
+        "residence_filter_omitted": true,
+        "exclusion_filters_omitted": true
+      },
+      {
+        "year": 2030,
+        "population": 4578383,
+        "population_base_year": 2024,
+        "population_base_count": 4715326,
+        "raw_mean_growth_rate": -0.0049168690888933275,
+        "applied_growth_rate": -0.0049,
+        "trend_precision": "published_percent_two_decimals",
+        "public_total_won": 10988119200000,
+        "national_won": 8790495360000,
+        "local_won": 2197623839999.9995,
+        "selected_component": "public_total",
+        "residence_filter_omitted": true,
+        "exclusion_filters_omitted": true
+      },
+      {
+        "year": 2031,
+        "population": 4555949,
+        "population_base_year": 2024,
+        "population_base_count": 4715326,
+        "raw_mean_growth_rate": -0.0049168690888933275,
+        "applied_growth_rate": -0.0049,
+        "trend_precision": "published_percent_two_decimals",
+        "public_total_won": 10934277600000,
+        "national_won": 8747422080000,
+        "local_won": 2186855519999.9995,
+        "selected_component": "public_total",
+        "residence_filter_omitted": true,
+        "exclusion_filters_omitted": true
+      }
+    ],
+    "sourceRefs": [
+      "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+      "2214355 비용추계서25D6242 PDF2~5쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2214355:regional_resident_benefit_trend"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2214355:regional_resident_benefit_trend",
+        "source_bill_no": "2214355",
+        "available_at": "2025-12-23",
+        "reviewed_at": "2026-10-13",
+        "payer": "government",
+        "family_key": "regional_resident_benefit_trend",
+        "source_ref": "2214355 비용추계서25D6242 PDF2~5쪽",
+        "match_groups": [
+          [
+            "인구감소지역"
+          ],
+          [
+            "주민"
+          ],
+          [
+            "기초연금",
+            "240만원",
+            "지원금"
+          ]
+        ],
+        "allowed_routes": [
+          "regional_resident_benefit_trend"
+        ],
+        "support_derivation": "regional_resident_benefit_trend",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2214355:regional_population_history:2021-2024"
+        ],
+        "required_confirmations": [
+          "regional_population_scope_note",
+          "regional_residence_proxy_note",
+          "regional_trend_note",
+          "regional_benefit_note"
+        ],
+        "baseline_check": "전연령 지역주민이며65세기초연금이나지역아동인구와 다름. 총공공지출과 국비지방비 중복합산금지",
+        "method_steps": [
+          "같은89개지역·같은통계기준의 관측인구이력 선택",
+          "전년비증감률의 산술평균으로 기준연도 이후 인구전망",
+          "2년계속거주·수급정지제외 미반영 대리가정을 승인",
+          "원문연간급여 하한·국비율 하한 및 동결가정 확인,국가와지방 분리"
+        ],
+        "limitation": "인구총조사 이력은 정답인용값. 거주조건 생략은 법적자격충족 확인아님. 지정지역변경시관측다시확보",
+        "lower_variable_keys": [
+          "regional_population_history"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "지역전체인구 대리전망·연간하한급여·분담금 분리",
+        "confirmed_assumptions": {
+          "regional_population_scope_note": "2024-15고시89개지역의 전연령 인구총조사2021~2024집계. 향후재지정은 불확실하므로 현재지역 유지 가정",
+          "regional_residence_proxy_note": "2년계속거주·수급정지·외국체류 제외인구를 전망하지 못해 전체지역인구를 대리로쓰는 가정 승인. 자격조건충족 판정 아님",
+          "regional_trend_note": "2021~2024 전년비증감률3개 산술평균. 원평균과 적용정밀도를 모두 기록",
+          "regional_benefit_note": "현재원문 제6조 연240만원이상·국비80%이상에서 최소액과80%를 동결하는 시나리오"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          11151240000000,
+          11096599200000,
+          11042224800000,
+          10988119200000,
+          10934277600000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2214355 비용추계서25D6242 PDF3~4쪽 표2·PDF8~9쪽 시군구 관측인구; 2214355 원문제6조제1항 법정연간하한을 적용하는 가정; 2214355 원문제6조제2항 국비하한80% 준용가정",
+        "is_assumption": true
+      }
+    }
+  },
+  "field_inspection_review": {
+    "decision": "not_estimated",
+    "amount": null,
+    "source_decision_label": "현지조사 실시 여부·빈도 예측곤란으로 미추계",
+    "decision_evidence_key": "2214355:field_inspection_not_estimated",
+    "reason": "담당공무원 현지조사 출장비 가능성이 있으나 실제실시·횟수 계획이 미확정",
+    "source_ref": "2214355 비용추계서25D6242 PDF2쪽",
+    "source_quote": "현 시점에서 현지조사 실시 여부 및 빈도 등을 예측하기 어려우므로 추계가 곤란함",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "field_inspection_scope_note": "제9조 공무원현지조사 출장비 가능성은 있음",
+      "field_inspection_plan_review_note": "현재정답의 계획·실시여부·빈도미확정 근거 확인. 새계획있으면재검토"
+    },
+    "confirmed_facts": {
+      "field_inspection_frequency_basis_available": false,
+      "approved_field_inspection_plan_available": false
+    },
+    "reestimate_when": "실시계획·횟수·출장인원·대상건수 등 신뢰근거 확보시 현지조사비 별도추계",
+    "limitation": "정답의 일부추계 사유이며 미첨부3호 번호를 새로단정한것 아님. 단가DB가없다는이유로미추계하지 않음"
+  },
+  "limitation": "원관측인구를 정답에서확인하고 가정·표시정밀도를 보강한사후회귀. 새의안 독립성과·거주조건 실제충족검증 아님"
+}

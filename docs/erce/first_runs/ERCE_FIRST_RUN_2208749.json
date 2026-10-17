@@ -1,0 +1,382 @@
+{
+  "bill_no": "2208749",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2208749",
+    "bill_name": "아동수당법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-03-10",
+    "articles": [
+      {
+        "article_ref": "제4조제1항",
+        "source_quote": "제4조제1항중“8세”를“18세”로하고",
+        "source_page": 3,
+        "change_summary": "18세미만 기본아동수당 월10만원. 부모급여금액변경없음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "0~17세 개정기본급여−0~7세 현행기본급여",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "연령확대순증",
+        "variables": []
+      },
+      {
+        "article_ref": "제4조제5항",
+        "source_quote": "⑤제1항에도불구하고18세미만자녀가2명이상인가정의아동\n에게는최대10만원을매월추가로지급한다.",
+        "source_page": 3,
+        "change_summary": "18세미만자녀2명이상가정의아동추가지급, 구체금액대통령령",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "가구조건이라첫째도대상가능. 출생순위둘째이상으로대체불가. 최대10만원은상한이지확정지급액아님",
+        "route_key": "transfer_recipient",
+        "route_reason": "가구조건 충족아동수×확인할 추가월액×개월",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "basic": {
+    "payload": {
+      "bill_no": "2208749",
+      "route_key": "transfer_population_amount_delta",
+      "cutoff_date": "2026-10-04",
+      "start_year": 2026,
+      "years": 5,
+      "explicit_inputs": {
+        "benefit_per_recipient": {
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "source_ref": "원문5쪽 현행월10만원금액변경없음"
+        },
+        "existing_benefit_per_recipient": {
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "source_ref": "원문5쪽현행월10만원"
+        },
+        "payments_per_year": {
+          "value": 12,
+          "unit": "month/year",
+          "source_ref": "원문3쪽2026-01-01시행 및 월지급"
+        }
+      },
+      "calculated_inputs": {
+        "new_recipient_count": {
+          "value": [
+            6332884.728,
+            6111539.664,
+            5907495.12,
+            5677459.956,
+            5464223.328
+          ],
+          "unit": "person",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        },
+        "existing_recipient_count": {
+          "value": [
+            2037785.124,
+            1945553.532,
+            1890267.564,
+            1864119.576,
+            1860980.184
+          ],
+          "unit": "person",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        }
+      }
+    },
+    "source_rows": [
+      {
+        "evidence_key": "2208381:under18_population:2026-2030",
+        "variable_key": "under18_population",
+        "value": [
+          6358318,
+          6136084,
+          5931220,
+          5700261,
+          5486168
+        ],
+        "unit": "person",
+        "source_bill_no": "2208381",
+        "available_at": "2025-04-03",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2",
+        "agency": "국회예산정책처",
+        "policy_domain": "아동수당",
+        "scope": "전국0~17세 출생순위별 급여·2026~2030년",
+        "service_function": "child_allowance_birth_order_weighted",
+        "variable_role": "assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-04",
+        "obtained_from": "reviewed_answer",
+        "independently_verified": false,
+        "allowed_routes": [
+          "transfer_population_amount_delta"
+        ],
+        "support_derivation": "child_allowance_birth_order_weighted",
+        "child_population_geography": "전국",
+        "birth_order_population_basis": "birth_share_proxy",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2208381/cost_estimate.pdf",
+        "value_years": [
+          2026,
+          2027,
+          2028,
+          2029,
+          2030
+        ],
+        "population_age_min": 0,
+        "population_age_max": 17,
+        "limitation": "2023.12 중위전망 인구 또는2025년 집행계수 동결 선례. 최신실측 아님. 지급률97.2% 추가 적용 금지"
+      },
+      {
+        "evidence_key": "2208381:under8_population:2026-2030",
+        "variable_key": "under8_population",
+        "value": [
+          2045969,
+          1953367,
+          1897859,
+          1871606,
+          1868454
+        ],
+        "unit": "person",
+        "source_bill_no": "2208381",
+        "available_at": "2025-04-03",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산",
+        "agency": "국회예산정책처",
+        "policy_domain": "아동수당",
+        "scope": "전국0~17세 출생순위별 급여·2026~2030년",
+        "service_function": "child_allowance_birth_order_weighted",
+        "variable_role": "assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-04",
+        "obtained_from": "reviewed_answer",
+        "independently_verified": false,
+        "allowed_routes": [
+          "transfer_population_amount_delta"
+        ],
+        "support_derivation": "child_allowance_birth_order_weighted",
+        "child_population_geography": "전국",
+        "birth_order_population_basis": "birth_share_proxy",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2208381/cost_estimate.pdf",
+        "value_years": [
+          2026,
+          2027,
+          2028,
+          2029,
+          2030
+        ],
+        "population_age_min": 0,
+        "population_age_max": 7,
+        "limitation": "2023.12 중위전망 인구 또는2025년 집행계수 동결 선례. 최신실측 아님. 지급률97.2% 추가 적용 금지"
+      },
+      {
+        "evidence_key": "2208381:child_execution_factor:2025",
+        "variable_key": "child_execution_factor",
+        "value": 0.996,
+        "unit": "ratio",
+        "source_bill_no": "2208381",
+        "available_at": "2025-04-03",
+        "source_ref": "2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "agency": "국회예산정책처",
+        "policy_domain": "아동수당",
+        "scope": "전국0~17세 출생순위별 급여·2026~2030년",
+        "service_function": "child_allowance_birth_order_weighted",
+        "variable_role": "assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-04",
+        "obtained_from": "reviewed_answer",
+        "independently_verified": false,
+        "allowed_routes": [
+          "transfer_population_amount_delta"
+        ],
+        "support_derivation": "child_allowance_birth_order_weighted",
+        "child_population_geography": "전국",
+        "birth_order_population_basis": "birth_share_proxy",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2208381/cost_estimate.pdf",
+        "observation_year": 2025,
+        "valid_from_year": 2026,
+        "valid_to_year": 2030,
+        "limitation": "2023.12 중위전망 인구 또는2025년 집행계수 동결 선례. 최신실측 아님. 지급률97.2% 추가 적용 금지"
+      }
+    ],
+    "required_variables_filled": 5,
+    "required_variable_count": 5,
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "annual_amounts_thousand": [
+      5154119525,
+      4999183358,
+      4820673067,
+      4576008456,
+      4323891773
+    ],
+    "total_thousand": 23873876179,
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6332884.728,
+          6111539.664,
+          5907495.12,
+          5677459.956,
+          5464223.328
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2037785.124,
+          1945553.532,
+          1890267.564,
+          1864119.576,
+          1860980.184
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽 현행월10만원금액변경없음",
+        "is_assumption": false
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽현행월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽2026-01-01시행 및 월지급",
+        "is_assumption": false
+      }
+    },
+    "limitation": "개발에이전트가 기존DB행을읽어수급인원하위계산후 Python엔진입력.자동웹프로필매핑아님;집행계수99.6%동결선례가정"
+  },
+  "extra": {
+    "payload": {
+      "bill_no": "2208749",
+      "route_key": "transfer_recipient",
+      "cutoff_date": "2026-10-04",
+      "start_year": 2026,
+      "years": 5,
+      "explicit_inputs": {
+        "payments_per_year": {
+          "value": 12,
+          "unit": "month/year",
+          "source_ref": "원문3쪽2026-01-01시행 및 월지급"
+        }
+      }
+    },
+    "result": {
+      "status": "needs_input",
+      "routeKey": "transfer_recipient",
+      "formulaKey": "TRANSFER_RECIPIENT_V1",
+      "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+      "missingVariables": [
+        "recipient_count",
+        "benefit_per_recipient"
+      ],
+      "missingDerivationVariables": [],
+      "derivationTrace": [],
+      "methodCandidates": [],
+      "selectedMethods": [],
+      "referenceCandidates": [
+        {
+          "evidenceKey": "2200169:transport_unit_cost:2023",
+          "variableKey": "benefit_per_recipient",
+          "value": 90341,
+          "unit": "KRW/person/year",
+          "sourceRef": "의안 2200169 비용추계서(24D0536), PDF p.16, 2023년 국가유공자 수송지원 예산/대상자",
+          "sourceClass": "precedent_assumption",
+          "availableAt": "2024-08-09",
+          "limitation": "2023년 과거 평균지원액이며 법정 고정요금이 아님. 2024-08-09 이전 공개를 확인하지 못해 그 전 컷오프에 사용 금지; 다른 수송수단 구성·지원범위·가격연도에는 직접 전용 금지",
+          "scope": "2023년 국가유공자 수송시설 이용지원 전국 평균",
+          "serviceFunction": "수송시설 할인 지원",
+          "requiresConfirmation": true
+        },
+        {
+          "evidenceKey": "2200487:dependent_spouse:benefit_per_recipient:2024",
+          "variableKey": "benefit_per_recipient",
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "sourceRef": "2200487 비용추계서 24D1005, PDF p.9",
+          "sourceClass": "precedent_assumption",
+          "availableAt": "2024-08-14",
+          "limitation": "선례에서 2020~2024 유지된 배우자수당 월10만원을 동결한 가정. 현재 공식 단가를 웹에서 새로 확인한 것이 아님",
+          "scope": "6·25참전 소년소녀병 생존자의 부양 배우자 수당",
+          "serviceFunction": "생존자의 부양 배우자 수당",
+          "requiresConfirmation": true
+        },
+        {
+          "evidenceKey": "2200487:survivor_compensation:benefit_per_recipient:2024",
+          "variableKey": "benefit_per_recipient",
+          "value": [
+            1839000,
+            1924000,
+            2013000,
+            2105000,
+            2202000
+          ],
+          "unit": "KRW/person/month",
+          "sourceRef": "2200487 비용추계서 24D1005, PDF p.5~8",
+          "sourceClass": "precedent_assumption",
+          "availableAt": "2024-08-14",
+          "limitation": "2024년 재일학도의용군인 본인/유족 단가에 과거 연평균 상승률 4.6%를 적용한 선례 전망치. 공식 미래 단가 아님; 표시 단가의 반올림으로 순증 차액 오차 가능",
+          "scope": "6·25참전 소년소녀병 선순위 배우자 유족보상금",
+          "serviceFunction": "선순위 배우자 유족보상금",
+          "requiresConfirmation": true
+        }
+      ],
+      "missingVariableEvidence": {
+        "recipient_count": {
+          "status": "no_eligible_candidate",
+          "candidateCount": 0,
+          "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+        },
+        "benefit_per_recipient": {
+          "status": "candidates_need_review",
+          "candidateCount": 3,
+          "meaning": "후보가 있으나 적용·선택이 필요합니다."
+        }
+      }
+    },
+    "required_variables_filled": 0,
+    "required_variable_count": 2,
+    "statutory_monthly_cap": 100000,
+    "cap_is_payment": false
+  },
+  "full_bill_total": null,
+  "limitations": [
+    "일반개발DB의유사가족근거재사용,동일가족격리독립평가아님",
+    "과거일2025-03-10발의시점으로제한하지않은개발실행.2025-04-03후발근거포함",
+    "가구당미성년자녀수분포·연령별아동수자료가없어순위비율전용안함",
+    "부모급여 추가로 유지와조문참조변경만으로별도급여를폐지·증액하지않음"
+  ]
+}

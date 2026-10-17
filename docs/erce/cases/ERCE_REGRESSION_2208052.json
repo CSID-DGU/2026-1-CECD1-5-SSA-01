@@ -1,0 +1,316 @@
+{
+  "bill_no": "2208052",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "price_result": {
+    "route_key": "transfer_recipient_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "evidence_key": "2207706:recognized_jobseekers:reviewed,2207706:iap_completion_rate:reviewed,2207706:average_payment_months:reviewed,2207706:livelihood_floor_history:reviewed,official:mohw:livelihood_floor:2025:single",
+    "annual_amounts_thousand": [
+      303313804,
+      347379701,
+      393665698,
+      442283646,
+      493351033
+    ],
+    "source_refs": [
+      "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+      "원문PDF1쪽당시월50만원",
+      "2207706 비용추계서25B0462 PDF4~6쪽"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": 219743.44,
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          765444,
+          804008.113290848,
+          844515.1392361936,
+          887062.964426986,
+          931754.4071142076
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 500000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF1쪽당시월50만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 5.2,
+        "unit": "month/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": [
+      "2207706:jobseeker_livelihood_previous_year"
+    ]
+  },
+  "extension_result": {
+    "route_key": "transfer_recipient",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "evidence_key": "2207706:recognized_jobseekers:reviewed:cash_duration,2207706:iap_completion_rate:reviewed:cash_duration,2207706:average_payment_months:reviewed:cash_duration,2207706:livelihood_floor_history:reviewed:cash_duration,official:mohw:livelihood_floor:2025:single",
+    "annual_amounts_thousand": [
+      874646748,
+      918712645,
+      964998642,
+      1013616590,
+      1064683977
+    ],
+    "source_refs": [
+      "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+      "원문PDF5쪽현행6개월; 원문PDF5쪽1년을12개월환산; 2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용",
+      "2208052 비용추계서25B0781 PDF6~7쪽"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": 219743.44,
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          765444,
+          804008.113290848,
+          844515.1392361936,
+          887062.964426986,
+          931754.4071142076
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 5.2,
+        "unit": "month/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "원문PDF5쪽현행6개월; 원문PDF5쪽1년을12개월환산; 2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2208052:cash_duration_utilization"
+    ]
+  },
+  "extension_payload": {
+    "bill_no": "2208052",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-06",
+    "payer": "government",
+    "route_key": "transfer_recipient",
+    "support_derivation": "jobseeker_cash_duration_extension",
+    "start_year": 2026,
+    "years": 5,
+    "livelihood_floor_base_year": 2025,
+    "jobseeker_cohort": "recognized_I_type",
+    "livelihood_floor_projection": "historic_cagr_2019_2023",
+    "support_derivation_note": "동일전년도생계최저액연동.금액인상분은기존5.2개월로계산하고제20조기간연장분은별도계산",
+    "payment_scope_note": "기존2022~2023평균·IAP로가격인상부분만계산;새실지급평균은미확정",
+    "floor_projection_note": "2025생계최저액765444원을공식확인,2019~2023기준액으로CAGR파생;미래값은가정",
+    "estimation_start_note": "공포후6개월의정답2026~2030시작가정",
+    "explicit_inputs": {
+      "existing_benefit_per_recipient": {
+        "value": 500000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문PDF1쪽당시월50만원"
+      },
+      "old_statutory_months": {
+        "value": 6,
+        "unit": "month",
+        "source_ref": "원문PDF5쪽현행6개월"
+      },
+      "new_statutory_months": {
+        "value": 12,
+        "unit": "month",
+        "source_ref": "원문PDF5쪽1년을12개월환산"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207706:recognized_jobseekers:reviewed:cash_duration",
+      "2207706:iap_completion_rate:reviewed:cash_duration",
+      "2207706:average_payment_months:reviewed:cash_duration",
+      "2207706:livelihood_floor_history:reviewed:cash_duration",
+      "official:mohw:livelihood_floor:2025:single"
+    ],
+    "evidence_selection_reasons": {
+      "2207706:recognized_jobseekers:reviewed:cash_duration": "기존고용실적·생계연동값유지,기간연장하위산식용별칭",
+      "2207706:iap_completion_rate:reviewed:cash_duration": "기존고용실적·생계연동값유지,기간연장하위산식용별칭",
+      "2207706:average_payment_months:reviewed:cash_duration": "기존고용실적·생계연동값유지,기간연장하위산식용별칭",
+      "2207706:livelihood_floor_history:reviewed:cash_duration": "기존고용실적·생계연동값유지,기간연장하위산식용별칭",
+      "official:mohw:livelihood_floor:2025:single": "기존고용실적·생계연동값유지,기간연장하위산식용별칭"
+    },
+    "selected_method_keys": [
+      "2208052:cash_duration_utilization"
+    ],
+    "method_selection_reasons": {
+      "2208052:cash_duration_utilization": "단가·기간동시변경의비례수령행태확인"
+    },
+    "method_confirmations": {
+      "2208052:cash_duration_utilization": {
+        "payment_period_projection_note": "정답의수령행태비례유지가정확인.실평균5.2/상한6×연장6=추가5.2개월",
+        "cash_component_separation_note": "기존5.2개월은단가인상항목,추가개월에만개정단가적용",
+        "estimation_start_note": "공포후6개월의정답2026~2030시작가정"
+      }
+    },
+    "payment_behavior_rule": "proportional_existing_payment_utilization",
+    "payment_period_projection_note": "정답의수령행태비례유지가정확인.실평균5.2/상한6×연장6=추가5.2개월",
+    "cash_component_separation_note": "기존5.2개월은단가인상항목,추가개월에만개정단가적용"
+  },
+  "extension_trace": [
+    {
+      "year": 2026,
+      "floor_reference_year": 2025,
+      "monthly_floor": 765444,
+      "history_cagr": 0.05038136466005083,
+      "recognized_mean": 224228,
+      "iap_rate": 0.98,
+      "effective_recipients": 219743.44,
+      "payment_months": 5.2,
+      "expression": "평균인정인원×IAP수립률×평균지급개월×(전년도생계최저액−현행수당)"
+    },
+    {
+      "year": 2027,
+      "floor_reference_year": 2026,
+      "monthly_floor": 804008.113290848,
+      "history_cagr": 0.05038136466005083,
+      "recognized_mean": 224228,
+      "iap_rate": 0.98,
+      "effective_recipients": 219743.44,
+      "payment_months": 5.2,
+      "expression": "평균인정인원×IAP수립률×평균지급개월×(전년도생계최저액−현행수당)"
+    },
+    {
+      "year": 2028,
+      "floor_reference_year": 2027,
+      "monthly_floor": 844515.1392361936,
+      "history_cagr": 0.05038136466005083,
+      "recognized_mean": 224228,
+      "iap_rate": 0.98,
+      "effective_recipients": 219743.44,
+      "payment_months": 5.2,
+      "expression": "평균인정인원×IAP수립률×평균지급개월×(전년도생계최저액−현행수당)"
+    },
+    {
+      "year": 2029,
+      "floor_reference_year": 2028,
+      "monthly_floor": 887062.964426986,
+      "history_cagr": 0.05038136466005083,
+      "recognized_mean": 224228,
+      "iap_rate": 0.98,
+      "effective_recipients": 219743.44,
+      "payment_months": 5.2,
+      "expression": "평균인정인원×IAP수립률×평균지급개월×(전년도생계최저액−현행수당)"
+    },
+    {
+      "year": 2030,
+      "floor_reference_year": 2029,
+      "monthly_floor": 931754.4071142076,
+      "history_cagr": 0.05038136466005083,
+      "recognized_mean": 224228,
+      "iap_rate": 0.98,
+      "effective_recipients": 219743.44,
+      "payment_months": 5.2,
+      "expression": "평균인정인원×IAP수립률×평균지급개월×(전년도생계최저액−현행수당)"
+    },
+    {
+      "variable_key": "payments_per_year",
+      "old_cap": 6,
+      "new_cap": 12,
+      "observed_payment_months": 5.2,
+      "utilization": 0.8666666666666667,
+      "extra_months": 5.2,
+      "total_implied_months": 10.4,
+      "confirmed_additional_override": false,
+      "expression": "실제평균지급개월/기존법정상한×법정기간증가분",
+      "note": "서비스이용8.3개월·무조건12개월수령으로대체하지않음.기존기간단가인상분은별도항목"
+    }
+  ],
+  "reusable_web_status": "computed_review",
+  "annual_eok": [
+    11779.60552,
+    12660.92346,
+    13586.6434,
+    14559.00236,
+    15580.3501
+  ],
+  "partial_total_eok": 68166.52484,
+  "gold_partial_total_eok": 68167,
+  "error_percent": 0.000697052826150159,
+  "actual_extra_payment_months": 5.2,
+  "service_review": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2208052:service_component_not_estimated",
+    "reason": "서비스항목의추가상담수요·인건비·기관운영비자료부족으로미추계.별도수당기간연장과단가인상은추계",
+    "source_ref": "2208052 비용추계서25B0781 PDF3쪽",
+    "source_quote": "현시점에서 장래에 발생할 인건비 및 기관운영비 등을 합리적으로 예측할 수 없으므로 추가재정소요 산출 곤란",
+    "additional_source_quote": "구직촉진수당의 수급자가 받는 수급액과 취업지원서비스의 기간 간에는 직접적인 관계가 없음",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "service_component_scope": "제15조상담서비스추가인건비/운영비범위에한정",
+      "cash_component_separation": "제19·20조수당단가와기간증가는별도추계;법안전체수당기간불변이라고판단안함",
+      "staffing_operating_basis_review": "당시정답의장래상담사/운영계획자료미확정확인.최신모든후속자료부재를전수확인한것아님"
+    },
+    "confirmed_facts": {
+      "service_duration_extended": true,
+      "cash_duration_change_separately_estimated": true,
+      "reliable_incremental_staffing_available": false,
+      "reliable_incremental_operating_cost_available": false
+    },
+    "reestimate_when": "서비스추가상담인력·상시관리수요·기관운영계획근거가확보되면서비스항목재추계",
+    "limitation": "역사적정답사유의항목단위검증.현재모든후속계획부재를전수확인한것아님"
+  },
+  "synthetic_service_review": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2208052:service_component_not_estimated",
+    "reason": "서비스항목의추가상담수요·인건비·기관운영비자료부족으로미추계.별도수당기간연장과단가인상은추계",
+    "source_ref": "2208052 비용추계서25B0781 PDF3쪽",
+    "source_quote": "현시점에서 장래에 발생할 인건비 및 기관운영비 등을 합리적으로 예측할 수 없으므로 추가재정소요 산출 곤란",
+    "additional_source_quote": "구직촉진수당의 수급자가 받는 수급액과 취업지원서비스의 기간 간에는 직접적인 관계가 없음",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "service_component_scope": "제15조상담서비스추가인건비/운영비범위에한정",
+      "cash_component_separation": "제19·20조수당단가와기간증가는별도추계;법안전체수당기간불변이라고판단안함",
+      "staffing_operating_basis_review": "당시정답의장래상담사/운영계획자료미확정확인.최신모든후속자료부재를전수확인한것아님"
+    },
+    "confirmed_facts": {
+      "service_duration_extended": true,
+      "cash_duration_change_separately_estimated": true,
+      "reliable_incremental_staffing_available": false,
+      "reliable_incremental_operating_cost_available": false
+    },
+    "reestimate_when": "서비스추가상담인력·상시관리수요·기관운영계획근거가확보되면서비스항목재추계",
+    "limitation": "역사적정답사유의항목단위검증.현재모든후속계획부재를전수확인한것아님"
+  },
+  "whole_bill_total": null,
+  "limitation": "수당비용일부추계와서비스미추계사후재현.최초8.3개월후보의28.65%오차기록유지"
+}

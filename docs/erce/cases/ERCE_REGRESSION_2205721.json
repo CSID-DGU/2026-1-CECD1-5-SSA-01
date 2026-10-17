@@ -1,0 +1,949 @@
+{
+  "bill_no": "2205721",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2205721",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "route_key": "special_classroom_expansion",
+    "support_derivation": "special_classroom_expansion",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "classroom_scenario_confirmed": true,
+    "classroom_price_basis": "reviewed_historical_bridge",
+    "classroom_rounding_policy": "reviewed_two_decimal_ceiling",
+    "price_index_bridge_confirmed": true,
+    "class_precision_assumption_confirmed": true,
+    "classroom_scope_note": "전국초등·고등의특수학교/일반학교특수학급4그룹. 유휴공간 증개축, 사립동일지원. 일반학급이동·새학교신축미반영",
+    "classroom_stock_note": "2026기설치학급은2021~2024성장유지전망, 이후증개축한학급까지누적. 첫해여유학급고정유지해고등부족학급0인지계산",
+    "classroom_precision_note": "정답학급표를대조해필요학급 소수2자리정리후올림 가정 승인. 문서에명시된공식규칙아니며 엄격올림과별도비교",
+    "classroom_price_note": "2022가격5000만원, 원공표2022지수107.71·2023지수111.59를연결하는참고가정.2024공표에서2022는107.72로수정됐으므로동일버전기본값과구분;2024~2029전망·2030동일2%연장 승인",
+    "explicit_inputs": {
+      "special_new_class_caps": {
+        "value": {
+          "elementary": 4,
+          "high": 6
+        },
+        "unit": "stage_to_person/class",
+        "source_ref": "2205721 원문PDF3·5쪽 제27조 개정설치기준"
+      }
+    },
+    "selected_evidence_keys": [
+      "2205721:special_student_history:reviewed",
+      "2205721:special_placement_2024:reviewed",
+      "2205721:special_class_stock_history:reviewed",
+      "2205721:classroom_base_unit_price:reviewed",
+      "2205721:classroom_price_base_year:reviewed",
+      "2205721:classroom_cpi_rates:reviewed",
+      "2205721:class_need_rounding_digits:reviewed",
+      "official:kostat:classroom_index_2022:reviewed_historical_bridge",
+      "official:kostat:classroom_index_2023:2024_vintage"
+    ],
+    "evidence_selection_reasons": {
+      "2205721:special_student_history:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:special_placement_2024:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:special_class_stock_history:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:classroom_base_unit_price:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:classroom_price_base_year:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:classroom_cpi_rates:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "2205721:class_need_rounding_digits:reviewed": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "official:kostat:classroom_index_2022:reviewed_historical_bridge": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인",
+      "official:kostat:classroom_index_2023:2024_vintage": "학교급·시설유형·관측년·통계가격버전·수량정밀도가정 확인"
+    },
+    "selected_method_keys": [
+      "2205721:capacity_shortfall_classroom_construction"
+    ],
+    "method_selection_reasons": {
+      "2205721:capacity_shortfall_classroom_construction": "정원변경에따른부족학급×학급당증개축비"
+    },
+    "method_confirmations": {
+      "2205721:capacity_shortfall_classroom_construction": {
+        "classroom_scope_note": "전국초등·고등의특수학교/일반학교특수학급4그룹. 유휴공간 증개축, 사립동일지원. 일반학급이동·새학교신축미반영",
+        "classroom_stock_note": "2026기설치학급은2021~2024성장유지전망, 이후증개축한학급까지누적. 첫해여유학급고정유지해고등부족학급0인지계산",
+        "classroom_precision_note": "정답학급표를대조해필요학급 소수2자리정리후올림 가정 승인. 문서에명시된공식규칙아니며 엄격올림과별도비교",
+        "classroom_price_note": "2022가격5000만원, 원공표2022지수107.71·2023지수111.59를연결하는참고가정.2024공표에서2022는107.72로수정됐으므로동일버전기본값과구분;2024~2029전망·2030동일2%연장 승인"
+      }
+    },
+    "estimate_purpose": "reference_scenario",
+    "reference_notice": "학급소수정밀도와다른공표버전의2022/2023지수연결은사후검토참고가정. 정답이같은내부규칙을썼다고확정하지않음"
+  },
+  "result": {
+    "route_key": "special_classroom_expansion",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2205721:special_student_history:reviewed,2205721:special_placement_2024:reviewed,2205721:special_class_stock_history:reviewed,2205721:classroom_base_unit_price:reviewed,2205721:classroom_price_base_year:reviewed,2205721:classroom_cpi_rates:reviewed,2205721:class_need_rounding_digits:reviewed,official:kostat:classroom_index_2022:reviewed_historical_bridge,official:kostat:classroom_index_2023:2024_vintage",
+    "annual_amounts_thousand": [
+      130275972,
+      40947353,
+      44182532,
+      47530739,
+      51414177
+    ],
+    "source_refs": [
+      "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2023-06-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+      "2205721 비용추계서24C5227 PDF3~7쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          130275971767.34747,
+          40947352552.273415,
+          44182531811.77535,
+          47530739300.63645,
+          51414176741.273636
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2023-06-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2205721:capacity_shortfall_classroom_construction"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "학급소수정밀도와다른공표버전의2022/2023지수연결은사후검토참고가정. 정답이같은내부규칙을썼다고확정하지않음",
+    "routeKey": "special_classroom_expansion",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      130275972,
+      40947353,
+      44182532,
+      47530739,
+      51414177
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 39170.19536418652,
+            "capacity": 4,
+            "raw_class_need": 9792.54884104663,
+            "needed_classes": 9793,
+            "installed_before": 8138,
+            "new_classes": 1655,
+            "installed_after": 9793
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 11531.297739197194,
+            "capacity": 4,
+            "raw_class_need": 2882.8244347992986,
+            "needed_classes": 2883,
+            "installed_before": 2182,
+            "new_classes": 701,
+            "installed_after": 2883
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11513.361283838396,
+            "capacity": 6,
+            "raw_class_need": 1918.8935473063993,
+            "needed_classes": 1919,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7097.4185115838845,
+            "capacity": 6,
+            "raw_class_need": 1182.9030852639808,
+            "needed_classes": 1183,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 2356,
+        "unit_price_won": 55295403.97595394,
+        "amount_won": 130275971767.34747,
+        "price_basis": "reviewed_historical_bridge",
+        "rounding_policy": "reviewed_two_decimal_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2027,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 41413.235667934896,
+            "capacity": 4,
+            "raw_class_need": 10353.308916983724,
+            "needed_classes": 10354,
+            "installed_before": 9793,
+            "new_classes": 561,
+            "installed_after": 10354
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 12191.625453753106,
+            "capacity": 4,
+            "raw_class_need": 3047.9063634382765,
+            "needed_classes": 3048,
+            "installed_before": 2883,
+            "new_classes": 165,
+            "installed_after": 3048
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11681.139354257552,
+            "capacity": 6,
+            "raw_class_need": 1946.8565590429253,
+            "needed_classes": 1947,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7200.845404345626,
+            "capacity": 6,
+            "raw_class_need": 1200.140900724271,
+            "needed_classes": 1201,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 726,
+        "unit_price_won": 56401312.05547302,
+        "amount_won": 40947352552.273415,
+        "price_basis": "reviewed_historical_bridge",
+        "rounding_policy": "reviewed_two_decimal_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2028,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 43784.72133064718,
+            "capacity": 4,
+            "raw_class_need": 10946.180332661796,
+            "needed_classes": 10947,
+            "installed_before": 10354,
+            "new_classes": 593,
+            "installed_after": 10947
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 12889.766144824964,
+            "capacity": 4,
+            "raw_class_need": 3222.441536206241,
+            "needed_classes": 3223,
+            "installed_before": 3048,
+            "new_classes": 175,
+            "installed_after": 3223
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11851.362364969958,
+            "capacity": 6,
+            "raw_class_need": 1975.2270608283263,
+            "needed_classes": 1976,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7305.77948202663,
+            "capacity": 6,
+            "raw_class_need": 1217.629913671105,
+            "needed_classes": 1218,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 768,
+        "unit_price_won": 57529338.29658249,
+        "amount_won": 44182531811.77535,
+        "price_basis": "reviewed_historical_bridge",
+        "rounding_policy": "reviewed_two_decimal_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2029,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 46292.00764157601,
+            "capacity": 4,
+            "raw_class_need": 11573.001910394003,
+            "needed_classes": 11573,
+            "installed_before": 10947,
+            "new_classes": 626,
+            "installed_after": 11573
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 13627.885132997493,
+            "capacity": 4,
+            "raw_class_need": 3406.9712832493733,
+            "needed_classes": 3407,
+            "installed_before": 3223,
+            "new_classes": 184,
+            "installed_after": 3407
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 12024.065944785872,
+            "capacity": 6,
+            "raw_class_need": 2004.0109907976455,
+            "needed_classes": 2005,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7412.242708028483,
+            "capacity": 6,
+            "raw_class_need": 1235.373784671414,
+            "needed_classes": 1236,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 810,
+        "unit_price_won": 58679925.06251414,
+        "amount_won": 47530739300.63645,
+        "price_basis": "reviewed_historical_bridge",
+        "rounding_policy": "reviewed_two_decimal_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2030,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 48942.87108292662,
+            "capacity": 4,
+            "raw_class_need": 12235.717770731655,
+            "needed_classes": 12236,
+            "installed_before": 11573,
+            "new_classes": 663,
+            "installed_after": 12236
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 14408.271733675903,
+            "capacity": 4,
+            "raw_class_need": 3602.067933418976,
+            "needed_classes": 3603,
+            "installed_before": 3407,
+            "new_classes": 196,
+            "installed_after": 3603
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 12199.286241715205,
+            "capacity": 6,
+            "raw_class_need": 2033.2143736192008,
+            "needed_classes": 2034,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7520.257365813709,
+            "capacity": 6,
+            "raw_class_need": 1253.376227635618,
+            "needed_classes": 1254,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 859,
+        "unit_price_won": 59853523.56376442,
+        "amount_won": 51414176741.273636,
+        "price_basis": "reviewed_historical_bridge",
+        "rounding_policy": "reviewed_two_decimal_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      }
+    ],
+    "sourceRefs": [
+      "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2023-06-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+      "2205721 비용추계서24C5227 PDF3~7쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2205721:capacity_shortfall_classroom_construction"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2205721:capacity_shortfall_classroom_construction",
+        "source_bill_no": "2205721",
+        "available_at": "2024-12-02",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "special_classroom_expansion",
+        "source_ref": "2205721 비용추계서24C5227 PDF3~7쪽",
+        "match_groups": [
+          [
+            "특수학교",
+            "특수학급"
+          ],
+          [
+            "학급"
+          ],
+          [
+            "설치기준",
+            "설치 기준",
+            "4인"
+          ]
+        ],
+        "allowed_routes": [
+          "special_classroom_expansion"
+        ],
+        "support_derivation": "special_classroom_expansion",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2205721:special_student_history:reviewed",
+          "2205721:special_placement_2024:reviewed",
+          "2205721:special_class_stock_history:reviewed",
+          "2205721:classroom_base_unit_price:reviewed",
+          "2205721:classroom_price_base_year:reviewed",
+          "2205721:classroom_cpi_rates:reviewed",
+          "2205721:class_need_rounding_digits:reviewed",
+          "official:kostat:classroom_index_2022:reviewed_historical_bridge",
+          "official:kostat:classroom_index_2022:consistent_2024_vintage",
+          "official:kostat:classroom_index_2023:2024_vintage"
+        ],
+        "required_confirmations": [
+          "classroom_scope_note",
+          "classroom_stock_note",
+          "classroom_precision_note",
+          "classroom_price_note"
+        ],
+        "method_steps": [
+          "초등·고등,특수학교·일반학교특수학급4그룹 분리",
+          "2019~2024학생 CAGR와2024배치비율 유지",
+          "2021~2024기존학급성장으로첫해기설치학급 전망",
+          "법안명시학급정원에따른필요학급에서기존학급차감, 이후전년설치량유지하고부족분만증설",
+          "학급당2022단가5000만원·실적지수·전망물가 반영",
+          "표와대조한학급소수정밀도·지수버전연결은확인할가정이며 엄격올림·동일버전과비교"
+        ],
+        "baseline_check": "면적단가·전체학교신축 산식아님. 기존학급이많으면신설0이며교원인건비는별도판정",
+        "limitation": "전국집계·배치/성장동결·유휴공간·사립동일공공지원 가정. 소수2자리올림은 문서명시규칙아니며 교차발표지수는참고추계만",
+        "lower_variable_keys": [
+          "special_student_history",
+          "special_placement_2024",
+          "special_class_stock_history",
+          "classroom_base_unit_price",
+          "classroom_price_base_year",
+          "classroom_cpi_rates",
+          "class_need_rounding_digits",
+          "classroom_index_2022",
+          "classroom_index_2023"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "정원변경에따른부족학급×학급당증개축비",
+        "confirmed_assumptions": {
+          "classroom_scope_note": "전국초등·고등의특수학교/일반학교특수학급4그룹. 유휴공간 증개축, 사립동일지원. 일반학급이동·새학교신축미반영",
+          "classroom_stock_note": "2026기설치학급은2021~2024성장유지전망, 이후증개축한학급까지누적. 첫해여유학급고정유지해고등부족학급0인지계산",
+          "classroom_precision_note": "정답학급표를대조해필요학급 소수2자리정리후올림 가정 승인. 문서에명시된공식규칙아니며 엄격올림과별도비교",
+          "classroom_price_note": "2022가격5000만원, 원공표2022지수107.71·2023지수111.59를연결하는참고가정.2024공표에서2022는107.72로수정됐으므로동일버전기본값과구분;2024~2029전망·2030동일2%연장 승인"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          130275971767.34747,
+          40947352552.273415,
+          44182531811.77535,
+          47530739300.63645,
+          51414176741.273636
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2023-06-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+        "is_assumption": true
+      }
+    }
+  },
+  "annual_eok": [
+    1302.75972,
+    409.47353,
+    441.82532,
+    475.30739,
+    514.14177
+  ],
+  "total_eok": 3143.50773,
+  "gold_headline_total_eok": 3143.52,
+  "error_percent": 0.00039032676745086466,
+  "annual_display_matches": 5,
+  "teacher_review_payload": {
+    "bill_no": "2205721",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "decision_evidence_key": "2205721:teacher_increment_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "teacher_increment_confirmed": false,
+      "existing_teacher_redeployment_confirmed": false
+    },
+    "decision_confirmations": {
+      "teacher_increment_scope_note": "정답PDF3쪽증원가능불명확,학급수와교원순증동일시금지",
+      "teacher_redeployment_review_note": "기존교원활용·재배치가능량불명확,표준보수단가가없어서미추계한것아님"
+    }
+  },
+  "teacher_decision": {
+    "decision": "not_estimated",
+    "amount": null,
+    "source_decision_label": "미추계",
+    "decision_evidence_key": "2205721:teacher_increment_not_estimated",
+    "reason": "학급확대에따른순증교원과기존교원활용이불명확하여인건비추계제외. 증개축비는별도추계",
+    "source_ref": "2205721 비용추계서24C5227 PDF3쪽",
+    "source_quote": "특수교육교원 증원 가능 여부 및 기존 교원 활용가능성 등이 불분명하므로 교원 인건비는 추계의 대상에서 제외",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_personnel_expenditure_increase",
+    "confirmed_conditions": {
+      "teacher_increment_scope_note": "정답PDF3쪽증원가능불명확,학급수와교원순증동일시금지",
+      "teacher_redeployment_review_note": "기존교원활용·재배치가능량불명확,표준보수단가가없어서미추계한것아님"
+    },
+    "confirmed_facts": {
+      "teacher_increment_confirmed": false,
+      "existing_teacher_redeployment_confirmed": false
+    },
+    "reestimate_when": "교원증원가능수와기존교원활용·재배치계획이확인되면순증보수·기관부담금등재추계",
+    "limitation": "새의안·새자료에서교원증원/재배치가확정되면과거미추계판정전용금지"
+  },
+  "strict_consistent_web_result": {
+    "status": "computed_review",
+    "routeKey": "special_classroom_expansion",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      130263878,
+      40943551,
+      44178430,
+      47585001,
+      51349556
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 39170.19536418652,
+            "capacity": 4,
+            "raw_class_need": 9792.54884104663,
+            "needed_classes": 9793,
+            "installed_before": 8138,
+            "new_classes": 1655,
+            "installed_after": 9793
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 11531.297739197194,
+            "capacity": 4,
+            "raw_class_need": 2882.8244347992986,
+            "needed_classes": 2883,
+            "installed_before": 2182,
+            "new_classes": 701,
+            "installed_after": 2883
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11513.361283838396,
+            "capacity": 6,
+            "raw_class_need": 1918.8935473063993,
+            "needed_classes": 1919,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7097.4185115838845,
+            "capacity": 6,
+            "raw_class_need": 1182.9030852639808,
+            "needed_classes": 1183,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 2356,
+        "unit_price_won": 55290270.722707,
+        "amount_won": 130263877822.6977,
+        "price_basis": "consistent_2024_vintage",
+        "rounding_policy": "strict_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2027,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 41413.235667934896,
+            "capacity": 4,
+            "raw_class_need": 10353.308916983724,
+            "needed_classes": 10354,
+            "installed_before": 9793,
+            "new_classes": 561,
+            "installed_after": 10354
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 12191.625453753106,
+            "capacity": 4,
+            "raw_class_need": 3047.9063634382765,
+            "needed_classes": 3048,
+            "installed_before": 2883,
+            "new_classes": 165,
+            "installed_after": 3048
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11681.139354257552,
+            "capacity": 6,
+            "raw_class_need": 1946.8565590429253,
+            "needed_classes": 1947,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7200.845404345626,
+            "capacity": 6,
+            "raw_class_need": 1200.140900724271,
+            "needed_classes": 1201,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 726,
+        "unit_price_won": 56396076.13716114,
+        "amount_won": 40943551275.57899,
+        "price_basis": "consistent_2024_vintage",
+        "rounding_policy": "strict_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2028,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 43784.72133064718,
+            "capacity": 4,
+            "raw_class_need": 10946.180332661796,
+            "needed_classes": 10947,
+            "installed_before": 10354,
+            "new_classes": 593,
+            "installed_after": 10947
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 12889.766144824964,
+            "capacity": 4,
+            "raw_class_need": 3222.441536206241,
+            "needed_classes": 3223,
+            "installed_before": 3048,
+            "new_classes": 175,
+            "installed_after": 3223
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 11851.362364969958,
+            "capacity": 6,
+            "raw_class_need": 1975.2270608283263,
+            "needed_classes": 1976,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7305.77948202663,
+            "capacity": 6,
+            "raw_class_need": 1217.629913671105,
+            "needed_classes": 1218,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 768,
+        "unit_price_won": 57523997.659904376,
+        "amount_won": 44178430202.806564,
+        "price_basis": "consistent_2024_vintage",
+        "rounding_policy": "strict_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2029,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 46292.00764157601,
+            "capacity": 4,
+            "raw_class_need": 11573.001910394003,
+            "needed_classes": 11574,
+            "installed_before": 10947,
+            "new_classes": 627,
+            "installed_after": 11574
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 13627.885132997493,
+            "capacity": 4,
+            "raw_class_need": 3406.9712832493733,
+            "needed_classes": 3407,
+            "installed_before": 3223,
+            "new_classes": 184,
+            "installed_after": 3407
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 12024.065944785872,
+            "capacity": 6,
+            "raw_class_need": 2004.0109907976455,
+            "needed_classes": 2005,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7412.242708028483,
+            "capacity": 6,
+            "raw_class_need": 1235.373784671414,
+            "needed_classes": 1236,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 811,
+        "unit_price_won": 58674477.613102466,
+        "amount_won": 47585001344.2261,
+        "price_basis": "consistent_2024_vintage",
+        "rounding_policy": "strict_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      },
+      {
+        "year": 2030,
+        "groups": [
+          {
+            "stage": "elementary",
+            "school_group": "general",
+            "pupil_forecast": 48942.87108292662,
+            "capacity": 4,
+            "raw_class_need": 12235.717770731655,
+            "needed_classes": 12236,
+            "installed_before": 11574,
+            "new_classes": 662,
+            "installed_after": 12236
+          },
+          {
+            "stage": "elementary",
+            "school_group": "special",
+            "pupil_forecast": 14408.271733675903,
+            "capacity": 4,
+            "raw_class_need": 3602.067933418976,
+            "needed_classes": 3603,
+            "installed_before": 3407,
+            "new_classes": 196,
+            "installed_after": 3603
+          },
+          {
+            "stage": "high",
+            "school_group": "general",
+            "pupil_forecast": 12199.286241715205,
+            "capacity": 6,
+            "raw_class_need": 2033.2143736192008,
+            "needed_classes": 2034,
+            "installed_before": 2081,
+            "new_classes": 0,
+            "installed_after": 2081
+          },
+          {
+            "stage": "high",
+            "school_group": "special",
+            "pupil_forecast": 7520.257365813709,
+            "capacity": 6,
+            "raw_class_need": 1253.376227635618,
+            "needed_classes": 1254,
+            "installed_before": 1260,
+            "new_classes": 0,
+            "installed_after": 1260
+          }
+        ],
+        "new_classes": 858,
+        "unit_price_won": 59847967.16536452,
+        "amount_won": 51349555827.88276,
+        "price_basis": "consistent_2024_vintage",
+        "rounding_policy": "strict_ceiling",
+        "teacher_cost_status": "separate_review_required"
+      }
+    ],
+    "sourceRefs": [
+      "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+      "2205721 비용추계서24C5227 PDF3~7쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2205721:capacity_shortfall_classroom_construction"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2205721:capacity_shortfall_classroom_construction",
+        "source_bill_no": "2205721",
+        "available_at": "2024-12-02",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "special_classroom_expansion",
+        "source_ref": "2205721 비용추계서24C5227 PDF3~7쪽",
+        "match_groups": [
+          [
+            "특수학교",
+            "특수학급"
+          ],
+          [
+            "학급"
+          ],
+          [
+            "설치기준",
+            "설치 기준",
+            "4인"
+          ]
+        ],
+        "allowed_routes": [
+          "special_classroom_expansion"
+        ],
+        "support_derivation": "special_classroom_expansion",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2205721:special_student_history:reviewed",
+          "2205721:special_placement_2024:reviewed",
+          "2205721:special_class_stock_history:reviewed",
+          "2205721:classroom_base_unit_price:reviewed",
+          "2205721:classroom_price_base_year:reviewed",
+          "2205721:classroom_cpi_rates:reviewed",
+          "2205721:class_need_rounding_digits:reviewed",
+          "official:kostat:classroom_index_2022:reviewed_historical_bridge",
+          "official:kostat:classroom_index_2022:consistent_2024_vintage",
+          "official:kostat:classroom_index_2023:2024_vintage"
+        ],
+        "required_confirmations": [
+          "classroom_scope_note",
+          "classroom_stock_note",
+          "classroom_precision_note",
+          "classroom_price_note"
+        ],
+        "method_steps": [
+          "초등·고등,특수학교·일반학교특수학급4그룹 분리",
+          "2019~2024학생 CAGR와2024배치비율 유지",
+          "2021~2024기존학급성장으로첫해기설치학급 전망",
+          "법안명시학급정원에따른필요학급에서기존학급차감, 이후전년설치량유지하고부족분만증설",
+          "학급당2022단가5000만원·실적지수·전망물가 반영",
+          "표와대조한학급소수정밀도·지수버전연결은확인할가정이며 엄격올림·동일버전과비교"
+        ],
+        "baseline_check": "면적단가·전체학교신축 산식아님. 기존학급이많으면신설0이며교원인건비는별도판정",
+        "limitation": "전국집계·배치/성장동결·유휴공간·사립동일공공지원 가정. 소수2자리올림은 문서명시규칙아니며 교차발표지수는참고추계만",
+        "lower_variable_keys": [
+          "special_student_history",
+          "special_placement_2024",
+          "special_class_stock_history",
+          "classroom_base_unit_price",
+          "classroom_price_base_year",
+          "classroom_cpi_rates",
+          "class_need_rounding_digits",
+          "classroom_index_2022",
+          "classroom_index_2023"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "정원변경에따른부족학급×학급당증개축비",
+        "confirmed_assumptions": {
+          "classroom_scope_note": "전국초등·고등의특수학교/일반학교특수학급4그룹. 유휴공간 증개축, 사립동일지원. 일반학급이동·새학교신축미반영",
+          "classroom_stock_note": "2026기설치학급은2021~2024성장유지전망, 이후증개축한학급까지누적. 첫해여유학급고정유지해고등부족학급0인지계산",
+          "classroom_precision_note": "학생·필요학급중간값을반올림하지않고필요학급에엄격올림. 정답대조로추론한2자리정리를사용하지않음",
+          "classroom_price_note": "2024.7같은공표버전의2022지수107.72·2023지수111.59로2022가격환산.2024~2029전망·2030동일2%연장가정"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          130263877822.6977,
+          40943551275.57899,
+          44178430202.806564,
+          47585001344.2261,
+          51349555827.88276
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205721 비용추계서24C5227 PDF4~7쪽; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2022; 통계청 소비자물가 보도자료 2024-07-02: 총지수2020=100, 해당연도2023; 2205721 원문PDF3·5쪽 제27조 개정설치기준",
+        "is_assumption": true
+      }
+    }
+  },
+  "strict_consistent_total_eok": 3143.20416,
+  "limitation": "정답표와대조해소수정밀도와역사지수연결을선택한참고회귀. 같은공식규칙을독립검증했다고주장하지않으며 기본엄격올림/동일발표버전 비교결과유지"
+}

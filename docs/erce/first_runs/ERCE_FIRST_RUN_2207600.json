@@ -1,0 +1,142 @@
+{
+  "bill_no": "2207600",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2207600",
+    "bill_name": "주거급여법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-01-17",
+    "articles": [
+      {
+        "article_ref": "제8조의2",
+        "source_quote": "제8조의2(관리비의지급)",
+        "source_page": 3,
+        "change_summary": "관리비급여 대상범위·월액은부령위임.관리비체납가구중대상·지원수준확인.과거3개월이상체납평균182329원을월단가로오인금지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "관리비급여 대상범위·월액은부령위임.관리비체납가구중대상·지원수준확인.과거3개월이상체납평균182329원을월단가로오인금지",
+        "route_key": "transfer_recipient",
+        "route_reason": "비용성격별기존상위산식후보,수량/단가/순증범위미확정",
+        "variables": []
+      },
+      {
+        "article_ref": "제17조제2항",
+        "source_quote": "사회보장정보시스템등대통령령으로정하는시스템",
+        "source_page": 4,
+        "change_summary": "기존주거정보와사회보장정보시스템연계·수집자료확대.새전산시스템전체신축가격을붙이지말고연계과업계획확인",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기존주거정보와사회보장정보시스템연계·수집자료확대.새전산시스템전체신축가격을붙이지말고연계과업계획확인",
+        "route_key": "information_system_project_plan",
+        "route_reason": "비용성격별기존상위산식후보,수량/단가/순증범위미확정",
+        "variables": []
+      },
+      {
+        "article_ref": "제18조제2항",
+        "source_quote": "발굴조사및신청현황에대한조사를분기마다정기적으로",
+        "source_page": 5,
+        "change_summary": "지자체분기발굴조사.기존발굴조사실시시예외.단순전국지자체×4회로이중계산금지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "지자체분기발굴조사.기존발굴조사실시시예외.단순전국지자체×4회로이중계산금지",
+        "route_key": "quantity_unit",
+        "route_reason": "비용성격별기존상위산식후보,수량/단가/순증범위미확정",
+        "variables": []
+      },
+      {
+        "article_ref": "제18조제3항",
+        "source_quote": "국토교통부장관은발굴체계의운영실태를매년정기적으로",
+        "source_page": 6,
+        "change_summary": "운영실태점검·개선방안마련.기존인력범위인지신규사업인지근거검토필요",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "운영실태점검·개선방안마련.기존인력범위인지신규사업인지근거검토필요",
+        "route_key": "",
+        "route_reason": "비용성격별기존상위산식후보,수량/단가/순증범위미확정",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "calculations": [
+    {
+      "article_ref": "제8조의2",
+      "payload": {
+        "bill_no": "2207600",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": []
+      }
+    },
+    {
+      "article_ref": "제17조제2항",
+      "payload": {
+        "bill_no": "2207600",
+        "route_key": "information_system_project_plan",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "formulaKey": "PROJECT_ANNUAL_BUDGET_V1",
+        "formula": "해당 사업계획의 연도별 재원배분액(포함된 운영·유지관리비 중복 가산 금지)",
+        "missingVariables": [
+          "annual_project_budget"
+        ],
+        "missingDerivationVariables": []
+      }
+    },
+    {
+      "article_ref": "제18조제2항",
+      "payload": {
+        "bill_no": "2207600",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": []
+      }
+    }
+  ],
+  "deferred_refs": [
+    "제18조제3항"
+  ],
+  "whole_bill_total": null,
+  "rejected_evidence": "기존2200093전산사업예산은과업/규모/기간이달라전용하지않음.2204731은배치에서정답개요만확인했고핵심단가DB적재/검증은안돼있음",
+  "limitation": "4개후보비용요인의순증여부검토전.금액미산출,DB부재만으로법정미추계아님.2026시작은임시가정"
+}

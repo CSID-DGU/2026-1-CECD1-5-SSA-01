@@ -1,0 +1,42 @@
+{
+  "bill_no": "2209533",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "data_cutoff": "2026-10-03",
+  "eligibility": {"in_development_manifest":true,"reserved_education_compensation_holdout":false,"prior_own_db_evidence_count":0},
+  "time_scope_note": "현재 개발 DB로 과거 의안을 시험. 기존 원문과 보강한 다른 의안 자료만 열람. 완전 무작위·발의시점 제한 평가 아님",
+  "ai_draft": {
+    "bill_no": "2209533",
+    "bill_name": "한국장학재단 설립 등에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-04-01",
+    "articles": [{
+      "article_ref": "제49조의4제1항/다자녀 학자금 우선지원 기준3자녀→2자녀 확대",
+      "source_quote": "제49조의4제1항중“셋이상의”를“둘이상의”로한다.",
+      "source_page": 3,
+      "cost_trigger": true,
+      "estimation_decision": "estimate_now",
+      "decision_reason": "기존 운영 중 학자금 우선지원제도의 자격 확대. 할 수 있다는 재량 문구는 유지되지만 기존 제도의 지원대상 확대 효과를 시나리오로 추계할 수 있음. 무상 전액지급을 신설한 법안과는 다름",
+      "route_key": "transfer_recipient_delta",
+      "route_reason": "새로 편입되는 정확히2자녀 가정 대학생 수 × (다자녀 장학금 적용시 지원액−이미 받는 일반 장학금). 기존3자녀 이상을 신규인원에 더하지 않고 전액 등록금 지원으로 가정하지 않음",
+      "variables": []
+    }]
+  },
+  "candidate_search": {
+    "self_excluded":true,
+    "selected_evidence_keys":[],
+    "reviewed_candidates":"2201899 다자녀 첫째·둘째의2024소득구간별 평균 지원액·등록금·인원. 다자녀가구의 첫째·둘째라는 출생순위와2자녀 가정이라는 가족 자녀수를 구별",
+    "rejection_reason":"기초인원은3자녀 이상 가정에 속한 기존 대상이며 새2자녀 가정 인원이 아님. 기존 일반장학금 기준선·2025정책 단가 없음. 전액 등록금 평균을 새 지급액으로 전용하지 않음"
+  },
+  "required_variables":["recipient_count","benefit_per_recipient","existing_benefit_per_recipient"],
+  "available_required_variables":0,
+  "missing_required_variables":["recipient_count","benefit_per_recipient","existing_benefit_per_recipient"],
+  "annual_amounts_thousand":null,
+  "execution":{"pipeline":"analyze_erce_pdf(ai_draft) -> ERCE formula requirements","quote_verified":[true],"cost_item_count":1,"unmapped_count":0,"formula_key":"TRANSFER_RECIPIENT_DELTA_V1","status":"needs_input","missing_variables":["recipient_count","benefit_per_recipient","existing_benefit_per_recipient"]},
+  "start_year":null,
+  "effective_date_note":"공포 후3개월. 공포일 미정이므로 추계 시작연도 임의 생성 안 함",
+  "scope_checks":["정확히2자녀 가정의 신규 다자녀 지원대상 수","소득구간별 기존 일반장학금 및 신규 다자녀 지원 차액","재량 지원 확대의 실제 실시·소득·성적 조건 확인","학자금 대출 조건 변화의 별도 재정 효과는 운영 근거가 있어야 분리"],
+  "assumptions":["해당 기존 지원제도의 확대 실시 시나리오;3자녀 이상 기존 집단의 단가·인원을 무조건 재사용하지 않음"]
+}

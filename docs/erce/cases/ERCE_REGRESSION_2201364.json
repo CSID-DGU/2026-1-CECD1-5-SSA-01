@@ -1,0 +1,234 @@
+{
+  "bill_no": "2201364",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2201364",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "policy_impact_annual_contract",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "research_service_function": "policy_impact_annual_contract",
+    "research_cost_scope": "research_contract_only",
+    "selected_evidence_keys": [
+      "2201364:annual_policy_impact:service_quantity",
+      "2201364:annual_policy_impact:service_unit_cost",
+      "2201364:annual_policy_impact:frequency_per_year",
+      "2201364:annual_policy_impact:growth_rate"
+    ],
+    "evidence_selection_reasons": {
+      "2201364:annual_policy_impact:service_quantity": "유사 연간영향평가 과업·패키지 범위와 예산 기준년 검토",
+      "2201364:annual_policy_impact:service_unit_cost": "유사 연간영향평가 과업·패키지 범위와 예산 기준년 검토",
+      "2201364:annual_policy_impact:frequency_per_year": "유사 연간영향평가 과업·패키지 범위와 예산 기준년 검토",
+      "2201364:annual_policy_impact:growth_rate": "유사 연간영향평가 과업·패키지 범위와 예산 기준년 검토"
+    },
+    "selected_method_keys": [
+      "2201364:annual_policy_impact_contract"
+    ],
+    "method_selection_reasons": {
+      "2201364:annual_policy_impact_contract": "정책건별 미확정 단가 대신 승인한 연간 패키지 참고 가정"
+    },
+    "method_confirmations": {
+      "2201364:annual_policy_impact_contract": {
+        "annual_package_scope_note": "연간 정책영향평가 연구용역1개 패키지 가정. 개별 정책건수에2억원을 곱하지 않음.",
+        "cross_domain_task_note": "기술의 경제사회환경 영향 연구와 인구정책의 인구변화 영향 연구가 유사한 분석평가 과업이라는 정답의 준용 가정.",
+        "price_freeze_note": "2024 기술영향평가 정책연구예산2억원을 추계기간 동결, 최신 실적이나 공식 건당 단가 아님.",
+        "estimation_start_note": "공포후6개월 및 심사기간을 고려한2025~2029 정답 준비 시나리오. 보고공표는 연구결과 활용 작업으로 보고 별도 금액을 자동 가산하지 않음."
+      }
+    }
+  },
+  "result": {
+    "route_key": "policy_impact_annual_contract",
+    "subtype": "",
+    "formula_key": "GOODS_SERVICE_ACTIVITY_V1",
+    "formula": "수량 × 단가 × 연간 횟수",
+    "evidence_key": "2201364:annual_policy_impact:service_quantity,2201364:annual_policy_impact:service_unit_cost,2201364:annual_policy_impact:frequency_per_year,2201364:annual_policy_impact:growth_rate",
+    "annual_amounts_thousand": [
+      200000,
+      200000,
+      200000,
+      200000,
+      200000
+    ],
+    "source_refs": [
+      "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+      "2201364 비용추계서24C1610 PDF3~4쪽"
+    ],
+    "resolved_variables": {
+      "service_quantity": {
+        "key": "service_quantity",
+        "value": 1,
+        "unit": "contract",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "service_unit_cost": {
+        "key": "service_unit_cost",
+        "value": 200000000,
+        "unit": "KRW/contract",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "frequency_per_year": {
+        "key": "frequency_per_year",
+        "value": 1,
+        "unit": "contract/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2201364:annual_policy_impact_contract"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "policy_impact_annual_contract",
+    "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+    "formula": "수량 × 단가 × 연간 횟수",
+    "annualAmountsThousand": [
+      200000,
+      200000,
+      200000,
+      200000,
+      200000
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+      "2201364 비용추계서24C1610 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2201364:annual_policy_impact_contract"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2201364:annual_policy_impact_contract",
+        "source_bill_no": "2201364",
+        "available_at": "2024-07-11",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "annual_policy_impact_contract",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽",
+        "match_groups": [
+          [
+            "인구영향평가",
+            "정책영향평가",
+            "기술영향평가"
+          ],
+          [
+            "평가",
+            "정책",
+            "연구"
+          ]
+        ],
+        "allowed_routes": [
+          "policy_impact_annual_contract"
+        ],
+        "variable_keys": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ],
+        "variable_evidence_keys": [
+          "2201364:annual_policy_impact:service_quantity",
+          "2201364:annual_policy_impact:service_unit_cost",
+          "2201364:annual_policy_impact:frequency_per_year",
+          "2201364:annual_policy_impact:growth_rate"
+        ],
+        "required_confirmations": [
+          "annual_package_scope_note",
+          "cross_domain_task_note",
+          "price_freeze_note",
+          "estimation_start_note"
+        ],
+        "method_steps": [
+          "정책건별 평가와 연간 전체 연구용역 패키지 구분",
+          "경제사회환경 기술영향평가와 인구정책영향평가 과업 비교",
+          "연간1개패키지·1회·2024예산2억원 준용을 설명·승인",
+          "단가동결 및 추계기간 선택",
+          "결과보고·공표의 패키지 범위를 확인하고 같은 작업비 중복 가산 금지"
+        ],
+        "baseline_check": "평가정책 수×연간 전체사업 예산을 곱하지 않음. 내부인력·위원회·별도보고사업은 포함여부 검토",
+        "limitation": "유사 정책영향평가 연간 연구용역의 참고 시나리오. 대상정책 수·개별단가가 확정된 경우 그 근거를 우선 검토",
+        "support_derivation": "",
+        "lower_variable_keys": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year",
+          "growth_rate"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "정책건별 미확정 단가 대신 승인한 연간 패키지 참고 가정",
+        "confirmed_assumptions": {
+          "annual_package_scope_note": "연간 정책영향평가 연구용역1개 패키지 가정. 개별 정책건수에2억원을 곱하지 않음.",
+          "cross_domain_task_note": "기술의 경제사회환경 영향 연구와 인구정책의 인구변화 영향 연구가 유사한 분석평가 과업이라는 정답의 준용 가정.",
+          "price_freeze_note": "2024 기술영향평가 정책연구예산2억원을 추계기간 동결, 최신 실적이나 공식 건당 단가 아님.",
+          "estimation_start_note": "공포후6개월 및 심사기간을 고려한2025~2029 정답 준비 시나리오. 보고공표는 연구결과 활용 작업으로 보고 별도 금액을 자동 가산하지 않음."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "service_quantity": {
+        "key": "service_quantity",
+        "value": 1,
+        "unit": "contract",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "service_unit_cost": {
+        "key": "service_unit_cost",
+        "value": 200000000,
+        "unit": "KRW/contract",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "frequency_per_year": {
+        "key": "frequency_per_year",
+        "value": 1,
+        "unit": "contract/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201364 비용추계서24C1610 PDF3~4쪽; 과기정통부2024 기술영향평가 정책연구용역 예산",
+        "is_assumption": true
+      }
+    }
+  },
+  "annual_thousand": [
+    200000,
+    200000,
+    200000,
+    200000,
+    200000
+  ],
+  "total_won": 1000000000,
+  "gold_total_won": 1000000000,
+  "error_percent": 0,
+  "annual_matches": 5,
+  "official_scope_complete": true
+}

@@ -1,0 +1,52 @@
+{
+  "bill_no": "2216008",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2216008.json",
+  "gold": {
+    "estimate_no": "26C0181",
+    "reply_date": "2026-02-20",
+    "total_eok": 36.54,
+    "years": [
+      2026,
+      2027,
+      2028,
+      2029,
+      2030
+    ],
+    "annual_million": [
+      0,
+      887,
+      904,
+      922,
+      941
+    ],
+    "unit_budget_won": 870000000,
+    "budget_year": 2026,
+    "baseline": "2026예산이미편성되어그해추가소요없음.2027이후법정정기조사추가비가정",
+    "price_projection": "국회예산정책처 물가전망 적용.본문상연도별정확율 표 미제시"
+  },
+  "first_run": {
+    "external_official_unit_correct": true,
+    "source": "국회예산정책처2026예산안심의결과 PDF102쪽870백만원 원자료",
+    "formula_family_correct": true,
+    "reference_gross_total_eok": 43.5,
+    "incremental_total_eok": null,
+    "required_slots": 1,
+    "filled_slots": 1,
+    "missing_slots": 0,
+    "period_match": false,
+    "price_mode_match": false,
+    "baseline_scope_complete": false,
+    "whole_incremental_error_percent": null,
+    "reference_amount_gap_eok": 6.96,
+    "reference_amount_gap_percent": 19.04761904761905
+  },
+  "difference": [
+    "정답 미열람 상태에서 공식유아사교육비조사8.7억원을 찾은 단가 선택은 일치",
+    "최초기간2027~2031과가격동결로총조사비43.5억원.정답기간2026~2030은2026기편성분제외·2027~2030물가 반영",
+    "기존사업중복 미검증을 명시해 최초43.5억원을 완성추가비로보고하지않음",
+    "정답이 참고자료에서 어린이집특별활동도 동일조사 별도항목으로 포함한다고 명시해유사과업근거가확인됨"
+  ],
+  "reinforcement_done": false,
+  "independent_unit_selection_success": true,
+  "whole_bill_success": false
+}

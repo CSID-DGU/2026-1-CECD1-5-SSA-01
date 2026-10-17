@@ -1,0 +1,242 @@
+{
+  "bill_no": "2204828",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "answer_table_replay": true,
+  "payload": {
+    "bill_no": "2204828",
+    "route_key": "transfer_population_amount_delta",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "development_review",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "median_income_pension_groups",
+    "median_pension_reading": "answer_table_replay",
+    "pension_baseline_version": "2024_03_reviewed_projection",
+    "support_derivation_note": "정답표2019~2023실적4집단CAGR및지급표재생.직역연금·국비분담이동미포함",
+    "median_pension_conflict_note": "정답표4지급예상액은감액액식과같고본문32%와2023표30%불일치.표재생후보이며법문정확추계로확정하지않음",
+    "published_baseline_note": "정답의동일경제전망기준현행급여예측총액표9를기준선으로사용.최신실측예산·독립재계산아님.명당평균은공표기준선/공식예측수급자/12의대리평균",
+    "use_unmatched_source_as_reference": true,
+    "unmatched_source_reference_note": "표지번호공란·회답일이발의일보다앞서는역사자료.내용대응은확인했으나정확버전미확인.명시적사후참조",
+    "selected_evidence_keys": [
+      "2204828:median_pension_history_groups:reviewed",
+      "2204828:median_income_history:reviewed",
+      "2204828:published_current_pension_cost:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2204828:median_pension_history_groups:reviewed": "해당기간·동일변경의표재생및기준선참조;후보가정",
+      "2204828:median_income_history:reviewed": "해당기간·동일변경의표재생및기준선참조;후보가정",
+      "2204828:published_current_pension_cost:reviewed": "해당기간·동일변경의표재생및기준선참조;후보가정"
+    },
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2025-01-01시행·월급여"
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_population_amount_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "evidence_key": "2204828:median_pension_history_groups:reviewed,2204828:median_income_history:reviewed,2204828:published_current_pension_cost:reviewed",
+    "annual_amounts_thousand": [
+      16132270771,
+      17561107495,
+      19628877295,
+      21973278423,
+      24937243167
+    ],
+    "source_refs": [
+      "2204828 폴더 비용추계서24C1884 PDF4~7쪽 표2~4·9;KOSIS2023.12공식65세이상전망·수급률99.1%",
+      "원문2025-01-01시행·월급여"
+    ],
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6324183.190054613,
+          6579136.509574744,
+          6852499.548648332,
+          7146327.74859827,
+          7462952.775437603
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204828 폴더 비용추계서24C1884 PDF4~7쪽 표2~4·9;KOSIS2023.12공식65세이상전망·수급률99.1%",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          7293497.2859,
+          7717423.599199999,
+          8044885.3779,
+          8411354.6013,
+          8686041.0714
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204828 폴더 비용추계서24C1884 PDF4~7쪽 표2~4·9;KOSIS2023.12공식65세이상전망·수급률99.1%",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          567033.3158482169,
+          591023.7033227914,
+          615698.4145621536,
+          641043.4416648368,
+          667042.0873627459
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204828 폴더 비용추계서24C1884 PDF4~7쪽 표2~4·9;KOSIS2023.12공식65세이상전망·수급률99.1%",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": [
+          307351.4089050697,
+          314224.03718403896,
+          321114.9956753859,
+          326939.0164070576,
+          333869.01767580333
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204828 폴더 비용추계서24C1884 PDF4~7쪽 표2~4·9;KOSIS2023.12공식65세이상전망·수급률99.1%",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2025-01-01시행·월급여",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": []
+  },
+  "required_variables_filled": 5,
+  "required_variable_count": 5,
+  "partial_total_thousand": 100232777151,
+  "gold_partial_total_thousand": 100300000000,
+  "difference_percent": 0.06702178364905284,
+  "non_estimation": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2204828:occupational_pension_not_estimated",
+    "reason": "소득요건에맞는직역연금수급자및배우자인원을산정할소득분포가부족하고지급액도위임·미확정이어서추가비용을추계하지않음",
+    "source_ref": "2204828 폴더비용추계서24C1884 PDF3쪽",
+    "source_quote": "직역연금 수급자 및 그 배우자의 소득 분포에 관한 자료가 부재",
+    "additional_source_quote": "기초연금액의 산정에 관하여 대통령령으로 정하도록 위임",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "occupational_scope_review": "원문제3조제3항삭제·제5조제8항신설.직역연금수급자와배우자포함",
+      "income_distribution_review": "당시정답PDF3쪽대상별소득분포부재확인.현재공개자료전수검색완료주장아님",
+      "delegated_payment_review": "원문산정방식대통령령위임과당시정답단가미확정확인.현재확정된단가있다면재검토",
+      "source_version_review": "표지의안번호공란및회답일선행.해당폴더역사적사유의사후검토로범위한정"
+    },
+    "confirmed_facts": {
+      "occupational_recipients_included": true,
+      "reliable_income_distribution_available": false,
+      "payment_delegated": true,
+      "payment_amount_confirmed": false
+    },
+    "reestimate_when": "대상직역연금수급자·배우자의소득분포와실제지급액이확정되거나적용가능근거가생기면추계재검토",
+    "limitation": "역사적정답사유재사용이며현재시행령/통계부재를확정한것아님.DB미검색만으로미추계금지.회답일이발의일보다앞서는버전문제확인필수"
+  },
+  "synthetic_web_status": "computed_review",
+  "group_trace": [
+    {
+      "group": "single_low",
+      "count_growth": 0.02946773225145427,
+      "payment_growth": 0.050380991047387136,
+      "recipients": [
+        3429050.342705474,
+        3530096.680081076,
+        3634120.623871453,
+        3741209.917385185,
+        3851454.8895271765
+      ],
+      "monthly_payment": [
+        687762.0555016476,
+        722412.1894626089,
+        758808.0315124479,
+        797037.532154762,
+        837193.0729266825
+      ],
+      "reading": "answer_table_replay",
+      "limitation": "표재생은역사적지급표값투영;법문후보는집단평균가구소득에min적용·부부2명균등배분 가정으로개인별min평균과다를수있음"
+    },
+    {
+      "group": "single_high",
+      "count_growth": 0.15805324640380958,
+      "payment_growth": 0.05448600477297871,
+      "recipients": [
+        355752.9159506464,
+        411980.8192342677,
+        477095.72517034475,
+        552502.2533788974,
+        639827.0281708523
+      ],
+      "monthly_payment": [
+        255834.21219828475,
+        269773.5963052117,
+        284472.48176112113,
+        299972.2507601387,
+        316316.54024681676
+      ],
+      "reading": "answer_table_replay",
+      "limitation": "표재생은역사적지급표값투영;법문후보는집단평균가구소득에min적용·부부2명균등배분 가정으로개인별min평균과다를수있음"
+    },
+    {
+      "group": "couple_low",
+      "count_growth": 0.018424854482607778,
+      "payment_growth": 0.050380991047387136,
+      "recipients": [
+        1859201.0259175487,
+        1893456.5342739949,
+        1928343.195387136,
+        1963872.6381546706,
+        2000056.7057350457
+      ],
+      "monthly_payment": [
+        550209.2030812276,
+        577929.288015853,
+        607045.9383014025,
+        637629.5142843182,
+        669753.9211350263
+      ],
+      "reading": "answer_table_replay",
+      "limitation": "표재생은역사적지급표값투영;법문후보는집단평균가구소득에min적용·부부2명균등배분 가정으로개인별min평균과다를수있음"
+    },
+    {
+      "group": "couple_high",
+      "count_growth": 0.09324542409855363,
+      "payment_growth": 0.06859556913193865,
+      "recipients": [
+        680178.9054809446,
+        743602.4759854053,
+        812940.004219399,
+        888742.9396795167,
+        971614.1520045286
+      ],
+      "monthly_payment": [
+        167145.0987776763,
+        178610.5119559451,
+        190862.40167651008,
+        203954.71674539897,
+        217945.10661769295
+      ],
+      "reading": "answer_table_replay",
+      "limitation": "표재생은역사적지급표값투영;법문후보는집단평균가구소득에min적용·부부2명균등배분 가정으로개인별min평균과다를수있음"
+    }
+  ],
+  "limitation": "정답표와공표현행기준선참조후사후재생.직역연금미추계와국비이동포함전체금액아님.정답서식모순이있는표재생을독립추계성능으로해석금지"
+}

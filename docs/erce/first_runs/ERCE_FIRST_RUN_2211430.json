@@ -1,0 +1,107 @@
+{
+  "bill_no": "2211430",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2211430",
+    "bill_name": "주거급여법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-07-10",
+    "articles": [
+      {
+        "article_ref": "제2조제1호·제8조제2항",
+        "source_quote": "주택의노후도및에너지이용",
+        "source_page": 3,
+        "change_summary": "자가주택수선급여범위에고효율냉난방설치/개량/보수추가.임차관리비와다른대상.기존수선급여한도안에재배분인지추가예산인지확인필요",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "시설개선급여범위확대후순증지원검토필요",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "실제수선대상×(변경된수선지원액−기존지원액).공사유형별하위산식/지원단가미준비",
+        "variables": []
+      },
+      {
+        "article_ref": "제10조제2항제2호",
+        "source_quote": "해당주택의에너지원별사용량및비용지출,냉난방가동시간",
+        "source_page": 3,
+        "change_summary": "에너지사용/소비행태조사항목확대.기존방문조사에포함할수있으므로별도연구용역전체금액단정금지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "순증조사활동/입력비검토",
+        "route_key": "quantity_unit",
+        "route_reason": "추가조사건수×추가과업단가,기존활동차감",
+        "variables": []
+      },
+      {
+        "article_ref": "제17조제3항제3호의2",
+        "source_quote": "등건축설비의설치등수선유지의결과.",
+        "source_page": 4,
+        "change_summary": "수선급여결과/취약대상시설자료수집확대.새시스템구축명령아님",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "기존시스템기록항목확대인지신규연계/기능개선과업인지계획확인필요",
+        "route_key": "",
+        "route_reason": "정보시스템전체구축비를임의부여하지않음",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "calculations": [
+    {
+      "article_ref": "제2조제1호·제8조제2항",
+      "payload": {
+        "bill_no": "2211430",
+        "route_key": "transfer_recipient_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1"
+      }
+    },
+    {
+      "article_ref": "제10조제2항제2호",
+      "payload": {
+        "bill_no": "2211430",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1"
+      }
+    }
+  ],
+  "total_amount": null,
+  "required_slots_filled": 0,
+  "required_slot_count": 5,
+  "rejected_evidence": "임차관리비단가/대상은자가수선급여에미적용.2203380학교냉방설치단가는군소음대책학교전체설비로가정주택수선에미적용",
+  "limitation": "고효율지원범위/조사/기록3개재정후보,기존사업불변·한도내재배분여부미확정.산식은상위후보이며정밀공사유형분리미완료"
+}

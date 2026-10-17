@@ -1,0 +1,32 @@
+{
+  "bill_no": "2203955",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C3788",
+  "gold_date": "2024-10-21",
+  "first_total_won": null,
+  "gold_total_won": 100000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 1,
+  "quote_total": 1,
+  "formula_family_match": true,
+  "recurrence_years_match": true,
+  "gold_scenario": "중앙정부·지방자치단체 협력의 별도 전국 인권침해 실태조사, 기존 보수조사와 과업 분리",
+  "gold_unit_won": 50000000,
+  "gold_unit_source": "2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사 연구용역비",
+  "gold_years": [
+    2026,
+    2029
+  ],
+  "gold_annual_won": [
+    50000000,
+    0,
+    0,
+    50000000,
+    0
+  ],
+  "first_missing": "해당 인권침해/폭력 경험 조사과업 단가와 별도조사 실시 가정",
+  "well_handled": "기존 보수조사 전체사업비를 추가 인권조사비로 사용하지 않음",
+  "source_discrepancy_note": "기존2205985 근거는2023 보수조사178백만원, 이번 정답은278백만원으로 인용. 동일범위인지 확인 전 어느 값을 덮어쓰지 않으며 본 추계 사용 단가는별도2021 인권조사50백만원.",
+  "reinforcement_performed": false
+}

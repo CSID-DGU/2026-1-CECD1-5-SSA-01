@@ -1,0 +1,1040 @@
+{
+  "bill_no": "2205719",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "parts": {
+    "meeting": {
+      "payload": {
+        "bill_no": "2205719",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "interagency_meeting_operation",
+        "support_derivation": "appointed_ombudsman_secretariat",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "ombudsman_component": "meeting",
+        "ombudsman_model_confirmed": true,
+        "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+        "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+        "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+        "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+        "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님",
+        "selected_evidence_keys": [
+          "2205719:ombudsman_offices:reviewed",
+          "2205719:ombudsman_heads_per_office:reviewed",
+          "2205719:ombudsman_meetings_per_year:reviewed",
+          "2205719:ombudsman_meeting_unit:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2205719:ombudsman_offices:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_heads_per_office:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_meetings_per_year:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_meeting_unit:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토"
+        },
+        "selected_method_keys": [
+          "2205719:ombudsman:meeting"
+        ],
+        "method_selection_reasons": {
+          "2205719:ombudsman:meeting": "옴부즈만 비용을 기존 구성요소별 산식에 연결"
+        },
+        "method_confirmations": {
+          "2205719:ombudsman:meeting": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "interagency_meeting_operation",
+        "subtype": "",
+        "formula_key": "GOODS_SERVICE_ACTIVITY_V1",
+        "formula": "수량 × 단가 × 연간 횟수",
+        "evidence_key": "2205719:ombudsman_offices:reviewed,2205719:ombudsman_heads_per_office:reviewed,2205719:ombudsman_meetings_per_year:reviewed,2205719:ombudsman_meeting_unit:reviewed",
+        "annual_amounts_thousand": [
+          19200,
+          19200,
+          19200,
+          19200,
+          19200
+        ],
+        "source_refs": [
+          "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "2205719 비용추계서24C5380 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "service_quantity": {
+            "key": "service_quantity",
+            "value": 1,
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "service_unit_cost": {
+            "key": "service_unit_cost",
+            "value": 400000,
+            "unit": "KRW/person/meeting",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "frequency_per_year": {
+            "key": "frequency_per_year",
+            "value": 48,
+            "unit": "meeting/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2205719:ombudsman:meeting"
+        ]
+      }
+    },
+    "personnel": {
+      "payload": {
+        "bill_no": "2205719",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "personnel_average",
+        "support_derivation": "appointed_ombudsman_secretariat",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "ombudsman_component": "personnel",
+        "ombudsman_model_confirmed": true,
+        "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+        "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+        "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+        "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+        "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님",
+        "selected_evidence_keys": [
+          "2205719:ombudsman_offices:reviewed",
+          "2205719:ombudsman_professional_per_office:reviewed",
+          "2205719:ombudsman_reference_professionals:reviewed",
+          "2205719:ombudsman_reference_payroll:reviewed",
+          "2205719:ombudsman_nominal_rates:reviewed",
+          "2205719:ombudsman_package_base_year:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2205719:ombudsman_offices:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_professional_per_office:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_reference_professionals:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_reference_payroll:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_nominal_rates:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_package_base_year:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토"
+        },
+        "selected_method_keys": [
+          "2205719:ombudsman:personnel"
+        ],
+        "method_selection_reasons": {
+          "2205719:ombudsman:personnel": "옴부즈만 비용을 기존 구성요소별 산식에 연결"
+        },
+        "method_confirmations": {
+          "2205719:ombudsman:personnel": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "personnel_average",
+        "subtype": "",
+        "formula_key": "PERSONNEL_AVERAGE_V1",
+        "formula": "순증인원 × 1인당 보수",
+        "evidence_key": "2205719:ombudsman_offices:reviewed,2205719:ombudsman_professional_per_office:reviewed,2205719:ombudsman_reference_professionals:reviewed,2205719:ombudsman_reference_payroll:reviewed,2205719:ombudsman_nominal_rates:reviewed,2205719:ombudsman_package_base_year:reviewed",
+        "annual_amounts_thousand": [
+          1037653,
+          1077084,
+          1118013,
+          1160498,
+          1204597
+        ],
+        "source_refs": [
+          "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "2205719 비용추계서24C5380 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "headcount": {
+            "key": "headcount",
+            "value": 16,
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "salary_per_person": {
+            "key": "salary_per_person",
+            "value": [
+              64853340.99999999,
+              67317767.95799999,
+              69875843.140404,
+              72531125.17973936,
+              75287307.93656944
+            ],
+            "unit": "KRW/person/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2205719:ombudsman:personnel"
+        ]
+      }
+    },
+    "operation": {
+      "payload": {
+        "bill_no": "2205719",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "quantity_unit",
+        "support_derivation": "appointed_ombudsman_secretariat",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "ombudsman_component": "operation",
+        "ombudsman_model_confirmed": true,
+        "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+        "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+        "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+        "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+        "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님",
+        "selected_evidence_keys": [
+          "2205719:ombudsman_offices:reviewed",
+          "2205719:ombudsman_reference_operations:reviewed",
+          "2205719:ombudsman_cpi_rates:reviewed",
+          "2205719:ombudsman_package_base_year:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2205719:ombudsman_offices:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_reference_operations:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_cpi_rates:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_package_base_year:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토"
+        },
+        "selected_method_keys": [
+          "2205719:ombudsman:operation"
+        ],
+        "method_selection_reasons": {
+          "2205719:ombudsman:operation": "옴부즈만 비용을 기존 구성요소별 산식에 연결"
+        },
+        "method_confirmations": {
+          "2205719:ombudsman:operation": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "quantity_unit",
+        "subtype": "",
+        "formula_key": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "evidence_key": "2205719:ombudsman_offices:reviewed,2205719:ombudsman_reference_operations:reviewed,2205719:ombudsman_cpi_rates:reviewed,2205719:ombudsman_package_base_year:reviewed",
+        "annual_amounts_thousand": [
+          2257799,
+          2302955,
+          2349014,
+          2395994,
+          2443914
+        ],
+        "source_refs": [
+          "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "2205719 비용추계서24C5380 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "quantity": {
+            "key": "quantity",
+            "value": 1,
+            "unit": "office",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "unit_cost": {
+            "key": "unit_cost",
+            "value": [
+              2257798560,
+              2302954531.2000003,
+              2349013621.8240004,
+              2395993894.26048,
+              2443913772.1456895
+            ],
+            "unit": "KRW/office/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2205719:ombudsman:operation"
+        ]
+      }
+    },
+    "initial_asset": {
+      "payload": {
+        "bill_no": "2205719",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "personnel_asset",
+        "support_derivation": "appointed_ombudsman_secretariat",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "ombudsman_component": "initial_asset",
+        "ombudsman_model_confirmed": true,
+        "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+        "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+        "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+        "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+        "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님",
+        "selected_evidence_keys": [
+          "2205719:ombudsman_offices:reviewed",
+          "2205719:ombudsman_heads_per_office:reviewed",
+          "2205719:ombudsman_professional_per_office:reviewed",
+          "2205719:ombudsman_asset_unit_reference:reviewed",
+          "2205719:ombudsman_cpi_rates:reviewed",
+          "2205719:ombudsman_package_base_year:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2205719:ombudsman_offices:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_heads_per_office:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_professional_per_office:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_asset_unit_reference:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_cpi_rates:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토",
+          "2205719:ombudsman_package_base_year:reviewed": "직종·근무형태·과업규모·연간단위·물가/임금 및 첫해자산 가정 검토"
+        },
+        "selected_method_keys": [
+          "2205719:ombudsman:initial_asset"
+        ],
+        "method_selection_reasons": {
+          "2205719:ombudsman:initial_asset": "옴부즈만 비용을 기존 구성요소별 산식에 연결"
+        },
+        "method_confirmations": {
+          "2205719:ombudsman:initial_asset": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "personnel_asset",
+        "subtype": "",
+        "formula_key": "PERSONNEL_ASSET_V1",
+        "formula": "순증인원 × 1인당 자산취득비",
+        "evidence_key": "2205719:ombudsman_offices:reviewed,2205719:ombudsman_heads_per_office:reviewed,2205719:ombudsman_professional_per_office:reviewed,2205719:ombudsman_asset_unit_reference:reviewed,2205719:ombudsman_cpi_rates:reviewed,2205719:ombudsman_package_base_year:reviewed",
+        "annual_amounts_thousand": [
+          74357,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_refs": [
+          "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "2205719 비용추계서24C5380 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "headcount": {
+            "key": "headcount",
+            "value": 17,
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "asset_unit_price_per_person": {
+            "key": "asset_unit_price_per_person",
+            "value": 4373964,
+            "unit": "KRW/person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          },
+          "duration": {
+            "key": "duration",
+            "value": 1,
+            "unit": "year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2205719:ombudsman:initial_asset"
+        ]
+      }
+    }
+  },
+  "reusable_web_results": {
+    "meeting": {
+      "status": "computed_review",
+      "routeKey": "interagency_meeting_operation",
+      "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+      "formula": "수량 × 단가 × 연간 횟수",
+      "annualAmountsThousand": [
+        19200,
+        19200,
+        19200,
+        19200,
+        19200
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "component": "meeting",
+          "amount_won": 19200000,
+          "appointee_salary_included": false
+        },
+        {
+          "year": 2027,
+          "component": "meeting",
+          "amount_won": 19200000,
+          "appointee_salary_included": false
+        },
+        {
+          "year": 2028,
+          "component": "meeting",
+          "amount_won": 19200000,
+          "appointee_salary_included": false
+        },
+        {
+          "year": 2029,
+          "component": "meeting",
+          "amount_won": 19200000,
+          "appointee_salary_included": false
+        },
+        {
+          "year": 2030,
+          "component": "meeting",
+          "amount_won": 19200000,
+          "appointee_salary_included": false
+        }
+      ],
+      "sourceRefs": [
+        "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+        "2205719 비용추계서24C5380 PDF3~5쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2205719:ombudsman:meeting"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2205719:ombudsman:meeting",
+          "source_bill_no": "2205719",
+          "available_at": "2024-12-12",
+          "reviewed_at": "2026-10-11",
+          "payer": "government",
+          "family_key": "appointed_ombudsman_secretariat",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽",
+          "match_groups": [
+            [
+              "옴부즈만"
+            ],
+            [
+              "위촉",
+              "사무기구",
+              "운영"
+            ]
+          ],
+          "allowed_routes": [
+            "interagency_meeting_operation"
+          ],
+          "support_derivation": "appointed_ombudsman_secretariat",
+          "ombudsman_component": "meeting",
+          "variable_keys": [
+            "component_derived_inputs"
+          ],
+          "variable_evidence_keys": [
+            "2205719:ombudsman_offices:reviewed",
+            "2205719:ombudsman_heads_per_office:reviewed",
+            "2205719:ombudsman_meetings_per_year:reviewed",
+            "2205719:ombudsman_meeting_unit:reviewed"
+          ],
+          "required_confirmations": [
+            "ombudsman_scope_note",
+            "ombudsman_staffing_note",
+            "ombudsman_unit_note",
+            "ombudsman_start_note"
+          ],
+          "method_steps": [
+            "비상근무보수 위촉자1명 회의수당과16명 전문위원 인건비 분리",
+            "회의1명×48회×40만원 동결, 2024전문위원 연보수패키지9.64억원에 명목임금전망",
+            "2024운영패키지21.68억원에 물가전망, 17명집기는첫해만",
+            "기존부서 행정지원 인력추가없음 가정, 파견보수와 인건비 중복계상금지"
+          ],
+          "baseline_check": "위촉자 급여·공무원직급별 보수를 임의 추가하지 않음. 회의사례금은 교통·식비 포함",
+          "limitation": "규제/애로해결 과업의 중소기업옴부즈만 준용 가정. 원문위촉·상근·과업규모가 다르면 새조건 확인. 2020집기자료의2024참고가격 사용은 승인할 가정",
+          "lower_variable_keys": [
+            "ombudsman_offices",
+            "ombudsman_heads_per_office",
+            "ombudsman_meetings_per_year",
+            "ombudsman_meeting_unit"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "applicability_reason": "옴부즈만 비용을 기존 구성요소별 산식에 연결",
+          "confirmed_assumptions": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "service_quantity": {
+          "key": "service_quantity",
+          "value": 1,
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "service_unit_cost": {
+          "key": "service_unit_cost",
+          "value": 400000,
+          "unit": "KRW/person/meeting",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "frequency_per_year": {
+          "key": "frequency_per_year",
+          "value": 48,
+          "unit": "meeting/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        }
+      }
+    },
+    "personnel": {
+      "status": "computed_review",
+      "routeKey": "personnel_average",
+      "formulaKey": "PERSONNEL_AVERAGE_V1",
+      "formula": "순증인원 × 1인당 보수",
+      "annualAmountsThousand": [
+        1037653,
+        1077084,
+        1118013,
+        1160498,
+        1204597
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "component": "personnel",
+          "amount_won": 1037653455.9999999,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": true
+        },
+        {
+          "year": 2027,
+          "component": "personnel",
+          "amount_won": 1077084287.3279998,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": true
+        },
+        {
+          "year": 2028,
+          "component": "personnel",
+          "amount_won": 1118013490.246464,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": true
+        },
+        {
+          "year": 2029,
+          "component": "personnel",
+          "amount_won": 1160498002.8758297,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": true
+        },
+        {
+          "year": 2030,
+          "component": "personnel",
+          "amount_won": 1204596926.985111,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": true
+        }
+      ],
+      "sourceRefs": [
+        "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+        "2205719 비용추계서24C5380 PDF3~5쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2205719:ombudsman:personnel"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2205719:ombudsman:personnel",
+          "source_bill_no": "2205719",
+          "available_at": "2024-12-12",
+          "reviewed_at": "2026-10-11",
+          "payer": "government",
+          "family_key": "appointed_ombudsman_secretariat",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽",
+          "match_groups": [
+            [
+              "옴부즈만"
+            ],
+            [
+              "위촉",
+              "사무기구",
+              "운영"
+            ]
+          ],
+          "allowed_routes": [
+            "personnel_average"
+          ],
+          "support_derivation": "appointed_ombudsman_secretariat",
+          "ombudsman_component": "personnel",
+          "variable_keys": [
+            "component_derived_inputs"
+          ],
+          "variable_evidence_keys": [
+            "2205719:ombudsman_offices:reviewed",
+            "2205719:ombudsman_professional_per_office:reviewed",
+            "2205719:ombudsman_reference_professionals:reviewed",
+            "2205719:ombudsman_reference_payroll:reviewed",
+            "2205719:ombudsman_nominal_rates:reviewed",
+            "2205719:ombudsman_package_base_year:reviewed"
+          ],
+          "required_confirmations": [
+            "ombudsman_scope_note",
+            "ombudsman_staffing_note",
+            "ombudsman_unit_note",
+            "ombudsman_start_note"
+          ],
+          "method_steps": [
+            "비상근무보수 위촉자1명 회의수당과16명 전문위원 인건비 분리",
+            "회의1명×48회×40만원 동결, 2024전문위원 연보수패키지9.64억원에 명목임금전망",
+            "2024운영패키지21.68억원에 물가전망, 17명집기는첫해만",
+            "기존부서 행정지원 인력추가없음 가정, 파견보수와 인건비 중복계상금지"
+          ],
+          "baseline_check": "위촉자 급여·공무원직급별 보수를 임의 추가하지 않음. 회의사례금은 교통·식비 포함",
+          "limitation": "규제/애로해결 과업의 중소기업옴부즈만 준용 가정. 원문위촉·상근·과업규모가 다르면 새조건 확인. 2020집기자료의2024참고가격 사용은 승인할 가정",
+          "lower_variable_keys": [
+            "ombudsman_offices",
+            "ombudsman_professional_per_office",
+            "ombudsman_reference_professionals",
+            "ombudsman_reference_payroll",
+            "ombudsman_nominal_rates",
+            "ombudsman_package_base_year"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "applicability_reason": "옴부즈만 비용을 기존 구성요소별 산식에 연결",
+          "confirmed_assumptions": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "headcount": {
+          "key": "headcount",
+          "value": 16,
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "salary_per_person": {
+          "key": "salary_per_person",
+          "value": [
+            64853340.99999999,
+            67317767.95799999,
+            69875843.140404,
+            72531125.17973936,
+            75287307.93656944
+          ],
+          "unit": "KRW/person/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        }
+      }
+    },
+    "operation": {
+      "status": "computed_review",
+      "routeKey": "quantity_unit",
+      "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+      "formula": "수량 × 단가",
+      "annualAmountsThousand": [
+        2257799,
+        2302955,
+        2349014,
+        2395994,
+        2443914
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "component": "operation",
+          "amount_won": 2257798560,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2027,
+          "component": "operation",
+          "amount_won": 2302954531.2000003,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2028,
+          "component": "operation",
+          "amount_won": 2349013621.8240004,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2029,
+          "component": "operation",
+          "amount_won": 2395993894.26048,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2030,
+          "component": "operation",
+          "amount_won": 2443913772.1456895,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        }
+      ],
+      "sourceRefs": [
+        "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+        "2205719 비용추계서24C5380 PDF3~5쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2205719:ombudsman:operation"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2205719:ombudsman:operation",
+          "source_bill_no": "2205719",
+          "available_at": "2024-12-12",
+          "reviewed_at": "2026-10-11",
+          "payer": "government",
+          "family_key": "appointed_ombudsman_secretariat",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽",
+          "match_groups": [
+            [
+              "옴부즈만"
+            ],
+            [
+              "위촉",
+              "사무기구",
+              "운영"
+            ]
+          ],
+          "allowed_routes": [
+            "quantity_unit"
+          ],
+          "support_derivation": "appointed_ombudsman_secretariat",
+          "ombudsman_component": "operation",
+          "variable_keys": [
+            "component_derived_inputs"
+          ],
+          "variable_evidence_keys": [
+            "2205719:ombudsman_offices:reviewed",
+            "2205719:ombudsman_reference_operations:reviewed",
+            "2205719:ombudsman_cpi_rates:reviewed",
+            "2205719:ombudsman_package_base_year:reviewed"
+          ],
+          "required_confirmations": [
+            "ombudsman_scope_note",
+            "ombudsman_staffing_note",
+            "ombudsman_unit_note",
+            "ombudsman_start_note"
+          ],
+          "method_steps": [
+            "비상근무보수 위촉자1명 회의수당과16명 전문위원 인건비 분리",
+            "회의1명×48회×40만원 동결, 2024전문위원 연보수패키지9.64억원에 명목임금전망",
+            "2024운영패키지21.68억원에 물가전망, 17명집기는첫해만",
+            "기존부서 행정지원 인력추가없음 가정, 파견보수와 인건비 중복계상금지"
+          ],
+          "baseline_check": "위촉자 급여·공무원직급별 보수를 임의 추가하지 않음. 회의사례금은 교통·식비 포함",
+          "limitation": "규제/애로해결 과업의 중소기업옴부즈만 준용 가정. 원문위촉·상근·과업규모가 다르면 새조건 확인. 2020집기자료의2024참고가격 사용은 승인할 가정",
+          "lower_variable_keys": [
+            "ombudsman_offices",
+            "ombudsman_reference_operations",
+            "ombudsman_cpi_rates",
+            "ombudsman_package_base_year"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "applicability_reason": "옴부즈만 비용을 기존 구성요소별 산식에 연결",
+          "confirmed_assumptions": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "quantity": {
+          "key": "quantity",
+          "value": 1,
+          "unit": "office",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "unit_cost": {
+          "key": "unit_cost",
+          "value": [
+            2257798560,
+            2302954531.2000003,
+            2349013621.8240004,
+            2395993894.26048,
+            2443913772.1456895
+          ],
+          "unit": "KRW/office/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        }
+      }
+    },
+    "initial_asset": {
+      "status": "computed_review",
+      "routeKey": "personnel_asset",
+      "formulaKey": "PERSONNEL_ASSET_V1",
+      "formula": "순증인원 × 1인당 자산취득비",
+      "annualAmountsThousand": [
+        74357,
+        0,
+        0,
+        0,
+        0
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "component": "initial_asset",
+          "amount_won": 74357388,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2027,
+          "component": "initial_asset",
+          "amount_won": 0,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2028,
+          "component": "initial_asset",
+          "amount_won": 0,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2029,
+          "component": "initial_asset",
+          "amount_won": 0,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        },
+        {
+          "year": 2030,
+          "component": "initial_asset",
+          "amount_won": 0,
+          "base_year": 2024,
+          "professional_pay_not_civil_grade": false
+        }
+      ],
+      "sourceRefs": [
+        "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+        "2205719 비용추계서24C5380 PDF3~5쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2205719:ombudsman:initial_asset"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2205719:ombudsman:initial_asset",
+          "source_bill_no": "2205719",
+          "available_at": "2024-12-12",
+          "reviewed_at": "2026-10-11",
+          "payer": "government",
+          "family_key": "appointed_ombudsman_secretariat",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽",
+          "match_groups": [
+            [
+              "옴부즈만"
+            ],
+            [
+              "위촉",
+              "사무기구",
+              "운영"
+            ]
+          ],
+          "allowed_routes": [
+            "personnel_asset"
+          ],
+          "support_derivation": "appointed_ombudsman_secretariat",
+          "ombudsman_component": "initial_asset",
+          "variable_keys": [
+            "component_derived_inputs"
+          ],
+          "variable_evidence_keys": [
+            "2205719:ombudsman_offices:reviewed",
+            "2205719:ombudsman_heads_per_office:reviewed",
+            "2205719:ombudsman_professional_per_office:reviewed",
+            "2205719:ombudsman_asset_unit_reference:reviewed",
+            "2205719:ombudsman_cpi_rates:reviewed",
+            "2205719:ombudsman_package_base_year:reviewed"
+          ],
+          "required_confirmations": [
+            "ombudsman_scope_note",
+            "ombudsman_staffing_note",
+            "ombudsman_unit_note",
+            "ombudsman_start_note",
+            "ombudsman_asset_price_note"
+          ],
+          "method_steps": [
+            "비상근무보수 위촉자1명 회의수당과16명 전문위원 인건비 분리",
+            "회의1명×48회×40만원 동결, 2024전문위원 연보수패키지9.64억원에 명목임금전망",
+            "2024운영패키지21.68억원에 물가전망, 17명집기는첫해만",
+            "기존부서 행정지원 인력추가없음 가정, 파견보수와 인건비 중복계상금지"
+          ],
+          "baseline_check": "위촉자 급여·공무원직급별 보수를 임의 추가하지 않음. 회의사례금은 교통·식비 포함",
+          "limitation": "규제/애로해결 과업의 중소기업옴부즈만 준용 가정. 원문위촉·상근·과업규모가 다르면 새조건 확인. 2020집기자료의2024참고가격 사용은 승인할 가정",
+          "lower_variable_keys": [
+            "ombudsman_offices",
+            "ombudsman_heads_per_office",
+            "ombudsman_professional_per_office",
+            "ombudsman_asset_unit_reference",
+            "ombudsman_cpi_rates",
+            "ombudsman_package_base_year"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "applicability_reason": "옴부즈만 비용을 기존 구성요소별 산식에 연결",
+          "confirmed_assumptions": {
+            "ombudsman_scope_note": "중소기업옴부즈만과 같은 규제·애로해결과업 및 사무기구규모 준용. 장애인분야 업무량 적합성 확인할 가정",
+            "ombudsman_staffing_note": "사무기구1개·비상근무보수위촉자1명·전문위원16명, 기존부서행정지원은 추가순증없음 가정. 파견과추가보수중복 금지",
+            "ombudsman_unit_note": "회의사례금40만원·연48회 동결, 2024전문위원16명연보수9.64억원·운영21.68억원 각각임금/물가. 일반공무원보수표 아님",
+            "ombudsman_start_note": "공포후6개월·준비기간 고려2026~2030 가정, 2025전망부터2024기준에 적용",
+            "ombudsman_asset_price_note": "2020연구의인당420만원을2024참고액으로 준용해2025부터물가, 첫해17명만. 2021~2024가격보정 미확인·최신집기표아님"
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "headcount": {
+          "key": "headcount",
+          "value": 17,
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "asset_unit_price_per_person": {
+          "key": "asset_unit_price_per_person",
+          "value": 4373964,
+          "unit": "KRW/person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        },
+        "duration": {
+          "key": "duration",
+          "value": 1,
+          "unit": "year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2205719 비용추계서24C5380 PDF3~5쪽,중소기업옴부즈만2024사업설명자료준용",
+          "is_assumption": true
+        }
+      }
+    }
+  },
+  "annual_raw_thousand": [
+    3389009,
+    3399239,
+    3486227,
+    3575692,
+    3667711
+  ],
+  "raw_total_eok": 175.17878,
+  "gold_display_total_eok": 175.17,
+  "raw_error_percent": 0.005012273791175181,
+  "display_table": {
+    "component_million": {
+      "personnel": [
+        1038,
+        1077,
+        1118,
+        1160,
+        1205
+      ],
+      "operation": [
+        2258,
+        2303,
+        2349,
+        2396,
+        2444
+      ],
+      "initial_asset": [
+        74,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "meeting_million": [
+      19.2,
+      19.2,
+      19.2,
+      19.2,
+      19.2
+    ],
+    "annual_total_million": [
+      3389,
+      3399,
+      3486,
+      3575,
+      3668
+    ],
+    "summed_display_total_million": 17517,
+    "rounded_components_plus_meeting_total_million": 17518
+  },
+  "annual_display_matches": 5,
+  "displayed_total_matches": true,
+  "display_precision_note": "정답표 구성행 인건비·운영비·자산은백만원반올림,회의19.2백만원은유지후총행반올림. 표시행 합계와 구성총계+96백만원은1백만원차이, 원시값을보정하지않음",
+  "limitation": "정답확인후선례패키지 보강회귀. 표시5/5와 원시합계차이는구분. 2020집기단가2024재사용의 정밀가격은미확인"
+}

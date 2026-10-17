@@ -1,0 +1,38 @@
+{
+  "bill_no": "2210347",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2210347.json",
+  "gold": {
+    "estimate_no": "25C2709",
+    "reply_date": "2025-06-30",
+    "decision": "일부추계",
+    "total_eok": 58.93,
+    "annual_million": [
+      4848,
+      279,
+      251,
+      229,
+      286
+    ],
+    "reference_model": "2207043과 동일한 초기 미자격재고·후속 제공인원순증·국가시험 재응시·물가",
+    "association_decision": "이미2023년 설립되어 교육·행사 수행 중이므로 별도추계하지 않음",
+    "cooperation_scope": "정답 추계항목 표에 포함되지 않음.별도 사유는 제시되지 않아 금액0이나 법정미추계로 확정하지 않음"
+  },
+  "first_run": {
+    "total_eok": null,
+    "error_percent": null,
+    "required_slots": 5,
+    "filled_slots": 1,
+    "missing_slots": 4,
+    "exam_reference_unit_match": true,
+    "full_exam_method_match": false,
+    "estimated_scope_match": false
+  },
+  "differences": [
+    "언어시험2023운영비662백만원/2760명 단가 선택은 맞음",
+    "기존 qualification_exam_stock_flow가 있음에도 단순quantity_unit로 잠정 실행해 초기재고·순증·재응시·물가 구조를 선택하지 못함",
+    "현재법안에2207043연계법안전제가없어서51.3%·전체순증·target_only미래인원은 그대로 적용하지 않았다.그러나 정답은 같은 시나리오를 준용",
+    "기존협회 이미설립 및 수행에 대한 근거 판정 미완료",
+    "기관협력체계를 별도 비용후보로 잡았으나 정답은 시험만 계산한 일부추계"
+  ],
+  "reinforcement_done": false
+}

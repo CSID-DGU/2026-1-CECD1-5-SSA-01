@@ -1,0 +1,57 @@
+{
+  "bill_no": "2209844",
+  "post_answer_comparison": true,
+  "management_comparisons": [
+    {
+      "scenario": "arrears_shared",
+      "first_management_eok": 3305.90525,
+      "gold_management_display_eok": 3368,
+      "display_difference_percent": 1.843668349168652,
+      "first_period": [
+        2026,
+        2030
+      ],
+      "gold_period": [
+        2027,
+        2031
+      ],
+      "same_period": false
+    },
+    {
+      "scenario": "all_tenants_flat",
+      "first_management_eok": 28177.77641,
+      "gold_management_display_eok": 27271,
+      "display_difference_percent": 3.325057423636825,
+      "first_period": [
+        2026,
+        2030
+      ],
+      "gold_period": [
+        2027,
+        2031
+      ],
+      "same_period": false
+    }
+  ],
+  "gold_whole_display_eok": [
+    3656,
+    27559
+  ],
+  "gold_moving_and_brokerage_display_eok": 288,
+  "whole_bill_error_percent": null,
+  "whole_bill_total": null,
+  "gold_moving_package": {
+    "base_per_household": 400000,
+    "moving_plan_share": 0.02,
+    "repeat_exclusion_years": 2,
+    "baseline_supported_households": 15000
+  },
+  "changed_reference": {
+    "arrears_share_from": 0.108,
+    "arrears_share_to": 0.102,
+    "cpi_2025_from": 0.021,
+    "cpi_2025_to": 0.019
+  },
+  "reinforcement_completed": false,
+  "notes": "이사비와중개보수는정답상한묶음40만원지원,각각40만원지급아님.부분금액만계산했고추계기간도달라전체정답오차율은없음"
+}

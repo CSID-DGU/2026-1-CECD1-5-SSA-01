@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import ErceChat from './ErceChat'
+import { userMessage } from './userMessages'
 import './App.css'
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
@@ -121,7 +122,7 @@ function App() {
     fetch('/erce_demo_2200555.json', { signal: controller.signal })
       .then(response => { if (!response.ok) throw new Error('예시를 불러오지 못했어요.'); return response.json() })
       .then(data => { if (!controller.signal.aborted) setResult(data) })
-      .catch(error => { if (!controller.signal.aborted) setError(error.message) })
+      .catch(error => { if (!controller.signal.aborted) setError(userMessage(error)) })
     return () => controller.abort()
   }, [])
 
@@ -162,7 +163,7 @@ function App() {
     } catch (e) {
       setCurrentStep(-1)
       setProcessingProgress(0)
-      setError(e.message)
+      setError(userMessage(e))
     } finally {
       setIsProcessing(false)
     }
@@ -261,7 +262,7 @@ function App() {
               <h2 className="result-title">함께 비용추계 초안을 만들어볼게요</h2>
               {result.analysisMode === 'manual_demo' && <p>개발 예시 · 2200555 정부 적립금 항목의 확인한 값을 미리 채웠어요. 실제 PDF 자동 분석 결과는 아닙니다.</p>}
             </div>
-            <ErceChat key={`${result.analysisMode}-${result.generatedAt}`} result={result} />
+            <ErceChat key={`${result.analysisMode}-${result.generatedAt}`} result={result} onRetryAnalysis={file ? start : undefined} />
             <details className="chat-article-details">
               <summary>분석한 조문 자세히 보기 ({(result.articles || []).length}개)</summary>
               <ArticlesView

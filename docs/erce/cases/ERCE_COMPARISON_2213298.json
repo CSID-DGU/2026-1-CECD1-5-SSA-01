@@ -1,0 +1,19 @@
+{
+  "bill_no": "2213298",
+  "post_answer_comparison": true,
+  "independent_first_run": true,
+  "total_trillion": 21.516876042,
+  "gold_display_total_trillion": 21.7,
+  "error_percent": 0.8438892073732696,
+  "signed_difference_trillion": -0.18312395799999948,
+  "formula_match": true,
+  "required_filled": 5,
+  "required_count": 5,
+  "population_basis_match": "2023.12전망공통;정답은2025년0세코호트출생증가보정추가",
+  "cpi_decision_match": true,
+  "operating_cost_scope_match": true,
+  "diagnostic_without_execution_factor_trillion": 21.60328919879518,
+  "diagnostic_without_execution_factor_error_percent": 0.4456718949530779,
+  "gold_execution_factor_explicitly_stated": false,
+  "note": "정답표는0.1조원표시.정답의출생아보정원값미공개,집행계수는적용한다는명시없음.첫결과변경및보강안함"
+}

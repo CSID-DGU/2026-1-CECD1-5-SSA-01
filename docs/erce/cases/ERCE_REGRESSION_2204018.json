@@ -1,0 +1,184 @@
+{
+  "bill_no": "2204018",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "scenario_only": true,
+  "payload": {
+    "bill_no": "2204018",
+    "route_key": "transfer_recipient_delta",
+    "cutoff_date": "2026-10-04",
+    "evidence_mode": "development_review",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "disability_couple_reduction_recovery",
+    "disability_benefit_scope": "disabled_basic_18_64_home_livelihood_medical",
+    "disability_population_basis": "freeze_2023_cohort",
+    "benefit_index_base_year": 2024,
+    "supplementary_benefit_unchanged": true,
+    "population_proxy_note": "가정 후보:2023년18~64세재가수급자 집단동결. 정답의 인구·수급권자비율 추세전망과 다르고 사용자 확정 전 시나리오임",
+    "support_derivation_note": "기초급여 부부20%감액 폐지; 명단위; 부가급여 유지; 전년도 물가 적용",
+    "estimation_start_note": "원문3쪽2025-01-01시행, 정답2025~2029년",
+    "selected_evidence_keys": [
+      "2204018:disability_reference_cohort:reference",
+      "2204018:disability_couple_share:reference",
+      "2204018:disability_lagged_cpi:reference",
+      "mohw:disability_basic_monthly:2024"
+    ],
+    "evidence_selection_reasons": {
+      "2204018:disability_reference_cohort:reference": "해당 역사적 대상집단의 사후 비교 및 동결 후보 시나리오",
+      "2204018:disability_couple_share:reference": "해당 역사적 대상집단의 사후 비교 및 동결 후보 시나리오",
+      "2204018:disability_lagged_cpi:reference": "해당 역사적 대상집단의 사후 비교 및 동결 후보 시나리오",
+      "mohw:disability_basic_monthly:2024": "해당 역사적 대상집단의 사후 비교 및 동결 후보 시나리오"
+    },
+    "explicit_inputs": {
+      "repealed_reduction_rate": {
+        "value": 0.2,
+        "unit": "ratio",
+        "source_ref": "원문5쪽제6조제3항100분의20감액 삭제"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2025-01-01시행 및 매월지급"
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_recipient_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "evidence_key": "2204018:disability_reference_cohort:reference,2204018:disability_couple_share:reference,2204018:disability_lagged_cpi:reference,mohw:disability_basic_monthly:2024",
+    "annual_amounts_thousand": [
+      2886950,
+      2947576,
+      3006528,
+      3066658,
+      3127991
+    ],
+    "source_refs": [
+      "2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망; 원문5쪽제6조제3항100분의20감액 삭제",
+      "원문2025-01-01시행 및 매월지급"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          3505.143,
+          3505.143,
+          3505.143,
+          3505.143,
+          3505.143
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          343180.24999999994,
+          350387.0352499999,
+          357394.7759549999,
+          364542.6714740999,
+          371833.52490358194
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": [
+          274544.19999999995,
+          280309.6281999999,
+          285915.82076399995,
+          291634.13717927993,
+          297466.81992286554
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망; 원문5쪽제6조제3항100분의20감액 삭제",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2025-01-01시행 및 매월지급",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": []
+  },
+  "total_thousand": 15035703,
+  "gold_total_thousand": 18400000,
+  "difference_percent": 18.284222826086957,
+  "required_variables_filled": 3,
+  "required_variable_count": 3,
+  "synthetic_web_status": "computed_review",
+  "synthetic_derivation_trace": [
+    {
+      "variable_key": "recipient_count",
+      "dependencies": [
+        "disability_reference_cohort",
+        "disability_couple_share"
+      ],
+      "values": [
+        3505.143,
+        3505.143,
+        3505.143,
+        3505.143,
+        3505.143
+      ],
+      "unit": "person",
+      "expression": "2023년18~64세재가수급자 동결×부부감액적용비율; 부부쌍2배 금지",
+      "source_ref": "2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "applied": true
+    },
+    {
+      "variable_key": "benefit_per_recipient",
+      "dependencies": [
+        "disability_base_monthly",
+        "disability_lagged_cpi"
+      ],
+      "values": [
+        343180.24999999994,
+        350387.0352499999,
+        357394.7759549999,
+        364542.6714740999,
+        371833.52490358194
+      ],
+      "unit": "KRW/person/month",
+      "expression": "2024년기초급여×전년도물가 누적",
+      "source_ref": "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "applied": true
+    },
+    {
+      "variable_key": "existing_benefit_per_recipient",
+      "dependencies": [
+        "disability_base_monthly",
+        "disability_lagged_cpi",
+        "repealed_reduction_rate"
+      ],
+      "values": [
+        274544.19999999995,
+        280309.6281999999,
+        285915.82076399995,
+        291634.13717927993,
+        297466.81992286554
+      ],
+      "unit": "KRW/person/month",
+      "expression": "2024년기초급여×전년도물가 누적×(1−폐지감액률)",
+      "source_ref": "보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망; 원문5쪽제6조제3항100분의20감액 삭제",
+      "applied": true
+    }
+  ],
+  "unresolved": "정답의18세이상 인구·수급권자비율추세·연령구성 전망 원자료 미확보; 2023집단동결 후보만 계산. 이 후보를 사용자 확정값 또는 정답 재현으로 취급하지 않음"
+}

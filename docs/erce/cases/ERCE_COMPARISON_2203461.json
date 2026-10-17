@@ -1,0 +1,15 @@
+{
+  "bill_no": "2203461",
+  "post_answer_comparison": true,
+  "first_covered_thousand": 323064076,
+  "gold_covered_thousand": 323064000,
+  "covered_error_percent": 0.00002352475051383008,
+  "annual_display_matches": true,
+  "transition_candidate_error_percent": 0.49559096649580264,
+  "whole_bill_total": null,
+  "whole_bill_error_percent": null,
+  "first_saved_before_target_answer": true,
+  "new_answer_evidence_added_before_first": false,
+  "shared_underlying_reference": "두법안의추계서는같은가구전망/2021조사/여가부고도화계획을준용",
+  "limitation": "동일정부계획을사용하는유사법안첫재사용사례,유형격리/새정책일반성능아님.경과조치/회수/행정별도비용미해결"
+}

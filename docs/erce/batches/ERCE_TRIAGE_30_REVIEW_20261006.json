@@ -1,0 +1,47 @@
+{
+  "batch_id": "ERCE_TRIAGE_30_20261006",
+  "post_answer_review": true,
+  "first_manifest_unchanged": true,
+  "full_formula_gold_validation_complete": false,
+  "routing_corrections": [
+    {
+      "bill_no": "2201629",
+      "initial_group": "의료·돌봄급여",
+      "initial_route": "transfer_service_use",
+      "corrected_group": "생계지원금 연령요건 완화",
+      "corrected_candidate_route": "transfer_recipient_adjusted",
+      "basis": "정답 비용추계 결과에서 참전유공자 생계지원금 대상연령 완화 확인",
+      "cause": "개정문 제6조의3의 현행 조문 제목·급여 성격을 확인하지 않고 요양/의료 지원으로 잘못 읽음",
+      "status": "corrected_intake_only_not_runtime_completed"
+    }
+  ],
+  "shared_priority": [
+    {
+      "group": "주차표지 발급",
+      "bills": [
+        "2200444",
+        "2200602"
+      ],
+      "next": "첫해 대상재고와 이후 순증인원을 구분하는 공통 하위산식·제작단가 묶음 보강"
+    },
+    {
+      "group": "민간 보훈단체 운영보조",
+      "bills": [
+        "2200492",
+        "2204112",
+        "2204762"
+      ],
+      "next": "유사단체의 회원규모·사업범위·인건비/운영비/사업비를 조건별로 매칭. 기존보조금 이관 여부 구분"
+    },
+    {
+      "group": "자활급여 실태조사",
+      "bills": [
+        "2204393"
+      ],
+      "next": "연1회 조사와 정답의 유사과업 용역비40백만원 적용가능성 기록"
+    }
+  ],
+  "computed_amount_count": 0,
+  "error_rates_available": false,
+  "limitations": "상위산식 후보28건에 값을 채우기 전 슬롯만 검사.28건 추계실패율이나 정답산식일치율을 뜻하지 않음.핵심법적현행조건·다중비용항목·금액 비교는 후속검증 필요"
+}

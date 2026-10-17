@@ -1,0 +1,58 @@
+{
+  "bill_no": "2208199",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2208199.json",
+  "first": {
+    "status": "needs_input",
+    "route": "research_survey",
+    "required_variables": 2,
+    "filled_variables": 0,
+    "missing_variables": [
+      "survey_unit_cost",
+      "recurrence_interval_years"
+    ],
+    "total_eok": null,
+    "error_percent": null
+  },
+  "attached_reference": {
+    "estimate_no": "25C0024",
+    "reply_date": "2025-02-03",
+    "bill_no_on_cover": null,
+    "bill_propose_date": "2025-02-17",
+    "source_bill_version_match": false,
+    "comparison_status": "reference_only_pending_version_verification",
+    "route": "research_survey",
+    "comparable_task": "2023 어린이 식생활안전관리에 관한 실태조사 및 식생활 안전지수 통합조사",
+    "base_cost_won": 760000000,
+    "base_year": 2023,
+    "recurrence_assumption_years": 3,
+    "start_year": 2026,
+    "annual_million_display": [
+      811,
+      0,
+      0,
+      861,
+      0
+    ],
+    "total_eok": 16.72,
+    "cpi_by_year": {
+      "2024": 0.025,
+      "2025": 0.021,
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02,
+      "2030": 0.02
+    }
+  },
+  "comparison": {
+    "formula_family_matches": true,
+    "period_missing_in_original": true,
+    "period_is_precedent_assumption_not_statutory": true,
+    "unit_cost_missing": true,
+    "first_year_scenario_matches": true,
+    "amount_error_percent": null
+  },
+  "reinforced": false,
+  "independent_achievement": false,
+  "limitation": "첨부 회답일이 발의일보다14일 앞서고 의안번호 공란. 동일 원문 버전의 정답으로 확정하지 않음; 참고 비교만 기록"
+}

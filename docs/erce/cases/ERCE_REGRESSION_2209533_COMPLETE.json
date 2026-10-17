@@ -1,0 +1,2362 @@
+{
+  "evaluated_at": "2026-10-03",
+  "independent_evaluation": false,
+  "description": "정답 확인 후 보강한 대학 구성비 대리 가정으로 전체 일부추계 범위 재계산",
+  "scenarios": [
+    {
+      "bill_no": "2209533",
+      "evidence_mode": "development_review",
+      "status": "computed_review",
+      "policy_scenario": "answer_table_reference",
+      "years": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "covered_cohorts": [
+        "new_two_child_second",
+        "existing_multichild_second"
+      ],
+      "covered_income_bands": [
+        "1-3",
+        "4-6",
+        "7-8",
+        "9"
+      ],
+      "annual_amounts_thousand": [
+        1539849176,
+        1544763108,
+        1549827752,
+        1554530036,
+        1559039712
+      ],
+      "total_thousand": 7748009784,
+      "gold_total_thousand": 7540391000,
+      "total_absolute_error_percent": 2.753421990981635,
+      "mix_evidence_key": "official:nabo:university_mix:2024:general_junior",
+      "university_shares": {
+        "public_general": 0.18250913505451832,
+        "public_junior": 0.004189091871014619,
+        "private_general": 0.6061931568575498,
+        "private_junior": 0.20710861621691723
+      },
+      "components": [
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            20782.497717793056,
+            20547.060933572728,
+            20314.17927724316,
+            20084.035257939413,
+            19856.44636652643
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            477.01608044430566,
+            471.61215193069677,
+            466.26687070328217,
+            460.9844258539327,
+            455.7606282907775
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            69027.82096452605,
+            68245.83179217982,
+            67472.32932402959,
+            66707.91975323221,
+            65951.99688663085
+          ],
+          "annual_amounts_thousand": [
+            118451741,
+            120249156,
+            122057444,
+            123809899,
+            125506650
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            23583.665237236582,
+            23316.49512231676,
+            23052.224528023973,
+            22791.06056297444,
+            22532.796118551945
+          ],
+          "annual_amounts_thousand": [
+            9221213,
+            10795537,
+            12355992,
+            13879756,
+            15389900
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            22956.18151629237,
+            22696.10599883968,
+            22438.950627547863,
+            22184.71540241692,
+            21933.400323446847
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            526.9081646280897,
+            520.9387087118939,
+            515.0362782656343,
+            509.20087328931095,
+            503.4324937829238
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            76247.58146269947,
+            75383.75621417747,
+            74529.63005616517,
+            73685.20298866261,
+            72850.47501166977
+          ],
+          "annual_amounts_thousand": [
+            252836980,
+            253440188,
+            254071509,
+            254656062,
+            255195214
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26050.328856380067,
+            25755.199078270958,
+            25463.383038021322,
+            25174.880735631155,
+            24889.69217110046
+          ],
+          "annual_amounts_thousand": [
+            51866205,
+            53132976,
+            54389786,
+            55611312,
+            56823167
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            23546.051040788574,
+            23279.405194473922,
+            23015.496985185087,
+            22754.691431192183,
+            22496.9885324952
+          ],
+          "annual_amounts_thousand": [
+            14763374,
+            14782422,
+            14821980,
+            14836059,
+            14848012
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            540.447309555209,
+            534.3270463316567,
+            528.2696194861695,
+            522.2834072024896,
+            516.368409480617
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            78206.79774566308,
+            77321.14954349419,
+            76444.59423867818,
+            75578.34421752873,
+            74722.39948004587
+          ],
+          "annual_amounts_thousand": [
+            321899180,
+            321810624,
+            321755297,
+            321661433,
+            321530485
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26719.703903993144,
+            26417.118215700226,
+            26117.639156650563,
+            25821.68094407659,
+            25529.2435779783
+          ],
+          "annual_amounts_thousand": [
+            74574694,
+            75632209,
+            76681389,
+            77697438,
+            78706658
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            19318.77445465582,
+            19099.7634925904,
+            18883.490167550794,
+            18669.40695213184,
+            18457.878864603656
+          ],
+          "annual_amounts_thousand": [
+            62341685,
+            61787735,
+            61258042,
+            60712911,
+            60172685
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            443.4195636387684,
+            438.39265339355086,
+            433.42857952639855,
+            428.5147747616984,
+            423.65961728319246
+          ],
+          "annual_amounts_thousand": [
+            624335,
+            621202,
+            618069,
+            614919,
+            611764
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            64166.151846528504,
+            63438.72005829945,
+            62720.38116742325,
+            62009.31659442934,
+            61306.73872563145
+          ],
+          "annual_amounts_thousand": [
+            430939876,
+            428972625,
+            427063075,
+            425135875,
+            423200417
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            21922.654135176905,
+            21674.123795716605,
+            21428.700085499557,
+            21185.761678677114,
+            20945.72279248171
+          ],
+          "annual_amounts_thousand": [
+            118185028,
+            118405738,
+            118629284,
+            118830937,
+            119034543
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2986.579486032138,
+            2952.815296047052,
+            2919.416124332075,
+            2886.1994617521527,
+            2853.530326577394
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            68.55029937728322,
+            67.77531738114551,
+            67.00871356874984,
+            66.24629884822518,
+            65.49645140331357
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9919.744818816946,
+            9807.5990847983,
+            9696.665737093366,
+            9586.338582545293,
+            9477.830007467792
+          ],
+          "annual_amounts_thousand": [
+            16030308,
+            16300230,
+            16571602,
+            16833611,
+            17088528
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3389.1253957736335,
+            3350.810301773504,
+            3312.909425005808,
+            3275.215656854329,
+            3238.143214551501
+          ],
+          "annual_amounts_thousand": [
+            986235,
+            1216344,
+            1444429,
+            1667085,
+            1887837
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2808.450570218928,
+            2776.5114715843874,
+            2745.11990035501,
+            2713.9108382606873,
+            2683.2493035715283
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            64.46174571117295,
+            63.72865463374539,
+            63.00813083193088,
+            62.29179612198738,
+            61.58802868765692
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9328.100297723977,
+            9222.016495273905,
+            9117.751272294407,
+            9014.092242471766,
+            8912.251792119698
+          ],
+          "annual_amounts_thousand": [
+            24868715,
+            25010109,
+            25155876,
+            25293543,
+            25426654
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3186.9873863459225,
+            3150.743378507962,
+            3115.120696518652,
+            3079.7051231455594,
+            3044.910875621117
+          ],
+          "annual_amounts_thousand": [
+            4273750,
+            4452000,
+            4629069,
+            4801260,
+            4972339
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2586.154443722525,
+            2556.770472978747,
+            2527.7515205050786,
+            2499.097586301519,
+            2470.808670368069
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            59.35943181227715,
+            58.68498802104379,
+            58.01892241355247,
+            57.36123498980317,
+            56.71192574979591
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            8589.757032671481,
+            8492.159934417416,
+            8395.775222477065,
+            8300.602896850429,
+            8206.64295753751
+          ],
+          "annual_amounts_thousand": [
+            26336195,
+            26427602,
+            26522254,
+            26611733,
+            26696210
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2934.729091793717,
+            2901.3846045827936,
+            2868.4543346043038,
+            2835.9382818582476,
+            2803.8364463446255
+          ],
+          "annual_amounts_thousand": [
+            5109363,
+            5260210,
+            5409905,
+            5555603,
+            5700199
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            1836.4069169185634,
+            1815.6008755223484,
+            1794.9773432611878,
+            1774.7188292701362,
+            1754.4603152790846
+          ],
+          "annual_amounts_thousand": [
+            1193664,
+            1180141,
+            1166735,
+            1153567,
+            1140399
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            42.150642406149096,
+            41.673085932853425,
+            41.199718551428774,
+            40.734729353746154,
+            40.26974015606353
+          ],
+          "annual_amounts_thousand": [
+            27398,
+            27088,
+            26780,
+            26478,
+            26175
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            6099.515544300666,
+            6030.409524418906,
+            5961.909697694003,
+            5894.622257282815,
+            5827.334816871627
+          ],
+          "annual_amounts_thousand": [
+            3964685,
+            3919766,
+            3875241,
+            3831504,
+            3787768
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2083.9268963746213,
+            2060.316514125893,
+            2036.913240493381,
+            2013.9241840933032,
+            1990.9351276932252
+          ],
+          "annual_amounts_thousand": [
+            1354552,
+            1339206,
+            1323994,
+            1309051,
+            1294108
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        }
+      ],
+      "missing_calculation_inputs": [],
+      "limitations": [
+        "정답과 같은 일부추계 범위 전체를 계산; 신규2자녀 첫째는 범위 밖이며 비용0 아님",
+        "대학유형별 대상집단 실제 분포 대신2024년 전국 재적학생 구성비 대리가정",
+        "지원방식·정책 동결은 명시한 시나리오이며 사용자 확인 필요",
+        "정답 확인 후 재계산이며 미열람 독립평가 아님"
+      ]
+    },
+    {
+      "bill_no": "2209533",
+      "evidence_mode": "development_review",
+      "status": "computed_review",
+      "policy_scenario": "all_second_full_tuition",
+      "years": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "covered_cohorts": [
+        "new_two_child_second",
+        "existing_multichild_second"
+      ],
+      "covered_income_bands": [
+        "1-3",
+        "4-6",
+        "7-8",
+        "9"
+      ],
+      "annual_amounts_thousand": [
+        1587971406,
+        1592780765,
+        1597745404,
+        1602345506,
+        1606744979
+      ],
+      "total_thousand": 7987588060,
+      "gold_total_thousand": 7540391000,
+      "total_absolute_error_percent": 5.930687944431528,
+      "mix_evidence_key": "official:nabo:university_mix:2024:general_junior",
+      "university_shares": {
+        "public_general": 0.18250913505451832,
+        "public_junior": 0.004189091871014619,
+        "private_general": 0.6061931568575498,
+        "private_junior": 0.20710861621691723
+      },
+      "components": [
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            20782.497717793056,
+            20547.060933572728,
+            20314.17927724316,
+            20084.035257939413,
+            19856.44636652643
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            477.01608044430566,
+            471.61215193069677,
+            466.26687070328217,
+            460.9844258539327,
+            455.7606282907775
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            69027.82096452605,
+            68245.83179217982,
+            67472.32932402959,
+            66707.91975323221,
+            65951.99688663085
+          ],
+          "annual_amounts_thousand": [
+            118451741,
+            120249156,
+            122057444,
+            123809899,
+            125506650
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            23583.665237236582,
+            23316.49512231676,
+            23052.224528023973,
+            22791.06056297444,
+            22532.796118551945
+          ],
+          "annual_amounts_thousand": [
+            9221213,
+            10795537,
+            12355992,
+            13879756,
+            15389900
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            22956.18151629237,
+            22696.10599883968,
+            22438.950627547863,
+            22184.71540241692,
+            21933.400323446847
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            526.9081646280897,
+            520.9387087118939,
+            515.0362782656343,
+            509.20087328931095,
+            503.4324937829238
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            76247.58146269947,
+            75383.75621417747,
+            74529.63005616517,
+            73685.20298866261,
+            72850.47501166977
+          ],
+          "annual_amounts_thousand": [
+            252836980,
+            253440188,
+            254071509,
+            254656062,
+            255195214
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26050.328856380067,
+            25755.199078270958,
+            25463.383038021322,
+            25174.880735631155,
+            24889.69217110046
+          ],
+          "annual_amounts_thousand": [
+            51866205,
+            53132976,
+            54389786,
+            55611312,
+            56823167
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            23546.051040788574,
+            23279.405194473922,
+            23015.496985185087,
+            22754.691431192183,
+            22496.9885324952
+          ],
+          "annual_amounts_thousand": [
+            14763374,
+            14782422,
+            14821980,
+            14836059,
+            14848012
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            540.447309555209,
+            534.3270463316567,
+            528.2696194861695,
+            522.2834072024896,
+            516.368409480617
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            78206.79774566308,
+            77321.14954349419,
+            76444.59423867818,
+            75578.34421752873,
+            74722.39948004587
+          ],
+          "annual_amounts_thousand": [
+            321899180,
+            321810624,
+            321755297,
+            321661433,
+            321530485
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26719.703903993144,
+            26417.118215700226,
+            26117.639156650563,
+            25821.68094407659,
+            25529.2435779783
+          ],
+          "annual_amounts_thousand": [
+            74574694,
+            75632209,
+            76681389,
+            77697438,
+            78706658
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            19318.77445465582,
+            19099.7634925904,
+            18883.490167550794,
+            18669.40695213184,
+            18457.878864603656
+          ],
+          "annual_amounts_thousand": [
+            62341685,
+            61787735,
+            61258042,
+            60712911,
+            60172685
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            443.4195636387684,
+            438.39265339355086,
+            433.42857952639855,
+            428.5147747616984,
+            423.65961728319246
+          ],
+          "annual_amounts_thousand": [
+            624335,
+            621202,
+            618069,
+            614919,
+            611764
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            64166.151846528504,
+            63438.72005829945,
+            62720.38116742325,
+            62009.31659442934,
+            61306.73872563145
+          ],
+          "annual_amounts_thousand": [
+            430939876,
+            428972625,
+            427063075,
+            425135875,
+            423200417
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            21922.654135176905,
+            21674.123795716605,
+            21428.700085499557,
+            21185.761678677114,
+            20945.72279248171
+          ],
+          "annual_amounts_thousand": [
+            118185028,
+            118405738,
+            118629284,
+            118830937,
+            119034543
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2986.579486032138,
+            2952.815296047052,
+            2919.416124332075,
+            2886.1994617521527,
+            2853.530326577394
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            68.55029937728322,
+            67.77531738114551,
+            67.00871356874984,
+            66.24629884822518,
+            65.49645140331357
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9919.744818816946,
+            9807.5990847983,
+            9696.665737093366,
+            9586.338582545293,
+            9477.830007467792
+          ],
+          "annual_amounts_thousand": [
+            16030308,
+            16300230,
+            16571602,
+            16833611,
+            17088528
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3389.1253957736335,
+            3350.810301773504,
+            3312.909425005808,
+            3275.215656854329,
+            3238.143214551501
+          ],
+          "annual_amounts_thousand": [
+            986235,
+            1216344,
+            1444429,
+            1667085,
+            1887837
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2808.450570218928,
+            2776.5114715843874,
+            2745.11990035501,
+            2713.9108382606873,
+            2683.2493035715283
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            64.46174571117295,
+            63.72865463374539,
+            63.00813083193088,
+            62.29179612198738,
+            61.58802868765692
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9328.100297723977,
+            9222.016495273905,
+            9117.751272294407,
+            9014.092242471766,
+            8912.251792119698
+          ],
+          "annual_amounts_thousand": [
+            24868715,
+            25010109,
+            25155876,
+            25293543,
+            25426654
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3186.9873863459225,
+            3150.743378507962,
+            3115.120696518652,
+            3079.7051231455594,
+            3044.910875621117
+          ],
+          "annual_amounts_thousand": [
+            4273750,
+            4452000,
+            4629069,
+            4801260,
+            4972339
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2586.154443722525,
+            2556.770472978747,
+            2527.7515205050786,
+            2499.097586301519,
+            2470.808670368069
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            59.35943181227715,
+            58.68498802104379,
+            58.01892241355247,
+            57.36123498980317,
+            56.71192574979591
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            8589.757032671481,
+            8492.159934417416,
+            8395.775222477065,
+            8300.602896850429,
+            8206.64295753751
+          ],
+          "annual_amounts_thousand": [
+            26336195,
+            26427602,
+            26522254,
+            26611733,
+            26696210
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2934.729091793717,
+            2901.3846045827936,
+            2868.4543346043038,
+            2835.9382818582476,
+            2803.8364463446255
+          ],
+          "annual_amounts_thousand": [
+            5109363,
+            5260210,
+            5409905,
+            5555603,
+            5700199
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            1836.4069169185634,
+            1815.6008755223484,
+            1794.9773432611878,
+            1774.7188292701362,
+            1754.4603152790846
+          ],
+          "annual_amounts_thousand": [
+            5283343,
+            5238009,
+            5194664,
+            5150234,
+            5105480
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            42.150642406149096,
+            41.673085932853425,
+            41.199718551428774,
+            40.734729353746154,
+            40.26974015606353
+          ],
+          "annual_amounts_thousand": [
+            44595,
+            44465,
+            44331,
+            44197,
+            44055
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            6099.515544300666,
+            6030.409524418906,
+            5961.909697694003,
+            5894.622257282815,
+            5827.334816871627
+          ],
+          "annual_amounts_thousand": [
+            38829516,
+            38666986,
+            38507975,
+            38350412,
+            38186525
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2083.9268963746213,
+            2060.316514125893,
+            2036.913240493381,
+            2013.9241840933032,
+            1990.9351276932252
+          ],
+          "annual_amounts_thousand": [
+            10505075,
+            10534398,
+            10563432,
+            10591227,
+            10617657
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        }
+      ],
+      "missing_calculation_inputs": [],
+      "limitations": [
+        "정답과 같은 일부추계 범위 전체를 계산; 신규2자녀 첫째는 범위 밖이며 비용0 아님",
+        "대학유형별 대상집단 실제 분포 대신2024년 전국 재적학생 구성비 대리가정",
+        "지원방식·정책 동결은 명시한 시나리오이며 사용자 확인 필요",
+        "정답 확인 후 재계산이며 미열람 독립평가 아님"
+      ]
+    },
+    {
+      "bill_no": "2209533",
+      "evidence_mode": "development_review",
+      "status": "computed_review",
+      "policy_scenario": "third_child_schedule_extension",
+      "years": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "covered_cohorts": [
+        "new_two_child_second",
+        "existing_multichild_second"
+      ],
+      "covered_income_bands": [
+        "1-3",
+        "4-6",
+        "7-8",
+        "9"
+      ],
+      "annual_amounts_thousand": [
+        1033609252,
+        1039626808,
+        1045725282,
+        1051528395,
+        1057154304
+      ],
+      "total_thousand": 5227644041,
+      "gold_total_thousand": 7540391000,
+      "total_absolute_error_percent": 30.671446069573843,
+      "mix_evidence_key": "official:nabo:university_mix:2024:general_junior",
+      "university_shares": {
+        "public_general": 0.18250913505451832,
+        "public_junior": 0.004189091871014619,
+        "private_general": 0.6061931568575498,
+        "private_junior": 0.20710861621691723
+      },
+      "components": [
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            20782.497717793056,
+            20547.060933572728,
+            20314.17927724316,
+            20084.035257939413,
+            19856.44636652643
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            477.01608044430566,
+            471.61215193069677,
+            466.26687070328217,
+            460.9844258539327,
+            455.7606282907775
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            69027.82096452605,
+            68245.83179217982,
+            67472.32932402959,
+            66707.91975323221,
+            65951.99688663085
+          ],
+          "annual_amounts_thousand": [
+            118451741,
+            120249156,
+            122057444,
+            123809899,
+            125506650
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            23583.665237236582,
+            23316.49512231676,
+            23052.224528023973,
+            22791.06056297444,
+            22532.796118551945
+          ],
+          "annual_amounts_thousand": [
+            9221213,
+            10795537,
+            12355992,
+            13879756,
+            15389900
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            22956.18151629237,
+            22696.10599883968,
+            22438.950627547863,
+            22184.71540241692,
+            21933.400323446847
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            526.9081646280897,
+            520.9387087118939,
+            515.0362782656343,
+            509.20087328931095,
+            503.4324937829238
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            76247.58146269947,
+            75383.75621417747,
+            74529.63005616517,
+            73685.20298866261,
+            72850.47501166977
+          ],
+          "annual_amounts_thousand": [
+            252836980,
+            253440188,
+            254071509,
+            254656062,
+            255195214
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26050.328856380067,
+            25755.199078270958,
+            25463.383038021322,
+            25174.880735631155,
+            24889.69217110046
+          ],
+          "annual_amounts_thousand": [
+            51866205,
+            53132976,
+            54389786,
+            55611312,
+            56823167
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            23546.051040788574,
+            23279.405194473922,
+            23015.496985185087,
+            22754.691431192183,
+            22496.9885324952
+          ],
+          "annual_amounts_thousand": [
+            14763374,
+            14782422,
+            14821980,
+            14836059,
+            14848012
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            540.447309555209,
+            534.3270463316567,
+            528.2696194861695,
+            522.2834072024896,
+            516.368409480617
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            78206.79774566308,
+            77321.14954349419,
+            76444.59423867818,
+            75578.34421752873,
+            74722.39948004587
+          ],
+          "annual_amounts_thousand": [
+            321899180,
+            321810624,
+            321755297,
+            321661433,
+            321530485
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            26719.703903993144,
+            26417.118215700226,
+            26117.639156650563,
+            25821.68094407659,
+            25529.2435779783
+          ],
+          "annual_amounts_thousand": [
+            74574694,
+            75632209,
+            76681389,
+            77697438,
+            78706658
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            19318.77445465582,
+            19099.7634925904,
+            18883.490167550794,
+            18669.40695213184,
+            18457.878864603656
+          ],
+          "annual_amounts_thousand": [
+            19318774,
+            19099763,
+            18883490,
+            18669407,
+            18457879
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            443.4195636387684,
+            438.39265339355086,
+            433.42857952639855,
+            428.5147747616984,
+            423.65961728319246
+          ],
+          "annual_amounts_thousand": [
+            443420,
+            438393,
+            433429,
+            428515,
+            423660
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            64166.151846528504,
+            63438.72005829945,
+            62720.38116742325,
+            62009.31659442934,
+            61306.73872563145
+          ],
+          "annual_amounts_thousand": [
+            64166152,
+            63438720,
+            62720381,
+            62009317,
+            61306739
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "new_two_child_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            21922.654135176905,
+            21674.123795716605,
+            21428.700085499557,
+            21185.761678677114,
+            20945.72279248171
+          ],
+          "annual_amounts_thousand": [
+            21922654,
+            21674124,
+            21428700,
+            21185762,
+            20945723
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2986.579486032138,
+            2952.815296047052,
+            2919.416124332075,
+            2886.1994617521527,
+            2853.530326577394
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            68.55029937728322,
+            67.77531738114551,
+            67.00871356874984,
+            66.24629884822518,
+            65.49645140331357
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9919.744818816946,
+            9807.5990847983,
+            9696.665737093366,
+            9586.338582545293,
+            9477.830007467792
+          ],
+          "annual_amounts_thousand": [
+            16030308,
+            16300230,
+            16571602,
+            16833611,
+            17088528
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "1-3",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3389.1253957736335,
+            3350.810301773504,
+            3312.909425005808,
+            3275.215656854329,
+            3238.143214551501
+          ],
+          "annual_amounts_thousand": [
+            986235,
+            1216344,
+            1444429,
+            1667085,
+            1887837
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2808.450570218928,
+            2776.5114715843874,
+            2745.11990035501,
+            2713.9108382606873,
+            2683.2493035715283
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            64.46174571117295,
+            63.72865463374539,
+            63.00813083193088,
+            62.29179612198738,
+            61.58802868765692
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            9328.100297723977,
+            9222.016495273905,
+            9117.751272294407,
+            9014.092242471766,
+            8912.251792119698
+          ],
+          "annual_amounts_thousand": [
+            24868715,
+            25010109,
+            25155876,
+            25293543,
+            25426654
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "4-6",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            3186.9873863459225,
+            3150.743378507962,
+            3115.120696518652,
+            3079.7051231455594,
+            3044.910875621117
+          ],
+          "annual_amounts_thousand": [
+            4273750,
+            4452000,
+            4629069,
+            4801260,
+            4972339
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            2586.154443722525,
+            2556.770472978747,
+            2527.7515205050786,
+            2499.097586301519,
+            2470.808670368069
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            59.35943181227715,
+            58.68498802104379,
+            58.01892241355247,
+            57.36123498980317,
+            56.71192574979591
+          ],
+          "annual_amounts_thousand": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            8589.757032671481,
+            8492.159934417416,
+            8395.775222477065,
+            8300.602896850429,
+            8206.64295753751
+          ],
+          "annual_amounts_thousand": [
+            26336195,
+            26427602,
+            26522254,
+            26611733,
+            26696210
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "7-8",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2934.729091793717,
+            2901.3846045827936,
+            2868.4543346043038,
+            2835.9382818582476,
+            2803.8364463446255
+          ],
+          "annual_amounts_thousand": [
+            5109363,
+            5260210,
+            5409905,
+            5555603,
+            5700199
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_general",
+          "allocated_recipients": [
+            1836.4069169185634,
+            1815.6008755223484,
+            1794.9773432611878,
+            1774.7188292701362,
+            1754.4603152790846
+          ],
+          "annual_amounts_thousand": [
+            1193664,
+            1180141,
+            1166735,
+            1153567,
+            1140399
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "public_junior",
+          "allocated_recipients": [
+            42.150642406149096,
+            41.673085932853425,
+            41.199718551428774,
+            40.734729353746154,
+            40.26974015606353
+          ],
+          "annual_amounts_thousand": [
+            27398,
+            27088,
+            26780,
+            26478,
+            26175
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_general",
+          "allocated_recipients": [
+            6099.515544300666,
+            6030.409524418906,
+            5961.909697694003,
+            5894.622257282815,
+            5827.334816871627
+          ],
+          "annual_amounts_thousand": [
+            3964685,
+            3919766,
+            3875241,
+            3831504,
+            3787768
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        },
+        {
+          "cohort": "existing_multichild_second",
+          "income_band": "9",
+          "university_kind": "private_junior",
+          "allocated_recipients": [
+            2083.9268963746213,
+            2060.316514125893,
+            2036.913240493381,
+            2013.9241840933032,
+            1990.9351276932252
+          ],
+          "annual_amounts_thousand": [
+            1354552,
+            1339206,
+            1323994,
+            1309051,
+            1294108
+          ],
+          "source_refs": [
+            "2209533 첨부25C2051 소득·편입/기존 인원 전망표; 국회예산정책처 지방대학 육성정책 평가(2025-08-21), PDF p.35~36/본문 p.14~15, 교육부 자료",
+            "2209533 첨부25C2051 대학유형별 등록금 전망표; https://www.kosaf.go.kr/ko/info.do?mode=view&pg=press01_02&seqNo=18747"
+          ]
+        }
+      ],
+      "missing_calculation_inputs": [],
+      "limitations": [
+        "정답과 같은 일부추계 범위 전체를 계산; 신규2자녀 첫째는 범위 밖이며 비용0 아님",
+        "대학유형별 대상집단 실제 분포 대신2024년 전국 재적학생 구성비 대리가정",
+        "지원방식·정책 동결은 명시한 시나리오이며 사용자 확인 필요",
+        "정답 확인 후 재계산이며 미열람 독립평가 아님"
+      ]
+    }
+  ]
+}

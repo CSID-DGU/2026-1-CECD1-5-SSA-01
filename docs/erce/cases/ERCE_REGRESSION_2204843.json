@@ -1,0 +1,133 @@
+{
+  "bill_no": "2204843",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "table_payload": {
+    "bill_no": "2204843",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-08",
+    "payer": "government",
+    "route_key": "transfer_recipient_delta",
+    "support_derivation": "jobseeker_livelihood_previous_year",
+    "start_year": 2026,
+    "years": 5,
+    "livelihood_floor_base_year": 2025,
+    "jobseeker_cohort": "recognized_I_type",
+    "livelihood_floor_projection": "historic_cagr_2019_2023",
+    "support_derivation_note": "정답확인후I유형인정인원평균·IAP·실지급개월·전년도생계급여시차 연결",
+    "payment_scope_note": "2022~2023평균인정인원224228명×IAP98%,평균5.2개월.법정서비스2년과구분",
+    "floor_projection_note": "2025생계최저액765444원을공식확인,2019~2023기준액으로CAGR파생;미래값은가정",
+    "estimation_start_note": "정답의2026~2030가정확인.공포날시행이2026을확정하지는않음",
+    "explicit_inputs": {
+      "existing_benefit_per_recipient": {
+        "value": 500000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문PDF1쪽당시월50만원"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207706:recognized_jobseekers:reviewed",
+      "2207706:iap_completion_rate:reviewed",
+      "2207706:average_payment_months:reviewed",
+      "2207706:livelihood_floor_history:reviewed",
+      "official:mohw:livelihood_floor:2025:single"
+    ],
+    "evidence_selection_reasons": {
+      "2207706:recognized_jobseekers:reviewed": "해당시점·인정I유형·시차/지급범위검토후사후준용",
+      "2207706:iap_completion_rate:reviewed": "해당시점·인정I유형·시차/지급범위검토후사후준용",
+      "2207706:average_payment_months:reviewed": "해당시점·인정I유형·시차/지급범위검토후사후준용",
+      "2207706:livelihood_floor_history:reviewed": "해당시점·인정I유형·시차/지급범위검토후사후준용",
+      "official:mohw:livelihood_floor:2025:single": "해당시점·인정I유형·시차/지급범위검토후사후준용"
+    },
+    "selected_method_keys": [
+      "2207706:jobseeker_livelihood_previous_year"
+    ],
+    "method_selection_reasons": {
+      "2207706:jobseeker_livelihood_previous_year": "전년도생계최저액연동 구직수당"
+    },
+    "method_confirmations": {
+      "2207706:jobseeker_livelihood_previous_year": {
+        "payment_scope_note": "실지급평균5.2개월·참여동결",
+        "floor_projection_note": "2025공식기준·과거CAGR전망가정",
+        "estimation_start_note": "법안심사기간고려2026시작가정"
+      }
+    },
+    "historical_table_year_offset": 1,
+    "source_year_discrepancy_note": "원문·설명은전년도이나정답2026단가표는2025기준액에1년추세를반영한값과일치.법정해석변경없이표재현모드에서만1년이동"
+  },
+  "table_result": {
+    "route_key": "transfer_recipient_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "evidence_key": "2207706:recognized_jobseekers:reviewed,2207706:iap_completion_rate:reviewed,2207706:average_payment_months:reviewed,2207706:livelihood_floor_history:reviewed,official:mohw:livelihood_floor:2025:single",
+    "annual_amounts_thousand": [
+      347379701,
+      393665698,
+      442283646,
+      493351033,
+      546991265
+    ],
+    "source_refs": [
+      "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+      "원문PDF1쪽당시월50만원",
+      "2207706 비용추계서25B0462 PDF4~6쪽"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": 219743.44,
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          804008.113290848,
+          844515.1392361936,
+          887062.964426986,
+          931754.4071142076,
+          978697.4656726379
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 500000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF1쪽당시월50만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 5.2,
+        "unit": "month/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207706 비용추계서25B0462 PDF4~6쪽 표2~3;고용노동부실적·복지부고시인용; 국가법령정보센터:보건복지부2025-07-09 기초생활수급 선정기준 및 급여중지 기준 해석",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2207706:jobseeker_livelihood_previous_year"
+    ]
+  },
+  "annual_eok": [
+    3473.79701,
+    3936.65698,
+    4422.83646,
+    4933.51033,
+    5469.91265
+  ],
+  "total_eok": 22236.71343,
+  "gold_total_eok": 22237,
+  "error_percent": 0.0012887080091748468,
+  "statutory_previous_year_eok": 19799.93882,
+  "limitation": "정답표재현과법정전년도시나리오구분.미해결시차를다른의안/일반웹에자동전용하지않음.첫결과유지"
+}

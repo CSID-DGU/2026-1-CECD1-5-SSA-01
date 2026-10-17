@@ -252,6 +252,21 @@ def _human_input_prompt(item_name: str, variable: str, unit: str | None) -> str:
     return f"{item_name} 계산에 필요한 ‘{variable}’ 값을 입력해 주세요.{suffix}"
 
 
+def _human_input_candidate_keys(variable: str) -> set[str]:
+    compact = _compact_korean(variable)
+    patterns = (
+        (r"회의횟수|개최횟수", "committee_meeting_count"),
+        (r"수당지급대상|민간위원|참석인원", "committee_paid_member_count"),
+        (r"회의수당|참석수당", "committee_allowance_unit"),
+        (r"소요인력|증원|순증|정원", "staffing_count"),
+        (r"직급별보수|평균보수|연봉", "grade_salary"),
+        (r"기관부담", "employer_contribution_rate"),
+        (r"기본경비비율|기본경비비중", "basic_expense_ratio"),
+        (r"자산취득|비품단가", "asset_acquisition_unit_cost"),
+    )
+    return {key for pattern, key in patterns if re.search(pattern, compact)}
+
+
 def _build_human_input_requests(estimate: dict[str, Any] | None) -> dict[str, Any] | None:
     if not estimate:
         return None
@@ -275,14 +290,16 @@ def _build_human_input_requests(estimate: dict[str, Any] | None) -> dict[str, An
             unit = str(strategy.get("unit") or "")
             candidates = []
             variable_compact = _compact_korean(variable)
+            matching_keys = _human_input_candidate_keys(variable)
             for candidate in item.get("assumption_candidates") or []:
                 candidate_text = _compact_korean(" ".join(
                     str(candidate.get(key) or "")
                     for key in ("label", "variable_name", "source_text")
                 ))
-                if variable_compact and (
+                same_variable = bool(candidate_text and variable_compact and len(variable_compact) >= 3 and (
                     variable_compact in candidate_text or candidate_text in variable_compact
-                ):
+                ))
+                if same_variable or candidate.get("assumption_key") in matching_keys:
                     candidates.append(candidate)
             requests.append({
                 "id": f"item-{item_index}-{len(requests)}",

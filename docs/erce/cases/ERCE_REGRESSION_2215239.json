@@ -1,0 +1,203 @@
+{
+  "bill_no": "2215239",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "committee_payload": {
+    "bill_no": "2215239",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-08",
+    "route_key": "committee_components",
+    "support_derivation": "central_social_policy_committee",
+    "payer": "government",
+    "start_year": 2027,
+    "years": 5,
+    "committee_role_profile": "central_social_policy_deliberation",
+    "meeting_mode": "face_to_face",
+    "exclude_duty_public_officials": true,
+    "support_derivation_note": "정답확인후중앙정책위원회운영과법안구성조건분리",
+    "committee_scale_note": "법정16~26중최소16명시나리오.무급차관위원장1명·5유형각3명·공무원1유형제외,유급12명",
+    "meeting_frequency_note": "분기별1회연4회선례가정확인,법정고정횟수아님",
+    "committee_payment_note": "대면20만원·서면10만원사회보장위원회사례.사전자료준비포함,공식일당상한과구분",
+    "explicit_inputs": {
+      "committee_total_members": {
+        "value": 16,
+        "unit": "person",
+        "source_ref": "원문제4조의3구성규칙과최소정원참고시나리오"
+      },
+      "unpaid_chair_count": {
+        "value": 1,
+        "unit": "person",
+        "source_ref": "원문제4조의3구성규칙과최소정원참고시나리오"
+      },
+      "equal_member_categories": {
+        "value": 5,
+        "unit": "category",
+        "source_ref": "원문제4조의3구성규칙과최소정원참고시나리오"
+      },
+      "paid_member_categories": {
+        "value": 4,
+        "unit": "category",
+        "source_ref": "원문제4조의3구성규칙과최소정원참고시나리오"
+      }
+    },
+    "selected_evidence_keys": [
+      "2215239:central_committee:annual_meetings",
+      "2215239:central_committee:meeting_price:face_to_face"
+    ],
+    "evidence_selection_reasons": {
+      "2215239:central_committee:annual_meetings": "동일중앙심의역할·빈도·회의형태검토후사후준용",
+      "2215239:central_committee:meeting_price:face_to_face": "동일중앙심의역할·빈도·회의형태검토후사후준용"
+    },
+    "selected_method_keys": [
+      "2215239:central_social_committee"
+    ],
+    "method_selection_reasons": {
+      "2215239:central_social_committee": "지역실무위원회아닌중앙정책본회의"
+    },
+    "method_confirmations": {
+      "2215239:central_social_committee": {
+        "committee_scale_note": "법정16~26중최소16명시나리오.무급차관위원장1명·5유형각3명·공무원1유형제외,유급12명",
+        "meeting_frequency_note": "분기별1회연4회선례가정확인,법정고정횟수아님",
+        "committee_payment_note": "대면20만원·서면10만원사회보장위원회사례.사전자료준비포함,공식일당상한과구분"
+      }
+    }
+  },
+  "committee_result": {
+    "route_key": "committee_components",
+    "subtype": "",
+    "formula_key": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "evidence_key": "2215239:central_committee:annual_meetings,2215239:central_committee:meeting_price:face_to_face",
+    "annual_amounts_thousand": [
+      9600,
+      9600,
+      9600,
+      9600,
+      9600
+    ],
+    "source_refs": [
+      "원문제4조의3구성규칙과최소정원참고시나리오; 2215239 비용추계서25C6927 PDF3~5쪽;사회보장위원회운영사례",
+      "2215239 비용추계서25C6927 PDF4~5쪽"
+    ],
+    "resolved_variables": {
+      "committee_components": {
+        "key": "committee_components",
+        "value": [
+          {
+            "paid_members": 12,
+            "annual_meetings": 4,
+            "meeting_unit_price": 200000
+          }
+        ],
+        "unit": "component_bundle",
+        "source_class": "calculated_estimate",
+        "source_ref": "원문제4조의3구성규칙과최소정원참고시나리오; 2215239 비용추계서25C6927 PDF3~5쪽;사회보장위원회운영사례",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2215239:central_social_committee"
+    ]
+  },
+  "committee_trace": [
+    {
+      "total_members": 16,
+      "unpaid_chairs": 1,
+      "category_count": 5,
+      "paid_categories": 4,
+      "paid_members": 12,
+      "annual_meetings": 4,
+      "meeting_price": 200000,
+      "meeting_mode": "face_to_face",
+      "expression": "(전체위원−무급위원장)/동수범주수×유급범주수×연회의×유형별수당;부위원장중복가산없음"
+    }
+  ],
+  "plan_payload": {
+    "bill_no": "2215239",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-08",
+    "route_key": "research_plan",
+    "payer": "government",
+    "agency": "보건복지부",
+    "policy_domain": "장애인활동지원",
+    "start_year": 2027,
+    "years": 5,
+    "research_service_function": "activity_support_governance_plan",
+    "research_cost_scope": "research_contract_only",
+    "selected_evidence_keys": [
+      "2215239:governance_plan:plan_unit_cost",
+      "2215239:governance_plan:recurrence_interval_years"
+    ],
+    "evidence_selection_reasons": {
+      "2215239:governance_plan:plan_unit_cost": "2022당사자관계·고도화연구과업선택.2018신규서비스개발과구분",
+      "2215239:governance_plan:recurrence_interval_years": "2022당사자관계·고도화연구과업선택.2018신규서비스개발과구분"
+    },
+    "selected_method_keys": [
+      "2215239:governance_plan_research"
+    ],
+    "method_selection_reasons": {
+      "2215239:governance_plan_research": "관계기반사업고도화과업범위"
+    },
+    "method_confirmations": {
+      "2215239:governance_plan_research": {
+        "research_task_scope_note": "2022관계기반발전방안연구8900만원참조",
+        "price_freeze_note": "9000만원준용동결",
+        "recurrence_phase_note": "5년계획2027첫해사례"
+      }
+    }
+  },
+  "plan_result": {
+    "route_key": "research_plan",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "evidence_key": "2215239:governance_plan:plan_unit_cost,2215239:governance_plan:recurrence_interval_years",
+    "annual_amounts_thousand": [
+      90000,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source_refs": [
+      "2215239 비용추계서25C6927 PDF3쪽;2022장애인활동지원서비스고도화연구8900만원준용",
+      "2215239 비용추계서25C6927 PDF3쪽"
+    ],
+    "resolved_variables": {
+      "plan_unit_cost": {
+        "key": "plan_unit_cost",
+        "value": 90000000,
+        "unit": "KRW/plan",
+        "source_class": "precedent_assumption",
+        "source_ref": "2215239 비용추계서25C6927 PDF3쪽;2022장애인활동지원서비스고도화연구8900만원준용",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 5,
+        "unit": "year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2215239 비용추계서25C6927 PDF3쪽;2022장애인활동지원서비스고도화연구8900만원준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2215239:governance_plan_research"
+    ]
+  },
+  "reusable_web_status": "computed_review",
+  "annual_thousand": [
+    99600,
+    9600,
+    9600,
+    9600,
+    9600
+  ],
+  "total_thousand": 138000,
+  "gold_total_thousand": 138000,
+  "error_percent": 0,
+  "local_plan_cost": null,
+  "limitation": "계획+본회의수당의정답범위회귀.지방계획/실무위등추가범위미검증,새의안독립성과아님"
+}

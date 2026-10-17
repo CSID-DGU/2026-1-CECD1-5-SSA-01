@@ -1,0 +1,121 @@
+{
+  "bill_no": "2203688",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2203688",
+    "bill_name": "장애인 건강권 및 의료접근성 보장에 관한 법률 일부개정법률안",
+    "propose_date": "2024-09-05",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제9조의2제1항·제2항",
+        "source_page": 3,
+        "source_quote": "한국수어통역사를배치하고문자통역을제공하는등",
+        "route_key": "transfer_subsidy_rate",
+        "route_reason": "상급종합병원 의무와 기타종합병원 노력의무 구분. 통역사 인건비·문자통역 체계비는 병원 자체 부담과 지원 여부를 구분하며 전액 국비로 단정하지 않음.",
+        "change_summary": "상급종합병원 의무와 기타종합병원 노력의무 구분. 통역사 인건비·문자통역 체계비는 병원 자체 부담과 지원 여부를 구분하며 전액 국비로 단정하지 않음.",
+        "decision_reason": "상급종합병원 의무와 기타종합병원 노력의무 구분. 통역사 인건비·문자통역 체계비는 병원 자체 부담과 지원 여부를 구분하며 전액 국비로 단정하지 않음.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "variables": []
+      },
+      {
+        "article_ref": "제22조제1항제9호",
+        "source_page": 3,
+        "source_quote": "종합병원의의사소통지원체계마련에소요되는비용",
+        "route_key": "transfer_subsidy_rate",
+        "route_reason": "정부가 병원 의사소통지원 체계비 전부 또는 일부를 지원할 수 있음. 지원 병원·배치인원·인건비·운영비·정부지원비율에 근거 필요.",
+        "change_summary": "정부가 병원 의사소통지원 체계비 전부 또는 일부를 지원할 수 있음. 지원 병원·배치인원·인건비·운영비·정부지원비율에 근거 필요.",
+        "decision_reason": "정부가 병원 의사소통지원 체계비 전부 또는 일부를 지원할 수 있음. 지원 병원·배치인원·인건비·운영비·정부지원비율에 근거 필요.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "variables": []
+      },
+      {
+        "article_ref": "제28조제1항제1호",
+        "source_page": 4,
+        "source_quote": "제9조의2제1항을위반하여의사소통지원체계를마련하지아니한자",
+        "route_key": "direct_annual_amount",
+        "route_reason": "신설 위반유형 과태료 수입 별도. 최대500만원은 실제 부과단가가 아니며 위반인원·적발·부과율 미확정. 지원비와 상계하지 않음.",
+        "change_summary": "신설 위반유형 과태료 수입 별도. 최대500만원은 실제 부과단가가 아니며 위반인원·적발·부과율 미확정. 지원비와 상계하지 않음.",
+        "decision_reason": "신설 위반유형 과태료 수입 별도. 최대500만원은 실제 부과단가가 아니며 위반인원·적발·부과율 미확정. 지원비와 상계하지 않음.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제9조의2제1항·제2항",
+      "verified": true
+    },
+    {
+      "article": "제22조제1항제9호",
+      "verified": true
+    },
+    {
+      "article": "제28조제1항제1호",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2203688",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "transfer_subsidy_rate",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "transfer_subsidy_rate",
+    "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+    "formula": "적격 사업비 × 보조율",
+    "missingVariables": [
+      "project_cost",
+      "subsidy_rate"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "project_cost": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "subsidy_rate": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "method_candidate_count": 0,
+  "missing_semantic_variables": [
+    "지원대상 병원수·배치 통역인원",
+    "수어통역사 인건비·문자통역 운영비·정부지원비율",
+    "과태료 부과대상수·실제단가"
+  ],
+  "rejected_basis": [
+    "공무원보수표를 병원 수어통역사 임금으로 자동 치환하지 않음",
+    "과태료 상한500만원을 발생수입으로 자동 계산하지 않음"
+  ],
+  "pending_review": [
+    "병원 자체비용과 정부 지원금을 분리",
+    "구체체계·지원비율 위임으로 미추계 가능성은 있지만 DB없다는 이유만으로 공식미추계 확정하지 않음"
+  ],
+  "estimate_start_note": "공포후1년·심사준비를 고려한2026~2030 후보"
+}

@@ -1,0 +1,515 @@
+{
+  "bill_no": "2211669",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "required_variables_filled": 5,
+  "required_variable_count": 5,
+  "gold_total_thousand": 30100000000,
+  "runs": [
+    {
+      "model": "ols_2021_2024",
+      "payload": {
+        "bill_no": "2211669",
+        "route_key": "transfer_population_amount_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "phased_couple_pension",
+        "pension_standard_vintage": "2025_03_reviewed_forecast",
+        "pension_trend_model": "ols_2021_2024",
+        "couple_recovery_model": "standard_amount_proxy",
+        "support_derivation_note": "원문75%확대·2026~2030부부감액10·5·0·0·0% 일정.단독수급과부부1인에부부감액적용금지",
+        "pension_trend_note": "공식2021~2024관측비율의명시적OLS또는동결후보.정답의구체추세방식은미확인",
+        "couple_recovery_note": "기준액×부부수급비율×감액률회복의후보.국민연금연계·소득역전감액으로제한되는실제차액은아직미확인",
+        "selected_evidence_keys": [
+          "mohw_pension_2024:recipient_history:2021-2024:phased",
+          "2211669:standard_monthly:2026-2030:202503"
+        ],
+        "evidence_selection_reasons": {
+          "mohw_pension_2024:recipient_history:2021-2024:phased": "동일연령·급여사업의관측이력및동일추계기간전망버전 재사용",
+          "2211669:standard_monthly:2026-2030:202503": "동일연령·급여사업의관측이력및동일추계기간전망버전 재사용"
+        },
+        "explicit_inputs": {
+          "new_eligibility_share": {
+            "value": 0.75,
+            "unit": "ratio",
+            "source_ref": "원문제3조75%"
+          },
+          "old_eligibility_share": {
+            "value": 0.7,
+            "unit": "ratio",
+            "source_ref": "현행제3조70%"
+          },
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "원문신구대비표현행20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.1,
+              0.05,
+              0,
+              0,
+              0
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2026년10%·2027년5%이후폐지"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "2026-01-01시행·월급여"
+          }
+        }
+      },
+      "result": {
+        "route_key": "transfer_population_amount_delta",
+        "subtype": "",
+        "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "evidence_key": "mohw_pension_2024:recipient_history:2021-2024:phased,2211669:standard_monthly:2026-2030:202503",
+        "annual_amounts_thousand": [
+          3429245915,
+          4411393942,
+          5518810154,
+          5779807621,
+          6076078078
+        ],
+        "source_refs": [
+          "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+          "2026-01-01시행·월급여"
+        ],
+        "resolved_variables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              7996600.623611837,
+              8266713.933310045,
+              8570941.7465692,
+              8776130.823984869,
+              9020322.396368673
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              7463493.915371047,
+              7715599.671089374,
+              7999545.630131252,
+              8191055.435719211,
+              8418967.569944093
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              318288.7345547311,
+              331386.3189401793,
+              345001.5512741466,
+              350713.79267285817,
+              356517.24541472114
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              302734.54040308564,
+              307410.93879063305,
+              312153.64818241046,
+              316962.75425343006,
+              321840.0155577524
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "2026-01-01시행·월급여",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      },
+      "total_thousand": 25215335710,
+      "difference_percent": 16.228120564784053,
+      "derivation_trace": [
+        {
+          "variable_key": "new_recipient_count",
+          "values": [
+            7996600.623611837,
+            8266713.933310045,
+            8570941.7465692,
+            8776130.823984869,
+            9020322.396368673
+          ],
+          "unit": "person",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "existing_recipient_count",
+          "values": [
+            7463493.915371047,
+            7715599.671089374,
+            7999545.630131252,
+            8191055.435719211,
+            8418967.569944093
+          ],
+          "unit": "person",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "benefit_per_recipient",
+          "values": [
+            318288.7345547311,
+            331386.3189401793,
+            345001.5512741466,
+            350713.79267285817,
+            356517.24541472114
+          ],
+          "unit": "KRW/person/month",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "existing_benefit_per_recipient",
+          "values": [
+            302734.54040308564,
+            307410.93879063305,
+            312153.64818241046,
+            316962.75425343006,
+            321840.0155577524
+          ],
+          "unit": "KRW/person/month",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "trend_model": "ols_2021_2024",
+          "historical_take_up": [
+            0.995691464051234,
+            0.9923657261760372,
+            0.9853904375777207,
+            0.971498603984654
+          ],
+          "historical_couple_share": [
+            0.42941045785752324,
+            0.4318771019673982,
+            0.4355971062171222,
+            0.4392491988221624
+          ],
+          "historical_payment_ratio": [
+            0.8852366666666667,
+            0.8840715447154471,
+            0.881255028157683,
+            0.8732714076640483
+          ],
+          "projected_take_up": [
+            0.9583927038680917,
+            0.9504373169882862,
+            0.9424819301084805,
+            0.9345265432286749,
+            0.9265711563488692
+          ],
+          "projected_couple_share": [
+            0.44566614571632607,
+            0.4489897684306902,
+            0.45231339114505437,
+            0.4556370138594185,
+            0.45896063657378267
+          ],
+          "projected_current_payment_ratio": [
+            0.8674093590529945,
+            0.8635381296964326,
+            0.8596669003398707,
+            0.8557956709833088,
+            0.8519244416267469
+          ],
+          "reduction_schedule": [
+            0.1,
+            0.05,
+            0,
+            0,
+            0
+          ],
+          "limitation": "기준액차액회복후보.유형별NR·소득역전감액교차정보미재현"
+        }
+      ],
+      "synthetic_web_status": "computed_review"
+    },
+    {
+      "model": "freeze_2021_2024",
+      "payload": {
+        "bill_no": "2211669",
+        "route_key": "transfer_population_amount_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "phased_couple_pension",
+        "pension_standard_vintage": "2025_03_reviewed_forecast",
+        "pension_trend_model": "freeze_2021_2024",
+        "couple_recovery_model": "standard_amount_proxy",
+        "support_derivation_note": "원문75%확대·2026~2030부부감액10·5·0·0·0% 일정.단독수급과부부1인에부부감액적용금지",
+        "pension_trend_note": "공식2021~2024관측비율의명시적OLS또는동결후보.정답의구체추세방식은미확인",
+        "couple_recovery_note": "기준액×부부수급비율×감액률회복의후보.국민연금연계·소득역전감액으로제한되는실제차액은아직미확인",
+        "selected_evidence_keys": [
+          "mohw_pension_2024:recipient_history:2021-2024:phased",
+          "2211669:standard_monthly:2026-2030:202503"
+        ],
+        "evidence_selection_reasons": {
+          "mohw_pension_2024:recipient_history:2021-2024:phased": "동일연령·급여사업의관측이력및동일추계기간전망버전 재사용",
+          "2211669:standard_monthly:2026-2030:202503": "동일연령·급여사업의관측이력및동일추계기간전망버전 재사용"
+        },
+        "explicit_inputs": {
+          "new_eligibility_share": {
+            "value": 0.75,
+            "unit": "ratio",
+            "source_ref": "원문제3조75%"
+          },
+          "old_eligibility_share": {
+            "value": 0.7,
+            "unit": "ratio",
+            "source_ref": "현행제3조70%"
+          },
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "원문신구대비표현행20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.1,
+              0.05,
+              0,
+              0,
+              0
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2026년10%·2027년5%이후폐지"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "2026-01-01시행·월급여"
+          }
+        }
+      },
+      "result": {
+        "route_key": "transfer_population_amount_delta",
+        "subtype": "",
+        "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "evidence_key": "mohw_pension_2024:recipient_history:2021-2024:phased,2211669:standard_monthly:2026-2030:202503",
+        "annual_amounts_thousand": [
+          3519914704,
+          4537901603,
+          5687616294,
+          5990818516,
+          6334594433
+        ],
+        "source_refs": [
+          "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+          "2026-01-01시행·월급여"
+        ],
+        "resolved_variables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              8228923.11521241,
+              8578088.580274135,
+              8968846.846253317,
+              9261739.1326734,
+              9601174.880972695
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              7680328.240864915,
+              8006216.008255859,
+              8370923.723169761,
+              8644289.857161839,
+              8961096.555574514
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              322611.58455955994,
+              336789.210060262,
+              351405.2780700892,
+              358433.1900784199,
+              365602.3958285872
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              307463.3825551535,
+              313612.4740145242,
+              319884.89968654705,
+              326282.4214885456,
+              332808.56325516716
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "2026-01-01시행·월급여",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      },
+      "total_thousand": 26070845550,
+      "difference_percent": 13.385895182724253,
+      "derivation_trace": [
+        {
+          "variable_key": "new_recipient_count",
+          "values": [
+            8228923.11521241,
+            8578088.580274135,
+            8968846.846253317,
+            9261739.1326734,
+            9601174.880972695
+          ],
+          "unit": "person",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "existing_recipient_count",
+          "values": [
+            7680328.240864915,
+            8006216.008255859,
+            8370923.723169761,
+            8644289.857161839,
+            8961096.555574514
+          ],
+          "unit": "person",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "benefit_per_recipient",
+          "values": [
+            322611.58455955994,
+            336789.210060262,
+            351405.2780700892,
+            358433.1900784199,
+            365602.3958285872
+          ],
+          "unit": "KRW/person/month",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "variable_key": "existing_benefit_per_recipient",
+          "values": [
+            307463.3825551535,
+            313612.4740145242,
+            319884.89968654705,
+            326282.4214885456,
+            332808.56325516716
+          ],
+          "unit": "KRW/person/month",
+          "applied": true,
+          "source_ref": "보건복지부 통계로본2024년기초연금 PDF11·12·42쪽;통계청2023.12연앙인구; 2211669 비용추계서25C3952 PDF4쪽표3:2025기준342510원+2025.3물가전망; 원문부칙2026년10%·2027년5%이후폐지; 원문신구대비표현행20%; 원문제3조75%; 현행제3조70%;KOSIS2023.12"
+        },
+        {
+          "trend_model": "freeze_2021_2024",
+          "historical_take_up": [
+            0.995691464051234,
+            0.9923657261760372,
+            0.9853904375777207,
+            0.971498603984654
+          ],
+          "historical_couple_share": [
+            0.42941045785752324,
+            0.4318771019673982,
+            0.4355971062171222,
+            0.4392491988221624
+          ],
+          "historical_payment_ratio": [
+            0.8852366666666667,
+            0.8840715447154471,
+            0.881255028157683,
+            0.8732714076640483
+          ],
+          "projected_take_up": [
+            0.9862365579474115,
+            0.9862365579474115,
+            0.9862365579474115,
+            0.9862365579474115,
+            0.9862365579474115
+          ],
+          "projected_couple_share": [
+            0.43403346621605154,
+            0.43403346621605154,
+            0.43403346621605154,
+            0.43403346621605154,
+            0.43403346621605154
+          ],
+          "projected_current_payment_ratio": [
+            0.8809586618009613,
+            0.8809586618009613,
+            0.8809586618009613,
+            0.8809586618009613,
+            0.8809586618009613
+          ],
+          "reduction_schedule": [
+            0.1,
+            0.05,
+            0,
+            0,
+            0
+          ],
+          "limitation": "기준액차액회복후보.유형별NR·소득역전감액교차정보미재현"
+        }
+      ],
+      "synthetic_web_status": "computed_review"
+    }
+  ],
+  "unresolved": "정답의유형별감액·실제회복액교차정보와정확한추세모형미재현.정답예측기준액및2024실적보강만으로정확한순증을보장하지않음.결과에맞춰모형선택/계수조정하지않음"
+}

@@ -167,11 +167,15 @@ def test_pdf_upload_defaults_to_manual_even_with_an_api_key():
 
 
 def test_gpt_pdf_adapter_uses_requested_model_without_live_call():
+    document = fitz.open()
+    document.new_page().insert_text((50, 50), "Test bill")
+    content = base64.b64encode(document.tobytes()).decode()
+    document.close()
     draft = {"bill_name": "Test", "document_type": "enactment", "bill_no": "", "articles": []}
     response = {"output": [{"type": "message", "content": [{"type": "output_text", "text": json.dumps(draft)}]}]}
     with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}):
         with patch("backend.erce.ai_pdf_analysis.request.urlopen", return_value=io.BytesIO(json.dumps(response).encode())) as mocked:
-            assert _openai_draft("test.pdf", base64.b64encode(b"pdf").decode()) == draft
+            assert _openai_draft("test.pdf", content) == draft
     sent = json.loads(mocked.call_args.args[0].data)
     assert sent["model"] == "gpt-6.1-sol"
     assert sent["reasoning"]["effort"] == "medium"

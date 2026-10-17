@@ -1,0 +1,32 @@
+{
+  "bill_no": "2204385",
+  "run_date": "2026-10-03",
+  "evaluation_type": "post_answer_partial_regression",
+  "independent_accuracy_test": false,
+  "ai_mode": "manual_development_no_api",
+  "route_key": "new_borrowing_interest_support",
+  "formula_key": "NEW_BORROWING_INTEREST_SUPPORT_V1",
+  "start_year": 2025,
+  "years": 1,
+  "selected_evidence_keys": [
+    "2204385:new_borrowing_2025",
+    "2204385:average_balance_factor",
+    "2204385:government_interest_support_share",
+    "2204385:new_issue_rate_2025"
+  ],
+  "annual_amounts_thousand": [15672],
+  "gold_amounts_thousand": [16000],
+  "error_percent_against_rounded_gold": 2.05,
+  "rounding_note": "정답 표는 백만원 단위. 엔진 결과를 백만원으로 반올림하면16백만원으로 일치",
+  "five_year_status": "needs_input",
+  "five_year_required_variables_available": "3/4",
+  "five_year_missing_variables": ["borrowing_interest_rate"],
+  "upstream_missing": ["2024 연체 의무상환액 및 신규 감소분 전망의 정확한 기초", "2026~2029 연도별 국고채 전망금리"],
+  "reinforcement": {"variable_rows_added": 13, "total_variable_rows": 303, "erce_unittests_passed": 112},
+  "limitations": [
+    "원문부터5년 전체까지 자동 추계 성공이 아님",
+    "정답 확인 후 차입액·가정 입력으로 수행한 부분 회귀",
+    "당해 신규발행 이자 지원만 계산하며 기존 차입 누적 이자·원금은 별도 범위",
+    "원래 정답 미열람 첫 실행은 산식 선택0/1·금액 미계산으로 유지"
+  ]
+}

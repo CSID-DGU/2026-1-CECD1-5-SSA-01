@@ -1,0 +1,324 @@
+{
+  "bill_no": "2203688",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "replay_payload": {
+    "bill_no": "2203688",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "hospital_communication_support",
+    "support_derivation": "hospital_communication_support_package",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "medical_unit_basis": "reviewed_monthly_replay",
+    "communication_scenario_confirmed": true,
+    "fiscal_scope": "national_and_local_combined",
+    "communication_package_phase": "full_year_following_year",
+    "communication_price_policy": "freeze_reference",
+    "disputed_monthly_replay_confirmed": true,
+    "communication_source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시.",
+    "communication_scope_note": "상급종합병원 지원, 수어통역사1명·코디네이터2명 패키지. 일반병원 노력의무와 별도.",
+    "communication_overlap_note": "2024상급47개 중 기존 지역센터지원10개 제외→추가37개 동결 참고 가정. 새의안은 지정·겹침 갱신 필요.",
+    "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+    "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오.",
+    "selected_evidence_keys": [
+      "2203688:tertiary_hospital_count:reviewed",
+      "2203688:already_supported_hospital_count:reviewed",
+      "2203688:communication_staff_per_hospital:reviewed",
+      "2203688:communication_payment_months:reviewed",
+      "2203688:communication_staff_monthly_reference:target_only",
+      "2203688:communication_operation_monthly_reference:target_only",
+      "2203688:nominal_wage_rates:20241011"
+    ],
+    "evidence_selection_reasons": {
+      "2203688:tertiary_hospital_count:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:already_supported_hospital_count:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_staff_per_hospital:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_payment_months:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_staff_monthly_reference:target_only": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_operation_monthly_reference:target_only": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:nominal_wage_rates:20241011": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토"
+    },
+    "selected_method_keys": [
+      "2203688:communication:reviewed_monthly_replay"
+    ],
+    "method_selection_reasons": {
+      "2203688:communication:reviewed_monthly_replay": "공식연간패키지와 월단가재현을 분리해 선택"
+    },
+    "method_confirmations": {
+      "2203688:communication:reviewed_monthly_replay": {
+        "communication_scope_note": "상급종합병원 지원, 수어통역사1명·코디네이터2명 패키지. 일반병원 노력의무와 별도.",
+        "communication_overlap_note": "2024상급47개 중 기존 지역센터지원10개 제외→추가37개 동결 참고 가정. 새의안은 지정·겹침 갱신 필요.",
+        "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+        "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오."
+      }
+    }
+  },
+  "replay_result": {
+    "route_key": "hospital_communication_support",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2203688:tertiary_hospital_count:reviewed,2203688:already_supported_hospital_count:reviewed,2203688:communication_staff_per_hospital:reviewed,2203688:communication_payment_months:reviewed,2203688:communication_staff_monthly_reference:target_only,2203688:communication_operation_monthly_reference:target_only,2203688:nominal_wage_rates:20241011",
+    "annual_amounts_thousand": [
+      84581072,
+      87076405,
+      89666562,
+      92355144,
+      95145892
+    ],
+    "source_refs": [
+      "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용; 2203688 비용추계서PDF4쪽 각주2, NABO2024.10.11 명목임금전망",
+      "24C3571 PDF3~4쪽; 서울시제332회 업무보고PDF39쪽, 단위불일치 시나리오 구분"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          84581071862.4,
+          87076405393.1712,
+          89666561598.11171,
+          92355143738.83995,
+          95145892000.91586
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용; 2203688 비용추계서PDF4쪽 각주2, NABO2024.10.11 명목임금전망",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2203688:communication:reviewed_monthly_replay"
+    ]
+  },
+  "replay_total_eok": 4488.25075,
+  "gold_detail_total_eok": 4486.56,
+  "replay_error_percent": 0.03768477408080473,
+  "annual_summary_matches": 3,
+  "official_annual_payload": {
+    "bill_no": "2203688",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "hospital_communication_support",
+    "support_derivation": "hospital_communication_support_package",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "medical_unit_basis": "official_annual_package",
+    "communication_scenario_confirmed": true,
+    "fiscal_scope": "national_and_local_combined",
+    "communication_package_phase": "full_year_following_year",
+    "communication_price_policy": "freeze_reference",
+    "disputed_monthly_replay_confirmed": true,
+    "communication_source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시.",
+    "communication_scope_note": "상급종합병원 지원, 수어통역사1명·코디네이터2명 패키지. 일반병원 노력의무와 별도.",
+    "communication_overlap_note": "2024상급47개 중 기존 지역센터지원10개 제외→추가37개 동결 참고 가정. 새의안은 지정·겹침 갱신 필요.",
+    "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+    "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오.",
+    "selected_evidence_keys": [
+      "2203688:tertiary_hospital_count:reviewed",
+      "2203688:already_supported_hospital_count:reviewed",
+      "2203688:communication_staff_per_hospital:reviewed",
+      "2203688:communication_payment_months:reviewed",
+      "official:seoul:communication:full_year_package:2025",
+      "2203688:nominal_wage_rates:20241011"
+    ],
+    "evidence_selection_reasons": {
+      "2203688:tertiary_hospital_count:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:already_supported_hospital_count:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_staff_per_hospital:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:communication_payment_months:reviewed": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "official:seoul:communication:full_year_package:2025": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토",
+      "2203688:nominal_wage_rates:20241011": "동일3명 의료접근 지원과업, 단위·기존지원·공공부담 범위검토"
+    },
+    "selected_method_keys": [
+      "2203688:communication:official_annual_package"
+    ],
+    "method_selection_reasons": {
+      "2203688:communication:official_annual_package": "공식연간패키지와 월단가재현을 분리해 선택"
+    },
+    "method_confirmations": {
+      "2203688:communication:official_annual_package": {
+        "communication_scope_note": "상급종합병원 지원, 수어통역사1명·코디네이터2명 패키지. 일반병원 노력의무와 별도.",
+        "communication_overlap_note": "2024상급47개 중 기존 지역센터지원10개 제외→추가37개 동결 참고 가정. 새의안은 지정·겹침 갱신 필요.",
+        "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+        "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오."
+      }
+    }
+  },
+  "official_annual_web_result": {
+    "status": "computed_review",
+    "routeKey": "hospital_communication_support",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      6660000,
+      6660000,
+      6660000,
+      6660000,
+      6660000
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "eligible_hospitals": 37,
+        "total_hospitals": 47,
+        "overlap_hospitals": 10,
+        "unit_basis": "official_annual_package",
+        "staff_monthly_cost": null,
+        "operation_monthly_cost": null,
+        "amount_won": 6660000000,
+        "included_staff": 3,
+        "source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시."
+      },
+      {
+        "year": 2027,
+        "eligible_hospitals": 37,
+        "total_hospitals": 47,
+        "overlap_hospitals": 10,
+        "unit_basis": "official_annual_package",
+        "staff_monthly_cost": null,
+        "operation_monthly_cost": null,
+        "amount_won": 6660000000,
+        "included_staff": 3,
+        "source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시."
+      },
+      {
+        "year": 2028,
+        "eligible_hospitals": 37,
+        "total_hospitals": 47,
+        "overlap_hospitals": 10,
+        "unit_basis": "official_annual_package",
+        "staff_monthly_cost": null,
+        "operation_monthly_cost": null,
+        "amount_won": 6660000000,
+        "included_staff": 3,
+        "source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시."
+      },
+      {
+        "year": 2029,
+        "eligible_hospitals": 37,
+        "total_hospitals": 47,
+        "overlap_hospitals": 10,
+        "unit_basis": "official_annual_package",
+        "staff_monthly_cost": null,
+        "operation_monthly_cost": null,
+        "amount_won": 6660000000,
+        "included_staff": 3,
+        "source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시."
+      },
+      {
+        "year": 2030,
+        "eligible_hospitals": 37,
+        "total_hospitals": 47,
+        "overlap_hospitals": 10,
+        "unit_basis": "official_annual_package",
+        "staff_monthly_cost": null,
+        "operation_monthly_cost": null,
+        "amount_won": 6660000000,
+        "included_staff": 3,
+        "source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시."
+      }
+    ],
+    "sourceRefs": [
+      "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용; 서울시 제332회 업무보고 PDF39쪽(인쇄37쪽): 1차년도90백만원·2차년도180백만원/개소, 국비50%·시비50%",
+      "24C3571 PDF3~4쪽; 서울시제332회 업무보고PDF39쪽, 단위불일치 시나리오 구분"
+    ],
+    "methodEvidenceKeys": [
+      "2203688:communication:official_annual_package"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2203688:communication:official_annual_package",
+        "source_bill_no": "2203688",
+        "available_at": "2026-10-10",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "hospital_communication_support_package",
+        "source_ref": "24C3571 PDF3~4쪽; 서울시제332회 업무보고PDF39쪽, 단위불일치 시나리오 구분",
+        "match_groups": [
+          [
+            "병원",
+            "의료기관"
+          ],
+          [
+            "수어",
+            "의사소통"
+          ],
+          [
+            "지원",
+            "통역"
+          ]
+        ],
+        "allowed_routes": [
+          "hospital_communication_support"
+        ],
+        "support_derivation": "hospital_communication_support_package",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2203688:tertiary_hospital_count:reviewed",
+          "2203688:already_supported_hospital_count:reviewed",
+          "2203688:communication_staff_per_hospital:reviewed",
+          "2203688:communication_payment_months:reviewed",
+          "official:seoul:communication:full_year_package:2025",
+          "2203688:nominal_wage_rates:20241011"
+        ],
+        "required_confirmations": [
+          "communication_scope_note",
+          "communication_overlap_note",
+          "communication_unit_note",
+          "communication_timing_note"
+        ],
+        "method_steps": [
+          "상급종합병원 의무와 기타기관 노력의무 구분",
+          "기존지원 겹침을 빼고 순증기관 계산",
+          "수어통역1명·코디네이터2명의 패키지 범위 확인",
+          "공식연간패키지와 정답월단가재현 분리, 연단가에12개월 재곱셈 금지",
+          "국비·지방비 합계를 구하며50%로전체비용 재감액하지 않음"
+        ],
+        "baseline_check": "월단가재현은자기의안개발회귀전용. 과태료미추계·0원은정답이명시하지않아자동판정금지",
+        "limitation": "원예산세부단위 미확정. 공식총액자료로 검증한연간패키지와 논란있는정답참고재현을구분",
+        "lower_variable_keys": [
+          "tertiary_hospital_count",
+          "already_supported_hospital_count",
+          "communication_staff_per_hospital",
+          "communication_payment_months",
+          "communication_annual_package",
+          "communication_nominal_wage_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "공식연간패키지와 월단가재현을 분리해 선택",
+        "confirmed_assumptions": {
+          "communication_scope_note": "상급종합병원 지원, 수어통역사1명·코디네이터2명 패키지. 일반병원 노력의무와 별도.",
+          "communication_overlap_note": "2024상급47개 중 기존 지역센터지원10개 제외→추가37개 동결 참고 가정. 새의안은 지정·겹침 갱신 필요.",
+          "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+          "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          6660000000,
+          6660000000,
+          6660000000,
+          6660000000,
+          6660000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용; 서울시 제332회 업무보고 PDF39쪽(인쇄37쪽): 1차년도90백만원·2차년도180백만원/개소, 국비50%·시비50%",
+        "is_assumption": true
+      }
+    }
+  },
+  "official_annual_total_eok": 333,
+  "limitation": "정답월단가 금액은 자기회귀만. 일반재사용은 공식연간1.8억원 패키지, 추가원예산 세부단위는 미확정. 둘을 동일정답이라고표시하지않음."
+}

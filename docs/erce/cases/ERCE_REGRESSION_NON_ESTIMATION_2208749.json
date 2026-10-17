@@ -1,0 +1,73 @@
+{
+  "bill_no": "2208749",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "review_payload": {
+    "bill_no": "2208749",
+    "cutoff_date": "2026-10-04",
+    "evidence_mode": "development_review",
+    "decision_evidence_key": "2208749:multichild_delegated_allowance_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "multiple_minor_children_household": true,
+      "reliable_household_child_basis_available": false,
+      "payment_delegated": true,
+      "payment_amount_confirmed": false
+    },
+    "decision_confirmations": {
+      "household_child_scope": "원문3쪽제4조제5항 미성년자녀2명이상가구의아동, 출생순위둘째이상과같지않음",
+      "population_basis_review": "25C1367 PDF4쪽의가구정보파악곤란사유를확인한해당역사적법안버전 사후검토.현재통계전수검색을했다는주장아님",
+      "delegated_payment_review": "원문월10만원은최대액,자녀수별실제추가급여는대통령령위임.당시정답PDF4쪽추정곤란사유확인, 현재지급제도사실로선언하지않음"
+    }
+  },
+  "decision": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2208749:multichild_delegated_allowance_not_estimated",
+    "reason": "미성년 자녀2명이상 가구의 대상아동 규모를 합리적으로 산정할 근거가 부족하고, 자녀수별 추가 지급액이 대통령령에 위임되어 아직 확정되지 않아 추가급여 비용을 추계하지 않음",
+    "source_ref": "2208749 비용추계서25C1367 PDF3~4쪽, 제4조제5항 미추계 사유",
+    "source_quote": "18세 미만 자녀가 2명 이상인 아동가구에 대한 구체적인 정보를 파악하기 곤란하여 현 시점에서 합리적으로 추정하는 데 한계가 있음",
+    "additional_source_quote": "추가 지급액을 자녀의 수를 고려하여 대통령령으로 정하도록 위임하고 있어 현 시점에서는 이를 추정하는 데 어려움이 있음",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "household_child_scope": "원문3쪽제4조제5항 미성년자녀2명이상가구의아동, 출생순위둘째이상과같지않음",
+      "population_basis_review": "25C1367 PDF4쪽의가구정보파악곤란사유를확인한해당역사적법안버전 사후검토.현재통계전수검색을했다는주장아님",
+      "delegated_payment_review": "원문월10만원은최대액,자녀수별실제추가급여는대통령령위임.당시정답PDF4쪽추정곤란사유확인, 현재지급제도사실로선언하지않음"
+    },
+    "confirmed_facts": {
+      "multiple_minor_children_household": true,
+      "reliable_household_child_basis_available": false,
+      "payment_delegated": true,
+      "payment_amount_confirmed": false
+    },
+    "reestimate_when": "적용가능한 가구별 미성년자녀 통계·준용선례와 자녀수별 확정지급액 또는 확인받은 시나리오가 확보되면 재추계",
+    "limitation": "의무지급규정도 범위·구체금액 미확정이면 기술적으로 추계곤란할 수 있음. 위임문구·상한·DB검색실패만으로 자동미추계하지 않음. 기존출생순위비율을 가구자녀수조건으로 전용 금지. 정답제3호표시와상세사유를 함께 보존"
+  },
+  "synthetic_candidate_keys": [
+    "2208749:multichild_delegated_allowance_not_estimated"
+  ],
+  "synthetic_condition_check": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2208749:multichild_delegated_allowance_not_estimated",
+    "reason": "미성년 자녀2명이상 가구의 대상아동 규모를 합리적으로 산정할 근거가 부족하고, 자녀수별 추가 지급액이 대통령령에 위임되어 아직 확정되지 않아 추가급여 비용을 추계하지 않음",
+    "source_ref": "2208749 비용추계서25C1367 PDF3~4쪽, 제4조제5항 미추계 사유",
+    "source_quote": "18세 미만 자녀가 2명 이상인 아동가구에 대한 구체적인 정보를 파악하기 곤란하여 현 시점에서 합리적으로 추정하는 데 한계가 있음",
+    "additional_source_quote": "추가 지급액을 자녀의 수를 고려하여 대통령령으로 정하도록 위임하고 있어 현 시점에서는 이를 추정하는 데 어려움이 있음",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "household_child_scope": "원문3쪽제4조제5항 미성년자녀2명이상가구의아동, 출생순위둘째이상과같지않음",
+      "population_basis_review": "25C1367 PDF4쪽의가구정보파악곤란사유를확인한해당역사적법안버전 사후검토.현재통계전수검색을했다는주장아님",
+      "delegated_payment_review": "원문월10만원은최대액,자녀수별실제추가급여는대통령령위임.당시정답PDF4쪽추정곤란사유확인, 현재지급제도사실로선언하지않음"
+    },
+    "confirmed_facts": {
+      "multiple_minor_children_household": true,
+      "reliable_household_child_basis_available": false,
+      "payment_delegated": true,
+      "payment_amount_confirmed": false
+    },
+    "reestimate_when": "적용가능한 가구별 미성년자녀 통계·준용선례와 자녀수별 확정지급액 또는 확인받은 시나리오가 확보되면 재추계",
+    "limitation": "의무지급규정도 범위·구체금액 미확정이면 기술적으로 추계곤란할 수 있음. 위임문구·상한·DB검색실패만으로 자동미추계하지 않음. 기존출생순위비율을 가구자녀수조건으로 전용 금지. 정답제3호표시와상세사유를 함께 보존"
+  },
+  "limitation": "미추계사유보강은정답열람후수행.출처검색·조건검증·판정연결및합성유사조건검증,신규실제의안독립미추계정확도평가아님. 검토메모는외부자료전수검색의자동증명이아님"
+}

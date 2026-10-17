@@ -1,0 +1,576 @@
+{
+  "bill_no": "2208381",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "target_answer_numeric_rows_added": true,
+  "gold_display_total_thousand": 31800000000,
+  "gold_display_annual_thousand": [
+    6900000000,
+    6700000000,
+    6300000000,
+    6100000000,
+    5800000000
+  ],
+  "runs": [
+    {
+      "scenario": "table3_annual",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "child_allowance_birth_order_weighted",
+        "support_derivation_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증",
+        "child_population_geography": "전국",
+        "parent_benefit_unchanged": true,
+        "birth_order_population_basis": "birth_share_proxy",
+        "birth_order_share_scenario": "table3_annual",
+        "birth_order_scope_note": "첫째·둘째·셋째이상 가중월액, 전체연령에 같은출생순위비율준용. 실제형제순위 관측아님. 가족인정범위 미확정은 선례가정으로검토",
+        "birth_order_scenario_note": "표3연도별전망과표4암시2026비율동결을 구분. 표시총액에맞춰값수정하지않음",
+        "estimation_start_note": "원문2026-01-01시행,2026~2030년각12개월",
+        "explicit_inputs": {
+          "birth_amount_first": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽first월액"
+          },
+          "birth_amount_second": {
+            "value": 150000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽second월액"
+          },
+          "birth_amount_third_plus": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽third_plus월액"
+          },
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽현행월10만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2026-01-01시행·월지급"
+          }
+        },
+        "selected_evidence_keys": [
+          "2208381:under18_population:2026-2030",
+          "2208381:under8_population:2026-2030",
+          "2208381:child_execution_factor:2025",
+          "2208381:birth_share_first:table3_annual",
+          "2208381:birth_share_second:table3_annual",
+          "2208381:birth_share_third_plus:table3_annual"
+        ],
+        "evidence_selection_reasons": {
+          "2208381:under18_population:2026-2030": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:under8_population:2026-2030": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:child_execution_factor:2025": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_first:table3_annual": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_second:table3_annual": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_third_plus:table3_annual": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정"
+        }
+      },
+      "annual_amounts_thousand": [
+        6814601900,
+        6557625973,
+        6284550358,
+        5948818273,
+        5612355634
+      ],
+      "total_thousand": 31217952138,
+      "display_total_difference_percent": 1.8303391886792455,
+      "resolved_variables": {
+        "new_recipient_count": {
+          "key": "new_recipient_count",
+          "value": [
+            6332884.728,
+            6111539.664,
+            5907495.12,
+            5677459.956,
+            5464223.328
+          ],
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        },
+        "existing_recipient_count": {
+          "key": "existing_recipient_count",
+          "value": [
+            2037785.124,
+            1945553.532,
+            1890267.564,
+            1864119.576,
+            1860980.184
+          ],
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        },
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            121850.0,
+            121250.0,
+            120650.0,
+            120150.0,
+            119650.0
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF4쪽 표3; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "source_class": "target_explicit",
+          "source_ref": "원문5쪽현행월10만원",
+          "is_assumption": false
+        },
+        "payments_per_year": {
+          "key": "payments_per_year",
+          "value": 12,
+          "unit": "month/year",
+          "source_class": "target_explicit",
+          "source_ref": "원문2026-01-01시행·월지급",
+          "is_assumption": false
+        }
+      },
+      "synthetic_web_reuse_check": true,
+      "synthetic_web_result": {
+        "status": "computed_review",
+        "routeKey": "transfer_population_amount_delta",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          6814601900,
+          6557625973,
+          6284550358,
+          5948818273,
+          5612355634
+        ],
+        "derivationTrace": [
+          {
+            "variable_key": "new_recipient_count",
+            "dependencies": [
+              "under18_population",
+              "child_execution_factor"
+            ],
+            "values": [
+              6332884.728,
+              6111539.664,
+              5907495.12,
+              5677459.956,
+              5464223.328
+            ],
+            "unit": "person",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "expression": "전체0~17세 전망인구×선택한 집행계수",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          },
+          {
+            "variable_key": "existing_recipient_count",
+            "dependencies": [
+              "under8_population",
+              "child_execution_factor"
+            ],
+            "values": [
+              2037785.124,
+              1945553.532,
+              1890267.564,
+              1864119.576,
+              1860980.184
+            ],
+            "unit": "person",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "expression": "현행0~7세 전망인구×동일집행계수",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          },
+          {
+            "variable_key": "benefit_per_recipient",
+            "dependencies": [
+              "birth_share_first",
+              "birth_share_second",
+              "birth_share_third_plus",
+              "birth_amount_first",
+              "birth_amount_second",
+              "birth_amount_third_plus"
+            ],
+            "values": [
+              121850.0,
+              121250.0,
+              120650.0,
+              120150.0,
+              119650.0
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "2208381 비용추계서25C1087 PDF4쪽 표3; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+            "expression": "Σ(확인한출생순위비율×해당순위월액); 연령전체에같은비율준용 가정",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          }
+        ],
+        "sourceRefs": [
+          "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "2208381 비용추계서25C1087 PDF4쪽 표3; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+          "원문5쪽현행월10만원",
+          "원문2026-01-01시행·월지급"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              6332884.728,
+              6111539.664,
+              5907495.12,
+              5677459.956,
+              5464223.328
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              2037785.124,
+              1945553.532,
+              1890267.564,
+              1864119.576,
+              1860980.184
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              121850.0,
+              121250.0,
+              120650.0,
+              120150.0,
+              119650.0
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF4쪽 표3; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문5쪽현행월10만원",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문2026-01-01시행·월지급",
+            "is_assumption": false
+          }
+        }
+      }
+    },
+    {
+      "scenario": "table4_fixed2026",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "support_derivation": "child_allowance_birth_order_weighted",
+        "support_derivation_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증",
+        "child_population_geography": "전국",
+        "parent_benefit_unchanged": true,
+        "birth_order_population_basis": "birth_share_proxy",
+        "birth_order_share_scenario": "table4_fixed2026",
+        "birth_order_scope_note": "첫째·둘째·셋째이상 가중월액, 전체연령에 같은출생순위비율준용. 실제형제순위 관측아님. 가족인정범위 미확정은 선례가정으로검토",
+        "birth_order_scenario_note": "표3연도별전망과표4암시2026비율동결을 구분. 표시총액에맞춰값수정하지않음",
+        "estimation_start_note": "원문2026-01-01시행,2026~2030년각12개월",
+        "explicit_inputs": {
+          "birth_amount_first": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽first월액"
+          },
+          "birth_amount_second": {
+            "value": 150000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽second월액"
+          },
+          "birth_amount_third_plus": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽third_plus월액"
+          },
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽현행월10만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2026-01-01시행·월지급"
+          }
+        },
+        "selected_evidence_keys": [
+          "2208381:under18_population:2026-2030",
+          "2208381:under8_population:2026-2030",
+          "2208381:child_execution_factor:2025",
+          "2208381:birth_share_first:table4_fixed2026",
+          "2208381:birth_share_second:table4_fixed2026",
+          "2208381:birth_share_third_plus:table4_fixed2026"
+        ],
+        "evidence_selection_reasons": {
+          "2208381:under18_population:2026-2030": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:under8_population:2026-2030": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:child_execution_factor:2025": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_first:table4_fixed2026": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_second:table4_fixed2026": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정",
+          "2208381:birth_share_third_plus:table4_fixed2026": "정답열람후확인한출처·기간·연령·집행계수동결및순위대리가정.자기정답이므로개발검토모드에한정"
+        }
+      },
+      "annual_amounts_thousand": [
+        6814601900,
+        6601629058,
+        6369618288,
+        6064638456,
+        5756611129
+      ],
+      "total_thousand": 31607098831,
+      "display_total_difference_percent": 0.6066074496855346,
+      "resolved_variables": {
+        "new_recipient_count": {
+          "key": "new_recipient_count",
+          "value": [
+            6332884.728,
+            6111539.664,
+            5907495.12,
+            5677459.956,
+            5464223.328
+          ],
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        },
+        "existing_recipient_count": {
+          "key": "existing_recipient_count",
+          "value": [
+            2037785.124,
+            1945553.532,
+            1890267.564,
+            1864119.576,
+            1860980.184
+          ],
+          "unit": "person",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "is_assumption": true
+        },
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            121850.0,
+            121850.0,
+            121850.0,
+            121850.0,
+            121850.0
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "source_class": "target_explicit",
+          "source_ref": "원문5쪽현행월10만원",
+          "is_assumption": false
+        },
+        "payments_per_year": {
+          "key": "payments_per_year",
+          "value": 12,
+          "unit": "month/year",
+          "source_class": "target_explicit",
+          "source_ref": "원문2026-01-01시행·월지급",
+          "is_assumption": false
+        }
+      },
+      "synthetic_web_reuse_check": true,
+      "synthetic_web_result": {
+        "status": "computed_review",
+        "routeKey": "transfer_population_amount_delta",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          6814601900,
+          6601629058,
+          6369618288,
+          6064638456,
+          5756611129
+        ],
+        "derivationTrace": [
+          {
+            "variable_key": "new_recipient_count",
+            "dependencies": [
+              "under18_population",
+              "child_execution_factor"
+            ],
+            "values": [
+              6332884.728,
+              6111539.664,
+              5907495.12,
+              5677459.956,
+              5464223.328
+            ],
+            "unit": "person",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "expression": "전체0~17세 전망인구×선택한 집행계수",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          },
+          {
+            "variable_key": "existing_recipient_count",
+            "dependencies": [
+              "under8_population",
+              "child_execution_factor"
+            ],
+            "values": [
+              2037785.124,
+              1945553.532,
+              1890267.564,
+              1864119.576,
+              1860980.184
+            ],
+            "unit": "person",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "expression": "현행0~7세 전망인구×동일집행계수",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          },
+          {
+            "variable_key": "benefit_per_recipient",
+            "dependencies": [
+              "birth_share_first",
+              "birth_share_second",
+              "birth_share_third_plus",
+              "birth_amount_first",
+              "birth_amount_second",
+              "birth_amount_third_plus"
+            ],
+            "values": [
+              121850.0,
+              121850.0,
+              121850.0,
+              121850.0,
+              121850.0
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+            "expression": "Σ(확인한출생순위비율×해당순위월액); 연령전체에같은비율준용 가정",
+            "applied": true,
+            "applicability_note": "정답열람후 인구·집행계수·순위비율 근거 적재 및 하위변수 연결, 회귀검증"
+          }
+        ],
+        "sourceRefs": [
+          "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+          "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+          "원문5쪽현행월10만원",
+          "원문2026-01-01시행·월지급"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              6332884.728,
+              6111539.664,
+              5907495.12,
+              5677459.956,
+              5464223.328
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              2037785.124,
+              1945553.532,
+              1890267.564,
+              1864119.576,
+              1860980.184
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              121850.0,
+              121850.0,
+              121850.0,
+              121850.0,
+              121850.0
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2208381 비용추계서25C1087 PDF4쪽2026비율 및 PDF5쪽표4 인원/총인구의근사비율 확인; 원문3쪽first월액; 원문3쪽second월액; 원문3쪽third_plus월액",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문5쪽현행월10만원",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문2026-01-01시행·월지급",
+            "is_assumption": false
+          }
+        }
+      }
+    }
+  ],
+  "remaining": "비율설명·계산인원표·반올림합계 불일치의 원시계산자료 미확인. 국비분리·실제연령별순위준용 검증 미포함",
+  "limitation": "정답열람후자료적재회귀검증. 정답표시금액에맞추기위한반올림·비율조정없음.표시총액차이는원시금액정밀오차율아님"
+}

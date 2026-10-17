@@ -1,0 +1,40 @@
+{
+  "bill_no": "2200629",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C1054",
+  "gold_date": "2024-07-11",
+  "first_total_won": null,
+  "gold_display_total_won": 1022300000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 3,
+  "quote_total": 3,
+  "benefit_formula_family_match": true,
+  "well_handled": "시설 미이용과 양육수당 병행을 확인해 기존2211034의60시간·양육수당차감 모형을 무조건 재사용하지 않음",
+  "gold_parameters": {
+    "start_year": 2025,
+    "years": 5,
+    "age_range": "0~5세",
+    "population_source": "KOSIS2023.12중위전망",
+    "care_share_source": "2021전국보육실태조사 낮시간 친조부모+외조부모",
+    "care_shares_by_age": [
+      0.083,
+      0.039,
+      0.038,
+      0.049,
+      0.042,
+      0.05
+    ],
+    "supported_hours": 80,
+    "hourly_public_rate_won": 3000,
+    "monthly_support_won": 240000,
+    "months": 12,
+    "registration_take_up": 1,
+    "foregone_allowance_won": 0
+  },
+  "gold_non_estimation": "제40조의2 환수·제54조 벌칙: 신규제도 위반인원·환수액·벌금을 예상하기 어려워 미추계",
+  "first_non_estimation_gap": "최초 구조에 환수·벌칙 별도 항목과 근거있는 미추계 판단을 포함하지 못함",
+  "gold_scope_note": "어린이집·유치원 미이용 조건이 있으나 정답은 낮시간 조부모 양육비율 대리모집단을 사용. 가정 승인과 한계 설명 필요.",
+  "source_table_note": "정답표5는 A행에전체영유아수를 표시하지만 결과 금액은 표4조부모양육아동수를 사용한 산식과 일치. 전체영유아를지원대상으로읽지않음.",
+  "reinforcement_performed": false
+}

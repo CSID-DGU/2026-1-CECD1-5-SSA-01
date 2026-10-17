@@ -1,0 +1,103 @@
+{
+  "bill_no": "2200664",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24B1101",
+  "gold_date": "2024-07-26",
+  "first_total_won": null,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "gold_horizon": [
+    2026,
+    2030
+  ],
+  "first_candidate_horizon": [
+    2025,
+    2029
+  ],
+  "formula_direction_match": "사업주인건비 부분지원 방향은 일치, 지원기준을 최저임금−실제시급 차액으로 선택하는 하위식은 미완성",
+  "gold_parameters": {
+    "target_scope": "장애인 직업재활시설 최저임금적용제외 근로자, 타사업체 제외",
+    "historical_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "target_count_history": [
+      7812,
+      8016,
+      8393,
+      8741,
+      8975
+    ],
+    "average_hourly_wage_history": [
+      4897,
+      5005,
+      4528,
+      5447,
+      5644
+    ],
+    "monthly_hours_history": [
+      126,
+      105,
+      112,
+      119,
+      118
+    ],
+    "months": 12,
+    "minimum_hourly_base_year": 2025,
+    "forecast_minimum_wage_rates": {
+      "2025": 0.017,
+      "2026": 0.032,
+      "2027": 0.032,
+      "2028": 0.032,
+      "2029": 0.032,
+      "2030": 0.031
+    }
+  },
+  "gold_scenarios": {
+    "share_30": {
+      "total_eok": 959,
+      "annual_eok": [
+        169,
+        180,
+        191,
+        203,
+        215
+      ]
+    },
+    "share_50": {
+      "total_eok": 1598,
+      "annual_eok": [
+        282,
+        300,
+        319,
+        338,
+        359
+      ]
+    },
+    "share_100": {
+      "total_eok": 3196,
+      "annual_eok": [
+        565,
+        600,
+        637,
+        677,
+        717
+      ]
+    }
+  },
+  "well_handled": "최저임금 상한을 전액지원으로 오해하지 않고 연계법안2200660과 실제임금 차액·지원률 확인 필요성을 파악",
+  "first_gaps": [
+    "직업재활시설 적용제외 근로자 과거실적·시급 추세",
+    "월근로시간116시간·연12개월",
+    "차액 기준의30/50/100%지원 시나리오",
+    "2026시작 준비가정"
+  ],
+  "scope_limits": "타사업체 근로자 및 적용제외집단만의 시급·시간 실적이 부재하여 시설전체평균을 대리 사용. 실제범위·시행에 따라 재검토.",
+  "source_note": "표8 제목2025~2029는 본문·열헤더2026~2030과 불일치. 본문과 열헤더를 기간근거로 사용.",
+  "reinforcement_performed": false
+}

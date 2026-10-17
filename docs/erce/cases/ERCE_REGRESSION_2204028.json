@@ -1,0 +1,280 @@
+{
+  "bill_no": "2204028",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "target_answer_numbers_selected": true,
+  "payload": {
+    "bill_no": "2204028",
+    "route_key": "transfer_population_amount_delta",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-04",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "child_allowance_indexed_population",
+    "support_derivation_note": "24C3796의2024년 월10만원 기준·당해연도 물가 누적 적용 선례를 확인한 사후 회귀검증",
+    "child_allowance_scenario": "all_under19_indexed",
+    "child_population_geography": "전국",
+    "child_index_base_year": 2024,
+    "parent_benefit_unchanged": true,
+    "child_allowance_scope_note": "0~18세 개정 기본급여−0~7세 현행 기본급여. 부모급여는 유지,2세미만 제외 안 함",
+    "estimation_start_note": "원문2025-01-01시행·월지급에 따라2025~2029년 완전연도12개월",
+    "explicit_inputs": {
+      "existing_benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문5쪽 현행 월10만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "2025-01-01 시행·매월지급 완전연도 시나리오"
+      }
+    },
+    "selected_evidence_keys": [
+      "2200147:under8_population:2025-2029:child_indexed",
+      "2200147:child_allowance_payment_rate:2024:child_indexed",
+      "2204028:under19_population:2025-2029",
+      "2204028:index_base_monthly_amount:2024",
+      "2204028:child_cpi_rates:2025-2029"
+    ],
+    "evidence_selection_reasons": {
+      "2200147:under8_population:2025-2029:child_indexed": "전국·같은 연령·2025~2029년·같은 통계 버전 확인; 물가는 과거전망, 지급률은 동결 가정. 자기 정답 신규근거는 사후 회귀검증에서만 사용",
+      "2200147:child_allowance_payment_rate:2024:child_indexed": "전국·같은 연령·2025~2029년·같은 통계 버전 확인; 물가는 과거전망, 지급률은 동결 가정. 자기 정답 신규근거는 사후 회귀검증에서만 사용",
+      "2204028:under19_population:2025-2029": "전국·같은 연령·2025~2029년·같은 통계 버전 확인; 물가는 과거전망, 지급률은 동결 가정. 자기 정답 신규근거는 사후 회귀검증에서만 사용",
+      "2204028:index_base_monthly_amount:2024": "전국·같은 연령·2025~2029년·같은 통계 버전 확인; 물가는 과거전망, 지급률은 동결 가정. 자기 정답 신규근거는 사후 회귀검증에서만 사용",
+      "2204028:child_cpi_rates:2025-2029": "전국·같은 연령·2025~2029년·같은 통계 버전 확인; 물가는 과거전망, 지급률은 동결 가정. 자기 정답 신규근거는 사후 회귀검증에서만 사용"
+    }
+  },
+  "result": {
+    "status": "computed_review",
+    "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "annualAmountsThousand": [
+      5902921786,
+      5950277640,
+      5915393455,
+      5882368100,
+      5829865659
+    ],
+    "resolvedVariables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6883704.0,
+          6651396.0,
+          6402564.0,
+          6196500.0,
+          6006960.0
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF4쪽 표2; 의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2116044.0,
+          1988712.0,
+          1898316.0,
+          1844856.0,
+          1819584.0
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          102200.0,
+          104448.4,
+          106641.8164,
+          108881.29454439999,
+          111167.80172983238
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽 현행 월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "2025-01-01 시행·매월지급 완전연도 시나리오",
+        "is_assumption": false
+      }
+    },
+    "sourceRefs": [
+      "의안2204028 비용추계서24C3796 PDF4쪽 표2; 의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+      "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+      "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1",
+      "원문5쪽 현행 월10만원",
+      "2025-01-01 시행·매월지급 완전연도 시나리오"
+    ]
+  },
+  "total_thousand": 29480826640,
+  "synthetic_web_reuse_check": true,
+  "synthetic_web_result": {
+    "status": "computed_review",
+    "routeKey": "transfer_population_amount_delta",
+    "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "annualAmountsThousand": [
+      5902921786,
+      5950277640,
+      5915393455,
+      5882368100,
+      5829865659
+    ],
+    "derivationTrace": [
+      {
+        "variable_key": "new_recipient_count",
+        "expression": "19세미만 인구×동일 아동수당 지급률",
+        "dependencies": [
+          "under19_population",
+          "child_payment_rate"
+        ],
+        "values": [
+          6883704.0,
+          6651396.0,
+          6402564.0,
+          6196500.0,
+          6006960.0
+        ],
+        "unit": "person",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF4쪽 표2; 의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "applied": true,
+        "applicability_note": "24C3796의2024년 월10만원 기준·당해연도 물가 누적 적용 선례를 확인한 사후 회귀검증"
+      },
+      {
+        "variable_key": "existing_recipient_count",
+        "expression": "현행8세미만 인구×동일 아동수당 지급률",
+        "dependencies": [
+          "under8_population",
+          "child_payment_rate"
+        ],
+        "values": [
+          2116044.0,
+          1988712.0,
+          1898316.0,
+          1844856.0,
+          1819584.0
+        ],
+        "unit": "person",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "applied": true,
+        "applicability_note": "24C3796의2024년 월10만원 기준·당해연도 물가 누적 적용 선례를 확인한 사후 회귀검증"
+      },
+      {
+        "variable_key": "benefit_per_recipient",
+        "expression": "확인한 기준연도 월액×기준연도 다음해부터 해당연도까지 ∏(1+물가변동률); 표시단위 중간 반올림 없음",
+        "dependencies": [
+          "index_base_monthly_amount",
+          "child_cpi_rates"
+        ],
+        "values": [
+          102200.0,
+          104448.4,
+          106641.8164,
+          108881.29454439999,
+          111167.80172983238
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1",
+        "applied": true,
+        "applicability_note": "24C3796의2024년 월10만원 기준·당해연도 물가 누적 적용 선례를 확인한 사후 회귀검증"
+      }
+    ],
+    "sourceRefs": [
+      "의안2204028 비용추계서24C3796 PDF4쪽 표2; 의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+      "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+      "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1",
+      "원문5쪽 현행 월10만원",
+      "2025-01-01 시행·매월지급 완전연도 시나리오"
+    ],
+    "methodEvidenceKeys": [],
+    "selectedMethods": [],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6883704.0,
+          6651396.0,
+          6402564.0,
+          6196500.0,
+          6006960.0
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF4쪽 표2; 의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2116044.0,
+          1988712.0,
+          1898316.0,
+          1844856.0,
+          1819584.0
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          102200.0,
+          104448.4,
+          106641.8164,
+          108881.29454439999,
+          111167.80172983238
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽 현행 월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "2025-01-01 시행·매월지급 완전연도 시나리오",
+        "is_assumption": false
+      }
+    }
+  },
+  "gold_display_total_thousand": 29500000000,
+  "display_total_difference_percent": 0.0649944406779661,
+  "gold_display_annual_thousand": [
+    5900000000,
+    6000000000,
+    5900000000,
+    5900000000,
+    5800000000
+  ],
+  "limitation": "정답 열람 후 인구·물가 전제 추가 및 하위 계산 연결. 독립 예측 성과 아님. 정답0.1조원 표시값 대비 차이이며 원시금액 정밀오차율 아님"
+}

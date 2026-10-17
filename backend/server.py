@@ -122,6 +122,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             "/api/recompute_committee",
             "/api/erce/estimate",
             "/api/erce/draft",
+            "/api/erce/draft/pdf",
         ):
             self._send_json({"error": "지원하지 않는 경로입니다."}, status=404)
             return
@@ -135,6 +136,26 @@ class ApiHandler(BaseHTTPRequestHandler):
             self._send_json({"error": "JSON 요청 본문이 필요합니다."}, status=400)
             return
 
+        if parsed.path == "/api/erce/draft/pdf":
+            if not isinstance(payload, dict):
+                self._send_json({"error": "문서 생성에 필요한 입력을 확인해 주세요."}, status=400)
+                return
+            try:
+                from .erce.draft_pdf import generate_draft_pdf
+                pdf_data = generate_draft_pdf(payload)
+            except (KeyError, ValueError, TypeError) as exc:
+                from .erce.user_messages import user_error
+                print(f"ERCE PDF export error: {exc}", flush=True)
+                self._send_json({"error": user_error(exc)}, status=400)
+                return
+            except Exception as exc:
+                print(f"ERCE PDF export error: {exc}", flush=True)
+                self._send_json({"error": "PDF를 만들지 못했어요. 잠시 후 다시 시도해 주세요."}, status=500)
+                return
+            name = self._download_name(payload.get("bill_name"), "의안")
+            self._send_bytes(pdf_data, content_type="application/pdf", download_name=f"{name}_비용추계서_초안.pdf")
+            return
+
         if parsed.path in ("/api/erce/estimate", "/api/erce/draft"):
             if not isinstance(payload, dict):
                 self._send_json({"error": "JSON 객체가 필요합니다."}, status=400)
@@ -143,7 +164,9 @@ class ApiHandler(BaseHTTPRequestHandler):
                 erce_result = (generate_draft(payload) if parsed.path == "/api/erce/draft"
                                else calculate_erce_web_item(payload))
             except (KeyError, ValueError, TypeError) as exc:
-                self._send_json({"error": str(exc)}, status=400)
+                from backend.erce.user_messages import user_error
+                print(f"ERCE calculation error: {exc}", flush=True)
+                self._send_json({"error": user_error(exc)}, status=400)
                 return
             self._send_json(erce_result, status=HTTPStatus.OK)
             return
@@ -297,10 +320,14 @@ class ApiHandler(BaseHTTPRequestHandler):
                 from .analyzer import analyze_document
                 result = analyze_document(filename, content)
         except ValueError as exc:
-            self._send_json({"error": str(exc)}, status=400)
+            from backend.erce.user_messages import user_error
+            print(f"PDF analysis error: {exc}", flush=True)
+            self._send_json({"error": user_error(exc)}, status=400)
             return
         except Exception as exc:
-            self._send_json({"error": str(exc)}, status=500)
+            from backend.erce.user_messages import user_error
+            print(f"PDF analysis error: {exc}", flush=True)
+            self._send_json({"error": user_error(exc)}, status=500)
             return
 
         self._send_json(result, status=HTTPStatus.OK)

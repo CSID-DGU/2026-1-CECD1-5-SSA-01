@@ -1,4 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { userMessage } from './userMessages'
+import { formatReferenceValue, referenceCandidates, selectedEvidenceContext } from './erceCandidates'
+import { displayValue, displaySources } from './erceDisplay'
+import ErceEvidence from './ErceEvidence'
 
 const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
 
@@ -156,9 +160,10 @@ function candidateFor(item, variable) {
   }
 }
 
-export default function ErceChat({ result }) {
+export default function ErceChat({ result, onRetryAnalysis }) {
   const erce = result.erce || {}
-  const items = erce.items || []
+  const [recoveredItems, setRecoveredItems] = useState({})
+  const items = (erce.items || []).map(item => recoveredItems[item.itemIndex] || item)
   const [answers, setAnswers] = useState({})
   const [skipped, setSkipped] = useState({})
   const [calculations, setCalculations] = useState({})
@@ -172,9 +177,27 @@ export default function ErceChat({ result }) {
   const [showAdditional, setShowAdditional] = useState(false)
   const [draftResult, setDraftResult] = useState(null)
   const [draftRetry, setDraftRetry] = useState(0)
+  const [draftRequested, setDraftRequested] = useState(false)
+  const [pdfDownloading, setPdfDownloading] = useState(false)
+  const [pdfError, setPdfError] = useState('')
+  const [confirmedAssumptions, setConfirmedAssumptions] = useState({})
+  const inputFormRef = useRef(null)
   const [reportStartYear, setReportStartYear] = useState(() => String(items.find(item => item.startYear)?.startYear || ''))
+  useEffect(() => {
+    let closed = []
+    const expand = () => {
+      closed = [...document.querySelectorAll('.chat-draft details:not([open])')]
+      closed.forEach(element => { element.open = true })
+    }
+    const restore = () => { closed.forEach(element => { element.open = false }); closed = [] }
+    window.addEventListener('beforeprint', expand)
+    window.addEventListener('afterprint', restore)
+    return () => { window.removeEventListener('beforeprint', expand); window.removeEventListener('afterprint', restore) }
+  }, [])
 
   const allQuestions = items.flatMap(item => {
+    if (item.assumptionConfirmationRequired && !confirmedAssumptions[item.itemIndex]) return []
+    if (item.calculation?.status === 'needs_review') return []
     if (item.calculation?.status === 'computed_review') return []
     return (item.calculation?.missingVariables || item.requiredVariables || [])
       .filter(variable => !item.explicitInputs?.[variable])
@@ -184,23 +207,28 @@ export default function ErceChat({ result }) {
   const additionalQuestionCount = allQuestions.length - questions.length
   const current = questions.find(question => !answers[question.id] && !skipped[question.id])
   const finished = questions.length - questions.filter(question => !answers[question.id] && !skipped[question.id]).length
-  const computed = items.filter(item => (calculations[item.itemIndex] || item.calculation)?.status === 'computed_review')
+  const computed = items.filter(item => (!item.assumptionConfirmationRequired || confirmedAssumptions[item.itemIndex])
+    && (calculations[item.itemIndex] || item.calculation)?.status === 'computed_review')
   const allComputed = items.length > 0 && computed.length === items.length
+  const reviewBlocked = items.some(item => item.calculation?.status === 'needs_review')
   const toEngineItem = item => ({
+    ...selectedEvidenceContext(item, answers),
     name: item.name, trigger_ref: item.triggerRef,
+    change_summary: item.scopeNote || item.decisionReason || '',
+    source_quote: item.reviewedSourceQuote || (result.articles?.[item.itemIndex]?.quote_verified ? result.articles[item.itemIndex].text : ''),
     route_key: item.routeKey, bill_no: erce.billNo, years: 5,
     start_year: answers[`${item.itemIndex}:start_year`]?.value ?? item.startYear,
     explicit_inputs: {
       ...item.explicitInputs,
       ...Object.fromEntries(Object.entries(answers)
-        .filter(([id]) => id.startsWith(`${item.itemIndex}:`))
+        .filter(([id, row]) => id.startsWith(`${item.itemIndex}:`) && !row.evidenceKey)
         .map(([id, value]) => [id.slice(id.indexOf(':') + 1), value])),
     },
-    cutoff_date: item.proposeDate || '', policy_domain: item.policyDomain || '',
+    cutoff_date: item.evidenceCutoff || item.proposeDate || '', policy_domain: item.policyDomain || '',
     staffing_context: item.staffingContext || {}, staffing_inputs: item.staffingInputs || {},
   })
   const chosenStartYear = Number(reportStartYear || items.map(item => toEngineItem(item).start_year).find(Boolean))
-  const draftRequest = allComputed && Number.isInteger(chosenStartYear) && chosenStartYear >= 1900 && chosenStartYear <= 2200
+  const draftRequest = draftRequested && allComputed && Number.isInteger(chosenStartYear) && chosenStartYear >= 1900 && chosenStartYear <= 2200
     ? JSON.stringify({
       bill_name: result.billName, bill_no: erce.billNo, start_year: chosenStartYear, years: 5,
       items: items.map(toEngineItem),
@@ -227,7 +255,7 @@ export default function ErceChat({ result }) {
       if (data.status !== 'draft_ready') throw new Error('아직 확인이 필요한 값이 있어요. 금액을 다시 확인해 주세요.')
       if (!controller.signal.aborted) setDraftResult({ request: draftRequest, attempt: draftRetry, data })
     }).catch(error => {
-      if (!controller.signal.aborted) setDraftResult({ request: draftRequest, attempt: draftRetry, error: error.message })
+      if (!controller.signal.aborted) setDraftResult({ request: draftRequest, attempt: draftRetry, error: userMessage(error) })
     })
     return () => controller.abort()
   }, [draftRequest, draftRetry])
@@ -242,13 +270,40 @@ export default function ErceChat({ result }) {
     setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
-  const saveAnswer = async (value, source) => {
+  const downloadPdf = async () => {
+    if (!draft || !draftRequest || pdfDownloading) return
+    setPdfDownloading(true)
+    setPdfError('')
+    try {
+      const response = await fetch(`${API_BASE}/api/erce/draft/pdf`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: draftRequest,
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'PDF를 만들지 못했어요.')
+      }
+      const url = URL.createObjectURL(await response.blob())
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `${(result.billName || '의안').replace(/[\\/:*?"<>|]/g, '_')}_비용추계서_초안.pdf`
+      link.click()
+      setTimeout(() => URL.revokeObjectURL(url), 1000)
+    } catch (error) {
+      setPdfError(userMessage(error))
+    } finally {
+      setPdfDownloading(false)
+    }
+  }
+
+  const saveAnswer = async (value, source, candidate = null) => {
     if (!current) return
     const { item, variable, id } = current
     const meta = variableMeta(variable, item.routeKey)
     const updated = {
       ...answers,
-      [id]: { value, unit: meta.engineUnit, source_ref: source || '사용자가 직접 입력한 추계 가정(별도 확인 필요)' },
+      [id]: { value, unit: candidate?.unit || meta.engineUnit,
+        source_ref: source || '사용자가 직접 입력한 추계 가정(별도 확인 필요)',
+        ...(candidate?.evidenceKey ? { evidenceKey: candidate.evidenceKey } : {}) },
     }
     setAnswers(updated)
     setInput('')
@@ -259,13 +314,14 @@ export default function ErceChat({ result }) {
     try {
       const explicitInputs = { ...item.explicitInputs }
       for (const question of allQuestions.filter(row => row.item.itemIndex === item.itemIndex)) {
-        if (updated[question.id]) explicitInputs[question.variable] = updated[question.id]
+        if (updated[question.id] && !updated[question.id].evidenceKey) explicitInputs[question.variable] = updated[question.id]
       }
       const response = await fetch(`${API_BASE}/api/erce/estimate`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...selectedEvidenceContext(item, updated),
           route_key: item.routeKey, bill_no: erce.billNo, years: 5, start_year: explicitInputs.start_year?.value ?? item.startYear,
-          explicit_inputs: explicitInputs, cutoff_date: item.proposeDate || '',
+          explicit_inputs: explicitInputs, cutoff_date: item.evidenceCutoff || item.proposeDate || '',
           policy_domain: item.policyDomain || '',
           staffing_context: item.staffingContext || {}, staffing_inputs: item.staffingInputs || {},
         }),
@@ -276,7 +332,7 @@ export default function ErceChat({ result }) {
       if (variable === 'committee_components') setCommitteeDraft({ members: '', meetings: '', rate: '' })
     } catch (error) {
       setAnswers(answers)
-      setInputError(error.message)
+      setInputError(userMessage(error))
     } finally {
       setRunning(false)
     }
@@ -315,42 +371,89 @@ export default function ErceChat({ result }) {
   if (result.analysisMode === 'manual_required') {
     return <section className="chat-shell"><div className="chat-bubble assistant">PDF는 받았어요. 자동 분석을 사용하려면 ERCE의 AI 분석 모드를 켜야 해요.</div></section>
   }
+  const candidates = current ? referenceCandidates(current.item, current.variable, candidateFor(current.item, current.variable)) : []
+  const focusManualInput = () => {
+    inputFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    inputFormRef.current?.querySelector('input, textarea')?.focus({ preventScroll: true })
+  }
+  const acceptCitation = (item, candidate) => {
+    setRecoveredItems(previous => ({ ...previous, [item.itemIndex]: {
+      ...item, name: `${candidate.articleRef} · 양육비 선지급`, triggerRef: candidate.articleRef,
+      reviewedSourceQuote: candidate.sourceQuote,
+      engineContext: candidate.engineContext, calculation: candidate.calculation,
+      startYear: candidate.startYear, assumptionConfirmationRequired: true,
+      assumptionNotice: candidate.engineContext.reference_notice,
+    } }))
+    setConfirmedAssumptions(previous => ({ ...previous, [item.itemIndex]: false }))
+    setDraftRequested(false)
+  }
 
   return (
+    <div className={`chat-layout${current ? ' has-candidates' : ''}`}>
     <section className="chat-shell" aria-label="비용추계 대화">
-      <div className="chat-progress"><span>비용추계 초안</span><span>{finished} / {questions.length}개 진행</span></div>
+      <div className="chat-progress"><span>비용추계 초안</span><span>{reviewBlocked ? '원문 확인 필요' : allComputed ? '추계 완료' : questions.length ? `${finished} / ${questions.length}개 진행` : '근거 확인'}</span></div>
       <div className="chat-bubble assistant">
         <span className="chat-eyebrow">PDF 분석 완료</span>
         <strong>{result.billName || '의안'}을 확인했어요.</strong>
         <p>{items.length ? `우선 추계할 항목 ${items.length}개를 찾았어요. 문서에서 확인한 값은 다시 묻지 않을게요.` : '바로 계산할 항목은 찾지 못했어요. 조문 검토가 필요합니다.'}</p>
       </div>
 
+      {items.filter(item => item.assumptionConfirmationRequired && !confirmedAssumptions[item.itemIndex]).map(item =>
+        <div className="chat-assumption" key={item.itemIndex}>
+          <span className="chat-eyebrow">계산 전 확인</span>
+          <strong>이 기준으로 계산할게요</strong>
+          {item.engineContext?.child_support_model === 'child_support_advance_expense' ? <>
+            <div className="assumption-key-values">
+              {['advance_monthly_amount', 'advance_months'].map(key => {
+                const row = item.calculation?.evidenceVariables?.[key]
+                return row && <div key={key}><span>{key === 'advance_monthly_amount' ? '월 지원금' : '연간 지원 기간'}</span><strong>{displayValue(row.value, row.unit)}</strong></div>
+              })}
+              <div><span>추계기간</span><strong>{item.startYear}~{item.startYear + 4}년</strong></div>
+            </div>
+            <p>지원 대상 전원이 신청한다고 가정해요. 대상자 수는 통계로 추정하고, 기존 사업 예산은 빼서 계산해요.</p>
+            <small className="assumption-disclaimer">유사 사례를 참고한 가정이에요. 실제 지급 기준과 시행연도는 달라질 수 있어요.</small>
+          </> : <p>{item.assumptionNotice}</p>}
+          <details><summary>근거와 적용 이유 보기</summary>
+            <p>{item.assumptionNotice}</p>
+            <p>{Object.values(item.engineContext?.evidence_selection_reasons || {})[0]}</p>
+            <p>{displaySources(item.calculation?.sourceRefs || [])}</p>
+            <p>자료 조회 기준: {item.evidenceCutoff} · 자기 의안의 정답 제외</p>
+          </details>
+          <button className="assumption-continue" type="button" onClick={() => setConfirmedAssumptions(previous => ({ ...previous, [item.itemIndex]: true }))}>확인하고 계속하기 <span aria-hidden="true">→</span></button>
+        </div>)}
+      {items.filter(item => item.calculation?.status === 'needs_review').map(item =>
+        <div className="chat-citation-review" key={item.itemIndex}>
+          <span className="chat-eyebrow">근거 조문 확인</span>
+          <strong>계산에 사용할 조문을 다시 확인해 주세요</strong>
+          <p>{item.calculation.reason}</p>
+          {(item.citationRecoveryCandidates || []).map(candidate => <div className="chat-citation-option" key={`${candidate.sourcePage}:${candidate.articleRef}`}>
+            <strong>{candidate.articleRef} · 의안 PDF {candidate.sourcePage}쪽</strong>
+            <p>업로드한 원문에서 찾은 선지급 신청 조문이에요. 이 조문이 계산하려는 내용인지 확인해 주세요.</p>
+            <details><summary>원문 보기</summary><blockquote>{candidate.sourceQuote.replace(/\s+/g, ' ')}</blockquote></details>
+            <button className="chat-variable-select" type="button" onClick={() => acceptCitation(item, candidate)}>이 조문으로 이어가기</button>
+          </div>)}
+          {onRetryAnalysis && <button className="chat-manual-choice" type="button" onClick={onRetryAnalysis}>PDF 다시 분석하기</button>}
+        </div>)}
+
       {computed.length > 0 && <div className="chat-result-list">
         {computed.map(item => {
           const output = calculations[item.itemIndex] || item.calculation
           return <div className="chat-result" key={item.itemIndex}>
             <span className="chat-check">✓</span>
-            <div><strong>{item.name || '비용 항목'} 계산 초안</strong><p>{formatAnnual(output.annualAmountsThousand)}</p>
-              <details><summary>계산 근거 보기</summary><p>{item.formula}</p><p>{(output.sourceRefs || []).join(' · ') || '입력된 값과 의안 원문을 사용했습니다.'}</p></details>
+            <div><strong>{item.name || '비용 항목'} 계산 초안</strong><p className="chat-result-total">{output.annualAmountsThousand.length}년 합계 {displayValue(output.annualAmountsThousand.reduce((sum, value) => sum + value, 0) * 1000, 'KRW')}</p>
+              <details><summary>연도별 금액과 근거 보기</summary><p>{formatAnnual(output.annualAmountsThousand)}</p><p>{item.formula}</p><p>{displaySources(output.sourceRefs || []) || '입력된 값과 의안 원문을 사용했습니다.'}</p></details>
             </div>
           </div>
         })}
       </div>}
 
       {current && <>
+        <div className="chat-section-divider"><span>추계를 위해 확인할 내용</span></div>
         <div className="chat-bubble assistant question">
           <span className="chat-eyebrow">{current.item.name || '비용 항목'} · {finished + 1}번째 확인</span>
           <strong>{LABELS[current.variable] || current.variable}을 알 수 있을까요?</strong>
           <p>의안에서 확정할 수 없어 비워뒀어요. 모르면 건너뛰어도 됩니다. 임의의 숫자는 넣지 않을게요.</p>
         </div>
-        {(() => {
-          const candidate = candidateFor(current.item, current.variable)
-          return candidate && <button className="chat-candidate" type="button" disabled={running}
-            onClick={() => saveAnswer(candidate.value, candidate.source)}>
-            <span>참고할 수 있는 후보값</span><strong>{candidate.label} 사용하기 →</strong>
-            <small>{candidate.note || candidate.source}</small>
-          </button>
-        })()}
         {current.variable === 'insurance_benefit_cohorts' && (() => {
           const references = (current.item.calculation?.referenceCandidates || [])
             .filter(row => (row.variableKey === 'insurer_daily_benefit' && !row.stayBand)
@@ -365,7 +468,7 @@ export default function ErceChat({ result }) {
             <small>시범사업 기준을 전국 대상자 수나 실제 평균 지원일수로 사용하면 안 됩니다. 180일 초과 구간은 별도 단가가 필요해요.</small>
           </div>
         })()}
-        <form className="chat-compose" onSubmit={submit}>
+        <form ref={inputFormRef} className="chat-compose" onSubmit={submit}>
           {current.variable === 'insurance_benefit_cohorts' ? <div className="chat-insurance-cohorts">
             <small>한 번에 하나의 A/B/C 간병 시나리오만 계산해요. 환자군별 대상 건수·지원일수·일당 <b>공단 부담액</b>을 입력해 주세요. 연도별 대상 건수는 쉼표로 구분한 5개 숫자도 가능합니다.</small>
             {insuranceDraft.map((row, index) => <div className="chat-insurance-row" key={index}>
@@ -410,54 +513,99 @@ export default function ErceChat({ result }) {
         </form>
       </>}
 
-      {!current && <div className="chat-bubble assistant question">
-        <strong>지금 확인할 질문은 여기까지예요.</strong>
-        <p>{questions.some(question => skipped[question.id])
+      {!current && !allComputed && !items.some(item => item.assumptionConfirmationRequired && !confirmedAssumptions[item.itemIndex]) && <div className="chat-bubble assistant question">
+        <strong>{reviewBlocked ? '원문을 확인하면 이어서 계산할 수 있어요.' : '지금 확인할 질문은 여기까지예요.'}</strong>
+        <p>{reviewBlocked ? '아직 금액을 계산하지 않았어요. 위에서 근거 조문을 선택하거나 PDF를 다시 분석해 주세요.' : questions.some(question => skipped[question.id])
           ? '모르는 값은 비워뒀어요. 해당 항목의 금액은 확정하지 않았습니다.'
           : '계산된 금액은 검토용 초안입니다. 적용 범위와 근거를 확인해 주세요.'}</p>
       </div>}
       {(erce.unmappedArticles || []).length > 0 && <div className="chat-note">산식을 확정하지 못한 조문 {erce.unmappedArticles.length}개는 계산에서 제외했어요.</div>}
-      {(erce.deferredItems || []).length > 0 && <div className="chat-note">실시 여부나 규모가 정해지지 않은 항목 {erce.deferredItems.length}개는 지금 숫자를 묻지 않고 검토 대상으로 남겼어요.</div>}
+      {(erce.deferredItems || []).length > 0 && <details className="chat-context-note">
+        <summary>추계와 함께 참고할 내용이 있어요</summary>
+        <p>아래 내용은 별도 금액으로 더하지 않았어요. 기존 비용과의 관계나 추가 확인이 필요한 이유를 살펴볼 수 있어요.</p>
+        {erce.deferredItems.map((row, index) => <div className="chat-context-item" key={`${row.itemIndex ?? index}:${row.name}`}>
+          <strong>{row.name || '참고 내용'}</strong>
+          <span>{({ no_incremental_cost: '추가 비용 없음으로 판단한 내용', needs_review: '계산 방법을 확인할 내용',
+            defer: '적용 조건을 더 확인할 내용', not_estimated: '금액을 추계하지 않은 내용',
+            out_of_scope: '추계 범위에 포함하지 않은 내용' })[row.decision] || '계산 시 참고할 내용'}</span>
+          <p>{row.reason || '이 내용의 비용 발생 여부와 계산 조건은 추가 확인이 필요해요.'}</p>
+        </div>)}
+      </details>}
+      {(erce.deferredItems || []).some(row => row.decision === 'needs_review') && <p className="chat-note">계산 방법을 확인해야 하는 내용도 있어요. 위 참고사항에서 이유를 확인해 주세요.</p>}
       {(erce.reviewCandidates || []).length > 0 && <div className="chat-note">추가 비용 가능성 {(erce.reviewCandidates || []).length}건은 아직 금액에 포함하지 않았어요.</div>}
       {additionalQuestionCount > 0 && <div className="chat-note">다른 확인값 {additionalQuestionCount}개는 우선 질문에서 제외했어요. 필요한 경우 이어서 검토할 수 있어요.</div>}
       {additionalQuestionCount > 0 && !current && <button className="chat-revisit" type="button" onClick={() => setShowAdditional(true)}>나머지 항목도 검토하기</button>}
       {Object.keys(skipped).length > 0 && <button className="chat-revisit" type="button" onClick={() => setSkipped({})}>건너뛴 질문 다시 보기</button>}
-      {allComputed && <div className="chat-bubble assistant">
-        <strong>금액을 모두 계산했어요. 비용추계서 초안으로 정리할게요.</strong>
-        <p>초안에 사용할 시작연도를 확인해 주세요. 입력한 가정과 근거도 함께 담아요.</p>
-        <label>추계 시작연도 <input className="chat-report-year" aria-label="초안 추계 시작연도"
+      {items.length > 0 && <div className="chat-bubble assistant">
+        <strong>{allComputed ? '추계가 끝났어요.' : '비용추계서 만들기'}</strong>
+        <p>{allComputed ? '확인한 값과 근거를 비용추계서로 정리할 수 있어요.'
+          : reviewBlocked ? '먼저 위에서 계산에 사용할 근거 조문을 확인해 주세요.'
+          : '위에서 필요한 값과 계산 기준을 확인하면 생성 버튼이 활성화돼요.'}</p>
+        {allComputed && <label>추계 시작연도 <input className="chat-report-year" aria-label="초안 추계 시작연도"
           type="number" min="1900" max="2200" value={reportStartYear || (chosenStartYear || '')}
-          onChange={event => setReportStartYear(event.target.value)} placeholder="예: 2026" /></label>
+          onChange={event => { setReportStartYear(event.target.value); setDraftRequested(false) }} placeholder="예: 2026" /></label>}
+        <button className="chat-generate" type="button" disabled={!allComputed || draftRunning || !Number.isInteger(chosenStartYear) || chosenStartYear < 1900 || chosenStartYear > 2200}
+          onClick={() => { setDraftRequested(true); setDraftRetry(value => value + 1) }}>{draftRunning ? '비용추계서를 정리하고 있어요…' : draft ? '비용추계서 다시 생성하기' : '비용추계서 생성하기'}</button>
+        {draft && <button className="chat-manual-choice" type="button" disabled={pdfDownloading} onClick={downloadPdf}>{pdfDownloading ? 'PDF를 만들고 있어요…' : 'PDF 내려받기'}</button>}
         {draftRunning && <p role="status">확인한 값으로 다시 계산하고 초안을 정리하고 있어요.</p>}
         {draftError && <><p className="chat-error" role="alert">{draftError}</p><button className="chat-revisit" type="button" onClick={() => setDraftRetry(value => value + 1)}>다시 만들기</button></>}
       </div>}
       {draft && <article className="chat-draft" aria-label="비용추계서 초안">
         <span className="chat-eyebrow">검토용 · 공식 비용추계서가 아닙니다</span>
-        <h3>{draft.title} 비용추계서 초안</h3>
+        <h3>{draft.title}</h3><p className="chat-report-subtitle">비용추계서</p>
+        <div className="chat-report-meta"><span>의안번호 {erce.billNo || '확인 필요'}</span><span>{draft.startYear}~{draft.startYear + draft.years - 1}년</span></div>
         <h4>Ⅰ. 비용추계 결과</h4><p>{draft.summary}</p>
-        <small>단위: 천원</small>
+        <small>단위: 백만원 · 반올림으로 합계에 차이가 있을 수 있습니다</small>
         <div className="chat-draft-table"><table><thead><tr><th>항목</th>
-          {Array.from({ length: draft.years }, (_, i) => <th key={i}>{draft.startYear + i}</th>)}<th>합계</th>
+          {Array.from({ length: draft.years }, (_, i) => <th key={i}>{draft.startYear + i}</th>)}<th>합계</th><th>연평균</th>
         </tr></thead><tbody>
           {draft.items.map((item, index) => <tr key={index}><th>{item.name}</th>
-            {item.annualAmountsThousand.map((value, i) => <td key={i}>{value.toLocaleString()}</td>)}
-            <td>{item.annualAmountsThousand.reduce((sum, value) => sum + value, 0).toLocaleString()}</td></tr>)}
-          <tr><th>합계</th>{draft.annualAmountsThousand.map((value, i) => <td key={i}>{value.toLocaleString()}</td>)}<td>{draft.totalAmountThousand.toLocaleString()}</td></tr>
+            {item.annualAmountsThousand.map((value, i) => <td key={i}>{Math.round(value / 1000).toLocaleString()}</td>)}
+            <td>{Math.round(item.annualAmountsThousand.reduce((sum, value) => sum + value, 0) / 1000).toLocaleString()}</td>
+            <td>{Math.round(item.annualAmountsThousand.reduce((sum, value) => sum + value, 0) / draft.years / 1000).toLocaleString()}</td></tr>)}
+          <tr><th>합계</th>{draft.annualAmountsThousand.map((value, i) => <td key={i}>{Math.round(value / 1000).toLocaleString()}</td>)}<td>{Math.round(draft.totalAmountThousand / 1000).toLocaleString()}</td><td>{Math.round(draft.totalAmountThousand / draft.years / 1000).toLocaleString()}</td></tr>
         </tbody></table></div>
         <h4>Ⅱ. 재정수반요인</h4>
         {draft.items.map((item, index) => <p key={index}>{item.triggerRef || '조문 확인 필요'} · {item.name}</p>)}
         <h4>Ⅲ. 추계의 전제와 상세내역</h4>
-        {draft.items.map((item, index) => <details key={index}><summary>{item.name} · 산식과 입력 근거</summary>
-          <p>{item.formula}</p>
-          {Object.entries(item.resolvedVariables).map(([key, row]) => <p key={key}>
-            <strong>{LABELS[key] || key}</strong>: {JSON.stringify(row.value)} {row.unit}<br /><small>{row.source_ref}</small>
-          </p>)}
-        </details>)}
+        {draft.items.map((item, index) => <section className="report-cost-section" key={index}><strong>{item.name}</strong>
+          <p className="report-formula">{item.derivationTrace?.some(step => step.advance_cases != null)
+            ? '추정 지원 건수 × 월 지원금 × 지원 개월 − 기존 사업 예산'
+            : item.derivationTrace?.[0]?.expression || item.formula}</p>
+          {item.documentAssumptions?.length ? item.documentAssumptions.map((note, noteIndex) => <p className="report-assumption-note" key={noteIndex}>{note}</p>) : item.referenceNotice && <p className="report-assumption-note">유사 자료를 참고한 가정입니다. 실제 지급 기준·대상·시행연도는 별도 확인이 필요합니다.</p>}
+          {item.derivationTrace?.some(step => step.advance_cases != null) && <div className="chat-draft-table"><small>금액: 백만원 · 선지급 건수: 건</small><table>
+            <thead><tr><th>연도</th><th>추정 선지급 건수</th><th>급여 지출</th><th>기존 예산 차감</th><th>추가 소요</th></tr></thead>
+            <tbody>{item.derivationTrace.map(step => <tr key={step.year}><th>{step.year}</th><td>{step.advance_cases.toLocaleString()}</td>
+              <td>{Math.round(step.gross_expense / 1000000).toLocaleString()}</td><td>{Math.round(step.legacy_budget / 1000000).toLocaleString()}</td>
+              <td>{Math.round(step.additional_expense / 1000000).toLocaleString()}</td></tr>)}</tbody></table></div>}
+          <ErceEvidence item={item} startYear={draft.startYear} labels={LABELS} />
+        </section>)}
         <h4>Ⅳ. 부대의견 및 검토사항</h4>
         <p>사용자 입력과 선례 가정의 적용 조건, 중복 지원 및 비용 항목의 누락 여부를 검토해 주세요. 입력하지 않은 선택 변수에는 산식 기본값이 적용됩니다.</p>
         {draft.exclusions.map((text, index) => <p className="chat-note" key={index}>미산출·검토 보류: {text}</p>)}
-        <button className="chat-revisit" type="button" onClick={downloadDraft}>초안 내려받기 (.md)</button>
+        <div className="chat-report-actions"><button className="chat-generate" type="button" disabled={pdfDownloading} onClick={downloadPdf}>{pdfDownloading ? 'PDF를 만들고 있어요…' : 'PDF 내려받기'}</button>
+          <button className="chat-revisit" type="button" onClick={downloadDraft}>초안 내려받기 (.md)</button></div>
+        {pdfError && <p className="chat-error" role="alert">{pdfError}</p>}
       </article>}
     </section>
+    {current && <aside className="chat-variable-panel" aria-label="변수 참고 후보">
+      <span className="chat-eyebrow">지금 확인하는 값</span>
+      <h3>{LABELS[current.variable] || '필요한 변수'}</h3>
+      <p className="chat-panel-description">같은 변수의 참고 후보예요. 대상과 규모가 맞는지 확인하고 선택해 주세요.</p>
+      {candidates.length ? candidates.map(candidate => <div className="chat-variable-card" key={candidate.id}>
+        <span className="chat-variable-kind">{candidate.sourceClass === 'official_standard' ? '공식 기준' : '유사 사례 · 가정 후보'}</span>
+        <strong>{formatReferenceValue(candidate)}</strong>
+        {candidate.availableAt && <small>자료 공개·확보일 {candidate.availableAt}</small>}
+        {candidate.scope && <p>{candidate.scope}</p>}
+        {candidate.note && <p>{candidate.note}</p>}
+        <details><summary>근거 확인</summary><p>{displaySources(candidate.source) || '근거를 추가로 확인해 주세요.'}</p>
+          {typeof candidate.value === 'object' && <pre>{JSON.stringify(candidate.value, null, 2)}</pre>}</details>
+        <button className="chat-variable-select" type="button" disabled={running}
+          onClick={() => saveAnswer(candidate.value, candidate.source, candidate)}>이 값 선택하기</button>
+      </div>) : <div className="chat-variable-empty">현재 적용할 만한 후보를 찾지 못했어요. 직접 입력하거나 건너뛸 수 있어요.</div>}
+      <button className="chat-manual-choice" type="button" disabled={running} onClick={focusManualInput}>직접 입력하기</button>
+      <small className="chat-panel-footer">선택한 값은 근거와 함께 초안에 남겨요. 후보값이 정답이라는 뜻은 아니에요.</small>
+    </aside>}
+    </div>
   )
 }

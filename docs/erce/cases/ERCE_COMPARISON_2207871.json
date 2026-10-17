@@ -1,0 +1,94 @@
+{
+  "bill_no": "2207871",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2207871.json",
+  "first": {
+    "route": "disabled_worker_minimum_wage_gap",
+    "formula_family_matches": true,
+    "status": "needs_input",
+    "blocking_condition": "linked_bill_scope_confirmation",
+    "unnecessary_condition": true,
+    "total_eok": null,
+    "error_percent": null
+  },
+  "gold": {
+    "estimate_no": "25B0616",
+    "reply_date": "2025-05-14",
+    "period": [
+      2026,
+      2030
+    ],
+    "scenarios": {
+      "share30": {
+        "total_eok": 990,
+        "annual_eok": [
+          171,
+          184,
+          197,
+          211,
+          227
+        ]
+      },
+      "share50": {
+        "total_eok": 1650,
+        "annual_eok": [
+          285,
+          306,
+          328,
+          352,
+          378
+        ]
+      },
+      "share100": {
+        "total_eok": 3299,
+        "annual_eok": [
+          571,
+          612,
+          656,
+          704,
+          756
+        ]
+      }
+    },
+    "formula": "대상자 전망×max(최저시급−평균시급,0)×월평균시간×12개월×보조율",
+    "scope": "직업재활시설 최저임금적용제외 근로자. 다른사업체 적용제외근로자 제외, 가용자료 한계로 전체시설 시급·시간 대리 사용",
+    "count_history": {
+      "2020": 8016,
+      "2021": 8393,
+      "2022": 8741,
+      "2023": 8975,
+      "2024": 9189
+    },
+    "wage_history": {
+      "2020": 4903,
+      "2021": 5038,
+      "2022": 5447,
+      "2023": 5644,
+      "2024": 5705
+    },
+    "monthly_hours_history": {
+      "2020": 106,
+      "2021": 106,
+      "2022": 119,
+      "2023": 118,
+      "2024": 118
+    },
+    "monthly_hours_display": 113,
+    "minimum_wage_base_2025": 10030,
+    "minimum_growth": {
+      "2026": 0.039,
+      "2027": 0.038,
+      "2028": 0.038,
+      "2029": 0.038,
+      "2030": 0.038
+    },
+    "forecast_vintage": "2025-04",
+    "linked_other_bill_required": false
+  },
+  "reinforcement_targets": [
+    "직접차액보조와 최저임금적용제외폐지 연계조건을 분리",
+    "2020~2024 대상·시급·시간 이력과2025.4최저임금전망 후보 추가",
+    "법정지원률 아닌30/50/100% 시나리오 유지"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

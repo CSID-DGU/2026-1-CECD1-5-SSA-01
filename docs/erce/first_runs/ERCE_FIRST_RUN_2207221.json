@@ -1,0 +1,247 @@
+{
+  "bill_no": "2207221",
+  "bill_name": "장애인기업활동 촉진법 일부개정법률안",
+  "proposer": "김동아",
+  "propose_date": "2025-01-03",
+  "original_pdf_date_issue": "원문표지2024.1.3이나 수집메타데이터2025-01-03. 22대·7221번호 및 본문2024사례와 맞는 메타날짜 사용, 원문오기는 별도 보존",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "article": "제10조의3제2항",
+      "page": 3,
+      "quote": "업무지원인서비스의운영에필요한경비를지원하여야한다.",
+      "verified": true
+    }
+  ],
+  "ai_decisions": [
+    {
+      "article": "제10조의3제2항",
+      "decision": "conditional_cost_candidate",
+      "route": "transfer_service_use",
+      "reason": "센터 위탁은 재량이나 위탁시 경비지원 의무. 신규센터설치 아님. 기존서비스에 대한 위탁사업운영비/인력지원의 국고지원 증가 검토",
+      "conditions": "위탁 실시·지원확대·추가국고부담 범위 확인 필요. 13033전체기업이나0.3%현재지원율을 미래수급자로 자동확정하지 않음"
+    }
+  ],
+  "known_context": {
+    "potential_target_enterprises": 13033,
+    "current_supported_share_approx": 0.003,
+    "source_ref": "원문PDF1~2쪽 제안이유",
+    "use_as_future_recipient_count": false
+  },
+  "candidate_review": "ERCE DB 업무지원인·장애인기업 동일과업 단가 및 방법0건. 장애인활동지원·근로지원은 대상과제도가 달라 자동전용하지 않음",
+  "payload": {
+    "bill_no": "2207221",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "transfer_service_use",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "policy_domain": "1인 중증장애인기업 업무지원인 서비스",
+    "explicit_inputs": {},
+    "selected_evidence_keys": [],
+    "selected_method_keys": []
+  },
+  "web_result": {
+    "status": "needs_input",
+    "routeKey": "transfer_service_use",
+    "formulaKey": "TRANSFER_SERVICE_USE_V1",
+    "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+    "missingVariables": [
+      "recipient_count",
+      "visits_per_recipient",
+      "cost_per_visit"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200487:contract_inpatient:visits_per_recipient:2024",
+        "variableKey": "visits_per_recipient",
+        "value": 3.131312193672954,
+        "unit": "visit/person/year",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "2023년 국가유공자 가족/유족 정부지원 실적 168665건/53864명. 입원·외래·약제와 병원을 구분하며 원 분자/분모로 계산. 본인 집단 이용률로 대체 불가",
+        "scope": "6·25참전 소년소녀병 위탁병원 입원",
+        "serviceFunction": "위탁병원 입원",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:contract_outpatient:visits_per_recipient:2024",
+        "variableKey": "visits_per_recipient",
+        "value": 4.333469478687063,
+        "unit": "visit/person/year",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "2023년 국가유공자 가족/유족 정부지원 실적 233418건/53864명. 입원·외래·약제와 병원을 구분하며 원 분자/분모로 계산. 본인 집단 이용률로 대체 불가",
+        "scope": "6·25참전 소년소녀병 위탁병원 외래",
+        "serviceFunction": "위탁병원 외래",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_drug:visits_per_recipient:2024",
+        "variableKey": "visits_per_recipient",
+        "value": 0.298290117868161,
+        "unit": "visit/person/year",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "2023년 국가유공자 가족/유족 정부지원 실적 347593건/1165285명. 입원·외래·약제와 병원을 구분하며 원 분자/분모로 계산. 본인 집단 이용률로 대체 불가",
+        "scope": "6·25참전 소년소녀병 보훈병원 약제",
+        "serviceFunction": "보훈병원 약제",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_inpatient:visits_per_recipient:2024",
+        "variableKey": "visits_per_recipient",
+        "value": 0.1335587431400902,
+        "unit": "visit/person/year",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "2023년 국가유공자 가족/유족 정부지원 실적 155634건/1165285명. 입원·외래·약제와 병원을 구분하며 원 분자/분모로 계산. 본인 집단 이용률로 대체 불가",
+        "scope": "6·25참전 소년소녀병 보훈병원 입원",
+        "serviceFunction": "보훈병원 입원",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_outpatient:visits_per_recipient:2024",
+        "variableKey": "visits_per_recipient",
+        "value": 0.48173193682232246,
+        "unit": "visit/person/year",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "2023년 국가유공자 가족/유족 정부지원 실적 561355건/1165285명. 입원·외래·약제와 병원을 구분하며 원 분자/분모로 계산. 본인 집단 이용률로 대체 불가",
+        "scope": "6·25참전 소년소녀병 보훈병원 외래",
+        "serviceFunction": "보훈병원 외래",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:contract_inpatient:cost_per_visit:2024",
+        "variableKey": "cost_per_visit",
+        "value": [
+          27578,
+          28608,
+          29677,
+          30786,
+          31936
+        ],
+        "unit": "KRW/visit",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "정부 지원금 지출/수진 건수 기반 단가를 선례의 상승률로 연장. 전체 의료비 단가가 아니므로 60% 감면율을 다시 곱하지 않음. 채널·서비스·연도 확인 필수",
+        "scope": "6·25참전 소년소녀병 위탁병원 입원",
+        "serviceFunction": "위탁병원 입원",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:contract_outpatient:cost_per_visit:2024",
+        "variableKey": "cost_per_visit",
+        "value": [
+          19941,
+          20957,
+          22026,
+          23148,
+          24328
+        ],
+        "unit": "KRW/visit",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "정부 지원금 지출/수진 건수 기반 단가를 선례의 상승률로 연장. 전체 의료비 단가가 아니므로 60% 감면율을 다시 곱하지 않음. 채널·서비스·연도 확인 필수",
+        "scope": "6·25참전 소년소녀병 위탁병원 외래",
+        "serviceFunction": "위탁병원 외래",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_drug:cost_per_visit:2024",
+        "variableKey": "cost_per_visit",
+        "value": [
+          25084,
+          23432,
+          21890,
+          20449,
+          19102
+        ],
+        "unit": "KRW/visit",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "정부 지원금 지출/수진 건수 기반 단가를 선례의 상승률로 연장. 전체 의료비 단가가 아니므로 60% 감면율을 다시 곱하지 않음. 채널·서비스·연도 확인 필수",
+        "scope": "6·25참전 소년소녀병 보훈병원 약제",
+        "serviceFunction": "보훈병원 약제",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_inpatient:cost_per_visit:2024",
+        "variableKey": "cost_per_visit",
+        "value": [
+          140127,
+          179541,
+          230043,
+          294749,
+          377656
+        ],
+        "unit": "KRW/visit",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "정부 지원금 지출/수진 건수 기반 단가를 선례의 상승률로 연장. 전체 의료비 단가가 아니므로 60% 감면율을 다시 곱하지 않음. 채널·서비스·연도 확인 필수",
+        "scope": "6·25참전 소년소녀병 보훈병원 입원",
+        "serviceFunction": "보훈병원 입원",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:hospital_outpatient:cost_per_visit:2024",
+        "variableKey": "cost_per_visit",
+        "value": [
+          34487,
+          36708,
+          39072,
+          41588,
+          44266
+        ],
+        "unit": "KRW/visit",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.11~14",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "정부 지원금 지출/수진 건수 기반 단가를 선례의 상승률로 연장. 전체 의료비 단가가 아니므로 60% 감면율을 다시 곱하지 않음. 채널·서비스·연도 확인 필수",
+        "scope": "6·25참전 소년소녀병 보훈병원 외래",
+        "serviceFunction": "보훈병원 외래",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "visits_per_recipient": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "cost_per_visit": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "first_total_eok": null,
+  "error_percent": null
+}

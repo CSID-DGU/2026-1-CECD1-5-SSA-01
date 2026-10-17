@@ -1,0 +1,127 @@
+{
+  "bill_no": "2203287",
+  "run_date": "2026-10-09",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2203287",
+    "bill_name": "양육비 이행확보 및 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-08-28",
+    "articles": [
+      {
+        "article_ref": "제21조의6제3~4항",
+        "source_quote": "부모합산소득에서양육비채무자의소득이차지하는비율",
+        "source_page": 9,
+        "change_summary": "이번금액은부모합산소득/자녀나이별표준양육비에개별가산감액·채무자소득분담률적용.기존정액20만원강제전용안함",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "이번금액은부모합산소득/자녀나이별표준양육비에개별가산감액·채무자소득분담률적용.기존정액20만원강제전용안함",
+        "route_key": "direct_annual_amount",
+        "route_reason": "대상조건과새지급금액산식구분",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의11제4항",
+        "source_quote": "회수하지아니하거나회수금액을감경",
+        "source_page": 13,
+        "change_summary": "저소득채무자회수감면.수입추계/회수율은별도이며지급지출에서상계안함",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "저소득채무자회수감면.수입추계/회수율은별도이며지급지출에서상계안함",
+        "route_key": "",
+        "route_reason": "대상조건과새지급금액산식구분",
+        "variables": []
+      },
+      {
+        "article_ref": "제14조삭제·제23조",
+        "source_quote": "제14조및제14조의2부터제14조의4까지를각각삭제한다.",
+        "source_page": 6,
+        "change_summary": "기존긴급지원대체와자료·금융조회/통지/수수료면제운영범위.명시IT신축이없어9.48억원자동가산안함",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "기존긴급지원대체와자료·금융조회/통지/수수료면제운영범위.명시IT신축이없어9.48억원자동가산안함",
+        "route_key": "",
+        "route_reason": "대상조건과새지급금액산식구분",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "advance_payload": {
+    "bill_no": "2203287",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-09",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "child_support_advance_expense",
+    "child_support_model": "child_support_advance_expense",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "support_derivation_note": "정답후가구·채권필터/기존사업대체예산과전산사업수명주기분리",
+    "child_support_scope_note": "새표준양육비/부모소득분담액이원문우선.기존단가20만원후보는거절,다른대상근거는참고후보",
+    "estimation_start_note": "공포후6개월의2026~2030시행준비참고가정",
+    "selected_evidence_keys": [
+      "2201707:child_support_advance_expense:household_forecast:reviewed",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed",
+      "2201707:child_support_advance_expense:advance_months:reviewed",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2201707:child_support_advance_expense:household_forecast:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:advance_months:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed": "동일양육비채권자대상모형/기존사업대체참고.정액20만원제외,표준액하위산식필요"
+    },
+    "selected_method_keys": [
+      "2201707:child_support_advance_expense"
+    ],
+    "method_selection_reasons": {
+      "2201707:child_support_advance_expense": "동일선지급급여/전산사업과업범위"
+    },
+    "method_confirmations": {
+      "2201707:child_support_advance_expense": {
+        "child_support_scope_note": "기존긴급지원차감·회수수입분리확인",
+        "estimation_start_note": "2026시작참고가정"
+      }
+    },
+    "advance_take_up_scenario": "all_eligible",
+    "claim_count_rounding": "final_half_up"
+  },
+  "calculation": {
+    "status": "needs_input",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [
+      "advance_monthly_amount"
+    ],
+    "derivationTrace": []
+  },
+  "whole_bill_total": null,
+  "whole_error_percent": null,
+  "main_missing_input": "원문표준양육비표/부모합산소득·개별조정·채무자소득비중으로계산한평균선지급액",
+  "scope_pending": [
+    "정기지급채권만포함하는모집단인지기존조사비율범위확인",
+    "회수감면/수입",
+    "조회/통지/수수료/행정비"
+  ],
+  "limitation": "기존대상필터피연산자는선택했지만지급액이없어총액미산출.연령·부모소득하위산식은아직미구현.20만원을미선택한것이핵심범위판단"
+}

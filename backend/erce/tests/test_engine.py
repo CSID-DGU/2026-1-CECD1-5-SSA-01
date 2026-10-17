@@ -94,6 +94,7 @@ class ERCEEngineTest(unittest.TestCase):
     def test_every_direct_route_dispatches_without_precedent_search(self) -> None:
         from unittest.mock import patch
         structured = {"headcount_by_grade": {"A": 2}, "salary_by_grade": {"A": 1000000},
+                      "survival_by_cohort": [[1, .9], [1]],
                       "historical_annual_fee_revenues": [1000000, 2000000],
                       "other_channel_base_year": 2024, "other_channel_growth_rate": 0,
                       "committee_components": [{"paid_members": 2, "annual_meetings": 3,
@@ -121,6 +122,12 @@ class ERCEEngineTest(unittest.TestCase):
                     values["benefit_per_recipient"]["unit"] = "KRW/person/month"
                 if key == "TRANSFER_BENEFIT_ABOLITION_V1":
                     values["existing_benefit_per_recipient"]["unit"] = "KRW/person/month"
+                if key == "ANNUAL_PUBLIC_SERVICE_SUPPORT_V1":
+                    values["annual_service_cost_per_person"]["unit"] = "KRW/person/year"
+                    values["public_support_share"]["unit"] = "ratio"
+                if key == "NEW_BORROWING_INTEREST_SUPPORT_V1":
+                    for name in values:
+                        values[name]["unit"] = "KRW/year" if name == "new_borrowing_amount" else "ratio"
                 if "premium_receipts_by_year" in values:
                     values["premium_receipts_by_year"]["unit"] = "KRW/year"
                     values["new_general_support_rate"]["unit"] = "ratio"

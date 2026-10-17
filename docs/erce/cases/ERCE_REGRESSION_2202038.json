@@ -1,0 +1,436 @@
+{
+  "bill_no": "2202038",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "committee_payload": {
+    "bill_no": "2202038",
+    "route_key": "committee_components",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "development_review",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "regional_advocacy_case_scaled_committee",
+    "committee_workload_proxy": "suspected_cases_scaled_members",
+    "committee_rounding": "half_up_after_cap",
+    "public_officials_paid": false,
+    "reference_region": "서울",
+    "support_derivation_note": "지역별사례규모로위촉위원수산정·28명상한·정수반올림.전국기본경비·인력신설아님",
+    "committee_scope_note": "공무원당연직미지급.학대사례를정원비교지표로준용하며사례마다회의를연다고계산하지않음",
+    "estimation_start_note": "공포후6개월을2025~2029통년으로가정한정답사후비교",
+    "selected_evidence_keys": [
+      "2202038:regional_suspected_cases:reviewed",
+      "2202038:reference_suspected_cases:reviewed",
+      "2202038:reference_paid_members:reviewed",
+      "2202038:maximum_paid_members:reviewed",
+      "2202038:annual_meetings:reviewed",
+      "2202038:meeting_allowance:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2202038:regional_suspected_cases:reviewed": "동일지역협의회규모·업무의역사적선례모형준용",
+      "2202038:reference_suspected_cases:reviewed": "동일지역협의회규모·업무의역사적선례모형준용",
+      "2202038:reference_paid_members:reviewed": "동일지역협의회규모·업무의역사적선례모형준용",
+      "2202038:maximum_paid_members:reviewed": "동일지역협의회규모·업무의역사적선례모형준용",
+      "2202038:annual_meetings:reviewed": "동일지역협의회규모·업무의역사적선례모형준용",
+      "2202038:meeting_allowance:reviewed": "동일지역협의회규모·업무의역사적선례모형준용"
+    },
+    "selected_method_keys": [
+      "2202038:regional_advocacy_case_scaled_committee"
+    ],
+    "payer": "government",
+    "method_selection_reasons": {
+      "2202038:regional_advocacy_case_scaled_committee": "원문시도지역협의회설치"
+    },
+    "method_confirmations": {
+      "2202038:regional_advocacy_case_scaled_committee": {
+        "committee_scope_note": "지역위촉위원수당만계산.기타직제·사무국은추가하지않음",
+        "estimation_start_note": "2025~2029통년은확인된정답의가정"
+      }
+    }
+  },
+  "committee_result": {
+    "route_key": "committee_components",
+    "subtype": "",
+    "formula_key": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "evidence_key": "2202038:regional_suspected_cases:reviewed,2202038:reference_suspected_cases:reviewed,2202038:reference_paid_members:reviewed,2202038:maximum_paid_members:reviewed,2202038:annual_meetings:reviewed,2202038:meeting_allowance:reviewed",
+    "annual_amounts_thousand": [
+      103600,
+      103600,
+      103600,
+      103600,
+      103600
+    ],
+    "source_refs": [
+      "2202038 비용추계서24C2066 PDF4~5쪽표2~3;2022장애인학대현황·서울2024위원회·경기조례준용",
+      "2202038 비용추계서24C2066 PDF4~5쪽"
+    ],
+    "resolved_variables": {
+      "committee_components": {
+        "key": "committee_components",
+        "value": [
+          {
+            "paid_members": 23,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 20,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 17,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 13,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 8,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 11,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 17,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 7,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 28,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 14,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 21,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 15,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 10,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 14,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 16,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 16,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          },
+          {
+            "paid_members": 9,
+            "annual_meetings": 2,
+            "meeting_unit_price": 200000
+          }
+        ],
+        "unit": "component_bundle",
+        "source_class": "calculated_estimate",
+        "source_ref": "2202038 비용추계서24C2066 PDF4~5쪽표2~3;2022장애인학대현황·서울2024위원회·경기조례준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2202038:regional_advocacy_case_scaled_committee"
+    ]
+  },
+  "regional_trace": [
+    {
+      "region": "서울",
+      "suspected_cases": 204,
+      "uncapped_members": 23,
+      "paid_members": 23,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "부산",
+      "suspected_cases": 181,
+      "uncapped_members": 20.40686274509804,
+      "paid_members": 20,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "대구",
+      "suspected_cases": 154,
+      "uncapped_members": 17.362745098039216,
+      "paid_members": 17,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "인천",
+      "suspected_cases": 117,
+      "uncapped_members": 13.191176470588236,
+      "paid_members": 13,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "광주",
+      "suspected_cases": 70,
+      "uncapped_members": 7.892156862745098,
+      "paid_members": 8,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "대전",
+      "suspected_cases": 99,
+      "uncapped_members": 11.161764705882353,
+      "paid_members": 11,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "울산",
+      "suspected_cases": 151,
+      "uncapped_members": 17.024509803921568,
+      "paid_members": 17,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "세종",
+      "suspected_cases": 62,
+      "uncapped_members": 6.990196078431373,
+      "paid_members": 7,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "경기",
+      "suspected_cases": 569,
+      "uncapped_members": 64.15196078431373,
+      "paid_members": 28,
+      "cap_applied": true,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "강원",
+      "suspected_cases": 125,
+      "uncapped_members": 14.093137254901961,
+      "paid_members": 14,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "충북",
+      "suspected_cases": 188,
+      "uncapped_members": 21.19607843137255,
+      "paid_members": 21,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "충남",
+      "suspected_cases": 136,
+      "uncapped_members": 15.333333333333334,
+      "paid_members": 15,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "전북",
+      "suspected_cases": 92,
+      "uncapped_members": 10.372549019607844,
+      "paid_members": 10,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "전남",
+      "suspected_cases": 123,
+      "uncapped_members": 13.867647058823529,
+      "paid_members": 14,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "경북",
+      "suspected_cases": 144,
+      "uncapped_members": 16.235294117647058,
+      "paid_members": 16,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "경남",
+      "suspected_cases": 144,
+      "uncapped_members": 16.235294117647058,
+      "paid_members": 16,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    },
+    {
+      "region": "제주",
+      "suspected_cases": 82,
+      "uncapped_members": 9.245098039215685,
+      "paid_members": 9,
+      "cap_applied": false,
+      "rounding": "half_up_after_cap",
+      "expression": "round_half_up(min(상한,기준위촉위원×지역사례/기준사례))"
+    }
+  ],
+  "regional_paid_members": {
+    "서울": 23,
+    "부산": 20,
+    "대구": 17,
+    "인천": 13,
+    "광주": 8,
+    "대전": 11,
+    "울산": 17,
+    "세종": 7,
+    "경기": 28,
+    "강원": 14,
+    "충북": 21,
+    "충남": 15,
+    "전북": 10,
+    "전남": 14,
+    "경북": 16,
+    "경남": 16,
+    "제주": 9
+  },
+  "total_paid_members": 259,
+  "committee_total_thousand": 518000,
+  "event_payload": {
+    "bill_no": "2202038",
+    "route_key": "quantity_unit",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "holdout",
+    "start_year": 2025,
+    "years": 5,
+    "service_cost_basis": "national_abuse_prevention_commemorative_event",
+    "commemorative_event_scale": "national_single_day_event",
+    "event_price_projection": "freeze_reviewed_event_package",
+    "selected_evidence_keys": [
+      "2201850:commemorative_event:unit_cost:reviewed",
+      "2201850:commemorative_event:annual_quantity:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2201850:commemorative_event:unit_cost:reviewed": "동일국가차원학대예방기념일의과업·규모를검토한사후준용",
+      "2201850:commemorative_event:annual_quantity:reviewed": "동일국가차원학대예방기념일의과업·규모를검토한사후준용"
+    },
+    "selected_method_keys": [
+      "2201850:annual_commemorative_event"
+    ],
+    "payer": "government",
+    "method_selection_reasons": {
+      "2201850:annual_commemorative_event": "캠페인영상이아닌기념일행사"
+    },
+    "method_confirmations": {
+      "2201850:annual_commemorative_event": {
+        "national_event_scope": "국가의연간예방의날기념행사.지자체추가사업미포함",
+        "annual_recurrence": "연1회행사가정.예방주간7일을7회로계산하지않음",
+        "historical_price_freeze": "2024예산9700만원참고연1억원동결선례",
+        "forecast_start_basis": "공포후6개월의2025~2029시작은해당정답의가정이며확정공포일아님"
+      }
+    }
+  },
+  "event_result": {
+    "route_key": "quantity_unit",
+    "subtype": "",
+    "formula_key": "COMMON_QUANTITY_UNIT_V1",
+    "formula": "수량 × 단가",
+    "evidence_key": "2201850:commemorative_event:unit_cost:reviewed,2201850:commemorative_event:annual_quantity:reviewed",
+    "annual_amounts_thousand": [
+      100000,
+      100000,
+      100000,
+      100000,
+      100000
+    ],
+    "source_refs": [
+      "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+      "2201850 비용추계서24C2064 PDF4쪽"
+    ],
+    "resolved_variables": {
+      "quantity": {
+        "key": "quantity",
+        "value": 1,
+        "unit": "event/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+        "is_assumption": true
+      },
+      "unit_cost": {
+        "key": "unit_cost",
+        "value": 100000000,
+        "unit": "KRW/event",
+        "source_class": "precedent_assumption",
+        "source_ref": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": [
+      "2201850:annual_commemorative_event"
+    ]
+  },
+  "event_total_thousand": 500000,
+  "annual_amounts_thousand": [
+    203600,
+    203600,
+    203600,
+    203600,
+    203600
+  ],
+  "total_thousand": 1018000,
+  "gold_total_thousand": 1018000,
+  "difference_percent": 0,
+  "synthetic_web_status": "computed_review",
+  "resolved_top_level_variables": 3,
+  "total_top_level_variables": 3,
+  "deferred_review_items": [
+    "기존종합계획내용추가·신고의무자확대는정답상비수반.원계획추가독립검증은별도"
+  ],
+  "limitation": "정답확인후6개하위변수·정원추정식을보강한회귀.행사부분은최초성공한기존근거재사용유지.원2022통계·2024서울예산조례는정답인용참조로서독립원자료대조미완료"
+}

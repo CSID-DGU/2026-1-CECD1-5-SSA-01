@@ -1,0 +1,286 @@
+{
+  "bill_no": "2210913",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "basic": {
+    "route_key": "transfer_population_amount_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "evidence_key": "target_formula_inputs",
+    "annual_amounts_thousand": [
+      12753581198,
+      12333030955,
+      11909667211,
+      11388960403,
+      10880959766
+    ],
+    "source_refs": [
+      "2208381 비용추계서25C1087 PDF3쪽 표2;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+      "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+      "원문3쪽 제4조제1항",
+      "원문5쪽 현행 제4조제1항",
+      "매월지급; 원문4쪽2026-01-01시행"
+    ],
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6332884.728,
+          6111539.664,
+          5907495.12,
+          5677459.956,
+          5464223.328
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2037785.124,
+          1945553.532,
+          1890267.564,
+          1864119.576,
+          1860980.184
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2208381 비용추계서25C1087 PDF3쪽 표2의0~7세 각연령 합산;2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 200000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽 제4조제1항",
+        "is_assumption": false
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽 현행 제4조제1항",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "매월지급; 원문4쪽2026-01-01시행",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": []
+  },
+  "regional": [
+    {
+      "payload": {
+        "bill_no": "2210913",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제6항 0~7세"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3~4쪽 매월지급2026시행"
+          }
+        },
+        "evidence_mode": "development_review",
+        "selected_evidence_keys": [
+          "2210913:declining_region:age0-7:recipients:2026-2030"
+        ],
+        "child_population_geography": "인구감소지역89개시군구:2025",
+        "population_age_min": 0,
+        "population_age_max": 7,
+        "recipient_population_basis": "regional_2022_2024_trend_execution_0996",
+        "evidence_selection_reasons": {
+          "2210913:declining_region:age0-7:recipients:2026-2030": "동일 역사적 법안 정답의 지역·연령별 전망값 사후검증"
+        }
+      },
+      "result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2210913:declining_region:age0-7:recipients:2026-2030",
+        "annual_amounts_thousand": [
+          154215461,
+          149193230,
+          144946685,
+          141267859,
+          138022891
+        ],
+        "source_refs": [
+          "2210913 비용추계서25C3281 PDF4~6쪽; 표5 지역별 연령집단 인구×집행계수99.6%",
+          "원문3쪽 제4조제6항 0~7세",
+          "원문3~4쪽 매월지급2026시행"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              128512.884,
+              124327.692,
+              120788.904,
+              117723.216,
+              115019.076
+            ],
+            "unit": "person",
+            "source_class": "precedent_assumption",
+            "source_ref": "2210913 비용추계서25C3281 PDF4~6쪽; 표5 지역별 연령집단 인구×집행계수99.6%",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽 제4조제6항 0~7세",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문3~4쪽 매월지급2026시행",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      }
+    },
+    {
+      "payload": {
+        "bill_no": "2210913",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 50000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제6항 8~17세"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3~4쪽 매월지급2026시행"
+          }
+        },
+        "evidence_mode": "development_review",
+        "selected_evidence_keys": [
+          "2210913:declining_region:age8-17:recipients:2026-2030"
+        ],
+        "child_population_geography": "인구감소지역89개시군구:2025",
+        "population_age_min": 8,
+        "population_age_max": 17,
+        "recipient_population_basis": "regional_2022_2024_trend_execution_0996",
+        "evidence_selection_reasons": {
+          "2210913:declining_region:age8-17:recipients:2026-2030": "동일 역사적 법안 정답의 지역·연령별 전망값 사후검증"
+        }
+      },
+      "result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2210913:declining_region:age8-17:recipients:2026-2030",
+        "annual_amounts_thousand": [
+          181793506,
+          180359863,
+          179147333,
+          178096752,
+          177170472
+        ],
+        "source_refs": [
+          "2210913 비용추계서25C3281 PDF4~6쪽; 표5 지역별 연령집단 인구×집행계수99.6%",
+          "원문3쪽 제4조제6항 8~17세",
+          "원문3~4쪽 매월지급2026시행"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              302989.176,
+              300599.772,
+              298578.888,
+              296827.92,
+              295284.12
+            ],
+            "unit": "person",
+            "source_class": "precedent_assumption",
+            "source_ref": "2210913 비용추계서25C3281 PDF4~6쪽; 표5 지역별 연령집단 인구×집행계수99.6%",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": 50000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽 제4조제6항 8~17세",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문3~4쪽 매월지급2026시행",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": []
+      }
+    }
+  ],
+  "synthetic_web_checks": [
+    {
+      "synthetic": true,
+      "status": "computed_review",
+      "annual_amounts_thousand": [
+        154215461,
+        149193230,
+        144946685,
+        141267859,
+        138022891
+      ]
+    },
+    {
+      "synthetic": true,
+      "status": "computed_review",
+      "annual_amounts_thousand": [
+        181793506,
+        180359863,
+        179147333,
+        178096752,
+        177170472
+      ]
+    }
+  ],
+  "required_variables_filled": 9,
+  "required_variable_count": 9,
+  "regional_total_thousand": 1624214052,
+  "total_thousand": 60890413585,
+  "gold_display_total_thousand": 61000000000,
+  "display_total_difference_percent": 0.1796498606557377,
+  "gold_operand_total_thousand": 60890413586.4,
+  "limitation": "정답 열람 후 회귀검증. 지역인원은 정답 전망값 재사용이며 독립예측 성과 아님. 기본수당은 기존 수동DB매핑 유지. 상품권 행정비는 별도 미확정"
+}

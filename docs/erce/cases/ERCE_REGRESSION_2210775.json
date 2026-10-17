@@ -1,0 +1,247 @@
+{
+  "bill_no": "2210775",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2210775",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-12",
+    "route_key": "facility_survey_scope_expansion_delta",
+    "support_derivation": "facility_survey_scope_expansion_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "facility_expansion_scenario_confirmed": true,
+    "facility_price_mode": "freeze_reference_budget",
+    "facility_scope_comparison_note": "기존국비시설526중약80표본 조사와 법제화대상범위를 비교. 확대실시를 선례시나리오로 가정, 원문전수명령 확정아님",
+    "facility_expansion_proxy_note": "2023편의시설 실태전수조사5억원을 인권조사규모확대 비용으로 준용. 둘은 같은사업이 아니므로 유사예산 가정",
+    "facility_baseline_budget_note": "현행2025시설인권조사예산1억원은 같은조사 기존분이므로 차감. 새기관·인력은 추가하지 않음",
+    "facility_price_note": "2026~2030매년실시·두예산모두가격동결 가정. 최신공식 단가로 주장하지 않음",
+    "explicit_inputs": {},
+    "selected_evidence_keys": [
+      "2210775:expanded_survey_annual_budget:reviewed",
+      "2210775:existing_survey_annual_budget:reviewed",
+      "2210775:existing_survey_covered_facilities:reviewed",
+      "2210775:reference_government_funded_facilities:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2210775:expanded_survey_annual_budget:reviewed": "시설표본·기준범위 및 확대사업 예산·현행예산 차감 가정 확인",
+      "2210775:existing_survey_annual_budget:reviewed": "시설표본·기준범위 및 확대사업 예산·현행예산 차감 가정 확인",
+      "2210775:existing_survey_covered_facilities:reviewed": "시설표본·기준범위 및 확대사업 예산·현행예산 차감 가정 확인",
+      "2210775:reference_government_funded_facilities:reviewed": "시설표본·기준범위 및 확대사업 예산·현행예산 차감 가정 확인"
+    },
+    "selected_method_keys": [
+      "2210775:facility_survey_scope_expansion_delta"
+    ],
+    "method_selection_reasons": {
+      "2210775:facility_survey_scope_expansion_delta": "기존사업 중복제외 대신 표본확대 순증추계"
+    },
+    "method_confirmations": {
+      "2210775:facility_survey_scope_expansion_delta": {
+        "facility_scope_comparison_note": "기존국비시설526중약80표본 조사와 법제화대상범위를 비교. 확대실시를 선례시나리오로 가정, 원문전수명령 확정아님",
+        "facility_expansion_proxy_note": "2023편의시설 실태전수조사5억원을 인권조사규모확대 비용으로 준용. 둘은 같은사업이 아니므로 유사예산 가정",
+        "facility_baseline_budget_note": "현행2025시설인권조사예산1억원은 같은조사 기존분이므로 차감. 새기관·인력은 추가하지 않음",
+        "facility_price_note": "2026~2030매년실시·두예산모두가격동결 가정. 최신공식 단가로 주장하지 않음"
+      }
+    }
+  },
+  "result": {
+    "route_key": "facility_survey_scope_expansion_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2210775:expanded_survey_annual_budget:reviewed,2210775:existing_survey_annual_budget:reviewed,2210775:existing_survey_covered_facilities:reviewed,2210775:reference_government_funded_facilities:reviewed",
+    "annual_amounts_thousand": [
+      400000,
+      400000,
+      400000,
+      400000,
+      400000
+    ],
+    "source_refs": [
+      "2210775 비용추계서25C3154 PDF2~3쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          400000000,
+          400000000,
+          400000000,
+          400000000,
+          400000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2210775 비용추계서25C3154 PDF2~3쪽",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2210775:facility_survey_scope_expansion_delta"
+    ]
+  },
+  "web_interface_result": {
+    "status": "computed_review",
+    "routeKey": "facility_survey_scope_expansion_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      400000,
+      400000,
+      400000,
+      400000,
+      400000
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "expanded_budget_won": 500000000,
+        "existing_budget_won": 100000000,
+        "incremental_cost_won": 400000000,
+        "current_sample_facilities": 80,
+        "reference_facilities": 526,
+        "expansion_is_assumption": true,
+        "price_frozen": true
+      },
+      {
+        "year": 2027,
+        "expanded_budget_won": 500000000,
+        "existing_budget_won": 100000000,
+        "incremental_cost_won": 400000000,
+        "current_sample_facilities": 80,
+        "reference_facilities": 526,
+        "expansion_is_assumption": true,
+        "price_frozen": true
+      },
+      {
+        "year": 2028,
+        "expanded_budget_won": 500000000,
+        "existing_budget_won": 100000000,
+        "incremental_cost_won": 400000000,
+        "current_sample_facilities": 80,
+        "reference_facilities": 526,
+        "expansion_is_assumption": true,
+        "price_frozen": true
+      },
+      {
+        "year": 2029,
+        "expanded_budget_won": 500000000,
+        "existing_budget_won": 100000000,
+        "incremental_cost_won": 400000000,
+        "current_sample_facilities": 80,
+        "reference_facilities": 526,
+        "expansion_is_assumption": true,
+        "price_frozen": true
+      },
+      {
+        "year": 2030,
+        "expanded_budget_won": 500000000,
+        "existing_budget_won": 100000000,
+        "incremental_cost_won": 400000000,
+        "current_sample_facilities": 80,
+        "reference_facilities": 526,
+        "expansion_is_assumption": true,
+        "price_frozen": true
+      }
+    ],
+    "sourceRefs": [
+      "2210775 비용추계서25C3154 PDF2~3쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2210775:facility_survey_scope_expansion_delta"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2210775:facility_survey_scope_expansion_delta",
+        "source_bill_no": "2210775",
+        "available_at": "2025-06-30",
+        "reviewed_at": "2026-10-12",
+        "payer": "government",
+        "family_key": "facility_survey_scope_expansion_delta",
+        "source_ref": "2210775 비용추계서25C3154 PDF2~3쪽",
+        "match_groups": [
+          [
+            "장애인거주시설",
+            "장애인 거주시설"
+          ],
+          [
+            "인권실태조사",
+            "인권 실태조사"
+          ],
+          [
+            "매년",
+            "정기",
+            "법적근거"
+          ]
+        ],
+        "allowed_routes": [
+          "facility_survey_scope_expansion_delta"
+        ],
+        "support_derivation": "facility_survey_scope_expansion_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2210775:expanded_survey_annual_budget:reviewed",
+          "2210775:existing_survey_annual_budget:reviewed",
+          "2210775:existing_survey_covered_facilities:reviewed",
+          "2210775:reference_government_funded_facilities:reviewed"
+        ],
+        "required_confirmations": [
+          "facility_scope_comparison_note",
+          "facility_expansion_proxy_note",
+          "facility_baseline_budget_note",
+          "facility_price_note"
+        ],
+        "baseline_check": "기존사업 있음만으로 추가비제외 금지. 현재표본·대상·주기·공표업무와 확대시나리오를 먼저 비교",
+        "method_steps": [
+          "국비시설526중약80표본과 개정조사 범위를 비교하고 확대가정 승인",
+          "유사편의시설전수조사2023예산5억원 준용.526/80배로 예산을 자동계산하지 않음",
+          "기존2025시설인권조사예산1억원은 같은업무 예산이므로 차감",
+          "추가조직인력없음·매년실시·가격동결 가정으로 연4억원 산출"
+        ],
+        "limitation": "법안이전수를 확정한것 아님. 확대와5억원준용은 정답추계가정. 기존관측연도가 다르므로 최신적용시 재검토",
+        "lower_variable_keys": [
+          "expanded_survey_annual_budget",
+          "existing_survey_annual_budget",
+          "existing_survey_covered_facilities",
+          "reference_government_funded_facilities"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "기존사업 중복제외 대신 표본확대 순증추계",
+        "confirmed_assumptions": {
+          "facility_scope_comparison_note": "기존국비시설526중약80표본 조사와 법제화대상범위를 비교. 확대실시를 선례시나리오로 가정, 원문전수명령 확정아님",
+          "facility_expansion_proxy_note": "2023편의시설 실태전수조사5억원을 인권조사규모확대 비용으로 준용. 둘은 같은사업이 아니므로 유사예산 가정",
+          "facility_baseline_budget_note": "현행2025시설인권조사예산1억원은 같은조사 기존분이므로 차감. 새기관·인력은 추가하지 않음",
+          "facility_price_note": "2026~2030매년실시·두예산모두가격동결 가정. 최신공식 단가로 주장하지 않음"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          400000000,
+          400000000,
+          400000000,
+          400000000,
+          400000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2210775 비용추계서25C3154 PDF2~3쪽",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 20,
+  "gold_total_eok": 20,
+  "error_percent": 0,
+  "annual_display_matches": 5,
+  "unverified_baseline_exclusion_blocked": true,
+  "limitation": "정답의조사규모확대·유사예산·현행예산차감을 채택한 사후회귀. 법제화가 무조건전수확대된다는 규칙 아님"
+}

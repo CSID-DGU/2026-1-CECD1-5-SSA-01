@@ -1,0 +1,63 @@
+{
+  "bill_no": "2205097",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C4867",
+  "gold_date": "2024-11-22",
+  "first_total_won": null,
+  "gold_total_won": 11237000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 3,
+  "quote_total": 3,
+  "first_routes": [
+    "information_system_project_plan",
+    "information_system_operation"
+  ],
+  "gold_cost_items": [
+    "시스템 구축",
+    "시스템 운영",
+    "시스템 유지관리"
+  ],
+  "gold_parameters": {
+    "start_year": 2025,
+    "years": 5,
+    "build_components_million": {
+      "development": 3267,
+      "hardware_software": 2422,
+      "issuance_devices": 876,
+      "audit": 140,
+      "privacy_assessment": 64,
+      "procurement_fee": 9
+    },
+    "build_total_won": 6778000000,
+    "operation_base_won": 837000000,
+    "maintenance_base_won": 233000000,
+    "operation_price_year": 2023,
+    "maintenance_price_year": 2023,
+    "operation_start_year": 2026,
+    "maintenance_start_year": 2027,
+    "cpi": {
+      "2024": 0.025,
+      "2025": 0.021,
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02
+    }
+  },
+  "gold_annual_million": [
+    6778,
+    893,
+    1165,
+    1189,
+    1212
+  ],
+  "well_handled": "정보시스템·발급·전자회수 과업 파악, 다른 사업 구축비·무조건15%유지관리와 벌금상한 적용 거절",
+  "first_gaps": [
+    "2025모바일장애인등록증 예산안 구축6개 구성요소",
+    "2023모바일공무원증 운영비·유지관리비 단가",
+    "2026운영·무상하자보수 및2027유지관리 개시를 구분한 생애주기"
+  ],
+  "gold_penalty_note": "정답은 벌칙 수입 별도금액·공식미추계판정을 제시하지 않음. None 또는 별도검토와 공식미추계 구분.",
+  "reinforcement_performed": false
+}

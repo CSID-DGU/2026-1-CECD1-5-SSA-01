@@ -51,6 +51,48 @@ class GeneralCostResolution:
 
 
 FORMULAS: dict[str, dict[str, Any]] = {
+    "NEW_BORROWING_INTEREST_SUPPORT_V1": {
+        "expression": "당해 추가 차입액 × 조달금리 × 평잔계수 × 정부 이자지원 부담률 (기존 차입분 이자·원금 제외)",
+        "required": ("new_borrowing_amount", "borrowing_interest_rate", "average_balance_factor", "government_interest_support_share"),
+        "optional": ("growth_rate",),  # Propagate only to reject duplicate indexing.
+    },
+    "ANNUAL_PUBLIC_SERVICE_SUPPORT_V1": {
+        "expression": "대상자 수 × 1인당 연간 경비 × 공공재정 부담률 × 연도별 단가 조정계수 − 확인된 기존 공공지원액 (미입력 시 총지원액 시나리오)",
+        "required": ("recipient_count", "annual_service_cost_per_person", "public_support_share", "cost_adjustment_factors"),
+        "optional": ("existing_public_support",),
+    },
+    "COMMITTEE_MEMBER_INCREASE_V1": {
+        "expression": "추가 위촉하는 유급 민간위원 수 × 연간 회의횟수 × 1인 1회 참석비",
+        "required": ("additional_paid_members", "annual_meetings", "meeting_unit_price"),
+        "optional": (),
+    },
+    "ASSET_PHASED_INSTALLATION_V1": {
+        "expression": "전체 설치대상 수량 ÷ 설치기간 × 해당 연도 설치단가 (설치기간 종료 후 0)",
+        "required": ("total_installation_quantity", "installation_years", "installation_unit_cost"),
+        "optional": (),
+    },
+    "TRANSFER_POPULATION_AMOUNT_DELTA_V1": {
+        "expression": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "required": ("new_recipient_count", "existing_recipient_count", "benefit_per_recipient",
+                     "existing_benefit_per_recipient", "payments_per_year"),
+        "optional": (),
+    },
+    "RELATED_PROJECT_RATIO_V1": {
+        "expression": "동일 기간 기준 사업비 × 연관 사업비 비율 (기준 사업비와 별도 계상)",
+        "required": ("reference_project_cost", "related_project_ratio"),
+        "optional": (),
+    },
+    "SURVIVOR_PENSION_COHORT_DELTA_V1": {
+        "expression": "Σ(발생연도별 신규 유족 수 × 최초 연간 연금 증가액 × 이후 연금 인상계수 × 해당 집단 생존율) ÷ 가격환산계수",
+        "required": ("new_survivors", "initial_annual_pension_delta", "survival_by_cohort",
+                     "pension_index_factors", "price_index_factors"),
+        "optional": (),
+    },
+    "DEATH_GRANT_DELTA_V1": {
+        "expression": "당해 신규 사망자 수 × 기준소득월액 증가분 × 조위금 지급배수 ÷ 가격환산계수",
+        "required": ("new_survivors", "monthly_income_delta", "grant_months", "price_index_factors"),
+        "optional": (),
+    },
     "NON_TAX_FEE_REVENUE_AVERAGE_V1": {
         "expression": "과거 평균 수수료 수입 × 신규 면제비율",
         "required": ("historical_annual_fee_revenues", "exemption_rate"),
@@ -351,6 +393,12 @@ def _has_valid_value(inputs: Mapping[str, EvidenceInput], key: str) -> bool:
     if key not in inputs:
         return False
     raw = inputs[key].value
+    if key == "annual_amount":
+        return isinstance(raw, (int, float, list, tuple)) and not isinstance(raw, bool)
+    if key in {"new_borrowing_amount", "borrowing_interest_rate", "average_balance_factor", "government_interest_support_share"}:
+        return isinstance(raw, (int, float, list, tuple)) and not isinstance(raw, bool)
+    if key in {"plan_unit_cost", "survey_unit_cost"}:
+        return isinstance(raw, (int, float, Mapping)) and not isinstance(raw, bool)
     if key in {"annual_project_budget", "historical_annual_fee_revenues"}:
         return isinstance(raw, (list, tuple)) and bool(raw)
     if key in {"annual_case_count", "action_rate", "notices_per_case", "notice_unit_price",
@@ -371,6 +419,13 @@ def _has_valid_value(inputs: Mapping[str, EvidenceInput], key: str) -> bool:
         return isinstance(raw, (list, tuple)) and bool(raw) and all(
             isinstance(component, Mapping) for component in raw
         )
+    if key == "survival_by_cohort":
+        return isinstance(raw, (list, tuple)) and bool(raw)
+    if key in {"new_survivors", "initial_annual_pension_delta", "monthly_income_delta",
+               "pension_index_factors", "price_index_factors", "installation_unit_cost",
+               "new_recipient_count", "existing_recipient_count", "reference_project_cost",
+               "annual_service_cost_per_person", "public_support_share", "cost_adjustment_factors"}:
+        return isinstance(raw, (int, float, list, tuple)) and not isinstance(raw, bool)
     if key == "insurance_benefit_cohorts":
         return isinstance(raw, (list, tuple)) and bool(raw) and all(
             isinstance(cohort, Mapping) for cohort in raw
@@ -699,8 +754,9 @@ def _fee_revenue_annual_amounts(request: GeneralCostRequest, inputs: Mapping[str
 
 
 def resolve_general_cost(request: GeneralCostRequest) -> GeneralCostResolution:
-    if not 1 <= request.years <= 10:
-        raise ValueError("years must be between 1 and 10")
+    limit = 100 if request.formula_key in {"SURVIVOR_PENSION_COHORT_DELTA_V1", "DEATH_GRANT_DELTA_V1"} else 10
+    if not 1 <= request.years <= limit:
+        raise ValueError(f"years must be between 1 and {limit}")
     formula = FORMULAS.get(request.formula_key)
     if formula is None:
         raise ValueError(f"unsupported formula: {request.formula_key}")
@@ -728,7 +784,125 @@ def resolve_general_cost(request: GeneralCostRequest) -> GeneralCostResolution:
     try:
         first_fraction = _number(inputs, "first_year_fraction", 1.0)
         growth_factors = _growth_factors(request, inputs)
-        if request.formula_key in {"NON_TAX_FEE_REVENUE_AVERAGE_V1", "NON_TAX_FEE_CHANNEL_SHIFT_V1"}:
+        if request.formula_key == "DIRECT_ANNUAL_AMOUNT_V1" and isinstance(inputs["annual_amount"].value, (list, tuple)):
+            from math import isfinite
+            raw = inputs["annual_amount"].value
+            if inputs["annual_amount"].unit != "KRW/year" or len(raw) != request.years or any(
+                    isinstance(v, bool) or not isinstance(v, (int, float)) or not isfinite(v) or v < 0 for v in raw):
+                raise ValueError("annual_amount")
+            annual_won = [float(v) for v in raw]
+        elif request.formula_key == "NEW_BORROWING_INTEREST_SUPPORT_V1":
+            from backend.erce.loan_financing_evidence import new_borrowing_interest_amounts
+            annual_won = new_borrowing_interest_amounts(request, inputs)
+        elif request.formula_key == "ANNUAL_PUBLIC_SERVICE_SUPPORT_V1":
+            from math import isfinite
+            if inputs["annual_service_cost_per_person"].unit != "KRW/person/year":
+                raise ValueError("annual_service_cost_per_person unit must be annual")
+            if inputs["public_support_share"].unit != "ratio":
+                raise ValueError("public_support_share unit must be ratio")
+            if any(k in inputs for k in ("growth_rates_by_year","base_year","first_year_fraction","duration")):
+                raise ValueError("annual support uses explicit annual adjustment factors")
+            operands={}
+            for name in (*formula["required"],"existing_public_support"):
+                raw=inputs[name].value if name in inputs else 0
+                if isinstance(raw,(list,tuple)) and len(raw)!=request.years:
+                    raise ValueError(name)
+                values=_year_values(raw,request.years,name=name)
+                if any(not isfinite(v) or v<0 for v in values):
+                    raise ValueError(name)
+                operands[name]=values
+            if any(v>1 for v in operands["public_support_share"]):
+                raise ValueError("public_support_share")
+            if any(v<=0 for v in operands["cost_adjustment_factors"]):
+                raise ValueError("cost_adjustment_factors")
+            annual_won=[operands["recipient_count"][i]*operands["annual_service_cost_per_person"][i]
+                        *operands["public_support_share"][i]*operands["cost_adjustment_factors"][i]
+                        -operands["existing_public_support"][i] for i in range(request.years)]
+        elif request.formula_key == "COMMITTEE_MEMBER_INCREASE_V1":
+            from math import isfinite
+            operands={}
+            for name in formula["required"]:
+                raw=inputs[name].value
+                values=_year_values(raw,request.years,name=name)
+                if any(not isfinite(v) or v<0 for v in values):
+                    raise ValueError(name)
+                operands[name]=values
+            annual_won=[operands["additional_paid_members"][i]*operands["annual_meetings"][i]
+                        *operands["meeting_unit_price"][i] for i in range(request.years)]
+        elif request.formula_key in {"ASSET_PHASED_INSTALLATION_V1", "TRANSFER_POPULATION_AMOUNT_DELTA_V1", "RELATED_PROJECT_RATIO_V1"}:
+            from math import isfinite
+            def nonnegative_series(name):
+                raw=inputs[name].value
+                if isinstance(raw,(list,tuple)) and len(raw)!=request.years:
+                    raise ValueError(name)
+                values=_year_values(raw,request.years,name=name)
+                if any(not isfinite(v) or v<0 for v in values):
+                    raise ValueError(name)
+                return values
+            if any(k in inputs for k in ("growth_rates_by_year","base_year","duration","first_year_fraction")):
+                raise ValueError("use explicit annual quantities and prices")
+            if request.formula_key == "ASSET_PHASED_INSTALLATION_V1":
+                quantity=_number(inputs,"total_installation_quantity")
+                period=_number(inputs,"installation_years")
+                if not isfinite(quantity) or quantity<0:
+                    raise ValueError("total_installation_quantity")
+                if not isfinite(period) or period<1 or period!=int(period):
+                    raise ValueError("installation_years")
+                prices=nonnegative_series("installation_unit_cost")
+                annual_won=[quantity/period*p if t<period else 0 for t,p in enumerate(prices)]
+            elif request.formula_key == "RELATED_PROJECT_RATIO_V1":
+                costs=nonnegative_series("reference_project_cost")
+                ratio=_number(inputs,"related_project_ratio")
+                if not isfinite(ratio) or not 0<=ratio<=1:
+                    raise ValueError("related_project_ratio")
+                annual_won=[c*ratio for c in costs]
+            else:
+                new=nonnegative_series("new_recipient_count")
+                old=nonnegative_series("existing_recipient_count")
+                prices=nonnegative_series("benefit_per_recipient")
+                baseline=nonnegative_series("existing_benefit_per_recipient")
+                payments=nonnegative_series("payments_per_year")
+                annual_won=[(n*p-o*b)*m for n,p,o,b,m in zip(new,prices,old,baseline,payments)]
+        elif request.formula_key in {"SURVIVOR_PENSION_COHORT_DELTA_V1", "DEATH_GRANT_DELTA_V1"}:
+            from math import isfinite
+            def series(name):
+                raw = inputs[name].value
+                if isinstance(raw, (list, tuple)) and len(raw) != request.years:
+                    raise ValueError(name)
+                values = _year_values(raw, request.years, name=name)
+                if any(not isfinite(v) or v < 0 for v in values):
+                    raise ValueError(name)
+                return values
+            counts, prices = series("new_survivors"), series("price_index_factors")
+            if any(v <= 0 for v in prices):
+                raise ValueError("price_index_factors")
+            # This formula already indexes and deflates every year; do not apply generic growth twice.
+            if any(name in inputs for name in ("growth_rate", "growth_rates_by_year", "base_year", "duration", "first_year_fraction")):
+                raise ValueError("cohort formula uses explicit indexing only")
+            if request.formula_key == "DEATH_GRANT_DELTA_V1":
+                amounts = series("monthly_income_delta")
+                months = _number(inputs, "grant_months")
+                if not isfinite(months) or months < 0:
+                    raise ValueError("grant_months")
+                annual_won = [n * p * months / d for n, p, d in zip(counts, amounts, prices)]
+            else:
+                amounts, index = series("initial_annual_pension_delta"), series("pension_index_factors")
+                if any(v <= 0 for v in index):
+                    raise ValueError("pension_index_factors")
+                survival = inputs["survival_by_cohort"].value
+                if len(survival) != request.years:
+                    raise ValueError("survival_by_cohort")
+                for c, row in enumerate(survival):
+                    if not isinstance(row, (list, tuple)) or len(row) != request.years - c:
+                        raise ValueError("survival_by_cohort")
+                    if row[0] != 1 or any(isinstance(v, bool) or not isinstance(v, (int, float)) or
+                                         not isfinite(v) or not 0 <= v <= 1 for v in row):
+                        raise ValueError("survival_by_cohort")
+                    if any(a < b for a, b in zip(row, row[1:])):
+                        raise ValueError("survival_by_cohort")
+                annual_won = [sum(counts[c] * amounts[c] * index[t] / index[c] * survival[c][t-c]
+                                  for c in range(t+1)) / prices[t] for t in range(request.years)]
+        elif request.formula_key in {"NON_TAX_FEE_REVENUE_AVERAGE_V1", "NON_TAX_FEE_CHANNEL_SHIFT_V1"}:
             annual_won = _fee_revenue_annual_amounts(request, inputs)
         elif request.formula_key == "PROJECT_ANNUAL_BUDGET_V1":
             from math import isfinite
@@ -973,22 +1147,46 @@ def resolve_general_cost(request: GeneralCostRequest) -> GeneralCostResolution:
             interval = int(raw_interval)
             if interval < 1 or raw_interval != interval:
                 raise ValueError("recurrence_interval_years")
-            base = _base_amount(request.formula_key, inputs)
             raw_offset = _number(inputs, "first_occurrence_offset_years", 0)
             offset = int(raw_offset)
             if offset < 0 or offset != raw_offset:
                 raise ValueError("first_occurrence_offset_years")
-            repeat = base
-            if request.formula_key == "PERIODIC_RESEARCH_PLAN_V1" and "repeat_plan_unit_cost" in inputs:
+            unit_key = "plan_unit_cost" if request.formula_key == "PERIODIC_RESEARCH_PLAN_V1" else "survey_unit_cost"
+            prices = inputs[unit_key].value
+            if isinstance(prices, Mapping):
                 from math import isfinite
-                repeat = _number(inputs, "repeat_plan_unit_cost")
-                if not isfinite(repeat) or repeat < 0:
-                    raise ValueError("repeat_plan_unit_cost")
-            annual_won = [
-                (base if index == offset else repeat)
-                if index >= offset and (index - offset) % interval == 0 else 0.0
-                for index in range(request.years)
-            ]
+                if request.start_year is None:
+                    raise ValueError("start_year for scheduled research prices")
+                if ("repeat_plan_unit_cost" in inputs or "growth_rates_by_year" in inputs
+                        or "base_year" in inputs or _number(inputs,"growth_rate",0) != 0):
+                    raise ValueError("scheduled research prices already indexed")
+                if not prices or any(not isinstance(k,str) or not k.isdigit() for k in prices):
+                    raise ValueError(unit_key)
+                if any(isinstance(v,bool) or not isinstance(v,(int,float)) or not isfinite(v) or v<0
+                       for v in prices.values()):
+                    raise ValueError(unit_key)
+                annual_won=[]
+                for index in range(request.years):
+                    if index < offset or (index-offset)%interval:
+                        annual_won.append(0.0)
+                    else:
+                        year=str(request.start_year+index)
+                        if year not in prices:
+                            raise ValueError(f"{unit_key} missing occurrence year:{year}")
+                        annual_won.append(float(prices[year]))
+            else:
+                base = _base_amount(request.formula_key, inputs)
+                repeat = base
+                if request.formula_key == "PERIODIC_RESEARCH_PLAN_V1" and "repeat_plan_unit_cost" in inputs:
+                    from math import isfinite
+                    repeat = _number(inputs, "repeat_plan_unit_cost")
+                    if not isfinite(repeat) or repeat < 0:
+                        raise ValueError("repeat_plan_unit_cost")
+                annual_won = [
+                    (base if index == offset else repeat)
+                    if index >= offset and (index - offset) % interval == 0 else 0.0
+                    for index in range(request.years)
+                ]
         else:
             base = _base_amount(request.formula_key, inputs)
             annual_won = [base] * request.years

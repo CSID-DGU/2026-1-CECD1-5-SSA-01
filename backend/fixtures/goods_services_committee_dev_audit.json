@@ -1,0 +1,26 @@
+{
+  "schema_version": "goods-services-committee-dev-audit-v1",
+  "source": "manual verification against local official cost-estimate PDFs",
+  "cases": {
+    "2213311": {
+      "item_contains": "방송분야 공익성심사위원회",
+      "gold_amount_scale": 10,
+      "reason": "official detailed table is in 만원; stored candidate treated table values as 천원"
+    },
+    "2215039": {
+      "item_contains": "공인탐정 자격제도 운영위원회",
+      "gold_amount_scale": 10,
+      "reason": "official detailed table is in 만원; stored candidate treated table values as 천원"
+    },
+    "2212491": {
+      "item_contains": "대법관후보추천위원회 회의참석수당",
+      "instances_per_year": [2, 1, 2, 5, 1],
+      "reason": "committee is formed for each justice nomination; annual expiry schedule is required"
+    },
+    "2215995": {
+      "item_contains": "위원후보추천위원회 회의참석수당",
+      "instances_per_year": [3, 1, 3, 3, 1],
+      "reason": "three meetings occur per committee instance and the annual number of committee formations varies"
+    }
+  }
+}

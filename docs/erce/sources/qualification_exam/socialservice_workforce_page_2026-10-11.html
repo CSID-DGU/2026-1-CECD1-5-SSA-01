@@ -1,0 +1,1925 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+	
+		<title>정보마당 > 주요 통계 | 사회서비스 전자바우처</title>
+	
+	
+
+<script language="javascript" type="text/javascript" src="/script/jquery-1.8.0.min.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript" src="/script/jquery-ui-1.8.23.custom.min.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript" src="/script/common.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript" src="/script/jquery.cookie.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/css/voucher.css" />
+
+
+
+
+
+
+
+
+
+
+ 
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="/css/ie/voucher_ie.css" />
+<link rel="stylesheet" type="text/css" href="/css/ie/jquery-ui-1.8.23.custom_ie.css" />
+<![endif]-->
+<script type="text/javascript">
+$(document).ready(function(){
+	 $(this).on("contextmenu", function(e){return false;});
+});
+</script>
+
+
+
+</head>
+<body>
+<form id="frm" name="frm" method="post" action=".">
+<input type="hidden" name="sn" value=""/>
+</form>
+<div id="wrap">
+    <!-- Header Include -->
+    
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/renew_common.css"/>
+
+<!-- 유관기관 추가 -->
+<script type="text/javascript" src="/script/b_banner.js"></script> 
+<script type="text/javascript" src="/script/portal.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3QM8F4F7QC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3QM8F4F7QC');
+</script>
+
+<script type="text/javascript">
+var selMenuVal;
+var selMenuTrgetVal;
+
+$(document).ready(function() {
+    // GNB
+    $(function(){
+    	var $navi = $('#DB_navi11_1');
+        var $menu = $navi.find('.DB_wrap > ul.mnu');
+        var SPEED = 200;
+        var isMouseDown = false;
+        var $backdrop = $('#gnb_backdrop');
+        
+      	//초기화
+        $menu.find('.submnu').hide();
+        $menu.find('> li').removeClass('open');
+        $menu.find('> li> a').attr('aria-expanded', 'false');
+        
+        function closeAll(keepBackdrop){
+        	$menu.find('> li.open').removeClass('open').children('.submnu:visible').stop(true, true).slideUp(SPEED);
+        	$menu.find('> li> a').attr('aria-expanded', 'false');
+        	if(!keepBackdrop){
+        		$backdrop.stop(true,true).fadeOut(SPEED);
+        	}
+        }
+        
+        function openOne($li){
+        	var $sub = $li.children('.submnu');
+        	if($sub.length === 0 ) {
+        		closeAll();
+        		return;
+        	}
+        	
+        	var keepBackdrop = $menu.find('> li.open').not($li).length > 0;
+        	closeAll(keepBackdrop);
+        	
+        	$li.addClass('open');
+        	$li.children('a').attr('aria-expanded','true');
+        	$sub.stop(true, true).slideDown(SPEED);
+        	$backdrop.stop(true,true).fadeIn(SPEED);
+        }
+        
+      	//1depth 클릭 토글
+        $menu.on('click', '> li > a', function(e){
+        	var $li = $(this).parent('li');
+        	var $sub = $li.children('.submnu');
+        	
+        	if($sub.length === 0){
+        		closeAll();
+        		return;
+        	}
+        	e.preventDefault();
+        	
+        	if($li.hasClass('open')){
+        		closeAll();
+        	}else {
+        		openOne($li)
+        	}
+        });
+      	
+        $menu.on('mousedown','> li > a', function(){
+        	isMouseDown = true;
+        });
+        
+        $menu.on('mouseup','> li > a', function(){
+        	setTimeout(function(){
+        		isMouseDown = false;
+        	},150)
+        })
+        
+        $menu.on('focusin','a, button',function(){
+        	if(isMouseDown) return;
+        	
+        	var $top = $(this).closest('.mnu > li');
+        	
+        	if($top.length && !$top.hasClass('open')){
+        		openOne($top);
+        	}
+        });
+        
+        //바깥 영역 클릭 시 메뉴 접힘
+		$(document).on('focusin click', function(e){
+			if($(e.target).closest('#Header').length===0){
+				closeAll();
+			}
+		})
+      
+    });
+    
+  	//로그아웃 기능
+    $("#logOutBtn").bind("click",function(){
+        if(confirm("로그아웃하시겠습니까?")){
+            location.href = "/login/logOut.do";
+        }
+        return false;
+    });
+
+
+    // 대메뉴 마우스 오버
+    $('#mNavi > li').each(function(idx){
+        $(this).hover(
+            function(){
+                if( !$(this).hasClass('mOn') ){
+                    //$(this).addClass('mOn');
+                    $('#mNavi > li').addClass('mOn');
+                    $(this).find('strong > a').addClass('over');
+                       }
+                
+                $(this).find('.lay_btm').show();
+            }, 
+            function(){
+                if( $(this).hasClass('mOn') ){
+                    //$(this).removeClass('mOn');
+                    $('#mNavi > li').removeClass('mOn');
+                    $(this).find('strong > a').removeClass('over');
+                }
+                
+                $(this).find('.lay_btm').hide();
+        });
+    });
+
+  //통합검색
+    var $totalSchModal = $('.totalSch_pop');
+    var $openTotalSchBtn = $('#openTotalSch');
+    var $closeTotalSchBtn = $('#closeTotalSch');
+    var $lastFocusedElement;
+    
+    function openTotalSch(){
+    	$lastFocusedElement = $(document.activeElement);
+    	$totalSchModal.fadeIn(200, function(){
+    		$totalSchModal.find('.search_input').focus();
+    	});
+    	$('body').addClass('totalSch_open');
+    }
+    
+    function closeTotalSch(){
+    	$totalSchModal.fadeOut(200);
+    	$('body').removeClass('totalSch_open');
+    	if($lastFocusedElement){
+    		$lastFocusedElement.focus();
+    	}
+    }
+    
+    function trapFocus(e){
+    	if($totalSchModal.is(':visible')){
+    		var focusableElements = 'a[href], button, input';
+    		var $firstFocusable = $totalSchModal.find(focusableElements).first();
+    		var $lastFocusable = $totalSchModal.find(focusableElements).last();
+    		
+    		if(e.which === 9){
+    			if(e.shiftKey){
+    				if(document.activeElement === $firstFocusable[0]){
+    					e.preventDefault();
+    					$lastFocusable.focus();
+    				}
+    			}else{
+    				if(document.activeElement === $lastFocusable[0]){
+    					e.preventDefault();
+    					$firstFocusable.focus();
+    				}
+    			}
+    		}
+    	}
+    }
+    
+    $openTotalSchBtn.on('click', openTotalSch);
+    $closeTotalSchBtn.on('click', closeTotalSch);
+    $(document).on('keydown', function(e){
+    	trapFocus(e);
+    })
+    
+    $("#btnTotalSch").bind("click",function(){
+		var keyword = $("#p_p_ts_keyword").val();
+		if (keyword == null || keyword == ''){
+			alert("검색어를 입력하세요");
+			// alert 후 검색어 입력창에 focus. setTimeout은 일부 브라우저에서 미작동되는 것을 방지
+			setTimeout(function(){$('#p_p_ts_keyword').focus();},1);
+			return false;
+			
+		}	
+        $('#totalschFrm').submit();
+    });
+    
+    topMenuClose = function(val){
+        $(".submnu.last").hide();
+    };
+    
+
+
+    /* [gnb-사업별 소개] @IE 전용 style 동적 추가 로직 */
+//     var agent = navigator.userAgent.toLowerCase();
+//     if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || agent.indexOf('msie') != -1) {
+//     	var $gridNav = $('#DB_navi11_1 .DB_wrap ul.mnu li ul.submnu.grid_nav');
+//     	if ($gridNav.length == 0) {
+//     		return;
+//     	}
+    	
+//     	var $items = $gridNav.children();
+//     	var colCnt = 4;
+//     	for (var i = 0; i< $items.length; i++) {
+//     		var row = Math.floor(i / colCnt) + 1;
+//     		var col = (i % colCnt) + 1;
+    		
+//     		var style = document.createElement('style');
+//     		style.textContent = "@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {"
+//     			+ "#DB_navi11_1 .DB_wrap ul.mnu li ul.submnu.grid_nav > *:nth-child(" + (i + 1) + ") {"
+//   				+ "-ms-grid-column:" + col + ";"
+//     			+ "-ms-grid-row:" + row + "; }"
+//     			+ "}";
+    		
+//     		document.head.appendChild(style);
+//     	}
+//     }
+    
+});
+// ]]>
+</script>
+
+
+
+<div title="스킵내비게이션" id="skipMenu">
+    <a href="#contents" class="skipNavigation">본문 바로가기</a>
+   <!-- [사전점검]20180405 웹접근성심사 수정  
+    <a href="#mNavi" class="skipNavigation">대메뉴 바로가기</a>
+    <a href="#sidebar" class="skipNavigation">서브메뉴 바로가기</a>
+    -->
+</div>
+	<div id="gnb_backdrop" style="display:none;"></div>
+    <!-- S:wrapHeader -->
+    <div id="wrapHeader">
+        <div id="Header">
+            <!-- S: gnb_menu -->
+            <div class="gnbWrap">
+                <ul>
+                	<!-- S: 로그인 후 화면 정의-->
+                    
+                        
+                    
+                    <!-- //E: 로그인 후 화면 정의 -->
+                	
+                    <!-- S: gnb basis menu -->
+                    
+                        
+                        
+<!--                         	<li> -->
+<!-- 	                            <a href="/login/loginWAH.do" title="시각장애인용 업무시스템">시각장애인용 업무시스템</a> -->
+<!--                         	</li> -->
+<!--                             <a href="/login/login.do" title="로그인">로그인</a> -->
+<!--                             <a href="/user/memberMng/selectJoinMember.do" title="회원가입">회원가입</a> -->
+                            <!--<a href="#" title="마이페이지">마이페이지</a>-->
+                        
+                    
+<!--                     <li> -->
+<!--                         <a href="/user/link/callLink06.do" title="사이트맵">사이트맵</a> -->
+<!--                     </li> -->
+                    <!-- //E: gnb basis menu  -->
+                    
+                    <!-- S: 화면크기설정 -->
+                    <li class="scr_setting">
+                        <span>화면크기</span>
+                        <a href="javascript:;" onclick="body_zoom_it(5);" title="화면크게" id="bodySizeUp" class="rbtn"><img src="/images/layout/re_top_btn_add.gif" alt="화면크게"/></a>
+                        <a href="javascript:;" onclick="body_zoom_it(-5);" title="화면작게" id="bodySizeDown"><img src="/images/layout/re_top_btn_minus.gif" alt="화면작게"/></a>
+                    </li>
+                    <!-- //E: 화면크기설정 -->
+               </ul>
+            </div>
+            <!-- //E: gnb_menu -->
+            
+            
+            <!-- S: logo / total search -->
+            <div class="shrWrap">
+                <h1><a href="/" title="메인페이지로 이동"><img src="/images/renew/logo_renew.png" alt="사회서비스전자바우처 로고"/></a></h1>
+                <!-- S : total Search Zone -->
+                <ul class="shrList">
+                	<li class="shr_search">
+                        <a href="javascript:;" id="openTotalSch" >통합검색</a>
+                    </li>
+                    
+                        
+                                           
+                            <li class="shr_login">
+                        		<a href="/login/login.do" title="로그인">로그인</a>
+                        	</li>
+                        	<li class="shr_join">
+                        		<a href="/user/memberMng/selectJoinMember.do" title="회원가입">회원가입</a>
+                        	</li>
+                        	<li class="shr_able">
+	                            <a href="/login/loginWAH.do" title="시각장애인용 업무시스템">시각장애인용 업무시스템</a>
+                        	</li>
+                          
+                            
+                </ul>
+                <!-- //E : total Search Zone -->
+            </div>
+            <!-- //E: logo / total search -->
+
+            <!-- S : mTop navi -->
+            <div id="DB_navi11_1">
+                <div class="DB_wrap">
+                    <ul class="mnu">
+                    
+                    
+                        
+                            
+	                            
+	                            
+                                
+								<li class="">
+								
+                                    <a href="/user/htmlEditor/view.do?p_sn=1" title="사회서비스전자바우처" id="topMenu0">사회서비스전자바우처</a>
+                                
+                                	<div class="submnu "  style="display: none;">
+                                		<p class="submnu_tit">사회서비스전자바우처</p>
+	                                	<ul>
+                               	
+                                
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view.do?p_sn=1"  >사회서비스란</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view.do?p_sn=2"  >전자바우처 사업현황 및 성과</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								
+								<li class="">
+                                    <a href="/user/htmlEditor/view2.do?p_sn=6" title="사업별소개" id="topMenu3">사업별소개</a>
+                                
+                                	<div class="submnu grid_nav"  style="display: none;">
+                                		<p class="submnu_tit">사업별소개</p>
+	                                	<ul>
+                               	
+                                
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=6"  >장애인활동지원서비스</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=7"  >산모/신생아건강관리지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/rssi/view2.do?p_sn=8"  >지역사회서비스투자사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=10"  >가사간병방문지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=11"  >장애아동가족지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=21"  >발달장애인지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=67"  >발달장애인 활동서비스사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=13"  >임신출산진료비지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    	
+                                    		
+                                    			<li><a href="/user/htmlEditor/view2.do?p_sn=24"  >청소년산모임신출산의료비 지원사업</a></li>
+                                    		
+                                    		
+                                    	
+                                    
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=39"  >기저귀/조제분유지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=40"  >아이돌봄지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=41"  >에너지바우처사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=66"  >여성청소년 생리용품 지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=69"  >첫만남 이용권 지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=71"  >정신건강 심리상담 바우처</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=82"  >일상돌봄서비스지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=83"  >긴급돌봄 지원사업</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view2.do?p_sn=84"  >최중증발달장애인통합돌봄서비스</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								
+								<li class="">
+                                    <a href="/user/svcsrch/supply/supplyList.do" title="서비스기관검색" id="topMenu22">서비스기관검색</a>
+                                
+                                	<div class="submnu "  style="display: none;">
+                                		<p class="submnu_tit">서비스기관검색</p>
+	                                	<ul>
+                               	
+                                
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/svcsrch/supply/supplyList.do"  >제공기관  검색</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/view.do?p_sn=72"  >판매점 검색</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    	
+                                    		
+                                    		
+                                    			<li class="two_line"><a href="/user/svcsrch/type/svcList.do"  >지역사회서비스투자사업 서비스별검색</a></li>
+                                    		
+                                    	
+                                    
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/svcsrch/eclst/eclstList.do"  >산모신생아 교육기관 검색</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/svcsrch/restorg/restOrgLink.do"  >요양기관검색</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								<li class="">
+								
+                                    <a href="/user/htmlEditor/quality/view.do?p_sn=18" title="제공기관 참여 및 평가" id="topMenu28">제공기관 참여 및 평가</a>
+                                
+                                
+                                	<div class="submnu" style="display: none;">
+                                		<p class="submnu_tit">제공기관 참여 및 평가</p>
+                                		<ul>
+                                
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/quality/view.do?p_sn=18"  >제공기관 참여</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/review/viewList.do"  >제공기관 이용후기</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/quality/intro/viewQualityIntroduce.do?p_sn=29"  >품질평가 소개</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/quality/bestsupply/viewBestSupplyList.do?p_sn=35"  >품질평가 결과</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								
+								<li class="">
+                                    <a href="/user/join/notice/list.do" title="참여마당" id="topMenu33">참여마당</a>
+                                
+                                
+                                
+	                                <div class="submnu" style="display: none;">
+	                                	<p class="submnu_tit">참여마당</p>
+                                		<ul>
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/join/notice/list.do"  >공지사항</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/join/qna/list.do"  >Q&amp;A</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/join/faq/list.do"  >FAQ</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/join/popup/list.do"  >팝업존</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/join/cmmt/intro/view.do?p_sn=16"  >지역 자문기관 커뮤니티</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								
+								<li class="">
+                                    <a href="/user/cleanCenter/intro1/viewInfoCleanCenter.do" title="클린센터(신고센터)" id="topMenu39">클린센터(신고센터)</a>
+                                
+                                
+                                
+	                                <div class="submnu" style="display: none;">
+	                                	<p class="submnu_tit">클린센터(신고센터)</p>
+                                		<ul>
+                                
+                                
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/cleanCenter/intro1/viewInfoCleanCenter.do"  >센터소개</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/cleanCenter/intro2/sttemntRwardInfo.do"  >신고안내</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/cleanCenter/sttemnt/viewAgree.do"  >신고하기</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/cleanCenter/sttemntDtls/authCheck.do"  >신고내역</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/cleanCenter/pds/formDownload.do"  >서식 자료실</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+	                            
+	                            
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+								
+								<li class="">
+                                    <a href="/user/htmlEditor/law/view.do?p_sn=14" title="정보마당" id="topMenu45">정보마당</a>
+                                
+                                
+                                
+                                
+                                	<div class="submnu" style="display: none;">
+                                		<p class="submnu_tit">정보마당</p>
+                                		<ul>
+								
+                            
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/law/view.do?p_sn=14"  >관련법령</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/htmlEditor/statistic/view.do?p_sn=15"  >주요통계</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/info/public/list.do"  >제공기관 정보공개</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/pubdata/open/openapi.do"  >공공데이터 개방</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/info/prtvbr/login.do"  >임신/출산 원천징수 영수증발급</a></li>
+                                    
+                                
+                                
+                                
+                            
+                        
+                    
+                        
+                            
+                            
+                            
+                                
+                                    
+                                    
+                                    <li><a href="/user/info/family/view.do" onfocusout="topMenuClose(2);" >관련사이트</a></li>
+                                    
+                                
+                                
+                                
+                                        </ul>
+                                        </div>
+                                    </li>
+                                
+                            
+                        
+                    
+                    </ul>
+                </div>
+                <!-- total search pop -->
+                <div class="totalSch_pop" style="display:none;">
+               		<!--popup header -->
+					<div class="pop_header">
+						<div class="popClose">
+							<a id=closeTotalSch href="#" onclick="return false;"><img src="/images/renew/ico_close.svg" alt="팝업 창 닫기" /></a>
+						</div>
+					  	<h1 class="tit sr-only">통합검색</h1>
+					</div>
+					<!--//popup header -->
+					<div class="pop_body">
+						<div class="totalSch_tit">
+							<label for="p_p_ts_keyword">
+								검색어를 입력해주세요
+							</label>
+						</div>
+						<div class="totalSch_form">
+							<div class="searchArea">
+								<div class="search_group">
+									<form id="totalschFrm" name="totalschFrm" method="post" action="/user/search/total/totalList.do">
+			                            <input type="text" class="search_input" title="통합검색" id="p_p_ts_keyword" name="p_p_ts_keyword" maxlength="40"/>
+			                            <a href="#" title="검색하기" id="btnTotalSch" class="ico_search" ><span class="sr-only">검색</span></a>
+		                        	</form>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+                <!-- //total search pop -->
+            </div>
+            <!-- S : mTop navi -->
+            
+        </div>
+    </div>
+    <!-- //E:wrapHeader -->
+    
+
+    <!-- container -->
+    <div id="container">
+
+        <!-- left 메뉴 -->
+        <div id="sidebar">
+        <!-- left Include -->
+        
+
+
+
+
+
+
+
+
+
+    <h2 class="sub_LT_bg07">정보마당</h2>
+    
+
+
+    
+    
+        <ul id="lnbNavi">
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li><a href="/user/htmlEditor/law/view.do?p_sn=14">관련법령</a></li> 
+            
+        
+        
+        
+        
+    
+
+
+    
+    
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li class="on"><a href="/user/htmlEditor/statistic/view.do?p_sn=15">주요통계</a></li> 
+            
+        
+        
+        
+        
+    
+
+
+    
+    
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li><a href="/user/info/public/list.do">제공기관 정보공개</a></li> 
+            
+        
+        
+        
+        
+    
+
+
+    
+    
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li><a href="/user/pubdata/open/openapi.do">공공데이터 개방</a></li> 
+            
+        
+        
+        
+        
+    
+
+
+    
+    
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li><a href="/user/info/prtvbr/login.do">임신/출산 원천징수 영수증발급</a></li> 
+            
+        
+        
+        
+        
+    
+
+
+    
+    
+        
+        
+        
+        
+        
+            
+            
+            
+            
+            
+                <li><a href="/user/info/family/view.do">관련사이트</a></li> 
+            
+        
+        
+        
+        </ul>
+    
+
+<!-- left 메뉴 end -->
+<form name="mntrFrm" id="mntrFrm" action="/user/mypg/monitoring/mntrReportList.do" method="post">
+
+</form>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	//2019.08.21 마이페이지에 모니터링 메뉴가 존재하면 모니터링 팝업을 바로 호출
+	if("N" ==  "Y")
+	{
+		fn_openMntr();
+	}	
+	//adminMypg
+	
+	//
+	
+	//2023.06 웹 접근성 결과 반영
+	$("#lnbNavi").find('li').each(function(index, item){
+		$(this).find('a').attr('role','menuitem');
+		if($(this).hasClass('on')) {
+			$(this).find('a').attr('aria-expanded',true);
+		} else {
+			$(this).find('a').attr('aria-expanded',false);
+		}
+	});
+	
+	$('.lnbDep01').parent('li').addClass('hasDepth');
+	
+});
+
+function fn_openMntr()
+{
+	var scrWidth = screen.availWidth;
+	var scrHeight = screen.availHeight;
+
+	window.open("",'mntrPopView','top=0,left=0,width='+scrWidth+',height='+scrHeight+', scrollbars=1, resizable=yes');
+	
+	 $('#mntrFrm').attr('action','/user/mypg/monitoring/mntrReportList.do');
+	 $('#mntrFrm').attr('target','mntrPopView');
+	 $('#mntrFrm').submit();
+}   
+
+</script>
+
+
+        <!-- //side_bottom -->
+        </div>
+        <!-- left 메뉴 end -->
+
+        <!-- content -->
+        <div id="contents">
+            <div class="title_group">
+<ul>
+<li><a id="homeLink" href="/"><img alt="home" src="/images/renew/ico_bread_home.svg" />홈</a> </li>
+<li><a href="http://www.socialservice.or.kr/user/info/public/list.do">정보마당</a> </li>
+<li class="last">주요통계</li>
+</ul>
+<h2>주요통계</h2>
+<h3>사회서비스 바우처 주요 통계정보를 알려드립니다.</h3></div>
+<div class="content_group">
+<h4 class="sub_title02">대상기간 : 2025년 1월 1일 ~ 12월 31일</h4>
+<ul class="list_type01">
+<li>기간내 서비스 결제 이력이 존재하는 대상자, 제공기관, 제공인력 </li>
+<li>'25년도 사업별 연말정산 기준 예탁액 및 집행액</li>
+</ul>
+<h4 class="sub_title02 mgT48">'25년 사회서비스 이용자 현황 
+<div class="etc"><span class="expl">(단위: 명)</span> </div></h4>
+<div class="table_list border">
+<table summary="사업명, 이용자 수로 구성됨">
+<caption>'25년도 사회서비스 이용자 현황표</caption>
+<colgroup>
+<col style="WIDTH: 50%" />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th scope="col">사업명</th>
+<th scope="col">이용자 수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="total fw700" scope="row">합 계</th>
+<td class="num fw700 alignR">847,471</td>
+</tr>
+<tr>
+<th scope="row">장애인활동지원</th>
+<td class="num alignR">148,027</td>
+</tr>
+<tr>
+<th scope="row">산모ㆍ신생아건강관리지원사업</th>
+<td class="num alignR">176,261</td>
+</tr>
+<tr>
+<th scope="row">가사ㆍ간병방문지원사업</th>
+<td class="num alignR">6,910</td>
+</tr>
+<tr>
+<th scope="row">지역사회서비스투자사업</th>
+<td class="num alignR">273,303</td>
+</tr>
+<tr>
+<th scope="row">발달재활서비스</th>
+<td class="num alignR">117,182</td>
+</tr>
+<tr>
+<th scope="row">언어발달지원사업</th>
+<td class="num alignR">328</td>
+</tr>
+<tr>
+<th scope="row">발달장애인부모상담지원사업</th>
+<td class="num alignR">1,407</td>
+</tr>
+<tr>
+<th scope="row">발달장애인주간활동서비스</th>
+<td class="num alignR">14,194</td>
+</tr>
+<tr>
+<th scope="row">청소년발달장애인 방과후활동서비스</th>
+<td class="num alignR">11,045</td>
+</tr>
+<tr>
+<th scope="row">정신건강 심리상담 바우처</th>
+<td class="num alignR">81,387</td>
+</tr>
+<tr>
+<th scope="row">일상돌봄 서비스사업</th>
+<td class="num alignR">13,664</td>
+</tr>
+<tr>
+<th scope="row">긴급돌봄 지원사업</th>
+<td class="num alignR">2,961</td>
+</tr>
+<tr>
+<th scope="row">최중증 발달장애인 주간그룹 1:1 지원</th>
+<td class="num alignR">802</td>
+</tr>
+</tbody>
+</table></div>
+<h4 class="sub_title02 mgT48">'25년 정부지원금 예탁및 집행 현황 
+<div class="etc"><span class="expl">(단위: 억원)</span> </div></h4>
+<div class="table_list border">
+<table summary="사업명, 예탁액, 집행액으로 구성">
+<caption>'25년도 정부지원금 예탁액 및 집행액 현황표</caption>
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th scope="col">사업명</th>
+<th scope="col">예탁액</th>
+<th scope="col">집행액</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="total fw700" scope="row">계</th>
+<td class="num fw700 alignR">50,634</td>
+<td class="num fw700 alignR">48,351</td>
+</tr>
+<tr>
+<th scope="row">장애인활동지원</th>
+<td class="num alignR">36,638</td>
+<td class="num alignR">35,480</td>
+</tr>
+<tr>
+<th scope="row">산모ㆍ신생아건강관리지원사업</th>
+<td class="num alignR">2,553</td>
+<td class="num alignR">2,549</td>
+</tr>
+<tr>
+<th scope="row">가사ㆍ간병방문지원사업</th>
+<td class="num alignR">326</td>
+<td class="num alignR">268</td>
+</tr>
+<tr>
+<th scope="row">지역사회서비스투자사업</th>
+<td class="num alignR">2,611</td>
+<td class="num alignR">2,416</td>
+</tr>
+<tr>
+<th scope="row">발달재활서비스</th>
+<td class="num alignR">2,427</td>
+<td class="num alignR">2,150</td>
+</tr>
+<tr>
+<th scope="row">언어발달지원사업</th>
+<td class="num alignR">10</td>
+<td class="num alignR">6</td>
+</tr>
+<tr>
+<th scope="row">발달장애인부모상담지원사업</th>
+<td class="num alignR">19</td>
+<td class="num alignR">14</td>
+</tr>
+<tr>
+<th scope="row">발달장애인주간활동서비스</th>
+<td class="num alignR">3,576</td>
+<td class="num alignR">3,360</td>
+</tr>
+<tr>
+<th scope="row">청소년발달장애인 방과후활동서비스</th>
+<td class="num alignR">962</td>
+<td class="num alignR">884</td>
+</tr>
+<tr>
+<th scope="row">정신건강 심리상담 바우처</th>
+<td class="num alignR">408</td>
+<td class="num alignR">396</td>
+</tr>
+<tr>
+<th scope="row">일상돌봄 서비스사업</th>
+<td class="num alignR">550</td>
+<td class="num alignR">480</td>
+</tr>
+<tr>
+<th scope="row">긴급돌봄 지원사업</th>
+<td class="num alignR">45</td>
+<td class="num alignR">40</td>
+</tr>
+<tr>
+<th scope="row">최중증 발달장애인 주간그룹 1:1 지원</th>
+<td class="num alignR">509</td>
+<td class="num alignR">309</td>
+</tr>
+</tbody>
+</table></div>
+<h4 class="sub_title02 mgT48">'25년 사회서비스 제공기관 및 제공인력 현황 
+<div class="etc"><span class="expl">(단위: 개소, 명)</span> </div></h4>
+<div class="table_list border">
+<table summary="사업명, 제공기관 수, 제공인력 수로 구성">
+<caption>'24년도 사회서비스 제공기관 및 제공인력 현황표</caption>
+<colgroup>
+<col />
+<col />
+<col />
+</colgroup>
+<thead>
+<tr>
+<th scope="col">사업명</th>
+<th scope="col">제공기관 수</th>
+<th scope="col">제공인력 수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="total fw700" scope="row">합 계</th>
+<td class="num fw700 alignR">16,041</td>
+<td class="num fw700 alignR">257,402</td>
+</tr>
+<tr>
+<th scope="row">장애인활동지원</th>
+<td class="num alignR">1,171</td>
+<td class="num alignR">151,871</td>
+</tr>
+<tr>
+<th scope="row">산모ㆍ신생아건강관리지원사업</th>
+<td class="num alignR">1,227</td>
+<td class="num alignR">32,942</td>
+</tr>
+<tr>
+<th scope="row">가사ㆍ간병방문지원사업</th>
+<td class="num alignR">382</td>
+<td class="num alignR">4,765</td>
+</tr>
+<tr>
+<th scope="row">지역사회서비스투자사업</th>
+<td class="num alignR">5,685</td>
+<td class="num alignR">20,849</td>
+</tr>
+<tr>
+<th scope="row">발달재활서비스</th>
+<td class="num alignR">2,843</td>
+<td class="num alignR">14,183</td>
+</tr>
+<tr>
+<th scope="row">언어발달지원사업</th>
+<td class="num alignR">157 </td>
+<td class="num alignR">266</td>
+</tr>
+<tr>
+<th scope="row">발달장애인부모상담지원사업</th>
+<td class="num alignR">262</td>
+<td class="num alignR">411</td>
+</tr>
+<tr>
+<th scope="row">발달장애인주간활동서비스</th>
+<td class="num alignR">811</td>
+<td class="num alignR">10,796</td>
+</tr>
+<tr>
+<th scope="row">청소년발달장애인 방과후활동서비스</th>
+<td class="num alignR">561</td>
+<td class="num alignR">6,030</td>
+</tr>
+<tr>
+<th scope="row">정신건강 심리상담 바우처</th>
+<td class="num alignR">1,702</td>
+<td class="num alignR">4,265</td>
+</tr>
+<tr>
+<th scope="row">일상돌봄 서비스사업</th>
+<td class="num alignR">826</td>
+<td class="num alignR">7,317</td>
+</tr>
+<tr>
+<th scope="row">긴급돌봄 서비스사업</th>
+<td class="num alignR">197</td>
+<td class="num alignR">2,121</td>
+</tr>
+<tr>
+<th scope="row">최중증 발달장애인 주간그룹 1:1 지원</th>
+<td class="num alignR">217</td>
+<td class="num alignR">1,586</td>
+</tr>
+</tbody>
+</table></div></div>
+        </div>
+        <!-- //content -->
+    </div>
+    <!-- // container end -->
+    <!-- footer Include  -->
+    
+
+
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-41855438-1', 'socialservice.or.kr');
+	ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // footer 관련사이트
+    $(function(){
+        var $siteWrap = $('.foot_site');
+        var SPEED = 200;
+        var isMouseDown = false;
+        
+        //초기화
+        $siteWrap.find('.foot_list').hide();
+        $siteWrap.find('.foot_item').removeClass('open');
+        
+        $siteWrap.find('.link').each(function(){
+        	var $button = $(this);
+        	var baseTitle = $button.text();
+        	$button.data('base-title', baseTitle);
+        	$button.attr('title', baseTitle + ' 확장');
+        	$button.attr('aria-expanded', 'false');
+        })
+        
+        function closeAll(){
+        	var $openItem = $siteWrap.find('.site_item.open');
+        	if($openItem.length){
+        		var $button = $openItem.find('.link');
+        		$button.attr('title', $button.data('base-title') + ' 확장');
+        		$button.attr('aria-expanded', 'false');
+        		
+        		$openItem.removeClass('open');
+        		$openItem.find('.site_list').stop(true,true).slideUp(SPEED);
+        	}
+        }
+        
+        function openOne($item){
+        	if(!$item.length || $item.hasClass('open')) return;
+        	closeAll();
+        	
+        	var $button = $item.find('.link');
+        	
+        	$button.attr('title', $button.data('base-title') + ' 축소');
+        	$button.attr('aria-expanded', 'true');
+        	
+        	$item.addClass('open');
+        	$item.find('.site_list').stop(true,true).slideDown(SPEED);
+        }
+        
+        $siteWrap.on('click', '.link', function(e){
+        	var $item = $(this).closest('.site_item');
+        	e.preventDefault();
+        	
+        	if($item.hasClass('open')){
+        		closeAll();
+        	}else{
+        		openOne($item);
+        	}
+        })
+        
+        $siteWrap.on('mousedown', '.link',function(){
+        	isMouseDown = true;
+        })
+        
+        $siteWrap.on('mouseup','.link',function(){
+        	setTimeout(function(){
+        		isMouseDown = false;
+        	},100)
+        });
+        
+        $siteWrap.on('focusin','button, a', function(){
+        	if(isMouseDown) return;
+        	var $item = $(this).closest('.site_item');
+        	openOne($item);
+        });
+        
+        $(document).on('focusin click', function(e){
+        	if($(e.target).closest('.foot_site').length === 0){
+        		closeAll();
+        	}
+        })
+        
+        
+    });
+    
+});
+</script>
+
+<!-- footer -->
+<div id="wrapFooter">
+	<div id="footer">
+		<div class="foot_site">
+			<div class="inner">
+				<div class="site_item">
+					<a href="/user/link/callLink02.do" class="no_icon fw700" style="color:#013f92;">개인정보처리방침</a>
+				</div>
+				<div class="site_item">
+					<a href="/user/link/callLink06.do" class="no_icon">사이트맵</a>
+				</div>
+				<div class="site_item">
+					<button type="button" class="link" title="확장됨">이용안내</button>
+					<div class="site_list" style="display:none;">
+						<ul>
+							<li><a href="/user/link/callLink01.do">이용안내</a></li>
+							<li><a href="/user/link/callLink03.do">저작권정책</a></li>
+							<li><a href="/user/link/callLink04.do">뷰어다운로드</a></li>
+							<li><a href="/user/link/callLink05.do">찾아오시는길</a></li>
+							<li><a href="/user/link/callLink07.do" class="sys">업무지원시스템 이용가이드</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="site_item">
+					<button type="button" class="link" title="확장됨">정부기관</button>
+					<div class="site_list" style="display:none;">
+						<ul>
+							<li><a href="https://www.mohw.go.kr/" title="[새창]보건복지부 이동" target="_blank" rel="noopener noreferrer">보건복지부</a></li>
+							<li><a href="https://www.moel.go.kr/" title="[새창]고용노동부 이동" target="_blank" rel="noopener noreferrer">고용노동부</a></li>
+							<li><a href="https://www.mogef.go.kr" title="[새창]성평등가족부 이동" target="_blank" rel="noopener noreferrer">성평등가족부</a></li>
+							<li><a href="https://www.mcee.go.kr" title="[새창]기후에너지환경부 이동" target="_blank" rel="noopener noreferrer">기후에너지환경부</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="site_item">
+					<button type="button" class="link" title="확장됨">관련사이트</button>
+					<div class="site_list" style="display:none;">
+						<ul>
+							<li><a href="http://www.voucher.go.kr/common/main.do" title="[새창]국가바우처 통합카드 국민행복카드 이동" target="_blank" rel="noopener noreferrer">국가바우처 통합카드 국민행복카드</a></li>
+							<li><a href="https://www.nhic.or.kr" title="[새창]국민건강보험 이동" target="_blank" rel="noopener noreferrer">국민건강보험</a></li>
+							<li><a href="https://www.ableservice.or.kr" title="[새창]장애인활동지원 이동" target="_blank" rel="noopener noreferrer">장애인활동지원</a></li>
+							<li><a href="https://www.kihasa.re.kr/html/jsp/" title="[새창]한국보건사회연구원 이동" target="_blank" rel="noopener noreferrer">한국보건사회연구원</a></li>
+							<li><a href="https://www.sbiz.or.kr" title="[새창]소상공인포털 이동" target="_blank" rel="noopener noreferrer">소상공인포털</a></li>
+							<li><a href="https://www.koreapost.go.kr" title="[새창]우정사업본부 이동" target="_blank" rel="noopener noreferrer">우정사업본부</a></li>
+							<li><a href="https://edu.ssis.or.kr" title="[새창]한국사회보장정보원 교육홈페이지 이동" target="_blank" rel="noopener noreferrer">한국사회보장정보원 교육홈페이지</a></li>
+							<li><a href="https://www.bokjiro.go.kr/" title="[새창]복지로 이동" target="_blank" rel="noopener noreferrer">복지로</a></li>
+							<li><a href="https://www.kcpass.or.kr/" title="[새창]중앙사회서비스원 이동" target="_blank" rel="noopener noreferrer">중앙사회서비스원</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="inner">
+			<div class="f_logo">
+				<a href="http://www.mohw.go.kr/" title="[새창]보건복지부 이동" target="_blank" rel="noopener noreferrer"><img src="/images/renew/logo_footer01.png" alt="보건복지부"/></a>
+				<a href="http://www.ssis.or.kr/" title="[새창]SSIS 한국사회보장정보원 이동" target="_blank" rel="noopener noreferrer"><img src="/images/renew/logo_footer02.png" alt="SSIS 한국사회보장정보원"/></a>
+				<a class="f_logo_right" href="http://www.kwacc.or.kr/CertificationSite/WA/2370/Detail?page=1 title="[새창]한국디지털접근성진흥원 이동" target="_blank" rel="noopener noreferrer"><img style="width:100px;" src="/images/renew/footer_mark_access.png" alt="한국디지털접근성진흥원 인증마크"/></a>
+			</div>
+			<div class="f_cnt">
+				<div class="f_info">
+					<p class="info_addr">보건복지부 [30113] 세종특별자치시 도움4로 13 정부세종청사 10동 보건복지상담센터 129</p>
+					<p class="info_addr">한국사회보장정보원 [04933] 서울특별시 광진구 능동로 400(중곡동)</p>
+					<ul class="info_cs">
+						<li><strong class="strong">사회서비스 콜센터</strong><span class="span">1566-3232(유료, 평일 09:00 ~ 18:00)</span></li>
+					</ul>
+				</div>
+				
+				<div class="f_link">
+					<div class="link_sns">
+						<a href="https://instagram.com/ssiskorea" class="instagram" target="_blank" title="[새창]인스타그램 이동">
+							<span class="sr-only">인스타그램</span>
+						</a>
+						<a href="https://www.youtube.com/channel/UCqywafpjY-pK74nO8ZL9R3Q" class="youtube" target="_blank" title="[새창]유튜브 이동">
+							<span class="sr-only">유튜브</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="f_btm">
+				<p class="f_copy">© 한국사회보장정보원 ALL RIGHTS RESERVED.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //footer -->
+<!-- //E :Footer -->
+
+    <!-- footer Include  -->
+</div>
+<!-- // wrap -->
+</body>
+</html>

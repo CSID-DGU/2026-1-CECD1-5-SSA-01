@@ -1,0 +1,82 @@
+{
+  "bill_no": "2210775",
+  "answer_seen": false,
+  "source": "원문PDF1~3쪽 및2024.12.6수행기관공개설명",
+  "public_source_url": "https://kofdo.kr/장애인거주시설-인권실태조사-성과와-과제-세미나/",
+  "temporary_method_evidence": {
+    "method_key": "public:kofdo:residential_rights_survey:2024",
+    "source_bill_no": "KOFDO_PUBLIC_2024",
+    "family_key": "residential_rights_existing_survey",
+    "available_at": "2024-12-06",
+    "source_ref": "https://kofdo.kr/장애인거주시설-인권실태조사-성과와-과제-세미나/",
+    "payer": "government",
+    "review_status": "reviewed",
+    "evidence_kind": "non_estimation",
+    "decision_category": "no_incremental_cost",
+    "source_decision_label": "기존사업 수행 근거의 조건부 추가추계 제외",
+    "source_quote": "2021년부터 4년간 보건복지부 위탁으로 전국단위 장애인거주시설 인권실태조사 수행",
+    "reason": "원문의 기존위탁조사 법적근거 명시와 수행기관2021~2024조사이력 대응.동일범위 유지시 신규조사비 중복제외",
+    "match_groups": [
+      [
+        "장애인거주시설"
+      ],
+      [
+        "인권실태조사"
+      ]
+    ],
+    "allowed_routes": [],
+    "variable_evidence_keys": [],
+    "baseline_check": "일반장애실태조사3년주기를 시설인권조사 주기로 오인하지 않음",
+    "fiscal_effect": "existing_service_no_separately_estimated_increment",
+    "required_confirmations": [
+      "existing_survey_note",
+      "scope_overlap_note"
+    ],
+    "required_facts": {
+      "existing_facility_rights_survey_confirmed": true,
+      "new_separate_survey_or_sample_expansion_confirmed": false
+    },
+    "reestimate_when": "표본·횟수·공표별도사업 확대 확인시 재검토",
+    "limitation": "2021~2024조사이력은 수행기관에서 확인.매년동일범위유지·공표 기존행정내수행은 분석가정.2025~2026예산·시설표본 독립미확인"
+  },
+  "payload": {
+    "bill_no": "2210775",
+    "cutoff_date": "2026-10-12",
+    "evidence_mode": "holdout",
+    "decision_evidence_key": "public:kofdo:residential_rights_survey:2024",
+    "reliable_estimation_basis_available": true,
+    "decision_confirmations": {
+      "existing_survey_note": "원문상기존위탁조사와2024.12.6수행기관 조사이력확인",
+      "scope_overlap_note": "동일시설인권조사 법적근거화로가정.표본·별도공표사업확대미확정. 현재예산주기완전검증아님"
+    },
+    "decision_facts": {
+      "existing_facility_rights_survey_confirmed": true,
+      "new_separate_survey_or_sample_expansion_confirmed": false
+    }
+  },
+  "result": {
+    "decision": "no_incremental_cost",
+    "amount": null,
+    "source_decision_label": "기존사업 수행 근거의 조건부 추가추계 제외",
+    "decision_evidence_key": "public:kofdo:residential_rights_survey:2024",
+    "reason": "원문의 기존위탁조사 법적근거 명시와 수행기관2021~2024조사이력 대응.동일범위 유지시 신규조사비 중복제외",
+    "source_ref": "https://kofdo.kr/장애인거주시설-인권실태조사-성과와-과제-세미나/",
+    "source_quote": "2021년부터 4년간 보건복지부 위탁으로 전국단위 장애인거주시설 인권실태조사 수행",
+    "additional_source_quote": "",
+    "fiscal_effect": "existing_service_no_separately_estimated_increment",
+    "confirmed_conditions": {
+      "existing_survey_note": "원문상기존위탁조사와2024.12.6수행기관 조사이력확인",
+      "scope_overlap_note": "동일시설인권조사 법적근거화로가정.표본·별도공표사업확대미확정. 현재예산주기완전검증아님"
+    },
+    "confirmed_facts": {
+      "existing_facility_rights_survey_confirmed": true,
+      "new_separate_survey_or_sample_expansion_confirmed": false
+    },
+    "reestimate_when": "표본·횟수·공표별도사업 확대 확인시 재검토",
+    "limitation": "2021~2024조사이력은 수행기관에서 확인.매년동일범위유지·공표 기존행정내수행은 분석가정.2025~2026예산·시설표본 독립미확인"
+  },
+  "total_eok": null,
+  "decision_is_conditional": true,
+  "known_limitations": "2021~2024조사이력은 수행기관에서 확인.매년동일범위유지·공표 기존행정내수행은 분석가정.2025~2026예산·시설표본 독립미확인",
+  "local_production_db_changed": false
+}

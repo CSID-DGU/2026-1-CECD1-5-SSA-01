@@ -1,0 +1,427 @@
+{
+  "bill_no": "2207043",
+  "bill_name": "장애인복지법 일부개정법률안",
+  "proposer": "강훈식",
+  "propose_date": "2024-12-27",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "page": 3,
+      "quote": "발달재활사자격증을내주어야한다.",
+      "verified": true
+    },
+    {
+      "page": 4,
+      "quote": "발달재활자격증종류별로실시하여야하며",
+      "verified": true
+    },
+    {
+      "page": 5,
+      "quote": "이법시행후3년이내에",
+      "verified": true
+    }
+  ],
+  "linked_bill_review": {
+    "bill_no": "2207049",
+    "assumed_passed_for_scenario": true,
+    "actual_passage_verified": false,
+    "source_ref": "원문PDF2쪽 의결전제"
+  },
+  "ai_decisions": [
+    {
+      "article": "제72조의4·제73조",
+      "reason": "새자격종류별 국가시험과자격교부로 시험운영·초기제도개발·교부행정비 검토. 의사소통/심리정서/감각운동은큰분야이지실제시험종류3개확정아님"
+    },
+    {
+      "article": "부칙제2조",
+      "reason": "기존자격인정자특례시험은시행후3년내, 정규시험과구분해첫회/한시비용 검토",
+      "decision": "implementation_scope_needed"
+    },
+    {
+      "article": "제71조·제76조·제77조",
+      "reason": "양성훈련 노력·취소/정지절차는기존제도확장. 별도새교육기관/행정인력 설치로확정하지않음",
+      "decision": "existing_capacity_review"
+    }
+  ],
+  "estimation_start_note": "공포후2년시행·시험준비 및2025심사공포 가정으로2028~2032 잠정. 원문확정시행년아님",
+  "candidate_review": "ERCE DB에 발달재활국가시험·자격시험단가·문항개발 동일과업 후보없음. 연구조사/일반위원회 단가로 대체하지않음. 응시료수입은원문생략된기존수수료규정과확정요금확인전 임의금액산출안함",
+  "items": [
+    {
+      "component": "national_exam_operation",
+      "payload": {
+        "bill_no": "2207043",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2028,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "goods_service_activity"
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "goods_service_activity",
+        "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+        "formula": "수량 × 단가 × 연간 횟수",
+        "missingVariables": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2214485:interagency_meeting_unit_cost:2024",
+            "variableKey": "service_unit_cost",
+            "value": 12000000,
+            "unit": "KRW/body/event",
+            "sourceRef": "의안 2214485, 25D6366, 비용추계서 PDF p.5 표2·각주1; 경찰청 2024년 학교폭력 상설협의체 예산 인용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-02-10",
+            "limitation": "회의 개최비 총액 선례. 참석수당·개별 인원 단가가 아니며 내부 세부 지출명세는 독립 확보하지 않음",
+            "scope": "교육부·경찰청 중앙부처 상설협의체 회의 개최",
+            "serviceFunction": "관계 중앙부처 교육정책 협의체 운영",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2214485:interagency_meeting_frequency:2026",
+            "variableKey": "frequency_per_year",
+            "value": 4,
+            "unit": "event/year",
+            "sourceRef": "의안 2214485, 25D6366, 비용추계서 PDF p.5 표2·각주1; 경찰청 2024년 학교폭력 상설협의체 예산 인용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-02-10",
+            "limitation": "회의 개최비 총액 선례. 참석수당·개별 인원 단가가 아니며 내부 세부 지출명세는 독립 확보하지 않음",
+            "scope": "교육부·경찰청 중앙부처 상설협의체 회의 개최",
+            "serviceFunction": "관계 중앙부처 교육정책 협의체 운영",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "service_quantity": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          },
+          "service_unit_cost": {
+            "status": "candidates_need_review",
+            "candidateCount": 1,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "frequency_per_year": {
+            "status": "candidates_need_review",
+            "candidateCount": 1,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "component": "initial_exam_development",
+      "payload": {
+        "bill_no": "2207043",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2028,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "quantity_unit"
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "quantity_unit",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "event/year",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "전국단위예방의날행사매년1회라는참조가정.노력규정이어서비용없다고단정하지않음.주간7일을7회행사로치환하지않음",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 150000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 200000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:unit_cost:reviewed",
+            "variableKey": "unit_cost",
+            "value": 100000000,
+            "unit": "KRW/event",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "연1억원은유사사례의8300/9700만원을참고한정답가정.공식고정요율·최신단가아님.원위탁예산서독립검증미완료.지자체별추가행사홍보비미포함",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_house:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 200000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_house",
+            "serviceFunction": "electric_house",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_other:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 1300000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_other",
+            "serviceFunction": "electric_other",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "quantity": {
+            "status": "candidates_need_review",
+            "candidateCount": 3,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "unit_cost": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "component": "certificate_issue_administration",
+      "payload": {
+        "bill_no": "2207043",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2028,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "quantity_unit"
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "quantity_unit",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "event/year",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "전국단위예방의날행사매년1회라는참조가정.노력규정이어서비용없다고단정하지않음.주간7일을7회행사로치환하지않음",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 150000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 200000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:unit_cost:reviewed",
+            "variableKey": "unit_cost",
+            "value": 100000000,
+            "unit": "KRW/event",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "연1억원은유사사례의8300/9700만원을참고한정답가정.공식고정요율·최신단가아님.원위탁예산서독립검증미완료.지자체별추가행사홍보비미포함",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_house:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 200000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_house",
+            "serviceFunction": "electric_house",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_other:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 1300000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_other",
+            "serviceFunction": "electric_other",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "quantity": {
+            "status": "candidates_need_review",
+            "candidateCount": 3,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "unit_cost": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    }
+  ],
+  "first_total_eok": null,
+  "error_percent": null
+}

@@ -1,0 +1,266 @@
+{
+  "bill_no": "2204465",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2204465",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "disabled_urban_rail_compensation",
+    "support_derivation": "disabled_urban_rail_compensation",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "rail_beneficiary_scope": "disabled_and_one_companion",
+    "rail_operator_scope": "urban_rail_excluding_korail_pso",
+    "rail_compensation_scenario_confirmed": true,
+    "rail_volume_trend": "linear_ols",
+    "rail_fare_trend": "log_ols",
+    "rail_scope_note": "장애인·동행보호자 도시철도 승차 연인원, 등록장애인 고유수와 노인무임비용 제외.",
+    "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고.",
+    "rail_trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+    "rail_fiscal_share_note": "정답처럼 장애인 도시철도 무임손실 국가전액보전 가정. 실제지원율 확정근거가 있으면 우선.",
+    "rail_start_note": "공포후3개월·심사기간 고려2025~2029 정답 시나리오.",
+    "selected_evidence_keys": [
+      "2204465:rail_free_trip_history:reviewed",
+      "2204465:rail_free_loss_history:reviewed",
+      "2204465:rail_compensation_share:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2204465:rail_free_trip_history:reviewed": "동일 장애인 도시철도 승차·손실 실적, 전액보전 참고 가정 검토",
+      "2204465:rail_free_loss_history:reviewed": "동일 장애인 도시철도 승차·손실 실적, 전액보전 참고 가정 검토",
+      "2204465:rail_compensation_share:reviewed": "동일 장애인 도시철도 승차·손실 실적, 전액보전 참고 가정 검토"
+    },
+    "selected_method_keys": [
+      "2204465:disabled_urban_rail_compensation"
+    ],
+    "method_selection_reasons": {
+      "2204465:disabled_urban_rail_compensation": "교통수단·기존지원·추세를 분리한 참고 모델"
+    },
+    "method_confirmations": {
+      "2204465:disabled_urban_rail_compensation": {
+        "rail_scope_note": "장애인·동행보호자 도시철도 승차 연인원, 등록장애인 고유수와 노인무임비용 제외.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고.",
+        "rail_trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "rail_fiscal_share_note": "정답처럼 장애인 도시철도 무임손실 국가전액보전 가정. 실제지원율 확정근거가 있으면 우선.",
+        "rail_start_note": "공포후3개월·심사기간 고려2025~2029 정답 시나리오."
+      }
+    }
+  },
+  "result": {
+    "route_key": "disabled_urban_rail_compensation",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2204465:rail_free_trip_history:reviewed,2204465:rail_free_loss_history:reviewed,2204465:rail_compensation_share:reviewed",
+    "annual_amounts_thousand": [
+      295034754,
+      332812632,
+      369251281,
+      404837014,
+      439868360
+    ],
+    "source_refs": [
+      "2204465 비용추계서24C4189 PDF3~4쪽, 국토교통부2023철도통계연보 인용",
+      "2204465 비용추계서24C4189 PDF3~4쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          295034754411.55115,
+          332812632164.456,
+          369251280645.6339,
+          404837014498.8862,
+          439868360215.29407
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204465 비용추계서24C4189 PDF3~4쪽, 국토교통부2023철도통계연보 인용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2204465:disabled_urban_rail_compensation"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "disabled_urban_rail_compensation",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      295034754,
+      332812632,
+      369251281,
+      404837014,
+      439868360
+    ],
+    "derivationTrace": [
+      {
+        "year": 2025,
+        "unrounded_trip_count": 76655666.66666666,
+        "displayed_trip_thousand": 76656,
+        "unrounded_fare_per_trip": 3848.831629036573,
+        "displayed_fare_won": 3849,
+        "compensation_share": 1,
+        "volume_slope": 4098000,
+        "fare_log_slope": 1494.611500723094,
+        "annual_won": 295034754411.55115,
+        "trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고."
+      },
+      {
+        "year": 2026,
+        "unrounded_trip_count": 80753666.66666666,
+        "displayed_trip_thousand": 80754,
+        "unrounded_fare_per_trip": 4121.331524650555,
+        "displayed_fare_won": 4121,
+        "compensation_share": 1,
+        "volume_slope": 4098000,
+        "fare_log_slope": 1494.611500723094,
+        "annual_won": 332812632164.456,
+        "trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고."
+      },
+      {
+        "year": 2027,
+        "unrounded_trip_count": 84851666.66666666,
+        "displayed_trip_thousand": 84852,
+        "unrounded_fare_per_trip": 4351.72690356466,
+        "displayed_fare_won": 4352,
+        "compensation_share": 1,
+        "volume_slope": 4098000,
+        "fare_log_slope": 1494.611500723094,
+        "annual_won": 369251280645.6339,
+        "trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고."
+      },
+      {
+        "year": 2028,
+        "unrounded_trip_count": 88949666.66666666,
+        "displayed_trip_thousand": 88950,
+        "unrounded_fare_per_trip": 4551.304458688842,
+        "displayed_fare_won": 4551,
+        "compensation_share": 1,
+        "volume_slope": 4098000,
+        "fare_log_slope": 1494.611500723094,
+        "annual_won": 404837014498.8862,
+        "trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고."
+      },
+      {
+        "year": 2029,
+        "unrounded_trip_count": 93047666.66666666,
+        "displayed_trip_thousand": 93048,
+        "unrounded_fare_per_trip": 4727.344338370951,
+        "displayed_fare_won": 4727,
+        "compensation_share": 1,
+        "volume_slope": 4098000,
+        "fare_log_slope": 1494.611500723094,
+        "annual_won": 439868360215.29407,
+        "trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+        "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고."
+      }
+    ],
+    "sourceRefs": [
+      "2204465 비용추계서24C4189 PDF3~4쪽, 국토교통부2023철도통계연보 인용",
+      "2204465 비용추계서24C4189 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2204465:disabled_urban_rail_compensation"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2204465:disabled_urban_rail_compensation",
+        "source_bill_no": "2204465",
+        "available_at": "2024-10-21",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "disabled_urban_rail_compensation",
+        "source_ref": "2204465 비용추계서24C4189 PDF3~4쪽",
+        "match_groups": [
+          [
+            "장애인"
+          ],
+          [
+            "운임",
+            "무임",
+            "수송"
+          ],
+          [
+            "운송사업자",
+            "도시철도",
+            "보전"
+          ]
+        ],
+        "allowed_routes": [
+          "disabled_urban_rail_compensation"
+        ],
+        "support_derivation": "disabled_urban_rail_compensation",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2204465:rail_free_trip_history:reviewed",
+          "2204465:rail_free_loss_history:reviewed",
+          "2204465:rail_compensation_share:reviewed"
+        ],
+        "required_confirmations": [
+          "rail_scope_note",
+          "korail_exclusion_note",
+          "rail_trend_note",
+          "rail_fiscal_share_note",
+          "rail_start_note"
+        ],
+        "method_steps": [
+          "장애인·동행보호자의 승차연인원과 전체노인 무임수송 구분",
+          "코레일 기존PSO 보상대상 제외, 도시철도 운영기관 범위 확인",
+          "과거무임손실/승차연인원으로 회당단가 도출, 천명·백만원 환산",
+          "승차량 선형·단가 로그 추세를 분리 선택·승인하고 원값으로 산출",
+          "국가전액보전 참고 가정, 추가CPI나중복운임 지원 가산금지"
+        ],
+        "baseline_check": "미래정답량을 원자료로 저장하지 않음. 회당손실단가는 정액표준운임이 아님",
+        "limitation": "표의 전망패턴을 비교하여 선택한 사후 추세모델. 추계서가 회귀식을 명시한 것은 아니며 최신실적·실제지원률과 다를 수 있음",
+        "lower_variable_keys": [
+          "rail_free_trip_history",
+          "rail_free_loss_history",
+          "rail_compensation_share"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "교통수단·기존지원·추세를 분리한 참고 모델",
+        "confirmed_assumptions": {
+          "rail_scope_note": "장애인·동행보호자 도시철도 승차 연인원, 등록장애인 고유수와 노인무임비용 제외.",
+          "korail_exclusion_note": "코레일은 이미PSO 공공운임감면 보상. 나머지 도시철도 운영기관 손실만 신규지원 참고.",
+          "rail_trend_note": "정답의 최근추세 표를 사후 비교하여 승차연인원 선형OLS·회당손실단가 로그OLS 선택. 원문/추계서에 회귀식 명시된 것은 아님.",
+          "rail_fiscal_share_note": "정답처럼 장애인 도시철도 무임손실 국가전액보전 가정. 실제지원율 확정근거가 있으면 우선.",
+          "rail_start_note": "공포후3개월·심사기간 고려2025~2029 정답 시나리오."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          295034754411.55115,
+          332812632164.456,
+          369251280645.6339,
+          404837014498.8862,
+          439868360215.29407
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204465 비용추계서24C4189 PDF3~4쪽, 국토교통부2023철도통계연보 인용",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 18418.04041,
+  "gold_display_total_eok": 18418,
+  "error_percent": 0.00021940492996758376,
+  "annual_display_matches": 5,
+  "limitation": "과거실적과 사후선택 추세모델 보강회귀. 미래정답대상수를 DB에 넣지 않았으며 첫실행 성과가 아님"
+}

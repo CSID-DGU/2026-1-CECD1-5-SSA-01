@@ -1,0 +1,218 @@
+{
+  "bill_no": "2203497",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2203497",
+    "route_key": "transfer_recipient",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "development_review",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "disability_eligibility_expansion",
+    "disability_benefit_scope": "severe_grade3_single_incremental_18plus",
+    "disability_population_basis": "official_population_linear_ratio_trend",
+    "disability_composition_basis": "table_2023_frozen",
+    "disability_cpi_basis": "table_application_years_2025_2029",
+    "benefit_index_base_year": 2024,
+    "supplementary_benefit_policy_unchanged": true,
+    "support_derivation_note": "종전3급단일등 신규수급범위.현행차감·기초/부가급여 구분; 기존18~64재가 부부감액비율 준용 후보",
+    "population_proxy_note": "공식18세이상전망×수급권자비율OLS추세.동결아님.정답의구체추세모형은미확인",
+    "composition_conflict_note": "본문2022와표2023 불일치:표2023 구성비 선택.65세차상위초과는표본체3만원선택; 주석5만원은 미반영.시설기초지급은표기초급여행 준용",
+    "estimation_start_note": "원문2025-01-01시행, 물가는정답표의2025~2029 적용연도대로 선택한 후보",
+    "use_unmatched_source_as_reference": true,
+    "unmatched_source_reference_note": "회답일이발의일보다앞서동일버전미확인.명시적사후참조시나리오",
+    "selected_evidence_keys": [
+      "2203497:disability_take_up:scenario_2023",
+      "2203497:disability_benefit_groups:scenario_2023",
+      "2203497:expansion_cpi:scenario_2023",
+      "2203497:existing_couple_reduction:scenario_2023",
+      "mohw:disability_basic_monthly:2024:expansion",
+      "2204018:disability_couple_share:reference:expansion",
+      "2203497:recipient_count:official_population_linear_trend"
+    ],
+    "evidence_selection_reasons": {
+      "2203497:expanded_eligible_reference:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:existing_eligible_reference:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:disability_take_up:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:disability_benefit_groups:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:expansion_cpi:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:existing_couple_reduction:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "mohw:disability_basic_monthly:2024:expansion": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2204018:disability_couple_share:reference:expansion": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:recipient_count:official_population_linear_trend": "공식인구전망과실적비율로구한검토용OLS추세후보"
+    },
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2025시행 및매월지급"
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_recipient",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "evidence_key": "2203497:disability_take_up:scenario_2023,2203497:disability_benefit_groups:scenario_2023,2203497:expansion_cpi:scenario_2023,2203497:existing_couple_reduction:scenario_2023,mohw:disability_basic_monthly:2024:expansion,2204018:disability_couple_share:reference:expansion,2203497:recipient_count:official_population_linear_trend",
+    "annual_amounts_thousand": [
+      1100965661,
+      1123019044,
+      1143544740,
+      1164055240,
+      1185640221
+    ],
+    "source_refs": [
+      "KOSIS DT_1BPA001 2023.12 중위전망18세이상 +2203497 PDF4쪽표2 수급권자실적,OLS비율추세 및70.59%",
+      "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제; 보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "원문2025시행 및매월지급"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          285570.71224172576,
+          286167.3952874277,
+          286481.99116129475,
+          286682.52936464874,
+          287036.241854895
+        ],
+        "unit": "person",
+        "source_class": "precedent_assumption",
+        "source_ref": "KOSIS DT_1BPA001 2023.12 중위전망18세이상 +2203497 PDF4쪽표2 수급권자실적,OLS비율추세 및70.59%",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          321276.42816220934,
+          327028.5918247896,
+          332640.08893962135,
+          338369.42749386455,
+          344219.08215774683
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제; 보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2025시행 및매월지급",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": []
+  },
+  "population_evidence": {
+    "evidence_key": "2203497:recipient_count:official_population_linear_trend",
+    "variable_key": "recipient_count",
+    "value": [
+      285570.71224172576,
+      286167.3952874277,
+      286481.99116129475,
+      286682.52936464874,
+      287036.241854895
+    ],
+    "unit": "person",
+    "source_bill_no": "2203497",
+    "available_at": "2026-10-06",
+    "source_ref": "KOSIS DT_1BPA001 2023.12 중위전망18세이상 +2203497 PDF4쪽표2 수급권자실적,OLS비율추세 및70.59%",
+    "agency": "통계청·국회예산정책처",
+    "policy_domain": "장애인연금",
+    "scope": "severe_grade3_single_incremental_18plus",
+    "service_function": "disability_eligibility_expansion",
+    "variable_role": "derived_population",
+    "reuse_policy": "comparable",
+    "source_class": "precedent_assumption",
+    "review_status": "reviewed",
+    "reviewed_at": "2026-10-06",
+    "support_derivation": "disability_eligibility_expansion",
+    "disability_benefit_scope": "severe_grade3_single_incremental_18plus",
+    "disability_population_basis": "official_population_linear_ratio_trend",
+    "value_years": [
+      2025,
+      2026,
+      2027,
+      2028,
+      2029
+    ],
+    "allowed_routes": [
+      "transfer_recipient"
+    ],
+    "requires_applicability_note": true,
+    "independently_verified": false,
+    "obtained_from": "official_population_and_reviewed_counts",
+    "source_bill_version_match": false,
+    "calculation_trace": {
+      "adult_population": [
+        45059265,
+        45250803,
+        45398467,
+        45528657,
+        45683791
+      ],
+      "historical_adult_population": [
+        43864163,
+        44140227,
+        44277176,
+        44402015,
+        44643323
+      ],
+      "historical_existing_counts": [
+        521180,
+        520176,
+        518705,
+        514409,
+        508975
+      ],
+      "historical_expanded_counts": [
+        921379,
+        920329,
+        918341,
+        914254
+      ],
+      "historical_existing_ratios": [
+        0.011881681180146991,
+        0.011784624487771664,
+        0.011714952191169555,
+        0.011585262515676372,
+        0.011400921029108876
+      ],
+      "historical_expanded_ratios": [
+        0.021005279412261896,
+        0.020850119325394496,
+        0.020740731071015008,
+        0.020590371855871856
+      ],
+      "existing_projected_ratios": [
+        0.011209135371106082,
+        0.01109304714368893,
+        0.01097695891627178,
+        0.010860870688854626,
+        0.010744782461437475
+      ],
+      "expanded_projected_ratios": [
+        0.020187275500538487,
+        0.020051864408183528,
+        0.019916453315828565,
+        0.019781042223473606,
+        0.019645631131118644
+      ],
+      "take_up": 0.7059,
+      "expression": "18세이상공식전망×(확대후비율OLS추세−현행비율OLS추세)×70.59%"
+    },
+    "source_url": "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1BPA001",
+    "limitation": "인원동결아님.OLS를명시한후보이며정답이사용한구체추세모형은미확인.비율실적은정답에서확인.원문버전불일치검토필수"
+  },
+  "total_thousand": 5717224906,
+  "gold_total_thousand": 5472400000,
+  "difference_percent": 4.473812330969959,
+  "synthetic_web_status": "computed_review",
+  "unresolved": "2018~2022년연령구성평균·정답의구체비율추세모형·지급단가표/주석불일치 미확인.정답확인후 시나리오 비교,독립평가아님"
+}

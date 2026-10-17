@@ -1,0 +1,359 @@
+{
+  "bill_no": "2204608",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2204608",
+    "bill_name": "기초연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-10-08",
+    "articles": [
+      {
+        "article_ref": "제3조제2항",
+        "source_quote": "제3조제2항중“70”을“80”으로한다.",
+        "source_page": 3,
+        "change_summary": "65세이상 수급범위70→80%. 기존대상증액과신규대상급여를개정총액−현행총액으로중복없이계산",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "65세이상 수급범위70→80%. 기존대상증액과신규대상급여를개정총액−현행총액으로중복없이계산",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "같은사업개정전체급여−현행전체급여;각변경별동일총액중복합산금지",
+        "variables": []
+      },
+      {
+        "article_ref": "제5조제4~7항·제6·7조",
+        "source_quote": "제6조및제7조를각각삭제한다.",
+        "source_page": 3,
+        "change_summary": "국민연금연계감액폐지. 국민연금동시수급자전체가감액대상인것은아님",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "국민연금연계감액폐지. 국민연금동시수급자전체가감액대상인것은아님",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "같은사업개정전체급여−현행전체급여;각변경별동일총액중복합산금지",
+        "variables": []
+      },
+      {
+        "article_ref": "제8조제2~4항",
+        "source_quote": "제8조제2항부터제4항까지를각각삭제한다.",
+        "source_page": 3,
+        "change_summary": "소득역전감액도폐지.제8조제1항부부감액20%는유지.제안이유만읽으면누락할수있는효과",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "소득역전감액도폐지.제8조제1항부부감액20%는유지.제안이유만읽으면누락할수있는효과",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "같은사업개정전체급여−현행전체급여;각변경별동일총액중복합산금지",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "calculation_item_count": 1,
+  "payload": {
+    "bill_no": "2204608",
+    "route_key": "transfer_population_amount_delta",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문3쪽2025-01-01시행 및매월급여"
+      }
+    },
+    "calculated_inputs": {
+      "new_recipient_count": {
+        "value": [
+          8336680.4874966135,
+          8821240.649198024,
+          9195539.029505482,
+          9614424.058762036,
+          9928398.719435323
+        ],
+        "unit": "person",
+        "source_ref": "KOSIS2023.12전망×원문80%×2021~2023실제수급률준용",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "value": [
+          7294595.426559537,
+          7718585.568048269,
+          8046096.6508172965,
+          8412621.05141678,
+          8687348.879505908
+        ],
+        "unit": "person",
+        "source_ref": "KOSIS2023.12전망×현행70%×동일실제수급률준용",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "value": [
+          313509.2364057683,
+          320092.93037028937,
+          326494.7889776952,
+          333024.6847572491,
+          339685.1784523941
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "NR·소득역전감액폐지,부부감액유지;공식통계PDF12쪽2021~2023부부2인비율동결,신규대상동일구성준용",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "value": [
+          303206.9850620258,
+          309574.3317483283,
+          315765.81838329486,
+          322081.13475096074,
+          328522.75744598
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "공식통계PDF42쪽2021~2023평균수령액/기준액비율과역사물가연동;이번에는차액계수가아닌현행평균급여수준에만사용",
+        "is_assumption": true
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_population_amount_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "evidence_key": "target_formula_inputs",
+    "annual_amounts_thousand": [
+      4822248567,
+      5209689596,
+      5539359375,
+      5907528082,
+      6222456984
+    ],
+    "source_refs": [
+      "KOSIS2023.12전망×원문80%×2021~2023실제수급률준용",
+      "KOSIS2023.12전망×현행70%×동일실제수급률준용",
+      "NR·소득역전감액폐지,부부감액유지;공식통계PDF12쪽2021~2023부부2인비율동결,신규대상동일구성준용",
+      "공식통계PDF42쪽2021~2023평균수령액/기준액비율과역사물가연동;이번에는차액계수가아닌현행평균급여수준에만사용",
+      "원문3쪽2025-01-01시행 및매월급여"
+    ],
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          8336680.4874966135,
+          8821240.649198024,
+          9195539.029505482,
+          9614424.058762036,
+          9928398.719435323
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS2023.12전망×원문80%×2021~2023실제수급률준용",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          7294595.426559537,
+          7718585.568048269,
+          8046096.6508172965,
+          8412621.05141678,
+          8687348.879505908
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS2023.12전망×현행70%×동일실제수급률준용",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          313509.2364057683,
+          320092.93037028937,
+          326494.7889776952,
+          333024.6847572491,
+          339685.1784523941
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "NR·소득역전감액폐지,부부감액유지;공식통계PDF12쪽2021~2023부부2인비율동결,신규대상동일구성준용",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": [
+          303206.9850620258,
+          309574.3317483283,
+          315765.81838329486,
+          322081.13475096074,
+          328522.75744598
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "공식통계PDF42쪽2021~2023평균수령액/기준액비율과역사물가연동;이번에는차액계수가아닌현행평균급여수준에만사용",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽2025-01-01시행 및매월급여",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": []
+  },
+  "required_variables_filled": 5,
+  "required_variable_count": 5,
+  "total_thousand": 27701282604,
+  "scenario_only": true,
+  "source_trace": {
+    "population": [
+      10513907,
+      11125016,
+      11597067,
+      12125349,
+      12521322
+    ],
+    "take_up": 0.9911492092683307,
+    "old_mean_payment_factor": 0.883521079846599,
+    "couple_both_share": 0.4322948886806812,
+    "base_monthly": [
+      343180.24999999994,
+      350387.0352499999,
+      357394.77595499996,
+      364542.6714740999,
+      371833.52490358194
+    ],
+    "proxy_rows": [
+      {
+        "evidence_key": "mohw_pension_2023:lower30:pension_take_up:proxy",
+        "variable_key": "pension_take_up",
+        "value": 0.9911492092683307,
+        "unit": "ratio",
+        "source_bill_no": "public:mohw:pension_statistics_2023",
+        "available_at": "2024-12-06",
+        "source_ref": "보건복지부 통계로본2023년기초연금 PDF11쪽·KOSIS동일버전연앙인구; mean(2021~2023실제수급자/(공식전망65세이상인구×70%))",
+        "agency": "보건복지부·통계청",
+        "policy_domain": "기초연금",
+        "scope": "전국평균2021~2023을소득구간에준용하는후보",
+        "service_function": "basic_pension_staged_increase",
+        "variable_role": "proxy_assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-06",
+        "source_url": "https://www.mohw.go.kr/board.es?mid=a10411010100&bid=0019&act=view&list_no=1483858",
+        "support_derivation": "basic_pension_staged_increase",
+        "pension_income_band": "lower30",
+        "pension_rate_basis": "national_2021_2023_average_proxy",
+        "allowed_routes": [
+          "transfer_recipient_delta"
+        ],
+        "valid_from_year": 2026,
+        "valid_to_year": 2030,
+        "requires_applicability_note": true,
+        "independently_verified": false,
+        "obtained_from": "official_observations_derived_proxy",
+        "historical_years": [
+          2021,
+          2022,
+          2023
+        ],
+        "observed_recipients": [
+          5973059,
+          6238798,
+          6508574
+        ],
+        "denominator_population": [
+          8569865,
+          8981133,
+          9435816
+        ],
+        "observed_mean_payments": [
+          265571,
+          271852,
+          284804
+        ],
+        "reference_monthly_amounts": [
+          300000,
+          307500,
+          323180
+        ],
+        "calculation": "mean(2021~2023실제수급자/(공식전망65세이상인구×70%))",
+        "raw_source_file": "backend/generated/erce_official_sources/mohw_basic_pension_2023.pdf",
+        "limitation": "전국평균을소득구간별미관측값에준용하는명시적가정후보.평균급여수준비율은기준액인상시한계지급비율과같다고검증되지않음.자동확정·정답역산금지.신규추계에사용전최신버전및대상범위검토"
+      },
+      {
+        "evidence_key": "mohw_pension_2023:lower30:pension_delta_payment_factor:proxy",
+        "variable_key": "pension_delta_payment_factor",
+        "value": 0.883521079846599,
+        "unit": "ratio",
+        "source_bill_no": "public:mohw:pension_statistics_2023",
+        "available_at": "2024-12-06",
+        "source_ref": "보건복지부 통계로본2023년기초연금 PDF42쪽 평균연금액·2021~2023기준액; mean(전국평균수령액/해당연도기준액)을증액차액에준용하는후보",
+        "agency": "보건복지부·통계청",
+        "policy_domain": "기초연금",
+        "scope": "전국평균2021~2023을소득구간에준용하는후보",
+        "service_function": "basic_pension_staged_increase",
+        "variable_role": "proxy_assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-06",
+        "source_url": "https://www.mohw.go.kr/board.es?mid=a10411010100&bid=0019&act=view&list_no=1483858",
+        "support_derivation": "basic_pension_staged_increase",
+        "pension_income_band": "lower30",
+        "pension_rate_basis": "national_2021_2023_average_proxy",
+        "allowed_routes": [
+          "transfer_recipient_delta"
+        ],
+        "valid_from_year": 2026,
+        "valid_to_year": 2030,
+        "requires_applicability_note": true,
+        "independently_verified": false,
+        "obtained_from": "official_observations_derived_proxy",
+        "historical_years": [
+          2021,
+          2022,
+          2023
+        ],
+        "observed_recipients": [
+          5973059,
+          6238798,
+          6508574
+        ],
+        "denominator_population": [
+          8569865,
+          8981133,
+          9435816
+        ],
+        "observed_mean_payments": [
+          265571,
+          271852,
+          284804
+        ],
+        "reference_monthly_amounts": [
+          300000,
+          307500,
+          323180
+        ],
+        "calculation": "mean(전국평균수령액/해당연도기준액)을증액차액에준용하는후보",
+        "raw_source_file": "backend/generated/erce_official_sources/mohw_basic_pension_2023.pdf",
+        "limitation": "전국평균을소득구간별미관측값에준용하는명시적가정후보.평균급여수준비율은기준액인상시한계지급비율과같다고검증되지않음.자동확정·정답역산금지.신규추계에사용전최신버전및대상범위검토"
+      }
+    ]
+  },
+  "limitations": [
+    "2021~2023수급률·부부구성동결및새소득구간동일구성준용가정",
+    "구체유형별2021~2023교차자료재현아님",
+    "개발AI수동근거매핑+Python계산,발의일시점·독립격리평가아님",
+    "원문변경효과3개를하나의순증계산에합침;API기사검색안함"
+  ]
+}

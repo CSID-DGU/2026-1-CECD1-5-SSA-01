@@ -1,0 +1,216 @@
+{
+  "bill_no": "2211430",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2211430",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-08",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "owner_energy_repair_grouped",
+    "payer": "government",
+    "start_year": 2027,
+    "years": 5,
+    "repair_recipient_scope": "owner_annual_repair_flow",
+    "repair_increment_base_year": 2025,
+    "repair_payment_scenario": "upper_bound_100",
+    "repair_counts_rounding": "half_up",
+    "support_derivation_note": "정답확인후자가보수등급별연간대상과추가단가를분리하여합산",
+    "annual_flow_note": "연간실제지원흐름에수선주기가반영됨,다시3/5/7로나누지않음",
+    "repair_income_scope_note": "정답의소득별80~100%차등미고려·상한100%지원시나리오,실제법정차등폐지가아님",
+    "repair_price_year_note": "유사사업추가단가60/180/300만원2025가격기준.2026전망1.9%부터보정",
+    "estimation_start_note": "정답사업준비기간2027~2031가정확인",
+    "selected_evidence_keys": [
+      "2211430:repair_household_history:reviewed",
+      "2211430:old_building_share:reviewed",
+      "2211430:repair_increment_base:reviewed",
+      "2211430:repair_cpi:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2211430:repair_household_history:reviewed": "보수범위·최근연간실적·노후비중·가격연도조건검토후사후준용",
+      "2211430:old_building_share:reviewed": "보수범위·최근연간실적·노후비중·가격연도조건검토후사후준용",
+      "2211430:repair_increment_base:reviewed": "보수범위·최근연간실적·노후비중·가격연도조건검토후사후준용",
+      "2211430:repair_cpi:reviewed": "보수범위·최근연간실적·노후비중·가격연도조건검토후사후준용"
+    },
+    "selected_method_keys": [
+      "2211430:owner_energy_repair_grouped"
+    ],
+    "method_selection_reasons": {
+      "2211430:owner_energy_repair_grouped": "자가주택고효율시설추가급여"
+    },
+    "method_confirmations": {
+      "2211430:owner_energy_repair_grouped": {
+        "annual_flow_note": "연간실제지원흐름에수선주기가반영됨,다시3/5/7로나누지않음",
+        "repair_income_scope_note": "정답의소득별80~100%차등미고려·상한100%지원시나리오,실제법정차등폐지가아님",
+        "repair_price_year_note": "유사사업추가단가60/180/300만원2025가격기준.2026전망1.9%부터보정",
+        "estimation_start_note": "정답사업준비기간2027~2031가정확인"
+      }
+    }
+  },
+  "result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2211430:repair_household_history:reviewed,2211430:old_building_share:reviewed,2211430:repair_increment_base:reviewed,2211430:repair_cpi:reviewed",
+    "annual_amounts_thousand": [
+      16923393,
+      17261861,
+      17607098,
+      17959240,
+      18318425
+    ],
+    "source_refs": [
+      "2211430 비용추계서25B3733 PDF5~8쪽 표2~6",
+      "2211430 비용추계서25B3733 PDF5~8쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          16923393036,
+          17261860896.72,
+          17607098114.654404,
+          17959240076.94749,
+          18318424878.486443
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2211430 비용추계서25B3733 PDF5~8쪽 표2~6",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2211430:owner_energy_repair_grouped"
+    ]
+  },
+  "trace": [
+    {
+      "year": 2027,
+      "eligible_households": {
+        "light": 7701,
+        "medium": 3177,
+        "heavy": 1981
+      },
+      "base_increment_won": {
+        "light": 600000,
+        "medium": 1800000,
+        "heavy": 3000000
+      },
+      "cpi_factor": 1.03938,
+      "grouped_amounts_won": {
+        "light": 4802559228,
+        "medium": 5943798468,
+        "heavy": 6177035340
+      },
+      "annual_won": 16923393036,
+      "income_payment_share": 1,
+      "expression": "Σ(round(종류별최근3년지원평균×노후비중)×종류별추가단가×CPI),수선주기재분할없음"
+    },
+    {
+      "year": 2028,
+      "eligible_households": {
+        "light": 7701,
+        "medium": 3177,
+        "heavy": 1981
+      },
+      "base_increment_won": {
+        "light": 600000,
+        "medium": 1800000,
+        "heavy": 3000000
+      },
+      "cpi_factor": 1.0601676,
+      "grouped_amounts_won": {
+        "light": 4898610412.56,
+        "medium": 6062674437.36,
+        "heavy": 6300576046.8
+      },
+      "annual_won": 17261860896.72,
+      "income_payment_share": 1,
+      "expression": "Σ(round(종류별최근3년지원평균×노후비중)×종류별추가단가×CPI),수선주기재분할없음"
+    },
+    {
+      "year": 2029,
+      "eligible_households": {
+        "light": 7701,
+        "medium": 3177,
+        "heavy": 1981
+      },
+      "base_increment_won": {
+        "light": 600000,
+        "medium": 1800000,
+        "heavy": 3000000
+      },
+      "cpi_factor": 1.081370952,
+      "grouped_amounts_won": {
+        "light": 4996582620.8112,
+        "medium": 6183927926.107201,
+        "heavy": 6426587567.736001
+      },
+      "annual_won": 17607098114.654404,
+      "income_payment_share": 1,
+      "expression": "Σ(round(종류별최근3년지원평균×노후비중)×종류별추가단가×CPI),수선주기재분할없음"
+    },
+    {
+      "year": 2030,
+      "eligible_households": {
+        "light": 7701,
+        "medium": 3177,
+        "heavy": 1981
+      },
+      "base_increment_won": {
+        "light": 600000,
+        "medium": 1800000,
+        "heavy": 3000000
+      },
+      "cpi_factor": 1.1029983710400002,
+      "grouped_amounts_won": {
+        "light": 5096514273.227425,
+        "medium": 6307606484.629345,
+        "heavy": 6555119319.090721
+      },
+      "annual_won": 17959240076.94749,
+      "income_payment_share": 1,
+      "expression": "Σ(round(종류별최근3년지원평균×노후비중)×종류별추가단가×CPI),수선주기재분할없음"
+    },
+    {
+      "year": 2031,
+      "eligible_households": {
+        "light": 7701,
+        "medium": 3177,
+        "heavy": 1981
+      },
+      "base_increment_won": {
+        "light": 600000,
+        "medium": 1800000,
+        "heavy": 3000000
+      },
+      "cpi_factor": 1.1250583384608002,
+      "grouped_amounts_won": {
+        "light": 5198444558.691974,
+        "medium": 6433758614.321932,
+        "heavy": 6686221705.472535
+      },
+      "annual_won": 18318424878.486443,
+      "income_payment_share": 1,
+      "expression": "Σ(round(종류별최근3년지원평균×노후비중)×종류별추가단가×CPI),수선주기재분할없음"
+    }
+  ],
+  "reusable_web_status": "computed_review",
+  "annual_eok": [
+    169.23393,
+    172.61861,
+    176.07098,
+    179.5924,
+    183.18425
+  ],
+  "total_eok": 880.70017,
+  "gold_total_eok": 880.7,
+  "error_percent": 0.000019302827286459836,
+  "required_lower_filled": 4,
+  "required_lower_count": 4,
+  "excluded_information_system": "정답의국토부확인:현행시스템처리가능,미대상",
+  "remaining_scope_note": "에너지조사는정답에별도사업비로열거안됨.자동추가용역비/사유3호미추계판정안함",
+  "limitation": "원단가와지급상한가정의사후회귀.독립성과아님.순수금액집계상위산식사용"
+}

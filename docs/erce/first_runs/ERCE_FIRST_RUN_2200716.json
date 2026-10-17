@@ -1,0 +1,168 @@
+{
+  "bill_no": "2200716",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2200716",
+    "bill_name": "아동복지법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-06-20",
+    "articles": [
+      {
+        "article_ref": "제42조제1항",
+        "source_quote": "하여아동이18세가될때까지매월20만원을해당아동의계좌에\n지원하는사업(이하“자산형성지원사업”이라한다)을실시할수있",
+        "source_page": 3,
+        "change_summary": "18세미만모든아동월20만원적립의전면실시후보.신생아만누적하는조건은원문에없음.임의규정이라100%실시는시나리오",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "18세미만모든아동월20만원적립의전면실시후보.신생아만누적하는조건은원문에없음.임의규정이라100%실시는시나리오",
+        "route_key": "transfer_child_asset_monthly",
+        "route_reason": "18세미만모든아동월20만원적립의전면실시후보.신생아만누적하는조건은원문에없음.임의규정이라100%실시는시나리오",
+        "variables": []
+      },
+      {
+        "article_ref": "제42조제2항·제43조제2항",
+        "source_quote": "제43조제2항제2호를삭제한다.",
+        "source_page": 3,
+        "change_summary": "18세까지인출제한은적립액을만기에다시국가지출하지않음.후원자관리삭제의절감액·계좌운영추가비용은기존사업과대조필요",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "18세까지인출제한은적립액을만기에다시국가지출하지않음.후원자관리삭제의절감액·계좌운영추가비용은기존사업과대조필요",
+        "route_key": "",
+        "route_reason": "18세까지인출제한은적립액을만기에다시국가지출하지않음.후원자관리삭제의절감액·계좌운영추가비용은기존사업과대조필요",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "payload": {
+    "bill_no": "2200716",
+    "route_key": "transfer_child_asset_monthly",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "benefit_per_recipient": {
+        "value": 200000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문3쪽제42조제1항월20만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문4쪽2025-01-01시행및매월적립·통년후보"
+      }
+    },
+    "calculated_inputs": {
+      "recipient_count": {
+        "value": [
+          6625299,
+          6358318,
+          6136084,
+          5931220,
+          5700261
+        ],
+        "unit": "person",
+        "source_ref": "기존공통DB KOSIS2023.12전국0~17세2025~2029공식전망",
+        "is_assumption": true
+      },
+      "participation_rate": {
+        "value": 1,
+        "unit": "ratio",
+        "source_ref": "기존2200486전원12개월자산형성사업후보를명시적전면실시가정으로준용",
+        "is_assumption": true
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_child_asset_monthly",
+    "subtype": "",
+    "formula_key": "TRANSFER_CHILD_ASSET_MONTHLY_V1",
+    "formula": "연도별 18세 미만 아동 수 × 1인당 월 적립액 × 연간 지원개월 수",
+    "evidence_key": "target_formula_inputs",
+    "annual_amounts_thousand": [
+      15900717600,
+      15259963200,
+      14726601600,
+      14234928000,
+      13680626400
+    ],
+    "source_refs": [
+      "기존공통DB KOSIS2023.12전국0~17세2025~2029공식전망",
+      "원문3쪽제42조제1항월20만원",
+      "원문4쪽2025-01-01시행및매월적립·통년후보",
+      "기존2200486전원12개월자산형성사업후보를명시적전면실시가정으로준용"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          6625299,
+          6358318,
+          6136084,
+          5931220,
+          5700261
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "기존공통DB KOSIS2023.12전국0~17세2025~2029공식전망",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 200000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽제42조제1항월20만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문4쪽2025-01-01시행및매월적립·통년후보",
+        "is_assumption": false
+      },
+      "participation_rate": {
+        "key": "participation_rate",
+        "value": 1,
+        "unit": "ratio",
+        "source_class": "calculated_estimate",
+        "source_ref": "기존2200486전원12개월자산형성사업후보를명시적전면실시가정으로준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": []
+  },
+  "required_variables_filled": 3,
+  "required_variable_count": 3,
+  "gross_total_thousand": 73802836800,
+  "net_additional_total_thousand": null,
+  "scenario_only": true,
+  "source_population": [
+    6625299,
+    6358318,
+    6136084,
+    5931220,
+    5700261
+  ],
+  "rejected_reuse": "2200486월10만원상한가정은이번원문월20만원과다르고인구2026~2030은이번기간2025~2029와달라그대로사용하지않음",
+  "unresolved": [
+    "현행취약아동자산형성지원비차감여부",
+    "계좌운영비·후원자관리폐지효과"
+  ],
+  "limitations": [
+    "적립총액전면실시후보,기존사업차감순증과행정비는미산정",
+    "현재개발DB에서공식자료수동매핑+Python고정계산.발의일시점독립평가아님",
+    "18세인출은계좌잔액지급이며국가가다시적립총액을지출한다고계산하지않음"
+  ]
+}

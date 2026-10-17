@@ -1,0 +1,573 @@
+{
+  "bill_no": "2200987",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payloads": [
+    {
+      "bill_no": "2200987",
+      "evidence_mode": "development_review",
+      "cutoff_date": "2026-10-10",
+      "route_key": "direct_annual_amount",
+      "support_derivation": "child_support_advance_expense",
+      "child_support_model": "child_support_advance_expense",
+      "payer": "government",
+      "start_year": 2026,
+      "years": 5,
+      "fiscal_reporting": "separate_revenue_and_expenditure",
+      "support_derivation_note": "대상 정답 미열람 현 개발 DB 재사용 후보",
+      "child_support_scope_note": "급여는 소득필터/채권금액 제약 미반영 비교 시나리오. 전산은 선지급·회수·정보연계 과업 참고 후보.",
+      "estimation_start_note": "공포일 미확정, 공포후1년·개발DB 준비시나리오 2026~2030 조건부 가정",
+      "selected_evidence_keys": [
+        "2201707:child_support_advance_expense:household_forecast:reviewed",
+        "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+        "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+        "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+        "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+        "2201707:child_support_advance_expense:children_per_claim:reviewed",
+        "2201707:child_support_advance_expense:advance_monthly_amount:reviewed",
+        "2201707:child_support_advance_expense:advance_months:reviewed",
+        "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+      ],
+      "evidence_selection_reasons": {
+        "2201707:child_support_advance_expense:household_forecast:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:minor_single_parent_share:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:claim_holder_share:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:unpaid_claim_share:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:children_per_claim:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:advance_monthly_amount:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:advance_months:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_advance_expense:legacy_support_budget:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음."
+      },
+      "selected_method_keys": [
+        "2200987:delegated_advance_policy_reference"
+      ],
+      "method_selection_reasons": {
+        "2200987:delegated_advance_policy_reference": "확인한 선례의 전원지원 참고 시나리오 승인"
+      },
+      "method_confirmations": {
+        "2200987:delegated_advance_policy_reference": {
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님."
+        }
+      },
+      "advance_take_up_scenario": "all_eligible",
+      "claim_count_rounding": "final_half_up",
+      "delegated_eligibility_reference_required": true,
+      "advance_amount_basis": "delegated_policy_reference",
+      "reference_scenario_confirmed": true,
+      "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+      "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+      "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+      "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님."
+    },
+    {
+      "bill_no": "2200987",
+      "evidence_mode": "holdout",
+      "cutoff_date": "2026-10-10",
+      "route_key": "direct_annual_amount",
+      "support_derivation": "child_support_system_upgrade",
+      "child_support_model": "child_support_system_upgrade",
+      "payer": "government",
+      "start_year": 2026,
+      "years": 5,
+      "fiscal_reporting": "separate_revenue_and_expenditure",
+      "support_derivation_note": "대상 정답 미열람 현 개발 DB 재사용 후보",
+      "child_support_scope_note": "급여는 소득필터/채권금액 제약 미반영 비교 시나리오. 전산은 선지급·회수·정보연계 과업 참고 후보.",
+      "estimation_start_note": "공포일 미확정, 공포후1년·개발DB 준비시나리오 2026~2030 조건부 가정",
+      "selected_evidence_keys": [
+        "2201707:child_support_system_upgrade:upgrade_components:reviewed",
+        "2201707:child_support_system_upgrade:system_maintenance_rate:reviewed",
+        "2201707:child_support_system_upgrade:maintenance_start_offset:reviewed",
+        "2201707:child_support_system_upgrade:system_cpi:reviewed"
+      ],
+      "evidence_selection_reasons": {
+        "2201707:child_support_system_upgrade:upgrade_components:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_system_upgrade:system_maintenance_rate:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_system_upgrade:maintenance_start_offset:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음.",
+        "2201707:child_support_system_upgrade:system_cpi:reviewed": "동일 선지급 및 회수 정보연계 과업 참고. 미확정 소득기준을 자동 숫자로 생성하지 않음."
+      },
+      "selected_method_keys": [
+        "2201707:child_support_system_upgrade"
+      ],
+      "method_selection_reasons": {
+        "2201707:child_support_system_upgrade": "급여 기본 구조 및 전산 과업별 기존 계산기의 조건부 재사용"
+      },
+      "method_confirmations": {
+        "2201707:child_support_system_upgrade": {
+          "child_support_scope_note": "급여는 소득필터/채권금액 제약 미반영 비교 시나리오. 전산은 선지급·회수·정보연계 과업 참고 후보.",
+          "estimation_start_note": "공포일 미확정, 공포후1년·개발DB 준비시나리오 2026~2030 조건부 가정"
+        }
+      },
+      "upgrade_scope_note": "양육비 선지급·회수·사회보장정보 연계, 기존 기능/연계/OCR/감리 고도화 참고 후보",
+      "warranty_timing_note": "2026구축·2027무상보수·2028유지관리 가정",
+      "maintenance_price_note": "첫 유지년도 구축비15%, 이후 기존 계획 전망물가"
+    }
+  ],
+  "engine_parts": [
+    {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2201707:child_support_advance_expense:household_forecast:reviewed,2201707:child_support_advance_expense:minor_single_parent_share:reviewed,2201707:child_support_advance_expense:divorced_unmarried_share:reviewed,2201707:child_support_advance_expense:claim_holder_share:reviewed,2201707:child_support_advance_expense:unpaid_claim_share:reviewed,2201707:child_support_advance_expense:children_per_claim:reviewed,2201707:child_support_advance_expense:advance_monthly_amount:reviewed,2201707:child_support_advance_expense:advance_months:reviewed,2201707:child_support_advance_expense:legacy_support_budget:reviewed",
+      "annual_amounts_thousand": [
+        63333400,
+        63880600,
+        64382200,
+        64835800,
+        65248600
+      ],
+      "source_refs": [
+        "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "2200987 비용추계서24C1050 PDF3~6쪽; 원문PDF8~9·18쪽"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            63333400000,
+            63880600000,
+            64382200000,
+            64835800000,
+            65248600000
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200987:delegated_advance_policy_reference"
+      ]
+    },
+    {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2201707:child_support_system_upgrade:upgrade_components:reviewed,2201707:child_support_system_upgrade:system_maintenance_rate:reviewed,2201707:child_support_system_upgrade:maintenance_start_offset:reviewed,2201707:child_support_system_upgrade:system_cpi:reviewed",
+      "annual_amounts_thousand": [
+        948000,
+        0,
+        142200,
+        145186,
+        148090
+      ],
+      "source_refs": [
+        "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "2201707 비용추계서24C1988 PDF4~7쪽"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            948000000,
+            0,
+            142200000,
+            145186200,
+            148089924
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "holdout",
+      "method_evidence_keys": [
+        "2201707:child_support_system_upgrade"
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "status": "computed_review",
+      "routeKey": "direct_annual_amount",
+      "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "annualAmountsThousand": [
+        63333400,
+        63880600,
+        64382200,
+        64835800,
+        65248600
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "households": 22516347,
+          "unrounded_stages": {
+            "minor_single_parent_share": 396287.7072,
+            "divorced_unmarried_share": 350318.3331648,
+            "claim_holder_share": 74617.8049641024,
+            "unpaid_claim_share": 19326.011485702522,
+            "children_per_claim": 27056.41607998353
+          },
+          "advance_cases": 27056,
+          "gross_expense": 64934400000,
+          "legacy_budget": 1601000000,
+          "additional_expense": 63333400000,
+          "amount_basis": "delegated_policy_reference",
+          "statutory_basis_difference_note": null,
+          "reference_scenario_confirmed": true,
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님.",
+          "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+        },
+        {
+          "year": 2027,
+          "households": 22705521,
+          "unrounded_stages": {
+            "minor_single_parent_share": 399617.1696,
+            "divorced_unmarried_share": 353261.5779264,
+            "claim_holder_share": 75244.7160983232,
+            "unpaid_claim_share": 19488.38146946571,
+            "children_per_claim": 27283.734057251993
+          },
+          "advance_cases": 27284,
+          "gross_expense": 65481600000,
+          "legacy_budget": 1601000000,
+          "additional_expense": 63880600000,
+          "amount_basis": "delegated_policy_reference",
+          "statutory_basis_difference_note": null,
+          "reference_scenario_confirmed": true,
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님.",
+          "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+        },
+        {
+          "year": 2028,
+          "households": 22879575,
+          "unrounded_stages": {
+            "minor_single_parent_share": 402680.52,
+            "divorced_unmarried_share": 355969.57968,
+            "claim_holder_share": 75821.52047184,
+            "unpaid_claim_share": 19637.77380220656,
+            "children_per_claim": 27492.883323089183
+          },
+          "advance_cases": 27493,
+          "gross_expense": 65983200000,
+          "legacy_budget": 1601000000,
+          "additional_expense": 64382200000,
+          "amount_basis": "delegated_policy_reference",
+          "statutory_basis_difference_note": null,
+          "reference_scenario_confirmed": true,
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님.",
+          "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+        },
+        {
+          "year": 2029,
+          "households": 23037240,
+          "unrounded_stages": {
+            "minor_single_parent_share": 405455.424,
+            "divorced_unmarried_share": 358422.594816,
+            "claim_holder_share": 76344.012695808,
+            "unpaid_claim_share": 19773.09928821427,
+            "children_per_claim": 27682.33900349998
+          },
+          "advance_cases": 27682,
+          "gross_expense": 66436800000,
+          "legacy_budget": 1601000000,
+          "additional_expense": 64835800000,
+          "amount_basis": "delegated_policy_reference",
+          "statutory_basis_difference_note": null,
+          "reference_scenario_confirmed": true,
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님.",
+          "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+        },
+        {
+          "year": 2030,
+          "households": 23180129,
+          "unrounded_stages": {
+            "minor_single_parent_share": 407970.2704,
+            "divorced_unmarried_share": 360645.7190336,
+            "claim_holder_share": 76817.5381541568,
+            "unpaid_claim_share": 19895.74238192661,
+            "children_per_claim": 27854.039334697256
+          },
+          "advance_cases": 27854,
+          "gross_expense": 66849600000,
+          "legacy_budget": 1601000000,
+          "additional_expense": 65248600000,
+          "amount_basis": "delegated_policy_reference",
+          "statutory_basis_difference_note": null,
+          "reference_scenario_confirmed": true,
+          "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+          "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+          "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+          "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님.",
+          "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+        }
+      ],
+      "sourceRefs": [
+        "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "2200987 비용추계서24C1050 PDF3~6쪽; 원문PDF8~9·18쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2200987:delegated_advance_policy_reference"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2200987:delegated_advance_policy_reference",
+          "source_bill_no": "2200987",
+          "available_at": "2024-07-05",
+          "reviewed_at": "2026-10-10",
+          "family_key": "child_support_delegated_policy_reference",
+          "payer": "government",
+          "source_ref": "2200987 비용추계서24C1050 PDF3~6쪽; 원문PDF8~9·18쪽",
+          "match_groups": [
+            [
+              "양육비"
+            ],
+            [
+              "선지급"
+            ],
+            [
+              "소득인정액",
+              "절반",
+              "대통령령"
+            ]
+          ],
+          "allowed_routes": [
+            "direct_annual_amount"
+          ],
+          "support_derivation": "child_support_advance_expense",
+          "required_confirmations": [
+            "delegated_eligibility_note",
+            "claim_amount_difference_note",
+            "reference_scenario_source",
+            "legacy_transition_note"
+          ],
+          "variable_keys": [
+            "annual_amount"
+          ],
+          "variable_evidence_keys": [
+            "2201707:child_support_advance_expense:household_forecast:reviewed",
+            "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+            "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+            "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+            "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+            "2201707:child_support_advance_expense:children_per_claim:reviewed",
+            "2201707:child_support_advance_expense:advance_monthly_amount:reviewed",
+            "2201707:child_support_advance_expense:advance_months:reviewed",
+            "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+          ],
+          "method_steps": [
+            "소득기준·선정 및 채권금액 조건이 미확정인지 확인",
+            "선례의 필요 대상 전원지원·월20만원·12개월 참고 가정을 후보로 제시",
+            "법정 조건을 실제로 충족한다고 단정하지 않고 차이와 근거를 설명·승인",
+            "기존 긴급지원 경과조치와 예산 차감 가정을 설명",
+            "기존 급여 산식 계산, 전산비 별도 합산 및 회수 수입 상계 금지"
+          ],
+          "baseline_check": "소득조건 무시를 일반 규칙으로 만들지 않음. 확정 대상·월액 자료가 있으면 우선 사용",
+          "limitation": "공식 추계서의 참고 시나리오. 법정 수급자·실제 채권금액 분포를 계산한 확정액이 아님",
+          "lower_variable_keys": [
+            "household_forecast",
+            "minor_single_parent_share",
+            "divorced_unmarried_share",
+            "claim_holder_share",
+            "unpaid_claim_share",
+            "children_per_claim",
+            "advance_monthly_amount",
+            "advance_months",
+            "legacy_support_budget"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "applicability_reason": "확인한 선례의 전원지원 참고 시나리오 승인",
+          "confirmed_assumptions": {
+            "delegated_eligibility_note": "소득기준은 대통령령 위임. 필요한 채권자 전원지원은 공식 추계서의 참고 가정이며 소득요건 충족을 산출한 것이 아님.",
+            "claim_amount_difference_note": "전부 또는 절반 이상 지급 조건과 실제 채권액 분포는 미확정. 월20만원 정책 가정은 법정 비율을 계산한 값이 아님.",
+            "reference_scenario_source": "24C1050 PDF3~6쪽: 필요 채권자 전원지원, 월20만원·12개월, 기존 긴급지원 예산 동결 차감.",
+            "legacy_transition_note": "부칙의 기존 결정자 경과조치는 유지. 공식 추계서처럼 기존 연16억100만원 차감은 참고 시나리오이며 실제 경과기간 지출을 검증한 값은 아님."
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            63333400000,
+            63880600000,
+            64382200000,
+            64835800000,
+            65248600000
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+          "is_assumption": true
+        }
+      }
+    },
+    {
+      "status": "computed_review",
+      "routeKey": "direct_annual_amount",
+      "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "annualAmountsThousand": [
+        948000,
+        0,
+        142200,
+        145186,
+        148090
+      ],
+      "derivationTrace": [
+        {
+          "year": 2026,
+          "build_expense": 948000000,
+          "maintenance_expense": 0,
+          "warranty_or_no_charge": false,
+          "first_maintenance_year": 2028,
+          "expression": "첫해기능별고도화예산합산,다음해무상보수,유지관리시작년15%이후물가"
+        },
+        {
+          "year": 2027,
+          "build_expense": 0,
+          "maintenance_expense": 0,
+          "warranty_or_no_charge": true,
+          "first_maintenance_year": 2028,
+          "expression": "첫해기능별고도화예산합산,다음해무상보수,유지관리시작년15%이후물가"
+        },
+        {
+          "year": 2028,
+          "build_expense": 0,
+          "maintenance_expense": 142200000,
+          "warranty_or_no_charge": false,
+          "first_maintenance_year": 2028,
+          "expression": "첫해기능별고도화예산합산,다음해무상보수,유지관리시작년15%이후물가"
+        },
+        {
+          "year": 2029,
+          "build_expense": 0,
+          "maintenance_expense": 145186200,
+          "warranty_or_no_charge": false,
+          "first_maintenance_year": 2028,
+          "expression": "첫해기능별고도화예산합산,다음해무상보수,유지관리시작년15%이후물가"
+        },
+        {
+          "year": 2030,
+          "build_expense": 0,
+          "maintenance_expense": 148089924,
+          "warranty_or_no_charge": false,
+          "first_maintenance_year": 2028,
+          "expression": "첫해기능별고도화예산합산,다음해무상보수,유지관리시작년15%이후물가"
+        }
+      ],
+      "sourceRefs": [
+        "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "2201707 비용추계서24C1988 PDF4~7쪽"
+      ],
+      "methodEvidenceKeys": [
+        "2201707:child_support_system_upgrade"
+      ],
+      "selectedMethods": [
+        {
+          "method_key": "2201707:child_support_system_upgrade",
+          "source_bill_no": "2201707",
+          "available_at": "2024-08-12",
+          "payer": "government",
+          "family_key": "child_support_system_upgrade",
+          "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽",
+          "match_groups": [
+            [
+              "양육비"
+            ],
+            [
+              "선지급"
+            ],
+            [
+              "전산",
+              "시스템"
+            ]
+          ],
+          "allowed_routes": [
+            "direct_annual_amount"
+          ],
+          "support_derivation": "child_support_system_upgrade",
+          "required_confirmations": [
+            "child_support_scope_note",
+            "estimation_start_note"
+          ],
+          "variable_keys": [
+            "annual_amount"
+          ],
+          "variable_evidence_keys": [
+            "2201707:child_support_system_upgrade:upgrade_components:reviewed",
+            "2201707:child_support_system_upgrade:system_maintenance_rate:reviewed",
+            "2201707:child_support_system_upgrade:maintenance_start_offset:reviewed",
+            "2201707:child_support_system_upgrade:system_cpi:reviewed"
+          ],
+          "method_steps": [
+            "기존시스템기능별고도화·무상보수기간·관리요율분리",
+            "회수수입과지출상계금지",
+            "과업/시점가정확인후연간계산"
+          ],
+          "baseline_check": "기존긴급지원예산차감은중복사업지출제거.회수수입차감과다름",
+          "limitation": "정부계획/조사준용가정.단가·선정자·참여실적확정값아님.조사인력·통지/수수료범위별도검토",
+          "lower_variable_keys": [
+            "upgrade_components",
+            "system_maintenance_rate",
+            "maintenance_start_offset",
+            "system_cpi"
+          ],
+          "review_status": "reviewed",
+          "obtained_from": "reviewed_answer",
+          "reviewed_at": "2026-10-03",
+          "applicability_reason": "급여 기본 구조 및 전산 과업별 기존 계산기의 조건부 재사용",
+          "confirmed_assumptions": {
+            "child_support_scope_note": "급여는 소득필터/채권금액 제약 미반영 비교 시나리오. 전산은 선지급·회수·정보연계 과업 참고 후보.",
+            "estimation_start_note": "공포일 미확정, 공포후1년·개발DB 준비시나리오 2026~2030 조건부 가정"
+          }
+        }
+      ],
+      "methodCandidates": [],
+      "resolvedVariables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            948000000,
+            0,
+            142200000,
+            145186200,
+            148089924
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+          "is_assumption": true
+        }
+      }
+    }
+  ],
+  "annual_thousand": [
+    64281400,
+    63880600,
+    64524400,
+    64980986,
+    65396690
+  ],
+  "total_eok": 3230.64076,
+  "gold_total_eok": 3230.64,
+  "raw_error_percent": 0.000023524750510740097,
+  "annual_display_matches": 5,
+  "total_display_match": true,
+  "official_scope_complete": true,
+  "limitation": "정답 확인 후 참고 시나리오 승인 경로 보강. 첫 실행의 급여 보류 기록과 분리."
+}

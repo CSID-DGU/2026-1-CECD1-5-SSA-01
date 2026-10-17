@@ -1,0 +1,83 @@
+{
+  "bill_no": "2216008",
+  "answer_seen": false,
+  "payload": {
+    "bill_no": "2216008",
+    "route_key": "annual_research_survey",
+    "start_year": 2027,
+    "years": 5,
+    "cutoff_date": "2026-10-13",
+    "payer": "government",
+    "estimate_purpose": "reference_scenario",
+    "explicit_inputs": {
+      "survey_unit_cost": {
+        "value": 870000000,
+        "unit": "KRW/survey",
+        "source_ref": "국회예산정책처2026예산안심의결과 PDF102쪽 단위백만원 유아사교육비조사 확정예산870. 같은규모 별도조사 준용가정. https://nabo.go.kr/board/file/bulkDown.do?bid=19&idx=9020"
+      },
+      "growth_rate": {
+        "value": 0,
+        "unit": "ratio/year",
+        "source_ref": "가격동결 참고가정. 원문매년조사·2027~2031시작은2026공포후6개월 가정"
+      }
+    }
+  },
+  "result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "",
+    "routeKey": "annual_research_survey",
+    "formulaKey": "ANNUAL_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 연구용역 단가 × 연 1회",
+    "annualAmountsThousand": [
+      870000,
+      870000,
+      870000,
+      870000,
+      870000
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "국회예산정책처2026예산안심의결과 PDF102쪽 단위백만원 유아사교육비조사 확정예산870. 같은규모 별도조사 준용가정. https://nabo.go.kr/board/file/bulkDown.do?bid=19&idx=9020",
+      "가격동결 참고가정. 원문매년조사·2027~2031시작은2026공포후6개월 가정"
+    ],
+    "methodEvidenceKeys": [],
+    "selectedMethods": [],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 870000000,
+        "unit": "KRW/survey",
+        "source_class": "target_explicit",
+        "source_ref": "국회예산정책처2026예산안심의결과 PDF102쪽 단위백만원 유아사교육비조사 확정예산870. 같은규모 별도조사 준용가정. https://nabo.go.kr/board/file/bulkDown.do?bid=19&idx=9020",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "target_explicit",
+        "source_ref": "가격동결 참고가정. 원문매년조사·2027~2031시작은2026공포후6개월 가정",
+        "is_assumption": false
+      }
+    }
+  },
+  "reference_gross_total_eok": 43.5,
+  "incremental_total_eok": null,
+  "required_slots": 1,
+  "filled_slots": 1,
+  "missing_slots": 0,
+  "baseline_overlap_status": "unverified",
+  "full_incremental_scope_complete": false,
+  "source_public_budget_url": "https://nabo.go.kr/board/file/bulkDown.do?bid=19&idx=9020",
+  "source_public_budget_pdf_page": 102,
+  "scope_notes": [
+    "제29조의3제3항 어린이집교육·특별활동·선행학습비용의 매년실태조사 재정수반을 선택",
+    "공식2026유아사교육비조사8.7억원은 외부유사예산이며정답의비용추계서는안봄",
+    "유아가구사교육비조사와어린이집기관교육·특별활동조사는 표본·세부과업이 다를수있음.같은규모로별도실시하는참고시나리오",
+    "2026이미조사예산편성됐으므로 기존조사통합가능성·표본확대·추가분 차감은 별도 검토필요.총조사비를확정추가비로보고안함",
+    "정책수립·교사노력의무 자체에서교육지원금을추가하지않음",
+    "지방기관마다같은중앙조사비중복곱셈안함"
+  ]
+}

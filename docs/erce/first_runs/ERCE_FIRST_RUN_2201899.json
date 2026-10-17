@@ -1,0 +1,69 @@
+{
+  "bill_no": "2201899",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "data_cutoff": "2026-10-03",
+  "time_scope_note": "현재 개발 DB를 사용한 미실행 개발 의안 시험. 무작위 격리 평가 또는 발의시점 제한 시험은 아님",
+  "eligibility": {"in_development_manifest": true, "reserved_education_compensation_holdout": false, "prior_own_db_evidence_count": 0},
+  "ai_draft": {
+    "bill_no": "2201899",
+    "bill_name": "한국장학재단 설립 등에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-07-18",
+    "articles": [
+      {
+        "article_ref": "제49조의4제1항/다자녀가정 학자금 무상지급 의무화",
+        "source_quote": "①재단은다자녀가정의모든자녀에대하여학자금무상지급을실시하여야한다.",
+        "source_page": 3,
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "셋 이상 자녀 가정의 모든 자녀에 대한 학자금 무상지급 의무 신설. 기존 우선지원과 기존 장학금은 별도로 차감해야 하며 단순 전체 등록금 합계는 순증 비용이 아님",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "다자녀 대학생 집단별 대상인원 × (연간 신규 무상지급액 − 기존 연간 지원액). 집단을 소득·출생순위 등으로 나누어 차액 산정 필요. 대상자·단가 모두 법안에 미명시",
+        "variables": []
+      },
+      {
+        "article_ref": "제36조/기존 장학금지원계정의 지원대상 확대",
+        "source_quote": "제36조중“학업성적이우수하거나경제적으로어려운”을“학업성적이우수한경우, 다자녀가정(출산또는입양으로셋이상의자녀를양육하는가정을말한다. 이하같다)의자녀에해당하는경우또는경제적으로어려운경우에해당하는”으로한다.",
+        "source_page": 3,
+        "cost_trigger": false,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "새 계정 설치가 아니라 기존 장학금 계정의 동일 다자녀 지원대상 확대. 제49조의4 무상지급 비용과 별도로 중복 합산하지 않음",
+        "route_key": "",
+        "route_reason": "동일 무상지급 제도의 재원 계정 연결",
+        "variables": []
+      }
+    ]
+  },
+  "candidate_search": {
+    "keywords": ["학자금", "장학", "다자녀"],
+    "self_excluded": true,
+    "matching_rows": "학자금 관련16행은2204385 연체금·추가채권 이자 및 ICL 공급통계. 무상지급 대상인원·연간 등록금·기존 장학금 단가가 아님",
+    "applicable_required_variable_candidates": 0,
+    "selected_evidence_keys": []
+  },
+  "required_variables": ["recipient_count", "benefit_per_recipient", "existing_benefit_per_recipient"],
+  "available_required_variables": 0,
+  "missing_required_variables": ["recipient_count", "benefit_per_recipient", "existing_benefit_per_recipient"],
+  "annual_amounts_thousand": null,
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item -> ERCE formula requirements",
+    "quote_verified": [true,true],
+    "cost_item_count": 1,
+    "unmapped_count": 0,
+    "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+    "status": "needs_input",
+    "missing_variables": ["recipient_count", "benefit_per_recipient", "existing_benefit_per_recipient"]
+  },
+  "scope_checks": [
+    "지원대상 대학생의 소득구간·출생순위·등록금 분포와 기존 장학금 차감",
+    "학자금의 적용 범위: 등록금·생활비 포함 여부 확인",
+    "무상지급 의무와 학자금 대출·재단채 이자지원은 다른 비용 경로",
+    "지원 정보 제공 확대의 별도 행정비 유무는 확인 필요"
+  ],
+  "start_year": null,
+  "effective_date_note": "공포 후6개월이며 공포일 미정. 추계 첫해를 법안의 확정 수치로 추출하지 않음",
+  "assumptions": ["인원·등록금·기존 지원액을 임의 생성하지 않음", "연간 지급액으로 환산한 집단별 차액 계산을 제안하되 지급횟수는 근거 확인 필요"]
+}

@@ -1,0 +1,249 @@
+{
+  "bill_no": "2200601",
+  "run_date": "2026-10-03",
+  "gold_opened": true,
+  "evaluation_type": "post_answer_development_regression",
+  "ai_mode": "manual_no_api",
+  "original_ai_draft_review_candidates": [
+    {
+      "componentKey": "public_basic_expense",
+      "routeKey": "personnel_basic_expense",
+      "formulaKey": "PERSONNEL_BASIC_EXPENSE_V1",
+      "formula": "보수총액 × 기본경비 비율",
+      "missingVariables": [
+        "annual_salary_amount",
+        "basic_expense_ratio"
+      ],
+      "status": "conditional_review",
+      "triggerRef": "제7조제1항/보수",
+      "sourceQuote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+      "sourcePage": 3,
+      "reason": "국·공립 추가 배치의 기본경비 필요 여부를 확인하세요. 선례는 봉급·수당과 기관부담금 합계에 비율을 적용했습니다.",
+      "requiresConfirmation": true
+    },
+    {
+      "componentKey": "public_initial_assets",
+      "routeKey": "personnel_asset",
+      "formulaKey": "PERSONNEL_ASSET_V1",
+      "formula": "순증인원 × 1인당 자산취득비",
+      "missingVariables": [
+        "headcount",
+        "asset_unit_price_per_person"
+      ],
+      "status": "conditional_review",
+      "triggerRef": "제7조제1항/보수",
+      "sourceQuote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+      "sourcePage": 3,
+      "reason": "새 인력의 PC·집기 구입 필요 여부를 확인하세요. 신규 구입이면 첫해만 계산하고 기존 장비 재사용 시 제외합니다.",
+      "requiresConfirmation": true
+    },
+    {
+      "componentKey": "private_pension_share",
+      "routeKey": "personnel_employer_contribution",
+      "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+      "formula": "보수총액 × 기관부담률",
+      "missingVariables": [
+        "annual_salary_amount",
+        "employer_contribution_rate"
+      ],
+      "status": "conditional_review",
+      "triggerRef": "제7조제1항/보수",
+      "sourceQuote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+      "sourcePage": 3,
+      "reason": "대상에 사립학교가 포함되는지 확인하세요. 사립 교원 연금의 국가부담은 국·공립 인건비와 분리하고, 재정결함보조는 별도 근거가 필요합니다.",
+      "requiresConfirmation": true
+    }
+  ],
+  "reviewed_ai_draft": {
+    "bill_no": "2200601",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-06-18",
+    "articles": [
+      {
+        "article_ref": "제7조제1항/국공립 봉급·수당",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_average",
+        "route_reason": "국·공립 순증인원 × 교원 연간 봉급·수당",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제1항/국공립 기관부담금",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "quantity_unit",
+        "route_reason": "국·공립 순증인원 × 선례 연간 기관부담금 단가. 정확한 부담률 전망 미확보라 비율 역산하지 않음",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제1항/국공립 기본경비",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_basic_expense",
+        "route_reason": "봉급·수당 및 기관부담금 합계 × 교육비특별회계 기본경비 비율",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제1항/국공립 초기 집기",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_asset",
+        "route_reason": "신규배치 인원 × 첫해1회 자산취득비. 대상 의안 정답이 제시한 시나리오 범위",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제1항/사립 연금 국가부담",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_employer_contribution",
+        "route_reason": "사립 순증인원 × 국공립 동일 봉급·수당 × 사학연금 국가부담률. 재정결함보조 제외 및 표와 본문 불일치 유의",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "mapped_routes": [
+    "personnel_average",
+    "quantity_unit",
+    "personnel_basic_expense",
+    "personnel_asset",
+    "personnel_employer_contribution"
+  ],
+  "scenarios": [
+    {
+      "components": {
+        "salary": [
+          5460000,
+          5772000,
+          5928000,
+          6240000,
+          6396000
+        ],
+        "employer_cost": [
+          780000,
+          780000,
+          780000,
+          780000,
+          936000
+        ],
+        "basic_expense": [
+          408096,
+          428501,
+          438703,
+          459108,
+          479513
+        ],
+        "initial_asset": [
+          780000,
+          0,
+          0,
+          0,
+          0
+        ],
+        "private_pension": [
+          10377,
+          10970,
+          11266,
+          11859,
+          12156
+        ]
+      },
+      "annual_amounts_thousand": [
+        7438473,
+        6991471,
+        7157969,
+        7490967,
+        7823669
+      ],
+      "total_thousand": 36902549,
+      "evaluation_type": "post_answer_rounded_rate_regression",
+      "limitation": "원자료 미확보: 반올림단가 사용, 사립연금은 불일치 표가 아닌 본문상 보수 기준",
+      "scenario": 1,
+      "gold_total_thousand": 36796000,
+      "total_error_percent": 0.28956680073921076,
+      "private_pension_gold_thousand": 70000,
+      "private_pension_error_percent": 19.102857142857143
+    },
+    {
+      "components": {
+        "salary": [
+          21630000,
+          22866000,
+          23484000,
+          24720000,
+          25338000
+        ],
+        "employer_cost": [
+          3090000,
+          3090000,
+          3090000,
+          3090000,
+          3708000
+        ],
+        "basic_expense": [
+          1616688,
+          1697522,
+          1737940,
+          1818774,
+          1899608
+        ],
+        "initial_asset": [
+          3090000,
+          0,
+          0,
+          0,
+          0
+        ],
+        "private_pension": [
+          11674,
+          12341,
+          12675,
+          13342,
+          13675
+        ]
+      },
+      "annual_amounts_thousand": [
+        29438362,
+        27665863,
+        28324615,
+        29642116,
+        30959283
+      ],
+      "total_thousand": 146030239,
+      "evaluation_type": "post_answer_rounded_rate_regression",
+      "limitation": "원자료 미확보: 반올림단가 사용, 사립연금은 불일치 표가 아닌 본문상 보수 기준",
+      "scenario": 2,
+      "gold_total_thousand": 145570000,
+      "total_error_percent": 0.3161633578347187,
+      "private_pension_gold_thousand": 79000,
+      "private_pension_error_percent": 19.35822784810127
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "bill_no": "2207435",
+  "run_date": "2026-10-11",
+  "evaluation_type": "pre_answer_development_first_run",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2207435.json",
+  "gold": {
+    "estimate_no": "25C0178",
+    "reply_date": "2025-02-13",
+    "estimated_items": 1,
+    "route": "research_plan",
+    "formula": "별도 처우개선 기본계획 연구용역 단가 × 3년 주기 수립횟수",
+    "unit_cost_won": 80000000,
+    "original_comparable_contract_won": 79500000,
+    "comparable_contract_year": 2022,
+    "comparable_contract_title": "사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+    "start_year": 2026,
+    "years": 5,
+    "annual_won": [
+      80000000,
+      0,
+      0,
+      80000000,
+      0
+    ],
+    "total_eok": 1.6,
+    "existing_survey_scope": "기존 보수·근로여건 조사에는 근로여건도 포함. 전체 기존 조사비를 추가하지 않고 별도 기본계획만 추계",
+    "price_policy": "기간 동결"
+  },
+  "first": {
+    "status": "needs_input",
+    "formula_correct": true,
+    "period_correct": true,
+    "conditional_first_year_matches": true,
+    "required_variables": 2,
+    "filled_required_variables": 1,
+    "missing_required_variables": [
+      "plan_unit_cost"
+    ],
+    "amount_eok": null,
+    "error_percent": null,
+    "estimated_scope_candidate_matches": true,
+    "other_article_scope": "기존조사 근로여건 추가분은 확인 필요로 남겼으나 정답은 이미 조사범위에 포함된다고 설명. 새로운 수치항목으로 계상하지 않음"
+  },
+  "conclusion": "산식과 주기·첫해는 맞았으나 대응 과업 단가가 없어 금액 미산출. 금액 오차0%나 완전 성공으로 기록하지 않음",
+  "reinforced": false,
+  "independent_achievement": false
+}

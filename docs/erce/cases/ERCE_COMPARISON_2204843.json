@@ -1,0 +1,25 @@
+{
+  "bill_no": "2204843",
+  "post_answer_comparison": true,
+  "first_total_eok": 16492.57231,
+  "gold_display_total_eok": 22237,
+  "display_total_difference_percent": 25.8327458290237,
+  "first_period": [
+    2025,
+    2029
+  ],
+  "gold_period": [
+    2026,
+    2030
+  ],
+  "comparable_same_period": false,
+  "period_aligned_diagnostic_eok": 19799.93882,
+  "aligned_diagnostic_error_percent": 10.959487250978102,
+  "table_matching_current_year_shift_diagnostic_eok": 22236.713418955787,
+  "table_matching_shift_difference_percent": 0.0012887576751029954,
+  "reference_lag_issue": "원문/정답설명은전년도이나정답월액표는기존2025기준값에첫해부터추세상승1회적용한해당연도후보와일치.기준연도/시차해석원작업파일확인필요",
+  "correct_formula": true,
+  "correct_population_iap_months": true,
+  "first_saved_before_gold": true,
+  "reinforcement_completed": false
+}

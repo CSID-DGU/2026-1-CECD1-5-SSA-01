@@ -1,0 +1,55 @@
+{
+  "bill_no": "2219149",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2219149",
+    "bill_name": "취업 후 학자금 상환 특별법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2026-06-09",
+    "articles": [{
+      "article_ref": "제16조의2제2항제7호",
+      "change_summary": "비수도권에 한정한 소득기준 이하 대학생의 학자금대출 이자면제를 수도권까지 확대",
+      "source_quote": "제16조의2제2항제7호본문중“「수도권정비계획법」제2조제1호에따른수도권이아닌지역의고등교육기관”을“고등교육기관”으로한다.",
+      "source_page": 3,
+      "cost_trigger": true,
+      "estimation_decision": "estimate_now",
+      "decision_reason": "새로 면제되는 수도권의 소득기준 이하 ICL 채무자의 이자 소요. 비수도권 현행 대상과 기존 다른 면제사유를 제외해야 하며, 졸업 후 상환기준소득 초과 전 기간과 등록금·생활비 범위를 구분해야 함",
+      "route_key": "transfer_recipient",
+      "route_reason": "새로 면제되는 대상자 수×연간 면제이자. 하위로 해당 대출잔액×학생금리를 계산할 수 있으나 자립지원대상자 인구비율·대학재적률로 수도권 소득구간 채무자를 산정할 수 없음",
+      "variables": [{"key": "start_year", "value_json": "2026", "unit": "year", "source_quote": "이법은2026년11월20일부터시행한다.", "source_page": 3}]
+    }]
+  },
+  "candidate_search": {
+    "method_candidate_keys": ["2209405:student_loan_interest_exemption"],
+    "selected_evidence_keys": [],
+    "candidates_needing_review": ["2209405:student_loan_rate:reference", "2209405:tuition_loan_balance:reference"],
+    "rejected": [
+      "자립지원 인원11173명·17~29세 인구비율·대학재적29.2%·대출이용16.1%는 수도권 소득구간 ICL 채무자와 모집단이 다름",
+      "기존 등록금 잔액 전망은 생활비와 졸업 후 기간까지의 전체 대출잔액을 대신하지 못함",
+      "만18세 미만 아동 수·장학금 등록금·교통수당·소음지원 단가는 대상과 지원 기능이 달라 사용 불가"
+    ]
+  },
+  "required_variables": ["recipient_count", "benefit_per_recipient"],
+  "missing_required_variables": ["recipient_count", "benefit_per_recipient"],
+  "start_year": 2026,
+  "annual_amounts_thousand": null,
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item",
+    "quote_verified": [true], "cost_item_count": 1, "unmapped_count": 0,
+    "formula_key": "TRANSFER_RECIPIENT_V1", "status": "needs_input",
+    "available_required_variables": 0, "required_variable_count": 2,
+    "missing_variables": ["recipient_count", "benefit_per_recipient"],
+    "method_candidate_found": true,
+    "web_candidate_warning": "웹의 지급액 후보는 교통·보훈 수당 등 부적합 근거3건. AI가 전부 배제했고 선택하지 않음"
+  },
+  "scope_notes": [
+    "현행 조문은 비교용으로만 읽고 기존 비수도권 면제의 비용을 다시 합산하지 않음",
+    "시행일은2026년11월20일이지만 연간 잔액과 이자 발생 시점이 없어 일할계수를 임의 적용하지 않음",
+    "1.7%는 과거 학생금리 동결 선례 후보이며2026년 최신 공식 금리로 확인된 값은 아님",
+    "정답 PDF를 열기 전에 이 입력·판정·부족 변수를 고정 저장. 현재 개발 DB를 사용하며 발의시점 제한 평가는 아님"
+  ]
+}

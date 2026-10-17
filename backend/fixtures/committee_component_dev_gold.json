@@ -1,0 +1,58 @@
+[
+  {
+    "bill_no": "2211238",
+    "committee_name": "이순신기념사업위원회",
+    "cutoff_date": "2025-07-28",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 8, "annual_meetings": 3, "meeting_unit_price": 350000}
+  },
+  {
+    "bill_no": "2211356",
+    "committee_name": "건강안전심의위원회",
+    "cutoff_date": "2025-07-31",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 5, "paid_members": 1, "annual_meetings": 4, "meeting_unit_price": 350000}
+  },
+  {
+    "bill_no": "2211498",
+    "committee_name": "소형원자로시스템지원위원회",
+    "cutoff_date": "2025-09-05",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 11, "annual_meetings": 4, "meeting_unit_price": 250000}
+  },
+  {
+    "bill_no": "2214030",
+    "committee_name": "중앙규제특례위원회",
+    "cutoff_date": "2025-12-03",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 15, "annual_meetings": 20, "meeting_unit_price": 300000}
+  },
+  {
+    "bill_no": "2217465",
+    "committee_name": "민간협의체",
+    "cutoff_date": "2026-04-08",
+    "formula_kind": "whole_meeting_operating_cost",
+    "operands": {"committee_instances": 1, "paid_members": 10, "annual_meetings": 2, "whole_meeting_cost": 7000000}
+  },
+  {
+    "bill_no": "2215941",
+    "committee_name": "과학기술외교심의위원회",
+    "cutoff_date": "2026-01-09",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 12, "annual_meetings": 24, "meeting_unit_price": 225000}
+  },
+  {
+    "bill_no": "2216426",
+    "committee_name": "국가인재위원회",
+    "cutoff_date": "2026-01-29",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 15, "annual_meetings": 2, "meeting_unit_price": 300000}
+  },
+  {
+    "bill_no": "2216622",
+    "committee_name": "돌봄정책위원회",
+    "cutoff_date": "2026-02-05",
+    "formula_kind": "per_person_meeting_allowance",
+    "operands": {"committee_instances": 1, "paid_members": 13, "annual_meetings": 3, "meeting_unit_price": 200000}
+  }
+]

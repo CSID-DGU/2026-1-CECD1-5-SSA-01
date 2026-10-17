@@ -1,0 +1,45 @@
+{
+ "bill_no": "2212323",
+ "run_date": "2026-10-16",
+ "gold_opened": false,
+ "ai_mode": "manual_no_api(Claude)",
+ "payload": {
+  "route_key": "transfer_recipient",
+  "bill_no": "2212323",
+  "cutoff_date": "2025-08-21",
+  "start_year": 2026,
+  "years": 5,
+  "policy_domain": "농어촌기본소득",
+  "agency": "행정안전부",
+  "method_query": "농어촌 읍면 주민 기본소득 지급대상자 수",
+  "explicit_inputs": {
+   "benefit_per_recipient": {
+    "value": 3600000,
+    "unit": "원/년",
+    "source_ref": "원문 제18조① 연간 360만원 이상"
+   }
+  }
+ },
+ "result": {
+  "status": "needs_input",
+  "routeKey": "transfer_recipient",
+  "formulaKey": "TRANSFER_RECIPIENT_V1",
+  "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+  "missingVariables": [
+   "recipient_count"
+  ],
+  "missingDerivationVariables": [],
+  "derivationTrace": [],
+  "methodCandidates": [],
+  "selectedMethods": [],
+  "referenceCandidates": [],
+  "missingVariableEvidence": {
+   "recipient_count": {
+    "status": "no_eligible_candidate",
+    "candidateCount": 0,
+    "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+   }
+  }
+ },
+ "note": "원문 명시 지급액만 직접 입력. 대상자 수는 ERCE DB 후보에서만 선택 가능 → 후보 0건으로 중단"
+}

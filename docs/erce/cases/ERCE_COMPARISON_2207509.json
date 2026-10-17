@@ -1,0 +1,49 @@
+{
+  "bill_no": "2207509",
+  "bill_name": "아동복지법 일부개정법률안—보호대상아동 자산관리사업",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2207509.json",
+  "first_run_answer_seen": false,
+  "gold": {
+    "estimate_no": "25C0255",
+    "reply_date": "2025-02-03",
+    "start_year": 2026,
+    "annual_million": [
+      469,
+      479,
+      488,
+      498,
+      508
+    ],
+    "display_total_eok": 24.42,
+    "method": "발달장애인 재산관리 지원서비스 시범사업 2024년 연간예산4억6000만원 준용·매년 실시·물가 반영",
+    "staffing_assumption": "아동권리보장원이 담당하고 조직·인력 추가확대 없음",
+    "price_timing_note": "2026 첫해 표시469백만원은460×1.02와 대응.2025물가2.1%까지 누적하면 달라지므로 보강시 가격 적용 시작시점 확인 필요"
+  },
+  "first_run": {
+    "status": "needs_input",
+    "total_eok": null,
+    "error_percent": null,
+    "required_slots": 8,
+    "filled_slots": 0,
+    "missing_slots": 8,
+    "formula_match": false,
+    "estimated_scope_match": false,
+    "year_period_match": true
+  },
+  "difference": {
+    "correct": [
+      "원문 제44조의2의 자산관리사업 재정수반 가능성을 탐지",
+      "계약체결지원·교육홍보 업무를 원문에서 확인",
+      "정답을 보기 전 기간가정2026~2030을 기록",
+      "무관한 기관 단가와 인원수를 임의 적용하지 않음"
+    ],
+    "incorrect_or_missing": [
+      "개별 활동의 수량×단가와 신규기관 인건비로 나눠 접근. 정답은 유사사업 연간예산 전체를 준용",
+      "정답은 추가 조직·인력 확대를 가정하지 않아 인건비를 별도 계산하지 않음",
+      "적합한 자산관리 유사사업 예산 후보를 DB에서 찾지 못함"
+    ],
+    "next_reinforcement": "기존기관 수행·무증원 가정 확인과 자산관리 신탁지원 유사사업의 연간예산 패키지 및 가격 적용시점 보강. 단순활동 산식/다른기관 인력 선례를 무조건 적용하지 않기"
+  },
+  "reinforcement_done": false,
+  "independent_success": false
+}

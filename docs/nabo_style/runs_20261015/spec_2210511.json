@@ -1,0 +1,59 @@
+{
+  "bill_no": "2210511",
+  "cutoff": "2025-05-14",
+  "years": [
+    2027,
+    2028,
+    2029,
+    2030,
+    2031
+  ],
+  "scope": [
+    {
+      "clause": "제6·7조 국가인공지능데이터센터진흥위원회",
+      "decision": "estimated",
+      "reason": ""
+    },
+    {
+      "clause": "제5조 기본계획(5년)·시행계획",
+      "decision": "not_applicable",
+      "reason": "동일 부처 AI법 선례(2205458·2205733)에서 과기정통부가 직접 작성해 별도 예산 불필요로 미대상 처리"
+    },
+    {
+      "clause": "제9조 실태조사",
+      "decision": "not_estimated",
+      "reason": "'실시할 수 있다' 재량+대통령령 위임, 조사 규모 불명(3호)"
+    },
+    {
+      "clause": "제11~19조 인허가·세제·전력·데이터·해외·전담기관",
+      "decision": "not_estimated",
+      "reason": "재량·위임 규정, 구체 사업계획 부재(3호). 선례 2205458 제14조 데이터센터 시책 동일 판단"
+    },
+    {
+      "clause": "제20~25조 특구·지원",
+      "decision": "not_estimated",
+      "reason": "특구 지정 대상·규모 불명(3호)"
+    }
+  ],
+  "items": [
+    {
+      "label": "진흥위원회 민간위원 회의참석수당",
+      "clause": "제7조",
+      "template": "committee_allowance",
+      "inputs": {
+        "paid_members": {
+          "value": 14,
+          "source": "위원 20명 이내 − 위원장(장관) − 명시 차관 5명 = 14명을 위촉위원으로 가정(광역단체장 포함 가능성은 상한 가정)"
+        },
+        "meetings_per_year": {
+          "value": 4,
+          "source": "선례 2205458(24B4992) 인공지능위원회 연4회"
+        },
+        "allowance_per_meeting_thousand": {
+          "value": 300,
+          "source": "선례 2205458(24B4992, 2024-11-22) 회의참석수당 30만원"
+        }
+      }
+    }
+  ]
+}

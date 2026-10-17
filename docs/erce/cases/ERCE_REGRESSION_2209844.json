@@ -1,0 +1,394 @@
+{
+  "bill_no": "2209844",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "moving_payload": {
+    "bill_no": "2209844",
+    "cutoff_date": "2026-10-08",
+    "evidence_mode": "development_review",
+    "route_key": "transfer_recipient",
+    "support_derivation": "housing_moving_brokerage_bundle",
+    "payer": "government",
+    "start_year": 2027,
+    "years": 5,
+    "housing_income_cutoff": "median_income_48_percent",
+    "support_derivation_note": "정답확인후기존상위산식과갱신된근거연결",
+    "estimation_start_note": "정답의사업준비기간2027~2031가정확인,원문확정연도아님",
+    "selected_evidence_keys": [
+      "2209844:housing_moving_brokerage_bundle:tenant_households:reviewed",
+      "2209844:housing_moving_brokerage_bundle:management_cpi_forecast:reviewed",
+      "2209844:housing_moving_brokerage_bundle:moving_plan_share:reviewed",
+      "2209844:housing_moving_brokerage_bundle:baseline_supported_households:reviewed",
+      "2209844:housing_moving_brokerage_bundle:moving_bundle_unit:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2209844:housing_moving_brokerage_bundle:tenant_households:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+      "2209844:housing_moving_brokerage_bundle:management_cpi_forecast:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+      "2209844:housing_moving_brokerage_bundle:moving_plan_share:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+      "2209844:housing_moving_brokerage_bundle:baseline_supported_households:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+      "2209844:housing_moving_brokerage_bundle:moving_bundle_unit:reviewed": "대상기간·자료연도·급여구성확인후사후준용"
+    },
+    "selected_method_keys": [
+      "2209844:moving_brokerage_bundle"
+    ],
+    "method_selection_reasons": {
+      "2209844:moving_brokerage_bundle": "동일과업과제외기준검토후방법선택"
+    },
+    "moving_cost_bundle_confirmed": true,
+    "moving_repeat_exclusion_years": 2,
+    "moving_price_base_year": 2025,
+    "prior_moving_supported_households": [
+      0,
+      0
+    ],
+    "moving_scope_note": "이사·중개비를합한회당40만원패키지1개",
+    "baseline_support_note": "기존정부사업15000가구를매년차감,국가/지방합산",
+    "moving_history_note": "정답신규프로그램첫2년지원재고0시나리오.기존사업은별도15000가구차감",
+    "method_confirmations": {
+      "2209844:moving_brokerage_bundle": {
+        "moving_scope_note": "이사·중개비를합한회당40만원패키지1개",
+        "baseline_support_note": "기존정부사업15000가구를매년차감,국가/지방합산",
+        "moving_history_note": "정답신규프로그램첫2년지원재고0시나리오.기존사업은별도15000가구차감"
+      }
+    }
+  },
+  "moving_result": {
+    "route_key": "transfer_recipient",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "evidence_key": "2209844:housing_moving_brokerage_bundle:tenant_households:reviewed,2209844:housing_moving_brokerage_bundle:management_cpi_forecast:reviewed,2209844:housing_moving_brokerage_bundle:moving_plan_share:reviewed,2209844:housing_moving_brokerage_bundle:baseline_supported_households:reviewed,2209844:housing_moving_brokerage_bundle:moving_bundle_unit:reviewed",
+    "annual_amounts_thousand": [
+      5680168,
+      5653692,
+      5619988,
+      5831755,
+      6038483
+    ],
+    "source_refs": [
+      "2209844 비용추계서25B2324 PDF7~13쪽",
+      "2209844 비용추계서25B2324 PDF11~13쪽"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          13649,
+          13319,
+          12980,
+          13205,
+          13405
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          416160,
+          424483.19999999995,
+          432972.864,
+          441632.32128000003,
+          450464.9677056
+        ],
+        "unit": "KRW/person/event",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 1,
+        "unit": "event/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2209844:moving_brokerage_bundle"
+    ]
+  },
+  "moving_trace": [
+    {
+      "year": 2027,
+      "households": 1432427,
+      "prior_two_years_supported": 0,
+      "gross_moving_households": 28649,
+      "baseline_households": 15000,
+      "incremental_households": 13649,
+      "unit_price": 416160,
+      "expression": "round((가구−직전2년지원가구)×이사비율)−기지원가구,회당패키지1회"
+    },
+    {
+      "year": 2028,
+      "households": 1444614,
+      "prior_two_years_supported": 28649,
+      "gross_moving_households": 28319,
+      "baseline_households": 15000,
+      "incremental_households": 13319,
+      "unit_price": 424483.19999999995,
+      "expression": "round((가구−직전2년지원가구)×이사비율)−기지원가구,회당패키지1회"
+    },
+    {
+      "year": 2029,
+      "households": 1455971,
+      "prior_two_years_supported": 56968,
+      "gross_moving_households": 27980,
+      "baseline_households": 15000,
+      "incremental_households": 12980,
+      "unit_price": 432972.864,
+      "expression": "round((가구−직전2년지원가구)×이사비율)−기지원가구,회당패키지1회"
+    },
+    {
+      "year": 2030,
+      "households": 1466533,
+      "prior_two_years_supported": 56299,
+      "gross_moving_households": 28205,
+      "baseline_households": 15000,
+      "incremental_households": 13205,
+      "unit_price": 441632.32128000003,
+      "expression": "round((가구−직전2년지원가구)×이사비율)−기지원가구,회당패키지1회"
+    },
+    {
+      "year": 2031,
+      "households": 1476445,
+      "prior_two_years_supported": 56185,
+      "gross_moving_households": 28405,
+      "baseline_households": 15000,
+      "incremental_households": 13405,
+      "unit_price": 450464.9677056,
+      "expression": "round((가구−직전2년지원가구)×이사비율)−기지원가구,회당패키지1회"
+    }
+  ],
+  "moving_eok": 288.24086,
+  "gold_moving_eok": 288.24,
+  "runs": [
+    {
+      "scenario": "arrears_shared",
+      "payload": {
+        "bill_no": "2209844",
+        "cutoff_date": "2026-10-08",
+        "evidence_mode": "development_review",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2027,
+        "years": 5,
+        "housing_income_cutoff": "median_income_48_percent",
+        "support_derivation_note": "정답확인후기존상위산식과갱신된근거연결",
+        "estimation_start_note": "정답의사업준비기간2027~2031가정확인,원문확정연도아님",
+        "selected_evidence_keys": [
+          "2209844:housing_management_fee:tenant_households:reviewed",
+          "2209844:housing_management_fee:management_cpi_forecast:reviewed",
+          "2209844:housing_management_fee:arrears_share:reviewed",
+          "2209844:housing_management_fee:management_public_share:reviewed",
+          "2209844:housing_management_fee:reported_monthly_common_fee:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2209844:housing_management_fee:tenant_households:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:management_cpi_forecast:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:arrears_share:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:management_public_share:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:reported_monthly_common_fee:reviewed": "대상기간·자료연도·급여구성확인후사후준용"
+        },
+        "selected_method_keys": [
+          "2209844:management:arrears_shared"
+        ],
+        "method_selection_reasons": {
+          "2209844:management:arrears_shared": "동일과업과제외기준검토후방법선택"
+        },
+        "management_fee_scenario": "arrears_shared",
+        "management_scope": "common_fee_excluding_utilities",
+        "management_fee_unit_basis": "reported_weighted_monthly",
+        "management_price_base_year": 2024,
+        "housing_scenario_note": "체납10.2%·공용비50%지원",
+        "price_year_note": "표5의2024가중평균월6.8만원/표7의2027월3만원.가격기준분리",
+        "method_confirmations": {
+          "2209844:management:arrears_shared": {
+            "housing_scenario_note": "체납10.2%·공용비50%지원",
+            "price_year_note": "표5의2024가중평균월6.8만원/표7의2027월3만원.가격기준분리",
+            "estimation_start_note": "정답의사업준비기간2027~2031가정확인,원문확정연도아님"
+          }
+        }
+      },
+      "management_result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2209844:housing_management_fee:tenant_households:reviewed,2209844:housing_management_fee:management_cpi_forecast:reviewed,2209844:housing_management_fee:arrears_share:reviewed,2209844:housing_management_fee:management_public_share:reviewed,2209844:housing_management_fee:reported_monthly_common_fee:reviewed",
+        "annual_amounts_thousand": [
+          63198586,
+          65011001,
+          66832534,
+          68663702,
+          70510342
+        ],
+        "source_refs": [
+          "2209844 비용추계서25B2324 PDF7~13쪽",
+          "2209844 비용추계서25B2324 PDF7~10쪽"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              146107.554,
+              147350.628,
+              148509.042,
+              149586.36599999998,
+              150597.38999999998
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              36045.6984,
+              36766.612368,
+              37501.94461536001,
+              38251.9835076672,
+              39017.023177820556
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2209844:management:arrears_shared"
+        ]
+      },
+      "total_eok": 3630.40251,
+      "gold_total_eok": 3656.21,
+      "error_percent": 0.7058536025009544,
+      "reusable_web_status": "computed_review"
+    },
+    {
+      "scenario": "all_tenants_flat",
+      "payload": {
+        "bill_no": "2209844",
+        "cutoff_date": "2026-10-08",
+        "evidence_mode": "development_review",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2027,
+        "years": 5,
+        "housing_income_cutoff": "median_income_48_percent",
+        "support_derivation_note": "정답확인후기존상위산식과갱신된근거연결",
+        "estimation_start_note": "정답의사업준비기간2027~2031가정확인,원문확정연도아님",
+        "selected_evidence_keys": [
+          "2209844:housing_management_fee:tenant_households:reviewed",
+          "2209844:housing_management_fee:management_cpi_forecast:reviewed",
+          "2209844:housing_management_fee:flat_monthly_fee:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2209844:housing_management_fee:tenant_households:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:management_cpi_forecast:reviewed": "대상기간·자료연도·급여구성확인후사후준용",
+          "2209844:housing_management_fee:flat_monthly_fee:reviewed": "대상기간·자료연도·급여구성확인후사후준용"
+        },
+        "selected_method_keys": [
+          "2209844:management:all_tenants_flat"
+        ],
+        "method_selection_reasons": {
+          "2209844:management:all_tenants_flat": "동일과업과제외기준검토후방법선택"
+        },
+        "management_fee_scenario": "all_tenants_flat",
+        "management_scope": "common_fee_excluding_utilities",
+        "management_fee_unit_basis": "reported_weighted_monthly",
+        "management_price_base_year": 2027,
+        "housing_scenario_note": "전체임차에2027기준월3만원",
+        "price_year_note": "표5의2024가중평균월6.8만원/표7의2027월3만원.가격기준분리",
+        "method_confirmations": {
+          "2209844:management:all_tenants_flat": {
+            "housing_scenario_note": "전체임차에2027기준월3만원",
+            "price_year_note": "표5의2024가중평균월6.8만원/표7의2027월3만원.가격기준분리",
+            "estimation_start_note": "정답의사업준비기간2027~2031가정확인,원문확정연도아님"
+          }
+        }
+      },
+      "management_result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2209844:housing_management_fee:tenant_households:reviewed,2209844:housing_management_fee:management_cpi_forecast:reviewed,2209844:housing_management_fee:flat_monthly_fee:reviewed",
+        "annual_amounts_thousand": [
+          515673720,
+          530462261,
+          545325202,
+          560266759,
+          575334558
+        ],
+        "source_refs": [
+          "2209844 비용추계서25B2324 PDF7~13쪽",
+          "2209844 비용추계서25B2324 PDF7~10쪽"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              1432427,
+              1444614,
+              1455971,
+              1466533,
+              1476445
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              30000,
+              30600,
+              31212,
+              31836.239999999998,
+              32472.964799999998
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2209844 비용추계서25B2324 PDF7~13쪽",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2209844:management:all_tenants_flat"
+        ]
+      },
+      "total_eok": 27558.86586,
+      "gold_total_eok": 27558.86,
+      "error_percent": 0.00002126357912163667,
+      "reusable_web_status": "computed_review"
+    }
+  ],
+  "limitation": "공개된가중평균/물가로재계산,정답단가표숨은정밀도차이는유지.정답총액역산안함"
+}

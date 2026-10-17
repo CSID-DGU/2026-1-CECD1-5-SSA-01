@@ -1,0 +1,153 @@
+{
+  "bill_no": "2212685",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "result": {
+    "route_key": "transfer_population_amount_delta",
+    "subtype": "",
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "evidence_key": "kosis_202312:under13_population:total:2026-2030:common,kosis_202312:under8_population:total:2026-2030:common,2208381:child_execution_factor:2025:reviewed_cpi,2212685:child_cpi:2026-2030:202507",
+    "annual_amounts_thousand": [
+      7478030310,
+      7275560731,
+      7019566883,
+      6767945016,
+      6610448690
+    ],
+    "source_refs": [
+      "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽; 2212685 비용추계서25C4808 PDF4쪽 각주4; 국회예산정책처2025.7전망2026~2030 CPI 각2%; 원문PDF3쪽월20만원; 원문PDF3·5쪽현행10만원; 원문2026년1월시행·월급여12개월",
+      "원문PDF3·5쪽현행10만원",
+      "원문2026년1월시행·월급여12개월",
+      "2212685 비용추계서25C4808 PDF4~6쪽;2025.7 CPI전망"
+    ],
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          4053665.22,
+          3848770.092,
+          3646743.444,
+          3466302.108,
+          3337476.48
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽; 2212685 비용추계서25C4808 PDF4쪽 각주4; 국회예산정책처2025.7전망2026~2030 CPI 각2%; 원문PDF3쪽월20만원; 원문PDF3·5쪽현행10만원; 원문2026년1월시행·월급여12개월",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2037785.124,
+          1945553.532,
+          1890267.564,
+          1864119.576,
+          1860980.184
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽; 2212685 비용추계서25C4808 PDF4쪽 각주4; 국회예산정책처2025.7전망2026~2030 CPI 각2%; 원문PDF3쪽월20만원; 원문PDF3·5쪽현행10만원; 원문2026년1월시행·월급여12개월",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          204000,
+          208080,
+          212241.59999999998,
+          216486.432,
+          220816.16064000002
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2208381 비용추계서25C1087 PDF4쪽 전제 및 PDF5~6쪽; 2212685 비용추계서25C4808 PDF4쪽 각주4; 국회예산정책처2025.7전망2026~2030 CPI 각2%; 원문PDF3쪽월20만원; 원문PDF3·5쪽현행10만원; 원문2026년1월시행·월급여12개월",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF3·5쪽현행10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2026년1월시행·월급여12개월",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2212685:child_allowance_reviewed_cpi"
+    ]
+  },
+  "trace": [
+    {
+      "year": 2026,
+      "cpi": 0.02,
+      "indexed_monthly_benefit": 204000,
+      "base_monthly_benefit": 200000,
+      "new_population": 4069945,
+      "existing_population": 2045969,
+      "execution_factor": 0.996,
+      "existing_monthly_benefit": 100000,
+      "note": "물가반영확인 후 신규급여만 누적반영; 현행급여동결"
+    },
+    {
+      "year": 2027,
+      "cpi": 0.02,
+      "indexed_monthly_benefit": 208080,
+      "base_monthly_benefit": 200000,
+      "new_population": 3864227,
+      "existing_population": 1953367,
+      "execution_factor": 0.996,
+      "existing_monthly_benefit": 100000,
+      "note": "물가반영확인 후 신규급여만 누적반영; 현행급여동결"
+    },
+    {
+      "year": 2028,
+      "cpi": 0.02,
+      "indexed_monthly_benefit": 212241.59999999998,
+      "base_monthly_benefit": 200000,
+      "new_population": 3661389,
+      "existing_population": 1897859,
+      "execution_factor": 0.996,
+      "existing_monthly_benefit": 100000,
+      "note": "물가반영확인 후 신규급여만 누적반영; 현행급여동결"
+    },
+    {
+      "year": 2029,
+      "cpi": 0.02,
+      "indexed_monthly_benefit": 216486.432,
+      "base_monthly_benefit": 200000,
+      "new_population": 3480223,
+      "existing_population": 1871606,
+      "execution_factor": 0.996,
+      "existing_monthly_benefit": 100000,
+      "note": "물가반영확인 후 신규급여만 누적반영; 현행급여동결"
+    },
+    {
+      "year": 2030,
+      "cpi": 0.02,
+      "indexed_monthly_benefit": 220816.16064000002,
+      "base_monthly_benefit": 200000,
+      "new_population": 3350880,
+      "existing_population": 1868454,
+      "execution_factor": 0.996,
+      "existing_monthly_benefit": 100000,
+      "note": "물가반영확인 후 신규급여만 누적반영; 현행급여동결"
+    }
+  ],
+  "reusable_web_status": "computed_review",
+  "total_trillion": 35.15155163,
+  "gold_partial_total_trillion": 35.2,
+  "difference_percent": 0.1376374147727349,
+  "regional_supplement": null,
+  "whole_bill_total": null,
+  "limitation": "물가시나리오확인 후 재실행,최초7.589%결과를덮어쓰지않음"
+}

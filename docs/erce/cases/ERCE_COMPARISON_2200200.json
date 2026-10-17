@@ -1,0 +1,88 @@
+{
+  "bill_no": "2200200",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24B0480",
+  "gold_date": "2024-06-19",
+  "first_total_won": null,
+  "error_percent": null,
+  "evaluation_status": "indirect_fiscal_routing_and_scenarios_need_reinforcement",
+  "quote_verified_count": 3,
+  "quote_total": 3,
+  "first_primary_clause_decision": "제22조의2 민간공동출자 자체는 직접공적출자 없음으로 비재정조문 처리",
+  "gold_primary_clause_decision": "제22조의2 요건완화→기존 표준사업장지원 신청증가→예산확대 가정으로 추계",
+  "gold_horizon": [
+    2025,
+    2029
+  ],
+  "gold_parameters": {
+    "planned_general_subsidiary_count": 170,
+    "general_supported_2023": 74,
+    "subsidiary_supported_2023": 64,
+    "subsidiary_reference_count": 79,
+    "grant_unit_base_won": 295000000,
+    "grant_price_year": 2024,
+    "additional_application_rates": [
+      0.01,
+      0.05,
+      0.1
+    ],
+    "annual_additional_counts": [
+      1,
+      4,
+      8
+    ],
+    "cpi": {
+      "2025": 0.022,
+      "2026": 0.022,
+      "2027": 0.021,
+      "2028": 0.021,
+      "2029": 0.021
+    }
+  },
+  "gold_scenarios": {
+    "one_percent": {
+      "total_won": 1573000000,
+      "annual_million": [
+        301,
+        308,
+        315,
+        321,
+        328
+      ]
+    },
+    "five_percent": {
+      "total_won": 6293000000,
+      "annual_million": [
+        1206,
+        1232,
+        1258,
+        1285,
+        1312
+      ]
+    },
+    "ten_percent": {
+      "total_won": 12587000000,
+      "annual_million": [
+        2412,
+        2465,
+        2517,
+        2570,
+        2624
+      ]
+    }
+  },
+  "gold_scenario_assumptions": [
+    "기존예산상한 때문에 실제지출이 늘지 않을수도 있으나 예산제약을 두지 않는 추가지원 가정",
+    "공동출자허용만으로 신규신청이 증가하지 않을수도 있으나 자회사형신청 증가 가정"
+  ],
+  "gold_certification_scope": "제22조의5 인증 및 취소는 현재고용노동부 행정력으로 이행가능해 별도 추계 안함",
+  "well_handled": "민간주식출자를 국가출자금으로 잘못계산하지 않고 조문번호정비를 금액변경으로 보지 않음",
+  "first_gaps": [
+    "직접지출없는 규제완화의 기존보조사업 신청증가 파급경로",
+    "기존지원범위·보조금평균단가 및 자회사형물량 분해",
+    "예산확대·추가신청1/5/10%시나리오",
+    "인증업무 기존행정력 처리 근거"
+  ],
+  "unit_note": "295백만원은평균지원금이며최대10억원한도·투자3/4규칙을 다시곱하지않음. 1/4/8건은 매년증분, 신규누적사업장수와 다름.",
+  "reinforcement_performed": false
+}

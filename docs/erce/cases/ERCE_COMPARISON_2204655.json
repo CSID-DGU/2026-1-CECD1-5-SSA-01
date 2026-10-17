@@ -1,0 +1,60 @@
+{
+  "bill_no": "2204655",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24B4305",
+  "gold_date": "2024-11-15",
+  "first_total_won": null,
+  "error_percent": null,
+  "evaluation_status": "reuse_scope_and_formal_decision_need_reinforcement",
+  "quote_verified_count": 3,
+  "quote_total": 3,
+  "matching_prior_method": "2200200:standard_workplace_application_expansion",
+  "first_failure": "부조계산 구조후보를 찾았으나 workplace_form 공동출자형 태그와 의료법인 자회사형 차이로 단가선택이 차단됨",
+  "gold_formal_decision": "제22조·제22조의2는 미첨부3호, 별도의 가정에 따른 참고재정소요 제시",
+  "gold_reference_total_eok": 97,
+  "gold_reference_parameters": {
+    "price_base_year": 2025,
+    "base_grant_won": 300000000,
+    "medical_corporation_base_count": 1617,
+    "annual_application_share": 0.001,
+    "rounding": "ceil",
+    "annual_new_workplaces": 2,
+    "cumulative_supported_workplaces": [
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "cpi": {
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02,
+      "2030": 0.02
+    },
+    "start_year": 2026,
+    "years": 5
+  },
+  "gold_reference_annual_million": [
+    612,
+    1248,
+    1910,
+    2598,
+    3312
+  ],
+  "gold_scope_assumptions": [
+    "신청증가·예산확대 가정",
+    "인증유지율100%",
+    "소득세·법인세감면의 추가감소 없음"
+  ],
+  "first_gaps": [
+    "같은설립보조 과업의 의료법인 적용을 공동출자 역할과 분리",
+    "2025평균지원3억원·새CPI·의료법인1617개0.1%참여 가정",
+    "공식미첨부와 참고시나리오 금액을 함께표시",
+    "표의 누적지원이 신규설립단가와 일관적인지 확인·별도보관"
+  ],
+  "cumulative_support_warning": "기존2200200은 매년신규1/4/8개 비용, 이번표는 누적2/4/6/8/10개 비용. 누적지원 방식은 같은보조사업의 보편규칙으로 덮어쓰지 않음.",
+  "well_handled": "민간자회사설립을 국가출자로 보지않고 전체79개 기준물량을 의료법인에 자동사용하지 않음",
+  "reinforcement_performed": false
+}

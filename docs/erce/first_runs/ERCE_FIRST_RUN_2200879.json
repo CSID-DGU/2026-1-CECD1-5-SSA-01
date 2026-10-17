@@ -1,0 +1,143 @@
+{
+  "bill_no": "2200879",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2200879",
+    "bill_name": "장애인복지법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-06-24",
+    "articles": [
+      {
+        "article_ref": "제40조의2",
+        "source_quote": "공익광고등홍보사업을실시하여야한다.",
+        "source_page": 3,
+        "change_summary": "장애인보조견인식개선홍보의무.기존장애인식개선사업과중복인지확인.홍보방법과규모대통령령위임",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "장애인보조견인식개선홍보의무.기존장애인식개선사업과중복인지확인.홍보방법과규모대통령령위임",
+        "route_key": "quantity_unit",
+        "route_reason": "장애인보조견인식개선홍보의무.기존장애인식개선사업과중복인지확인.홍보방법과규모대통령령위임",
+        "variables": []
+      },
+      {
+        "article_ref": "제90조제3항제3호",
+        "source_quote": "제90조제3항제3호중“정당한사유없이거부한”을“거부한”으로한",
+        "source_page": 3,
+        "change_summary": "동반출입거부금지·과태료적용범위변경.300만원은기존상한이며평균징수액아님.벌칙수입의추가위반건수·징수율미확정",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "동반출입거부금지·과태료적용범위변경.300만원은기존상한이며평균징수액아님.벌칙수입의추가위반건수·징수율미확정",
+        "route_key": "",
+        "route_reason": "동반출입거부금지·과태료적용범위변경.300만원은기존상한이며평균징수액아님.벌칙수입의추가위반건수·징수율미확정",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "payload": {
+    "bill_no": "2200879",
+    "route_key": "quantity_unit",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "result": {
+    "status": "needs_input",
+    "routeKey": "quantity_unit",
+    "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+    "formula": "수량 × 단가",
+    "missingVariables": [
+      "quantity",
+      "unit_cost"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2203380:electric_house:unit_cost:2024",
+        "variableKey": "unit_cost",
+        "value": 200000,
+        "unit": "KRW/facility/year",
+        "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-28",
+        "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+        "scope": "군 소음대책 electric_house",
+        "serviceFunction": "electric_house",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2203380:electric_other:unit_cost:2024",
+        "variableKey": "unit_cost",
+        "value": 1300000,
+        "unit": "KRW/facility/year",
+        "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-28",
+        "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+        "scope": "군 소음대책 electric_other",
+        "serviceFunction": "electric_other",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2203380:electric_school:unit_cost:2024",
+        "variableKey": "unit_cost",
+        "value": 15000000,
+        "unit": "KRW/facility/year",
+        "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-28",
+        "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+        "scope": "군 소음대책 electric_school",
+        "serviceFunction": "electric_school",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2203380:tv_fee:unit_cost:2024",
+        "variableKey": "unit_cost",
+        "value": 30000,
+        "unit": "KRW/facility/year",
+        "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-28",
+        "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+        "scope": "군 소음대책 tv_fee",
+        "serviceFunction": "tv_fee",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "quantity": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "unit_cost": {
+        "status": "candidates_need_review",
+        "candidateCount": 4,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "required_variables_filled": 0,
+  "required_variable_count": 2,
+  "amount_thousand": null,
+  "provisional_calculation_structure": "홍보사업연간수량×내용별단가.방송광고등세부수단은확정하지않음",
+  "penalty_decision": "needs_review:기존상한을단가로치환하지않고추가수입근거검토",
+  "limitations": [
+    "공포후6개월시행이므로2025~2029는개발시나리오,원문이명시한확정연도아님",
+    "DB에적절한공익광고·홍보단가를찾지못함.조사연구용역·정보시스템단가로대체하지않음",
+    "정답미열람최초분석,세부홍보사업집단미구성"
+  ]
+}

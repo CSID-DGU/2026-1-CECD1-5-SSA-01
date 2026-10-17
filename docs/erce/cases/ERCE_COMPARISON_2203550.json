@@ -1,0 +1,68 @@
+{
+  "bill_no": "2203550",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C2515",
+  "gold_date": "2024-08-08",
+  "target_propose_date": "2024-09-03",
+  "gold_identity_verified": false,
+  "source_version_warning": "정답 표지 의안번호 공란·회답일이 대상 발의일보다 빠름. 동일 제목·제23조 최저임금·2024-11-01시행은 일치하지만 대상의 확정 정답인지 별도 검증 필요.",
+  "comparison_type": "attached_reference_comparison_not_identity_verified",
+  "first_total_won": null,
+  "gold_display_total_won": 957400000000,
+  "error_percent": null,
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "evaluation_status": "needs_reinforcement",
+  "formula_family_match": true,
+  "horizon_match": true,
+  "gold_scope": "공익활동형 노인일자리에 최저시급 적용. 사회서비스형·민간형 이미 최저임금 이상으로 제외",
+  "gold_operands": {
+    "historical_participants": [
+      543000,
+      590000,
+      608000,
+      608000,
+      654000
+    ],
+    "participant_years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "minimum_hourly_wages": [
+      8720,
+      9160,
+      9620,
+      9860,
+      10030
+    ],
+    "wage_years": [
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "current_monthly_payment_won": 290000,
+    "hours_per_month": 30,
+    "normal_months": 11,
+    "first_year_months": 2,
+    "ancillary_year_won": 180000
+  },
+  "gold_annual_display_eok": [
+    79,
+    861,
+    1787,
+    2834,
+    4012
+  ],
+  "well_handled": "임금차액과 참여자별 적용 검토, 공무원보수표·전체노인인구 치환 안함. 2024-11-01시행·첫해2개월을 분리한 방향과 기간 일치",
+  "first_gaps": [
+    "적용대상을 공익활동형으로 좁힐 근거",
+    "실제사업 참여자 추세·최저임금추세",
+    "월29만원 현행 지급액·월30시간·연11개월"
+  ],
+  "reinforcement_performed": false
+}

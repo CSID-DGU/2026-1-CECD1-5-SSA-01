@@ -1,0 +1,518 @@
+{
+  "bill_no": "2200664",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "parts": [
+    {
+      "scenario": "share30",
+      "payload": {
+        "bill_no": "2200664",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-10",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "wage_gap_scenario": "share30",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": true,
+        "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+        "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+        "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+        "worker_scenario_note": "최저임금 차액의 share30 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+        "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정.",
+        "selected_evidence_keys": [
+          "2200664:exempt_worker_history:reviewed",
+          "2200664:facility_hourly_wage_history:reviewed",
+          "2200664:facility_monthly_hours_history:reviewed",
+          "2200664:worker_payment_months:reviewed",
+          "2200664:minimum_wage_forecast_rates:reviewed",
+          "official:moel:minimum_hourly:2025:disabled_gap",
+          "2200664:wage_gap_subsidy_share:share30"
+        ],
+        "evidence_selection_reasons": {
+          "2200664:exempt_worker_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_hourly_wage_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_monthly_hours_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:worker_payment_months:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:minimum_wage_forecast_rates:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "official:moel:minimum_hourly:2025:disabled_gap": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:wage_gap_subsidy_share:share30": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인"
+        },
+        "selected_method_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ],
+        "method_selection_reasons": {
+          "2200664:disabled_worker_wage_gap": "사업주 최저임금 차액지원 시나리오"
+        },
+        "method_confirmations": {
+          "2200664:disabled_worker_wage_gap": {
+            "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+            "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+            "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+            "worker_scenario_note": "최저임금 차액의 share30 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+            "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정."
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2200664:exempt_worker_history:reviewed,2200664:facility_hourly_wage_history:reviewed,2200664:facility_monthly_hours_history:reviewed,2200664:worker_payment_months:reviewed,2200664:minimum_wage_forecast_rates:reviewed,official:moel:minimum_hourly:2025:disabled_gap,2200664:wage_gap_subsidy_share:share30",
+        "annual_amounts_thousand": [
+          16940143,
+          17986674,
+          19097773,
+          20276474,
+          21471558
+        ],
+        "source_refs": [
+          "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2200664 비용추계서24B1101 PDF3~7쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              16940143012.125092,
+              17986674186.138424,
+              19097772864.147167,
+              20276473705.436348,
+              21471558151.115166
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ]
+      },
+      "trace": [
+        {
+          "year": 2026,
+          "excluded_worker_count": 9960,
+          "projected_hourly_wage": 6278.120987790942,
+          "minimum_hourly_wage": 10350.960000000001,
+          "hourly_gap": 4072.8390122090586,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.3,
+          "annual_won": 16940143012.125092,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2027,
+          "excluded_worker_count": 10311,
+          "projected_hourly_wage": 6504.949152542372,
+          "minimum_hourly_wage": 10682.19072,
+          "hourly_gap": 4177.241567457629,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.3,
+          "annual_won": 17986674186.138424,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2028,
+          "excluded_worker_count": 10675,
+          "projected_hourly_wage": 6739.972606365892,
+          "minimum_hourly_wage": 11024.020823039999,
+          "hourly_gap": 4284.048216674107,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.3,
+          "annual_won": 19097772864.147167,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2029,
+          "excluded_worker_count": 11052,
+          "projected_hourly_wage": 6983.487444603316,
+          "minimum_hourly_wage": 11376.78948937728,
+          "hourly_gap": 4393.302044773963,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.3,
+          "annual_won": 20276473705.436348,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2030,
+          "excluded_worker_count": 11442,
+          "projected_hourly_wage": 7235.800460504814,
+          "minimum_hourly_wage": 11729.469963547974,
+          "hourly_gap": 4493.66950304316,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.3,
+          "annual_won": 21471558151.115166,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        }
+      ],
+      "web_status": "computed_review",
+      "total_eok": 957.72622,
+      "gold_total_eok": 959,
+      "error_percent": 0.13282377476537935,
+      "annual_display_matches": 5
+    },
+    {
+      "scenario": "share50",
+      "payload": {
+        "bill_no": "2200664",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-10",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "wage_gap_scenario": "share50",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": true,
+        "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+        "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+        "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+        "worker_scenario_note": "최저임금 차액의 share50 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+        "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정.",
+        "selected_evidence_keys": [
+          "2200664:exempt_worker_history:reviewed",
+          "2200664:facility_hourly_wage_history:reviewed",
+          "2200664:facility_monthly_hours_history:reviewed",
+          "2200664:worker_payment_months:reviewed",
+          "2200664:minimum_wage_forecast_rates:reviewed",
+          "official:moel:minimum_hourly:2025:disabled_gap",
+          "2200664:wage_gap_subsidy_share:share50"
+        ],
+        "evidence_selection_reasons": {
+          "2200664:exempt_worker_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_hourly_wage_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_monthly_hours_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:worker_payment_months:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:minimum_wage_forecast_rates:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "official:moel:minimum_hourly:2025:disabled_gap": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:wage_gap_subsidy_share:share50": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인"
+        },
+        "selected_method_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ],
+        "method_selection_reasons": {
+          "2200664:disabled_worker_wage_gap": "사업주 최저임금 차액지원 시나리오"
+        },
+        "method_confirmations": {
+          "2200664:disabled_worker_wage_gap": {
+            "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+            "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+            "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+            "worker_scenario_note": "최저임금 차액의 share50 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+            "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정."
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2200664:exempt_worker_history:reviewed,2200664:facility_hourly_wage_history:reviewed,2200664:facility_monthly_hours_history:reviewed,2200664:worker_payment_months:reviewed,2200664:minimum_wage_forecast_rates:reviewed,official:moel:minimum_hourly:2025:disabled_gap,2200664:wage_gap_subsidy_share:share50",
+        "annual_amounts_thousand": [
+          28233572,
+          29977790,
+          31829621,
+          33794123,
+          35785930
+        ],
+        "source_refs": [
+          "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2200664 비용추계서24B1101 PDF3~7쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              28233571686.875153,
+              29977790310.230705,
+              31829621440.245277,
+              33794122842.393917,
+              35785930251.85861
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ]
+      },
+      "trace": [
+        {
+          "year": 2026,
+          "excluded_worker_count": 9960,
+          "projected_hourly_wage": 6278.120987790942,
+          "minimum_hourly_wage": 10350.960000000001,
+          "hourly_gap": 4072.8390122090586,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.5,
+          "annual_won": 28233571686.875153,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2027,
+          "excluded_worker_count": 10311,
+          "projected_hourly_wage": 6504.949152542372,
+          "minimum_hourly_wage": 10682.19072,
+          "hourly_gap": 4177.241567457629,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.5,
+          "annual_won": 29977790310.230705,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2028,
+          "excluded_worker_count": 10675,
+          "projected_hourly_wage": 6739.972606365892,
+          "minimum_hourly_wage": 11024.020823039999,
+          "hourly_gap": 4284.048216674107,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.5,
+          "annual_won": 31829621440.245277,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2029,
+          "excluded_worker_count": 11052,
+          "projected_hourly_wage": 6983.487444603316,
+          "minimum_hourly_wage": 11376.78948937728,
+          "hourly_gap": 4393.302044773963,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.5,
+          "annual_won": 33794122842.393917,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2030,
+          "excluded_worker_count": 11442,
+          "projected_hourly_wage": 7235.800460504814,
+          "minimum_hourly_wage": 11729.469963547974,
+          "hourly_gap": 4493.66950304316,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 0.5,
+          "annual_won": 35785930251.85861,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        }
+      ],
+      "web_status": "computed_review",
+      "total_eok": 1596.21036,
+      "gold_total_eok": 1598,
+      "error_percent": 0.11199249061326427,
+      "annual_display_matches": 3
+    },
+    {
+      "scenario": "share100",
+      "payload": {
+        "bill_no": "2200664",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-10",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "wage_gap_scenario": "share100",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": true,
+        "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+        "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+        "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+        "worker_scenario_note": "최저임금 차액의 share100 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+        "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정.",
+        "selected_evidence_keys": [
+          "2200664:exempt_worker_history:reviewed",
+          "2200664:facility_hourly_wage_history:reviewed",
+          "2200664:facility_monthly_hours_history:reviewed",
+          "2200664:worker_payment_months:reviewed",
+          "2200664:minimum_wage_forecast_rates:reviewed",
+          "official:moel:minimum_hourly:2025:disabled_gap",
+          "2200664:wage_gap_subsidy_share:share100"
+        ],
+        "evidence_selection_reasons": {
+          "2200664:exempt_worker_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_hourly_wage_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:facility_monthly_hours_history:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:worker_payment_months:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:minimum_wage_forecast_rates:reviewed": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "official:moel:minimum_hourly:2025:disabled_gap": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인",
+          "2200664:wage_gap_subsidy_share:share100": "적용제외 대상·시급/시간 대리변수·역사적가격 및 지원률 확인"
+        },
+        "selected_method_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ],
+        "method_selection_reasons": {
+          "2200664:disabled_worker_wage_gap": "사업주 최저임금 차액지원 시나리오"
+        },
+        "method_confirmations": {
+          "2200664:disabled_worker_wage_gap": {
+            "worker_scope_note": "직업재활시설 최저임금적용제외 근로자, 다른사업체 제외 참고 범위.",
+            "worker_proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영.",
+            "worker_projection_note": "2019~2023대상수와시급 각각CAGR, 월시간평균116·연12개월. 2025고시10030원 이후2024.7NABO 전망으로 계산, 최신2026실적 전망 아님.",
+            "worker_scenario_note": "최저임금 차액의 share100 보조가정. 실제법정확정률이 아니며 지원기준 확정 시 재검토.",
+            "worker_start_note": "공포후6개월·준비기간을 고려한2026~2030 정답기간, 연계2200660 의결·시행을 가정."
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2200664:exempt_worker_history:reviewed,2200664:facility_hourly_wage_history:reviewed,2200664:facility_monthly_hours_history:reviewed,2200664:worker_payment_months:reviewed,2200664:minimum_wage_forecast_rates:reviewed,official:moel:minimum_hourly:2025:disabled_gap,2200664:wage_gap_subsidy_share:share100",
+        "annual_amounts_thousand": [
+          56467143,
+          59955581,
+          63659243,
+          67588246,
+          71571861
+        ],
+        "source_refs": [
+          "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2200664 비용추계서24B1101 PDF3~7쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              56467143373.750305,
+              59955580620.46141,
+              63659242880.490555,
+              67588245684.787834,
+              71571860503.71722
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2200664 비용추계서24B1101 PDF3~7쪽, 복지부2019~2023직업재활시설 실적 및NABO2024.7 최저임금전망; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2200664:disabled_worker_wage_gap"
+        ]
+      },
+      "trace": [
+        {
+          "year": 2026,
+          "excluded_worker_count": 9960,
+          "projected_hourly_wage": 6278.120987790942,
+          "minimum_hourly_wage": 10350.960000000001,
+          "hourly_gap": 4072.8390122090586,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 1,
+          "annual_won": 56467143373.750305,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2027,
+          "excluded_worker_count": 10311,
+          "projected_hourly_wage": 6504.949152542372,
+          "minimum_hourly_wage": 10682.19072,
+          "hourly_gap": 4177.241567457629,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 1,
+          "annual_won": 59955580620.46141,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2028,
+          "excluded_worker_count": 10675,
+          "projected_hourly_wage": 6739.972606365892,
+          "minimum_hourly_wage": 11024.020823039999,
+          "hourly_gap": 4284.048216674107,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 1,
+          "annual_won": 63659242880.490555,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2029,
+          "excluded_worker_count": 11052,
+          "projected_hourly_wage": 6983.487444603316,
+          "minimum_hourly_wage": 11376.78948937728,
+          "hourly_gap": 4393.302044773963,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 1,
+          "annual_won": 67588245684.787834,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        },
+        {
+          "year": 2030,
+          "excluded_worker_count": 11442,
+          "projected_hourly_wage": 7235.800460504814,
+          "minimum_hourly_wage": 11729.469963547974,
+          "hourly_gap": 4493.66950304316,
+          "monthly_hours": 116,
+          "payment_months": 12,
+          "subsidy_share": 1,
+          "annual_won": 71571860503.71722,
+          "worker_cagr": 0.035304390250772366,
+          "hourly_wage_cagr": 0.03612994480236087,
+          "proxy_note": "적용제외집단만의 시급·시간자료 부재로 시설전체평균 시급·시간을 대리 사용, 고용위축·변동 미반영."
+        }
+      ],
+      "web_status": "computed_review",
+      "total_eok": 3192.42074,
+      "gold_total_eok": 3196,
+      "error_percent": 0.11199186483103805,
+      "annual_display_matches": 3
+    }
+  ],
+  "limitation": "과거실적·공식2025시급·공개2024.7전망으로 재계산. 미래정답값을 입력하지 않음. 공개반올림전망과 상세차이는 유지."
+}

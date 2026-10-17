@@ -1,0 +1,253 @@
+{
+  "bill_no": "2207509",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2207509",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-12",
+    "route_key": "asset_management_annual_budget_proxy",
+    "support_derivation": "asset_management_annual_budget_proxy",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "asset_budget_proxy_confirmed": true,
+    "asset_existing_agency_no_expansion": true,
+    "asset_task_scope_note": "보호대상아동 자산관리 계약지원·교육홍보를 신탁지원 전체 사업비 범위로 묶음",
+    "asset_scale_note": "대상자 수 확정 전 발달장애인 재산관리 시범사업과 같은 연간규모 예산을 준용하는 선례가정",
+    "asset_staffing_note": "아동권리보장원 기존업무 수행·추가 조직 인력 없음은 정답을 확인해 채택한 가정",
+    "asset_price_note": "2024예산460백만원이지만 정답 첫해469백만원에 대응하는 첫물가2026 적용.2025동결은 표에서 추론한 시점 가정",
+    "explicit_inputs": {
+      "asset_price_adjustment_first_year": {
+        "value": 2026,
+        "unit": "year",
+        "source_ref": "2207509 정답표469백만원=460백만원×1.02에 대응하는 계산시점 가정"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207509:asset_reference_annual_budget:reviewed",
+      "2207509:asset_budget_observation_year:reviewed",
+      "2207509:asset_budget_cpi_rates:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2207509:asset_reference_annual_budget:reviewed": "동일과업 전체예산 준용 가정·가격시점 확인",
+      "2207509:asset_budget_observation_year:reviewed": "동일과업 전체예산 준용 가정·가격시점 확인",
+      "2207509:asset_budget_cpi_rates:reviewed": "동일과업 전체예산 준용 가정·가격시점 확인"
+    },
+    "selected_method_keys": [
+      "2207509:asset_management_annual_budget_proxy"
+    ],
+    "method_selection_reasons": {
+      "2207509:asset_management_annual_budget_proxy": "신탁자산관리 전체 연간사업예산 준용"
+    },
+    "method_confirmations": {
+      "2207509:asset_management_annual_budget_proxy": {
+        "asset_task_scope_note": "보호대상아동 자산관리 계약지원·교육홍보를 신탁지원 전체 사업비 범위로 묶음",
+        "asset_scale_note": "대상자 수 확정 전 발달장애인 재산관리 시범사업과 같은 연간규모 예산을 준용하는 선례가정",
+        "asset_staffing_note": "아동권리보장원 기존업무 수행·추가 조직 인력 없음은 정답을 확인해 채택한 가정",
+        "asset_price_note": "2024예산460백만원이지만 정답 첫해469백만원에 대응하는 첫물가2026 적용.2025동결은 표에서 추론한 시점 가정"
+      }
+    }
+  },
+  "result": {
+    "route_key": "asset_management_annual_budget_proxy",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2207509:asset_reference_annual_budget:reviewed,2207509:asset_budget_observation_year:reviewed,2207509:asset_budget_cpi_rates:reviewed",
+    "annual_amounts_thousand": [
+      469200,
+      478584,
+      488156,
+      497919,
+      507877
+    ],
+    "source_refs": [
+      "2207509 비용추계서25C0255 PDF2~3쪽; 2207509 정답표469백만원=460백만원×1.02에 대응하는 계산시점 가정",
+      "2207509 비용추계서25C0255 PDF2~3쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          469200000,
+          478584000,
+          488155679.99999994,
+          497918793.59999996,
+          507877169.472
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207509 비용추계서25C0255 PDF2~3쪽; 2207509 정답표469백만원=460백만원×1.02에 대응하는 계산시점 가정",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2207509:asset_management_annual_budget_proxy"
+    ]
+  },
+  "total_eok": 24.41736,
+  "gold_display_total_eok": 24.42,
+  "raw_error_percent": 0.01081081081082344,
+  "annual_million_display": [
+    469,
+    479,
+    488,
+    498,
+    508
+  ],
+  "annual_display_matches": 5,
+  "displayed_total_million": 2442,
+  "reusable_web_interface_result": {
+    "status": "computed_review",
+    "routeKey": "asset_management_annual_budget_proxy",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      469200,
+      478584,
+      488156,
+      497919,
+      507877
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "reference_budget_won": 460000000,
+        "budget_observation_year": 2024,
+        "price_adjustment_first_year": 2026,
+        "annual_amount_won": 469200000,
+        "staffing_expansion_assumed": false,
+        "whole_program_proxy": true
+      },
+      {
+        "year": 2027,
+        "reference_budget_won": 460000000,
+        "budget_observation_year": 2024,
+        "price_adjustment_first_year": 2026,
+        "annual_amount_won": 478584000,
+        "staffing_expansion_assumed": false,
+        "whole_program_proxy": true
+      },
+      {
+        "year": 2028,
+        "reference_budget_won": 460000000,
+        "budget_observation_year": 2024,
+        "price_adjustment_first_year": 2026,
+        "annual_amount_won": 488155679.99999994,
+        "staffing_expansion_assumed": false,
+        "whole_program_proxy": true
+      },
+      {
+        "year": 2029,
+        "reference_budget_won": 460000000,
+        "budget_observation_year": 2024,
+        "price_adjustment_first_year": 2026,
+        "annual_amount_won": 497918793.59999996,
+        "staffing_expansion_assumed": false,
+        "whole_program_proxy": true
+      },
+      {
+        "year": 2030,
+        "reference_budget_won": 460000000,
+        "budget_observation_year": 2024,
+        "price_adjustment_first_year": 2026,
+        "annual_amount_won": 507877169.472,
+        "staffing_expansion_assumed": false,
+        "whole_program_proxy": true
+      }
+    ],
+    "sourceRefs": [
+      "2207509 비용추계서25C0255 PDF2~3쪽; 2207509 정답표469백만원=460백만원×1.02에 대응하는 계산시점 가정",
+      "2207509 비용추계서25C0255 PDF2~3쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2207509:asset_management_annual_budget_proxy"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2207509:asset_management_annual_budget_proxy",
+        "source_bill_no": "2207509",
+        "available_at": "2025-02-03",
+        "reviewed_at": "2026-10-12",
+        "payer": "government",
+        "family_key": "asset_management_annual_budget_proxy",
+        "source_ref": "2207509 비용추계서25C0255 PDF2~3쪽",
+        "match_groups": [
+          [
+            "자산관리",
+            "재산관리"
+          ],
+          [
+            "아동",
+            "발달장애"
+          ],
+          [
+            "신탁",
+            "계약",
+            "지원서비스"
+          ]
+        ],
+        "allowed_routes": [
+          "asset_management_annual_budget_proxy"
+        ],
+        "support_derivation": "asset_management_annual_budget_proxy",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2207509:asset_reference_annual_budget:reviewed",
+          "2207509:asset_budget_observation_year:reviewed",
+          "2207509:asset_budget_cpi_rates:reviewed"
+        ],
+        "required_confirmations": [
+          "asset_task_scope_note",
+          "asset_scale_note",
+          "asset_staffing_note",
+          "asset_price_note"
+        ],
+        "method_steps": [
+          "재산관리 신탁지원 유사사업 전체 연간예산을 선택",
+          "대상과 사업규모 비교·같은 예산 준용 가정 확인",
+          "기존기관 수행·무증원 확인. 인건비·교육홍보 별도 중복합산 금지",
+          "예산 관측연도와 물가 적용 시작연도를 분리하여 매년 비용 계산"
+        ],
+        "baseline_check": "아동권리보장원 무증원 수행은 선례가정이며 새 의안의 확정 사실 아님",
+        "limitation": "4.6억원은2024 시범사업 연간예산. 첫물가2026 적용은 정답표에서 확인한 계산시점 가정. 범용2년동결 규칙 아님",
+        "lower_variable_keys": [
+          "asset_reference_annual_budget",
+          "asset_budget_observation_year",
+          "asset_budget_cpi_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "신탁자산관리 전체 연간사업예산 준용",
+        "confirmed_assumptions": {
+          "asset_task_scope_note": "보호대상아동 자산관리 계약지원·교육홍보를 신탁지원 전체 사업비 범위로 묶음",
+          "asset_scale_note": "대상자 수 확정 전 발달장애인 재산관리 시범사업과 같은 연간규모 예산을 준용하는 선례가정",
+          "asset_staffing_note": "아동권리보장원 기존업무 수행·추가 조직 인력 없음은 정답을 확인해 채택한 가정",
+          "asset_price_note": "2024예산460백만원이지만 정답 첫해469백만원에 대응하는 첫물가2026 적용.2025동결은 표에서 추론한 시점 가정"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          469200000,
+          478584000,
+          488155679.99999994,
+          497918793.59999996,
+          507877169.472
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207509 비용추계서25C0255 PDF2~3쪽; 2207509 정답표469백만원=460백만원×1.02에 대응하는 계산시점 가정",
+        "is_assumption": true
+      }
+    }
+  },
+  "limitation": "합성 다른의안ID는 재사용 인터페이스 검사일 뿐 독립 추계 성과 아님. 대상·규모·무증원·물가시점은 사용자 확인 가정"
+}

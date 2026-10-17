@@ -1,0 +1,214 @@
+{
+  "bill_no": "2209259",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2209259",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "committee_components",
+    "support_derivation": "social_security_committee_expansion",
+    "payer": "government",
+    "committee_role_profile": "social_security_existing_committee_expansion",
+    "meeting_mode": "face_to_face",
+    "start_year": 2026,
+    "years": 5,
+    "expansion_scenario_confirmed": true,
+    "committee_scale_note": "원문 상한30→35명. 정답의 추가 당연직1명·유급위촉4명 참고 구성, 실제 인원 확정값 아님.",
+    "meeting_frequency_note": "사회보장위원회2023·2024 각3회 본회의 실적 준용, 향후 연3회 가정.",
+    "committee_payment_note": "본회의 대면20만원·서면10만원. 정답은 매년 대면3회 가정, 분과회의 추가비용 제외.",
+    "explicit_inputs": {
+      "old_member_limit": {
+        "value": 30,
+        "unit": "person",
+        "source_ref": "2209259 원문PDF3쪽 제21조 상한개정"
+      },
+      "new_member_limit": {
+        "value": 35,
+        "unit": "person",
+        "source_ref": "2209259 원문PDF3쪽 제21조 상한개정"
+      }
+    },
+    "selected_evidence_keys": [
+      "2209259:committee_expansion:incremental_unpaid_members",
+      "2209259:committee_expansion:annual_meetings",
+      "2209259:committee_expansion:meeting_price:face_to_face"
+    ],
+    "evidence_selection_reasons": {
+      "2209259:committee_expansion:incremental_unpaid_members": "동일 사회보장위원회 본회의 과업·구성 및 실적 참고",
+      "2209259:committee_expansion:annual_meetings": "동일 사회보장위원회 본회의 과업·구성 및 실적 참고",
+      "2209259:committee_expansion:meeting_price:face_to_face": "동일 사회보장위원회 본회의 과업·구성 및 실적 참고"
+    },
+    "selected_method_keys": [
+      "2209259:social_security_committee_expansion"
+    ],
+    "method_selection_reasons": {
+      "2209259:social_security_committee_expansion": "기존 위원회 확대의 유급 순증만 계산"
+    },
+    "method_confirmations": {
+      "2209259:social_security_committee_expansion": {
+        "committee_scale_note": "원문 상한30→35명. 정답의 추가 당연직1명·유급위촉4명 참고 구성, 실제 인원 확정값 아님.",
+        "meeting_frequency_note": "사회보장위원회2023·2024 각3회 본회의 실적 준용, 향후 연3회 가정.",
+        "committee_payment_note": "본회의 대면20만원·서면10만원. 정답은 매년 대면3회 가정, 분과회의 추가비용 제외."
+      }
+    }
+  },
+  "result": {
+    "route_key": "committee_components",
+    "subtype": "",
+    "formula_key": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "evidence_key": "2209259:committee_expansion:incremental_unpaid_members,2209259:committee_expansion:annual_meetings,2209259:committee_expansion:meeting_price:face_to_face",
+    "annual_amounts_thousand": [
+      2400,
+      2400,
+      2400,
+      2400,
+      2400
+    ],
+    "source_refs": [
+      "2209259 원문PDF3쪽 제21조 상한개정; 2209259 비용추계서25C1706 PDF3~4쪽; 2023·2024 사회보장위원회 본회의 실적",
+      "2209259 비용추계서25C1706 PDF3~4쪽"
+    ],
+    "resolved_variables": {
+      "committee_components": {
+        "key": "committee_components",
+        "value": [
+          {
+            "paid_members": 4,
+            "annual_meetings": 3,
+            "meeting_unit_price": 200000
+          }
+        ],
+        "unit": "component_bundle",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209259 원문PDF3쪽 제21조 상한개정; 2209259 비용추계서25C1706 PDF3~4쪽; 2023·2024 사회보장위원회 본회의 실적",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2209259:social_security_committee_expansion"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "committee_components",
+    "formulaKey": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "annualAmountsThousand": [
+      2400,
+      2400,
+      2400,
+      2400,
+      2400
+    ],
+    "derivationTrace": [
+      {
+        "old_limit": 30,
+        "new_limit": 35,
+        "incremental_unpaid_members": 1,
+        "paid_members": 4,
+        "annual_meetings": 3,
+        "meeting_price": 200000,
+        "meeting_mode": "face_to_face",
+        "composition_assumption": "원문 상한30→35명. 정답의 추가 당연직1명·유급위촉4명 참고 구성, 실제 인원 확정값 아님.",
+        "expression": "(개정정원상한−기존정원상한−추가무급위원)×연본회의×회의방식별수당"
+      }
+    ],
+    "sourceRefs": [
+      "2209259 원문PDF3쪽 제21조 상한개정; 2209259 비용추계서25C1706 PDF3~4쪽; 2023·2024 사회보장위원회 본회의 실적",
+      "2209259 비용추계서25C1706 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2209259:social_security_committee_expansion"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2209259:social_security_committee_expansion",
+        "source_bill_no": "2209259",
+        "available_at": "2025-04-22",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "social_security_committee_expansion",
+        "source_ref": "2209259 비용추계서25C1706 PDF3~4쪽",
+        "match_groups": [
+          [
+            "사회보장위원회"
+          ],
+          [
+            "위원",
+            "정원"
+          ],
+          [
+            "확대",
+            "35명",
+            "협의체"
+          ]
+        ],
+        "allowed_routes": [
+          "committee_components"
+        ],
+        "support_derivation": "social_security_committee_expansion",
+        "required_confirmations": [
+          "committee_scale_note",
+          "meeting_frequency_note",
+          "committee_payment_note"
+        ],
+        "variable_keys": [
+          "committee_components"
+        ],
+        "variable_evidence_keys": [
+          "2209259:committee_expansion:incremental_unpaid_members",
+          "2209259:committee_expansion:annual_meetings",
+          "2209259:committee_expansion:meeting_price:face_to_face",
+          "2209259:committee_expansion:meeting_price:written"
+        ],
+        "method_steps": [
+          "기존 위원회 확대와 신설 구분",
+          "원문의 개정·기존 정원상한 차이 계산",
+          "추가 당연직1명·나머지 유급위촉 가정을 설명하고 승인",
+          "해당 위원회 본회의 실적 연3회와 대면20만원/서면10만원 구분",
+          "유급 순증인원만 계산, 전체위원 운영비 중복 방지"
+        ],
+        "baseline_check": "정원상한 증가가 실제 유급 순증과 같다는 자동 가정 금지. 분과회의는 별도",
+        "limitation": "정답의 구성·회의방식 참고 시나리오. 공무원 전원 무급이나 증가5명 전원 유급으로 단정하지 않음",
+        "lower_variable_keys": [
+          "incremental_unpaid_members",
+          "annual_meetings",
+          "committee_meeting_price"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "기존 위원회 확대의 유급 순증만 계산",
+        "confirmed_assumptions": {
+          "committee_scale_note": "원문 상한30→35명. 정답의 추가 당연직1명·유급위촉4명 참고 구성, 실제 인원 확정값 아님.",
+          "meeting_frequency_note": "사회보장위원회2023·2024 각3회 본회의 실적 준용, 향후 연3회 가정.",
+          "committee_payment_note": "본회의 대면20만원·서면10만원. 정답은 매년 대면3회 가정, 분과회의 추가비용 제외."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "committee_components": {
+        "key": "committee_components",
+        "value": [
+          {
+            "paid_members": 4,
+            "annual_meetings": 3,
+            "meeting_unit_price": 200000
+          }
+        ],
+        "unit": "component_bundle",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209259 원문PDF3쪽 제21조 상한개정; 2209259 비용추계서25C1706 PDF3~4쪽; 2023·2024 사회보장위원회 본회의 실적",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_won": 12000000,
+  "gold_total_won": 12000000,
+  "error_percent": 0,
+  "annual_matches": 5,
+  "official_scope_complete": true
+}

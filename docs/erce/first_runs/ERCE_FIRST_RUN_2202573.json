@@ -1,0 +1,258 @@
+{
+  "bill_no": "2202573",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2202573",
+    "bill_name": "아동수당법 일부개정법률안",
+    "propose_date": "2024-08-05",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제4조제1항",
+        "source_quote": "제4조제1항중“8세”를“18세”로, “10만원을”을“20만원을”로한다.",
+        "source_page": 3,
+        "change_summary": "조문은18세미만. 기존0~7세 월10만원 인상분+신규8~17세 월20만원. 부모급여 유지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "조문은18세미만. 기존0~7세 월10만원 인상분+신규8~17세 월20만원. 부모급여 유지",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "조문은18세미만. 기존0~7세 월10만원 인상분+신규8~17세 월20만원. 부모급여 유지",
+        "variables": []
+      },
+      {
+        "article_ref": "제16조제1항제3호",
+        "source_quote": "3. 보호자가「아동학대범죄의처벌등에관한특례법」제2조제4호\n의죄를범하여형을선고받은경우",
+        "source_page": 3,
+        "change_summary": "아동학대 유죄보호자 급여 환수. 환수전용 산식 미등록, 대상건수·기지급액·회수율 부족. 수입효과를0으로 가정하지 않음",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "아동학대 유죄보호자 급여 환수. 환수전용 산식 미등록, 대상건수·기지급액·회수율 부족. 수입효과를0으로 가정하지 않음",
+        "route_key": "",
+        "route_reason": "아동학대 유죄보호자 급여 환수. 환수전용 산식 미등록, 대상건수·기지급액·회수율 부족. 수입효과를0으로 가정하지 않음",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "items": [
+    {
+      "scope": "0~7세 기존 급여 인상분",
+      "payload": {
+        "bill_no": "2202573",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 월20만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2025년1월1일 시행·매월 지급"
+          },
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽 현행 월10만원"
+          }
+        },
+        "selected_evidence_keys": [
+          "2200147:under8_population:2025-2029",
+          "2200147:child_allowance_payment_rate:2024"
+        ],
+        "evidence_selection_reasons": {
+          "2200147:under8_population:2025-2029": "같은 아동수당·전국·같은 연령·2025~2029년 인구와97.2% 지급률 동결 선례. 최신실측 아님",
+          "2200147:child_allowance_payment_rate:2024": "같은 아동수당·전국·같은 연령·2025~2029년 인구와97.2% 지급률 동결 선례. 최신실측 아님"
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          2539252800,
+          2386454400,
+          2277979200,
+          2213827200,
+          2183500800
+        ],
+        "derivationTrace": [],
+        "sourceRefs": [
+          "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+          "원문3쪽 월20만원",
+          "원문5쪽 현행 월10만원",
+          "원문3쪽2025년1월1일 시행·매월 지급"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              2177000,
+              2046000,
+              1953000,
+              1898000,
+              1872000
+            ],
+            "unit": "person/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽 월20만원",
+            "is_assumption": false
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문5쪽 현행 월10만원",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽2025년1월1일 시행·매월 지급",
+            "is_assumption": false
+          },
+          "participation_rate": {
+            "key": "participation_rate",
+            "value": 0.972,
+            "unit": "ratio",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          }
+        }
+      }
+    },
+    {
+      "scope": "8~17세 신규 지급비",
+      "payload": {
+        "bill_no": "2202573",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 월20만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2025년1월1일 시행·매월 지급"
+          }
+        },
+        "selected_evidence_keys": [
+          "2200147:age8to17_population:2025-2029",
+          "2200147:child_allowance_payment_rate:2024"
+        ],
+        "evidence_selection_reasons": {
+          "2200147:age8to17_population:2025-2029": "같은 아동수당·전국·같은 연령·2025~2029년 인구와97.2% 지급률 동결 선례. 최신실측 아님",
+          "2200147:child_allowance_payment_rate:2024": "같은 아동수당·전국·같은 연령·2025~2029년 인구와97.2% 지급률 동결 선례. 최신실측 아님"
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "annualAmountsThousand": [
+          10376294400,
+          10059033600,
+          9758102400,
+          9408182400,
+          8929958400
+        ],
+        "derivationTrace": [],
+        "sourceRefs": [
+          "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+          "원문3쪽 월20만원",
+          "원문3쪽2025년1월1일 시행·매월 지급"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              4448000,
+              4312000,
+              4183000,
+              4033000,
+              3828000
+            ],
+            "unit": "person/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽 월20만원",
+            "is_assumption": false
+          },
+          "participation_rate": {
+            "key": "participation_rate",
+            "value": 0.972,
+            "unit": "ratio",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문3쪽2025년1월1일 시행·매월 지급",
+            "is_assumption": false
+          }
+        }
+      }
+    }
+  ],
+  "annual_amounts_thousand": [
+    12915547200,
+    12445488000,
+    12036081600,
+    11622009600,
+    11113459200
+  ],
+  "total_thousand": 60132585600,
+  "limitations": [
+    "급여 지급비만 계산. 환수 수입효과와 별도 행정비 미계산",
+    "동일가족 선례 재사용 개발검증이며 독립평가 아님",
+    "첫 분석 시 미등록 non_tax_revenue 라우트로 실패. 환수 전용산식 없음 확인 후 빈 라우트·검토보류로 수정. 금액 산식 보강 없음"
+  ]
+}

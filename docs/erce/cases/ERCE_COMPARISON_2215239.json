@@ -1,0 +1,20 @@
+{
+  "bill_no": "2215239",
+  "post_answer_comparison": true,
+  "first_plan_thousand": 40000,
+  "gold_plan_thousand": 90000,
+  "plan_only_error_percent": 55.55555555555556,
+  "gold_committee_thousand": 48000,
+  "gold_whole_thousand": 138000,
+  "whole_bill_error_percent": null,
+  "whole_bill_total": null,
+  "gold_committee": {
+    "total_members": 16,
+    "paid_members": 12,
+    "annual_meetings": 4,
+    "unit_rate": 200000,
+    "unit": "KRW/person/meeting"
+  },
+  "missing_reference": "2022장애인활동지원서비스고도화연구8900만원→9000만원가정",
+  "reinforcement_completed": false
+}

@@ -1,0 +1,56 @@
+{
+  "bill_no": "2214218",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2214218",
+    "bill_name": "후계농어업인 및 청년농어업인 육성ㆍ지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-11-13",
+    "articles": [
+      {
+        "article_ref": "제2조제3호/예비후계농어업인 정의",
+        "source_quote": "3. “예비후계농어업인”이란농어업경영체에등록하지않았으나농업또는어업에종사하기위하여농업또는어업관련교육을이수하거나실습또는창업준비를하는자로서나이등대통령령으로정하는요건에해당하는사람을말한다.",
+        "source_page": 3, "cost_trigger": false, "estimation_decision": "no_incremental_cost",
+        "decision_reason": "용어 정의만 신설. 교육·실습 수행자라는 정의를 정부의 새 교육사업 실시 의무로 해석하지 않음",
+        "route_key": "", "route_reason": "직접적인 신규 재정 행위 없음", "variables": []
+      },
+      {
+        "article_ref": "제12조제1항/예비후계농어업인 단체 가입",
+        "source_quote": "①예비후계농어업인은대통령령으로정하는바에따라후계농어업인단체에가입할수있다.",
+        "source_page": 3, "cost_trigger": false, "estimation_decision": "no_incremental_cost",
+        "decision_reason": "가입 자격 확대만 규정. 국가·지자체에 가입자별 지원금 지급이나 지원예산 증가 의무를 부과하지 않음",
+        "route_key": "", "route_reason": "단체 회원 증가를 정부 지원액 증가로 자동 환산하지 않음", "variables": []
+      },
+      {
+        "article_ref": "제12조제2항/단체 지원경비 구체화",
+        "source_quote": "같은조제2항(종전의제목외의부분) 중“행정적ㆍ재정적지원을할수있다”를“운영비, 시설비와그밖에필요한경비를지원할수있다”로하며",
+        "source_page": 3, "cost_trigger": true, "estimation_decision": "no_incremental_cost",
+        "decision_reason": "현행 제12조에 이미 국가·지자체의 조직·활동 관련 행정적·재정적 지원 근거가 있음. 재량 지원의 비용 종류를 운영비·시설비 등으로 구체화한 것이며 새로운 지원사업·의무·금액·범위 확대가 확인되지 않아 순증비용을 산정하지 않음",
+        "route_key": "", "route_reason": "기존 지원 범위와 비교해 순증 없음으로 판단; 운영비라는 단어만으로 새 사업 산식에 배정하지 않음", "variables": []
+      },
+      {
+        "article_ref": "제12조제3항/개인·법인·단체 출연·기부",
+        "source_quote": "③개인ㆍ법인및단체는후계농어업인단체활동을지원ㆍ육성하기위하여금전이나그밖의재산을출연하거나기부할수있다.",
+        "source_page": 3, "cost_trigger": false, "estimation_decision": "no_incremental_cost",
+        "decision_reason": "개인·법인·단체의 자율적 출연·기부 근거. 국가·지자체의 신규 출연 의무나 정부 예산 배정은 규정하지 않으므로 출연 키워드만으로 국가 지출 생성하지 않음",
+        "route_key": "", "route_reason": "민간 지원과 국가 재정을 구분", "variables": []
+      }
+    ]
+  },
+  "candidate_search": {"selected_evidence_keys": [], "note": "순증 재정 행위가 확인되지 않아 단가·인원 후보를 억지로 채우지 않음"},
+  "required_variables": [],
+  "annual_amounts_thousand": null,
+  "decision": "no_incremental_cost",
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft)",
+    "quote_verified": [true, true, true, true],
+    "analyzed_changes": 4, "cost_item_count": 0,
+    "deferred_decisions": ["no_incremental_cost"],
+    "unmapped_count": 0, "status": "no_incremental_cost"
+  },
+  "time_scope_note": "현재 개발 파이프라인에서 원문만 분석한 판정. 정답 PDF 미열람. 금액0 자동계산 결과와 구분"
+}

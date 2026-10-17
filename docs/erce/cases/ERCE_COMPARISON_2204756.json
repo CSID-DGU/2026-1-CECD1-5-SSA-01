@@ -1,0 +1,51 @@
+{
+  "bill_no": "2204756",
+  "answer": {
+    "total_million": 2647,
+    "annual_million": [
+      528,
+      514,
+      524,
+      534,
+      545
+    ],
+    "estimate_no": "24D4379",
+    "reply_date": "2024-12-23"
+  },
+  "first_total_million": 799.589,
+  "abs_error_percent": 69.79,
+  "component_compare": {
+    "차관 보수": {
+      "first_thousand_2025": 141140,
+      "answer_thousand_2025": 159774,
+      "cause": "연봉외 급여(직급보조비 월95만 등 13,560천) 누락, 연봉 141,140(보도) vs 143,235(정답), 상승률 0 vs 1.9%"
+    },
+    "비서실 4인(5급1·7급2·별정6급1)": {
+      "first": 0,
+      "answer_total_thousand": 1086267,
+      "cause": "원문 미명시라 미추계 처리. 정답은 기존 1차관 비서실 구성 준용 가정"
+    },
+    "기관부담금": {
+      "first_total_million": 93.9,
+      "answer_total_million": 251,
+      "cause": "보수총액 차이 전파, 요율 13.114%(2200010) vs 13.004%~"
+    },
+    "기본경비": {
+      "first": 0,
+      "answer_total_million": 455,
+      "cause": "환경부 2024 인건비 대비 기본경비비율 21% 근거 DB 없음"
+    },
+    "자산취득비": {
+      "first": 0,
+      "answer_total_million": 24,
+      "cause": "NABO 1인당 자산취득비 전망(2025 4,907천) 시점유효 근거 DB 없음, 사무공간은 유휴공간 가정"
+    }
+  },
+  "error_classes": [
+    "범위(보좌인력 준용가정 미적용)",
+    "변수(정무직 연봉외급여·기본경비비율·자산취득비 근거부재)",
+    "변수(상승률 동결가정)"
+  ],
+  "routing_formula_correct": true,
+  "note": "라우팅·산식 4개 말단(보수/기관부담금/기본경비/자산취득)은 정답 구성과 일치. 오차는 변수 근거와 보좌인력 준용 규칙 부재에서 발생."
+}

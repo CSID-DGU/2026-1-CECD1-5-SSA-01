@@ -1,0 +1,23 @@
+{
+  "diagnostic_only": true,
+  "year": 2026,
+  "assumptions": [
+    "동일한소득구간수급자수가개정전후유지",
+    "같은구간평균감액비율을개정전후기준액에비례적용",
+    "30~50%와50%초과는2026년에변경없음"
+  ],
+  "old_reference": 350387,
+  "new_reference": 400000,
+  "gold_after_lower30_trillion": 15.1,
+  "implied_delta_trillion": 1.8728907499999998,
+  "rounding_interval": [
+    1.8666891249999997,
+    1.879092375
+  ],
+  "displayed_delta_interval": [
+    1.05,
+    1.1500000000000001
+  ],
+  "consistent_under_assumptions": false,
+  "conclusion": "위비례가정하에서는표시반올림으로설명불가.실제처리에서대상구성·감액산정이다른지작성근거확인필요.정답이틀렸다고단정하거나총액에맞춰비율역산금지"
+}

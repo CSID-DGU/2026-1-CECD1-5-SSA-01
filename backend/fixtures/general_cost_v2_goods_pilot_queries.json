@@ -1,0 +1,37 @@
+[
+  {
+    "case_id": "goods-research-01",
+    "query": "어업법인의 경영 현황을 정기적으로 파악하기 위한 통계 조사 용역 비용",
+    "expected_bill_no": "2211831",
+    "expected_item_contains": "어업법인 통계조사",
+    "expected_mechanism": "research_survey"
+  },
+  {
+    "case_id": "goods-committee-01",
+    "query": "돌봄 종사자를 보호하는 심의위원회를 구성하고 회의를 개최하는 운영 비용",
+    "expected_bill_no": "2215597",
+    "expected_item_contains": "보호위원회",
+    "expected_mechanism": "committee_operation"
+  },
+  {
+    "case_id": "goods-system-01",
+    "query": "바닥충격음 검사 결과를 관리할 전산망 개발과 클라우드 서버 운영 비용",
+    "expected_bill_no": "2213147",
+    "expected_item_contains": "시스템구축",
+    "expected_mechanism": "information_system"
+  },
+  {
+    "case_id": "goods-event-01",
+    "query": "북한 주민 인권 증진 기념일에 행사와 교육 홍보를 시행하는 비용",
+    "expected_bill_no": "2213203",
+    "expected_item_contains": "북한인권증진",
+    "expected_mechanism": "commemorative_event"
+  },
+  {
+    "case_id": "goods-operation-01",
+    "query": "모범운전자 단체 사무실의 임차 관리와 전기 수도 등 공공요금",
+    "expected_bill_no": "2212387",
+    "expected_item_contains": "관리비 및 공공요금",
+    "expected_mechanism": "rental_operation"
+  }
+]

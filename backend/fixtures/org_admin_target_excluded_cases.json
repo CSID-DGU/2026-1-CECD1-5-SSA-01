@@ -1,0 +1,163 @@
+{
+  "schema_version": "org-admin-benchmark-catalog-v1",
+  "category": "organization_administration_operations",
+  "exclusion_policy": {
+    "exclude_target_bill_no": true,
+    "exclude_after_target_propose_date": true,
+    "answer_access": "score_only_after_source_plan_is_frozen"
+  },
+  "cases": [
+    {
+      "bill_no": "2124118",
+      "bill_name": "공익법인의 설립·운영에 관한 법률 일부개정법률안",
+      "propose_date": "2023-08-31",
+      "subtypes": [
+        "committee",
+        "organization_personnel",
+        "organization_operations"
+      ],
+      "benchmark_role": "primary_mixed_org_committee",
+      "source_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2124118/2124118_의사국 의안과_의안원문.pdf",
+      "answer_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2124118/2124118_의사국 의안과_비용추계서.pdf",
+      "source_only_plan": {
+        "facts": [
+          "법무부에 공익법인위원회를 신설한다.",
+          "위원회는 위원장 1명과 상임위원 1명을 포함하여 9명 이내이다.",
+          "위원회 사무를 처리할 사무기구를 둔다."
+        ],
+        "components": [
+          "committee_meeting",
+          "personnel",
+          "employer_contribution",
+          "basic_expense",
+          "asset"
+        ],
+        "missing_target_inputs": [
+          "수당 지급대상 위원 수",
+          "연간 회의횟수",
+          "상임위원 보수 적용기준",
+          "사무기구 순증인원과 직급 구성"
+        ],
+        "automatic_amount_policy": "stop_until_target_scale_is_confirmed"
+      }
+    },
+    {
+      "bill_no": "2124970",
+      "bill_name": "대전특별자치시 설치 등에 관한 특별법안",
+      "propose_date": "2023-09-27",
+      "subtypes": [
+        "committee",
+        "organization_personnel",
+        "organization_operations"
+      ],
+      "benchmark_role": "primary_org_creation",
+      "source_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2124970/2124970_의사국 의안과_의안원문.pdf",
+      "answer_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2124970/2124970_의사국 의안과_비용추계서.pdf",
+      "source_only_plan": {
+        "facts": [
+          "국무총리 소속 지원위원회는 25명 이상 30명 이하이고 실무위원회를 둔다.",
+          "실무지원단은 설치할 수 있어 선택적이다.",
+          "시장 소속 감사위원회는 위원장 1명을 포함하여 7명 이내이다.",
+          "감사위원회 사무국을 두며 사무국장과 직원은 지방공무원이다."
+        ],
+        "components": [
+          "committee_meeting",
+          "personnel",
+          "employer_contribution",
+          "basic_expense",
+          "asset"
+        ],
+        "missing_target_inputs": [
+          "실무지원단 실제 설치 여부",
+          "민간·비상임 위원의 수당 지급범위와 회의횟수",
+          "감사위원장 상근·보수 적용기준",
+          "감사위원회 사무국 순증인원과 직급 구성"
+        ],
+        "automatic_amount_policy": "stop_until_target_scale_is_confirmed"
+      }
+    },
+    {
+      "bill_no": "2213320",
+      "bill_name": "인공지능데이터센터 기반 구축 및 산업 육성에 관한 법률안",
+      "propose_date": "2025-09-26",
+      "subtypes": [
+        "committee"
+      ],
+      "benchmark_role": "primary_committee",
+      "source_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2213320/2213320_의사국 의안과_의안원문.pdf",
+      "answer_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2213320/2213320_의사국 의안과_비용추계서.pdf",
+      "source_only_plan": {
+        "facts": [
+          "국가인공지능데이터센터진흥위원회를 국가인공지능위원회 소속으로 둔다.",
+          "위원회는 과학기술정보통신부장관을 위원장으로 하여 20명 이내이다."
+        ],
+        "components": [
+          "committee_operation"
+        ],
+        "missing_target_inputs": [
+          "실제 위촉위원 수",
+          "수당 지급대상 위원 수",
+          "연간 회의횟수"
+        ],
+        "automatic_amount_policy": "stop_until_target_scale_is_confirmed"
+      }
+    },
+    {
+      "bill_no": "2216503",
+      "bill_name": "국가인권위원회법 일부개정법률안",
+      "propose_date": "2026-02-02",
+      "subtypes": [
+        "committee"
+      ],
+      "benchmark_role": "primary_event_driven_committee",
+      "source_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2216503/2216503_의사국 의안과_의안원문.pdf",
+      "answer_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2216503/2216503_의사국 의안과_비용추계서.pdf",
+      "source_only_plan": {
+        "facts": [
+          "국회·대통령·대법원장이 위원을 선출·지명할 때마다 후보추천위원회를 둔다.",
+          "각 후보추천위원회는 위원장 1명을 포함하여 10명이다.",
+          "후보 추천이 끝나면 해당 위원회는 해산한다."
+        ],
+        "components": [
+          "committee_meeting"
+        ],
+        "missing_target_inputs": [
+          "향후 5년의 선출·지명 건수와 위원회 설치 횟수",
+          "추천 1건당 회의횟수",
+          "수당 지급대상 위원 수"
+        ],
+        "automatic_amount_policy": "stop_until_event_frequency_is_confirmed"
+      }
+    },
+    {
+      "bill_no": "2216473",
+      "bill_name": "전북특별자치도 설치 및 글로벌생명경제도시 조성을 위한 특별법 일부개정법률안",
+      "propose_date": "2026-01-30",
+      "subtypes": [
+        "organization_personnel",
+        "transferred_administration",
+        "mixed_non_org_costs"
+      ],
+      "benchmark_role": "boundary_mixed_bill",
+      "source_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2216473/2216473_의사국 의안과_의안원문.pdf",
+      "answer_pdf": "backend/generated/assembly_rag_seed_age21_50/files/2216473/2216473_의사국 의안과_비용추계서.pdf",
+      "source_only_plan": {
+        "facts": [
+          "이양 사무에 필요한 소요예산·인력정원 이체방안을 계획에 포함한다.",
+          "국가는 이양 사무 비용을 전액 보전하고 인력 증원을 허용한다.",
+          "다수의 산업·시설·지원·조세 조항도 함께 존재한다."
+        ],
+        "components": [
+          "personnel",
+          "operating_expense"
+        ],
+        "missing_target_inputs": [
+          "실제 이양 사무 목록",
+          "사무별 순증인원과 직급 구성",
+          "기존 예산의 이체분과 순증 비용의 구분"
+        ],
+        "automatic_amount_policy": "exclude_from_pure_org_accuracy_score_and_use_as_routing_boundary"
+      }
+    }
+  ]
+}

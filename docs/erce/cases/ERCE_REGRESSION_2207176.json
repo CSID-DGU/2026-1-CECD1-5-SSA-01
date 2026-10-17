@@ -1,0 +1,304 @@
+{
+  "bill_no": "2207176",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2207176",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "route_key": "research_survey_annualization_delta",
+    "support_derivation": "survey_annualization_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "research_service_function": "care_leaver_independent_living_survey",
+    "survey_annualization_confirmed": true,
+    "survey_task_scope_note": "동일보호종료아동 자립지원 전국실태조사, 새매년과기존3년예산 차액",
+    "survey_phase_note": "실시이력2023,현행3년이면2026·2029. 공포후6개월·준비기간 고려개정2026부터매년",
+    "survey_price_note": "2023조사예산2억원에2024.12 CPI2024부터적용,정부별·연구항목별중복곱셈없음",
+    "explicit_inputs": {
+      "existing_survey_interval": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "2207176 원문PDF5쪽 현행3년"
+      },
+      "amended_survey_interval": {
+        "value": 1,
+        "unit": "year",
+        "source_ref": "2207176 원문PDF3쪽 매년"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207176:survey_unit_cost:reviewed",
+      "2207176:survey_price_base_year:reviewed",
+      "2207176:last_survey_year:reviewed",
+      "2207176:survey_cpi_rates:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2207176:survey_unit_cost:reviewed": "동일조사·기준예산년·실시이력·물가전망 확인",
+      "2207176:survey_price_base_year:reviewed": "동일조사·기준예산년·실시이력·물가전망 확인",
+      "2207176:last_survey_year:reviewed": "동일조사·기준예산년·실시이력·물가전망 확인",
+      "2207176:survey_cpi_rates:reviewed": "동일조사·기준예산년·실시이력·물가전망 확인"
+    },
+    "selected_method_keys": [
+      "2207176:survey_annualization_delta"
+    ],
+    "method_selection_reasons": {
+      "2207176:survey_annualization_delta": "기존주기에해당하는조사비를차감하는연례화순증"
+    },
+    "method_confirmations": {
+      "2207176:survey_annualization_delta": {
+        "survey_task_scope_note": "동일보호종료아동 자립지원 전국실태조사, 새매년과기존3년예산 차액",
+        "survey_phase_note": "실시이력2023,현행3년이면2026·2029. 공포후6개월·준비기간 고려개정2026부터매년",
+        "survey_price_note": "2023조사예산2억원에2024.12 CPI2024부터적용,정부별·연구항목별중복곱셈없음"
+      }
+    }
+  },
+  "result": {
+    "route_key": "research_survey_annualization_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2207176:survey_unit_cost:reviewed,2207176:survey_price_base_year:reviewed,2207176:last_survey_year:reviewed,2207176:survey_cpi_rates:reviewed",
+    "annual_amounts_thousand": [
+      0,
+      217761,
+      222116,
+      0,
+      231090
+    ],
+    "source_refs": [
+      "2207176 비용추계서24C6463 PDF3~4쪽,2023보호종료아동 자립지원실태조사; 2207176 원문PDF5쪽 현행3년; 2207176 원문PDF3쪽 매년",
+      "2207176 비용추계서24C6463 PDF3~5쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          0,
+          217760921.99999994,
+          222116140.43999997,
+          0,
+          231089632.51377597
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207176 비용추계서24C6463 PDF3~4쪽,2023보호종료아동 자립지원실태조사; 2207176 원문PDF5쪽 현행3년; 2207176 원문PDF3쪽 매년",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2207176:survey_annualization_delta"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "research_survey_annualization_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      0,
+      217761,
+      222116,
+      0,
+      231090
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "survey_unit_won": 213491099.99999994,
+        "new_survey_cost_won": 213491099.99999994,
+        "existing_survey_cost_won": 213491099.99999994,
+        "annual_delta_won": 0,
+        "baseline_survey_due": true,
+        "last_observed_survey_year": 2023,
+        "existing_interval": 3,
+        "amended_interval": 1
+      },
+      {
+        "year": 2027,
+        "survey_unit_won": 217760921.99999994,
+        "new_survey_cost_won": 217760921.99999994,
+        "existing_survey_cost_won": 0,
+        "annual_delta_won": 217760921.99999994,
+        "baseline_survey_due": false,
+        "last_observed_survey_year": 2023,
+        "existing_interval": 3,
+        "amended_interval": 1
+      },
+      {
+        "year": 2028,
+        "survey_unit_won": 222116140.43999997,
+        "new_survey_cost_won": 222116140.43999997,
+        "existing_survey_cost_won": 0,
+        "annual_delta_won": 222116140.43999997,
+        "baseline_survey_due": false,
+        "last_observed_survey_year": 2023,
+        "existing_interval": 3,
+        "amended_interval": 1
+      },
+      {
+        "year": 2029,
+        "survey_unit_won": 226558463.24879998,
+        "new_survey_cost_won": 226558463.24879998,
+        "existing_survey_cost_won": 226558463.24879998,
+        "annual_delta_won": 0,
+        "baseline_survey_due": true,
+        "last_observed_survey_year": 2023,
+        "existing_interval": 3,
+        "amended_interval": 1
+      },
+      {
+        "year": 2030,
+        "survey_unit_won": 231089632.51377597,
+        "new_survey_cost_won": 231089632.51377597,
+        "existing_survey_cost_won": 0,
+        "annual_delta_won": 231089632.51377597,
+        "baseline_survey_due": false,
+        "last_observed_survey_year": 2023,
+        "existing_interval": 3,
+        "amended_interval": 1
+      }
+    ],
+    "sourceRefs": [
+      "2207176 비용추계서24C6463 PDF3~4쪽,2023보호종료아동 자립지원실태조사; 2207176 원문PDF5쪽 현행3년; 2207176 원문PDF3쪽 매년",
+      "2207176 비용추계서24C6463 PDF3~5쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2207176:survey_annualization_delta"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2207176:survey_annualization_delta",
+        "source_bill_no": "2207176",
+        "available_at": "2025-01-07",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "survey_annualization_delta",
+        "source_ref": "2207176 비용추계서24C6463 PDF3~5쪽",
+        "match_groups": [
+          [
+            "자립지원",
+            "보호종료"
+          ],
+          [
+            "실태조사"
+          ],
+          [
+            "매년",
+            "주기"
+          ]
+        ],
+        "allowed_routes": [
+          "research_survey_annualization_delta"
+        ],
+        "support_derivation": "survey_annualization_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2207176:survey_unit_cost:reviewed",
+          "2207176:survey_price_base_year:reviewed",
+          "2207176:last_survey_year:reviewed",
+          "2207176:survey_cpi_rates:reviewed"
+        ],
+        "required_confirmations": [
+          "survey_task_scope_note",
+          "survey_phase_note",
+          "survey_price_note"
+        ],
+        "method_steps": [
+          "원문현행주기와개정매년을별도추출",
+          "2023동일과업조사2억원과실시이력 확인",
+          "각연도개정총조사비−현행기실시예정조사비",
+          "기존3년조사연도2026/2029는추가비용0, 나머지만추가",
+          "단가 기준2023 이후물가와지급시점 구분"
+        ],
+        "baseline_check": "동일조사 전체연간예산을 신규로계상하지않음. 예전조사위상은새법안시작연도와독립",
+        "limitation": "2023조사·2024.12물가의역사적선례.현재신규과업범위·조사단가·기존실시이력은다시확인.연례화외변경은별도계산",
+        "lower_variable_keys": [
+          "survey_unit_cost",
+          "survey_price_base_year",
+          "last_survey_year",
+          "survey_cpi_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "기존주기에해당하는조사비를차감하는연례화순증",
+        "confirmed_assumptions": {
+          "survey_task_scope_note": "동일보호종료아동 자립지원 전국실태조사, 새매년과기존3년예산 차액",
+          "survey_phase_note": "실시이력2023,현행3년이면2026·2029. 공포후6개월·준비기간 고려개정2026부터매년",
+          "survey_price_note": "2023조사예산2억원에2024.12 CPI2024부터적용,정부별·연구항목별중복곱셈없음"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          0,
+          217760921.99999994,
+          222116140.43999997,
+          0,
+          231089632.51377597
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207176 비용추계서24C6463 PDF3~4쪽,2023보호종료아동 자립지원실태조사; 2207176 원문PDF5쪽 현행3년; 2207176 원문PDF3쪽 매년",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 6.70967,
+  "gold_display_total_eok": 6.71,
+  "raw_error_percent": 0.004918032786884374,
+  "annual_million_display": [
+    0,
+    218,
+    222,
+    0,
+    231
+  ],
+  "annual_display_matches": 5,
+  "displayed_total_million": 671,
+  "engine_and_web_same": true,
+  "counselling_review_payload": {
+    "bill_no": "2207176",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "decision_evidence_key": "2207176:counselling_existing_program",
+    "reliable_estimation_basis_available": true,
+    "decision_facts": {
+      "counselling_already_provided": true,
+      "new_service_scope_or_staffing_expansion_confirmed": false
+    },
+    "decision_confirmations": {
+      "existing_counselling_program_note": "정답PDF3쪽 2024자립지원체계사업의전담인력 심리상담/사례관리 제공근거",
+      "counselling_scope_overlap_note": "동일기존서비스·새물량이나인력확대 미명시.현행2026서비스현황 독립전수확인아닌역사적선례 적용성 검토"
+    }
+  },
+  "counselling_decision": {
+    "decision": "no_incremental_cost",
+    "amount": null,
+    "source_decision_label": "기존사업 시행으로 추가추계 제외",
+    "decision_evidence_key": "2207176:counselling_existing_program",
+    "reason": "자립지원체계 구축사업의 전담인력이 이미 심리상담·사례관리를 수행하여 별도신규상담비 추계제외",
+    "source_ref": "2207176 비용추계서24C6463 PDF3쪽",
+    "source_quote": "해당 전담인력을 배정하여 자립준비청년을 위한 심리상담, 사례관리 등을 실시하고 있음",
+    "additional_source_quote": "",
+    "fiscal_effect": "existing_service_no_separately_estimated_increment",
+    "confirmed_conditions": {
+      "existing_counselling_program_note": "정답PDF3쪽 2024자립지원체계사업의전담인력 심리상담/사례관리 제공근거",
+      "counselling_scope_overlap_note": "동일기존서비스·새물량이나인력확대 미명시.현행2026서비스현황 독립전수확인아닌역사적선례 적용성 검토"
+    },
+    "confirmed_facts": {
+      "counselling_already_provided": true,
+      "new_service_scope_or_staffing_expansion_confirmed": false
+    },
+    "reestimate_when": "기존사업에 없는 신규대상·상담량·전담인력확대가확인되면 순증부분추계",
+    "limitation": "2024사업이인용된역사적선례.2026현재제공현황을독립검증한것아님.서비스·규모가달라지면기존사업제외전용금지"
+  },
+  "limitation": "정답확인후단가·실시이력·기존사업근거 저장한회귀. 원시반올림차이를0%로표시하지않고 기존사업예산을신규추가총액에합산하지않음"
+}

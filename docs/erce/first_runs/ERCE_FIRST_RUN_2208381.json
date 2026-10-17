@@ -1,0 +1,274 @@
+{
+  "bill_no": "2208381",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2208381",
+    "bill_name": "아동수당법 일부개정법률안",
+    "propose_date": "2025-02-24",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제4조제1항 각호",
+        "change_summary": "18세미만 첫째월10만원·둘째15만원·셋째이상20만원. 부모급여 기존유지",
+        "source_quote": "1. 첫째자녀인아동: 10만원\n2. 둘째자녀인아동: 15만원\n3. 셋째자녀인아동등제1호및제2호외의아동: 20만원",
+        "source_page": 3,
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기존0~7세 첫째 증분0. 기존둘째·셋째이상 인상분과 신규8~17세 출생순위별 지급비 분리. 부모급여 변경없음",
+        "route_key": "transfer_recipient",
+        "route_reason": "전체급여가 아닌 신규대상·기존대상별 산식분리",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "items": [
+    {
+      "scope": "0~7세 둘째",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 150000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제1항 둘째 월15만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2026-01-01시행·매월 지급 완전연도"
+          },
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽 현행 월10만원"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      },
+      "required_variable_count": 3
+    },
+    {
+      "scope": "0~7세 셋째이상",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제1항 셋째이상 월20만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2026-01-01시행·매월 지급 완전연도"
+          },
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽 현행 월10만원"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      },
+      "required_variable_count": 3
+    },
+    {
+      "scope": "8~17세 첫째",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제1항 첫째 월10만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2026-01-01시행·매월 지급 완전연도"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      },
+      "required_variable_count": 2
+    },
+    {
+      "scope": "8~17세 둘째",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 150000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제1항 둘째 월15만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2026-01-01시행·매월 지급 완전연도"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      },
+      "required_variable_count": 2
+    },
+    {
+      "scope": "8~17세 셋째이상",
+      "payload": {
+        "bill_no": "2208381",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 200000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 제4조제1항 셋째이상 월20만원"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문3쪽2026-01-01시행·매월 지급 완전연도"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      },
+      "required_variable_count": 2
+    }
+  ],
+  "required_variable_count": 12,
+  "required_variables_filled": 7,
+  "status": "needs_input",
+  "total_thousand": null,
+  "diagnosis": [
+    "5개 하위계산 모두 출생순위별 수급자수 부족. 기존0~7세 첫째는 지급액 동일로순증0",
+    "대학 장학금 출생순위 자료는 인구범위·사업이달라거부",
+    "기존전체아동2025~2029년 인구로2026~2030년 출생순위별인구를대체하지않음.2030년근거도부족",
+    "같은법안 재현근거가 아닌현DB개발첫실행. 정답열람전입력·결과저장"
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "bill_no": "2211034",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2211034",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-08",
+    "payer": "government",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "grandparent_care_age_net",
+    "start_year": 2027,
+    "years": 5,
+    "grandparent_count_basis": "child_age_proxy",
+    "care_price_projection": "freeze_reference_rate",
+    "population_geography": "전국",
+    "statistical_sex": "total",
+    "population_vintage": "2023-12",
+    "support_derivation_note": "기존공식각세인구재사용,조부모양육비율·공공시간제지원액·연령별대체급여연결",
+    "registration_scope_note": "0~5세아동수단위,소득조건없음·모두연초교육/등록하는참고시나리오",
+    "allowance_overlap_note": "0~1세부모급여는별개,2~5세가정양육수당10만원을순증돌봄지원에서차감",
+    "estimation_start_note": "원문2026-04-23시행과정답심사준비기간을고려한2027~2031가정",
+    "selected_evidence_keys": [
+      "official:kosis:age0_5:2027-2031:grandparent",
+      "2211034:grandparent_care_shares:reviewed",
+      "2211034:supported_care_hours:reviewed",
+      "2211034:public_care_hour_rate:reviewed",
+      "2211034:foregone_allowance_by_age:reviewed",
+      "2211034:registration_take_up:reviewed",
+      "2211034:care_payment_months:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "official:kosis:age0_5:2027-2031:grandparent": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:grandparent_care_shares:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:supported_care_hours:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:public_care_hour_rate:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:foregone_allowance_by_age:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:registration_take_up:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용",
+      "2211034:care_payment_months:reviewed": "연령·국가범위·자료시점·대체급여검토후사후준용"
+    },
+    "selected_method_keys": [
+      "2211034:grandparent_care_age_net"
+    ],
+    "method_selection_reasons": {
+      "2211034:grandparent_care_age_net": "조부모양육아동에대한신규급여순증모형"
+    },
+    "method_confirmations": {
+      "2211034:grandparent_care_age_net": {
+        "registration_scope_note": "0~5세아동수단위,소득조건없음·모두연초교육/등록하는참고시나리오",
+        "allowance_overlap_note": "0~1세부모급여는별개,2~5세가정양육수당10만원을순증돌봄지원에서차감",
+        "estimation_start_note": "원문2026-04-23시행과정답심사준비기간을고려한2027~2031가정"
+      }
+    }
+  },
+  "result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "official:kosis:age0_5:2027-2031:grandparent,2211034:grandparent_care_shares:reviewed,2211034:supported_care_hours:reviewed,2211034:public_care_hour_rate:reviewed,2211034:foregone_allowance_by_age:reviewed,2211034:registration_take_up:reviewed,2211034:care_payment_months:reviewed",
+    "annual_amounts_thousand": [
+      83853840,
+      84346560,
+      85672320,
+      87780240,
+      90470880
+    ],
+    "source_refs": [
+      "기존KOSIS2023.12전국중위전망 원자료+2031보충;0~5세별남녀합산; 2211034 비용추계서25C3422 PDF4~7쪽;2024보육실태조사·당시시간제보육지원준용",
+      "2211034 비용추계서25C3422 PDF4~7쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          83853840000,
+          84346560000,
+          85672320000,
+          87780240000,
+          90470880000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "기존KOSIS2023.12전국중위전망 원자료+2031보충;0~5세별남녀합산; 2211034 비용추계서25C3422 PDF4~7쪽;2024보육실태조사·당시시간제보육지원준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2211034:grandparent_care_age_net"
+    ]
+  },
+  "trace": [
+    {
+      "year": 2027,
+      "age_child_counts": {
+        "0": 11392,
+        "1": 9955,
+        "2": 8663,
+        "3": 9588,
+        "4": 9484,
+        "5": 11582
+      },
+      "gross_monthly_support": 180000,
+      "net_monthly_by_age": {
+        "0": 180000,
+        "1": 180000,
+        "2": 80000,
+        "3": 80000,
+        "4": 80000,
+        "5": 80000
+      },
+      "registration_take_up": 1,
+      "annual_won_by_age": {
+        "0": 24606720000,
+        "1": 21502800000,
+        "2": 8316480000,
+        "3": 9204480000,
+        "4": 9104640000,
+        "5": 11118720000
+      },
+      "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+    },
+    {
+      "year": 2028,
+      "age_child_counts": {
+        "0": 11900,
+        "1": 10448,
+        "2": 8658,
+        "3": 9098,
+        "4": 8896,
+        "5": 10926
+      },
+      "gross_monthly_support": 180000,
+      "net_monthly_by_age": {
+        "0": 180000,
+        "1": 180000,
+        "2": 80000,
+        "3": 80000,
+        "4": 80000,
+        "5": 80000
+      },
+      "registration_take_up": 1,
+      "annual_won_by_age": {
+        "0": 25704000000,
+        "1": 22567680000,
+        "2": 8311680000,
+        "3": 8734080000,
+        "4": 8540160000,
+        "5": 10488960000
+      },
+      "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+    },
+    {
+      "year": 2029,
+      "age_child_counts": {
+        "0": 12364,
+        "1": 10912,
+        "2": 9086,
+        "3": 9094,
+        "4": 8442,
+        "5": 10249
+      },
+      "gross_monthly_support": 180000,
+      "net_monthly_by_age": {
+        "0": 180000,
+        "1": 180000,
+        "2": 80000,
+        "3": 80000,
+        "4": 80000,
+        "5": 80000
+      },
+      "registration_take_up": 1,
+      "annual_won_by_age": {
+        "0": 26706240000,
+        "1": 23569920000,
+        "2": 8722560000,
+        "3": 8730240000,
+        "4": 8104320000,
+        "5": 9839040000
+      },
+      "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+    },
+    {
+      "year": 2030,
+      "age_child_counts": {
+        "0": 12770,
+        "1": 11337,
+        "2": 9489,
+        "3": 9542,
+        "4": 8439,
+        "5": 9727
+      },
+      "gross_monthly_support": 180000,
+      "net_monthly_by_age": {
+        "0": 180000,
+        "1": 180000,
+        "2": 80000,
+        "3": 80000,
+        "4": 80000,
+        "5": 80000
+      },
+      "registration_take_up": 1,
+      "annual_won_by_age": {
+        "0": 27583200000,
+        "1": 24487920000,
+        "2": 9109440000,
+        "3": 9160320000,
+        "4": 8101440000,
+        "5": 9337920000
+      },
+      "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+    },
+    {
+      "year": 2031,
+      "age_child_counts": {
+        "0": 13110,
+        "1": 11708,
+        "2": 9857,
+        "3": 9965,
+        "4": 8855,
+        "5": 9723
+      },
+      "gross_monthly_support": 180000,
+      "net_monthly_by_age": {
+        "0": 180000,
+        "1": 180000,
+        "2": 80000,
+        "3": 80000,
+        "4": 80000,
+        "5": 80000
+      },
+      "registration_take_up": 1,
+      "annual_won_by_age": {
+        "0": 28317600000,
+        "1": 25289280000,
+        "2": 9462720000,
+        "3": 9566400000,
+        "4": 8500800000,
+        "5": 9334080000
+      },
+      "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+    }
+  ],
+  "reusable_web_status": "computed_review",
+  "annual_eok": [
+    838.5384,
+    843.4656,
+    856.7232,
+    877.8024,
+    904.7088
+  ],
+  "total_eok": 4321.2384,
+  "gold_display_eok": 4321,
+  "error_percent": 0.0055172413793145875,
+  "required_lower_filled": 7,
+  "required_lower_count": 7,
+  "remaining_scope": "교육비는정답별도항목아님.기존/공공부담주체검토미완료,자동0/미추계판정안함",
+  "limitation": "단가동결/전원등록·아동수대리단위·시간제서비스추가차감미고려는확인된시나리오.사후회귀"
+}

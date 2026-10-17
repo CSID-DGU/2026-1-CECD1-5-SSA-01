@@ -1,0 +1,245 @@
+{
+  "bill_no": "2205811",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_vintage_mode": "current_development_db_not_proposal_date_isolated",
+  "ai_draft": {
+    "bill_no": "2205811",
+    "bill_name": "장애인 건강권 및 의료접근성 보장에 관한 법률 일부개정법률안",
+    "propose_date": "2024-11-22",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제9조의2·제22조제1항",
+        "source_page": 3,
+        "source_quote": "비용의전부를지원하여야한다.",
+        "route_key": "hospital_communication_support",
+        "route_reason": "서울대병원·국립대학병원 의사소통지원 의무와 비용전부지원. 기존 상급47병원 중37개라는 모집단과 다름. 국비·지방비 총액지원이며50%로 다시감액하지 않음.",
+        "change_summary": "서울대병원·국립대학병원 의사소통지원 의무와 비용전부지원. 기존 상급47병원 중37개라는 모집단과 다름. 국비·지방비 총액지원이며50%로 다시감액하지 않음.",
+        "decision_reason": "서울대병원·국립대학병원 의사소통지원 의무와 비용전부지원. 기존 상급47병원 중37개라는 모집단과 다름. 국비·지방비 총액지원이며50%로 다시감액하지 않음.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "variables": []
+      },
+      {
+        "article_ref": "제23조의2·제28조",
+        "source_page": 4,
+        "source_quote": "제23조의2에따른시정명령에따르지아니한자",
+        "route_key": "direct_annual_amount",
+        "route_reason": "시정명령 및 과태료 신규위반유형. 미이행기관·적발·실제부과액 미확정. 상한500만원을 예상수입으로 곱하지 않음.",
+        "change_summary": "시정명령 및 과태료 신규위반유형. 미이행기관·적발·실제부과액 미확정. 상한500만원을 예상수입으로 곱하지 않음.",
+        "decision_reason": "시정명령 및 과태료 신규위반유형. 미이행기관·적발·실제부과액 미확정. 상한500만원을 예상수입으로 곱하지 않음.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제9조의2·제22조제1항",
+      "verified": true
+    },
+    {
+      "article": "제23조의2·제28조",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2205811",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "hospital_communication_support",
+    "support_derivation": "hospital_communication_support_package",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "medical_unit_basis": "official_annual_package",
+    "communication_scenario_confirmed": true,
+    "fiscal_scope": "national_and_local_combined",
+    "communication_package_phase": "full_year_following_year",
+    "communication_price_policy": "freeze_reference",
+    "disputed_monthly_replay_confirmed": true,
+    "communication_source_discrepancy_note": "정답월단가표기를재현하되일반단가로사용하지않음. 공식서울시연차패키지와단위/규모가상충. 2025예산기준액에2025임금률부터적용하는정답경로도명시.",
+    "communication_scope_note": "국립대학병원·서울대병원이 대상, 상급47개모집단을 전용하지 않음. 3명지원체계는동일사업참고 패키지이며 법안명시인원이아님.",
+    "communication_overlap_note": "대상 국립대학병원 범위와 기존지원겹침을 새로 확인해야 함. 기존37개와10개를 사용하지 않음.",
+    "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+    "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오.",
+    "selected_evidence_keys": [
+      "2203688:communication_staff_per_hospital:reviewed",
+      "2203688:communication_payment_months:reviewed",
+      "official:seoul:communication:full_year_package:2025",
+      "2203688:nominal_wage_rates:20241011"
+    ],
+    "evidence_selection_reasons": {
+      "2203688:communication_staff_per_hospital:reviewed": "같은의사소통지원 수어1명·코디네이터2명 공식연간패키지 후보. 가격범위는준용하되 국립병원대상수·기존사업겹침은별도확인.",
+      "2203688:communication_payment_months:reviewed": "같은의사소통지원 수어1명·코디네이터2명 공식연간패키지 후보. 가격범위는준용하되 국립병원대상수·기존사업겹침은별도확인.",
+      "official:seoul:communication:full_year_package:2025": "같은의사소통지원 수어1명·코디네이터2명 공식연간패키지 후보. 가격범위는준용하되 국립병원대상수·기존사업겹침은별도확인.",
+      "2203688:nominal_wage_rates:20241011": "같은의사소통지원 수어1명·코디네이터2명 공식연간패키지 후보. 가격범위는준용하되 국립병원대상수·기존사업겹침은별도확인."
+    },
+    "selected_method_keys": [
+      "2203688:communication:official_annual_package"
+    ],
+    "method_selection_reasons": {
+      "2203688:communication:official_annual_package": "공식연간패키지와 월단가재현을 분리해 선택"
+    },
+    "method_confirmations": {
+      "2203688:communication:official_annual_package": {
+        "communication_scope_note": "국립대학병원·서울대병원이 대상, 상급47개모집단을 전용하지 않음. 3명지원체계는동일사업참고 패키지이며 법안명시인원이아님.",
+        "communication_overlap_note": "대상 국립대학병원 범위와 기존지원겹침을 새로 확인해야 함. 기존37개와10개를 사용하지 않음.",
+        "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+        "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오."
+      }
+    }
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "hospital_communication_support",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [
+      "tertiary_hospital_count",
+      "already_supported_hospital_count"
+    ],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [
+      {
+        "method_key": "2203688:communication:official_annual_package",
+        "source_bill_no": "2203688",
+        "available_at": "2026-10-10",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "hospital_communication_support_package",
+        "source_ref": "24C3571 PDF3~4쪽; 서울시제332회 업무보고PDF39쪽, 단위불일치 시나리오 구분",
+        "match_groups": [
+          [
+            "병원",
+            "의료기관"
+          ],
+          [
+            "수어",
+            "의사소통"
+          ],
+          [
+            "지원",
+            "통역"
+          ]
+        ],
+        "allowed_routes": [
+          "hospital_communication_support"
+        ],
+        "support_derivation": "hospital_communication_support_package",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2203688:tertiary_hospital_count:reviewed",
+          "2203688:already_supported_hospital_count:reviewed",
+          "2203688:communication_staff_per_hospital:reviewed",
+          "2203688:communication_payment_months:reviewed",
+          "official:seoul:communication:full_year_package:2025",
+          "2203688:nominal_wage_rates:20241011"
+        ],
+        "required_confirmations": [
+          "communication_scope_note",
+          "communication_overlap_note",
+          "communication_unit_note",
+          "communication_timing_note"
+        ],
+        "method_steps": [
+          "상급종합병원 의무와 기타기관 노력의무 구분",
+          "기존지원 겹침을 빼고 순증기관 계산",
+          "수어통역1명·코디네이터2명의 패키지 범위 확인",
+          "공식연간패키지와 정답월단가재현 분리, 연단가에12개월 재곱셈 금지",
+          "국비·지방비 합계를 구하며50%로전체비용 재감액하지 않음"
+        ],
+        "baseline_check": "월단가재현은자기의안개발회귀전용. 과태료미추계·0원은정답이명시하지않아자동판정금지",
+        "limitation": "원예산세부단위 미확정. 공식총액자료로 검증한연간패키지와 논란있는정답참고재현을구분",
+        "lower_variable_keys": [
+          "tertiary_hospital_count",
+          "already_supported_hospital_count",
+          "communication_staff_per_hospital",
+          "communication_payment_months",
+          "communication_annual_package",
+          "communication_nominal_wage_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "공식연간패키지와 월단가재현을 분리해 선택",
+        "confirmed_assumptions": {
+          "communication_scope_note": "국립대학병원·서울대병원이 대상, 상급47개모집단을 전용하지 않음. 3명지원체계는동일사업참고 패키지이며 법안명시인원이아님.",
+          "communication_overlap_note": "대상 국립대학병원 범위와 기존지원겹침을 새로 확인해야 함. 기존37개와10개를 사용하지 않음.",
+          "communication_unit_note": "공식서울시 연차180백만원은 연패키지. 정답은45.8·42.6백만원을 월단가로 표시해 상충, 모드별로 분리.",
+          "communication_timing_note": "공포후1년·준비기간 고려2026~2030. 연간모드는 정상운영2차년도 패키지 동결 시나리오."
+        }
+      }
+    ],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2203688:tertiary_hospital_count:reviewed",
+        "variableKey": "tertiary_hospital_count",
+        "value": 47,
+        "unit": "hospital",
+        "sourceRef": "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-21",
+        "limitation": "2024대상수·2025사업가정. 새 의안은 최신지정·기존지원겹침 확인 필요",
+        "scope": "상급종합병원 기존지원제외 추가기관 지원",
+        "serviceFunction": "hospital_communication_support_package",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2203688:already_supported_hospital_count:reviewed",
+        "variableKey": "already_supported_hospital_count",
+        "value": 10,
+        "unit": "hospital",
+        "sourceRef": "2203688 비용추계서24C3571 PDF3~4쪽, 2025장애인 의료기관 이용편의 지원예산안 준용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-21",
+        "limitation": "2024대상수·2025사업가정. 새 의안은 최신지정·기존지원겹침 확인 필요",
+        "scope": "상급종합병원 기존지원제외 추가기관 지원",
+        "serviceFunction": "hospital_communication_support_package",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "annual_amount": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "tertiary_hospital_count": {
+        "status": "candidates_need_review",
+        "candidateCount": 1,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "already_supported_hospital_count": {
+        "status": "candidates_need_review",
+        "candidateCount": 1,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "candidate_annual_package_won": 180000000,
+  "candidate_source": "서울시2025 공식 정상운영2차년도 연간패키지, 확인일2026-10-10",
+  "rejected_basis": [
+    "상급종합병원47−기존센터10=37개를 국립대학병원에 전용하지 않음",
+    "기존2203688 월단가45.8·42.6백만원은 단위불일치 자기회귀전용이므로 새의안에사용금지"
+  ],
+  "missing_semantic_variables": [
+    "법안적용 국립대학병원·서울대병원 기관수와 분원포함 범위",
+    "기존 의사소통지원사업 중복기관·지원액",
+    "국립병원 과업에 맞는 인건비·운영비 세부단가 및 상승방식"
+  ],
+  "non_estimation_decision": null
+}

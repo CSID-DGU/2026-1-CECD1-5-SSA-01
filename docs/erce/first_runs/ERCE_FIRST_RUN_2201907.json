@@ -1,0 +1,363 @@
+{
+  "bill_no": "2201907",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2201907",
+    "bill_name": "영유아보육법 일부개정법률안",
+    "propose_date": "2024-07-18",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제3조제3항",
+        "source_page": 3,
+        "source_quote": "제3조제3항중“인종”을“국적,인종”으로한다.",
+        "change_summary": "보육이념의 차별금지 기준에 국적 추가. 별도 현금지원 산식 없음.",
+        "cost_trigger": false,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "지원비 발생 근거는 아래 제34조의8로 분리, 선언적 이념을 별도 급여로 중복 계산하지 않음.",
+        "route_key": "",
+        "route_reason": "",
+        "variables": []
+      },
+      {
+        "article_ref": "제34조의8",
+        "source_page": 3,
+        "source_quote": "국내에체류하는재외국민또는외국인에게제34조및제34조의2에따른비용을지원할수있다.",
+        "change_summary": "국내 재외국민·외국인에 기존 보육료 및 양육수당 지원대상 확대. 이미 지원되는 집단과 이용형태별 대상 분리 필요.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "양육수당과 보육료는 이용형태·연령별 금액이 달라 전원 중복 지급하지 않음. 국내 전체인구로 외국영유아 모집단 대체 금지.",
+        "route_key": "transfer_recipient",
+        "route_reason": "이용형태·연령별 순증 대상수×해당 지원 단가×개월",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제3조제3항",
+      "verified": true
+    },
+    {
+      "article": "제34조의8",
+      "verified": true
+    }
+  ],
+  "parts": [
+    {
+      "component": "보육료 신규지원",
+      "payload": {
+        "bill_no": "2201907",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "transfer_recipient",
+        "payer": "government",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {}
+      },
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200147:age8to17_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              4448000,
+              4312000,
+              4183000,
+              4033000,
+              3828000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200147:under18_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              6625000,
+              6358000,
+              6136000,
+              5931000,
+              5700000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200147:under8_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              2177000,
+              2046000,
+              1953000,
+              1898000,
+              1872000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203497:recipient_count:official_population_linear_trend",
+            "variableKey": "recipient_count",
+            "value": [
+              285570.71224172576,
+              286167.3952874277,
+              286481.99116129475,
+              286682.52936464874,
+              287036.241854895
+            ],
+            "unit": "person",
+            "sourceRef": "KOSIS DT_1BPA001 2023.12 중위전망18세이상 +2203497 PDF4쪽표2 수급권자실적,OLS비율추세 및70.59%",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-06",
+            "limitation": "인원동결아님.OLS를명시한후보이며정답이사용한구체추세모형은미확인.비율실적은정답에서확인.원문버전불일치검토필수",
+            "scope": "severe_grade3_single_incremental_18plus",
+            "serviceFunction": "disability_eligibility_expansion",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200169:transport_unit_cost:2023",
+            "variableKey": "benefit_per_recipient",
+            "value": 90341,
+            "unit": "KRW/person/year",
+            "sourceRef": "의안 2200169 비용추계서(24D0536), PDF p.16, 2023년 국가유공자 수송지원 예산/대상자",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-09",
+            "limitation": "2023년 과거 평균지원액이며 법정 고정요금이 아님. 2024-08-09 이전 공개를 확인하지 못해 그 전 컷오프에 사용 금지; 다른 수송수단 구성·지원범위·가격연도에는 직접 전용 금지",
+            "scope": "2023년 국가유공자 수송시설 이용지원 전국 평균",
+            "serviceFunction": "수송시설 할인 지원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200487:dependent_spouse:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "sourceRef": "2200487 비용추계서 24D1005, PDF p.9",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-14",
+            "limitation": "선례에서 2020~2024 유지된 배우자수당 월10만원을 동결한 가정. 현재 공식 단가를 웹에서 새로 확인한 것이 아님",
+            "scope": "6·25참전 소년소녀병 생존자의 부양 배우자 수당",
+            "serviceFunction": "생존자의 부양 배우자 수당",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "candidates_need_review",
+            "candidateCount": 4,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "benefit_per_recipient": {
+            "status": "candidates_need_review",
+            "candidateCount": 2,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "component": "가정양육수당 신규지원",
+      "payload": {
+        "bill_no": "2201907",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "transfer_recipient",
+        "payer": "government",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {}
+      },
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200147:age8to17_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              4448000,
+              4312000,
+              4183000,
+              4033000,
+              3828000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200147:under18_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              6625000,
+              6358000,
+              6136000,
+              5931000,
+              5700000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200147:under8_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              2177000,
+              2046000,
+              1953000,
+              1898000,
+              1872000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203497:recipient_count:official_population_linear_trend",
+            "variableKey": "recipient_count",
+            "value": [
+              285570.71224172576,
+              286167.3952874277,
+              286481.99116129475,
+              286682.52936464874,
+              287036.241854895
+            ],
+            "unit": "person",
+            "sourceRef": "KOSIS DT_1BPA001 2023.12 중위전망18세이상 +2203497 PDF4쪽표2 수급권자실적,OLS비율추세 및70.59%",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-06",
+            "limitation": "인원동결아님.OLS를명시한후보이며정답이사용한구체추세모형은미확인.비율실적은정답에서확인.원문버전불일치검토필수",
+            "scope": "severe_grade3_single_incremental_18plus",
+            "serviceFunction": "disability_eligibility_expansion",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200169:transport_unit_cost:2023",
+            "variableKey": "benefit_per_recipient",
+            "value": 90341,
+            "unit": "KRW/person/year",
+            "sourceRef": "의안 2200169 비용추계서(24D0536), PDF p.16, 2023년 국가유공자 수송지원 예산/대상자",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-09",
+            "limitation": "2023년 과거 평균지원액이며 법정 고정요금이 아님. 2024-08-09 이전 공개를 확인하지 못해 그 전 컷오프에 사용 금지; 다른 수송수단 구성·지원범위·가격연도에는 직접 전용 금지",
+            "scope": "2023년 국가유공자 수송시설 이용지원 전국 평균",
+            "serviceFunction": "수송시설 할인 지원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200487:dependent_spouse:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "sourceRef": "2200487 비용추계서 24D1005, PDF p.9",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-14",
+            "limitation": "선례에서 2020~2024 유지된 배우자수당 월10만원을 동결한 가정. 현재 공식 단가를 웹에서 새로 확인한 것이 아님",
+            "scope": "6·25참전 소년소녀병 생존자의 부양 배우자 수당",
+            "serviceFunction": "생존자의 부양 배우자 수당",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "candidates_need_review",
+            "candidateCount": 4,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "benefit_per_recipient": {
+            "status": "candidates_need_review",
+            "candidateCount": 2,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    }
+  ],
+  "first_total_won": null,
+  "missing_semantic_variables": [
+    "외국인·재외국민 각세 영유아수와 해당 연도 전망",
+    "이미 지원받는 집단·난민 등 제외 및 어린이집 이용률",
+    "연령별 보육료·양육수당 적용액과 중복지급 방지"
+  ],
+  "rejected_evidence": [
+    {
+      "evidence_key": "2200563:additional_recipients:2024",
+      "reason": "민생회복지원금의 재외국민·외국인 포함 전연령 집단. 영유아 각세 대상수로 전용 불가"
+    },
+    {
+      "evidence_key": "official:kosis:DT_1BPA001:202312",
+      "reason": "전국 내외국인 합계전망을 외국인 영유아만의 모집단으로 사용할 수 없음"
+    },
+    {
+      "evidence_key": "mohw_parent_benefit:age0:2024_monthly",
+      "reason": "부모급여100만원을 외국영유아의 보육료·가정양육수당으로 자동 치환하지 않음"
+    }
+  ],
+  "assumptions": [
+    "공포후6개월·심사기간 고려2025~2029 준비시나리오 후보, 확정 시작일 아님"
+  ]
+}

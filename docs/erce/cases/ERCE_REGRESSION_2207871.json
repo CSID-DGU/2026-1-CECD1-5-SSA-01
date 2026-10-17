@@ -1,0 +1,1611 @@
+{
+  "bill_no": "2207871",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "parts": [
+    {
+      "scenario": "share30",
+      "payload": {
+        "bill_no": "2207871",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "worker_support_model": "direct_gap_subsidy",
+        "worker_forecast_basis": "reviewed_2024_11_levels",
+        "wage_gap_scenario": "share30",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": false,
+        "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+        "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+        "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+        "worker_scenario_note": "share30 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+        "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+        "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+        "selected_evidence_keys": [
+          "2207871:exempt_worker_history:reviewed",
+          "2207871:facility_hourly_wage_history:reviewed",
+          "2207871:facility_monthly_hours_history:reviewed",
+          "2207871:worker_payment_months:reviewed",
+          "2207871:wage_gap_subsidy_share:share30",
+          "2207081:minimum_hourly_forecast:202411:worker_gap",
+          "official:moel:minimum_hourly:2025:disabled_gap"
+        ],
+        "evidence_selection_reasons": {
+          "2207871:exempt_worker_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_hourly_wage_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_monthly_hours_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:worker_payment_months:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:wage_gap_subsidy_share:share30": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207081:minimum_hourly_forecast:202411:worker_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "official:moel:minimum_hourly:2025:disabled_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+        },
+        "selected_method_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "method_selection_reasons": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": "직접시급차액보조·법안연계없이 별도거시전망 선택"
+        },
+        "method_confirmations": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": {
+            "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+            "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+            "worker_scenario_note": "share30 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+            "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+            "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2207871:exempt_worker_history:reviewed,2207871:facility_hourly_wage_history:reviewed,2207871:facility_monthly_hours_history:reviewed,2207871:worker_payment_months:reviewed,2207871:wage_gap_subsidy_share:share30,2207081:minimum_hourly_forecast:202411:worker_gap,official:moel:minimum_hourly:2025:disabled_gap",
+        "annual_amounts_thousand": [
+          17118854,
+          18363995,
+          19692400,
+          21116354,
+          22683944
+        ],
+        "source_refs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              17118853603.122604,
+              18363995253.31978,
+              19692399960.730873,
+              21116354160.66955,
+              22683943899.901722
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ]
+      },
+      "web_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          17118854,
+          18363995,
+          19692400,
+          21116354,
+          22683944
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10416.31100478469,
+            "hourly_gap": 4262.381364685059,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 17118853603.122604,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10810.267942583732,
+            "hourly_gap": 4418.794843252519,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 18363995253.31978,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11217.387559808612,
+            "hourly_gap": 4579.201755199189,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 19692399960.730873,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11640.301435406698,
+            "hourly_gap": 4745.879743930134,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 21116354160.66955,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12087.416267942584,
+            "hourly_gap": 4926.8679104536195,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 22683943899.901722,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:reviewed_2024_11_levels",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "reviewed_2024_11_levels",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100",
+              "2207081:minimum_hourly_forecast:202411:worker_gap"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note",
+              "worker_forecast_vintage_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "wage_gap_subsidy_share",
+              "minimum_wage_hourly_forecast_levels"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share30 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              17118853603.122604,
+              18363995253.31978,
+              19692399960.730873,
+              21116354160.66955,
+              22683943899.901722
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        }
+      },
+      "total_eok": 989.75547,
+      "gold_display_total_eok": 990,
+      "error_percent": 0.024700000000005485,
+      "annual_display_eok": [
+        171,
+        184,
+        197,
+        211,
+        227
+      ],
+      "annual_display_matches": 5,
+      "published_rate_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          17138369,
+          18392698,
+          19739014,
+          21181308,
+          22731687
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10421.17,
+            "hourly_gap": 4267.24035990037,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 17138368616.124105,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10817.17446,
+            "hourly_gap": 4425.701360668787,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 18392697933.020554,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11228.22708948,
+            "hourly_gap": 4590.041284870577,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 19739014275.864037,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11654.89971888024,
+            "hourly_gap": 4760.478027403677,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 21181307876.43941,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12097.785908197691,
+            "hourly_gap": 4937.237550708726,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.3,
+            "annual_won": 22731687079.155605,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:published_2025_04_rates"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:published_2025_04_rates",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "published_2025_04_rates",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:minimum_wage_forecast_rates:202504",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "minimum_wage_forecast_rates",
+              "wage_gap_subsidy_share"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share30 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              17138368616.124105,
+              18392697933.020554,
+              19739014275.864037,
+              21181307876.43941,
+              22731687079.155605
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        }
+      },
+      "published_rate_total_eok": 991.83076
+    },
+    {
+      "scenario": "share50",
+      "payload": {
+        "bill_no": "2207871",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "worker_support_model": "direct_gap_subsidy",
+        "worker_forecast_basis": "reviewed_2024_11_levels",
+        "wage_gap_scenario": "share50",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": false,
+        "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+        "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+        "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+        "worker_scenario_note": "share50 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+        "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+        "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+        "selected_evidence_keys": [
+          "2207871:exempt_worker_history:reviewed",
+          "2207871:facility_hourly_wage_history:reviewed",
+          "2207871:facility_monthly_hours_history:reviewed",
+          "2207871:worker_payment_months:reviewed",
+          "2207871:wage_gap_subsidy_share:share50",
+          "2207081:minimum_hourly_forecast:202411:worker_gap",
+          "official:moel:minimum_hourly:2025:disabled_gap"
+        ],
+        "evidence_selection_reasons": {
+          "2207871:exempt_worker_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_hourly_wage_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_monthly_hours_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:worker_payment_months:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:wage_gap_subsidy_share:share50": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207081:minimum_hourly_forecast:202411:worker_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "official:moel:minimum_hourly:2025:disabled_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+        },
+        "selected_method_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "method_selection_reasons": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": "직접시급차액보조·법안연계없이 별도거시전망 선택"
+        },
+        "method_confirmations": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": {
+            "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+            "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+            "worker_scenario_note": "share50 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+            "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+            "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2207871:exempt_worker_history:reviewed,2207871:facility_hourly_wage_history:reviewed,2207871:facility_monthly_hours_history:reviewed,2207871:worker_payment_months:reviewed,2207871:wage_gap_subsidy_share:share50,2207081:minimum_hourly_forecast:202411:worker_gap,official:moel:minimum_hourly:2025:disabled_gap",
+        "annual_amounts_thousand": [
+          28531423,
+          30606659,
+          32820667,
+          35193924,
+          37806573
+        ],
+        "source_refs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              28531422671.87101,
+              30606658755.532963,
+              32820666601.218124,
+              35193923601.11592,
+              37806573166.50287
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ]
+      },
+      "web_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          28531423,
+          30606659,
+          32820667,
+          35193924,
+          37806573
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10416.31100478469,
+            "hourly_gap": 4262.381364685059,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 28531422671.87101,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10810.267942583732,
+            "hourly_gap": 4418.794843252519,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 30606658755.532963,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11217.387559808612,
+            "hourly_gap": 4579.201755199189,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 32820666601.218124,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11640.301435406698,
+            "hourly_gap": 4745.879743930134,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 35193923601.11592,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12087.416267942584,
+            "hourly_gap": 4926.8679104536195,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 37806573166.50287,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:reviewed_2024_11_levels",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "reviewed_2024_11_levels",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100",
+              "2207081:minimum_hourly_forecast:202411:worker_gap"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note",
+              "worker_forecast_vintage_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "wage_gap_subsidy_share",
+              "minimum_wage_hourly_forecast_levels"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share50 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              28531422671.87101,
+              30606658755.532963,
+              32820666601.218124,
+              35193923601.11592,
+              37806573166.50287
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        }
+      },
+      "total_eok": 1649.59246,
+      "gold_display_total_eok": 1650,
+      "error_percent": 0.024699393939389476,
+      "annual_display_eok": [
+        285,
+        306,
+        328,
+        352,
+        378
+      ],
+      "annual_display_matches": 5,
+      "published_rate_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          28563948,
+          30654497,
+          32898357,
+          35302180,
+          37886145
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10421.17,
+            "hourly_gap": 4267.24035990037,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 28563947693.540176,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10817.17446,
+            "hourly_gap": 4425.701360668787,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 30654496555.03426,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11228.22708948,
+            "hourly_gap": 4590.041284870577,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 32898357126.44006,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11654.89971888024,
+            "hourly_gap": 4760.478027403677,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 35302179794.06569,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12097.785908197691,
+            "hourly_gap": 4937.237550708726,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 0.5,
+            "annual_won": 37886145131.92601,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:published_2025_04_rates"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:published_2025_04_rates",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "published_2025_04_rates",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:minimum_wage_forecast_rates:202504",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "minimum_wage_forecast_rates",
+              "wage_gap_subsidy_share"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share50 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              28563947693.540176,
+              30654496555.03426,
+              32898357126.44006,
+              35302179794.06569,
+              37886145131.92601
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        }
+      },
+      "published_rate_total_eok": 1653.05127
+    },
+    {
+      "scenario": "share100",
+      "payload": {
+        "bill_no": "2207871",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-11",
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "support_derivation": "disabled_worker_minimum_wage_gap",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "disabled_worker_scope": "vocational_facility_exempt_workers",
+        "worker_support_model": "direct_gap_subsidy",
+        "worker_forecast_basis": "reviewed_2024_11_levels",
+        "wage_gap_scenario": "share100",
+        "worker_scenario_confirmed": true,
+        "linked_minimum_wage_bill_assumed_passed": false,
+        "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+        "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+        "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+        "worker_scenario_note": "share100 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+        "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+        "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+        "selected_evidence_keys": [
+          "2207871:exempt_worker_history:reviewed",
+          "2207871:facility_hourly_wage_history:reviewed",
+          "2207871:facility_monthly_hours_history:reviewed",
+          "2207871:worker_payment_months:reviewed",
+          "2207871:wage_gap_subsidy_share:share100",
+          "2207081:minimum_hourly_forecast:202411:worker_gap",
+          "official:moel:minimum_hourly:2025:disabled_gap"
+        ],
+        "evidence_selection_reasons": {
+          "2207871:exempt_worker_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_hourly_wage_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:facility_monthly_hours_history:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:worker_payment_months:reviewed": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207871:wage_gap_subsidy_share:share100": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "2207081:minimum_hourly_forecast:202411:worker_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음",
+          "official:moel:minimum_hourly:2025:disabled_gap": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음;정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+        },
+        "selected_method_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "method_selection_reasons": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": "직접시급차액보조·법안연계없이 별도거시전망 선택"
+        },
+        "method_confirmations": {
+          "2207871:direct_wage_gap:reviewed_2024_11_levels": {
+            "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+            "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+            "worker_scenario_note": "share100 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+            "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+            "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        }
+      },
+      "result": {
+        "route_key": "disabled_worker_minimum_wage_gap",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "2207871:exempt_worker_history:reviewed,2207871:facility_hourly_wage_history:reviewed,2207871:facility_monthly_hours_history:reviewed,2207871:worker_payment_months:reviewed,2207871:wage_gap_subsidy_share:share100,2207081:minimum_hourly_forecast:202411:worker_gap,official:moel:minimum_hourly:2025:disabled_gap",
+        "annual_amounts_thousand": [
+          57062845,
+          61213318,
+          65641333,
+          70387847,
+          75613146
+        ],
+        "source_refs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              57062845343.74202,
+              61213317511.065926,
+              65641333202.43625,
+              70387847202.23184,
+              75613146333.00574
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ]
+      },
+      "web_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          57062845,
+          61213318,
+          65641333,
+          70387847,
+          75613146
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10416.31100478469,
+            "hourly_gap": 4262.381364685059,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 57062845343.74202,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10810.267942583732,
+            "hourly_gap": 4418.794843252519,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 61213317511.065926,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11217.387559808612,
+            "hourly_gap": 4579.201755199189,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 65641333202.43625,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11640.301435406698,
+            "hourly_gap": 4745.879743930134,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 70387847202.23184,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12087.416267942584,
+            "hourly_gap": 4926.8679104536195,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 75613146333.00574,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "reviewed_2024_11_levels",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:reviewed_2024_11_levels"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:reviewed_2024_11_levels",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "reviewed_2024_11_levels",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100",
+              "2207081:minimum_hourly_forecast:202411:worker_gap"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note",
+              "worker_forecast_vintage_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "wage_gap_subsidy_share",
+              "minimum_wage_hourly_forecast_levels"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share100 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              57062845343.74202,
+              61213317511.065926,
+              65641333202.43625,
+              70387847202.23184,
+              75613146333.00574
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원; 2207081 비용추계서24B6384 PDF9쪽 표7 최저임금 대비 현행i=5 월기초액, 월209시간으로 시급환산",
+            "is_assumption": true
+          }
+        }
+      },
+      "total_eok": 3299.18489,
+      "gold_display_total_eok": 3299,
+      "error_percent": 0.0056044255835100264,
+      "annual_display_eok": [
+        571,
+        612,
+        656,
+        704,
+        756
+      ],
+      "annual_display_matches": 5,
+      "published_rate_result": {
+        "status": "computed_review",
+        "routeKey": "disabled_worker_minimum_wage_gap",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "annualAmountsThousand": [
+          57127895,
+          61308993,
+          65796714,
+          70604360,
+          75772290
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "excluded_worker_count": 9838,
+            "projected_hourly_wage": 6153.92964009963,
+            "minimum_hourly_wage": 10421.17,
+            "hourly_gap": 4267.24035990037,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 57127895387.08035,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2027,
+            "excluded_worker_count": 10180,
+            "projected_hourly_wage": 6391.473099331213,
+            "minimum_hourly_wage": 10817.17446,
+            "hourly_gap": 4425.701360668787,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 61308993110.06852,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2028,
+            "excluded_worker_count": 10534,
+            "projected_hourly_wage": 6638.185804609423,
+            "minimum_hourly_wage": 11228.22708948,
+            "hourly_gap": 4590.041284870577,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 65796714252.88012,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2029,
+            "excluded_worker_count": 10899,
+            "projected_hourly_wage": 6894.421691476564,
+            "minimum_hourly_wage": 11654.89971888024,
+            "hourly_gap": 4760.478027403677,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 70604359588.13138,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          },
+          {
+            "year": 2030,
+            "excluded_worker_count": 11278,
+            "projected_hourly_wage": 7160.548357488965,
+            "minimum_hourly_wage": 12097.785908197691,
+            "hourly_gap": 4937.237550708726,
+            "monthly_hours": 113.4,
+            "payment_months": 12,
+            "subsidy_share": 1,
+            "annual_won": 75772290263.85202,
+            "worker_cagr": 0.03473141750277131,
+            "hourly_wage_cagr": 0.03860028845369401,
+            "proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+            "legal_model": "direct_gap_subsidy",
+            "forecast_basis": "published_2025_04_rates",
+            "history_start": 2020,
+            "history_end": 2024,
+            "forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+          }
+        ],
+        "sourceRefs": [
+          "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+          "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처"
+        ],
+        "methodEvidenceKeys": [
+          "2207871:direct_wage_gap:published_2025_04_rates"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2207871:direct_wage_gap:published_2025_04_rates",
+            "source_bill_no": "2207871",
+            "available_at": "2025-05-14",
+            "reviewed_at": "2026-10-11",
+            "payer": "government",
+            "family_key": "direct_disabled_worker_wage_gap",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~7쪽; 정밀 전망 후보는2207081 PDF9쪽 별도 출처",
+            "worker_support_model": "direct_gap_subsidy",
+            "worker_forecast_basis": "published_2025_04_rates",
+            "match_groups": [
+              [
+                "장애인"
+              ],
+              [
+                "저임금",
+                "차액"
+              ],
+              [
+                "보조",
+                "지원"
+              ]
+            ],
+            "allowed_routes": [
+              "disabled_worker_minimum_wage_gap"
+            ],
+            "support_derivation": "disabled_worker_minimum_wage_gap",
+            "variable_keys": [
+              "annual_amount"
+            ],
+            "variable_evidence_keys": [
+              "2207871:exempt_worker_history:reviewed",
+              "2207871:facility_hourly_wage_history:reviewed",
+              "2207871:facility_monthly_hours_history:reviewed",
+              "2207871:worker_payment_months:reviewed",
+              "2207871:minimum_wage_forecast_rates:202504",
+              "2207871:wage_gap_subsidy_share:share30",
+              "2207871:wage_gap_subsidy_share:share50",
+              "2207871:wage_gap_subsidy_share:share100"
+            ],
+            "required_confirmations": [
+              "worker_scope_note",
+              "worker_proxy_note",
+              "worker_projection_note",
+              "worker_scenario_note",
+              "worker_start_note"
+            ],
+            "method_steps": [
+              "직접차액보조는 다른법안 적용제외폐지 통과를 요구하지 않음",
+              "시설 적용제외 집단만 산출, 시설전체 시급·시간을 대리사용",
+              "2020~2024 인원·시급 무반올림CAGR 및 월시간113.4 유지",
+              "최저시급 전망은 표기율2025.4와 다른의안의2024.11 정밀 단가를 별도 선택·시점설명",
+              "양수시급차액×인원×월시간×12개월×30/50/100% 정책시나리오"
+            ],
+            "baseline_check": "시설전체근로자15022명을 적용제외9189명 대신 사용하지 않음. 다른사업체와 훈련자 별도인원 임의 합산금지",
+            "limitation": "보조율과 예산편성을 가정한 추계. 정밀단가는 타의안의 과거거시전망이며2025.4원전망과 동일이라고 확정하지 않음",
+            "lower_variable_keys": [
+              "exempt_worker_history",
+              "facility_hourly_wage_history",
+              "facility_monthly_hours_history",
+              "worker_payment_months",
+              "minimum_wage_forecast_rates",
+              "wage_gap_subsidy_share"
+            ],
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "applicability_reason": "직접시급차액보조·법안연계없이 별도거시전망 선택",
+            "confirmed_assumptions": {
+              "worker_scope_note": "시설 적용제외 근로자만 산출, 다른사업체·원문훈련자 미분리 인원 자동가산 금지",
+              "worker_proxy_note": "가용자료 한계로 전체시설 시급·시간을 적용제외집단 대리 사용. 이 범위는 정답과 같지만 모든 법정대상을 포함한 수치아님",
+              "worker_projection_note": "2020~2024 인원·시급 각각CAGR, 원자료평균113.4시간 유지. 표시113·3.47%·3.86%를 계산원시값으로 쓰지 않음",
+              "worker_scenario_note": "share100 보조율은 정책시나리오, 재량지원 예산편성 가정이며 시행령 확정률 아님",
+              "worker_start_note": "공포후6개월과 준비기간 고려2026~2030. 직접 차액보조이므로2200660통과 조건 없음",
+              "worker_forecast_vintage_note": "정답표시2025.4률과 별도로 기존2207081의2024.11 월최저임금 전망단가를209시간으로 환산하는 대안 참조. 같은2025.4전망 원자료라고 확정하지 않음"
+            }
+          }
+        ],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              57127895387.08035,
+              61308993110.06852,
+              65796714252.88012,
+              70604359588.13138,
+              75772290263.85202
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207871 비용추계서25B0616 PDF3~6쪽; 고용노동부2024-50호, 2025적용 최저임금 시간급10,030원",
+            "is_assumption": true
+          }
+        }
+      },
+      "published_rate_total_eok": 3306.10252
+    }
+  ],
+  "forecast_vintage_match_unverified": true,
+  "limitation": "시설집단 정답표시 재현·과거거시전망 대안선택. 다른사업체 제외 유지,2025.4 원전망 정밀도 독립확인 전이며 최초독립정확도 성과 아님"
+}

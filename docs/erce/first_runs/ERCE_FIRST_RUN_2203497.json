@@ -1,0 +1,194 @@
+{
+  "bill_no": "2203497",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "reserved_holdout": false,
+  "prior_own_db_evidence_count": 0,
+  "ai_draft": {
+    "bill_no": "2203497",
+    "bill_name": "장애인연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-02",
+    "articles": [
+      {
+        "article_ref": "제2조제1호",
+        "source_quote": "제2조제1호중“대통령령으로정하는”을“같은법제2조제2항에따라\n이루어지는장애정도심사결과장애의정도가심한장애인에해당하\n는”으로한다.",
+        "source_page": 3,
+        "change_summary": "종전3급단일 장애인 등 수급범위 확대. 기존1·2급·3급중복 대상과 겹치는 인원은 제외. 신규대상은 연령·소득·급여유형별로 확인 필요",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "법률 정의 변경으로 기존 제외대상의 연금지급 증가 가능. 전체중증장애인 수나 부부감액대상 인원을 신규인원으로 전용하지 않음",
+        "route_key": "transfer_recipient",
+        "route_reason": "새롭게 급여수급하는 인원×해당 유형 평균 연간지원액. 별도 운영비는 발생근거확인필요",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "payload": {
+    "bill_no": "2203497",
+    "route_key": "transfer_recipient",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문3쪽2025-01-01시행 및 장애인연금 매월지급"
+      }
+    }
+  },
+  "result": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient",
+    "formulaKey": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "missingVariables": [
+      "recipient_count",
+      "benefit_per_recipient"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200147:age8to17_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          4448000,
+          4312000,
+          4183000,
+          4033000,
+          3828000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200147:under18_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          6625000,
+          6358000,
+          6136000,
+          5931000,
+          5700000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200147:under8_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          2177000,
+          2046000,
+          1953000,
+          1898000,
+          1872000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200169:transport_unit_cost:2023",
+        "variableKey": "benefit_per_recipient",
+        "value": 90341,
+        "unit": "KRW/person/year",
+        "sourceRef": "의안 2200169 비용추계서(24D0536), PDF p.16, 2023년 국가유공자 수송지원 예산/대상자",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-09",
+        "limitation": "2023년 과거 평균지원액이며 법정 고정요금이 아님. 2024-08-09 이전 공개를 확인하지 못해 그 전 컷오프에 사용 금지; 다른 수송수단 구성·지원범위·가격연도에는 직접 전용 금지",
+        "scope": "2023년 국가유공자 수송시설 이용지원 전국 평균",
+        "serviceFunction": "수송시설 할인 지원",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200487:dependent_spouse:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "sourceRef": "2200487 비용추계서 24D1005, PDF p.9",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-14",
+        "limitation": "선례에서 2020~2024 유지된 배우자수당 월10만원을 동결한 가정. 현재 공식 단가를 웹에서 새로 확인한 것이 아님",
+        "scope": "6·25참전 소년소녀병 생존자의 부양 배우자 수당",
+        "serviceFunction": "생존자의 부양 배우자 수당",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "candidates_need_review",
+        "candidateCount": 3,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "benefit_per_recipient": {
+        "status": "candidates_need_review",
+        "candidateCount": 2,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "required_variables_filled": 0,
+  "required_variable_count": 2,
+  "available_component_evidence": [
+    {
+      "evidence_key": "mohw:disability_basic_monthly:2024",
+      "variable_key": "disability_base_monthly",
+      "value": 334810,
+      "unit": "KRW/person/month",
+      "source_bill_no": "official:mohw:2024-3",
+      "available_at": "2024-01-10",
+      "source_ref": "보건복지부고시제2024-3호 제3조 2024년도 기초급여액",
+      "agency": "보건복지부",
+      "policy_domain": "장애인연금",
+      "scope": "2024년 기초급여 기준액",
+      "service_function": "disability_couple_reduction_recovery",
+      "variable_role": "base_rate",
+      "reuse_policy": "comparable",
+      "source_class": "official_standard",
+      "review_status": "reviewed",
+      "reviewed_at": "2026-10-04",
+      "source_url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000234880",
+      "independently_verified": true,
+      "benefit_index_base_year": 2024,
+      "support_derivation": "disability_couple_reduction_recovery",
+      "disability_benefit_scope": "disabled_basic_18_64_home_livelihood_medical",
+      "allowed_routes": [
+        "transfer_recipient_delta"
+      ],
+      "valid_from_year": 2025,
+      "valid_to_year": 2029,
+      "limitation": "2024년 공식 기준액을 물가 연동의 기초로 사용. 2025~2029년 자체 고시액 또는 최신단가라고 주장하지 않음"
+    }
+  ],
+  "rejected_reuse_reason": "334810원은2024년기초급여 기초단가이지 모든 신규대상자의 평균기초+부가급여가 아니다.120867명·2.9%는기존수급자 부부감액범위로신규3급단일대상인원과다름",
+  "pre_answer_decision": "추계대상. 금액미산출, DB부족을 법정미추계로 확정하지 않음",
+  "amount_thousand": null,
+  "limitation": "현재개발DB에서 선례사용가능성을검토.발의일시점백테스트·독립평가셋아님"
+}

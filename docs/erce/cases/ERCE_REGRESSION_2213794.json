@@ -1,0 +1,449 @@
+{
+  "bill_no": "2213794",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "runs": [
+    {
+      "group": "no_nr_full",
+      "payload": {
+        "bill_no": "2213794",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2027,
+        "years": 5,
+        "support_derivation": "low_income_couple_pension",
+        "pension_group": "no_nr_full",
+        "low_income_scope": "overall_elderly_bottom40",
+        "pension_standard_vintage": "2025_09_reviewed_forecast",
+        "support_derivation_note": "소득하위40%부부2인만.2027~2029감액15%·2030이후10%",
+        "pension_denominator_note": "각NR/급여유형의전체인원에유형내저소득비율을곱함.전체부부인원으로대체하지않음",
+        "pension_increment_factor_note": "NR연계·저소득경계감액후실제증액/기준액증액 비율.근거미확보로1자동입력안함",
+        "selected_evidence_keys": [
+          "2213794:no_nr_full:conditional_low_income_share:2022-2024",
+          "2213794:standard_monthly:2027-2031:202509"
+        ],
+        "evidence_selection_reasons": {
+          "2213794:no_nr_full:conditional_low_income_share:2022-2024": "동일기간·소득조건·유형의사후자료 연결",
+          "2213794:standard_monthly:2027-2031:202509": "동일기간·소득조건·유형의사후자료 연결"
+        },
+        "explicit_inputs": {
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "현행제8조20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.15,
+              0.15,
+              0.15,
+              0.1,
+              0.1
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2027~2029년15%이후10%"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2027-01-01시행 및매월급여"
+          }
+        }
+      },
+      "resolved": {
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            302566,
+            308490.5,
+            314653,
+            339822,
+            346617
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 원문부칙2027~2029년15%이후10%",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": [
+            284768,
+            290344,
+            296144,
+            302064,
+            308104
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 현행제8조20%",
+          "is_assumption": true
+        }
+      },
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "missing_operands": [
+        "pension_type_recipients",
+        "pension_increment_factor"
+      ],
+      "synthetic_web_status": "needs_input"
+    },
+    {
+      "group": "no_nr_reduced",
+      "payload": {
+        "bill_no": "2213794",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2027,
+        "years": 5,
+        "support_derivation": "low_income_couple_pension",
+        "pension_group": "no_nr_reduced",
+        "low_income_scope": "overall_elderly_bottom40",
+        "pension_standard_vintage": "2025_09_reviewed_forecast",
+        "support_derivation_note": "소득하위40%부부2인만.2027~2029감액15%·2030이후10%",
+        "pension_denominator_note": "각NR/급여유형의전체인원에유형내저소득비율을곱함.전체부부인원으로대체하지않음",
+        "pension_increment_factor_note": "NR연계·저소득경계감액후실제증액/기준액증액 비율.근거미확보로1자동입력안함",
+        "selected_evidence_keys": [
+          "2213794:no_nr_reduced:conditional_low_income_share:2022-2024",
+          "2213794:standard_monthly:2027-2031:202509"
+        ],
+        "evidence_selection_reasons": {
+          "2213794:no_nr_reduced:conditional_low_income_share:2022-2024": "동일기간·소득조건·유형의사후자료 연결",
+          "2213794:standard_monthly:2027-2031:202509": "동일기간·소득조건·유형의사후자료 연결"
+        },
+        "explicit_inputs": {
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "현행제8조20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.15,
+              0.15,
+              0.15,
+              0.1,
+              0.1
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2027~2029년15%이후10%"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2027-01-01시행 및매월급여"
+          }
+        }
+      },
+      "resolved": {
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            302566,
+            308490.5,
+            314653,
+            339822,
+            346617
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 원문부칙2027~2029년15%이후10%",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": [
+            284768,
+            290344,
+            296144,
+            302064,
+            308104
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 현행제8조20%",
+          "is_assumption": true
+        }
+      },
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "missing_operands": [
+        "pension_type_recipients",
+        "pension_increment_factor",
+        "printed_zero_precision_review"
+      ],
+      "synthetic_web_status": "needs_input"
+    },
+    {
+      "group": "nr_full",
+      "payload": {
+        "bill_no": "2213794",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2027,
+        "years": 5,
+        "support_derivation": "low_income_couple_pension",
+        "pension_group": "nr_full",
+        "low_income_scope": "overall_elderly_bottom40",
+        "pension_standard_vintage": "2025_09_reviewed_forecast",
+        "support_derivation_note": "소득하위40%부부2인만.2027~2029감액15%·2030이후10%",
+        "pension_denominator_note": "각NR/급여유형의전체인원에유형내저소득비율을곱함.전체부부인원으로대체하지않음",
+        "pension_increment_factor_note": "NR연계·저소득경계감액후실제증액/기준액증액 비율.근거미확보로1자동입력안함",
+        "selected_evidence_keys": [
+          "2213794:nr_full:conditional_low_income_share:2022-2024",
+          "2213794:standard_monthly:2027-2031:202509"
+        ],
+        "evidence_selection_reasons": {
+          "2213794:nr_full:conditional_low_income_share:2022-2024": "동일기간·소득조건·유형의사후자료 연결",
+          "2213794:standard_monthly:2027-2031:202509": "동일기간·소득조건·유형의사후자료 연결"
+        },
+        "explicit_inputs": {
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "현행제8조20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.15,
+              0.15,
+              0.15,
+              0.1,
+              0.1
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2027~2029년15%이후10%"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2027-01-01시행 및매월급여"
+          }
+        }
+      },
+      "resolved": {
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            302566,
+            308490.5,
+            314653,
+            339822,
+            346617
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 원문부칙2027~2029년15%이후10%",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": [
+            284768,
+            290344,
+            296144,
+            302064,
+            308104
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 현행제8조20%",
+          "is_assumption": true
+        }
+      },
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "missing_operands": [
+        "pension_type_recipients",
+        "pension_increment_factor"
+      ],
+      "synthetic_web_status": "needs_input"
+    },
+    {
+      "group": "nr_reduced",
+      "payload": {
+        "bill_no": "2213794",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2027,
+        "years": 5,
+        "support_derivation": "low_income_couple_pension",
+        "pension_group": "nr_reduced",
+        "low_income_scope": "overall_elderly_bottom40",
+        "pension_standard_vintage": "2025_09_reviewed_forecast",
+        "support_derivation_note": "소득하위40%부부2인만.2027~2029감액15%·2030이후10%",
+        "pension_denominator_note": "각NR/급여유형의전체인원에유형내저소득비율을곱함.전체부부인원으로대체하지않음",
+        "pension_increment_factor_note": "NR연계·저소득경계감액후실제증액/기준액증액 비율.근거미확보로1자동입력안함",
+        "selected_evidence_keys": [
+          "2213794:nr_reduced:conditional_low_income_share:2022-2024",
+          "2213794:standard_monthly:2027-2031:202509"
+        ],
+        "evidence_selection_reasons": {
+          "2213794:nr_reduced:conditional_low_income_share:2022-2024": "동일기간·소득조건·유형의사후자료 연결",
+          "2213794:standard_monthly:2027-2031:202509": "동일기간·소득조건·유형의사후자료 연결"
+        },
+        "explicit_inputs": {
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "현행제8조20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.15,
+              0.15,
+              0.15,
+              0.1,
+              0.1
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2027~2029년15%이후10%"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2027-01-01시행 및매월급여"
+          }
+        }
+      },
+      "resolved": {
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            302566,
+            308490.5,
+            314653,
+            339822,
+            346617
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 원문부칙2027~2029년15%이후10%",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": [
+            284768,
+            290344,
+            296144,
+            302064,
+            308104
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 현행제8조20%",
+          "is_assumption": true
+        }
+      },
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "missing_operands": [
+        "pension_type_recipients",
+        "pension_increment_factor"
+      ],
+      "synthetic_web_status": "needs_input"
+    },
+    {
+      "group": "occupational_special",
+      "payload": {
+        "bill_no": "2213794",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2027,
+        "years": 5,
+        "support_derivation": "low_income_couple_pension",
+        "pension_group": "occupational_special",
+        "low_income_scope": "overall_elderly_bottom40",
+        "pension_standard_vintage": "2025_09_reviewed_forecast",
+        "support_derivation_note": "소득하위40%부부2인만.2027~2029감액15%·2030이후10%",
+        "pension_denominator_note": "각NR/급여유형의전체인원에유형내저소득비율을곱함.전체부부인원으로대체하지않음",
+        "pension_increment_factor_note": "NR연계·저소득경계감액후실제증액/기준액증액 비율.근거미확보로1자동입력안함",
+        "selected_evidence_keys": [
+          "2213794:occupational_special:conditional_low_income_share:2022-2024",
+          "2213794:standard_monthly:2027-2031:202509"
+        ],
+        "evidence_selection_reasons": {
+          "2213794:occupational_special:conditional_low_income_share:2022-2024": "동일기간·소득조건·유형의사후자료 연결",
+          "2213794:standard_monthly:2027-2031:202509": "동일기간·소득조건·유형의사후자료 연결"
+        },
+        "explicit_inputs": {
+          "old_couple_reduction": {
+            "value": 0.2,
+            "unit": "ratio",
+            "source_ref": "현행제8조20%"
+          },
+          "new_couple_reduction": {
+            "value": [
+              0.15,
+              0.15,
+              0.15,
+              0.1,
+              0.1
+            ],
+            "unit": "ratio",
+            "source_ref": "원문부칙2027~2029년15%이후10%"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2027-01-01시행 및매월급여"
+          }
+        }
+      },
+      "resolved": {
+        "benefit_per_recipient": {
+          "key": "benefit_per_recipient",
+          "value": [
+            302566,
+            308490.5,
+            314653,
+            339822,
+            346617
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 원문부칙2027~2029년15%이후10%",
+          "is_assumption": true
+        },
+        "existing_benefit_per_recipient": {
+          "key": "existing_benefit_per_recipient",
+          "value": [
+            284768,
+            290344,
+            296144,
+            302064,
+            308104
+          ],
+          "unit": "KRW/person/month",
+          "source_class": "calculated_estimate",
+          "source_ref": "2213794 비용추계서25C5764 PDF4쪽표3·4; 현행제8조20%",
+          "is_assumption": true
+        }
+      },
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "missing_operands": [
+        "pension_type_recipients",
+        "pension_increment_factor"
+      ],
+      "synthetic_web_status": "needs_input"
+    }
+  ],
+  "reference_variable_slots_filled": 10,
+  "reference_variable_slot_count": 15,
+  "total_thousand": null,
+  "gold_total_thousand": 2408900000,
+  "known_conditional_share_count": 5,
+  "unresolved": "각유형전체예측인원·실제감액후회복계수미확보.참조급여슬롯2개는기준금액이고실제소득조건에대한순증은미산출"
+}

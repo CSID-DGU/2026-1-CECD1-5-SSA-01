@@ -1,0 +1,89 @@
+{
+  "bill_no": "2209259",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2209259",
+    "bill_name": "사회보장기본법 일부개정법률안",
+    "propose_date": "2025-03-21",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제21조제1항·제3항",
+        "source_page": 3,
+        "source_quote": "제21조제1항중“30명”을“35명”으로하고",
+        "change_summary": "기존 사회보장위원회 정원 상한5명 확대와 지자체장 등 협의체 대표자 추가. 신규 위원회 설치가 아니며 5명은 확정 순증 인원 아님.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "회의수당 증분 가능성 검토. 추가 대표자의 공무상 참석 여부·실제 유급 순증·여비 처리 미확정. 신설위원회 전체30~35명 비용 적용 금지.",
+        "route_key": "committee_components",
+        "route_reason": "순증 유급위원×회의횟수×수당, 기존 운영비와 구분",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제21조제1항·제3항",
+      "verified": true,
+      "decision": "estimate_now"
+    }
+  ],
+  "payload": {
+    "bill_no": "2209259",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "committee_components",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "committee_components",
+    "formulaKey": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "missingVariables": [
+      "committee_components"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "committee_components": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "first_total_eok": null,
+  "semantic_review": {
+    "existing_committee": true,
+    "maximum_capacity_increase": 5,
+    "actual_increase_confirmed": false,
+    "paid_incremental_members": null,
+    "provisional_conclusion": "추가 협의체 대표자가 공무 수행으로 참석하면 수당 증분0 가능. 실제 지급규칙·대표 구성 확인 없이 전체비용0원이나 미첨부 사유를 확정하지 않는다."
+  },
+  "candidate_evidence": [
+    "2215239:central_committee:annual_meetings",
+    "2215239:central_committee:meeting_price:face_to_face"
+  ],
+  "candidate_evidence_note": "현행 사회보장위원회 사례를 인용한 연4회·20만원 후보는 존재하나 신규 유급대상 미확정으로 곱하지 않음.",
+  "missing_semantic_variables": [
+    "실제 추가위원 및 수당 지급 여부",
+    "추가 회의·여비 필요 여부"
+  ],
+  "limitations": [
+    "정원 상한 차이를 유급 순증인원으로 자동 변환하지 않음",
+    "부칙 공포후6개월, 시행연도 미확정"
+  ]
+}

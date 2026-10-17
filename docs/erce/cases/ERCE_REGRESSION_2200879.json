@@ -1,0 +1,190 @@
+{
+  "bill_no": "2200879",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "runs": [
+    {
+      "package": "public_awareness_campaign",
+      "payload": {
+        "bill_no": "2200879",
+        "route_key": "quantity_unit",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2025,
+        "years": 5,
+        "service_cost_basis": "public_awareness_campaign",
+        "awareness_price_projection": "freeze_2023_package",
+        "awareness_scale_profile": "national_disability_awareness_annual_package",
+        "selected_evidence_keys": [
+          "2200879:public_awareness_campaign:unit_cost:2023",
+          "2200879:public_awareness_campaign:annual_quantity:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2200879:public_awareness_campaign:unit_cost:2023": "같은국가차원장애인식개선과업·연간패키지의사후재사용 검토",
+          "2200879:public_awareness_campaign:annual_quantity:reviewed": "같은국가차원장애인식개선과업·연간패키지의사후재사용 검토"
+        },
+        "selected_method_keys": [
+          "2200879:annual_awareness_campaign_and_video"
+        ],
+        "payer": "government",
+        "method_selection_reasons": {
+          "2200879:annual_awareness_campaign_and_video": "원문홍보사업을캠페인·영상제작송출로가정하여분리"
+        },
+        "method_confirmations": {
+          "2200879:annual_awareness_campaign_and_video": {
+            "annual_package_scope": "전국대국민연간패키지.영상제작과송출함께포함",
+            "historical_price_freeze": "2023예산준용단가를추계기간동결하는가정.최신광고공식요율아님",
+            "forecast_start_basis": "공포후6개월에2025~2029시작으로가정한정답과같은사후시나리오"
+          }
+        }
+      },
+      "result": {
+        "route_key": "quantity_unit",
+        "subtype": "",
+        "formula_key": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "evidence_key": "2200879:public_awareness_campaign:unit_cost:2023,2200879:public_awareness_campaign:annual_quantity:reviewed",
+        "annual_amounts_thousand": [
+          200000,
+          200000,
+          200000,
+          200000,
+          200000
+        ],
+        "source_refs": [
+          "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+          "2200879 비용추계서24C1330 PDF3~4쪽"
+        ],
+        "resolved_variables": {
+          "quantity": {
+            "key": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "is_assumption": true
+          },
+          "unit_cost": {
+            "key": "unit_cost",
+            "value": 200000000,
+            "unit": "KRW/package",
+            "source_class": "precedent_assumption",
+            "source_ref": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2200879:annual_awareness_campaign_and_video"
+        ]
+      },
+      "synthetic_web_status": "computed_review",
+      "synthetic_annual": [
+        200000,
+        200000,
+        200000,
+        200000,
+        200000
+      ]
+    },
+    {
+      "package": "awareness_video_production_distribution",
+      "payload": {
+        "bill_no": "2200879",
+        "route_key": "quantity_unit",
+        "cutoff_date": "2026-10-06",
+        "evidence_mode": "development_review",
+        "start_year": 2025,
+        "years": 5,
+        "service_cost_basis": "awareness_video_production_distribution",
+        "awareness_price_projection": "freeze_2023_package",
+        "awareness_scale_profile": "national_disability_awareness_annual_package",
+        "selected_evidence_keys": [
+          "2200879:awareness_video_production_distribution:unit_cost:2023",
+          "2200879:awareness_video_production_distribution:annual_quantity:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2200879:awareness_video_production_distribution:unit_cost:2023": "같은국가차원장애인식개선과업·연간패키지의사후재사용 검토",
+          "2200879:awareness_video_production_distribution:annual_quantity:reviewed": "같은국가차원장애인식개선과업·연간패키지의사후재사용 검토"
+        },
+        "selected_method_keys": [
+          "2200879:annual_awareness_campaign_and_video"
+        ],
+        "payer": "government",
+        "method_selection_reasons": {
+          "2200879:annual_awareness_campaign_and_video": "원문홍보사업을캠페인·영상제작송출로가정하여분리"
+        },
+        "method_confirmations": {
+          "2200879:annual_awareness_campaign_and_video": {
+            "annual_package_scope": "전국대국민연간패키지.영상제작과송출함께포함",
+            "historical_price_freeze": "2023예산준용단가를추계기간동결하는가정.최신광고공식요율아님",
+            "forecast_start_basis": "공포후6개월에2025~2029시작으로가정한정답과같은사후시나리오"
+          }
+        }
+      },
+      "result": {
+        "route_key": "quantity_unit",
+        "subtype": "",
+        "formula_key": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "evidence_key": "2200879:awareness_video_production_distribution:unit_cost:2023,2200879:awareness_video_production_distribution:annual_quantity:reviewed",
+        "annual_amounts_thousand": [
+          150000,
+          150000,
+          150000,
+          150000,
+          150000
+        ],
+        "source_refs": [
+          "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+          "2200879 비용추계서24C1330 PDF3~4쪽"
+        ],
+        "resolved_variables": {
+          "quantity": {
+            "key": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "is_assumption": true
+          },
+          "unit_cost": {
+            "key": "unit_cost",
+            "value": 150000000,
+            "unit": "KRW/package",
+            "source_class": "precedent_assumption",
+            "source_ref": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2200879:annual_awareness_campaign_and_video"
+        ]
+      },
+      "synthetic_web_status": "computed_review",
+      "synthetic_annual": [
+        150000,
+        150000,
+        150000,
+        150000,
+        150000
+      ]
+    }
+  ],
+  "required_variables_filled": 4,
+  "required_variable_count": 4,
+  "annual_amounts_thousand": [
+    350000,
+    350000,
+    350000,
+    350000,
+    350000
+  ],
+  "total_thousand": 1750000,
+  "gold_total_thousand": 1750000,
+  "difference_percent": 0,
+  "penalty_revenue_status": "review_pending",
+  "whole_bill_all_fiscal_effects_complete": false,
+  "limitation": "단가·연간1패키지·가격동결을정답확인후저장한급여외홍보비회귀.정답미열람성능아님.과태료수입변화미확정.원2023사업예산독립검증아님"
+}

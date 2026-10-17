@@ -1,0 +1,106 @@
+{
+  "bill_no": "2208360",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2208360.json",
+  "first": {
+    "status": "computed_review",
+    "expense_total_eok": 1996.12212,
+    "expense_annual_eok": [
+      374,
+      386,
+      399,
+      412,
+      425
+    ],
+    "expense_error_percent": 23.10777657935285,
+    "expense_annual_display_matches": 0,
+    "income_total_eok": null,
+    "government_civil_formula_family_matches": true,
+    "non_civil_formula_matches": false
+  },
+  "gold": {
+    "estimate_no": "25B1029",
+    "reply_date": "2025-06-23",
+    "expense_total_eok": 2596,
+    "expense_annual_eok": [
+      481,
+      500,
+      519,
+      538,
+      558
+    ],
+    "reference_income_total_eok": 11383,
+    "reference_income_annual_eok": [
+      2110,
+      2191,
+      2274,
+      2360,
+      2449
+    ],
+    "income_role": "legal_attachment_outside_scope_but_quantified_as_reference",
+    "formula": "구간별 미고용인원×신구 월기초액 차이×12개월. 지출=공무원+비공무원; 참고수입=정부+공공기관+민간",
+    "unfilled_2024_by_sector": {
+      "civil": [
+        735,
+        4301,
+        5720,
+        0,
+        3
+      ],
+      "non_civil": [
+        397,
+        492,
+        102,
+        0,
+        0
+      ],
+      "public_institution": [
+        658,
+        527,
+        323,
+        42,
+        8
+      ],
+      "private": [
+        6172,
+        15056,
+        13663,
+        3948,
+        3890
+      ]
+    },
+    "new_shares": [
+      0.8,
+      0.818,
+      0.86,
+      0.92,
+      1
+    ],
+    "old_bands_2025": [
+      1258000,
+      1333480,
+      1509600,
+      1761200,
+      2096270
+    ],
+    "zero_employment_clause": {
+      "decision": "not_estimated",
+      "reason": "무고용기초액의 최저임금 이상 변경에서 구체인상수준 미확정. 이효과는 별도 제외하며 기존100%수준을 유지해 나머지부분 산출"
+    },
+    "forecast_vintage": "2024-11",
+    "minimum_monthly_forecast": [
+      2177009,
+      2259346,
+      2344434,
+      2432823,
+      2526270
+    ]
+  },
+  "causes": [
+    "공무원 인원을2023자료로 동결했지만 정답은2024자료 사용",
+    "비공무원을 공무원증가액의6.4%로 대리했지만 정답은 비공무원5구간 인원 직접 산출",
+    "가격기준2024·2024.7전망이 정답2025가격·2024.11전망과 다름",
+    "정부지출만 산출했으며 정답의 참고수입산출과 무고용변경 미추계사유는 별도 미구현"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

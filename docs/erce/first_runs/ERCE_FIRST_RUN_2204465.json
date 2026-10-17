@@ -1,0 +1,83 @@
+{
+  "bill_no": "2204465",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2204465",
+    "bill_name": "장애인복지법 일부개정법률안",
+    "propose_date": "2024-09-30",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제30조제3항",
+        "source_page": 3,
+        "source_quote": "그비용을지원한다.",
+        "change_summary": "기존 장애인·동행 보호자 운임감면 비용을 운송사업자에게 국가가 보전하는 의무규정. 신규 무료이용자 급여가 아니라 기존 감면분의 재정부담 이전.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "도시철도뿐 아니라 제30조2항 대상 운송수단 전체 범위를 검토. 운송수단별 장애인 및 동행자 감면액 실적과 국가보전 범위를 구분. 전체노인무임비용을 장애인비용으로 전용하지 않음.",
+        "route_key": "transfer_subsidy_rate",
+        "route_reason": "교통수단별 기존 감면·손실비용×국가 보전비율, 기존 국비지원 중복 제외",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제30조제3항",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2204465",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "transfer_subsidy_rate",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "transfer_subsidy_rate",
+    "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+    "formula": "적격 사업비 × 보조율",
+    "missingVariables": [
+      "project_cost",
+      "subsidy_rate"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "project_cost": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "subsidy_rate": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "method_candidate_count": 0,
+  "missing_semantic_variables": [
+    "교통수단별 장애인·보호자 감면운임 실적 및 지원대상 운영자",
+    "기존 감면실적 추세 또는 이용횟수·감면단가",
+    "국가보전비율·기존지원 중복 제외"
+  ],
+  "scope_review": "신규지원은 이미무료이용하는 장애인의 운임을 운영기관에 보전하는 지출. 시민전체무임/노인무임 손실총액과 분리. 운송기관 기존손실과 재정지출의 중복 합산 금지.",
+  "estimation_start_note": "공포후3개월 및 심사기간을 고려한2025~2029 준비후보, 확정공포일 아님",
+  "non_estimation_decision": null
+}

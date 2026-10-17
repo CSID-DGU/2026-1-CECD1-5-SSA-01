@@ -1,0 +1,105 @@
+{
+  "bill_no": "2201813",
+  "run_date": "2026-10-03",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_cutoff": "2026-10-03",
+  "time_scope_note": "현재 개발 DB 재사용 시험. 발의 당시 공개자료만 제한한 시험은 아님",
+  "ai_mode": "manual_no_api",
+  "ai_draft": {
+    "bill_no": "2201813",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-07-16",
+    "articles": [
+      {
+        "article_ref": "제4조제5호/급식지원",
+        "source_quote": "「대안교육기관에관한법률」제2조제2호에따른대안교육기관",
+        "source_page": 3,
+        "route_key": "transfer_service_use",
+        "route_reason": "등록 대안교육기관 학생의 순증 급식 지원: 미지원 학생 수 × 지원 급식일수 × 식당지원액. 지자체 기존 지원 중복 제외",
+        "change_summary": "급식지원 대상 확대",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제4조제5호/시설설비",
+        "source_quote": "「대안교육기관에관한법률」제2조제2호에따른대안교육기관",
+        "source_page": 3,
+        "route_key": "capital_asset",
+        "route_reason": "새로 필요한 급식시설·설비 수 × 설치비. 기존 설치·지자체 지원 제외 및 지원 의무범위 확인",
+        "change_summary": "급식시설 지원 가능 범위 확대",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "제안이유에서 시설·설비 지원을 언급하나 원문에 설치계획·물량·지원기준이 없어 별도 근거 확인 필요",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "unmapped_count": 0,
+  "items": [
+    {
+      "itemIndex": 0,
+      "name": "제4조제5호/급식지원",
+      "triggerRef": "제4조제5호/급식지원",
+      "routeKey": "transfer_service_use",
+      "formulaKey": "TRANSFER_SERVICE_USE_V1",
+      "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+      "requiredVariables": [
+        "recipient_count",
+        "visits_per_recipient",
+        "cost_per_visit"
+      ],
+      "scopeNote": "등록 대안교육기관 학생의 순증 급식 지원: 미지원 학생 수 × 지원 급식일수 × 식당지원액. 지자체 기존 지원 중복 제외",
+      "explicitInputs": {},
+      "decisionReason": "",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2024-07-16",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "transfer_service_use",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "missingVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ]
+      }
+    }
+  ],
+  "deferred_items": [
+    {
+      "itemIndex": 1,
+      "name": "제4조제5호/시설설비",
+      "text": "「대안교육기관에관한법률」제2조제2호에따른대안교육기관",
+      "routeKey": "capital_asset",
+      "decision": "defer",
+      "reason": "제안이유에서 시설·설비 지원을 언급하나 원문에 설치계획·물량·지원기준이 없어 별도 근거 확인 필요"
+    }
+  ],
+  "candidate_search": {
+    "대안교육기관": [],
+    "학교급식": [],
+    "급식비": []
+  },
+  "selected_evidence_keys": [],
+  "annual_amounts_thousand": null,
+  "missing_explanation": "해당 미지원 학생 집단·지급일수·식당 지원단가 근거 없음. 다른 기관 전체 학생·일반 지원액을 임의로 대체하지 않음",
+  "assumptions": [
+    "지자체 기존 지원과 중복된 비용은 순증에서 제외",
+    "시설·설비 지원의 실제 신규 설치 및 지원범위는 근거 확인 전 보류",
+    "공포 후1년 시행이나 확정 시행연도·추계 시작연도는 원문에 없음"
+  ]
+}

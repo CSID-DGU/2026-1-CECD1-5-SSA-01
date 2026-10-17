@@ -1,0 +1,357 @@
+{
+  "bill_no": "2207600",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "runs": [
+    {
+      "scenario": "arrears_shared",
+      "payload": {
+        "bill_no": "2207600",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-08",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "management_fee_scenario": "arrears_shared",
+        "housing_income_cutoff": "median_income_48_percent",
+        "management_scope": "common_fee_excluding_utilities",
+        "support_derivation_note": "발의이전회답인첨부추계서를과거유사관리비사례로만준용",
+        "housing_scenario_note": "체납10.8%·공용관리비50%지원",
+        "price_year_note": "2023Kapt총월공용관리비/호수,2024실제CPI2.3%+2025부터첨부전망",
+        "estimation_start_note": "참고추계서2026~2030기간준용,확정시행일아님",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "회답2024-12-23/발의2025-01-17.동일버전공식전체정답아닌참고급여시나리오",
+        "selected_evidence_keys": [
+          "2207600:management:tenant_households:reference",
+          "2207600:management:management_cpi_forecast:reference",
+          "2207600:management:arrears_share:reference",
+          "2207600:management:management_public_share:reference",
+          "2207600:management:kapt_stock_2023:reference",
+          "2207600:management:kapt_monthly_common_fees_2023:reference",
+          "official:kostat:cpi_actual_2024:housing"
+        ],
+        "evidence_selection_reasons": {
+          "2207600:management:tenant_households:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_cpi_forecast:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:arrears_share:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_public_share:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:kapt_stock_2023:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:kapt_monthly_common_fees_2023:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "official:kostat:cpi_actual_2024:housing": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용"
+        },
+        "selected_method_keys": [
+          "2207600:management_fee:arrears_shared"
+        ],
+        "method_selection_reasons": {
+          "2207600:management_fee:arrears_shared": "새법안일치확정이아닌관리비기존시나리오재사용"
+        },
+        "method_confirmations": {
+          "2207600:management_fee:arrears_shared": {
+            "housing_scenario_note": "두시나리오범위분리",
+            "unmatched_source_reference_note": "참고추계서원문버전일치미확인",
+            "price_year_note": "가격기준연도와물가중복여부확인",
+            "estimation_start_note": "2026~2030참고기간"
+          }
+        }
+      },
+      "result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2207600:management:tenant_households:reference,2207600:management:management_cpi_forecast:reference,2207600:management:arrears_share:reference,2207600:management:management_public_share:reference,2207600:management:kapt_stock_2023:reference,2207600:management:kapt_monthly_common_fees_2023:reference,official:kostat:cpi_actual_2024:housing",
+        "annual_amounts_thousand": [
+          62428637,
+          64266518,
+          66109513,
+          67961873,
+          69823984
+        ],
+        "source_refs": [
+          "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치; 통계청2024년12월및연간소비자물가동향,2024연간2.3%",
+          "2207600 첨부24B5535 PDF4~9쪽,원문버전일치미확인"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              153283.536,
+              154702.116,
+              156018.204,
+              157244.868,
+              158385.56399999998
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치; 통계청2024년12월및연간소비자물가동향,2024연간2.3%",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              33939.629363852815,
+              34618.42195112987,
+              35310.79039015247,
+              36017.00619795552,
+              36737.34632191463
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치; 통계청2024년12월및연간소비자물가동향,2024연간2.3%",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치; 통계청2024년12월및연간소비자물가동향,2024연간2.3%",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2207600:management_fee:arrears_shared"
+        ]
+      },
+      "trace": [
+        {
+          "year": 2026,
+          "scenario": "arrears_shared",
+          "base_price_year": 2023,
+          "base_monthly_common_fee": 63714.09862132716,
+          "gross_households": 1419292,
+          "recipient_share": 0.108,
+          "public_share": 0.5,
+          "monthly_public_payment": 33939.629363852815,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2027,
+          "scenario": "arrears_shared",
+          "base_price_year": 2023,
+          "base_monthly_common_fee": 63714.09862132716,
+          "gross_households": 1432427,
+          "recipient_share": 0.108,
+          "public_share": 0.5,
+          "monthly_public_payment": 34618.42195112987,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2028,
+          "scenario": "arrears_shared",
+          "base_price_year": 2023,
+          "base_monthly_common_fee": 63714.09862132716,
+          "gross_households": 1444613,
+          "recipient_share": 0.108,
+          "public_share": 0.5,
+          "monthly_public_payment": 35310.79039015247,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2029,
+          "scenario": "arrears_shared",
+          "base_price_year": 2023,
+          "base_monthly_common_fee": 63714.09862132716,
+          "gross_households": 1455971,
+          "recipient_share": 0.108,
+          "public_share": 0.5,
+          "monthly_public_payment": 36017.00619795552,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2030,
+          "scenario": "arrears_shared",
+          "base_price_year": 2023,
+          "base_monthly_common_fee": 63714.09862132716,
+          "gross_households": 1466533,
+          "recipient_share": 0.108,
+          "public_share": 0.5,
+          "monthly_public_payment": 36737.34632191463,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        }
+      ],
+      "reusable_web_status": "computed_review",
+      "total_eok": 3305.90525,
+      "gold_reference_eok": 3323.34,
+      "difference_percent": 0.5246152966593953
+    },
+    {
+      "scenario": "all_tenants_flat",
+      "payload": {
+        "bill_no": "2207600",
+        "evidence_mode": "development_review",
+        "cutoff_date": "2026-10-08",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "management_fee_scenario": "all_tenants_flat",
+        "housing_income_cutoff": "median_income_48_percent",
+        "management_scope": "common_fee_excluding_utilities",
+        "support_derivation_note": "발의이전회답인첨부추계서를과거유사관리비사례로만준용",
+        "housing_scenario_note": "전체임차가구월3만원정액의유사사례",
+        "price_year_note": "정액월3만원을2024기준가격으로가정,2025부터첨부전망적용",
+        "estimation_start_note": "참고추계서2026~2030기간준용,확정시행일아님",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "회답2024-12-23/발의2025-01-17.동일버전공식전체정답아닌참고급여시나리오",
+        "selected_evidence_keys": [
+          "2207600:management:tenant_households:reference",
+          "2207600:management:management_cpi_forecast:reference",
+          "2207600:management:flat_monthly_fee:reference"
+        ],
+        "evidence_selection_reasons": {
+          "2207600:management:tenant_households:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_cpi_forecast:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:flat_monthly_fee:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용"
+        },
+        "selected_method_keys": [
+          "2207600:management_fee:all_tenants_flat"
+        ],
+        "method_selection_reasons": {
+          "2207600:management_fee:all_tenants_flat": "새법안일치확정이아닌관리비기존시나리오재사용"
+        },
+        "method_confirmations": {
+          "2207600:management_fee:all_tenants_flat": {
+            "housing_scenario_note": "두시나리오범위분리",
+            "unmatched_source_reference_note": "참고추계서원문버전일치미확인",
+            "price_year_note": "가격기준연도와물가중복여부확인",
+            "estimation_start_note": "2026~2030참고기간"
+          }
+        }
+      },
+      "result": {
+        "route_key": "transfer_recipient",
+        "subtype": "",
+        "formula_key": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "evidence_key": "2207600:management:tenant_households:reference,2207600:management:management_cpi_forecast:reference,2207600:management:flat_monthly_fee:reference",
+        "annual_amounts_thousand": [
+          532108467,
+          547773584,
+          563482298,
+          579270824,
+          595142468
+        ],
+        "source_refs": [
+          "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치",
+          "2207600 첨부24B5535 PDF4~9쪽,원문버전일치미확인"
+        ],
+        "resolved_variables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              1419292,
+              1432427,
+              1444613,
+              1455971,
+              1466533
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              31242.600000000002,
+              31867.452,
+              32504.801040000002,
+              33154.8970608,
+              33817.995002015996
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "2207600 첨부24B5535 PDF5~9쪽;회답2024-12-23/발의2025-01-17버전불일치",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2207600:management_fee:all_tenants_flat"
+        ]
+      },
+      "trace": [
+        {
+          "year": 2026,
+          "scenario": "all_tenants_flat",
+          "base_price_year": 2024,
+          "base_monthly_common_fee": 30000,
+          "gross_households": 1419292,
+          "recipient_share": 1,
+          "public_share": 1,
+          "monthly_public_payment": 31242.600000000002,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2027,
+          "scenario": "all_tenants_flat",
+          "base_price_year": 2024,
+          "base_monthly_common_fee": 30000,
+          "gross_households": 1432427,
+          "recipient_share": 1,
+          "public_share": 1,
+          "monthly_public_payment": 31867.452,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2028,
+          "scenario": "all_tenants_flat",
+          "base_price_year": 2024,
+          "base_monthly_common_fee": 30000,
+          "gross_households": 1444613,
+          "recipient_share": 1,
+          "public_share": 1,
+          "monthly_public_payment": 32504.801040000002,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2029,
+          "scenario": "all_tenants_flat",
+          "base_price_year": 2024,
+          "base_monthly_common_fee": 30000,
+          "gross_households": 1455971,
+          "recipient_share": 1,
+          "public_share": 1,
+          "monthly_public_payment": 33154.8970608,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        },
+        {
+          "year": 2030,
+          "scenario": "all_tenants_flat",
+          "base_price_year": 2024,
+          "base_monthly_common_fee": 30000,
+          "gross_households": 1466533,
+          "recipient_share": 1,
+          "public_share": 1,
+          "monthly_public_payment": 33817.995002015996,
+          "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+        }
+      ],
+      "reusable_web_status": "computed_review",
+      "total_eok": 28177.77641,
+      "gold_reference_eok": 28262.31,
+      "difference_percent": 0.2991036118420707
+    }
+  ],
+  "source_version_match": false,
+  "whole_bill_total": null,
+  "pending_items": [
+    "전산연계과업비",
+    "지자체순증발굴조사비",
+    "중앙운영실태점검증분"
+  ],
+  "limitation": "원문전체정답이아닌관리비참고시나리오비교.가격연도·물가실측/전망차이는그대로유지,총액역산안함"
+}

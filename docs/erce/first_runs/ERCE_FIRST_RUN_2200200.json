@@ -1,0 +1,121 @@
+{
+  "bill_no": "2200200",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2200200",
+    "bill_name": "장애인고용촉진 및 직업재활법 일부개정법률안",
+    "propose_date": "2024-06-07",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제22조의2",
+        "source_page": 3,
+        "source_quote": "공동출자법인의주식을소유할수있다.",
+        "change_summary": "일반지주회사 자·손자회사간 민간공동출자 허용 특례. 국가가 출자하는 의무가 아니므로 공공 출자출연금으로 계산하지 않음.",
+        "cost_trigger": false,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "직접 민간주식소유 허용조항에 공적출자액이나 새로운 예산지원의무가 없음. 법안 전체간접효과0을 확정한 것은 아님.",
+        "route_key": "",
+        "route_reason": "",
+        "variables": []
+      },
+      {
+        "article_ref": "제22조의5",
+        "source_page": 4,
+        "source_quote": "제22조의2(일반지주회사의자회사또는손자회사가공동출자법인으로설립한장애인표준사업장에한한다)",
+        "change_summary": "공동출자 표준사업장에 인증·취소기준 연결. 실제 신규사업장·추가고용·기존지원·부담금 변화 여부는 근거 확인 필요.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "제도 확대로 인한 기존공공사업 추가수요 또는 기금수입감소의 간접효과를 검토하지만 신규 인증기업·투자·고용규모·지원선택 미확정. 기존 직업재활시설근로자나 고용부담금 분포를 전용하지 않음.",
+        "route_key": "transfer_subsidy_rate",
+        "route_reason": "지원사업 추가수요 발생 시 해당범위만 추계, 직접국가출자 또는 지원금확정으로 단정하지 않음.",
+        "variables": []
+      },
+      {
+        "article_ref": "제33조제4항·제86조",
+        "source_page": 4,
+        "source_quote": "제33조제4항중“제22조의4”를“제22조의5”로한다.",
+        "change_summary": "기존표준사업장 인증조문 이동에 따른 부담금감면·과태료 인용번호 정비. 새감면율·새과태료단가 도입이 아님.",
+        "cost_trigger": false,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "조문번호 변경 자체에 기존금액변동 없음. 기금수입의 간접변화는 위의 신규인증·고용범위와 별도 검토.",
+        "route_key": "",
+        "route_reason": "",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제22조의2",
+      "verified": true,
+      "decision": "no_incremental_cost"
+    },
+    {
+      "article": "제22조의5",
+      "verified": true,
+      "decision": "defer"
+    },
+    {
+      "article": "제33조제4항·제86조",
+      "verified": true,
+      "decision": "no_incremental_cost"
+    }
+  ],
+  "payload": {
+    "bill_no": "2200200",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "transfer_subsidy_rate",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "slot_diagnostic": {
+    "status": "needs_input",
+    "routeKey": "transfer_subsidy_rate",
+    "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+    "formula": "적격 사업비 × 보조율",
+    "missingVariables": [
+      "project_cost",
+      "subsidy_rate"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "project_cost": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "subsidy_rate": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "diagnostic_only": true,
+  "scope_review": "민간출자 허용과 공공출자 지출은 구분. 직접금액이없는 제도확대의 간접재정효과 검토를 위해 진단했으며 보조금 사업이원문에신설됐다고확정하지 않음.",
+  "non_estimation_decision": null,
+  "pending_reason": "공동출자 추진사업장·투자 및 신규고용 규모와 파급효과를 확인해야 하며 원문 또는 근거모델만으로 합리적인 금액산출은 아직 불가.",
+  "missing_semantic_variables": [
+    "공동출자 신규표준사업장 및 추가고용규모",
+    "공공지원 추가수요·기존지원범위·기금수입 변화 여부"
+  ],
+  "rejected_basis": [
+    "민간회사 주식출자를 국가의 출자출연 지출로 라우팅하지 않음",
+    "2200664 직업재활시설 적용제외근로자8975명이나2200209정부미고용 구간분포를 전용하지 않음"
+  ]
+}

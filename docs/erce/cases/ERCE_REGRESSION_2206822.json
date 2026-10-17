@@ -1,0 +1,577 @@
+{
+  "bill_no": "2206822",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "current_target_numeric_rows_added": false,
+  "items": [
+    {
+      "name": "기본 아동수당",
+      "payload": {
+        "bill_no": "2206822",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2025,
+        "years": 5,
+        "child_index_base_year": 2024,
+        "child_population_geography": "전국",
+        "support_derivation_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증",
+        "estimation_start_note": "원문2025-01-01시행·매월지급,2025~2029년 완전연도12개월",
+        "family_index_scope_note": "기본 아동수당과 부모급여는 별도. 부모급여 현금·보육료를 두 급여로 중복가산하지 않고 같은 기본부모급여 기준액의 인상차액만 계산. 법정하한 반영",
+        "route_key": "transfer_population_amount_delta",
+        "support_derivation": "child_allowance_under18_indexed_floor",
+        "child_allowance_scenario": "all_under18_indexed_parent_changed",
+        "parent_benefit_unchanged": false,
+        "selected_evidence_keys": [
+          "2200147:under18_population:2025-2029:family_indexed",
+          "2200147:under8_population:2025-2029:family_indexed",
+          "2200147:child_allowance_payment_rate:2024:family_indexed",
+          "2204028:index_base_monthly_amount:2024:family_indexed",
+          "2204028:child_cpi_rates:2025-2029:family_indexed"
+        ],
+        "explicit_inputs": {
+          "existing_benefit_per_recipient": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문5쪽 현행 월10만원"
+          },
+          "minimum_monthly_amount": {
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽 기본급여 월10만원 이상"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도"
+          }
+        },
+        "evidence_selection_reasons": {
+          "2200147:under18_population:2025-2029:family_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2200147:under8_population:2025-2029:family_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2200147:child_allowance_payment_rate:2024:family_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2204028:index_base_monthly_amount:2024:family_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2204028:child_cpi_rates:2025-2029:family_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음"
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "routeKey": "transfer_population_amount_delta",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          5358150000,
+          5359408863,
+          5354408019,
+          5318491909,
+          5207468264
+        ],
+        "derivationTrace": [
+          {
+            "variable_key": "new_recipient_count",
+            "dependencies": [
+              "under18_population",
+              "child_payment_rate"
+            ],
+            "expression": "18세미만 인구×아동수당 지급률",
+            "values": [
+              6439500.0,
+              6179976.0,
+              5964192.0,
+              5764932.0,
+              5540400.0
+            ],
+            "unit": "person",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "existing_recipient_count",
+            "dependencies": [
+              "under8_population",
+              "child_payment_rate"
+            ],
+            "expression": "현행8세미만 인구×동일 지급률",
+            "values": [
+              2116044.0,
+              1988712.0,
+              1898316.0,
+              1844856.0,
+              1819584.0
+            ],
+            "unit": "person",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "benefit_per_recipient",
+            "dependencies": [
+              "index_base_monthly_amount",
+              "child_cpi_rates",
+              "minimum_monthly_amount"
+            ],
+            "expression": "max(확인한 법정하한, 기준월액×기준연도 다음해부터 누적∏(1+물가변동률)); 중간 표시 반올림 없음",
+            "values": [
+              102200.0,
+              104448.4,
+              106641.8164,
+              108881.29454439999,
+              111167.80172983238
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽 기본급여 월10만원 이상",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          }
+        ],
+        "sourceRefs": [
+          "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+          "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽 기본급여 월10만원 이상",
+          "원문5쪽 현행 월10만원",
+          "원문2025-01-01시행·매월 지급 완전연도"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "new_recipient_count": {
+            "key": "new_recipient_count",
+            "value": [
+              6439500.0,
+              6179976.0,
+              5964192.0,
+              5764932.0,
+              5540400.0
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          },
+          "existing_recipient_count": {
+            "key": "existing_recipient_count",
+            "value": [
+              2116044.0,
+              1988712.0,
+              1898316.0,
+              1844856.0,
+              1819584.0
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              102200.0,
+              104448.4,
+              106641.8164,
+              108881.29454439999,
+              111167.80172983238
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "의안2204028 비용추계서24C3796 PDF3쪽 상세 추계 전제; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽 기본급여 월10만원 이상",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": 100000,
+            "unit": "KRW/person/month",
+            "source_class": "target_explicit",
+            "source_ref": "원문5쪽 현행 월10만원",
+            "is_assumption": false
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도",
+            "is_assumption": false
+          }
+        }
+      }
+    },
+    {
+      "name": "부모급여 0세",
+      "payload": {
+        "bill_no": "2206822",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2025,
+        "years": 5,
+        "child_index_base_year": 2024,
+        "child_population_geography": "전국",
+        "support_derivation_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증",
+        "estimation_start_note": "원문2025-01-01시행·매월지급,2025~2029년 완전연도12개월",
+        "family_index_scope_note": "기본 아동수당과 부모급여는 별도. 부모급여 현금·보육료를 두 급여로 중복가산하지 않고 같은 기본부모급여 기준액의 인상차액만 계산. 법정하한 반영",
+        "route_key": "transfer_recipient_delta",
+        "support_derivation": "parent_benefit_age_indexed_floor",
+        "child_allowance_scenario": "parent_age_indexed",
+        "parent_benefit_age": 0,
+        "parent_population_basis": "forecast_population_proxy",
+        "parent_population_proxy_note": "24C4317 표5·6의같은연령 중위 전망인구 준용 방법을 확인. 실제 수급관측값 아님. 별도 아동수당 지급률 전용하지 않음",
+        "selected_evidence_keys": [
+          "kosis_202312:age0_population:2025-2029:parent_indexed",
+          "mohw_parent_benefit:age0:2024_monthly:parent_indexed",
+          "2204028:child_cpi_rates:2025-2029:parent_indexed"
+        ],
+        "explicit_inputs": {
+          "minimum_monthly_amount": {
+            "value": 500000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽2세미만 추가급여 월50만원 이상"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도"
+          }
+        },
+        "evidence_selection_reasons": {
+          "kosis_202312:age0_population:2025-2029:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "mohw_parent_benefit:age0:2024_monthly:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2204028:child_cpi_rates:2025-2029:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음"
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          57347664,
+          115878507,
+          181586995,
+          253645509,
+          331387541
+        ],
+        "derivationTrace": [
+          {
+            "variable_key": "recipient_count",
+            "dependencies": [
+              "parent_population"
+            ],
+            "expression": "확인한 해당연령 전망인구 준용; 실제 수급자 관측값 아님",
+            "values": [
+              217226,
+              217079,
+              227833,
+              237996,
+              247279
+            ],
+            "unit": "person",
+            "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 0세 합계; 2026-10-02 직접 조회",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "existing_benefit_per_recipient",
+            "dependencies": [
+              "parent_base_monthly_amount"
+            ],
+            "expression": "확인한2024년 연령별 공식 부모급여를 현행 시나리오에 동결",
+            "values": [
+              1000000,
+              1000000,
+              1000000,
+              1000000,
+              1000000
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "benefit_per_recipient",
+            "dependencies": [
+              "parent_base_monthly_amount",
+              "parent_cpi_rates",
+              "minimum_monthly_amount"
+            ],
+            "expression": "max(확인한 법정하한, 기준월액×기준연도 다음해부터 누적∏(1+물가변동률)); 중간 표시 반올림 없음",
+            "values": [
+              1022000.0,
+              1044484.0,
+              1066418.1639999999,
+              1088812.945444,
+              1111678.0172983238
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          }
+        ],
+        "sourceRefs": [
+          "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 0세 합계; 2026-10-02 직접 조회",
+          "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+          "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인",
+          "원문2025-01-01시행·매월 지급 완전연도"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              217226,
+              217079,
+              227833,
+              237996,
+              247279
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 0세 합계; 2026-10-02 직접 조회",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              1022000.0,
+              1044484.0,
+              1066418.1639999999,
+              1088812.945444,
+              1111678.0172983238
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              1000000,
+              1000000,
+              1000000,
+              1000000,
+              1000000
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도",
+            "is_assumption": false
+          }
+        }
+      }
+    },
+    {
+      "name": "부모급여 1세",
+      "payload": {
+        "bill_no": "2206822",
+        "cutoff_date": "2026-10-04",
+        "start_year": 2025,
+        "years": 5,
+        "child_index_base_year": 2024,
+        "child_population_geography": "전국",
+        "support_derivation_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증",
+        "estimation_start_note": "원문2025-01-01시행·매월지급,2025~2029년 완전연도12개월",
+        "family_index_scope_note": "기본 아동수당과 부모급여는 별도. 부모급여 현금·보육료를 두 급여로 중복가산하지 않고 같은 기본부모급여 기준액의 인상차액만 계산. 법정하한 반영",
+        "route_key": "transfer_recipient_delta",
+        "support_derivation": "parent_benefit_age_indexed_floor",
+        "child_allowance_scenario": "parent_age_indexed",
+        "parent_benefit_age": 1,
+        "parent_population_basis": "forecast_population_proxy",
+        "parent_population_proxy_note": "24C4317 표5·6의같은연령 중위 전망인구 준용 방법을 확인. 실제 수급관측값 아님. 별도 아동수당 지급률 전용하지 않음",
+        "selected_evidence_keys": [
+          "kosis_202312:age1_population:2025-2029:parent_indexed",
+          "mohw_parent_benefit:age1:2024_monthly:parent_indexed",
+          "2204028:child_cpi_rates:2025-2029:parent_indexed"
+        ],
+        "explicit_inputs": {
+          "minimum_monthly_amount": {
+            "value": 500000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽2세미만 추가급여 월50만원 이상"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도"
+          }
+        },
+        "evidence_selection_reasons": {
+          "kosis_202312:age1_population:2025-2029:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "mohw_parent_benefit:age1:2024_monthly:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음",
+          "2204028:child_cpi_rates:2025-2029:parent_indexed": "전국·같은 연령·기간·기준연도·통계버전 확인. 공식값과 선례가정 구분, 현재 최신통계로 주장하지 않음"
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "annualAmountsThousand": [
+          30131112,
+          57795392,
+          86242525,
+          121027710,
+          158954226
+        ],
+        "derivationTrace": [
+          {
+            "variable_key": "recipient_count",
+            "dependencies": [
+              "parent_population"
+            ],
+            "expression": "확인한 해당연령 전망인구 준용; 실제 수급자 관측값 아님",
+            "values": [
+              228266,
+              216540,
+              216413,
+              227121,
+              237221
+            ],
+            "unit": "person",
+            "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 1세 합계; 2026-10-02 직접 조회",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "existing_benefit_per_recipient",
+            "dependencies": [
+              "parent_base_monthly_amount"
+            ],
+            "expression": "확인한2024년 연령별 공식 부모급여를 현행 시나리오에 동결",
+            "values": [
+              500000,
+              500000,
+              500000,
+              500000,
+              500000
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          },
+          {
+            "variable_key": "benefit_per_recipient",
+            "dependencies": [
+              "parent_base_monthly_amount",
+              "parent_cpi_rates",
+              "minimum_monthly_amount"
+            ],
+            "expression": "max(확인한 법정하한, 기준월액×기준연도 다음해부터 누적∏(1+물가변동률)); 중간 표시 반올림 없음",
+            "values": [
+              511000.0,
+              522242.0,
+              533209.0819999999,
+              544406.472722,
+              555839.0086491619
+            ],
+            "unit": "KRW/person/month",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+            "applied": true,
+            "applicability_note": "정답24C4317 확인 후 기존 인구·공식기준액·24C3796 물가전망 근거를 재사용하는 사후 회귀검증"
+          }
+        ],
+        "sourceRefs": [
+          "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 1세 합계; 2026-10-02 직접 조회",
+          "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+          "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인",
+          "원문2025-01-01시행·매월 지급 완전연도"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "recipient_count": {
+            "key": "recipient_count",
+            "value": [
+              228266,
+              216540,
+              216413,
+              227121,
+              237221
+            ],
+            "unit": "person",
+            "source_class": "calculated_estimate",
+            "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 1세 합계; 2026-10-02 직접 조회",
+            "is_assumption": true
+          },
+          "benefit_per_recipient": {
+            "key": "benefit_per_recipient",
+            "value": [
+              511000.0,
+              522242.0,
+              533209.0819999999,
+              544406.472722,
+              555839.0086491619
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인; 의안2204028 비용추계서24C3796 PDF3쪽 각주1; 원문3쪽2세미만 추가급여 월50만원 이상",
+            "is_assumption": true
+          },
+          "existing_benefit_per_recipient": {
+            "key": "existing_benefit_per_recipient",
+            "value": [
+              500000,
+              500000,
+              500000,
+              500000,
+              500000
+            ],
+            "unit": "KRW/person/month",
+            "source_class": "calculated_estimate",
+            "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인",
+            "is_assumption": true
+          },
+          "payments_per_year": {
+            "key": "payments_per_year",
+            "value": 12,
+            "unit": "month/year",
+            "source_class": "target_explicit",
+            "source_ref": "원문2025-01-01시행·매월 지급 완전연도",
+            "is_assumption": false
+          }
+        }
+      }
+    }
+  ],
+  "component_totals_thousand": [
+    26597927055,
+    939846216,
+    454150965
+  ],
+  "gold_display_component_totals_thousand": [
+    26600000000,
+    939800000,
+    454200000
+  ],
+  "component_display_differences_percent": [
+    0.007793026315789473,
+    0.0049176420515003195,
+    0.010795904887714664
+  ],
+  "parent_total_thousand": 1393997181,
+  "gold_display_parent_total_thousand": 1394000000,
+  "parent_display_difference_percent": 0.0002022238163558106,
+  "annual_amounts_thousand": [
+    5445628776,
+    5533082762,
+    5622237539,
+    5693165128,
+    5697810031
+  ],
+  "total_thousand": 27991924236,
+  "gold_display_total_thousand": 28000000000,
+  "display_total_difference_percent": 0.028842014285714285,
+  "scope": "기본급여·0세부모급여·1세부모급여 합계. 국비·지방비분할 미포함",
+  "limitation": "정답을 본 뒤 전망인구 준용과 하위 계산을 보강한 회귀검증. 기존 원출처 수치 재사용이지만 독립검증 아님. 정답금액 표시단위가 달라 차이를 원시금액 정밀오차율로 해석하지 않음"
+}

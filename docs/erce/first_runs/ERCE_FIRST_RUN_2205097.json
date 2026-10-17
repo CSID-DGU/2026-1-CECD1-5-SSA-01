@@ -1,0 +1,150 @@
+{
+  "bill_no": "2205097",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2205097",
+    "bill_name": "장애인복지법 일부개정법률안",
+    "propose_date": "2024-10-31",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제32조제2항",
+        "source_page": 3,
+        "source_quote": "이를추가로발급할수있다.",
+        "route_key": "information_system_project_plan",
+        "route_reason": "모바일 장애인등록증 추가발급 근거. 발급·검증 시스템이 신규구축인지 기존모바일신분증·등록증 사업 활용인지 확인. 기존시스템 예산과 중복 계산 금지.",
+        "change_summary": "모바일 장애인등록증 추가발급 근거. 발급·검증 시스템이 신규구축인지 기존모바일신분증·등록증 사업 활용인지 확인. 기존시스템 예산과 중복 계산 금지.",
+        "decision_reason": "모바일 장애인등록증 추가발급 근거. 발급·검증 시스템이 신규구축인지 기존모바일신분증·등록증 사업 활용인지 확인. 기존시스템 예산과 중복 계산 금지.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "variables": []
+      },
+      {
+        "article_ref": "제32조의3제4항",
+        "source_page": 4,
+        "source_quote": "모바일등록증을전자적으로회수하여야한다.",
+        "route_key": "information_system_operation",
+        "route_reason": "등록취소 시 전자회수 기능. 발급시스템과 같은 과업으로 포함 가능, 별도 구축비를 중복 가산하지 않음. 운영·발급건수·유지관리 계획 근거 필요.",
+        "change_summary": "등록취소 시 전자회수 기능. 발급시스템과 같은 과업으로 포함 가능, 별도 구축비를 중복 가산하지 않음. 운영·발급건수·유지관리 계획 근거 필요.",
+        "decision_reason": "등록취소 시 전자회수 기능. 발급시스템과 같은 과업으로 포함 가능, 별도 구축비를 중복 가산하지 않음. 운영·발급건수·유지관리 계획 근거 필요.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "variables": []
+      },
+      {
+        "article_ref": "제87조제2호의2·제2호의3",
+        "source_page": 4,
+        "source_quote": "등록증또는그이미지파일이나복사본을부정하게사용한자",
+        "route_key": "direct_annual_amount",
+        "route_reason": "부정사용 벌칙 확대. 최대벌금1천만원을 실제 단가로 사용하지 않으며 위반건수·벌금선고 실적과 예상이 필요. 발급·회수 지출과 수입상계 금지.",
+        "change_summary": "부정사용 벌칙 확대. 최대벌금1천만원을 실제 단가로 사용하지 않으며 위반건수·벌금선고 실적과 예상이 필요. 발급·회수 지출과 수입상계 금지.",
+        "decision_reason": "부정사용 벌칙 확대. 최대벌금1천만원을 실제 단가로 사용하지 않으며 위반건수·벌금선고 실적과 예상이 필요. 발급·회수 지출과 수입상계 금지.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제32조제2항",
+      "verified": true
+    },
+    {
+      "article": "제32조의3제4항",
+      "verified": true
+    },
+    {
+      "article": "제87조제2호의2·제2호의3",
+      "verified": true
+    }
+  ],
+  "parts": [
+    {
+      "payload": {
+        "bill_no": "2205097",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "information_system_project_plan",
+        "payer": "government",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {}
+      },
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "information_system_project_plan",
+        "formulaKey": "PROJECT_ANNUAL_BUDGET_V1",
+        "formula": "해당 사업계획의 연도별 재원배분액(포함된 운영·유지관리비 중복 가산 금지)",
+        "missingVariables": [
+          "annual_project_budget"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "annual_project_budget": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      }
+    },
+    {
+      "payload": {
+        "bill_no": "2205097",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "information_system_operation",
+        "payer": "government",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {}
+      },
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "information_system_operation",
+        "formulaKey": "INFORMATION_SYSTEM_OPERATION_V1",
+        "formula": "기준 연간 운영비 × 연도별 적용 상승률 누적",
+        "missingVariables": [
+          "annual_operating_amount"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "annual_operating_amount": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      }
+    }
+  ],
+  "first_total_won": null,
+  "method_candidate_count": 0,
+  "missing_semantic_variables": [
+    "기존 모바일신분증·장애인등록증 사업과 신규개발 여부",
+    "부처별 구축·연계·발급·전자회수 과업 및 예산계획",
+    "운영기간·유지관리·발급단가 또는 사업비",
+    "위반건수·벌금선고액 예측근거"
+  ],
+  "rejected_basis": [
+    "양육비정보시스템948백만원이나 재해복구 구축비를 과업이 다른 신분증에 그대로 적용하지 않음",
+    "일반유지관리15%를 모르는 구축비에 강제로 적용하지 않음"
+  ],
+  "scope_review": "법적발급근거가 신규정부사업인지 기존사업근거명확화인지 확인 필요. 전자회수는 발급시스템과 중복과업일 수 있어 구축+운영 시나리오를 확정하지 않음.",
+  "non_estimation_decision": null
+}

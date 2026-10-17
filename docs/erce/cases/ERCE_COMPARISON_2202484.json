@@ -1,0 +1,18 @@
+{
+  "bill_no": "2202484",
+  "post_answer_comparison": true,
+  "first_covered_eok": 3216.806,
+  "gold_covered_eok": 3216.81,
+  "covered_error_percent": 0.00012434679076182346,
+  "annual_display_match": true,
+  "whole_bill_total": null,
+  "whole_bill_error_percent": null,
+  "source_values_added_before_first": false,
+  "pending": [
+    "기존위원회추가운영비",
+    "회수수입",
+    "긴급지원경과조치",
+    "조사/통지/수수료/집행"
+  ],
+  "limitation": "기존동일정부선지급계획의유사법안첫재사용,정답에열거된급여범위만비교.전체미완성"
+}

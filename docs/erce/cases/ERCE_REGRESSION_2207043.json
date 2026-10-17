@@ -1,0 +1,468 @@
+{
+  "bill_no": "2207043",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2207043",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "route_key": "qualification_exam_stock_flow",
+    "support_derivation": "qualification_exam_stock_flow",
+    "payer": "government",
+    "start_year": 2027,
+    "years": 5,
+    "exam_model_confirmed": true,
+    "exam_linked_dependency_present": true,
+    "exam_linked_bill_assumed_passed": true,
+    "exam_special_all_pass_assumed": true,
+    "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+    "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+    "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+    "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+    "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님",
+    "explicit_inputs": {
+      "exam_special_duration_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207043:exam_reference_annual_cost:reviewed",
+      "2207043:exam_reference_candidates:reviewed",
+      "2207043:exam_price_base_year:reviewed",
+      "2207043:exam_initial_unlicensed_share:reviewed",
+      "2207043:exam_new_provider_eligibility_share:reviewed",
+      "2207043:exam_regular_failure_share:reviewed",
+      "2207043:exam_cpi_rates:reviewed",
+      "2207043:service_provider_forecast:2027-2031:target_only"
+    ],
+    "evidence_selection_reasons": {
+      "2207043:exam_reference_annual_cost:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_reference_candidates:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_price_base_year:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_initial_unlicensed_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_new_provider_eligibility_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_regular_failure_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_cpi_rates:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:service_provider_forecast:2027-2031:target_only": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만"
+    },
+    "selected_method_keys": [
+      "2207043:qualification_exam_stock_flow"
+    ],
+    "method_selection_reasons": {
+      "2207043:qualification_exam_stock_flow": "첫재고·후속신규·정규실패재응시의동일계산구조"
+    },
+    "method_confirmations": {
+      "2207043:qualification_exam_stock_flow": {
+        "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+        "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+        "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+        "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+        "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님"
+      }
+    }
+  },
+  "result": {
+    "route_key": "qualification_exam_stock_flow",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2207043:exam_reference_annual_cost:reviewed,2207043:exam_reference_candidates:reviewed,2207043:exam_price_base_year:reviewed,2207043:exam_initial_unlicensed_share:reviewed,2207043:exam_new_provider_eligibility_share:reviewed,2207043:exam_regular_failure_share:reviewed,2207043:exam_cpi_rates:reviewed,2207043:service_provider_forecast:2027-2031:target_only",
+    "annual_amounts_thousand": [
+      4848087,
+      279165,
+      251328,
+      229195,
+      286358
+    ],
+    "source_refs": [
+      "2207043 비용추계서24C6328 PDF3~6쪽; 2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정",
+      "2207043 비용추계서24C6328 PDF3~6쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          4848087149.41539,
+          279164578.71358955,
+          251328034.3666715,
+          229194864.98341846,
+          286357782.5789202
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207043 비용추계서24C6328 PDF3~6쪽; 2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2207043:qualification_exam_stock_flow"
+    ]
+  },
+  "total_eok": 58.94133,
+  "gold_display_total_eok": 58.93,
+  "raw_error_percent": 0.01922620057695732,
+  "annual_million_display": [
+    4848,
+    279,
+    251,
+    229,
+    286
+  ],
+  "annual_display_matches": 5,
+  "displayed_total_million": 5893,
+  "general_missing_projection_result": {
+    "status": "needs_input",
+    "routeKey": "qualification_exam_stock_flow",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [
+      "service_provider_forecast"
+    ],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [
+      {
+        "method_key": "2207043:qualification_exam_stock_flow",
+        "source_bill_no": "2207043",
+        "available_at": "2025-01-07",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "qualification_exam_stock_flow",
+        "source_ref": "2207043 비용추계서24C6328 PDF3~6쪽",
+        "match_groups": [
+          [
+            "발달재활사",
+            "언어재활사"
+          ],
+          [
+            "국가시험",
+            "특례시험",
+            "자격시험"
+          ]
+        ],
+        "allowed_routes": [
+          "qualification_exam_stock_flow"
+        ],
+        "support_derivation": "qualification_exam_stock_flow",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2207043:exam_reference_annual_cost:reviewed",
+          "2207043:exam_reference_candidates:reviewed",
+          "2207043:exam_price_base_year:reviewed",
+          "2207043:exam_initial_unlicensed_share:reviewed",
+          "2207043:exam_new_provider_eligibility_share:reviewed",
+          "2207043:exam_regular_failure_share:reviewed",
+          "2207043:exam_cpi_rates:reviewed",
+          "2207043:service_provider_forecast:2027-2031:target_only"
+        ],
+        "required_confirmations": [
+          "exam_scope_note",
+          "exam_population_note",
+          "exam_transition_note",
+          "exam_price_note",
+          "exam_start_note"
+        ],
+        "method_steps": [
+          "동일시험과업의응시자별운영단가를선택,시험영역수만큼중복곱셈금지",
+          "첫해기존제공인원의미자격51.3% stock을응시자산정",
+          "이후언어/발달제공인원순증을신규시험수요로보는가정,매년첫해재고반복금지",
+          "특례3년은전원취득 가정,정규4년차부터실패32% 다음해재응시추가",
+          "2023언어시험비용662백만원/2760명×물가,2027첫시험 가정"
+        ],
+        "baseline_check": "초기문항개발·교부행정비가시험운영단가에포함되면별도중복추계하지않음.응시자수는제공인원전체와다름",
+        "limitation": "2021~2023제공인원 원이력·추세식미확보,미래정답인원은target_only회귀전용.새의안은별도인원전망·연계의결·시험설계 근거필요",
+        "lower_variable_keys": [
+          "exam_reference_annual_cost",
+          "exam_reference_candidates",
+          "exam_price_base_year",
+          "exam_initial_unlicensed_share",
+          "exam_new_provider_eligibility_share",
+          "exam_regular_failure_share",
+          "exam_cpi_rates",
+          "service_provider_forecast"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "첫재고·후속신규·정규실패재응시의동일계산구조",
+        "confirmed_assumptions": {
+          "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+          "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+          "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+          "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+          "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님"
+        }
+      }
+    ],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "annual_amount": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "service_provider_forecast": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "explicit_projection_web_result": {
+    "status": "computed_review",
+    "routeKey": "qualification_exam_stock_flow",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      4848087,
+      279165,
+      251328,
+      229195,
+      286358
+    ],
+    "derivationTrace": [
+      {
+        "year": 2027,
+        "service_providers": 36188,
+        "new_candidates": 18564,
+        "retake_candidates": 0,
+        "total_candidates": 18564,
+        "failed_candidates": 0,
+        "exam_type": "special",
+        "quantity_basis": "initial_unlicensed_stock",
+        "unit_price_won": 261155.30863043474,
+        "amount_won": 4848087149.41539,
+        "projection_source_class": "target_explicit"
+      },
+      {
+        "year": 2028,
+        "service_providers": 37236,
+        "new_candidates": 1048,
+        "retake_candidates": 0,
+        "total_candidates": 1048,
+        "failed_candidates": 0,
+        "exam_type": "special",
+        "quantity_basis": "net_new_providers",
+        "unit_price_won": 266378.4148030435,
+        "amount_won": 279164578.71358955,
+        "projection_source_class": "target_explicit"
+      },
+      {
+        "year": 2029,
+        "service_providers": 38161,
+        "new_candidates": 925,
+        "retake_candidates": 0,
+        "total_candidates": 925,
+        "failed_candidates": 0,
+        "exam_type": "special",
+        "quantity_basis": "net_new_providers",
+        "unit_price_won": 271705.9830991043,
+        "amount_won": 251328034.3666715,
+        "projection_source_class": "target_explicit"
+      },
+      {
+        "year": 2030,
+        "service_providers": 38988,
+        "new_candidates": 827,
+        "retake_candidates": 0,
+        "total_candidates": 827,
+        "failed_candidates": 265,
+        "exam_type": "regular",
+        "quantity_basis": "net_new_providers",
+        "unit_price_won": 277140.1027610864,
+        "amount_won": 229194864.98341846,
+        "projection_source_class": "target_explicit"
+      },
+      {
+        "year": 2031,
+        "service_providers": 39736,
+        "new_candidates": 748,
+        "retake_candidates": 265,
+        "total_candidates": 1013,
+        "failed_candidates": 324,
+        "exam_type": "regular",
+        "quantity_basis": "net_new_providers",
+        "unit_price_won": 282682.9048163082,
+        "amount_won": 286357782.5789202,
+        "projection_source_class": "target_explicit"
+      }
+    ],
+    "sourceRefs": [
+      "2207043 비용추계서24C6328 PDF3~6쪽; 인터페이스시험용공급전망.정답표를사용한입력테스트로신규기관독립자료아님; 2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정",
+      "2207043 비용추계서24C6328 PDF3~6쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2207043:qualification_exam_stock_flow"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2207043:qualification_exam_stock_flow",
+        "source_bill_no": "2207043",
+        "available_at": "2025-01-07",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "qualification_exam_stock_flow",
+        "source_ref": "2207043 비용추계서24C6328 PDF3~6쪽",
+        "match_groups": [
+          [
+            "발달재활사",
+            "언어재활사"
+          ],
+          [
+            "국가시험",
+            "특례시험",
+            "자격시험"
+          ]
+        ],
+        "allowed_routes": [
+          "qualification_exam_stock_flow"
+        ],
+        "support_derivation": "qualification_exam_stock_flow",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2207043:exam_reference_annual_cost:reviewed",
+          "2207043:exam_reference_candidates:reviewed",
+          "2207043:exam_price_base_year:reviewed",
+          "2207043:exam_initial_unlicensed_share:reviewed",
+          "2207043:exam_new_provider_eligibility_share:reviewed",
+          "2207043:exam_regular_failure_share:reviewed",
+          "2207043:exam_cpi_rates:reviewed",
+          "2207043:service_provider_forecast:2027-2031:target_only"
+        ],
+        "required_confirmations": [
+          "exam_scope_note",
+          "exam_population_note",
+          "exam_transition_note",
+          "exam_price_note",
+          "exam_start_note"
+        ],
+        "method_steps": [
+          "동일시험과업의응시자별운영단가를선택,시험영역수만큼중복곱셈금지",
+          "첫해기존제공인원의미자격51.3% stock을응시자산정",
+          "이후언어/발달제공인원순증을신규시험수요로보는가정,매년첫해재고반복금지",
+          "특례3년은전원취득 가정,정규4년차부터실패32% 다음해재응시추가",
+          "2023언어시험비용662백만원/2760명×물가,2027첫시험 가정"
+        ],
+        "baseline_check": "초기문항개발·교부행정비가시험운영단가에포함되면별도중복추계하지않음.응시자수는제공인원전체와다름",
+        "limitation": "2021~2023제공인원 원이력·추세식미확보,미래정답인원은target_only회귀전용.새의안은별도인원전망·연계의결·시험설계 근거필요",
+        "lower_variable_keys": [
+          "exam_reference_annual_cost",
+          "exam_reference_candidates",
+          "exam_price_base_year",
+          "exam_initial_unlicensed_share",
+          "exam_new_provider_eligibility_share",
+          "exam_regular_failure_share",
+          "exam_cpi_rates",
+          "service_provider_forecast"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "첫재고·후속신규·정규실패재응시의동일계산구조",
+        "confirmed_assumptions": {
+          "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+          "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+          "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+          "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+          "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          4848087149.41539,
+          279164578.71358955,
+          251328034.3666715,
+          229194864.98341846,
+          286357782.5789202
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2207043 비용추계서24C6328 PDF3~6쪽; 인터페이스시험용공급전망.정답표를사용한입력테스트로신규기관독립자료아님; 2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정",
+        "is_assumption": true
+      }
+    }
+  },
+  "explicit_projection_payload": {
+    "bill_no": "SYNTHETIC_QUALIFICATION_EXAM",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "qualification_exam_stock_flow",
+    "support_derivation": "qualification_exam_stock_flow",
+    "payer": "government",
+    "start_year": 2027,
+    "years": 5,
+    "exam_model_confirmed": true,
+    "exam_linked_dependency_present": true,
+    "exam_linked_bill_assumed_passed": true,
+    "exam_special_all_pass_assumed": true,
+    "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+    "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+    "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+    "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+    "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님",
+    "explicit_inputs": {
+      "exam_special_duration_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "2207043 원문PDF5쪽 시행후3년이내특례·정답의3년특례운영 가정"
+      },
+      "service_provider_forecast": {
+        "value": {
+          "2027": 36188,
+          "2028": 37236,
+          "2029": 38161,
+          "2030": 38988,
+          "2031": 39736
+        },
+        "unit": "year_to_person",
+        "source_ref": "인터페이스시험용공급전망.정답표를사용한입력테스트로신규기관독립자료아님"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207043:exam_reference_annual_cost:reviewed",
+      "2207043:exam_reference_candidates:reviewed",
+      "2207043:exam_price_base_year:reviewed",
+      "2207043:exam_initial_unlicensed_share:reviewed",
+      "2207043:exam_new_provider_eligibility_share:reviewed",
+      "2207043:exam_regular_failure_share:reviewed",
+      "2207043:exam_cpi_rates:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2207043:exam_reference_annual_cost:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_reference_candidates:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_price_base_year:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_initial_unlicensed_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_new_provider_eligibility_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_regular_failure_share:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만",
+      "2207043:exam_cpi_rates:reviewed": "시험운영단가·과업·기간·인원범위확인.정답인원표는자기회귀만"
+    },
+    "selected_method_keys": [
+      "2207043:qualification_exam_stock_flow"
+    ],
+    "method_selection_reasons": {
+      "2207043:qualification_exam_stock_flow": "첫재고·후속신규·정규실패재응시의동일계산구조"
+    },
+    "method_confirmations": {
+      "2207043:qualification_exam_stock_flow": {
+        "exam_scope_note": "언어시험과발달재활시험의인당운영과업유사성검토.종류별비용같음·인당1회·초기개발/교부비별도중복없음 가정",
+        "exam_population_note": "원문연계2207049 의결전제.2027기존미자격51.3%,이후언어/발달제공인원순증전체를신규시험수요로추정.원관측추세미확보",
+        "exam_transition_note": "첫3년특례,4년차부터국가시험.특례전원취득,국가시험실패32%다음해재응시.진행중기존응시자를매년반복하지않음",
+        "exam_price_note": "2023언어시험예산662백만원/2760명의원시단가로계산,2024.12 CPI·2031동일2%연장가정",
+        "exam_start_note": "공포후2년·2025심의공포가정으로2027~2031.원문에확정연도없으며실제공포일·통과사실확인한것아님"
+      }
+    }
+  },
+  "limitation": "응시자계산과단가는재사용가능하지만미래제공인원은자기정답회귀전용.공식원관측자료미확보로새의안자동인원예측까지완료한것아님"
+}

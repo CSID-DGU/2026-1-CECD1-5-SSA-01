@@ -1,0 +1,338 @@
+{
+ "bill_no": "2203602",
+ "bill_title": "기초연금법 일부개정법률안(주호영의원 등 14인, 2024-09-03 발의)",
+ "run_date": "2026-10-16",
+ "agent_note": "fresh agent, answer unseen",
+ "answer_exposure": "정답(비용추계서 PDF·NABO 추출문·docs/erce/cases 등 2203602 관련 기록) 미열람. 다만 파일 목록 확인(grep -l '24C3532') 결과 backend/erce/basic_pension_staged_evidence.py, backend/erce/reviewed_method_rows.py, backend/erce/data/reference_snapshot.json 가 NABO 추계번호를 인용함을 확인하고 내용은 열지 않음. basic_pension_staged_increase 파생 프로파일은 해당 모듈에 구현되어 있어 정답 기반으로 설계되었을 가능성이 있음 → 엔진 홀드아웃 동작 확인용 탐침만 실행했고 금액은 산출되지 않음(정답 값 노출 없음).",
+ "evidence_mode": "holdout",
+ "cutoff_date": "2024-09-03",
+ "clauses_read": [
+  {
+   "clause": "안 제5조의2제1항(본문 개정)",
+   "quote": "제5조의2제1항중 “100분의40”을 “일정비율”로, “30만원으로 한다”를 “다음 각 호의 구분에 따른다”로 하고",
+   "cost_relevance": "주 비용항목"
+  },
+  {
+   "clause": "안 제5조의2제1항제1호",
+   "quote": "소득인정액이 100분의30 이하인 사람에 대한 2026년의 기준연금액: 40만원",
+   "cost_relevance": "2026년 하위30% 기준연금액 인상 → 지출 증가"
+  },
+  {
+   "clause": "안 제5조의2제1항제2호",
+   "quote": "소득인정액이 100분의50 이하인 사람에 대한 2027년의 기준연금액: 40만원",
+   "cost_relevance": "2027년 하위50%로 인상 대상 확대 → 지출 증가"
+  },
+  {
+   "clause": "법률 제16868호 부칙 제2조 삭제",
+   "quote": "법률 제16868호 기초연금법 일부개정법률 부칙 제2조를 삭제한다. (현행: 제5조의2는 2020년 12월 31일까지 효력을 가진다.)",
+   "cost_relevance": "특례 조항의 유효기간 삭제 → 2028년 이후에도 인상액 유지 해석 근거"
+  },
+  {
+   "clause": "안 제3조제3항",
+   "quote": "제1항에도 불구하고 대통령령으로 정하는 사람 중 19세 이후 국내에 7년 이상 거주하지 아니한 사람에게는 기초연금을 지급하지 아니한다.",
+   "cost_relevance": "지출 감소 요인(대상자 축소)"
+  },
+  {
+   "clause": "안 제10조제3항",
+   "quote": "기초연금 수급희망자와 그 배우자는 제1항에 따른 신청을 할 때 국외에 소득 또는 재산을 보유한 경우에는 이를 신고하여야 한다.",
+   "cost_relevance": "신고의무(행정절차), 부정수급 감소 효과는 계량 불가"
+  },
+  {
+   "clause": "부칙 제1조",
+   "quote": "이 법은 공포 후 1년이 경과한 날부터 시행한다.",
+   "cost_relevance": "시행시점이 공포일에 따라 결정됨(조문상 2026·2027년 연도 명시)"
+  },
+  {
+   "clause": "부칙 제2조·제3조",
+   "quote": "제3조제3항의 개정규정은 이 법 시행 후 최초로 기초연금을 신청하는 경우부터 적용한다. / 제10조제3항의 개정규정은 이 법 시행 후 최초로 기초연금을 신청하는 경우부터 적용한다.",
+   "cost_relevance": "거주요건·신고의무는 신규 신청자부터 적용(기존 수급자 영향 없음)"
+  }
+ ],
+ "cost_items": [
+  {
+   "item": "기준연금액 단계 인상(하위30%: 2026년, 하위50%: 2027년 40만원)",
+   "route_path": [
+    "이전지출",
+    "개인지원",
+    "기존급여인상차액"
+   ],
+   "route_key": "transfer_recipient_delta",
+   "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+   "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+   "why": "기존 수급자(소득하위 70% 중 하위30%/50% 구간)의 월 급여액을 현행 물가연동 기준연금액에서 40만원으로 올리는 '기존급여 인상 차액' 구조. 대상자 확대가 아니라 동일 수급자 내 구간별 단가 인상이므로 transfer_population_amount_delta·transfer_recipient 대신 이 잎을 선택. 구간별(하위30% 2026~, 30~50% 2027~)로 분리 계산 후 합산 계획.",
+   "status": "needs_input"
+  },
+  {
+   "item": "거주요건 신설에 따른 지급 제외(지출 감소)",
+   "status": "not_estimable",
+   "reason": "제외 대상('대통령령으로 정하는 사람' 중 19세 이후 국내 거주 7년 미만)의 범위가 하위법령에 위임되어 있고, 부칙상 시행 후 신규 신청자부터 적용. 해당 인원 근거가 DB에 없음(0명으로 채우지 않음)."
+  },
+  {
+   "item": "국외 소득·재산 신고의무",
+   "status": "not_estimable",
+   "reason": "신청 절차상 신고의무로 직접 재정지출 없음. 부정수급 감소 효과는 규모 근거가 없어 계량 불가."
+  }
+ ],
+ "payloads_and_raw_results": [
+  {
+   "call_id": 1,
+   "purpose": "기본 경로(파생 없음): 법안 명시값만으로 기존급여인상차액 산식 실행 → 부족 변수 확인",
+   "payload": {
+    "bill_no": "2203602",
+    "cutoff_date": "2024-09-03",
+    "policy_domain": "기초연금",
+    "agency": "보건복지부",
+    "route_key": "transfer_recipient_delta",
+    "route_path": [
+     "이전지출",
+     "개인지원",
+     "기존급여인상차액"
+    ],
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+     "benefit_per_recipient": {
+      "value": 400000,
+      "unit": "KRW/person/month",
+      "source_ref": "의안 2203602 안 제5조의2제1항제1호·제2호: 2026년(소득인정액 100분의30 이하)·2027년(100분의50 이하) 기준연금액 40만원"
+     },
+     "payments_per_year": {
+      "value": 12,
+      "unit": "times/year",
+      "source_ref": "기초연금 월 지급(법 제5조 기준연금액은 월액) — 연 12회"
+     }
+    }
+   },
+   "result": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient_delta",
+    "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "missingVariables": [
+     "recipient_count",
+     "existing_benefit_per_recipient"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+     "recipient_count": {
+      "status": "no_eligible_candidate",
+      "candidateCount": 0,
+      "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+     },
+     "existing_benefit_per_recipient": {
+      "status": "no_eligible_candidate",
+      "candidateCount": 0,
+      "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+     }
+    }
+   }
+  },
+  {
+   "call_id": 2,
+   "purpose": "공식 65세 이상 인구(하위30% 구간 행)를 recipient_count 근거로 직접 선택 시도",
+   "payload": {
+    "bill_no": "2203602",
+    "cutoff_date": "2024-09-03",
+    "policy_domain": "기초연금",
+    "agency": "보건복지부",
+    "route_key": "transfer_recipient_delta",
+    "route_path": [
+     "이전지출",
+     "개인지원",
+     "기존급여인상차액"
+    ],
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+     "benefit_per_recipient": {
+      "value": 400000,
+      "unit": "KRW/person/month",
+      "source_ref": "의안 2203602 안 제5조의2제1항제1호·제2호: 2026년(소득인정액 100분의30 이하)·2027년(100분의50 이하) 기준연금액 40만원"
+     },
+     "payments_per_year": {
+      "value": 12,
+      "unit": "times/year",
+      "source_ref": "기초연금 월 지급(법 제5조 기준연금액은 월액) — 연 12회"
+     }
+    },
+    "selected_evidence_keys": [
+     "kosis_202312:age65_population:lower30:2026-2030:pension"
+    ],
+    "evidence_selection_reasons": {
+     "kosis_202312:age65_population:lower30:2026-2030:pension": "공식 KOSIS 2023.12 장래인구 중위추계 65세 이상 인구(2026~2030), 발의일 이전 공개. 대상자 수가 아니라 모집단으로 제시"
+    }
+   },
+   "result": {
+    "error": "ValueError: selected DB evidence support_derivation mismatch: kosis_202312:age65_population:lower30:2026-2030:pension"
+   },
+   "interpretation": "엔진이 거부함: 해당 행은 support_derivation=basic_pension_staged_increase 전용. 인구는 수급자 수가 아니므로 직접 대입 불가(우회하지 않음)"
+  },
+  {
+   "call_id": 3,
+   "purpose": "basic_pension_staged_increase 파생 프로파일 탐침(두 구간 동시 선택)",
+   "payload": {
+    "bill_no": "2203602",
+    "cutoff_date": "2024-09-03",
+    "policy_domain": "기초연금",
+    "agency": "보건복지부",
+    "route_key": "transfer_recipient_delta",
+    "route_path": [
+     "이전지출",
+     "개인지원",
+     "기존급여인상차액"
+    ],
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+     "benefit_per_recipient": {
+      "value": 400000,
+      "unit": "KRW/person/month",
+      "source_ref": "의안 2203602 안 제5조의2제1항제1호·제2호: 2026년(소득인정액 100분의30 이하)·2027년(100분의50 이하) 기준연금액 40만원"
+     }
+    },
+    "support_derivation": "basic_pension_staged_increase",
+    "support_derivation_note": "법안 제5조의2: 2026년 하위30%, 2027년 하위50% 기준연금액 40만원 단계 인상. 모집단은 공식 장래인구추계 65세 이상 인구",
+    "selected_evidence_keys": [
+     "kosis_202312:age65_population:lower30:2026-2030:pension",
+     "kosis_202312:age65_population:between30_50:2026-2030:pension"
+    ],
+    "evidence_selection_reasons": {
+     "kosis_202312:age65_population:lower30:2026-2030:pension": "공식 KOSIS 2023.12 중위추계 65세 이상 인구, 2023-12-14 공개(발의일 이전). 하위30% 구간 모집단",
+     "kosis_202312:age65_population:between30_50:2026-2030:pension": "동일 공식 인구, 30~50% 구간 모집단"
+    }
+   },
+   "result": {
+    "error": "ValueError: selected DB evidence pension_income_band mismatch: kosis_202312:age65_population:lower30:2026-2030:pension"
+   },
+   "interpretation": "pension_income_band 메타데이터 불일치로 거부. 구간별 개별 호출 필요"
+  },
+  {
+   "call_id": 4,
+   "purpose": "basic_pension_staged_increase 파생 프로파일 탐침, 구간 lower30",
+   "payload": {
+    "bill_no": "2203602",
+    "cutoff_date": "2024-09-03",
+    "policy_domain": "기초연금",
+    "agency": "보건복지부",
+    "route_key": "transfer_recipient_delta",
+    "route_path": [
+     "이전지출",
+     "개인지원",
+     "기존급여인상차액"
+    ],
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+     "benefit_per_recipient": {
+      "value": 400000,
+      "unit": "KRW/person/month",
+      "source_ref": "의안 2203602 안 제5조의2제1항제1호: 소득인정액이 100분의30 이하인 사람에 대한 2026년의 기준연금액: 40만원"
+     }
+    },
+    "support_derivation": "basic_pension_staged_increase",
+    "pension_income_band": "lower30",
+    "support_derivation_note": "법안 제5조의2 단계 인상(2026 하위30%, 2027 하위50% 40만원). 모집단=공식 장래인구 65세 이상",
+    "selected_evidence_keys": [
+     "kosis_202312:age65_population:lower30:2026-2030:pension"
+    ],
+    "evidence_selection_reasons": {
+     "kosis_202312:age65_population:lower30:2026-2030:pension": "공식 KOSIS 2023.12 중위추계 65세 이상 인구(2023-12-14 공개, 발의일 이전). 인구이며 수급자 수가 아님"
+    }
+   },
+   "result": {
+    "error": "ValueError: basic pension needs reviewed differential payment and start assumptions"
+   },
+   "interpretation": "엔진이 '검토된 차액지급(감액) 및 시행시점 가정 근거 필요'로 계산 중단. 발의일(2024-09-03) 이전·자기 의안 제외 조건에서 해당 근거 행 없음. 금액 미산출."
+  },
+  {
+   "call_id": 5,
+   "purpose": "basic_pension_staged_increase 파생 프로파일 탐침, 구간 between30_50",
+   "payload": {
+    "bill_no": "2203602",
+    "cutoff_date": "2024-09-03",
+    "policy_domain": "기초연금",
+    "agency": "보건복지부",
+    "route_key": "transfer_recipient_delta",
+    "route_path": [
+     "이전지출",
+     "개인지원",
+     "기존급여인상차액"
+    ],
+    "start_year": 2026,
+    "years": 5,
+    "explicit_inputs": {
+     "benefit_per_recipient": {
+      "value": 400000,
+      "unit": "KRW/person/month",
+      "source_ref": "의안 2203602 안 제5조의2제1항제2호: 소득인정액이 100분의50 이하인 사람에 대한 2027년의 기준연금액: 40만원"
+     }
+    },
+    "support_derivation": "basic_pension_staged_increase",
+    "pension_income_band": "between30_50",
+    "support_derivation_note": "법안 제5조의2 단계 인상(2026 하위30%, 2027 하위50% 40만원). 모집단=공식 장래인구 65세 이상",
+    "selected_evidence_keys": [
+     "kosis_202312:age65_population:between30_50:2026-2030:pension"
+    ],
+    "evidence_selection_reasons": {
+     "kosis_202312:age65_population:between30_50:2026-2030:pension": "공식 KOSIS 2023.12 중위추계 65세 이상 인구(2023-12-14 공개, 발의일 이전). 인구이며 수급자 수가 아님"
+    }
+   },
+   "result": {
+    "error": "ValueError: basic pension needs reviewed differential payment and start assumptions"
+   },
+   "interpretation": "엔진이 '검토된 차액지급(감액) 및 시행시점 가정 근거 필요'로 계산 중단. 발의일(2024-09-03) 이전·자기 의안 제외 조건에서 해당 근거 행 없음. 금액 미산출."
+  }
+ ],
+ "computed_amount_by_year_won": null,
+ "computed_amount_note": "계산 미완료. 어떤 호출도 computed_review 상태에 도달하지 않음.",
+ "explicit_inputs_used": {
+  "benefit_per_recipient": "400,000원/인/월 (안 제5조의2제1항제1호·제2호)",
+  "payments_per_year": "12회/년 (기초연금 월 지급; 호출1에서만 사용)"
+ },
+ "selected_evidence_ids_attempted": [
+  "kosis_202312:age65_population:lower30:2026-2030:pension",
+  "kosis_202312:age65_population:between30_50:2026-2030:pension"
+ ],
+ "missing_variables": [
+  {
+   "variable": "recipient_count(구간별 기초연금 수급자 수: 하위30%, 30~50%, 2026~2030)",
+   "status": "no_eligible_candidate",
+   "note": "공식 65세 이상 인구 행(KOSIS 2023.12)은 있으나 인구≠수급자. 구간폭·실제 수급률을 적용할 검토된 근거가 발의일 이전 DB에 없음."
+  },
+  {
+   "variable": "existing_benefit_per_recipient(현행 기준연금액 2026·2027년 전망, 물가연동)",
+   "status": "no_eligible_candidate",
+   "note": "2024년 기준액 334,810원은 장애인연금 기초급여 행(mohw:disability_basic_monthly:2024)으로만 존재하며 장애인연금 파생 전용. 기초연금용 물가상승률 전망 근거 없음."
+  },
+  {
+   "variable": "차액지급계수(부부감액 20%·소득역전방지 감액·국민연금 연계감액 반영 실지급 비율)",
+   "status": "no_eligible_candidate",
+   "note": "엔진 메시지: 'basic pension needs reviewed differential payment and start assumptions'"
+  },
+  {
+   "variable": "시행시점 가정(공포 후 1년 시행 → 2026년 인상 적용 개시 월)",
+   "status": "no_eligible_candidate",
+   "note": "공포일 미정. 조문의 2026·2027년 연도 명시와 시행일의 관계에 대한 검토 근거 필요."
+  }
+ ],
+ "assumption_candidates_not_applied": [
+  "2028년 이후: 부칙 유효기간 삭제로 하위50%의 40만원이 유지된다고 해석 가능하나, 2028년 이후 물가연동 여부는 조문(제5조의2 제2항·제3항 '현행과 같음')에 따라 확인 필요.",
+  "재정 범위: 기초연금은 국비·지방비 분담 사업이므로 총지출(국비+지방비)과 국비분을 구분 표시해야 함. 국고보조율 근거 미선택."
+ ],
+ "items_not_estimable": [
+  {
+   "item": "안 제3조제3항 거주요건",
+   "reason": "대상자 범위가 대통령령에 위임, 인원 근거 없음, 신규 신청자부터 적용"
+  },
+  {
+   "item": "안 제10조제3항 국외 소득·재산 신고",
+   "reason": "행정절차 의무, 직접 비용 없음, 부정수급 감소효과 계량 근거 없음"
+  }
+ ],
+ "overall_status": "needs_input",
+ "summary": "주 비용항목(기준연금액 단계 인상)은 이전지출/개인지원/기존급여인상차액(transfer_recipient_delta)으로 라우팅. 법안 명시값(40만원)은 입력했으나 수급자 수·현행 기준연금액 전망·차액지급계수·시행시점 가정의 발의일 이전 검토 근거가 없어 금액 미산출. 거주요건·신고의무는 미추계."
+}

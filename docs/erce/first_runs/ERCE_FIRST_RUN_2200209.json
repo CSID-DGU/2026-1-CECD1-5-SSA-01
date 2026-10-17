@@ -1,0 +1,99 @@
+{
+  "bill_no": "2200209",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2200209",
+    "bill_name": "장애인고용촉진 및 직업재활법 일부개정법률안",
+    "propose_date": "2024-06-07",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제33조제3항",
+        "source_page": 3,
+        "source_quote": "“100분의60”을“100분의80”으로한다.",
+        "route_key": "direct_annual_amount",
+        "route_reason": "현재연간금액 계산기 임시입력경로. 부담금수입의 고용률별 세부산식·감독환수 모형은 없음.",
+        "change_summary": "최저임금 월환산액에 대한 고용부담기초액 하한60→80%. 국가기금 수입증가 방향. 고용률별 가산 및 무고용 월최저임금100% 규정 유지, 모든부담금을20%로 증가시키지 않음.",
+        "decision_reason": "최저임금 월환산액에 대한 고용부담기초액 하한60→80%. 국가기금 수입증가 방향. 고용률별 가산 및 무고용 월최저임금100% 규정 유지, 모든부담금을20%로 증가시키지 않음.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "variables": []
+      },
+      {
+        "article_ref": "제30조제5항·제31조제1항제2호",
+        "source_page": 3,
+        "source_quote": "고용장려금을다른용도로사용한경우",
+        "route_key": "direct_annual_amount",
+        "route_reason": "현재연간금액 계산기 임시입력경로. 부담금수입의 고용률별 세부산식·감독환수 모형은 없음.",
+        "change_summary": "직업재활시설 장려금 용도제한과 부당이득 환수 확대. 기존지급 예산 전체를 신규비용으로 계산하지 않음. 위반사업체·환수액·급여중단 효과는 별도 근거 필요.",
+        "decision_reason": "직업재활시설 장려금 용도제한과 부당이득 환수 확대. 기존지급 예산 전체를 신규비용으로 계산하지 않음. 위반사업체·환수액·급여중단 효과는 별도 근거 필요.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제33조제3항",
+      "verified": true
+    },
+    {
+      "article": "제30조제5항·제31조제1항제2호",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2200209",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "direct_annual_amount",
+    "payer": "government",
+    "fiscal_effect": "revenue_increase",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "direct_annual_amount",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "annual_amount": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "fiscal_direction": "고용부담금 수입증가, 장려금환수 수입증가 가능 및 지급중단 지출감소 별도",
+  "lower_route_ready": false,
+  "method_candidate_count": 0,
+  "missing_semantic_variables": [
+    "미달고용 사업체의 고용률 구간별 기준근로자·미고용 인원 실적",
+    "기존부담기초액·가산률·월최저임금·제외무고용집단",
+    "기업 고용행태변화와 장려금용도위반·환수규모 예측"
+  ],
+  "rejected_basis": [
+    "장애인 임금차액 보조모형을 부담금 수입증가에 전용하지 않음",
+    "무고용사업주 이미100%기초액을60→80%로 인상하지 않음",
+    "최저임금80%가 모든사업주의 실제새부담액이라고 단정하지 않음"
+  ],
+  "non_estimation_decision": null
+}

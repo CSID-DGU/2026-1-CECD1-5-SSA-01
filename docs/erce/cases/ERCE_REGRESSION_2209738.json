@@ -1,0 +1,293 @@
+{
+  "bill_no": "2209738",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "primary_payload_unchanged": true,
+  "primary_payload": {
+    "bill_no": "2209738",
+    "route_key": "transfer_child_asset_monthly",
+    "cutoff_date": "2026-10-12",
+    "start_year": 2026,
+    "years": 5,
+    "payer": "government",
+    "estimate_purpose": "reference_scenario",
+    "population_age_min": 8,
+    "population_age_max": 18,
+    "explicit_inputs": {
+      "recipient_count": {
+        "value": [
+          4797037,
+          4633713,
+          4477539,
+          4308517,
+          4089003
+        ],
+        "unit": "person/year",
+        "source_ref": "저장된KOSIS2023.12중위추계 원자료8~18세 남녀합산. 전체인구100%계좌개설·12개월지급 참고가정"
+      },
+      "benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문PDF5쪽 제44조의2제1항 월10만원정부적립금"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2026.1.1시행·매월지급.7월1일추계인구를연평균대리로적용한가정"
+      }
+    }
+  },
+  "primary_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "",
+    "routeKey": "transfer_child_asset_monthly",
+    "formulaKey": "TRANSFER_CHILD_ASSET_MONTHLY_V1",
+    "formula": "연도별 18세 미만 아동 수 × 1인당 월 적립액 × 연간 지원개월 수",
+    "annualAmountsThousand": [
+      5756444400,
+      5560455600,
+      5373046800,
+      5170220400,
+      4906803600
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "저장된KOSIS2023.12중위추계 원자료8~18세 남녀합산. 전체인구100%계좌개설·12개월지급 참고가정",
+      "원문PDF5쪽 제44조의2제1항 월10만원정부적립금",
+      "원문2026.1.1시행·매월지급.7월1일추계인구를연평균대리로적용한가정"
+    ],
+    "methodEvidenceKeys": [],
+    "selectedMethods": [],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          4797037,
+          4633713,
+          4477539,
+          4308517,
+          4089003
+        ],
+        "unit": "person/year",
+        "source_class": "target_explicit",
+        "source_ref": "저장된KOSIS2023.12중위추계 원자료8~18세 남녀합산. 전체인구100%계좌개설·12개월지급 참고가정",
+        "is_assumption": false
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF5쪽 제44조의2제1항 월10만원정부적립금",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2026.1.1시행·매월지급.7월1일추계인구를연평균대리로적용한가정",
+        "is_assumption": false
+      }
+    }
+  },
+  "education_payload": {
+    "bill_no": "2209738",
+    "route_key": "education_training_package_freeze",
+    "support_derivation": "education_training_package_freeze",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-12",
+    "start_year": 2026,
+    "years": 5,
+    "payer": "government",
+    "training_package_confirmed": true,
+    "training_price_mode": "freeze_reference_budget",
+    "training_task_scope_note": "금융교육의 콘텐츠제작·강사육성·교재·교육을 동일 교육통합과업으로 준용",
+    "training_scale_note": "장애인교육과 아동금융교육 대상은 다르나 같은 연간사업규모를 준용하는 정답의 가정",
+    "training_overlap_note": "적립금과는 별도, 콘텐츠·강사·교재·교육비는 패키지내부로 중복합산하지 않음",
+    "training_price_note": "2025교육사업7억원을2026~2030 매년실시·가격동결하는 선례. 최신공식 단가 아님",
+    "explicit_inputs": {},
+    "selected_evidence_keys": [
+      "2209738:education_training_annual_budget:2025"
+    ],
+    "evidence_selection_reasons": {
+      "2209738:education_training_annual_budget:2025": "강사육성·콘텐츠·교재·교육이 포함된 전체사업 선례"
+    },
+    "selected_method_keys": [
+      "2209738:education_training_package_freeze"
+    ],
+    "method_selection_reasons": {
+      "2209738:education_training_package_freeze": "통합교육과업·매년시행·가격동결 확인"
+    },
+    "method_confirmations": {
+      "2209738:education_training_package_freeze": {
+        "training_task_scope_note": "금융교육의 콘텐츠제작·강사육성·교재·교육을 동일 교육통합과업으로 준용",
+        "training_scale_note": "장애인교육과 아동금융교육 대상은 다르나 같은 연간사업규모를 준용하는 정답의 가정",
+        "training_overlap_note": "적립금과는 별도, 콘텐츠·강사·교재·교육비는 패키지내부로 중복합산하지 않음",
+        "training_price_note": "2025교육사업7억원을2026~2030 매년실시·가격동결하는 선례. 최신공식 단가 아님"
+      }
+    }
+  },
+  "education_annual_thousand": [
+    700000,
+    700000,
+    700000,
+    700000,
+    700000
+  ],
+  "education_total_eok": 35,
+  "combined_annual_thousand": [
+    5757144400,
+    5561155600,
+    5373746800,
+    5170920400,
+    4907503600
+  ],
+  "total_eok": 267704.708,
+  "gold_display_total_eok": 267705,
+  "raw_error_percent": 0.00010907528810288657,
+  "annual_eok_display": [
+    57571,
+    55612,
+    53737,
+    51709,
+    49075
+  ],
+  "annual_display_matches": 5,
+  "whole_scope_complete_against_gold": true,
+  "reusable_web_interface_result": {
+    "status": "computed_review",
+    "routeKey": "education_training_package_freeze",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      700000,
+      700000,
+      700000,
+      700000,
+      700000
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "annual_amount_won": 700000000,
+        "price_frozen": true,
+        "scope": "content_trainer_teaching_whole_program"
+      },
+      {
+        "year": 2027,
+        "annual_amount_won": 700000000,
+        "price_frozen": true,
+        "scope": "content_trainer_teaching_whole_program"
+      },
+      {
+        "year": 2028,
+        "annual_amount_won": 700000000,
+        "price_frozen": true,
+        "scope": "content_trainer_teaching_whole_program"
+      },
+      {
+        "year": 2029,
+        "annual_amount_won": 700000000,
+        "price_frozen": true,
+        "scope": "content_trainer_teaching_whole_program"
+      },
+      {
+        "year": 2030,
+        "annual_amount_won": 700000000,
+        "price_frozen": true,
+        "scope": "content_trainer_teaching_whole_program"
+      }
+    ],
+    "sourceRefs": [
+      "2209738 비용추계서25C2156 PDF3~4쪽,2025장애인식개선교육 예산",
+      "2209738 비용추계서25C2156 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2209738:education_training_package_freeze"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2209738:education_training_package_freeze",
+        "source_bill_no": "2209738",
+        "available_at": "2025-04-28",
+        "reviewed_at": "2026-10-12",
+        "payer": "government",
+        "family_key": "education_training_package_freeze",
+        "source_ref": "2209738 비용추계서25C2156 PDF3~4쪽",
+        "match_groups": [
+          [
+            "교육"
+          ],
+          [
+            "강사",
+            "교재",
+            "콘텐츠"
+          ],
+          [
+            "아동",
+            "자산",
+            "금융",
+            "인식개선"
+          ]
+        ],
+        "allowed_routes": [
+          "education_training_package_freeze"
+        ],
+        "support_derivation": "education_training_package_freeze",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2209738:education_training_annual_budget:2025"
+        ],
+        "required_confirmations": [
+          "training_task_scope_note",
+          "training_scale_note",
+          "training_overlap_note",
+          "training_price_note"
+        ],
+        "baseline_check": "강사육성·교재·교육 통합사업 예산으로 준용. 현금 적립금과 분리하며 홍보비나 강사비 중복 추가 금지",
+        "method_steps": [
+          "교육·강사육성·교재제작 통합과업이면 교육사업 예산 후보를 검토",
+          "2025장애인식개선교육7억원을 아동 금융교육에 동일규모 준용하는 가정 확인",
+          "매년실시·가격동결 확인 후 기준연간예산을 반복",
+          "기존 아동적립금 산식과 인구를 변경하지 않고 교육비만 합산"
+        ],
+        "limitation": "정답 확인 후 적재한 선례. 모든 교육사업에7억원 강제 금지. 과업·규모·가격동결 미확인시 입력요구",
+        "lower_variable_keys": [
+          "education_training_annual_budget"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "통합교육과업·매년시행·가격동결 확인",
+        "confirmed_assumptions": {
+          "training_task_scope_note": "금융교육의 콘텐츠제작·강사육성·교재·교육을 동일 교육통합과업으로 준용",
+          "training_scale_note": "장애인교육과 아동금융교육 대상은 다르나 같은 연간사업규모를 준용하는 정답의 가정",
+          "training_overlap_note": "적립금과는 별도, 콘텐츠·강사·교재·교육비는 패키지내부로 중복합산하지 않음",
+          "training_price_note": "2025교육사업7억원을2026~2030 매년실시·가격동결하는 선례. 최신공식 단가 아님"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          700000000,
+          700000000,
+          700000000,
+          700000000,
+          700000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2209738 비용추계서25C2156 PDF3~4쪽,2025장애인식개선교육 예산",
+        "is_assumption": true
+      }
+    }
+  },
+  "limitation": "정부적립금은 최초정답미열람에서 맞았지만 교육은 정답확인후보강. 전체독립성과 아님"
+}

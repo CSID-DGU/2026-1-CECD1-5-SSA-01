@@ -1,0 +1,44 @@
+{
+  "bill_no": "2203688",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C3571",
+  "gold_date": "2024-10-21",
+  "first_total_won": null,
+  "gold_detail_total_won": 448656000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 3,
+  "quote_total": 3,
+  "formula_family_match": "정부비용지원 산식 방향 일치, 하위 인건비+운영비 패키지 구체식 미선택",
+  "gold_parameters": {
+    "tertiary_hospitals": 47,
+    "existing_supported_hospitals": 10,
+    "new_supported_hospitals": 37,
+    "staff_per_hospital": 3,
+    "staff_reference_price_won": 45800000,
+    "operating_reference_price_won": 42600000,
+    "payment_months": 12,
+    "start_year": 2026,
+    "years": 5,
+    "nominal_wage_rates": {
+      "2025": 0.036,
+      "2026": 0.039,
+      "2027": 0.038,
+      "2028": 0.038,
+      "2029": 0.038,
+      "2030": 0.038
+    },
+    "national_share_reference": 0.5
+  },
+  "gold_budget_source": "2025복지부 장애인 의료기관 이용편의 지원 예산안, 수어통역·전담코디네이터 등3명+운영비",
+  "gold_scope": "상급종합병원37개에 국비·지방비 합계 지원. 노력의무인 일반종합병원 제외.",
+  "first_gaps": [
+    "기관별 지원 패키지 단가·인원·배제 병원수",
+    "인건비 명목임금 상승과 운영비 동결 분리",
+    "국비50%가 아니라 국비+지방비 총액의 산정범위"
+  ],
+  "well_handled": "병원 의무비용과 공공지원을 분리하고 과태료 상한을 예상수입으로 쓰지 않음",
+  "source_units_note": "추계서 본문·표는 인당45.8백만원 및 운영비42.6백만원을 월단가로 두고12개월을 곱한다. 원예산의 연간 단가인지 여부는 독립 확인 전 확정불가. 참고재현과 실제 연간 단가 기준 계산은 구분 필요.",
+  "gold_penalty_scope_note": "정답은 과태료 별도금액·명시적미추계판정을 제시하지 않음. 정답이 과태료를3호미추계했다고 단정하지 않음.",
+  "reinforcement_performed": false
+}

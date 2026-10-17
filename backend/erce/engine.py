@@ -15,6 +15,7 @@ from backend.erce.notification_evidence_registry import notification_formula_inp
 from backend.erce.diagnostic_evidence_registry import diagnostic_formula_inputs
 from backend.erce.route_tree import route_for_path
 from backend.erce.variable_evidence_store import evidence_payload_from_db
+from backend.erce.method_evidence_store import validate_selected_methods
 
 
 @dataclass(frozen=True)
@@ -28,6 +29,7 @@ class ERCEEstimate:
     source_refs: tuple[str, ...]
     resolved_variables: dict[str, ResolvedVariable]
     evidence_mode: str = "holdout"
+    method_evidence_keys: tuple[str, ...] = ()
 
 
 def estimate_routed_item(payload: Mapping[str, Any]) -> ERCEEstimate:
@@ -35,11 +37,18 @@ def estimate_routed_item(payload: Mapping[str, Any]) -> ERCEEstimate:
     mode = str(payload.get("evidence_mode") or "holdout")
     if mode not in {"holdout", "development_review"}:
         raise ValueError("invalid evidence_mode")
+    from backend.erce.variable_evidence_store import DEFAULT_VARIABLE_DB
+    from pathlib import Path
+    methods = validate_selected_methods(payload,
+        db_path=Path(payload.get("variable_db_path") or DEFAULT_VARIABLE_DB))
     payload = evidence_payload_from_db(payload)
     result = _estimate_hydrated_item(payload)
     keys = payload.get("selected_evidence_keys") or []
     return replace(result, evidence_mode=mode,
-                   evidence_key=",".join(keys) if keys else result.evidence_key)
+                   evidence_key=",".join(keys) if keys else result.evidence_key,
+                   method_evidence_keys=tuple(row["method_key"] for row in methods),
+                   source_refs=tuple(dict.fromkeys((*result.source_refs,
+                       *(row["source_ref"] for row in methods)))))
 
 
 def _estimate_hydrated_item(payload: Mapping[str, Any]) -> ERCEEstimate:
@@ -53,6 +62,20 @@ def _estimate_hydrated_item(payload: Mapping[str, Any]) -> ERCEEstimate:
     subtype = str(payload.get("subtype") or "")
     formula = formula_for_route(route_key)
     if route_key in DIRECT_FORMULA_ROUTE_KEYS:
+        if payload.get("support_derivation") == "child_allowance_birth_order_weighted" and payload.get("start_year") is None:
+            raise ValueError("missing ERCE formula variables: start_year")
+        if payload.get("support_derivation") in {"student_income_interest", "center_annual_designation", "child_allowance_net_population", "child_allowance_indexed_population", "child_allowance_under18_indexed_floor", "parent_benefit_age_indexed_floor"} and payload.get("start_year") is None:
+            raise ValueError("missing ERCE formula variables: start_year")
+        from backend.erce.support_method_operands import prepare_support_operands
+        payload = prepare_support_operands(payload)
+        if route_key == "new_borrowing_interest_support":
+            from backend.erce.loan_financing_evidence import prepare_loan_interest_projection
+            payload = prepare_loan_interest_projection(payload)
+        if route_key == "transfer_recipient_delta":
+            from backend.erce.multichild_scholarship_evidence import prepare_scholarship_projection
+            from backend.erce.scholarship_cap_evidence import prepare_scholarship_caps
+            payload = prepare_scholarship_caps(payload)
+            payload = prepare_scholarship_projection(payload)
         return _estimate_direct_formula_item(payload, formula)
     if route_key == "committee_operation" and "committee_components" in (payload.get("explicit_inputs") or {}):
         return _estimate_direct_formula_item(payload, formula)
@@ -409,6 +432,10 @@ def _estimate_research_item(payload: Mapping[str, Any], formula: Any) -> ERCEEst
         )
     except KeyError:
         benchmark = {}
+    if route == "research_survey" and payload.get("linked_plan_recurrence_years") is not None:
+        # A generic agency survey frequency is not evidence for a linked
+        # standards review. Keep prices, but require a separately selected cycle.
+        benchmark.pop("recurrence_interval_years",None)
     benchmark = {**benchmark, **selected_precedent_inputs(payload)}
     # Published budget comparables remain assumptions about the NEW target.
     # A law's explicit annual/three-year frequency overrides any comparable.
@@ -417,11 +444,12 @@ def _estimate_research_item(payload: Mapping[str, Any], formula: Any) -> ERCEEst
         target_explicit=payload.get("explicit_inputs"),
         target_current_actual=payload.get("actual_inputs"),
         official_standard=payload.get("official_inputs"),
+        calculated_estimate=payload.get("calculated_inputs"),
         precedent_assumption=benchmark,
     )
     # Phase is independent of statutory recurrence: an existing survey may
     # put the next occurrence after the first estimation year.
-    optional_keys = ("first_occurrence_offset_years", "growth_rate", "growth_rates_by_year", "base_year")
+    optional_keys = ("first_occurrence_offset_years", "last_occurrence_year", "growth_rate", "growth_rates_by_year", "base_year")
     if route == "research_plan":
         optional_keys += ("repeat_plan_unit_cost",)
     optional, _ = resolve_formula_variables(
@@ -434,6 +462,20 @@ def _estimate_research_item(payload: Mapping[str, Any], formula: Any) -> ERCEEst
     resolved.update(optional)
     if missing:
         raise ValueError("missing ERCE formula variables: " + ", ".join(missing))
+    if "last_occurrence_year" in resolved and "first_occurrence_offset_years" not in resolved:
+        last = resolved["last_occurrence_year"]
+        start = payload.get("start_year")
+        cycle = resolved["recurrence_interval_years"].value
+        if (isinstance(last.value, bool) or not isinstance(last.value, int) or last.unit != "year"
+                or not last.source_ref or isinstance(start, bool) or not isinstance(start, int)
+                or last.value >= start or isinstance(cycle, bool) or not isinstance(cycle, (int, float))
+                or cycle < 1 or cycle != int(cycle)):
+            raise ValueError("invalid historical research occurrence year/cycle")
+        offset = (last.value - start) % int(cycle)
+        resolved["first_occurrence_offset_years"] = ResolvedVariable(
+            key="first_occurrence_offset_years", value=offset, unit="year",
+            source_class="calculated_estimate", source_ref=last.source_ref,
+            is_assumption=last.is_assumption)
     result = resolve_general_cost(request_from_dict({
         "cost_nature": "goods_services",
         "component": route,

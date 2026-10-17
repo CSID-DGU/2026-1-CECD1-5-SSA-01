@@ -1,0 +1,158 @@
+{
+  "bill_no": "2212766",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2212766",
+    "bill_name": "장애인활동 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-09-08",
+    "articles": [
+      {
+        "article_ref": "제3조제4항",
+        "source_quote": "국가는물가상승률등을고려하여활동지원인력의적정인건비",
+        "source_page": 5,
+        "change_summary": "적정인건비기준마련.물가언급만으로모든인건비에2%추가안함.기준수준/공공지원연계변화미확정",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "적정인건비기준마련.물가언급만으로모든인건비에2%추가안함.기준수준/공공지원연계변화미확정",
+        "route_key": "",
+        "route_reason": "비용유발/기존사업/위임범위검토용후보",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조의2제2항",
+        "source_quote": "제3조의2제2항을삭제한다.",
+        "source_page": 5,
+        "change_summary": "장애실태조사포함실시조항삭제.별도활동지원조사의기존진행여부/현행법제1항주기추가확인필요",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "장애실태조사포함실시조항삭제.별도활동지원조사의기존진행여부/현행법제1항주기추가확인필요",
+        "route_key": "research_survey",
+        "route_reason": "비용유발/기존사업/위임범위검토용후보",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조의3제1항",
+        "source_quote": "5년단위로다음",
+        "source_page": 5,
+        "change_summary": "중앙기본계획5년,계획과업범위가다른부처계획가격자동전용안함",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "중앙기본계획5년,계획과업범위가다른부처계획가격자동전용안함",
+        "route_key": "research_plan",
+        "route_reason": "비용유발/기존사업/위임범위검토용후보",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조의3제2항",
+        "source_quote": "따라매년시행계획을수립ㆍ시행하여야한다.",
+        "source_page": 6,
+        "change_summary": "지방연간시행계획.중앙용역단가를지자체수만큼곱하지않음.기존행정력수행인지검토",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "지방연간시행계획.중앙용역단가를지자체수만큼곱하지않음.기존행정력수행인지검토",
+        "route_key": "quantity_unit",
+        "route_reason": "비용유발/기존사업/위임범위검토용후보",
+        "variables": []
+      },
+      {
+        "article_ref": "제31조·제32조",
+        "source_quote": "운영비로구분하여청구하고",
+        "source_page": 7,
+        "change_summary": "인건비/운영비분리청구·지급.분리자체는총액증가아님,전산개선/적정인건비연계추가계획확인",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "인건비/운영비분리청구·지급.분리자체는총액증가아님,전산개선/적정인건비연계추가계획확인",
+        "route_key": "",
+        "route_reason": "비용유발/기존사업/위임범위검토용후보",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "calculations": [
+    {
+      "ref": "제3조의2제2항",
+      "payload": {
+        "bill_no": "2212766",
+        "route_key": "research_survey",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1"
+      }
+    },
+    {
+      "ref": "제3조의3제1항",
+      "payload": {
+        "bill_no": "2212766",
+        "route_key": "research_plan",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5,
+        "explicit_inputs": {
+          "recurrence_interval_years": {
+            "value": 5,
+            "unit": "year",
+            "source_ref": "원문제3조의3제1항5년단위"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "plan_unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "PERIODIC_RESEARCH_PLAN_V1"
+      }
+    },
+    {
+      "ref": "제3조의3제2항",
+      "payload": {
+        "bill_no": "2212766",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1"
+      }
+    }
+  ],
+  "whole_bill_total": null,
+  "required_slots_filled": 1,
+  "required_slot_count": 6,
+  "rejected_references": "2205985사회복지사보수조사178백만원은보수조사한정으로활동지원전체실태와과업이달라자동선택안함.예약검증셋2203298경계선지능연구단가재사용안함",
+  "limitation": "5개비용후보의순증판정미완성.민간활동지원인력을공무원신설정원으로계산안함.2027시작임시가정"
+}

@@ -1,0 +1,215 @@
+{
+  "bill_no": "2200482",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "items": {
+    "operation": {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2200482:plan:central_centers:reviewed,2200482:plan:regional_centers:reviewed,2200482:plan:annual_center_cost:reviewed",
+      "annual_amounts_thousand": [
+        1950000,
+        1950000,
+        1950000,
+        1950000,
+        1950000
+      ],
+      "source_refs": [
+        "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+        "2200482 비용추계서24C0850 PDF3~5쪽 복지부 별도제출 사업계획"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            1950000000,
+            1950000000,
+            1950000000,
+            1950000000,
+            1950000000
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200482:submitted_elder_protection_plan"
+      ]
+    },
+    "project": {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2200482:plan:regional_centers:reviewed,2200482:plan:helpers_per_center:reviewed,2200482:plan:monthly_helper_payment:reviewed",
+      "annual_amounts_thousand": [
+        86754,
+        86754,
+        86754,
+        86754,
+        86754
+      ],
+      "source_refs": [
+        "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+        "2200482 비용추계서24C0850 PDF3~5쪽 복지부 별도제출 사업계획"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            86754000,
+            86754000,
+            86754000,
+            86754000,
+            86754000
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200482:submitted_elder_protection_plan"
+      ]
+    },
+    "staff": {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2200482:plan:central_staff:reviewed,2200482:plan:regional_centers:reviewed,2200482:plan:staff_per_center:reviewed,2200482:plan:annual_staff_costs:reviewed",
+      "annual_amounts_thousand": [
+        2958768,
+        3050784,
+        3145635,
+        3243483,
+        3344328
+      ],
+      "source_refs": [
+        "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+        "2200482 비용추계서24C0850 PDF3~5쪽 복지부 별도제출 사업계획"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            2958768000,
+            3050784000,
+            3145635000,
+            3243483000,
+            3344328000
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200482:submitted_elder_protection_plan"
+      ]
+    },
+    "research": {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2200482:plan:initial_research_cost:reviewed",
+      "annual_amounts_thousand": [
+        50000,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_refs": [
+        "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+        "2200482 비용추계서24C0850 PDF3~5쪽 복지부 별도제출 사업계획"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            50000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200482:submitted_elder_protection_plan"
+      ]
+    },
+    "system": {
+      "route_key": "direct_annual_amount",
+      "subtype": "",
+      "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+      "formula": "검증된 연간 금액",
+      "evidence_key": "2200482:plan:initial_system_cost:reviewed",
+      "annual_amounts_thousand": [
+        300000,
+        0,
+        0,
+        0,
+        0
+      ],
+      "source_refs": [
+        "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+        "2200482 비용추계서24C0850 PDF3~5쪽 복지부 별도제출 사업계획"
+      ],
+      "resolved_variables": {
+        "annual_amount": {
+          "key": "annual_amount",
+          "value": [
+            300000000,
+            0,
+            0,
+            0,
+            0
+          ],
+          "unit": "KRW/year",
+          "source_class": "calculated_estimate",
+          "source_ref": "2200482 비용추계서24C0850 PDF3~5쪽; 복지부 별도제출 예상사업계획 및 표3",
+          "is_assumption": true
+        }
+      },
+      "evidence_mode": "development_review",
+      "method_evidence_keys": [
+        "2200482:submitted_elder_protection_plan"
+      ]
+    }
+  },
+  "annual_thousand": [
+    5345522,
+    5087538,
+    5182389,
+    5280237,
+    5381082
+  ],
+  "total_thousand": 26276768,
+  "gold_total_thousand": 26277000,
+  "difference_percent": 0.0008829013966586748,
+  "covered_items": 5,
+  "gold_items": 5,
+  "production_activity_status": "needs_input",
+  "production_missing_variables": [
+    "activity_months"
+  ],
+  "production_whole_bill_total": null,
+  "limitation": "정답표 재현이지 독립추계 성공 아님. 사업비 월단가/연간표 불일치 미해결; 지급기간 확인 전 전체금액 확정 금지"
+}

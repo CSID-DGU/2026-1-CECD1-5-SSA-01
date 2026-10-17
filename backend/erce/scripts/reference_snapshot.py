@@ -2,25 +2,31 @@
 import argparse
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 from backend.erce.variable_evidence_store import DEFAULT_VARIABLE_DB, save_variable_rows
-from backend.erce.official_salary_store import save_official_salary_rates
+from backend.erce.official_salary_store import SCHEMA as SALARY_SCHEMA, save_official_salary_rates
+from backend.erce.method_evidence_store import save_method_rows
 
 DEFAULT_SNAPSHOT = Path(__file__).resolve().parents[1] / "data/reference_snapshot.json"
 
 
 def export_snapshot(db_path, snapshot_path):
-    with sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(Path(db_path).resolve().as_uri() + "?mode=ro", uri=True)) as db:
         db.row_factory = sqlite3.Row
         variables = [json.loads(row[0]) for row in db.execute(
             "SELECT row_json FROM erce_variable_evidence ORDER BY evidence_key")]
         salaries = [dict(row) for row in db.execute(
             "SELECT * FROM erce_official_salary_rates ORDER BY year,schedule,grade,step")]
+        methods = ([json.loads(row[0]) for row in db.execute(
+            "SELECT row_json FROM erce_method_cases ORDER BY method_key")]
+            if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='erce_method_cases'").fetchone()
+            else [])
     snapshot_path = Path(snapshot_path)
     snapshot_path.parent.mkdir(parents=True, exist_ok=True)
     snapshot_path.write_text(json.dumps({"version": 1, "variables": variables,
-                                        "official_salary_rates": salaries}, ensure_ascii=False,
+                                        "official_salary_rates": salaries, "methods": methods}, ensure_ascii=False,
                                        indent=2) + "\n", encoding="utf-8")
     return len(variables), len(salaries)
 
@@ -29,8 +35,14 @@ def import_snapshot(db_path, snapshot_path):
     data = json.loads(Path(snapshot_path).read_text(encoding="utf-8"))
     if data.get("version") != 1:
         raise ValueError("unsupported ERCE snapshot version")
-    return (save_variable_rows(data["variables"], Path(db_path)),
-            save_official_salary_rates(data["official_salary_rates"], Path(db_path)))
+    counts = (save_variable_rows(data["variables"], Path(db_path)),
+              save_official_salary_rates(data["official_salary_rates"], Path(db_path))
+              if data["official_salary_rates"] else 0)
+    if not data["official_salary_rates"]:
+        with closing(sqlite3.connect(db_path)) as db, db:
+            db.executescript(SALARY_SCHEMA)
+    save_method_rows(data.get("methods", []), Path(db_path))
+    return counts
 
 
 if __name__ == "__main__":

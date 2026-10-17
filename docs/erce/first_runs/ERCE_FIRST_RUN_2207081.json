@@ -1,0 +1,229 @@
+{
+  "bill_no": "2207081",
+  "bill_name": "장애인고용촉진 및 직업재활법 일부개정법률안",
+  "proposer": "정혜경",
+  "propose_date": "2024-12-30",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "article": "제33조제3항",
+      "page": 3,
+      "quote": "최저임금액",
+      "verified": true
+    },
+    {
+      "article": "제33조제3항",
+      "page": 3,
+      "quote": "2분의1 이상의",
+      "verified": true
+    },
+    {
+      "article": "제33조제3항",
+      "page": 3,
+      "quote": "최저임금액의2배",
+      "verified": true
+    }
+  ],
+  "ai_decisions": [
+    {
+      "article": "제33조제3항",
+      "role": "government_employer_expense",
+      "route": "government_employment_levy_delta",
+      "reason": "국가·지자체도 고용주로서 납부지출 증가 검토. 100%이상기초·50%이상가산·무고용200%는 기존80%모델과 다름"
+    },
+    {
+      "article": "제33조제3항",
+      "role": "fund_receipts",
+      "decision": "separate_scope_review",
+      "reason": "정부부담금수입과고용주지출을 분리. 민간부담금을정부고용주지출에합산하거나수입과상계하지 않음"
+    }
+  ],
+  "payload": {
+    "bill_no": "2207081",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "government_employment_levy_delta",
+    "support_derivation": "government_employment_levy_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "levy_payer_scope": "state_local_employer",
+    "government_levy_scenario_confirmed": true,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "reviewed_table_year_offset": 0,
+    "levy_table_year_discrepancy_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지.",
+    "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+    "levy_band_note": "새원문은기초액100%이상·가산50%이상·무고용200%. 기존80%및구간차이절반가산·무고용100%산식을 그대로 쓰면 안됨. 개정구간가산 mapping 미확정",
+    "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+    "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정.",
+    "selected_evidence_keys": [
+      "2200209:levy_old_bands:reviewed",
+      "2200209:government_unfilled_by_band:reviewed",
+      "2200209:levy_minimum_monthly_base:reviewed",
+      "2200209:government_non_civil_share:reviewed",
+      "2200209:levy_payment_months:reviewed",
+      "2200209:levy_minimum_growth:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2200209:levy_old_bands:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_unfilled_by_band:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_monthly_base:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_new_floor_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_band_difference_weight:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_non_civil_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_payment_months:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_growth:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인"
+    },
+    "selected_method_keys": [
+      "2200209:government_employer_levy_delta"
+    ],
+    "method_selection_reasons": {
+      "2200209:government_employer_levy_delta": "정부고용주지출과기금수입 분리 및 구간별차액 구조만 참조. 새법안 구간기초액 산식은 기존선례와 다름"
+    },
+    "method_confirmations": {
+      "2200209:government_employer_levy_delta": {
+        "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+        "levy_band_note": "새원문은기초액100%이상·가산50%이상·무고용200%. 기존80%및구간차이절반가산·무고용100%산식을 그대로 쓰면 안됨. 개정구간가산 mapping 미확정",
+        "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+        "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정."
+      }
+    },
+    "explicit_inputs": {
+      "levy_new_floor_share": {
+        "value": 1,
+        "unit": "ratio",
+        "source_ref": "2207081 원문PDF3쪽: 최저임금액의60%이상에서최저임금액으로"
+      },
+      "zero_employment_minimum_multiplier": {
+        "value": 2,
+        "unit": "multiplier",
+        "source_ref": "2207081 원문PDF3쪽: 무고용 최저임금액2배"
+      }
+    }
+  },
+  "web_result": {
+    "status": "needs_input",
+    "routeKey": "government_employment_levy_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [
+      "levy_band_difference_weight"
+    ],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [
+      {
+        "method_key": "2200209:government_employer_levy_delta",
+        "source_bill_no": "2200209",
+        "available_at": "2024-08-29",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "government_employment_levy_delta",
+        "source_ref": "2200209 비용추계서24B0612 PDF5~11쪽",
+        "match_groups": [
+          [
+            "장애인"
+          ],
+          [
+            "부담기초액",
+            "고용부담금"
+          ],
+          [
+            "고용",
+            "사업주"
+          ]
+        ],
+        "allowed_routes": [
+          "government_employment_levy_delta"
+        ],
+        "support_derivation": "government_employment_levy_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2200209:levy_old_bands:reviewed",
+          "2200209:government_unfilled_by_band:reviewed",
+          "2200209:levy_minimum_monthly_base:reviewed",
+          "2200209:levy_new_floor_share:reviewed",
+          "2200209:levy_band_difference_weight:reviewed",
+          "2200209:government_non_civil_share:reviewed",
+          "2200209:levy_payment_months:reviewed",
+          "2200209:levy_minimum_growth:reviewed"
+        ],
+        "required_confirmations": [
+          "government_payer_note",
+          "levy_band_note",
+          "levy_overlap_note",
+          "levy_timing_note"
+        ],
+        "method_steps": [
+          "기금징수 수입과 정부고용주 납부지출을 각각 탐지, 상계금지",
+          "5고용률구간 원기초액 비율·개정하한과 가산 가중치 계산, 무고용100%유지",
+          "정부공무원 미고용인원×월기초액 차이×12개월",
+          "비공무원 추가비중6.4% 참고가산, 미래고용행태·감면반영여부 확인",
+          "고용연도와 다음해 납부연도 분리, 정답표가격년 차이는 자기회귀만 허용"
+        ],
+        "baseline_check": "국가납부자 지출을 단순수입증가로 미대상처리하지 않음. 민간·공공기관 전체부담금을 정부지출로 잡지 않음",
+        "limitation": "2023미고용·구간구성·비공무원비중 동결. 고용행태와 교육감·일시납감면 미반영 참고모형",
+        "lower_variable_keys": [
+          "levy_old_bands",
+          "government_unfilled_by_band",
+          "levy_minimum_monthly_base",
+          "levy_new_floor_share",
+          "levy_band_difference_weight",
+          "government_non_civil_share",
+          "levy_payment_months",
+          "levy_minimum_growth"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "정부고용주지출과기금수입 분리 및 구간별차액 구조만 참조. 새법안 구간기초액 산식은 기존선례와 다름",
+        "confirmed_assumptions": {
+          "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+          "levy_band_note": "새원문은기초액100%이상·가산50%이상·무고용200%. 기존80%및구간차이절반가산·무고용100%산식을 그대로 쓰면 안됨. 개정구간가산 mapping 미확정",
+          "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+          "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정."
+        }
+      }
+    ],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200209:levy_band_difference_weight:reviewed",
+        "variableKey": "levy_band_difference_weight",
+        "value": 0.5,
+        "unit": "ratio",
+        "sourceRef": "2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-08-29",
+        "limitation": "과거고용률구간·미고용인원·비공무원비중동결, 고용행태변화·감면미반영. 기금수입이 아닌 정부고용주지출",
+        "scope": "국가·지자체 공무원 및 비공무원 납부지출",
+        "serviceFunction": "government_employment_levy_delta",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "annual_amount": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "levy_band_difference_weight": {
+        "status": "candidates_need_review",
+        "candidateCount": 1,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "formula_compatibility": "상위 구간차액 유형만 일치. 기존helper무고용100%고정·가산차이절반 모델은 새법안에 적용불가",
+  "first_total_eok": null,
+  "error_percent": null
+}

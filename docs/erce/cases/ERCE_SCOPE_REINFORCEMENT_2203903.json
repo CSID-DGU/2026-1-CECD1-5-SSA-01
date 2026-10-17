@@ -1,0 +1,156 @@
+{
+  "bill_no": "2203903",
+  "review_date": "2026-10-09",
+  "post_answer_reinforcement": true,
+  "original_first_run_unchanged": true,
+  "corrected_draft": {
+    "bill_no": "2203903",
+    "bill_name": "장애인활동 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-11",
+    "articles": [
+      {
+        "article_ref": "제3조의2",
+        "source_quote": "관한조사를3년마다실시하",
+        "source_page": 5,
+        "change_summary": "3년실태조사신설.장애실태조사에포함실시가능하므로독립계약실시시가격후보와기존조사통합경우구분",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "3년실태조사신설.장애실태조사에포함실시가능하므로독립계약실시시가격후보와기존조사통합경우구분",
+        "route_key": "research_survey",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제32조제2항",
+        "source_quote": "정인건비기준을정하고제1항에따라급여비용을정할때이를",
+        "source_page": 7,
+        "change_summary": "적정인건비기준·급여비반영수준미명시.기존동일유형의조건부3호미추계근거검토",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "적정인건비기준·급여비반영수준미명시.기존동일유형의조건부3호미추계근거검토",
+        "route_key": "",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제31조제1항",
+        "source_quote": "운영비를구분하여청구하고",
+        "source_page": 7,
+        "change_summary": "인건비운영비분리청구는그자체로급여총액증가아님.전산/시정/과징금집행의순증계획미확정",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "인건비운영비분리청구는그자체로급여총액증가아님.전산/시정/과징금집행의순증계획미확정",
+        "route_key": "",
+        "route_reason": "추계가능범위/기존사업및가정분리",
+        "variables": []
+      }
+    ]
+  },
+  "original_quote_verified": [
+    true,
+    true,
+    false
+  ],
+  "corrected_quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "survey_annual_thousand": [
+    90000,
+    0,
+    0,
+    90000,
+    0
+  ],
+  "pay_non_estimation": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2212766:pay_standard_not_estimated",
+    "reason": "급여비용변동가능성은있으나적정인건비수준과급여산정반영방식미확정으로인건비영향미추계",
+    "source_ref": "2212766 비용추계서25C4872 PDF3쪽",
+    "source_quote": "현시점에서 활동지원인력의 적정 인건비수준과 급여비용 산정 시 반영 방식 등을 합리적으로 예측할 수 없어 비용추계의 대상에서 제외",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "pay_standard_scope_review": "원문제32조제2항에적정임금수치/수준이없음.원문기반역사적계획미확정시나리오",
+      "benefit_reflection_review": "사업급여반영수준/방법이원문미명시,후속확정계획있으면이판정재사용안함"
+    },
+    "confirmed_facts": {
+      "pay_standard_confirmed": false,
+      "benefit_reflection_method_confirmed": false
+    },
+    "reestimate_when": "적정인건비고시/시급과급여비반영기준·서비스시간/대상규모가확보되면증분계산",
+    "limitation": "역사적정답의자료부족확인.현재기준고시가없음을전수검색한주장아님"
+  },
+  "items": [
+    {
+      "key": "survey_contract",
+      "status": "estimated",
+      "source_ref": "원문제3조의2·정답24C3732 PDF2~4",
+      "note": "3년주기연구계약9000만원×2,독립계약시나리오"
+    },
+    {
+      "key": "pay_standard",
+      "status": "grounded_non_estimation",
+      "source_ref": "2212766 비용추계서25C4872 PDF3쪽",
+      "note": "급여비용변동가능성은있으나적정인건비수준과급여산정반영방식미확정으로인건비영향미추계"
+    },
+    {
+      "key": "accounting_split_direct_payment",
+      "status": "direct_scope_reviewed",
+      "source_ref": "2203903 원문PDF6~7 제31조제1항,제32조제2항",
+      "note": "제31조는급여비용중인건비/운영비청구·지급구분이다.금액인상기준은별도제32조에서검토.이구분만으로정액지출추가를생성하지않음"
+    },
+    {
+      "key": "accounting_system_implementation",
+      "status": "needs_review",
+      "source_ref": "2203903 원문PDF6~7 제31조;2026-10-09공식사이트검색에서해당개편과업견적미확보",
+      "note": "기존전산필드사용/새개발여부,인터페이스·정산/급여분리과업견적필요.예산0또는3호미추계확정아님"
+    },
+    {
+      "key": "supervision_administration",
+      "status": "needs_review",
+      "source_ref": "2203903 원문PDF6 제23조의2·제24조",
+      "note": "시정명령·업무정지/취소집행의순증사건수,인력/시간,기존업무흡수가능성미확정"
+    },
+    {
+      "key": "penalty_revenue",
+      "status": "needs_review",
+      "source_ref": "2203903 원문PDF6 제24조의2",
+      "note": "추가과징금부과대상확대에따른사건수·부과액·징수율자료없음.수입0으로판정하지않음"
+    }
+  ],
+  "completion": {
+    "overall_status": "partial_pending_review",
+    "scope_review_complete": false,
+    "whole_numeric_complete": false,
+    "resolved_scope_count": 3,
+    "scope_count": 6,
+    "pending_scope_keys": [
+      "accounting_system_implementation",
+      "supervision_administration",
+      "penalty_revenue"
+    ],
+    "covered_amount_thousand": 180000,
+    "covered_error_percent": 0,
+    "whole_bill_amount_thousand": null,
+    "whole_bill_error_percent": null
+  },
+  "open_required_evidence": {
+    "accounting_system_implementation": [
+      "기존청구·정산시스템기능확인서",
+      "추가개발이있다면작업범위·견적"
+    ],
+    "supervision_administration": [
+      "기존업무처리자료",
+      "순증처리사건수·추가인력/시간"
+    ],
+    "penalty_revenue": [
+      "기존부과/징수실적",
+      "새위반대상예상건수"
+    ]
+  },
+  "reuse_note": "분리청구직접지급분과구현/집행비분리검토구조는재사용가능.근거없는수치추가/수당단가조정없음"
+}

@@ -1,0 +1,148 @@
+{
+  "bill_no": "2201707",
+  "run_date": "2026-10-09",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2201707",
+    "bill_name": "양육비 이행확보 및 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-07-12",
+    "articles": [
+      {
+        "article_ref": "제21조의6·9",
+        "source_quote": "양육비선지급신청",
+        "source_page": 6,
+        "change_summary": "양육비선지급신설,기존긴급지원삭제.채무불이행·소득·법적절차대상조건위임.신규지급/기존대체지출분리",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "양육비선지급신설,기존긴급지원삭제.채무불이행·소득·법적절차대상조건위임.신규지급/기존대체지출분리",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의12",
+        "source_quote": "제21조의12(양육비선지급금의회수)",
+        "source_page": 12,
+        "change_summary": "선지급채무자회수는수입효과.지급액전체가회수된다고추론하지않음.회수율·시차·징수비자료필요",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "선지급채무자회수는수입효과.지급액전체가회수된다고추론하지않음.회수율·시차·징수비자료필요",
+        "route_key": "",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의15",
+        "source_quote": "전산관리시스템을구축ㆍ운영할수있다.",
+        "source_page": 13,
+        "change_summary": "선지급/회수정보공유시스템구축운영.다른정부전산사업비를무조건전용안함",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "선지급/회수정보공유시스템구축운영.다른정부전산사업비를무조건전용안함",
+        "route_key": "information_system_project_plan",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의7",
+        "source_quote": "소속직원으로하여금선지급신청인의주거",
+        "source_page": 7,
+        "change_summary": "지원자격/재산조사와징수업무의추가인력·운영계획필요.순증인원이원문에없음",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "지원자격/재산조사와징수업무의추가인력·운영계획필요.순증인원이원문에없음",
+        "route_key": "",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의9·10",
+        "source_quote": "선지급신청인및양육비채무자에게서면으로",
+        "source_page": 10,
+        "change_summary": "선지급결정·변경통지.서면통지를무조건등기우편으로간주안함.통지건수/채널확인",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "선지급결정·변경통지.서면통지를무조건등기우편으로간주안함.통지건수/채널확인",
+        "route_key": "",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      },
+      {
+        "article_ref": "제23조제3항",
+        "source_quote": "사용료,수수료등을면제한다.",
+        "source_page": 14,
+        "change_summary": "행정자료제출관련수수료면제.유료제출규모·수수료수입감소와내부이전을구분",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "행정자료제출관련수수료면제.유료제출규모·수수료수입감소와내부이전을구분",
+        "route_key": "",
+        "route_reason": "확정정책범위·추가재정효과검토",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "calculations": [
+    {
+      "article_ref": "제21조의6·9",
+      "payload": {
+        "bill_no": "2201707",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-09",
+        "start_year": 2025,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": []
+      }
+    },
+    {
+      "article_ref": "제21조의15",
+      "payload": {
+        "bill_no": "2201707",
+        "route_key": "information_system_project_plan",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-09",
+        "start_year": 2025,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "annual_project_budget"
+        ],
+        "missingDerivationVariables": []
+      }
+    }
+  ],
+  "matching_db_candidate_keys": [],
+  "whole_bill_amount": null,
+  "whole_error_percent": null,
+  "required_slots_filled": 0,
+  "required_slot_count": 6,
+  "original_legacy_support_amount": 200000,
+  "legacy_amount_period_not_accepted_as_explicit": true,
+  "limitation": "기존긴급지원20만원을선지급새단가로전용하지않음.대상예측에전체한부모아동수/조부모돌봄비율을무단사용안함.2025시작임시가정.복합지출/회수/운영효과미완성"
+}

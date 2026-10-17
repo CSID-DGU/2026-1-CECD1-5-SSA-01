@@ -1,0 +1,97 @@
+{
+  "bill_no": "2207176",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2207176.json",
+  "first": {
+    "total_eok": null,
+    "error_percent": null,
+    "survey_frequency_delta_direction_correct": true,
+    "counselling_existing_program_exclusion_matched": false,
+    "required_missing_unique_numeric_variables": [
+      "recipient_count",
+      "visits_per_recipient",
+      "cost_per_visit",
+      "survey_unit_cost"
+    ],
+    "items": [
+      {
+        "component": "counselling",
+        "status": "needs_input",
+        "missing": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ]
+      },
+      {
+        "component": "new_annual_survey",
+        "status": "needs_input",
+        "missing": [
+          "survey_unit_cost"
+        ]
+      },
+      {
+        "component": "existing_three_year_survey",
+        "status": "needs_input",
+        "missing": [
+          "survey_unit_cost"
+        ]
+      }
+    ]
+  },
+  "gold": {
+    "estimate_no": "24C6463",
+    "reply_date": "2025-01-07",
+    "total_eok": 6.71,
+    "annual_million": [
+      0,
+      218,
+      222,
+      0,
+      231
+    ],
+    "formula": "개정매년조사비−현행3년조사비",
+    "survey_base_cost_won": 200000000,
+    "survey_base_year": 2023,
+    "last_survey_year": 2023,
+    "old_interval": 3,
+    "new_interval": 1,
+    "start_year": 2026,
+    "new_annual_million": [
+      213,
+      218,
+      222,
+      227,
+      231
+    ],
+    "old_annual_million": [
+      213,
+      0,
+      0,
+      227,
+      0
+    ],
+    "cpi": {
+      "2024": 0.025,
+      "2025": 0.021,
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02,
+      "2030": 0.02
+    },
+    "counselling": {
+      "estimated": false,
+      "reason": "이미 자립준비청년 자립지원 체계 구축사업 전담인력이 심리상담·사례관리 수행",
+      "existing_2024_budget_won": 17721000000,
+      "decision_label": "기존사업 시행에 따라 추계제외"
+    },
+    "partial_estimate": true
+  },
+  "reinforcement_targets": [
+    "자립지원 조사2023년2억원 단가와 실시이력 저장",
+    "원문매년과현행3년 주기의 연도별차액 계산",
+    "기존심리상담 사업 수행근거를 확인해 별도신규상담비를 중복계상하지 않음"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

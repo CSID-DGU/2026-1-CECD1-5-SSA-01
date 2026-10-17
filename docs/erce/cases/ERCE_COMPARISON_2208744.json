@@ -1,0 +1,45 @@
+{
+  "bill_no": "2208744",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2208744.json",
+  "gold": {
+    "estimate_no": "25C1366",
+    "reply_date": "2025-04-10",
+    "total_eok": 41.24,
+    "annual_million": [
+      793,
+      808,
+      825,
+      841,
+      858
+    ],
+    "reference_program": "입양인식개선 홍보·교육",
+    "reference_budget_won": 777000000,
+    "price_year": 2025,
+    "cpi_forecast_vintage": "2025.3",
+    "annual_cpi_2026_2030": 0.02,
+    "scope": "제41조의2제1항 교육·홍보 및 제2항 강사양성·프로그램 업무를 유사사업 전체예산으로 준용"
+  },
+  "first_run": {
+    "total_eok": null,
+    "reference_only_partial_eok": 17.5,
+    "whole_total_error_percent": null,
+    "partial_to_whole_shortfall_percent": 57.565470417070806,
+    "required_slots": 10,
+    "filled_slots": 4,
+    "missing_slots": 6,
+    "slots_note": "가선택 산식 입력 슬롯. 실제 사용자 질문수나 정답에서 필요했던 변수수 아님"
+  },
+  "match": {
+    "cost_trigger": "제1·2항 교육홍보 업무 탐지는 일치. 제3항 교과서비는 정답 추계범위 밖인데 별도 후보로 잡음",
+    "method": "연간 유사사업예산 준용 방향은 일부 일치하나 교육통합 전체패키지·물가산식·선례선택 불일치",
+    "year_period": true,
+    "whole_amount": false
+  },
+  "difference": [
+    "장애인식개선 캠페인2억원+영상1.5억원을 참고했다. 정답은 아동권리보장원의 입양인식개선 교육홍보7.77억원을 준용",
+    "우리 참고시나리오는 가격동결. 정답은2025예산에2026년부터매년2% 적용",
+    "강사양성·프로그램 비용을 별도로 채우려 했으나 정답은 매체홍보·교육·위탁기관실무자교육 포함 유사사업 전체예산에 묶음"
+  ],
+  "reinforcement_done": false,
+  "independent_success": false
+}

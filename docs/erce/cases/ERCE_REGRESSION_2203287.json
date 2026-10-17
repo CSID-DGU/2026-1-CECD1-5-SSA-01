@@ -1,0 +1,118 @@
+{
+  "bill_no": "2203287",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "evaluation_scope": "official_cost_estimate_reproduction",
+  "reproduction_status": "complete",
+  "reproduction_complete": true,
+  "annual_display_match": true,
+  "total_display_match": true,
+  "displayed_total_eok": 3216.81,
+  "raw_error_percent": 0.00012434679076182346,
+  "proxy_payload": {
+    "bill_no": "2203287",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-09",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "child_support_advance_expense",
+    "child_support_model": "child_support_advance_expense",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "support_derivation_note": "정답후가구·채권필터/기존사업대체예산과전산사업수명주기분리",
+    "child_support_scope_note": "정답정액정부계획후보·원문표준기준차이명시",
+    "estimation_start_note": "원문공포후6개월과정답2026~2030준비가정확인",
+    "selected_evidence_keys": [
+      "2201707:child_support_advance_expense:household_forecast:reviewed",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed",
+      "2201707:child_support_advance_expense:advance_months:reviewed",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed",
+      "2203287:advance_monthly_amount:policy_proxy"
+    ],
+    "evidence_selection_reasons": {
+      "2201707:child_support_advance_expense:household_forecast:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:advance_months:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음",
+      "2203287:advance_monthly_amount:policy_proxy": "정답정책참고가정승인모드.표준양육비계산완료라고표시하지않음"
+    },
+    "selected_method_keys": [
+      "2203287:approved_policy_proxy"
+    ],
+    "method_selection_reasons": {
+      "2203287:approved_policy_proxy": "승인된정액참고가정"
+    },
+    "method_confirmations": {
+      "2203287:approved_policy_proxy": {
+        "proxy_basis_note": "정답이쓴정부정책참고월20만원가정을사후재현용으로선택",
+        "statutory_basis_difference_note": "표준양육비/부모소득/분담률로도출된값아님.원문기준과정답정액시나리오별도"
+      }
+    },
+    "advance_take_up_scenario": "all_eligible",
+    "claim_count_rounding": "final_half_up",
+    "statutory_standard_table_required": true,
+    "advance_amount_basis": "policy_fixed_proxy",
+    "proxy_assumption_confirmed": true,
+    "proxy_basis_note": "정답이쓴정부정책참고월20만원가정을사후재현용으로선택",
+    "statutory_basis_difference_note": "표준양육비/부모소득/분담률로도출된값아님.원문기준과정답정액시나리오별도"
+  },
+  "proxy_result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2201707:child_support_advance_expense:household_forecast:reviewed,2201707:child_support_advance_expense:minor_single_parent_share:reviewed,2201707:child_support_advance_expense:divorced_unmarried_share:reviewed,2201707:child_support_advance_expense:claim_holder_share:reviewed,2201707:child_support_advance_expense:unpaid_claim_share:reviewed,2201707:child_support_advance_expense:children_per_claim:reviewed,2201707:child_support_advance_expense:advance_months:reviewed,2201707:child_support_advance_expense:legacy_support_budget:reviewed,2203287:advance_monthly_amount:policy_proxy",
+    "annual_amounts_thousand": [
+      63333400,
+      63880600,
+      64382200,
+      64835800,
+      65248600
+    ],
+    "source_refs": [
+      "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용; 2203287 비용추계서24C3127 PDF5쪽;정부2024선지급추진계획월20만원준용",
+      "2203287 비용추계서24C3127 PDF5쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          63333400000,
+          63880600000,
+          64382200000,
+          64835800000,
+          65248600000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용; 2203287 비용추계서24C3127 PDF5쪽;정부2024선지급추진계획월20만원준용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2203287:approved_policy_proxy"
+    ]
+  },
+  "proxy_web_status": "computed_review",
+  "covered_total_eok": 3216.806,
+  "gold_total_eok": 3216.81,
+  "covered_error_percent": 0.00012434679076182346,
+  "standard_table_status": "needs_input",
+  "standard_missing": [
+    "standard_support_cells",
+    "standard_cell_weights"
+  ],
+  "whole_bill_total": null,
+  "optional_standard_mode_blocks_reproduction": false,
+  "limitation": "공식 추계서의 급여 추계범위 재현 완료. 원문 표준양육비 모드는 별도이며 실제 자료가 필요하다. 정답 확인 후 보강 회귀로, 독립 평가 성과는 아니다."
+}

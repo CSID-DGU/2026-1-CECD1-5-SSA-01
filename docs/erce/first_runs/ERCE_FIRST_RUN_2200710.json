@@ -1,0 +1,43 @@
+{
+  "bill_no": "2200710", "run_date": "2026-10-04",
+  "evaluation_type": "pre_answer_development_first_run", "gold_opened": false,
+  "ai_mode": "manual_no_api", "prior_own_db_evidence_count": 0, "reserved_holdout": false,
+  "original_quote": "제4조제1항중“8세”를“18세”로, “10만원을”을“30만원을”로한다.",
+  "source_page": 3, "quote_verified": true,
+  "pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item, 2 calculation items",
+  "start_year": 2025, "years": 5, "cutoff_date": "2026-10-04",
+  "timing_basis": "원문3쪽2025년1월1일 시행, 매월 지급; 각 완전연도12개월",
+  "items": [
+    {
+      "scope": "0~7세 기존 급여 인상분", "route_key": "transfer_recipient_delta",
+      "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+      "formula": "기존 대상인구 × 지급률 × (월30만원 − 월10만원) ×12개월",
+      "selected_evidence_keys": ["2200147:under8_population:2025-2029", "2200147:child_allowance_payment_rate:2024"],
+      "recipient_count": [2177000,2046000,1953000,1898000,1872000],
+      "benefit_per_recipient": 300000, "existing_benefit_per_recipient": 100000,
+      "benefit_unit": "KRW/person/month", "payments_per_year": 12, "participation_rate": 0.972,
+      "required_variables_filled": 3, "required_variable_count": 3,
+      "status": "computed_review",
+      "annual_amounts_thousand": [5078505600,4772908800,4555958400,4427654400,4367001600]
+    },
+    {
+      "scope": "8~17세 신규 지급비", "route_key": "transfer_recipient",
+      "formula_key": "TRANSFER_RECIPIENT_V1",
+      "formula": "신규 대상인구 × 지급률 × 월30만원 ×12개월",
+      "selected_evidence_keys": ["2200147:age8to17_population:2025-2029", "2200147:child_allowance_payment_rate:2024"],
+      "recipient_count": [4448000,4312000,4183000,4033000,3828000],
+      "benefit_per_recipient": 300000, "benefit_unit": "KRW/person/month",
+      "payments_per_year": 12, "participation_rate": 0.972,
+      "required_variables_filled": 2, "required_variable_count": 2,
+      "status": "computed_review",
+      "annual_amounts_thousand": [15564441600,15088550400,14637153600,14112273600,13394937600]
+    }
+  ],
+  "selection_note": "전국·같은 연령·2025~2029년·2023년12월 중위전망 선례 인구. 지급률97.2% 동결은 같은 아동수당의 선례 가정이며 최신 실측값 아님",
+  "scope_notes": [
+    "원문5쪽 제4조제2~5항 현행 유지. 부모급여 유지, 2세미만 기본 아동수당 제외를 적용하지 않음",
+    "제5·7·10조 정보제공·공동이용·지급기간 변경의 별도 순증 행정비는 근거 부족으로 검토 필요",
+    "현재 개발DB와 같은 가족 선례를 사용한 개발 실행. 독립격리 평가·GPT API 자동성능 평가 아님",
+    "정답 열람 전 저장. 이후 수정하지 않음"
+  ]
+}

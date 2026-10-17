@@ -1,0 +1,179 @@
+{
+  "bill_no": "2200664",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2200664",
+    "bill_name": "장애인고용촉진 및 직업재활법 일부개정법률안",
+    "propose_date": "2024-06-19",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제21조제3항",
+        "source_page": 3,
+        "source_quote": "최저임금의한도내에서그인건비의일부를지원할수있다.",
+        "change_summary": "근로능력이 현저히 낮은 장애인을 고용하는 사업주에게 최저임금 범위 내 인건비 일부 지원. 근로자 전체임금의 인상과 국가보조분은 구분.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "대통령령 지원대상·비율·기준 미확정. 기존 최저임금 적용제외 인원과 실제임금·근로시간을 파악하고 지원비율 또는 차액보전 가정을 근거로 선택해야 함. 전액보전이라고 단정하지 않음.",
+        "route_key": "transfer_recipient_subsidy",
+        "route_reason": "적격 근로자수×지원대상 인건비×공공지원비율, 상한과 실제 지급액 구분",
+        "variables": []
+      },
+      {
+        "article_ref": "참고사항",
+        "source_page": 2,
+        "source_quote": "의안번호제660호",
+        "change_summary": "최저임금 적용제외 삭제안2200660의 의결·변경에 따른 법안 조정 필요.",
+        "cost_trigger": false,
+        "estimation_decision": "defer",
+        "decision_reason": "연계법안 시행 및 범위가 달라지면 지원대상과 추가소요 재검토.",
+        "route_key": "",
+        "route_reason": "",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제21조제3항",
+      "verified": true
+    },
+    {
+      "article": "참고사항",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2200664",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "transfer_recipient_subsidy",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {}
+  },
+  "calculation": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient_subsidy",
+    "formulaKey": "TRANSFER_RECIPIENT_SUBSIDY_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수 × 국고분담률",
+    "missingVariables": [
+      "recipient_count",
+      "benefit_per_recipient",
+      "subsidy_rate"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200147:age8to17_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          4448000,
+          4312000,
+          4183000,
+          4033000,
+          3828000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200147:under18_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          6625000,
+          6358000,
+          6136000,
+          5931000,
+          5700000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200147:under8_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          2177000,
+          2046000,
+          1953000,
+          1898000,
+          1872000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2200147:child_allowance_treasury_share:2024",
+        "variableKey": "subsidy_rate",
+        "value": 0.7555,
+        "unit": "ratio",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "2024년 평균 국고보조율을 동결하는 선례 가정. 총재정소요에는 곱하지 않으며 국비 분리 시에만 사용. 최신 보조율은 아님",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "candidates_need_review",
+        "candidateCount": 3,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "benefit_per_recipient": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "subsidy_rate": {
+        "status": "candidates_need_review",
+        "candidateCount": 1,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "first_total_won": null,
+  "linked_bill_no": "2200660",
+  "missing_semantic_variables": [
+    "근로능력이 현저히 낮아 현재최저임금적용 제외되는 근로자수와 고용유지 전망",
+    "해당근로자의 근로시간·실제임금·최저임금 차액",
+    "국가 일부지원률 또는 차액보전의 정책가정",
+    "연계법안2200660의 시행범위"
+  ],
+  "rejected_basis": [
+    "노인공익활동 참여자·월30시간·월29만원을 장애인근로자에게 적용하지 않음",
+    "법정최저임금 상한이 인당보조금액이나100%지원이라는 뜻은 아님"
+  ],
+  "non_estimation_decision": null
+}

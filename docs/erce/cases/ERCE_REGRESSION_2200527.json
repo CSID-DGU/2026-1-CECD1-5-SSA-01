@@ -1,0 +1,91 @@
+{
+  "bill_no": "2200527",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "target_answer_numbers_selected": false,
+  "inputs": {
+    "bill_no": "2200527",
+    "route_key": "transfer_population_amount_delta",
+    "cutoff_date": "2026-10-04",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "child_allowance_net_population",
+    "child_allowance_scenario": "under2_parent_only",
+    "child_population_geography": "전국",
+    "parent_benefit_unchanged": true,
+    "child_allowance_scope_note": "2세미만은 개정 기본 아동수당 미지급, 부모급여 유지. 현행0~7세 월10만원과 개정2~17세 월30만원의 차액만 계산",
+    "support_derivation_note": "기존 타 의안 인구와 직접 확보했던 KOSIS0·1세 전망을 재사용; 같은 통계 버전·전국·기간, 지급률97.2% 동결 시나리오",
+    "estimation_start_note": "24C0938 선례의2025~2029년을 확인한 추계기간 가정. 공포일이나 시행연도가 원문에 명시된 것은 아님",
+    "explicit_inputs": {
+      "benefit_per_recipient": {
+        "value": 300000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문3쪽 제4조제1항 개정 월30만원"
+      },
+      "existing_benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문5쪽 현행 제4조제1항 월10만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "확인한 추계기간의 각 완전연도12개월 적용 시나리오"
+      }
+    },
+    "selected_evidence_keys": [
+      "2200147:under18_population:2025-2029:child_net",
+      "2200147:under8_population:2025-2029:child_net",
+      "kosis_202312:age0_population:2025-2029:child_net",
+      "kosis_202312:age1_population:2025-2029:child_net",
+      "2200147:child_allowance_payment_rate:2024:child_net"
+    ],
+    "evidence_selection_reasons": {
+      "2200147:under18_population:2025-2029:child_net": "전국·같은2023년12월 중위전망·2025~2029년 인구. 실제 수급자 인원이 아니므로97.2%를1회 적용. 대상 정답 인구를 새로 적재하지 않음",
+      "2200147:under8_population:2025-2029:child_net": "전국·같은2023년12월 중위전망·2025~2029년 인구. 실제 수급자 인원이 아니므로97.2%를1회 적용. 대상 정답 인구를 새로 적재하지 않음",
+      "kosis_202312:age0_population:2025-2029:child_net": "전국·같은2023년12월 중위전망·2025~2029년 인구. 실제 수급자 인원이 아니므로97.2%를1회 적용. 대상 정답 인구를 새로 적재하지 않음",
+      "kosis_202312:age1_population:2025-2029:child_net": "전국·같은2023년12월 중위전망·2025~2029년 인구. 실제 수급자 인원이 아니므로97.2%를1회 적용. 대상 정답 인구를 새로 적재하지 않음",
+      "2200147:child_allowance_payment_rate:2024:child_net": "전국·같은2023년12월 중위전망·2025~2029년 인구. 실제 수급자 인원이 아니므로97.2%를1회 적용. 대상 정답 인구를 새로 적재하지 않음"
+    }
+  },
+  "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+  "annual_amounts_thousand": [
+    19084081594,
+    18344139595,
+    17638606397,
+    16912390594,
+    16066576800
+  ],
+  "total_thousand": 88045794980,
+  "gold_total_thousand": 88100000000,
+  "gold_annual_thousand": [
+    19100000000,
+    18300000000,
+    17600000000,
+    16900000000,
+    16100000000
+  ],
+  "total_error_percent": 0.061526696935300794,
+  "new_recipients": [
+    6006481.776,
+    5758498.3319999995,
+    5532384.888,
+    5312838.276,
+    5069466.0
+  ],
+  "existing_recipients": [
+    2116044.0,
+    1988712.0,
+    1898316.0,
+    1844856.0,
+    1819584.0
+  ],
+  "source_refs": [
+    "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3; KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 0세 합계; 2026-10-02 직접 조회; KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 1세 합계; 2026-10-02 직접 조회",
+    "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+    "원문3쪽 제4조제1항 개정 월30만원",
+    "원문5쪽 현행 제4조제1항 월10만원",
+    "확인한 추계기간의 각 완전연도12개월 적용 시나리오"
+  ],
+  "limitation": "정답의2세미만 운영 가정을 확인한 뒤 재계산. 정답 표시 인구를 복사하지 않고 기존 인구 근거로 산정했으나 독립 예측 평가는 아님. 정답 금액은0.1조원 단위 표시라 오차 해석 시 주의"
+}

@@ -1,0 +1,73 @@
+{
+  "bill_no": "2204465",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C4189",
+  "gold_date": "2024-10-21",
+  "first_total_won": null,
+  "gold_display_total_won": 1841800000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 1,
+  "quote_total": 1,
+  "formula_direction_match": true,
+  "horizon_match": true,
+  "gold_scope": "코레일 기존PSO 보상 제외, 도시철도 장애인·동행보호자 무임수송 비용 전액보전",
+  "gold_operands": {
+    "historical_years": [
+      2021,
+      2022,
+      2023
+    ],
+    "ridership_thousand": [
+      60469,
+      63951,
+      68665
+    ],
+    "free_transport_cost_million": [
+      81268,
+      175777,
+      200189
+    ],
+    "displayed_cost_per_trip_won": [
+      1344,
+      2749,
+      2915
+    ],
+    "government_compensation_ratio": 1,
+    "start_year": 2025,
+    "years": 5
+  },
+  "gold_display_forecast": {
+    "rides_thousand": [
+      76656,
+      80754,
+      84852,
+      88950,
+      93048
+    ],
+    "price_won": [
+      3849,
+      4121,
+      4352,
+      4551,
+      4727
+    ],
+    "annual_eok": [
+      2950,
+      3328,
+      3693,
+      4048,
+      4399
+    ]
+  },
+  "gold_operand_source": "국토교통부2023 철도통계연보",
+  "first_gaps": [
+    "장애인 무임승차 연인원·운임손실 과거실적",
+    "코레일PSO 기존지원 제외",
+    "최근이용량·1회당손실단가 각각의 추세 및 국가전액보전 가정"
+  ],
+  "well_handled": "기존 감면비용의 사업자보전으로 분류하고 전체노인무임비용·운영기관 손실과 중복가산하지 않음",
+  "unit_note": "무임승차 인원은 승차 연인원(천명)이다. 등록장애인 고유인원과 같지 않음. 천명×원 단위 변환 필요.",
+  "source_note": "요약표 제26조 표기는 원문 제30조와 다르지만 상세 재정요인과 제30조는 일치. 조문번호는 원문우선.",
+  "reinforcement_performed": false
+}

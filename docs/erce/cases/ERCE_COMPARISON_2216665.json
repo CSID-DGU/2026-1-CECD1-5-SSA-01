@@ -1,0 +1,45 @@
+{
+  "bill_no": "2216665",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2216665.json",
+  "gold": {
+    "estimate_no": "26C0846",
+    "reply_date": "2026-04-15",
+    "decision": "일부추계",
+    "total_eok": 35.93,
+    "annual_million": [
+      767,
+      742,
+      720,
+      694,
+      670
+    ],
+    "premium_won": 68500,
+    "recipients": [
+      11198,
+      10838,
+      10506,
+      10128,
+      9775
+    ],
+    "population_method": "2020~2024보호아동/아동인구 평균비중(표시0.17%)×장래인구",
+    "survey_decision": "표본크기·선정방법·조사항목 미구체화로 미추계",
+    "coverage": "상해보험료만 추계.배상책임보험료 별도금액은 제시안함"
+  },
+  "first_run": {
+    "insurance_reference_total_eok": 42.75085,
+    "insurance_component_error_percent": 18.98371834121904,
+    "whole_total_eok": null,
+    "annual_unit_premium_match": true,
+    "insurance_formula_match": true,
+    "start_year_match": true,
+    "recipient_forecast_match": false,
+    "survey_formal_non_estimation_match": false
+  },
+  "difference": [
+    "정답미열람에서 공식보험료68500원과기존가정위탁제외·연1회·단가동결·2027~2031기간을맞춤",
+    "2024원문시설9904+공동생활2578=12482명을계속동결.정답은보호아동비중×아동장래인구로매년감소 전망",
+    "실태조사추가비 계산불가라고했지만 정답의표본·선정·문항 미확정 근거를 갖춘 미추계판정은미완료",
+    "2020~2024 비중원자료와구체모집단·정밀도는본문표에없어보강시확인필요"
+  ],
+  "reinforcement_done": false
+}

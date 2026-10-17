@@ -1,0 +1,182 @@
+{
+  "bill_no": "2204828",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2204828",
+    "bill_name": "기초연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-10-22",
+    "articles": [
+      {
+        "article_ref": "제3조제2항",
+        "source_quote": "②선정기준액은「국민기초생활보장법」제2조제11호에따른기\n준중위소득으로서해당연도1인가구의기준중위소득으로한다.",
+        "source_page": 5,
+        "change_summary": "기준중위소득을선정기준으로.수급범위를단순80%또는100%로임의치환하지않음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기준중위소득을선정기준으로.수급범위를단순80%또는100%로임의치환하지않음",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "기준중위소득을선정기준으로.수급범위를단순80%또는100%로임의치환하지않음",
+        "variables": []
+      },
+      {
+        "article_ref": "제5조제1항",
+        "source_quote": "를“「국민기초생활보장법」제6조에따라공표하는해당연도1인\n가구의생계급여최저보장수준으로한다”로하고",
+        "source_page": 5,
+        "change_summary": "신규월액은1인가구생계급여최저보장수준.중위소득전액과혼동금지.연도별공식값·미래전망필요",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규월액은1인가구생계급여최저보장수준.중위소득전액과혼동금지.연도별공식값·미래전망필요",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "신규월액은1인가구생계급여최저보장수준.중위소득전액과혼동금지.연도별공식값·미래전망필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제5조의2·제6·7조",
+        "source_quote": "제5조의2, 제6조및제7조를각각삭제한다.",
+        "source_page": 7,
+        "change_summary": "국민연금연계감액등삭제.부부감액과일반소득역전감액은남음;전액무감액으로계산금지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "국민연금연계감액등삭제.부부감액과일반소득역전감액은남음;전액무감액으로계산금지",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "국민연금연계감액등삭제.부부감액과일반소득역전감액은남음;전액무감액으로계산금지",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조제3항·제5조제8항",
+        "source_quote": "⑧다음각호의어느하나에해당하는연금의수급권자와그배우",
+        "source_page": 5,
+        "change_summary": "직역연금수급자제외삭제·지급산정대통령령위임.새대상인원과급여액미확정",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "직역연금수급자제외삭제·지급산정대통령령위임.새대상인원과급여액미확정",
+        "route_key": "",
+        "route_reason": "직역연금수급자제외삭제·지급산정대통령령위임.새대상인원과급여액미확정",
+        "variables": []
+      },
+      {
+        "article_ref": "제25조제1항",
+        "source_quote": "을”을“전부를”로하고, 같은조제2항을삭제한다.",
+        "source_page": 7,
+        "change_summary": "국가전액부담.국비증가·지방비감소는분리,국비지방비합산급여증가에중복가산금지",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "국가전액부담.국비증가·지방비감소는분리,국비지방비합산급여증가에중복가산금지",
+        "route_key": "",
+        "route_reason": "국가전액부담.국비증가·지방비감소는분리,국비지방비합산급여증가에중복가산금지",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "payload": {
+    "bill_no": "2204828",
+    "route_key": "transfer_population_amount_delta",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문7쪽2025-01-01시행 및매월급여"
+      }
+    },
+    "calculated_inputs": {
+      "existing_recipient_count": {
+        "value": [
+          7294595.426559537,
+          7718585.568048269,
+          8046096.6508172965,
+          8412621.05141678,
+          8687348.879505908
+        ],
+        "unit": "person",
+        "source_ref": "기존KOSIS2023.12인구×70%×공식수급통계2021~2023대상대비수급률",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "value": [
+          303206.9850620258,
+          309574.3317483283,
+          315765.81838329486,
+          322081.13475096074,
+          328522.75744598
+        ],
+        "unit": "KRW/person/month",
+        "source_ref": "기존공식평균연금액/기준액비율88.3521%및역사적물가연동;현행평균준용",
+        "is_assumption": true
+      }
+    }
+  },
+  "result": {
+    "status": "needs_input",
+    "engine_error": "missing ERCE formula variables: new_recipient_count, benefit_per_recipient"
+  },
+  "missing_variables": [
+    "new_recipient_count",
+    "benefit_per_recipient"
+  ],
+  "resolved_variables": {
+    "existing_recipient_count": {
+      "key": "existing_recipient_count",
+      "value": [
+        7294595.426559537,
+        7718585.568048269,
+        8046096.6508172965,
+        8412621.05141678,
+        8687348.879505908
+      ],
+      "unit": "person",
+      "source_class": "calculated_estimate",
+      "source_ref": "기존KOSIS2023.12인구×70%×공식수급통계2021~2023대상대비수급률",
+      "is_assumption": true
+    },
+    "existing_benefit_per_recipient": {
+      "key": "existing_benefit_per_recipient",
+      "value": [
+        303206.9850620258,
+        309574.3317483283,
+        315765.81838329486,
+        322081.13475096074,
+        328522.75744598
+      ],
+      "unit": "KRW/person/month",
+      "source_class": "calculated_estimate",
+      "source_ref": "기존공식평균연금액/기준액비율88.3521%및역사적물가연동;현행평균준용",
+      "is_assumption": true
+    },
+    "payments_per_year": {
+      "key": "payments_per_year",
+      "value": 12,
+      "unit": "month/year",
+      "source_class": "target_explicit",
+      "source_ref": "원문7쪽2025-01-01시행 및매월급여",
+      "is_assumption": false
+    }
+  },
+  "required_variables_filled": 3,
+  "required_variable_count": 5,
+  "amount_thousand": null,
+  "review_items": [
+    "직역연금신규대상인원·위임지급액",
+    "국비전액전환의순국비증가액·기존가중국고부담률"
+  ],
+  "limitations": [
+    "2020·2024중위소득DB값은있으나2025~2029생계급여와선정기준을동일값으로가정하지않음",
+    "기존국민연금감액폐지선례는부부감액·소득역전감액유지여부가달라전체평균전용하지않음",
+    "현행인원·평균급여는명시적개발가정,미산출전체금액을0이라고하지않음"
+  ]
+}

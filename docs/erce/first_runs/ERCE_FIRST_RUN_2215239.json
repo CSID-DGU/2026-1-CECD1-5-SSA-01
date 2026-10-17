@@ -1,0 +1,212 @@
+{
+  "bill_no": "2215239",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2215239",
+    "bill_name": "장애인활동 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-12-15",
+    "articles": [
+      {
+        "article_ref": "제3조의3",
+        "source_quote": "계획”이라한다)을5년마다수립ㆍ시행하여야한다.",
+        "source_page": 3,
+        "change_summary": "장애인활동지원중앙기본계획5년.직전동일과업연구단가재사용",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규계획/위원회순증범위검토",
+        "route_key": "research_plan",
+        "route_reason": "장애인활동지원중앙기본계획5년.직전동일과업연구단가재사용",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조의4",
+        "source_quote": "시행계획”이라한다)을수립ㆍ시행하여야한다.",
+        "source_page": 4,
+        "change_summary": "지방연간시행계획·추진실적평가.중앙연구비를지자체수만큼곱하지않음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규계획/위원회순증범위검토",
+        "route_key": "quantity_unit",
+        "route_reason": "지방연간시행계획·추진실적평가.중앙연구비를지자체수만큼곱하지않음",
+        "variables": []
+      },
+      {
+        "article_ref": "제4조의2~4",
+        "source_quote": "부위원장1명을포함하여16명이상26명이하의위원",
+        "source_page": 5,
+        "change_summary": "중앙위원회구성.위원장제외5유형동수,공무원그룹제외시유급12/16/20명후보.부위원장을또가산하지않음.회의빈도위임",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규계획/위원회순증범위검토",
+        "route_key": "committee_components",
+        "route_reason": "중앙위원회구성.위원장제외5유형동수,공무원그룹제외시유급12/16/20명후보.부위원장을또가산하지않음.회의빈도위임",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "plan_payload": {
+    "bill_no": "2215239",
+    "cutoff_date": "2026-10-08",
+    "evidence_mode": "holdout",
+    "route_key": "research_plan",
+    "start_year": 2027,
+    "years": 5,
+    "payer": "government",
+    "agency": "보건복지부",
+    "policy_domain": "장애인활동지원",
+    "research_service_function": "activity_support_plan",
+    "research_cost_scope": "research_contract_only",
+    "selected_evidence_keys": [
+      "2212766:plan:plan_unit_cost:reviewed",
+      "2212766:plan:recurrence:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2212766:plan:plan_unit_cost:reviewed": "동일장애인활동지원정책범위·5년계획,직전유사계획4000만원동결가정준용.대상정답미열람",
+      "2212766:plan:recurrence:reviewed": "동일장애인활동지원정책범위·5년계획,직전유사계획4000만원동결가정준용.대상정답미열람"
+    },
+    "selected_method_keys": [
+      "2212766:research_plan"
+    ],
+    "method_selection_reasons": {
+      "2212766:research_plan": "동일과업에대한유사연구계약범위검토"
+    },
+    "method_confirmations": {
+      "2212766:research_plan": {
+        "research_contract_scope_note": "조사현장수행비750백만원아닌연구용역분만;계획은신규서비스정책연구",
+        "recurrence_phase_note": "실태3년2027/2030,계획5년2027.지방계획은별도미검증",
+        "price_freeze_note": "과거계약9000/4000만원준용동결,최신고시단가아님"
+      }
+    },
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 5,
+        "unit": "year",
+        "source_ref": "원문제3조의3의5년마다수립"
+      }
+    }
+  },
+  "plan_result": {
+    "route_key": "research_plan",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "evidence_key": "2212766:plan:plan_unit_cost:reviewed,2212766:plan:recurrence:reviewed",
+    "annual_amounts_thousand": [
+      40000,
+      0,
+      0,
+      0,
+      0
+    ],
+    "source_refs": [
+      "2212766 비용추계서25C4872 PDF4~5쪽",
+      "원문제3조의3의5년마다수립"
+    ],
+    "resolved_variables": {
+      "plan_unit_cost": {
+        "key": "plan_unit_cost",
+        "value": 40000000,
+        "unit": "KRW/plan",
+        "source_class": "precedent_assumption",
+        "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 5,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "원문제3조의3의5년마다수립",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": [
+      "2212766:research_plan"
+    ]
+  },
+  "partial_plan_thousand": 40000,
+  "other_items": [
+    {
+      "article_ref": "제3조의4",
+      "payload": {
+        "bill_no": "2215239",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": []
+      }
+    },
+    {
+      "article_ref": "제4조의2~4",
+      "payload": {
+        "bill_no": "2215239",
+        "route_key": "committee_components",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2027,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "committee_components"
+        ],
+        "missingDerivationVariables": []
+      }
+    }
+  ],
+  "whole_bill_total": null,
+  "committee_paid_member_candidates": [
+    12,
+    16,
+    20
+  ],
+  "committee_upper_limit_reference": {
+    "key": "central_government_meeting_allowance_limit_2026",
+    "valid_year": 2026,
+    "available_at": "2026-01-05",
+    "source_class": "official_standard",
+    "value_kind": "upper_limit",
+    "unit": "KRW/person/day",
+    "base_limit_won": 200000,
+    "written_review_limit_won": 150000,
+    "additional_limit_won": 100000,
+    "additional_minimum_hours": 2,
+    "additional_max_times_per_day": 1,
+    "scope": "법령 등에 의해 설치된 중앙정부 위원회",
+    "civil_servant_condition": "본인 소관 및 소속 중앙관서 사무 이외의 위원으로 위촉된 경우",
+    "source_ref": "2026년도 예산 및 기금운용계획 집행지침, 일반수용비-위원회 참석비; 원문 HWPX 직접 확인",
+    "source_url": "https://www.mpb.go.kr/web/main/bbs/b_0005/1142",
+    "attachment_url": "https://www.mpb.go.kr/web/main/file/download/uu/50dacba4be474154a6dd349189c7386f",
+    "selection_note": "상한이지 자동 지급액 아님. 30만원 적용에는 시간/예산 및 지급 가정 근거 필요. 차년도에도 자동 최신 기준으로 간주하지 않음"
+  },
+  "unfilled_committee": [
+    "연간회의횟수",
+    "확정유급구성",
+    "실제지급액/회의시간",
+    "실무위원회운영여부"
+  ],
+  "limitation": "중앙계획연구비만실계산,지방계획·위원회미산출.2026일당상한은2027이후실지급단가확정값아님.등록법안구성범위만으로회의횟수생성안함"
+}

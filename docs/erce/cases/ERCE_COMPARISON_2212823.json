@@ -1,0 +1,19 @@
+{
+  "bill_no": "2212823",
+  "post_answer_comparison": true,
+  "original_partial_trillion": 31.217952138,
+  "gold_whole_trillion": 34.8,
+  "partial_to_full_shortfall_percent": 10.29324098275861,
+  "whole_bill_error_percent": null,
+  "whole_error_unavailable_reason": "한부모지원은미산출이라우리완성총액이없음.부분액과전체정답간부족률일뿐",
+  "gold_birth_order_display_subtotal_trillion": 31.8,
+  "original_part_to_display_part_error_percent": 1.830339188679244,
+  "single_parent_population_source": "정답PDF4쪽인용2024한부모가족실태조사322천가구×평균1.5명=483000명",
+  "single_parent_diagnostic_cost_trillion": 2.886408,
+  "fixed_rank_diagnostic_partial_trillion": 31.607098831,
+  "combined_diagnostic_trillion": 34.493506831,
+  "combined_diagnostic_error_percent": 0.8807274971264353,
+  "independent_evaluation": false,
+  "reinforcement_completed": false,
+  "fixed_ratio_limitation": "정답 설명은 연도별 비율 변화지만 계산표 인원은 2026 구성비 동결에 가까움. 해당 후보 적용도 완전 재현은 아님."
+}

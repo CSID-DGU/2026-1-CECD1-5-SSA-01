@@ -1,0 +1,342 @@
+{
+  "bill_no": "2209844",
+  "run_date": "2026-10-08",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2209844",
+    "bill_name": "주거급여법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-04-15",
+    "articles": [
+      {
+        "article_ref": "제8조의2 관리비",
+        "source_quote": "제8조의2(관리비ㆍ이사비ㆍ중개보수비의지급)",
+        "source_page": 3,
+        "change_summary": "관리비지급,기존참고사례의두지원시나리오를후보로제시.정부고시/대상계획확정값아님",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "현금지원추가,위임범위/사업계획확인필요",
+        "route_key": "transfer_recipient",
+        "route_reason": "관리비지급,기존참고사례의두지원시나리오를후보로제시.정부고시/대상계획확정값아님",
+        "variables": []
+      },
+      {
+        "article_ref": "제8조의2 이사비",
+        "source_quote": "비,이사비,중개보수비(이하",
+        "source_page": 3,
+        "change_summary": "이사발생가구×회당이사비×지원비율.모든가구에매년12회지원아님",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "현금지원추가,위임범위/사업계획확인필요",
+        "route_key": "transfer_recipient",
+        "route_reason": "이사발생가구×회당이사비×지원비율.모든가구에매년12회지원아님",
+        "variables": []
+      },
+      {
+        "article_ref": "제8조의2 중개보수비",
+        "source_quote": "비,이사비,중개보수비(이하",
+        "source_page": 3,
+        "change_summary": "임대차중개발생가구×실제중개보수×지원비율.임차료/관리비와구분",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "현금지원추가,위임범위/사업계획확인필요",
+        "route_key": "transfer_recipient",
+        "route_reason": "임대차중개발생가구×실제중개보수×지원비율.임차료/관리비와구분",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true
+  ],
+  "management_candidates": [
+    {
+      "scenario": "arrears_shared",
+      "payload": {
+        "bill_no": "2209844",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "management_fee_scenario": "arrears_shared",
+        "housing_income_cutoff": "median_income_48_percent",
+        "management_scope": "common_fee_excluding_utilities",
+        "support_derivation_note": "새원문의관리비를기존유사임차급여시나리오로준용.대상/가구모형고정은미확인후보",
+        "housing_scenario_note": "체납10.8%·공용관리비50%지원",
+        "price_year_note": "2023Kapt총월공용관리비/호수,2024실제CPI2.3%+2025부터첨부전망",
+        "estimation_start_note": "2025년4월발의·공포후6개월의2026~2030후보.실제공포일확정아님",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "회답2024-12-23/발의2025-01-17.동일버전공식전체정답아닌참고급여시나리오",
+        "selected_evidence_keys": [
+          "2207600:management:tenant_households:reference",
+          "2207600:management:management_cpi_forecast:reference",
+          "2207600:management:arrears_share:reference",
+          "2207600:management:management_public_share:reference",
+          "2207600:management:kapt_stock_2023:reference",
+          "2207600:management:kapt_monthly_common_fees_2023:reference",
+          "official:kostat:cpi_actual_2024:housing"
+        ],
+        "evidence_selection_reasons": {
+          "2207600:management:tenant_households:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_cpi_forecast:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:arrears_share:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_public_share:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:kapt_stock_2023:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:kapt_monthly_common_fees_2023:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "official:kostat:cpi_actual_2024:housing": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용"
+        },
+        "selected_method_keys": [
+          "2207600:management_fee:arrears_shared"
+        ],
+        "method_selection_reasons": {
+          "2207600:management_fee:arrears_shared": "새법안일치확정이아닌관리비기존시나리오재사용"
+        },
+        "method_confirmations": {
+          "2207600:management_fee:arrears_shared": {
+            "housing_scenario_note": "두시나리오범위분리",
+            "unmatched_source_reference_note": "참고추계서원문버전일치미확인",
+            "price_year_note": "가격기준연도와물가중복여부확인",
+            "estimation_start_note": "2026~2030참고기간"
+          }
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "annualAmountsThousand": [
+          62428637,
+          64266518,
+          66109513,
+          67961873,
+          69823984
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "scenario": "arrears_shared",
+            "base_price_year": 2023,
+            "base_monthly_common_fee": 63714.09862132716,
+            "gross_households": 1419292,
+            "recipient_share": 0.108,
+            "public_share": 0.5,
+            "monthly_public_payment": 33939.629363852815,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2027,
+            "scenario": "arrears_shared",
+            "base_price_year": 2023,
+            "base_monthly_common_fee": 63714.09862132716,
+            "gross_households": 1432427,
+            "recipient_share": 0.108,
+            "public_share": 0.5,
+            "monthly_public_payment": 34618.42195112987,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2028,
+            "scenario": "arrears_shared",
+            "base_price_year": 2023,
+            "base_monthly_common_fee": 63714.09862132716,
+            "gross_households": 1444613,
+            "recipient_share": 0.108,
+            "public_share": 0.5,
+            "monthly_public_payment": 35310.79039015247,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2029,
+            "scenario": "arrears_shared",
+            "base_price_year": 2023,
+            "base_monthly_common_fee": 63714.09862132716,
+            "gross_households": 1455971,
+            "recipient_share": 0.108,
+            "public_share": 0.5,
+            "monthly_public_payment": 36017.00619795552,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2030,
+            "scenario": "arrears_shared",
+            "base_price_year": 2023,
+            "base_monthly_common_fee": 63714.09862132716,
+            "gross_households": 1466533,
+            "recipient_share": 0.108,
+            "public_share": 0.5,
+            "monthly_public_payment": 36737.34632191463,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          }
+        ]
+      },
+      "partial_total_thousand": 330590525,
+      "confirmed_policy": false
+    },
+    {
+      "scenario": "all_tenants_flat",
+      "payload": {
+        "bill_no": "2209844",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-08",
+        "route_key": "transfer_recipient",
+        "support_derivation": "housing_management_fee",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "management_fee_scenario": "all_tenants_flat",
+        "housing_income_cutoff": "median_income_48_percent",
+        "management_scope": "common_fee_excluding_utilities",
+        "support_derivation_note": "새원문의관리비를기존유사임차급여시나리오로준용.대상/가구모형고정은미확인후보",
+        "housing_scenario_note": "전체임차가구월3만원정액의유사사례",
+        "price_year_note": "정액월3만원을2024기준가격으로가정,2025부터첨부전망적용",
+        "estimation_start_note": "2025년4월발의·공포후6개월의2026~2030후보.실제공포일확정아님",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "회답2024-12-23/발의2025-01-17.동일버전공식전체정답아닌참고급여시나리오",
+        "selected_evidence_keys": [
+          "2207600:management:tenant_households:reference",
+          "2207600:management:management_cpi_forecast:reference",
+          "2207600:management:flat_monthly_fee:reference"
+        ],
+        "evidence_selection_reasons": {
+          "2207600:management:tenant_households:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:management_cpi_forecast:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용",
+          "2207600:management:flat_monthly_fee:reference": "단가·기간·대상·시나리오범위와버전불일치검토후사후준용"
+        },
+        "selected_method_keys": [
+          "2207600:management_fee:all_tenants_flat"
+        ],
+        "method_selection_reasons": {
+          "2207600:management_fee:all_tenants_flat": "새법안일치확정이아닌관리비기존시나리오재사용"
+        },
+        "method_confirmations": {
+          "2207600:management_fee:all_tenants_flat": {
+            "housing_scenario_note": "두시나리오범위분리",
+            "unmatched_source_reference_note": "참고추계서원문버전일치미확인",
+            "price_year_note": "가격기준연도와물가중복여부확인",
+            "estimation_start_note": "2026~2030참고기간"
+          }
+        }
+      },
+      "result": {
+        "status": "computed_review",
+        "annualAmountsThousand": [
+          532108467,
+          547773584,
+          563482298,
+          579270824,
+          595142468
+        ],
+        "derivationTrace": [
+          {
+            "year": 2026,
+            "scenario": "all_tenants_flat",
+            "base_price_year": 2024,
+            "base_monthly_common_fee": 30000,
+            "gross_households": 1419292,
+            "recipient_share": 1,
+            "public_share": 1,
+            "monthly_public_payment": 31242.600000000002,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2027,
+            "scenario": "all_tenants_flat",
+            "base_price_year": 2024,
+            "base_monthly_common_fee": 30000,
+            "gross_households": 1432427,
+            "recipient_share": 1,
+            "public_share": 1,
+            "monthly_public_payment": 31867.452,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2028,
+            "scenario": "all_tenants_flat",
+            "base_price_year": 2024,
+            "base_monthly_common_fee": 30000,
+            "gross_households": 1444613,
+            "recipient_share": 1,
+            "public_share": 1,
+            "monthly_public_payment": 32504.801040000002,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2029,
+            "scenario": "all_tenants_flat",
+            "base_price_year": 2024,
+            "base_monthly_common_fee": 30000,
+            "gross_households": 1455971,
+            "recipient_share": 1,
+            "public_share": 1,
+            "monthly_public_payment": 33154.8970608,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          },
+          {
+            "year": 2030,
+            "scenario": "all_tenants_flat",
+            "base_price_year": 2024,
+            "base_monthly_common_fee": 30000,
+            "gross_households": 1466533,
+            "recipient_share": 1,
+            "public_share": 1,
+            "monthly_public_payment": 33817.995002015996,
+            "note": "원단위에서물가보정,가구단위지원.국고83.61%분할은합산총액에재곱하지않음"
+          }
+        ]
+      },
+      "partial_total_thousand": 2817777641,
+      "confirmed_policy": false
+    }
+  ],
+  "other_items": [
+    {
+      "item": "이사비",
+      "payload": {
+        "bill_no": "2209844",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5,
+        "evidence_mode": "holdout"
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": []
+      }
+    },
+    {
+      "item": "중개보수비",
+      "payload": {
+        "bill_no": "2209844",
+        "route_key": "transfer_recipient",
+        "cutoff_date": "2026-10-08",
+        "start_year": 2026,
+        "years": 5,
+        "evidence_mode": "holdout"
+      },
+      "result": {
+        "status": "needs_input",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": []
+      }
+    }
+  ],
+  "moving_fee_db_candidate_keys": [],
+  "whole_bill_total": null,
+  "limitation": "관리비는기존단가/대상/시나리오로실계산하지만새정책확정가정아님.이사/중개항목미산출,전체완료아님.그외조사/전산은급여집행부수절차로신규과업계획있으면추가검토"
+}

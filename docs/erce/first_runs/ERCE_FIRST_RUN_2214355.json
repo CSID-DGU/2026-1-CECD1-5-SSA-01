@@ -1,0 +1,92 @@
+{
+  "bill_no": "2214355",
+  "answer_seen": false,
+  "source": "원문PDF5~14쪽.제5~6조및부칙",
+  "primary_payload": {
+    "bill_no": "2214355",
+    "route_key": "transfer_recipient_subsidy",
+    "start_year": 2027,
+    "years": 5,
+    "cutoff_date": "2026-10-12",
+    "payer": "government",
+    "explicit_inputs": {
+      "benefit_per_recipient": {
+        "value": 2400000,
+        "unit": "KRW/person/year",
+        "source_ref": "원문PDF6쪽 제6조제1항 연240만원이상. 최저금액240만원 가격동결시나리오"
+      },
+      "subsidy_rate": {
+        "value": 0.8,
+        "unit": "ratio",
+        "source_ref": "원문제6조제2항 국비80%이상. 최소국비80% 시나리오"
+      }
+    }
+  },
+  "primary_result": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient_subsidy",
+    "formulaKey": "TRANSFER_RECIPIENT_SUBSIDY_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수 × 국고분담률",
+    "missingVariables": [
+      "recipient_count"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "committee_payload": {
+    "bill_no": "2214355",
+    "route_key": "committee_components",
+    "start_year": 2027,
+    "years": 5,
+    "cutoff_date": "2026-10-12",
+    "payer": "government",
+    "explicit_inputs": {}
+  },
+  "committee_result": {
+    "status": "needs_input",
+    "routeKey": "committee_components",
+    "formulaKey": "COMMITTEE_MEETING_ALLOWANCE_V1",
+    "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+    "missingVariables": [
+      "committee_components"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "committee_components": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "required_slots": 4,
+  "filled_slots": 2,
+  "missing_slots": 2,
+  "total_eok": null,
+  "primary_required_slots": 3,
+  "primary_filled_slots": 2,
+  "primary_missing_slots": 1,
+  "scope_notes": [
+    "주민전체연령 대상. 일반65세기초연금산식·수급률 적용안함",
+    "신청직전2년이상계속거주 대상. 인구감소89개지역아동0~17세 전망으로 전체주민대체안함",
+    "최저급여연240만원·최소국비80%로단가동결시나리오. 위원회가결정할실제급여·국비율미확정",
+    "국가+지방전체공공지출은 대상인원×240만원,국비는그80%이며중복합산안함",
+    "공포후1년·2026심의공포 가정2027~2031, 실제공포확정아님",
+    "위원회구성·유급위원·회의횟수는대통령령위임으로미정",
+    "환수·벌금·과태료참고수입은발생건수없어미산출.지출과상계안함"
+  ]
+}

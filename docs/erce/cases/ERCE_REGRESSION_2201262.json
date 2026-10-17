@@ -1,0 +1,358 @@
+{
+  "bill_no": "2201262",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "scenarios": {
+    "combined": {
+      "components": [
+        {
+          "center_kind": "agriculture",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "agriculture",
+            "support_fiscal_scope": "combined",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:agriculture",
+              "2201262:annual_new_centers:agriculture",
+              "2201262:center_annual_unit:agriculture",
+              "2201262:government_share:combined"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:combined": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            500000,
+            1000000,
+            1500000,
+            2000000,
+            2500000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            500000000,
+            500000000,
+            500000000,
+            500000000,
+            500000000
+          ]
+        },
+        {
+          "center_kind": "fisheries",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "fisheries",
+            "support_fiscal_scope": "combined",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:fisheries",
+              "2201262:annual_new_centers:fisheries",
+              "2201262:center_annual_unit:fisheries",
+              "2201262:government_share:combined"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:combined": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            600000,
+            1200000,
+            1800000,
+            2400000,
+            3000000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            600000000,
+            600000000,
+            600000000,
+            600000000,
+            600000000
+          ]
+        }
+      ],
+      "annual_amounts_thousand": [
+        1100000,
+        2200000,
+        3300000,
+        4400000,
+        5500000
+      ],
+      "total_thousand": 16500000
+    },
+    "national": {
+      "components": [
+        {
+          "center_kind": "agriculture",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "agriculture",
+            "support_fiscal_scope": "national",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:agriculture",
+              "2201262:annual_new_centers:agriculture",
+              "2201262:center_annual_unit:agriculture",
+              "2201262:government_share:national"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:national": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            250000,
+            500000,
+            750000,
+            1000000,
+            1250000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            250000000.0,
+            250000000.0,
+            250000000.0,
+            250000000.0,
+            250000000.0
+          ]
+        },
+        {
+          "center_kind": "fisheries",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "fisheries",
+            "support_fiscal_scope": "national",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:fisheries",
+              "2201262:annual_new_centers:fisheries",
+              "2201262:center_annual_unit:fisheries",
+              "2201262:government_share:national"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:national": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            300000,
+            600000,
+            900000,
+            1200000,
+            1500000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            300000000.0,
+            300000000.0,
+            300000000.0,
+            300000000.0,
+            300000000.0
+          ]
+        }
+      ],
+      "annual_amounts_thousand": [
+        550000,
+        1100000,
+        1650000,
+        2200000,
+        2750000
+      ],
+      "total_thousand": 8250000
+    },
+    "local": {
+      "components": [
+        {
+          "center_kind": "agriculture",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "agriculture",
+            "support_fiscal_scope": "local",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:agriculture",
+              "2201262:annual_new_centers:agriculture",
+              "2201262:center_annual_unit:agriculture",
+              "2201262:government_share:local"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:agriculture": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:local": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            250000,
+            500000,
+            750000,
+            1000000,
+            1250000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            250000000.0,
+            250000000.0,
+            250000000.0,
+            250000000.0,
+            250000000.0
+          ]
+        },
+        {
+          "center_kind": "fisheries",
+          "inputs": {
+            "bill_no": "2201262",
+            "route_key": "quantity_unit",
+            "start_year": 2025,
+            "years": 5,
+            "cutoff_date": "2026-10-04",
+            "evidence_mode": "development_review",
+            "support_derivation": "center_annual_designation",
+            "center_kind": "fisheries",
+            "support_fiscal_scope": "local",
+            "support_derivation_note": "정답 확인 후 유형별 매년1개 신규 지정·계속 운영·단가 동결 시나리오로 재계산",
+            "center_operation_scope_note": "신규 지원대상 센터만 계산하며 기존 재정지원 중복 제외. 지정된 센터는 다음 해에도 계속 운영하고 지정연도부터 연간 지원비 전액 반영. 패키지 인건비·사업비 중복 가산 없음",
+            "estimation_start_note": "24B0644 PDF3쪽의2025~2029년 추계기간을 가정으로 확인. 공포일은 미정이며 원문 명시연도로 취급하지 않음",
+            "selected_evidence_keys": [
+              "2201262:initial_supported_centers:fisheries",
+              "2201262:annual_new_centers:fisheries",
+              "2201262:center_annual_unit:fisheries",
+              "2201262:government_share:local"
+            ],
+            "evidence_selection_reasons": {
+              "2201262:initial_supported_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:annual_new_centers:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:center_annual_unit:fisheries": "매년 각1개 신규 지정·계속 운영·단가 동결은 선례 가정. 농업은 상담교류센터5억원, 어업은 제출 구성사업비603백만원을600백만원으로 적용한 패키지. 다른 기능·규모 센터에 자동 전용 금지",
+              "2201262:government_share:local": "국비·지방비50:50을 추계기간 동결한 정책 가정. 합산과 분할을 함께 더하면 중복"
+            }
+          },
+          "formula_key": "COMMON_QUANTITY_UNIT_V1",
+          "annual_amounts_thousand": [
+            300000,
+            600000,
+            900000,
+            1200000,
+            1500000
+          ],
+          "operating_centers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selected_unit_cost": [
+            300000000.0,
+            300000000.0,
+            300000000.0,
+            300000000.0,
+            300000000.0
+          ]
+        }
+      ],
+      "annual_amounts_thousand": [
+        550000,
+        1100000,
+        1650000,
+        2200000,
+        2750000
+      ],
+      "total_thousand": 8250000
+    }
+  },
+  "gold_annual_thousand": [
+    1100000,
+    2200000,
+    3300000,
+    4400000,
+    5500000
+  ],
+  "total_error_percent": 0.0,
+  "limitation": "정답 확인 후 단가·지정 시나리오 재계산. 신규 의안의 자동 판단 정확도가 아님. 어업 원시603백만원 대신 정답이 명시한 적용단가600백만원을 사용; 총액 역산 없음"
+}

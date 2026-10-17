@@ -1,0 +1,365 @@
+{
+  "bill_no": "2205165",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_vintage_mode": "current_development_db_not_proposal_date_isolated",
+  "ai_draft": {
+    "bill_no": "2205165",
+    "bill_name": "사회복지사 등의 처우 및 지위 향상을 위한 법률 일부개정법률안",
+    "propose_date": "2024-11-01",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제3조제4항",
+        "source_page": 3,
+        "source_quote": "폭력피해실태및그에대한조치현황",
+        "change_summary": "폭력피해·조치현황 항목 추가, 현행 보수조사 포함 전체 주기3→2년. 신구표와 비교하여 별도 폭력조사 신규비 및 기존 보수조사 추가빈도 분리.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "직전 인권·폭력경험 단가 참고 가능. 보수조사는 전체 신규가 아닌 개정실시비−현행실시비 비교. 첫 기존조사 차수는 미확정 참고 시나리오.",
+        "route_key": "research_survey",
+        "route_reason": "동일 연구과업 비용×주기별 실시횟수, 신규 폭력과업과 기존 빈도증분 분리",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제3조제4항",
+      "verified": true
+    }
+  ],
+  "rights_payload": {
+    "bill_no": "2205165",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "research_survey",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "research_service_function": "social_worker_rights_violence_survey",
+    "research_cost_scope": "research_contract_only",
+    "implementation_model": "central_local_cooperative_separate_survey",
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 2,
+        "unit": "year",
+        "source_ref": "2205165 원문PDF3쪽 3년마다→2년마다"
+      }
+    },
+    "selected_evidence_keys": [
+      "2203955:rights_survey:2021_unit_cost",
+      "2203955:rights_survey:price_freeze"
+    ],
+    "evidence_selection_reasons": {
+      "2203955:rights_survey:2021_unit_cost": "사회복지사 폭력피해·조치현황과 직전 인권·폭력경험 과업 유사, 중앙지방 협력 전국조사 후보",
+      "2203955:rights_survey:price_freeze": "사회복지사 폭력피해·조치현황과 직전 인권·폭력경험 과업 유사, 중앙지방 협력 전국조사 후보"
+    },
+    "selected_method_keys": [
+      "2203955:separate_rights_survey"
+    ],
+    "method_selection_reasons": {
+      "2203955:separate_rights_survey": "보수조사 전체비 아닌 별도 인권조사 과업 준용"
+    },
+    "method_confirmations": {
+      "2203955:separate_rights_survey": {
+        "separate_survey_scope_note": "기존 보수조사와 성격이 다른 인권·폭력경험 조사. 중앙·지방 협력의 전국1회 별도 연구용역 가정을 승인, 지자체 수 중복 곱셈 없음.",
+        "price_freeze_note": "2021 사회복지사 폭력경험 종합실태조사 연구용역5천만원 준용, 2026~2030 동결 가정.",
+        "recurrence_phase_note": "공포후3개월 및 시행후1년내 첫조사. 준비기간을 고려한2026첫조사 후보, 2년주기로2026·2028·2030실시."
+      }
+    }
+  },
+  "rights_calculation": {
+    "status": "computed_review",
+    "routeKey": "research_survey",
+    "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "annualAmountsThousand": [
+      50000,
+      0,
+      50000,
+      0,
+      50000
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "2203955 비용추계서24C3788 PDF3~4쪽; 2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사",
+      "2205165 원문PDF3쪽 3년마다→2년마다",
+      "2203955 비용추계서24C3788 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2203955:separate_rights_survey"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2203955:separate_rights_survey",
+        "source_bill_no": "2203955",
+        "available_at": "2024-10-21",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "social_worker_rights_violence_survey",
+        "source_ref": "2203955 비용추계서24C3788 PDF3~4쪽",
+        "match_groups": [
+          [
+            "사회복지사"
+          ],
+          [
+            "인권침해",
+            "폭력"
+          ],
+          [
+            "실태조사",
+            "조사"
+          ]
+        ],
+        "allowed_routes": [
+          "research_survey"
+        ],
+        "variable_keys": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2203955:rights_survey:2021_unit_cost",
+          "2203955:rights_survey:price_freeze"
+        ],
+        "required_confirmations": [
+          "separate_survey_scope_note",
+          "price_freeze_note",
+          "recurrence_phase_note"
+        ],
+        "method_steps": [
+          "기존 보수조사에 인권조사 추가와 신규 전체 보수조사 구분",
+          "동일예산 내 문항추가 가능성과 별도 연구용역 실시 시나리오 비교",
+          "중앙·지방 협력 전국 단일 인권조사 가정을 승인",
+          "2021 폭력경험 조사5천만원 및 기간동결 가정 준용",
+          "원문 주기와 첫 실시연도로 산출, 기존 보수조사 예산 중복 가산 금지"
+        ],
+        "baseline_check": "기존178/278백만원 보수조사 전체사업비를 신규 인권조사비로 사용하지 않음",
+        "limitation": "독립 인권조사 참고 시나리오. 동일예산 통합수행이나 지역별 독립조사에는 별도 검토 필요",
+        "support_derivation": "",
+        "lower_variable_keys": [
+          "survey_unit_cost",
+          "growth_rate"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "보수조사 전체비 아닌 별도 인권조사 과업 준용",
+        "confirmed_assumptions": {
+          "separate_survey_scope_note": "기존 보수조사와 성격이 다른 인권·폭력경험 조사. 중앙·지방 협력의 전국1회 별도 연구용역 가정을 승인, 지자체 수 중복 곱셈 없음.",
+          "price_freeze_note": "2021 사회복지사 폭력경험 종합실태조사 연구용역5천만원 준용, 2026~2030 동결 가정.",
+          "recurrence_phase_note": "공포후3개월 및 시행후1년내 첫조사. 준비기간을 고려한2026첫조사 후보, 2년주기로2026·2028·2030실시."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2203955 비용추계서24C3788 PDF3~4쪽; 2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 2,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "2205165 원문PDF3쪽 3년마다→2년마다",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2203955 비용추계서24C3788 PDF3~4쪽; 2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사",
+        "is_assumption": true
+      }
+    }
+  },
+  "wage_scenarios": [
+    {
+      "cycle": 3,
+      "payload": {
+        "bill_no": "2205165",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "research_survey",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "selected_evidence_keys": [
+          "2205985:social_worker_wage_survey:2023",
+          "2205985:wage_survey_price_freeze"
+        ],
+        "evidence_selection_reasons": {
+          "2205985:social_worker_wage_survey:2023": "현행 사회복지사 보수·지급실태·기준준수 전국조사 단가 참고. 과업이 다른 폭력조사에는 적용하지 않음.",
+          "2205985:wage_survey_price_freeze": "현행 사회복지사 보수·지급실태·기준준수 전국조사 단가 참고. 과업이 다른 폭력조사에는 적용하지 않음."
+        },
+        "explicit_inputs": {
+          "recurrence_interval_years": {
+            "value": 3,
+            "unit": "year",
+            "source_ref": "원문PDF3·5쪽 현행3년·개정2년"
+          }
+        }
+      },
+      "calculation": {
+        "status": "computed_review",
+        "routeKey": "research_survey",
+        "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "annualAmountsThousand": [
+          178000,
+          0,
+          0,
+          178000,
+          0
+        ],
+        "derivationTrace": [],
+        "sourceRefs": [
+          "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+          "원문PDF3·5쪽 현행3년·개정2년"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "survey_unit_cost": {
+            "key": "survey_unit_cost",
+            "value": 178000000,
+            "unit": "KRW/survey",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 3,
+            "unit": "year",
+            "source_class": "target_explicit",
+            "source_ref": "원문PDF3·5쪽 현행3년·개정2년",
+            "is_assumption": false
+          },
+          "growth_rate": {
+            "key": "growth_rate",
+            "value": 0,
+            "unit": "ratio/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+            "is_assumption": true
+          }
+        }
+      }
+    },
+    {
+      "cycle": 2,
+      "payload": {
+        "bill_no": "2205165",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-10",
+        "route_key": "research_survey",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "selected_evidence_keys": [
+          "2205985:social_worker_wage_survey:2023",
+          "2205985:wage_survey_price_freeze"
+        ],
+        "evidence_selection_reasons": {
+          "2205985:social_worker_wage_survey:2023": "현행 사회복지사 보수·지급실태·기준준수 전국조사 단가 참고. 과업이 다른 폭력조사에는 적용하지 않음.",
+          "2205985:wage_survey_price_freeze": "현행 사회복지사 보수·지급실태·기준준수 전국조사 단가 참고. 과업이 다른 폭력조사에는 적용하지 않음."
+        },
+        "explicit_inputs": {
+          "recurrence_interval_years": {
+            "value": 2,
+            "unit": "year",
+            "source_ref": "원문PDF3·5쪽 현행3년·개정2년"
+          }
+        }
+      },
+      "calculation": {
+        "status": "computed_review",
+        "routeKey": "research_survey",
+        "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "annualAmountsThousand": [
+          178000,
+          0,
+          178000,
+          0,
+          178000
+        ],
+        "derivationTrace": [],
+        "sourceRefs": [
+          "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+          "원문PDF3·5쪽 현행3년·개정2년"
+        ],
+        "methodEvidenceKeys": [],
+        "selectedMethods": [],
+        "methodCandidates": [],
+        "resolvedVariables": {
+          "survey_unit_cost": {
+            "key": "survey_unit_cost",
+            "value": 178000000,
+            "unit": "KRW/survey",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 2,
+            "unit": "year",
+            "source_class": "target_explicit",
+            "source_ref": "원문PDF3·5쪽 현행3년·개정2년",
+            "is_assumption": false
+          },
+          "growth_rate": {
+            "key": "growth_rate",
+            "value": 0,
+            "unit": "ratio/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+            "is_assumption": true
+          }
+        }
+      }
+    }
+  ],
+  "wage_delta_annual_thousand": [
+    0,
+    0,
+    178000,
+    -178000,
+    178000
+  ],
+  "combined_candidate_annual_thousand": [
+    50000,
+    0,
+    228000,
+    -178000,
+    228000
+  ],
+  "rights_candidate_total_won": 150000000,
+  "wage_delta_candidate_total_won": 178000000,
+  "combined_candidate_total_won": 328000000,
+  "assumptions": [
+    "폭력피해조사를 별도 전국연구용역으로 실시",
+    "두 조사 모두2026 첫조사 가정, 원문만으로 기존조사 실시차수 미확정",
+    "보수조사 기존 DB178백만원 동결 후보 사용"
+  ],
+  "limitations": [
+    "기존178백만원 보수조사 출처는 직전 다른 정답의278백만원 인용과 범위차이 미확인. 확정값으로 표시하지 않음",
+    "현행 조사 기존차수에 따라 연도별 추가금액이 달라질 수 있음",
+    "합산값은 비교 시나리오, 독립 GPT API 성능 아님"
+  ]
+}

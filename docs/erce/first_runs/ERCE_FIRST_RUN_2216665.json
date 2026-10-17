@@ -1,0 +1,182 @@
+{
+  "bill_no": "2216665",
+  "answer_seen": false,
+  "insurance_payload": {
+    "bill_no": "2216665",
+    "route_key": "transfer_recipient",
+    "start_year": 2027,
+    "years": 5,
+    "cutoff_date": "2026-10-14",
+    "payer": "government",
+    "estimate_purpose": "reference_scenario",
+    "explicit_inputs": {
+      "recipient_count": {
+        "value": 12482,
+        "unit": "person",
+        "source_ref": "원문PDF1쪽2024시설9904명+공동생활2578명.기존가정위탁7703명제외·추계기간인원동결 가정"
+      },
+      "benefit_per_recipient": {
+        "value": 68500,
+        "unit": "KRW/person/year",
+        "source_ref": "공식2025복지안내책자 위탁아동상해보험료 연68500원내외를 시설아동동일보장에 준용·연1회전액동결 가정. https://www.bokjiro.go.kr/ssis-tbu/cms/pc/common/download/2025년%20안내책자%20[아동·청소년].pdf"
+      }
+    }
+  },
+  "insurance_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "",
+    "routeKey": "transfer_recipient",
+    "formulaKey": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "annualAmountsThousand": [
+      855017,
+      855017,
+      855017,
+      855017,
+      855017
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "원문PDF1쪽2024시설9904명+공동생활2578명.기존가정위탁7703명제외·추계기간인원동결 가정",
+      "공식2025복지안내책자 위탁아동상해보험료 연68500원내외를 시설아동동일보장에 준용·연1회전액동결 가정. https://www.bokjiro.go.kr/ssis-tbu/cms/pc/common/download/2025년%20안내책자%20[아동·청소년].pdf"
+    ],
+    "methodEvidenceKeys": [],
+    "selectedMethods": [],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": 12482,
+        "unit": "person",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF1쪽2024시설9904명+공동생활2578명.기존가정위탁7703명제외·추계기간인원동결 가정",
+        "is_assumption": false
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": 68500,
+        "unit": "KRW/person/year",
+        "source_class": "target_explicit",
+        "source_ref": "공식2025복지안내책자 위탁아동상해보험료 연68500원내외를 시설아동동일보장에 준용·연1회전액동결 가정. https://www.bokjiro.go.kr/ssis-tbu/cms/pc/common/download/2025년%20안내책자%20[아동·청소년].pdf",
+        "is_assumption": false
+      }
+    }
+  },
+  "insurance_reference_total_eok": 42.75085,
+  "survey_payload": {
+    "bill_no": "2216665",
+    "route_key": "research_survey",
+    "start_year": 2027,
+    "years": 5,
+    "cutoff_date": "2026-10-14",
+    "payer": "government",
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "원문현행아동종합실태조사3년주기 유지.대상추가"
+      }
+    }
+  },
+  "survey_result": {
+    "status": "needs_input",
+    "routeKey": "research_survey",
+    "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "missingVariables": [
+      "survey_unit_cost"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2203955:rights_survey:2021_unit_cost",
+        "variableKey": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2203955 비용추계서24C3788 PDF3~4쪽; 2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-21",
+        "limitation": "2021 유사 인권·폭력경험 조사용역 준용 및 기간 동결. 기존 보수조사 전체사업비 아님. 지자체마다 별도 수행비로 중복 적용 금지",
+        "scope": "중앙·지방 협력 전국 통합 인권침해 연구용역",
+        "serviceFunction": "social_worker_rights_violence_survey",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2205985:social_worker_wage_survey:2023",
+        "variableKey": "survey_unit_cost",
+        "value": 178000000,
+        "unit": "KRW/survey",
+        "sourceRef": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-12-02",
+        "limitation": "공식 고정요금이 아닌 2023년 유사 조사 사업비. 대상 직종·조사항목·전국 범위·수행방식을 확인한 뒤 사용. 지자체마다 별도 조사 시 개별 단가로 전용 금지; 시행 주기는 새 법안에서 추출",
+        "scope": "중앙정부와 지방자치단체가 협력하는 전국 보수·지급실태 조사 1회",
+        "serviceFunction": "종사자 보수수준·지급실태·기준 준수율 조사",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2208199:meal_survey:survey_unit_cost:reference",
+        "variableKey": "survey_unit_cost",
+        "value": 760000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-11",
+        "limitation": "2023 어린이 통합조사 예산을 노인·장애인 급식소에 준용한 가정. 표본·과업범위 검토 필요. 최신 공식단가·법정3년주기 아님; 시설수와 다시 곱하지 않음",
+        "scope": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활 통합조사를 준용한 참고 시나리오",
+        "serviceFunction": "social_welfare_meal_safety_survey",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2209797:media_monitoring:2025_unit_cost",
+        "variableKey": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2025-04-28",
+        "limitation": "2025선례 사업예산5천만원을 조사1회 비용으로 준용·가격동결하는 가정. 최신계약요율 아님. 현장방문·인구설문 과업으로 자동전용 금지",
+        "scope": "정책 및 언론 모니터링·권고기준 점검·개선사항 조사분석",
+        "serviceFunction": "policy_media_monitoring_survey",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:care_worker_job_2023",
+        "variableKey": "survey_unit_cost",
+        "value": 22000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "돌봄전담사 직무분석·인력 운영",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "survey_unit_cost": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "required_slots": 4,
+  "filled_slots": 3,
+  "missing_slots": 1,
+  "total_eok": null,
+  "source_public_premium_url": "https://www.bokjiro.go.kr/ssis-tbu/cms/pc/common/download/2025년%20안내책자%20[아동·청소년].pdf",
+  "scope_notes": [
+    "원문가정위탁은기존보험지원으로신규지원에서제외.시설과공동생활가정12482명을한시점대리인원으로사용",
+    "2025단가68500원내외는정액고시가아니며약가정. 실제시설단체보험가입 견적과보장범위 미확인",
+    "참여100%·정액보험연1회·인원과단가동결 참고시나리오. 실제추가5년대상인구전망 아님",
+    "원문공포후3개월이나공포일미정.2026심의·2027전년시행 참고기간 가정",
+    "조사보호아동표본추가비는 기존3년조사와범위비교필요. 전체조사비를신규로중복계산하지않음",
+    "정부전국지원목적이지만원문시도시장군수예산범위재량.기존국비70%요율을신규시설지원에자동적용하지않음"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "bill_no": "2204385",
+  "run_date": "2026-10-03",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_cutoff": "2026-10-03",
+  "ai_mode": "manual_no_api",
+  "time_scope_note": "현재 개발 DB 재사용; 완전 무작위 평가 또는 발의 당시 자료만 제한한 시험은 아님",
+  "ai_draft": {
+    "bill_no": "2204385",
+    "bill_name": "취업 후 학자금 상환 특별법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-27",
+    "articles": [
+      {
+        "article_ref": "제30조제2항/연체금 한도 인하",
+        "source_quote": "제30조제2항중후단“9”를“5”로한다.",
+        "source_page": 3,
+        "route_key": "non_tax_fee_change",
+        "route_reason": "정부가 징수하는 연체금 수입감소 후보. 대상 건수 × 실제 건당 연체금 감소액. 9→5%는 상한 변화이지 모든 미납원리금에 적용할 일률 인하율이 아님",
+        "change_summary": "신규 고지 미납분의 연체금 총한도9%에서5%로 감소",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "연체금 수입 감소; 전용 상한·연체기간별 건당 산식은 미구현, 일반 수입감소 경로만 연결해 실제 감소액 확인",
+        "variables": [
+          {
+            "key": "old_cap_percentage",
+            "value_json": "9",
+            "unit": "%",
+            "source_quote": "이에취업후상환학자금대출연체금총한도를미납된대출원리금의9%에서5%로하향하여대학생의취업후학자금상환부담을경감할수있도록제도개선을하려는것임(안제30조제2항).",
+            "source_page": 1
+          },
+          {
+            "key": "new_cap_percentage",
+            "value_json": "5",
+            "unit": "%",
+            "source_quote": "이에취업후상환학자금대출연체금총한도를미납된대출원리금의9%에서5%로하향하여대학생의취업후학자금상환부담을경감할수있도록제도개선을하려는것임(안제30조제2항).",
+            "source_page": 1
+          },
+          {
+            "key": "start_year",
+            "value_json": "2025",
+            "unit": "year",
+            "source_quote": "제1조(시행일)이법은2025년1월1일부터시행한다.",
+            "source_page": 3
+          }
+        ]
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "items": [
+    {
+      "itemIndex": 0,
+      "name": "제30조제2항/연체금 한도 인하",
+      "triggerRef": "제30조제2항/연체금 한도 인하",
+      "routeKey": "non_tax_fee_change",
+      "formulaKey": "NON_TAX_FEE_CHANGE_V1",
+      "formula": "대상 건수 × 건당 수입 감소액 × 적용률",
+      "requiredVariables": [
+        "transaction_count",
+        "fee_change_per_case"
+      ],
+      "scopeNote": "정부가 징수하는 연체금 수입감소 후보. 대상 건수 × 실제 건당 연체금 감소액. 9→5%는 상한 변화이지 모든 미납원리금에 적용할 일률 인하율이 아님",
+      "explicitInputs": {},
+      "decisionReason": "연체금 수입 감소; 전용 상한·연체기간별 건당 산식은 미구현, 일반 수입감소 경로만 연결해 실제 감소액 확인",
+      "observedVariables": [
+        {
+          "key": "old_cap_percentage",
+          "value": 9,
+          "unit": "%",
+          "source_ref": "bill_text.pdf 1쪽: 이에취업후상환학자금대출연체금총한도를미납된대출원리금의9%에서5%로하향하여대학생의취업후학자금상환부담을경감할수있도록제도개선을하려는것임(안제30조제2항)."
+        },
+        {
+          "key": "new_cap_percentage",
+          "value": 5,
+          "unit": "%",
+          "source_ref": "bill_text.pdf 1쪽: 이에취업후상환학자금대출연체금총한도를미납된대출원리금의9%에서5%로하향하여대학생의취업후학자금상환부담을경감할수있도록제도개선을하려는것임(안제30조제2항)."
+        }
+      ],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2024-09-27",
+      "startYear": 2025,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "non_tax_fee_change",
+        "formulaKey": "NON_TAX_FEE_CHANGE_V1",
+        "formula": "대상 건수 × 건당 수입 감소액 × 적용률",
+        "missingVariables": [
+          "transaction_count",
+          "fee_change_per_case"
+        ]
+      }
+    }
+  ],
+  "unmapped_count": 0,
+  "candidate_search": {
+    "학자금": [],
+    "연체금": [],
+    "연체": [],
+    "가산금": []
+  },
+  "selected_evidence_keys": [],
+  "annual_amounts_thousand": null,
+  "observed_constraints": {
+    "old_cap_percentage": 9,
+    "new_cap_percentage": 5,
+    "start_year": 2025
+  },
+  "detailed_formula_status": "상한 인하 전용 상세 산식 미구현; 일반 건수×실제 감소액 산식은 연결",
+  "missing_explanation": "2025년 이후 고지된 미납분의 원리금·연체기간·부과 및 실제 징수 분포와 건수 미확보. 상한 이하인 경우 효과가 다르므로4%를 모든 미납원리금에 곱할 수 없음",
+  "assumptions": [
+    "2025-01-01 시행 및 시행 후 고지된 미납분만 적용",
+    "연체기간에 따른 부과액을 구한 뒤 기존9%상한과 신규5%상한을 각각 적용한 차액이 필요",
+    "최근3→2%라는 제안이유의 과거 가산금 인하는 본 개정의 새 인하로 중복 분석하지 않음",
+    "연체금 상한과 건당 실제 수입변화를 구별",
+    "장학지원금이나 교육비 지급액이 아닌 연체금 수입 감소 후보"
+  ]
+}

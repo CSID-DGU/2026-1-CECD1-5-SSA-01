@@ -1,0 +1,48 @@
+{
+  "bill_no": "2200527", "run_date": "2026-10-04",
+  "evaluation_type": "pre_answer_development_first_run", "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2200527", "bill_name": "아동수당법 일부개정법률안",
+    "document_type": "amendment", "propose_date": "2024-06-17",
+    "articles": [
+      {"article_ref": "제4조제1항/8~17세 신규 지급", "change_summary": "18세미만으로 대상 확대·월30만원 지급",
+       "source_quote": "제4조제1항중“8세”를“18세”로, “10만원”을“30만원”으로하고, 같은조제5항중“추가로지급한다”를“지급한다”로한다.", "source_page": 3,
+       "cost_trigger": true, "estimation_decision": "estimate_now",
+       "decision_reason": "기존 미지급8~17세 집단의 신규 월급여. 인구 전망과 지급률은 타 아동수당 근거를 후보로 사용할 수 있음",
+       "route_key": "transfer_recipient", "route_reason": "8~17세 인구×아동수당 지급률×월30만원×지급개월수", "variables": []},
+      {"article_ref": "제4조제1항·제5항/기존8세미만 및2세미만 특례", "change_summary": "기존급여 인상과2세미만 추가급여 규정 변경",
+       "source_quote": "제4조제1항중“8세”를“18세”로, “10만원”을“30만원”으로하고, 같은조제5항중“추가로지급한다”를“지급한다”로한다.", "source_page": 3,
+       "cost_trigger": true, "estimation_decision": "needs_review",
+       "decision_reason": "2~7세 월급여차액20만원은 명확하나0~1세는 추가급여를 지급으로 바꾸는 특례와 충돌 가능. 전국8세미만 전체에20만원을 곱해 전액 확정하지 않음. 부모급여의 다른 법적 운영 범위 및 병급을 확인해야 함",
+       "route_key": "transfer_recipient_delta", "route_reason": "기존집단은 신·구 지급액 차이로 계산하되2세미만을 분리해 중복·특례 여부 확인", "variables": []}
+    ]
+  },
+  "calculation_payload": {
+    "bill_no": "2200527", "route_key": "transfer_recipient", "cutoff_date": "2026-10-04",
+    "start_year": 2025, "years": 5,
+    "explicit_inputs": {
+      "benefit_per_recipient": {"value": 300000, "unit": "KRW/person/month", "source_ref": "원문3쪽 제4조제1항 월30만원=300000원; 단위 정규화는 개발 에이전트가 수행"},
+      "payments_per_year": {"value": 12, "unit": "month/year", "source_ref": "월 지급을2025~2029년 각 완전연도12개월 적용하는 개발 시나리오"}
+    },
+    "selected_evidence_keys": ["2200147:age8to17_population:2025-2029", "2200147:child_allowance_payment_rate:2024"],
+    "evidence_selection_reasons": {
+      "2200147:age8to17_population:2025-2029": "동일 전국8~17세·2025~2029년·2023년12월 중위전망. 대상 의안 정답이 아닌 기존 아동수당 선례의 표시 인구 사용",
+      "2200147:child_allowance_payment_rate:2024": "동일 아동수당 지급률97.2%를 신규연령에도 적용하는 확인된 개발 가정. 실제8~17세 수급실적이나 최신 공식률 아님"
+    }
+  },
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item(8~17세 부분)",
+    "quote_verified": [true, true], "calculated_cost_item_count": 1,
+    "review_pending_item_count": 1, "formula_key": "TRANSFER_RECIPIENT_V1",
+    "required_variables_filled": 2, "required_variable_count": 2,
+    "status": "computed_review", "annual_amounts_thousand": [15564441600,15088550400,14637153600,14112273600,13394937600],
+    "total_thousand": 72797356800, "whole_bill_complete": false
+  },
+  "candidate_search": {
+    "reused_bill_no": "2200147", "selected_evidence_count": 2,
+    "rejected": ["부모급여0세100만원·1세50만원을 아동수당 월30만원으로 전용하지 않음", "국고보조율75.55%는 총비용에 곱하지 않음", "2세미만 특례를 무시하고8세미만 전체에20만원을 일괄 적용하지 않음"]
+  },
+  "scope_notes": ["공포 즉시 시행이라 시작연도 원문값은 없음.2025~2029년은 기존 인구근거 기간을 이용한 개발 시나리오이며 법정 시작연도 아님", "이번 금액은8~17세 신규 지급 부분만이며 전체 법안 총액이 아님", "재사용 인구는 천명단위 표시값이고 실제 수급자 수가 아니라97.2%를 별도 적용", "원문과 기존 타 의안 DB만 보고 첫 실행을 고정하며 정답 PDF는 아직 열람하지 않음"]
+}

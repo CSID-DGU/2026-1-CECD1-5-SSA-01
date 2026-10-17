@@ -1,0 +1,33 @@
+{
+  "bill_no": "2210775",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2210775.json",
+  "gold": {
+    "estimate_no": "25C3154",
+    "reply_date": "2025-06-30",
+    "total_eok": 20,
+    "annual_eok": [
+      4,
+      4,
+      4,
+      4,
+      4
+    ],
+    "current_survey_budget_eok": 1,
+    "current_scope": "국비지원시설526개 중 약80개소",
+    "expanded_survey_proxy": "2023장애인 편의시설 실태 전수조사5억원",
+    "formula": "(확대조사 유사예산5억원−현재사업1억원)×매년1회",
+    "price_mode": "freeze"
+  },
+  "first_run": {
+    "decision": "no_incremental_cost",
+    "decision_is_conditional": true,
+    "decision_matches": false,
+    "total_eok": null,
+    "error_percent": null,
+    "public_existing_survey_history_verified": true,
+    "sample_coverage_not_verified": true
+  },
+  "difference": "기존조사 이력은 확인했지만 현재 조사 표본과 개정대상 범위를 비교하지 않고 같은범위유지 가정으로 추가비제외했다. 정답은 기존80개표본에서 규모확대 가정·현행1억원차감 후매년4억원을 추계",
+  "reinforcement_done": false,
+  "independent_success": false
+}

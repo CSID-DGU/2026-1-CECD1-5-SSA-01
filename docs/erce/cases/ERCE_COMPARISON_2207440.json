@@ -1,0 +1,29 @@
+{
+  "bill_no": "2207440",
+  "post_answer_comparison": true,
+  "first_cash_candidate_eok": 59850.18311,
+  "gold_partial_eok": 58995,
+  "error_percent": 1.44958574455462,
+  "delta_eok": 855.1831099999981,
+  "comparison_scope": "현금수당단가인상+15~34세기간연장,양쪽군복무가산미포함",
+  "source_target_read_before_calculation": false,
+  "price_floor_lag_matched": true,
+  "extension_only_youth_matched": true,
+  "youth_candidate": {
+    "recognized_count_basis": "전체평균×2023청년비율169493/228929",
+    "iap": 0.98,
+    "payment_months": 5.2
+  },
+  "gold_youth": {
+    "recognized_2022": 156492,
+    "recognized_2023": 169471,
+    "mean_display": 162982,
+    "mean_exact": 162981.5,
+    "iap": 0.985,
+    "payment_months": 5.15
+  },
+  "gold_youth_table_comment": "설명은2023수급행태5.2를언급하지만계산표는2022~2023평균5.15를사용.청년과전체피연산자분리필요",
+  "whole_bill_total": null,
+  "independent_holdout_evaluation": false,
+  "reinforcement_completed": false
+}

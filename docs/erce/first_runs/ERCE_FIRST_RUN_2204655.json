@@ -1,0 +1,127 @@
+{
+  "bill_no": "2204655",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2204655",
+    "bill_name": "장애인고용촉진 및 직업재활법 일부개정법률안",
+    "propose_date": "2024-10-11",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제22조의2",
+        "source_page": 3,
+        "source_quote": "의료법인은대통령령으로정하는요건을모두갖춘경우에",
+        "change_summary": "의료법인 자회사형 표준사업장 설립 허용. 민간자회사 설립자금 자체가 아니라 기존설립보조 신청증가의 간접지출 후보.",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "직전2200200과 같은 표준사업장 설립지원 수요확대 과업. 평균보조 단가 후보는 있으나 의료법인 추가신청 물량·예산확대 가정이 필요. 공동출자전체79개를 의료법인기준물량으로 전용하지 않음.",
+        "route_key": "standard_workplace_subsidy_expansion",
+        "route_reason": "설립보조 평균단가×의료법인 신규지원사업장수, 기존회사 재지원 및 민간출자액 가산 금지.",
+        "variables": []
+      },
+      {
+        "article_ref": "제22조의5",
+        "source_page": 3,
+        "source_quote": "제22조의2(의료법인이설립한표준사업장에한한다)",
+        "change_summary": "의료법인 표준사업장의 인증·취소기준. 별도새기관 설치가 아닌 기존인증 업무의 대상확대.",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "직전 기존행정력 처리 근거가 있지만 이번 추가심사규모·집행가능성 확인 후 적용. 인증부담을 설립보조에 중복가산하지 않음.",
+        "route_key": "direct_annual_amount",
+        "route_reason": "별도행정순증이 있을때만계산",
+        "variables": []
+      },
+      {
+        "article_ref": "제33조제4항·제86조",
+        "source_page": 3,
+        "source_quote": "제33조제4항중“제22조의4제1항”을“제22조의5제1항”으로한다.",
+        "change_summary": "부담금감면·과태료 인용조항번호 정비. 기존감면율이나 벌금단가 변경 없음.",
+        "cost_trigger": false,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "인용번호 이동만 신규수입·지출로 잡지 않음.",
+        "route_key": "",
+        "route_reason": "",
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제22조의2",
+      "verified": true
+    },
+    {
+      "article": "제22조의5",
+      "verified": true
+    },
+    {
+      "article": "제33조제4항·제86조",
+      "verified": true
+    }
+  ],
+  "payload": {
+    "bill_no": "2204655",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "standard_workplace_subsidy_expansion",
+    "support_derivation": "standard_workplace_subsidy_expansion",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "workplace_form": "medical_corporation_subsidiary",
+    "application_growth_scenario": "increase1",
+    "application_increase_mode": "fixed_annual_increment_from_base",
+    "standard_grant_price_year": 2024,
+    "workplace_scenario_confirmed": true,
+    "budget_expansion_assumed": true,
+    "workplace_indirect_scope_note": "공동출자허용에 따른 기존설립지원 신청증가를 가정. 국가가 민간주식에 출자하는 비용이 아님.",
+    "workplace_quantity_note": "자회사형79개 기준 increase1 매년고정증분. 신규신청을 복리·누적기존보조로 계산하지 않음.",
+    "workplace_budget_note": "신청증가가 자동예산증가를 뜻하지는 않지만 정답처럼 예산제약을 완화해 추가지원하는 시나리오 승인.",
+    "workplace_price_note": "2024평균지원2.95억원·2024.3CPI2025부터 적용. 투자액3/4나최대10억원을 다시 적용하지 않음.",
+    "selected_evidence_keys": [
+      "2200200:standard_grant_unit:reviewed",
+      "2200200:standard_grant_cpi:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2200200:standard_grant_unit:reviewed": "같은 자회사형 표준사업장 설립지원의2024평균보조·물가 후보. 의료법인이라는 설립주체 차이는 검토 필요.",
+      "2200200:standard_grant_cpi:reviewed": "같은 자회사형 표준사업장 설립지원의2024평균보조·물가 후보. 의료법인이라는 설립주체 차이는 검토 필요."
+    },
+    "selected_method_keys": [
+      "2200200:standard_workplace_application_expansion"
+    ],
+    "method_selection_reasons": {
+      "2200200:standard_workplace_application_expansion": "규제완화의 기존공공보조 수요증가 시나리오"
+    },
+    "method_confirmations": {
+      "2200200:standard_workplace_application_expansion": {
+        "workplace_indirect_scope_note": "공동출자허용에 따른 기존설립지원 신청증가를 가정. 국가가 민간주식에 출자하는 비용이 아님.",
+        "workplace_quantity_note": "이번 의료법인 기존5개소와 새신청규모를 확인해야 함. 과거 전체자회사 기준79개 및1/4/8증분 미적용.",
+        "workplace_budget_note": "신청증가가 자동예산증가를 뜻하지는 않지만 정답처럼 예산제약을 완화해 추가지원하는 시나리오 승인.",
+        "workplace_price_note": "2024평균지원2.95억원·2024.3CPI2025부터 적용. 투자액3/4나최대10억원을 다시 적용하지 않음."
+      }
+    }
+  },
+  "calculation": {
+    "status": "scope_selection_blocked",
+    "reason": "selected DB evidence workplace_form mismatch: 2200200:standard_grant_unit:reviewed"
+  },
+  "first_total_won": null,
+  "matching_method": "2200200:standard_workplace_application_expansion",
+  "candidate_grant_unit_won": 295000000,
+  "prior_workplace_form": "subsidiary_joint_investment",
+  "target_workplace_form": "medical_corporation_subsidiary",
+  "original_existing_medical_workplaces": 5,
+  "missing_semantic_variables": [
+    "의료법인 추가신청 건수·지원단가 기준년도·예산확대 가정",
+    "의료법인설립과 공동출자특례의 적용조건 차이",
+    "인증업무 기존행정력 준용 여부"
+  ],
+  "rejected_quantity": "표준사업장 전체자회사79개 및 추가1/4/8건을 의료법인신규수요로 자동쓰지않음",
+  "scope_note": "동일지원사업 비용구조를 찾았지만 기존 엔진의 공동출자형 태그가 의료법인경로와 다르게 고정되어 실제가격선택도 차단됨. 신규의안의 금액은 미산출."
+}

@@ -1,0 +1,269 @@
+{
+  "components": {
+    "large_public:salary": [
+      41665128,
+      42926280,
+      43944624,
+      44960552,
+      46430688
+    ],
+    "large_public:employer_cost": [
+      5444456,
+      5636528,
+      5798400,
+      5973560,
+      6212744
+    ],
+    "large_public:basic_expense": [
+      3080967,
+      3176008,
+      3253194,
+      3331091,
+      3442880
+    ],
+    "large_public:initial_asset": [
+      6017048,
+      0,
+      0,
+      0,
+      0
+    ],
+    "meals_public:salary": [
+      28041183,
+      28889955,
+      29575314,
+      30259047,
+      31248468
+    ],
+    "meals_public:employer_cost": [
+      3664191,
+      3793458,
+      3902400,
+      4020285,
+      4181259
+    ],
+    "meals_public:basic_expense": [
+      2073531,
+      2137495,
+      2189442,
+      2241868,
+      2317104
+    ],
+    "meals_public:initial_asset": [
+      4049553,
+      0,
+      0,
+      0,
+      0
+    ],
+    "large_private:private_pension": [
+      116320,
+      119840,
+      122683,
+      125520,
+      129624
+    ]
+  },
+  "source_refs": {
+    "large_public:salary": [
+      "2207986:large_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "large_public:employer_cost": [
+      "2207986:large_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "large_public:basic_expense": [
+      "large_public 보수+기관부담금 계산;2207986:salary_public;2207986:employer_cost",
+      "2200601 비용추계서 PDF p.4~8 표3·각주5"
+    ],
+    "large_public:initial_asset": [
+      "2207986:large_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "의안 2212273 추계서 25D4478 PDF p.4, 2026년 정부기관 1인당 자산취득비 전망 인용",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "meals_public:salary": [
+      "2207986:meals_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "meals_public:employer_cost": [
+      "2207986:meals_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "meals_public:basic_expense": [
+      "meals_public 보수+기관부담금 계산;2207986:salary_public;2207986:employer_cost",
+      "2200601 비용추계서 PDF p.4~8 표3·각주5"
+    ],
+    "meals_public:initial_asset": [
+      "2207986:meals_public:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+      "의안 2212273 추계서 25D4478 PDF p.4, 2026년 정부기관 1인당 자산취득비 전망 인용",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ],
+    "large_private:private_pension": [
+      "2207986:large_private:headcount; 중복차감 근거:2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정 × 2207986 비용추계서25C0723 PDF p.5~7 표3·7",
+      "2207986 비용추계서25C0723 PDF p.5~7 표3·7"
+    ]
+  },
+  "effective_headcounts": {
+    "large_public": 1208,
+    "meals_public": 813,
+    "large_private": 91
+  },
+  "overlap_public": 0,
+  "overlap_source_ref": "2207986 추계서 PDF p.3: 두 조건 중복 없음의 확인된 선례 가정",
+  "annual_amounts_thousand": [
+    94152377,
+    86679564,
+    88786057,
+    90911923,
+    93962767
+  ],
+  "total_thousand": 454492688,
+  "excluded_scope": "다회급식 사립학교·유치원·특수·대안학교 및 사립 재정결함보조는 이 구성에 미포함; 비용0 확정 아님",
+  "evaluation_type": "post_answer_development_regression",
+  "limitation": "해당 의안 정답의 인원·단가 사용한 회귀시험. 기본경비는 과거 선례 비율; 중복0은 관측 아닌 가정",
+  "bill_no": "2207986",
+  "run_date": "2026-10-03",
+  "gold_opened": true,
+  "ai_mode": "manual_no_api",
+  "reviewed_ai_draft": {
+    "bill_no": "2207986",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-02-07",
+    "articles": [
+      {
+        "article_ref": "제7조제2항/규모기준 국공립/국공립 봉급·수당",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_average",
+        "route_reason": "규모기준 국공립: 국공립 순증 영양교사 수 × 교원 연간 봉급·수당. 대상학교는 일정 규모 이상 또는1일2회 이상 급식의 합집합으로 중복 제거하고 기존 배치·재배치를 확인해야 함",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/규모기준 국공립/국공립 기관부담금",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "quantity_unit",
+        "route_reason": "규모기준 국공립: 국공립 순증 인원 × 인당 기관부담금. 선례의 반올림 단가 경로를 검토하며 부담률 경로와 중복 합산하지 않음",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/규모기준 국공립/국공립 기본경비",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_basic_expense",
+        "route_reason": "규모기준 국공립: 국공립 봉급·수당+기관부담금 × 기본경비율. 학교별 증원에 필요한 운영경비를 선례 조건으로 검토",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/규모기준 국공립/국공립 초기 집기",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_asset",
+        "route_reason": "규모기준 국공립: 국공립 순증 인원 × 첫해 집기 단가. 기존 집기 재사용이면 제외하고 필요할 경우 첫해에만 계상",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/다회급식 국공립/국공립 봉급·수당",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_average",
+        "route_reason": "다회급식 국공립: 국공립 순증 영양교사 수 × 교원 연간 봉급·수당. 대상학교는 일정 규모 이상 또는1일2회 이상 급식의 합집합으로 중복 제거하고 기존 배치·재배치를 확인해야 함",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/다회급식 국공립/국공립 기관부담금",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "quantity_unit",
+        "route_reason": "다회급식 국공립: 국공립 순증 인원 × 인당 기관부담금. 선례의 반올림 단가 경로를 검토하며 부담률 경로와 중복 합산하지 않음",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/다회급식 국공립/국공립 기본경비",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_basic_expense",
+        "route_reason": "다회급식 국공립: 국공립 봉급·수당+기관부담금 × 기본경비율. 학교별 증원에 필요한 운영경비를 선례 조건으로 검토",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/다회급식 국공립/국공립 초기 집기",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_asset",
+        "route_reason": "다회급식 국공립: 국공립 순증 인원 × 첫해 집기 단가. 기존 집기 재사용이면 제외하고 필요할 경우 첫해에만 계상",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/규모기준 사립 연금 국가부담",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_employer_contribution",
+        "route_reason": "사립 대상학교 순증 인원에 대응하는 봉급·수당 × 연금 국가부담률. 사립 전체 보수를 국가 비용으로 계상하지 않고 재정결함보조는 규모 미확인으로 제외 후보",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "mapped_routes": [
+    "personnel_average",
+    "quantity_unit",
+    "personnel_basic_expense",
+    "personnel_asset",
+    "personnel_average",
+    "quantity_unit",
+    "personnel_basic_expense",
+    "personnel_asset",
+    "personnel_employer_contribution"
+  ],
+  "gold_total_thousand": 453150000,
+  "total_error_percent": 0.2963010040825334
+}

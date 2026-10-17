@@ -1,0 +1,65 @@
+{
+  "bill_no": "2205811",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C5381",
+  "gold_date": "2024-12-05",
+  "first_total_won": null,
+  "gold_total_won": 2810000000,
+  "error_percent": null,
+  "evaluation_status": "staffing_formula_and_population_need_reinforcement",
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "first_route": "hospital_communication_support",
+  "first_price_candidate_won": 180000000,
+  "first_price_candidate_scope": "3인인력+운영비 정상운영 패키지",
+  "gold_model": "국립대학병원별 통역사1명 인건비+첫배치년도 자산취득비",
+  "formula_match": false,
+  "fiscal_scope_direction_match": true,
+  "gold_parameters": {
+    "national_university_hospitals": 18,
+    "additional_interpreters_per_hospital": 1,
+    "already_staffed_hospitals_subtracted": false,
+    "annual_salary_base_won": 25680000,
+    "asset_per_staff_base_won": 6740000,
+    "price_base_year": 2024,
+    "start_year": 2026,
+    "years": 5,
+    "nominal_wages": {
+      "2025": 0.036,
+      "2026": 0.039,
+      "2027": 0.038,
+      "2028": 0.038,
+      "2029": 0.038,
+      "2030": 0.038
+    },
+    "asset_cpi": {
+      "2025": 0.021,
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02,
+      "2030": 0.02
+    }
+  },
+  "gold_annual_million": [
+    624,
+    516,
+    536,
+    556,
+    578
+  ],
+  "gold_sources": [
+    "2023.12전국공공의료기관현황",
+    "2024사회복지시설종사자 인건비가이드라인",
+    "NABO2024.10공공기관 1인당자산취득비"
+  ],
+  "well_handled": "상급47−기존지원10=37개를 국립대학병원에 전용하지 않고 비용전액지원·공공합계 범위를 이해",
+  "first_gaps": [
+    "같은통역지원 목적 내3인패키지와1명배치+자산 산식 차이",
+    "국립대학병원18개 모집단",
+    "이미통역사가 있어도1명추가배치 가정으로 기존기관 차감없음",
+    "연봉단가·명목임금 및 자산의 첫해만 CPI 반영"
+  ],
+  "gold_limit": "별도의사소통서비스 세부사업·운영비는 향후체계설계에따라추가될수있음. 정답은인건비·자산 범위추계.",
+  "reinforcement_performed": false
+}

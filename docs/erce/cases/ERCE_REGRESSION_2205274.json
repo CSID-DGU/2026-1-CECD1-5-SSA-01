@@ -1,0 +1,383 @@
+{
+  "bill_no": "2205274",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2205274",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "disabled_child_allowance_mandatory_delta",
+    "support_derivation": "disabled_child_allowance_mandatory_delta",
+    "payer": "government",
+    "start_year": 2025,
+    "years": 5,
+    "disability_child_scope": "under18_livelihood_medical",
+    "child_allowance_scenario_confirmed": true,
+    "child_allowance_projection": "freeze_202411_cohort_and_2024_rate",
+    "child_allowance_scope_note": "생계·의료급여 수급 만18세미만 등록아동만. 재학18~20세는 정답 행정자료 추출한계로 제외.",
+    "child_allowance_baseline_note": "4집단별 적격자−현재수급자, 총10,615−10,314=미신청301명만 신규지급.",
+    "child_allowance_freeze_note": "2024.11행복이음 대상·수급분포와2024집단별월단가·연12개월 동결 참고 가정.",
+    "child_allowance_start_note": "공포즉시시행이지만 심사기간 고려2025~2029 정답 시나리오.",
+    "selected_evidence_keys": [
+      "2205274:child_allowance_eligible_by_group:reviewed",
+      "2205274:child_allowance_current_by_group:reviewed",
+      "2205274:child_allowance_monthly_by_group:reviewed",
+      "2205274:child_allowance_payment_months:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2205274:child_allowance_eligible_by_group:reviewed": "동일 만18세미만 생계·의료수급4집단의 기준실적과 지급액 검토",
+      "2205274:child_allowance_current_by_group:reviewed": "동일 만18세미만 생계·의료수급4집단의 기준실적과 지급액 검토",
+      "2205274:child_allowance_monthly_by_group:reviewed": "동일 만18세미만 생계·의료수급4집단의 기준실적과 지급액 검토",
+      "2205274:child_allowance_payment_months:reviewed": "동일 만18세미만 생계·의료수급4집단의 기준실적과 지급액 검토"
+    },
+    "selected_method_keys": [
+      "2205274:child_allowance_mandatory_delta"
+    ],
+    "method_selection_reasons": {
+      "2205274:child_allowance_mandatory_delta": "기존급여 의무화의 미신청자 순증만 계산"
+    },
+    "method_confirmations": {
+      "2205274:child_allowance_mandatory_delta": {
+        "child_allowance_scope_note": "생계·의료급여 수급 만18세미만 등록아동만. 재학18~20세는 정답 행정자료 추출한계로 제외.",
+        "child_allowance_baseline_note": "4집단별 적격자−현재수급자, 총10,615−10,314=미신청301명만 신규지급.",
+        "child_allowance_freeze_note": "2024.11행복이음 대상·수급분포와2024집단별월단가·연12개월 동결 참고 가정.",
+        "child_allowance_start_note": "공포즉시시행이지만 심사기간 고려2025~2029 정답 시나리오."
+      }
+    }
+  },
+  "result": {
+    "route_key": "disabled_child_allowance_mandatory_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2205274:child_allowance_eligible_by_group:reviewed,2205274:child_allowance_current_by_group:reviewed,2205274:child_allowance_monthly_by_group:reviewed,2205274:child_allowance_payment_months:reviewed",
+    "annual_amounts_thousand": [
+      465000,
+      465000,
+      465000,
+      465000,
+      465000
+    ],
+    "source_refs": [
+      "2205274 비용추계서24C4866 PDF3~4쪽, 2024.11행복이음 등록·수급자료 및2024지급기준",
+      "2205274 비용추계서24C4866 PDF3~4쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          465000000,
+          465000000,
+          465000000,
+          465000000,
+          465000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205274 비용추계서24C4866 PDF3~4쪽, 2024.11행복이음 등록·수급자료 및2024지급기준",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2205274:child_allowance_mandatory_delta"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "disabled_child_allowance_mandatory_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      465000,
+      465000,
+      465000,
+      465000,
+      465000
+    ],
+    "derivationTrace": [
+      {
+        "year": 2025,
+        "eligible_by_group": {
+          "severe_home": 3999,
+          "severe_facility": 1028,
+          "mild_home": 4583,
+          "mild_facility": 1005
+        },
+        "current_by_group": {
+          "severe_home": 3919,
+          "severe_facility": 1018,
+          "mild_home": 4409,
+          "mild_facility": 968
+        },
+        "new_recipients_by_group": {
+          "severe_facility": 10,
+          "mild_facility": 37,
+          "mild_home": 174,
+          "severe_home": 80
+        },
+        "monthly_prices": {
+          "severe_home": 220000,
+          "severe_facility": 90000,
+          "mild_home": 110000,
+          "mild_facility": 30000
+        },
+        "annual_won_by_group": {
+          "severe_facility": 10800000,
+          "mild_facility": 13320000,
+          "mild_home": 229680000,
+          "severe_home": 211200000
+        },
+        "payment_months": 12,
+        "additional_recipients": 301,
+        "annual_won": 465000000,
+        "excluded_scope": "행정자료 추출한계로 학교재학18~20세는 참고추계에서 제외"
+      },
+      {
+        "year": 2026,
+        "eligible_by_group": {
+          "severe_home": 3999,
+          "severe_facility": 1028,
+          "mild_home": 4583,
+          "mild_facility": 1005
+        },
+        "current_by_group": {
+          "severe_home": 3919,
+          "severe_facility": 1018,
+          "mild_home": 4409,
+          "mild_facility": 968
+        },
+        "new_recipients_by_group": {
+          "severe_facility": 10,
+          "mild_facility": 37,
+          "mild_home": 174,
+          "severe_home": 80
+        },
+        "monthly_prices": {
+          "severe_home": 220000,
+          "severe_facility": 90000,
+          "mild_home": 110000,
+          "mild_facility": 30000
+        },
+        "annual_won_by_group": {
+          "severe_facility": 10800000,
+          "mild_facility": 13320000,
+          "mild_home": 229680000,
+          "severe_home": 211200000
+        },
+        "payment_months": 12,
+        "additional_recipients": 301,
+        "annual_won": 465000000,
+        "excluded_scope": "행정자료 추출한계로 학교재학18~20세는 참고추계에서 제외"
+      },
+      {
+        "year": 2027,
+        "eligible_by_group": {
+          "severe_home": 3999,
+          "severe_facility": 1028,
+          "mild_home": 4583,
+          "mild_facility": 1005
+        },
+        "current_by_group": {
+          "severe_home": 3919,
+          "severe_facility": 1018,
+          "mild_home": 4409,
+          "mild_facility": 968
+        },
+        "new_recipients_by_group": {
+          "severe_facility": 10,
+          "mild_facility": 37,
+          "mild_home": 174,
+          "severe_home": 80
+        },
+        "monthly_prices": {
+          "severe_home": 220000,
+          "severe_facility": 90000,
+          "mild_home": 110000,
+          "mild_facility": 30000
+        },
+        "annual_won_by_group": {
+          "severe_facility": 10800000,
+          "mild_facility": 13320000,
+          "mild_home": 229680000,
+          "severe_home": 211200000
+        },
+        "payment_months": 12,
+        "additional_recipients": 301,
+        "annual_won": 465000000,
+        "excluded_scope": "행정자료 추출한계로 학교재학18~20세는 참고추계에서 제외"
+      },
+      {
+        "year": 2028,
+        "eligible_by_group": {
+          "severe_home": 3999,
+          "severe_facility": 1028,
+          "mild_home": 4583,
+          "mild_facility": 1005
+        },
+        "current_by_group": {
+          "severe_home": 3919,
+          "severe_facility": 1018,
+          "mild_home": 4409,
+          "mild_facility": 968
+        },
+        "new_recipients_by_group": {
+          "severe_facility": 10,
+          "mild_facility": 37,
+          "mild_home": 174,
+          "severe_home": 80
+        },
+        "monthly_prices": {
+          "severe_home": 220000,
+          "severe_facility": 90000,
+          "mild_home": 110000,
+          "mild_facility": 30000
+        },
+        "annual_won_by_group": {
+          "severe_facility": 10800000,
+          "mild_facility": 13320000,
+          "mild_home": 229680000,
+          "severe_home": 211200000
+        },
+        "payment_months": 12,
+        "additional_recipients": 301,
+        "annual_won": 465000000,
+        "excluded_scope": "행정자료 추출한계로 학교재학18~20세는 참고추계에서 제외"
+      },
+      {
+        "year": 2029,
+        "eligible_by_group": {
+          "severe_home": 3999,
+          "severe_facility": 1028,
+          "mild_home": 4583,
+          "mild_facility": 1005
+        },
+        "current_by_group": {
+          "severe_home": 3919,
+          "severe_facility": 1018,
+          "mild_home": 4409,
+          "mild_facility": 968
+        },
+        "new_recipients_by_group": {
+          "severe_facility": 10,
+          "mild_facility": 37,
+          "mild_home": 174,
+          "severe_home": 80
+        },
+        "monthly_prices": {
+          "severe_home": 220000,
+          "severe_facility": 90000,
+          "mild_home": 110000,
+          "mild_facility": 30000
+        },
+        "annual_won_by_group": {
+          "severe_facility": 10800000,
+          "mild_facility": 13320000,
+          "mild_home": 229680000,
+          "severe_home": 211200000
+        },
+        "payment_months": 12,
+        "additional_recipients": 301,
+        "annual_won": 465000000,
+        "excluded_scope": "행정자료 추출한계로 학교재학18~20세는 참고추계에서 제외"
+      }
+    ],
+    "sourceRefs": [
+      "2205274 비용추계서24C4866 PDF3~4쪽, 2024.11행복이음 등록·수급자료 및2024지급기준",
+      "2205274 비용추계서24C4866 PDF3~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2205274:child_allowance_mandatory_delta"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2205274:child_allowance_mandatory_delta",
+        "source_bill_no": "2205274",
+        "available_at": "2024-12-12",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "disabled_child_allowance_mandatory_delta",
+        "source_ref": "2205274 비용추계서24C4866 PDF3~4쪽",
+        "match_groups": [
+          [
+            "장애아동",
+            "장애아동수당"
+          ],
+          [
+            "반드시",
+            "의무",
+            "미신청"
+          ],
+          [
+            "생계",
+            "의료"
+          ]
+        ],
+        "allowed_routes": [
+          "disabled_child_allowance_mandatory_delta"
+        ],
+        "support_derivation": "disabled_child_allowance_mandatory_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2205274:child_allowance_eligible_by_group:reviewed",
+          "2205274:child_allowance_current_by_group:reviewed",
+          "2205274:child_allowance_monthly_by_group:reviewed",
+          "2205274:child_allowance_payment_months:reviewed"
+        ],
+        "required_confirmations": [
+          "child_allowance_scope_note",
+          "child_allowance_baseline_note",
+          "child_allowance_freeze_note",
+          "child_allowance_start_note"
+        ],
+        "method_steps": [
+          "생계·의료급여 수급 만18세미만 등록장애아동과 기존수당수급자 비교",
+          "중증/경증×재가/시설4집단으로 분해해 대상−현재수급 순증 도출",
+          "그룹별월단가×순증×12개월, 기존수급자에게 중복 신규비용 가산금지",
+          "2024.11대상분포·2024단가 동결 가정과 시작연도 확인"
+        ],
+        "baseline_check": "전체등록아동10,615명을 신규대상으로 계산하지 않음. 기존수급10,314명 제외",
+        "limitation": "행정자료 추출제약으로 재학18~20세는 제외한 참고범위. 현재실적 및 지급기준 확보 시 우선 검토",
+        "lower_variable_keys": [
+          "child_allowance_eligible_by_group",
+          "child_allowance_current_by_group",
+          "child_allowance_monthly_by_group",
+          "child_allowance_payment_months"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "기존급여 의무화의 미신청자 순증만 계산",
+        "confirmed_assumptions": {
+          "child_allowance_scope_note": "생계·의료급여 수급 만18세미만 등록아동만. 재학18~20세는 정답 행정자료 추출한계로 제외.",
+          "child_allowance_baseline_note": "4집단별 적격자−현재수급자, 총10,615−10,314=미신청301명만 신규지급.",
+          "child_allowance_freeze_note": "2024.11행복이음 대상·수급분포와2024집단별월단가·연12개월 동결 참고 가정.",
+          "child_allowance_start_note": "공포즉시시행이지만 심사기간 고려2025~2029 정답 시나리오."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          465000000,
+          465000000,
+          465000000,
+          465000000,
+          465000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2205274 비용추계서24C4866 PDF3~4쪽, 2024.11행복이음 등록·수급자료 및2024지급기준",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_won": 2325000000,
+  "gold_total_won": 2325000000,
+  "error_percent": 0,
+  "annual_matches": 5,
+  "official_scope_complete": true
+}

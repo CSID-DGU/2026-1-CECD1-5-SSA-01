@@ -1,0 +1,19 @@
+{
+  "bill_no": "2203903",
+  "post_answer_comparison": true,
+  "first_partial_thousand": 180000,
+  "gold_partial_thousand": 180000,
+  "partial_error_percent": 0,
+  "annual_match": true,
+  "pay_non_estimation_matches_gold": true,
+  "original_quote_verified": [
+    true,
+    true,
+    false
+  ],
+  "whole_bill_total": null,
+  "scenario_after_gold_scope_match": "정답도장기요양실태조사연구계약비9000만원을3년마다실시하는참고가정",
+  "new_target_answer_values_added_before_first": false,
+  "independent_holdout_evaluation": false,
+  "limitation": "수동AI/현재개발DB의유사유형재사용.첫실행정답미열람이지만2024시점격리나유형격리평가아님.분리청구인용은페이지넘김으로실패,기록유지"
+}

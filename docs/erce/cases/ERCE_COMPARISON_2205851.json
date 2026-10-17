@@ -1,0 +1,37 @@
+{
+  "bill_no": "2205851",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C5383",
+  "gold_date": "2024-12-02",
+  "first_total_won": 100000000,
+  "gold_total_won": 100000000,
+  "error_percent": 0,
+  "evaluation_status": "official_scope_reproduced_first_run",
+  "first_annual_thousand": [
+    50000,
+    0,
+    0,
+    50000,
+    0
+  ],
+  "gold_annual_thousand": [
+    50000,
+    0,
+    0,
+    50000,
+    0
+  ],
+  "annual_matches": 5,
+  "formula_match": true,
+  "required_variables_available": 2,
+  "required_variables_total": 2,
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "reused_evidence": "2203955:2021사회복지사 폭력경험조사5천만원·기간동결 및 기존주기계산기",
+  "scope_match": "별도폭력피해조사 전국중앙지방협력1회·연3년. 기존보수조사주기미변경으로 추가빈도비 없음.",
+  "timing_assumption": "공포후6개월·시행후1년내 첫조사, 심사준비를 고려한2026첫조사 후보가 정답기간·실시연도와 일치.",
+  "independent_target_gold_unseen_first_run": true,
+  "independent_family_or_time_holdout": false,
+  "ai_mode": "manual_no_api",
+  "reinforcement_performed": false
+}

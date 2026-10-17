@@ -1,0 +1,520 @@
+{
+  "bill_no": "2206822",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2206822",
+    "bill_name": "아동수당법 일부개정법률안",
+    "propose_date": "2024-12-23",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제4조제1항",
+        "change_summary": "18세미만 기본급여 물가연동, 월10만원 하한",
+        "source_quote": "제4조제1항중“8세”를“18세”로, “매월10만원”을“매월10만원이상",
+        "source_page": 3,
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "0~17세 물가연동 급여−기존0~7세 월10만원. 기준월액과 물가전망은 선례시나리오, 하한 유지",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "대상확대 및 급여변경 차액",
+        "variables": []
+      },
+      {
+        "article_ref": "제4조제5항",
+        "change_summary": "2세미만 추가급여도 전년도금액에 소비자물가변동률 반영",
+        "source_quote": "그전년도에2세미만의아동에게추가로지급된아동수당금액에전\n국소비자물가변동률을반영하여대통령령으로정하는금액",
+        "source_page": 3,
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "부모급여는 유지가 아니라 물가연동 변경. 연령별 현금·바우처 중복 및 실제 지급대상 근거 확인 필요",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "동일 부모급여 대상의 급여 인상분",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "basic_benefit": {
+    "required_variables_filled": 5,
+    "required_variable_count": 5,
+    "payload": {
+      "bill_no": "2206822",
+      "route_key": "transfer_population_amount_delta",
+      "cutoff_date": "2026-10-04",
+      "start_year": 2025,
+      "years": 5,
+      "explicit_inputs": {
+        "existing_benefit_per_recipient": {
+          "value": 100000,
+          "unit": "KRW/person/month",
+          "source_ref": "원문5쪽 현행 월10만원"
+        },
+        "payments_per_year": {
+          "value": 12,
+          "unit": "month/year",
+          "source_ref": "원문3쪽2025-01-01시행·월지급"
+        }
+      },
+      "calculated_inputs": {
+        "new_recipient_count": {
+          "value": [
+            6439500,
+            6179976,
+            5964192,
+            5764932,
+            5540400
+          ],
+          "unit": "person",
+          "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3;의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+          "is_assumption": true
+        },
+        "existing_recipient_count": {
+          "value": [
+            2116044,
+            1988712,
+            1898316,
+            1844856,
+            1819584
+          ],
+          "unit": "person",
+          "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3;의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+          "is_assumption": true
+        },
+        "benefit_per_recipient": {
+          "value": [
+            102099.99999999999,
+            104142,
+            106224.84000000001,
+            108349.3368,
+            110516.32353600001
+          ],
+          "unit": "KRW/person/month",
+          "source_ref": "24C3796선례의2024년 월10만원 기준 가정; 국회예산정책처 경제전망(2024.10.) 2025년 2.1%, 2026~2029년 2.0% 소비자물가상승률 전망; 원문10만원 하한",
+          "is_assumption": true
+        }
+      }
+    },
+    "formula_key": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "annual_amounts_thousand": [
+      5350422600,
+      5336686327,
+      5324564891,
+      5281691507,
+      5164154867
+    ],
+    "total_thousand": 26457520192,
+    "resolved_variables": {
+      "new_recipient_count": {
+        "key": "new_recipient_count",
+        "value": [
+          6439500,
+          6179976,
+          5964192,
+          5764932,
+          5540400
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3;의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "existing_recipient_count": {
+        "key": "existing_recipient_count",
+        "value": [
+          2116044,
+          1988712,
+          1898316,
+          1844856,
+          1819584
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3;의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          102099.99999999999,
+          104142,
+          106224.84000000001,
+          108349.3368,
+          110516.32353600001
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "24C3796선례의2024년 월10만원 기준 가정; 국회예산정책처 경제전망(2024.10.) 2025년 2.1%, 2026~2029년 2.0% 소비자물가상승률 전망; 원문10만원 하한",
+        "is_assumption": true
+      },
+      "existing_benefit_per_recipient": {
+        "key": "existing_benefit_per_recipient",
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_class": "target_explicit",
+        "source_ref": "원문5쪽 현행 월10만원",
+        "is_assumption": false
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문3쪽2025-01-01시행·월지급",
+        "is_assumption": false
+      }
+    },
+    "source_rows": [
+      {
+        "evidence_key": "2200147:under18_population:2025-2029",
+        "variable_key": "recipient_count",
+        "value": [
+          6625000,
+          6358000,
+          6136000,
+          5931000,
+          5700000
+        ],
+        "unit": "person/year",
+        "source_bill_no": "2200147",
+        "available_at": "2024-06-13",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "agency": "보건복지부",
+        "policy_domain": "아동수당",
+        "scope": "전국 아동수당, 2025~2029년",
+        "service_function": "연령 확대 및 월 급여 인상",
+        "variable_role": "target_quantity",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2200147/cost_estimate.pdf",
+        "obtained_from": "reviewed_answer",
+        "requires_applicability_note": true,
+        "independently_verified": false,
+        "allowed_routes": [
+          "transfer_recipient",
+          "transfer_child_asset_monthly",
+          "transfer_recipient_subsidy"
+        ],
+        "value_years": [
+          2025,
+          2026,
+          2027,
+          2028,
+          2029
+        ],
+        "geography": "전국",
+        "population_age_min": 0,
+        "population_age_max": 17,
+        "forecast_version": "통계청 2023.12 장래인구추계 중위(2022 기준)",
+        "official_reference_url": "https://www.kostat.go.kr/board.es?act=view&bid=207&list_no=428476&mid=a10301020100",
+        "derivation": "추계서 표의 천명 값을 명으로 환산",
+        "precision_note": "천명 단위 반올림 표시값; 원 통계의 1명 단위 값은 별도 미검증",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음"
+      },
+      {
+        "evidence_key": "2200147:under8_population:2025-2029",
+        "variable_key": "recipient_count",
+        "value": [
+          2177000,
+          2046000,
+          1953000,
+          1898000,
+          1872000
+        ],
+        "unit": "person/year",
+        "source_bill_no": "2200147",
+        "available_at": "2024-06-13",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "agency": "보건복지부",
+        "policy_domain": "아동수당",
+        "scope": "전국 아동수당, 2025~2029년",
+        "service_function": "연령 확대 및 월 급여 인상",
+        "variable_role": "target_quantity",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2200147/cost_estimate.pdf",
+        "obtained_from": "reviewed_answer",
+        "requires_applicability_note": true,
+        "independently_verified": false,
+        "allowed_routes": [
+          "transfer_recipient_delta",
+          "transfer_recipient",
+          "transfer_recipient_subsidy"
+        ],
+        "value_years": [
+          2025,
+          2026,
+          2027,
+          2028,
+          2029
+        ],
+        "geography": "전국",
+        "population_age_min": 0,
+        "population_age_max": 7,
+        "forecast_version": "통계청 2023.12 장래인구추계 중위(2022 기준)",
+        "official_reference_url": "https://www.kostat.go.kr/board.es?act=view&bid=207&list_no=428476&mid=a10301020100",
+        "derivation": "추계서 표의 천명 값을 명으로 환산",
+        "precision_note": "천명 단위 반올림 표시값; 원 통계의 1명 단위 값은 별도 미검증",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음"
+      },
+      {
+        "evidence_key": "2200147:child_allowance_payment_rate:2024",
+        "variable_key": "participation_rate",
+        "value": 0.972,
+        "unit": "ratio",
+        "source_bill_no": "2200147",
+        "available_at": "2024-06-13",
+        "source_ref": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "agency": "보건복지부",
+        "policy_domain": "아동수당",
+        "scope": "전국 아동수당, 2025~2029년",
+        "service_function": "연령 확대 및 월 급여 인상",
+        "variable_role": "take_up_assumption",
+        "reuse_policy": "comparable",
+        "source_class": "precedent_assumption",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "source_url": "backend/generated/assembly_22_pdfs/by_bill/2200147/cost_estimate.pdf",
+        "obtained_from": "reviewed_answer",
+        "requires_applicability_note": true,
+        "independently_verified": false,
+        "observation_year": 2024,
+        "valid_from_year": 2025,
+        "valid_to_year": 2029,
+        "allowed_routes": [
+          "transfer_recipient",
+          "transfer_recipient_delta",
+          "transfer_recipient_subsidy"
+        ],
+        "limitation": "2024년 아동수당 지급률을 추계기간에 유지하는 선례 가정. 다른 복지사업의 지급률로 전용 금지. 실제 수급자 수에 중복 적용 금지"
+      }
+    ],
+    "forecast": {
+      "key": "nabo_macro_2024_10_consumer_price",
+      "indicator": "consumer_price_growth_rate",
+      "published_at": "2024-10",
+      "rates_by_year": {
+        "2025": 0.021,
+        "2026": 0.02,
+        "2027": 0.02,
+        "2028": 0.02,
+        "2029": 0.02
+      },
+      "source": "국회예산정책처 경제전망(2024.10.)",
+      "source_ref": "2025년 2.1%, 2026~2029년 2.0% 소비자물가상승률 전망",
+      "extension_policy": "none"
+    }
+  },
+  "parent_benefit_items": [
+    {
+      "age": 0,
+      "route_key": "transfer_recipient_delta",
+      "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+      "required_variable_count": 3,
+      "required_variables_filled": 2,
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "status": "needs_input",
+      "candidate_population": {
+        "evidence_key": "kosis_202312:age0_population:2025-2029",
+        "variable_key": "recipient_count",
+        "value": [
+          217226,
+          217079,
+          227833,
+          237996,
+          247279
+        ],
+        "unit": "person/year",
+        "source_bill_no": "KOSIS_202312",
+        "available_at": "2026-10-02",
+        "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 0세 합계; 2026-10-02 직접 조회",
+        "agency": "보건복지부",
+        "policy_domain": "부모급여",
+        "scope": "전국 0세 부모급여 대상 인구",
+        "service_function": "연령별 부모급여 폐지",
+        "variable_role": "target_quantity",
+        "reuse_policy": "comparable",
+        "source_class": "official_standard",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "geography": "전국",
+        "requires_applicability_note": true,
+        "independently_verified": true,
+        "allowed_routes": [
+          "transfer_benefit_abolition"
+        ],
+        "source_url": "https://kosis.kr/visual/populationKorea/populationPyramidData.do",
+        "obtained_from": "official_web_data",
+        "value_years": [
+          2025,
+          2026,
+          2027,
+          2028,
+          2029
+        ],
+        "population_age_min": 0,
+        "population_age_max": 0,
+        "forecast_version": "통계청 2023.12 장래인구추계(2022 기준), 중위",
+        "request_parameters": {
+          "rcgnSn": "222",
+          "areaId": ""
+        },
+        "derivation": "manDtvalArry와 femaleDtvlArry의 해당 연령을 정수 합산",
+        "limitation": "실제 수급자 수가 아닌 전망 인구. 국적·수급요건·보육료 중복·부분월 확인 필요. 공개 시점은 보수적으로 직접 확보일 사용; 최신 개편 버전으로 간주하지 않음"
+      },
+      "baseline_amount_evidence": {
+        "evidence_key": "mohw_parent_benefit:age0:2024_monthly",
+        "variable_key": "existing_benefit_per_recipient",
+        "value": 1000000,
+        "unit": "KRW/person/month",
+        "source_bill_no": "MOHW_PARENT_2024",
+        "available_at": "2026-10-02",
+        "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 0세 부모급여 월 100만원; 2026-10-02 확인",
+        "agency": "보건복지부",
+        "policy_domain": "부모급여",
+        "scope": "전국 0세 부모급여 대상 인구",
+        "service_function": "연령별 부모급여 폐지",
+        "variable_role": "official_reference_rate",
+        "reuse_policy": "comparable",
+        "source_class": "official_standard",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "geography": "전국",
+        "requires_applicability_note": true,
+        "independently_verified": true,
+        "allowed_routes": [
+          "transfer_benefit_abolition"
+        ],
+        "source_url": "https://www.mohw.go.kr/board.es?act=view&bid=0027&list_no=1479667&mid=a10503000000",
+        "observation_year": 2024,
+        "population_age_min": 0,
+        "population_age_max": 0,
+        "limitation": "2024년 공식 급여 기준액. 이후 연도 동결은 별도 추계 가정이며 최신 지급액 자동 갱신 아님. 현금과 보육료 바우처 중복 차감 금지"
+      },
+      "candidate_indexed_monthly": [
+        1020999.9999999999,
+        1041420,
+        1062248.4000000001,
+        1083493.368,
+        1105163.23536
+      ],
+      "missing_reason": "전망인구는 있지만 실제 부모급여 수급자와 동일하다고 확정할 수 없음. 공식대상 인구를 수급인원으로 사용할지·현금/보육료 중복 범위·지급률 확인 필요. 아동수당97.2% 자동 전용하지 않음"
+    },
+    {
+      "age": 1,
+      "route_key": "transfer_recipient_delta",
+      "formula_key": "TRANSFER_RECIPIENT_DELTA_V1",
+      "required_variable_count": 3,
+      "required_variables_filled": 2,
+      "missing_variables": [
+        "recipient_count"
+      ],
+      "status": "needs_input",
+      "candidate_population": {
+        "evidence_key": "kosis_202312:age1_population:2025-2029",
+        "variable_key": "recipient_count",
+        "value": [
+          228266,
+          216540,
+          216413,
+          227121,
+          237221
+        ],
+        "unit": "person/year",
+        "source_bill_no": "KOSIS_202312",
+        "available_at": "2026-10-02",
+        "source_ref": "KOSIS 인구피라미드, 전국 중위 시나리오 rcgnSn=222, 2025~2029년 남녀 1세 합계; 2026-10-02 직접 조회",
+        "agency": "보건복지부",
+        "policy_domain": "부모급여",
+        "scope": "전국 1세 부모급여 대상 인구",
+        "service_function": "연령별 부모급여 폐지",
+        "variable_role": "target_quantity",
+        "reuse_policy": "comparable",
+        "source_class": "official_standard",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "geography": "전국",
+        "requires_applicability_note": true,
+        "independently_verified": true,
+        "allowed_routes": [
+          "transfer_benefit_abolition"
+        ],
+        "source_url": "https://kosis.kr/visual/populationKorea/populationPyramidData.do",
+        "obtained_from": "official_web_data",
+        "value_years": [
+          2025,
+          2026,
+          2027,
+          2028,
+          2029
+        ],
+        "population_age_min": 1,
+        "population_age_max": 1,
+        "forecast_version": "통계청 2023.12 장래인구추계(2022 기준), 중위",
+        "request_parameters": {
+          "rcgnSn": "222",
+          "areaId": ""
+        },
+        "derivation": "manDtvalArry와 femaleDtvlArry의 해당 연령을 정수 합산",
+        "limitation": "실제 수급자 수가 아닌 전망 인구. 국적·수급요건·보육료 중복·부분월 확인 필요. 공개 시점은 보수적으로 직접 확보일 사용; 최신 개편 버전으로 간주하지 않음"
+      },
+      "baseline_amount_evidence": {
+        "evidence_key": "mohw_parent_benefit:age1:2024_monthly",
+        "variable_key": "existing_benefit_per_recipient",
+        "value": 500000,
+        "unit": "KRW/person/month",
+        "source_bill_no": "MOHW_PARENT_2024",
+        "available_at": "2026-10-02",
+        "source_ref": "보건복지부 2024년 정부지원 확대 보도자료: 1세 부모급여 월 50만원; 2026-10-02 확인",
+        "agency": "보건복지부",
+        "policy_domain": "부모급여",
+        "scope": "전국 1세 부모급여 대상 인구",
+        "service_function": "연령별 부모급여 폐지",
+        "variable_role": "official_reference_rate",
+        "reuse_policy": "comparable",
+        "source_class": "official_standard",
+        "review_status": "reviewed",
+        "reviewed_at": "2026-10-02",
+        "geography": "전국",
+        "requires_applicability_note": true,
+        "independently_verified": true,
+        "allowed_routes": [
+          "transfer_benefit_abolition"
+        ],
+        "source_url": "https://www.mohw.go.kr/board.es?act=view&bid=0027&list_no=1479667&mid=a10503000000",
+        "observation_year": 2024,
+        "population_age_min": 1,
+        "population_age_max": 1,
+        "limitation": "2024년 공식 급여 기준액. 이후 연도 동결은 별도 추계 가정이며 최신 지급액 자동 갱신 아님. 현금과 보육료 바우처 중복 차감 금지"
+      },
+      "candidate_indexed_monthly": [
+        510499.99999999994,
+        520710,
+        531124.2000000001,
+        541746.684,
+        552581.61768
+      ],
+      "missing_reason": "전망인구는 있지만 실제 부모급여 수급자와 동일하다고 확정할 수 없음. 공식대상 인구를 수급인원으로 사용할지·현금/보육료 중복 범위·지급률 확인 필요. 아동수당97.2% 자동 전용하지 않음"
+    }
+  ],
+  "total_bill_status": "incomplete",
+  "limitations": [
+    "기본급여5/5개는 개발 에이전트가 DB 근거를 읽어 하위 계산·변수매핑 후 Python 엔진으로 계산. 현재 웹 프로필 자동연결 검증이 아님",
+    "부모급여 변경 때문에 under19_indexed/under2_parent_only프로필 재사용하지 않음",
+    "법정하한은 실제 지급액과 다름. 기준월액과 당해물가 연동은 기존 선례를 확인한 가정",
+    "현재 개발DB의2026년 확보인구와 같은 가족 선례 사용. 독립 격리·발의시점 평가 아님"
+  ]
+}

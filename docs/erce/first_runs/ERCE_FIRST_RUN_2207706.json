@@ -1,0 +1,1325 @@
+{
+  "bill_no": "2207706",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2207706",
+    "bill_name": "구직자 취업촉진 및 생활안정지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-01-22",
+    "articles": [
+      {
+        "article_ref": "제15조제1항",
+        "source_quote": "제15조제1항중“1년”을“2년”으로한다.",
+        "source_page": 3,
+        "change_summary": "취업지원서비스기간1년→2년.구직촉진수당의지급개월을2배로늘린것은아님",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "추가서비스활동비가능.추가기간잔류대상수/서비스단가확인필요",
+        "route_key": "quantity_unit",
+        "route_reason": "추가서비스수량×서비스단가라는임시상위산식.신규코호트잔류·실제이용기간하위산식미연결",
+        "variables": []
+      },
+      {
+        "article_ref": "제19조제1항",
+        "source_quote": "제6조에따른1인가구생계급여의최저보장수준이상이되도록결",
+        "source_page": 3,
+        "change_summary": "구직촉진수당을전년도1인가구생계급여최저보장수준이상으로설정.자동CPI2%아닌별도공식기준연동",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "현행월50만원대비월지급액증가.생계급여기준의전년도시차필요",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "실제구직촉진수당수급자×월단가차이×기존지급개월.서비스기간과지급개월분리",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "pipeline_result": {
+    "items": [
+      {
+        "itemIndex": 0,
+        "name": "제15조제1항",
+        "triggerRef": "제15조제1항",
+        "routeKey": "quantity_unit",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "requiredVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "scopeNote": "추가서비스수량×서비스단가라는임시상위산식.신규코호트잔류·실제이용기간하위산식미연결",
+        "explicitInputs": {},
+        "decisionReason": "추가서비스활동비가능.추가기간잔류대상수/서비스단가확인필요",
+        "observedVariables": [],
+        "staffingContext": {
+          "court_upgrade": false,
+          "parent_court": ""
+        },
+        "staffingInputs": {},
+        "proposeDate": "2025-01-22",
+        "startYear": null,
+        "effectiveYear": null,
+        "timingNeedsConfirmation": true,
+        "timingSourceRef": "",
+        "policyDomain": "",
+        "methodCandidates": [],
+        "calculation": {
+          "status": "needs_input",
+          "routeKey": "quantity_unit",
+          "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+          "formula": "수량 × 단가",
+          "missingVariables": [
+            "quantity",
+            "unit_cost"
+          ],
+          "missingDerivationVariables": [],
+          "derivationTrace": [],
+          "methodCandidates": [],
+          "selectedMethods": [],
+          "referenceCandidates": [
+            {
+              "evidenceKey": "2200879:awareness_video_production_distribution:annual_quantity:reviewed",
+              "variableKey": "quantity",
+              "value": 1,
+              "unit": "package/year",
+              "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-06-27",
+              "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+              "scope": "전국대국민인식개선 연간패키지",
+              "serviceFunction": "awareness_video_production_distribution",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200879:public_awareness_campaign:annual_quantity:reviewed",
+              "variableKey": "quantity",
+              "value": 1,
+              "unit": "package/year",
+              "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-06-27",
+              "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+              "scope": "전국대국민인식개선 연간패키지",
+              "serviceFunction": "public_awareness_campaign",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2201850:commemorative_event:annual_quantity:reviewed",
+              "variableKey": "quantity",
+              "value": 1,
+              "unit": "event/year",
+              "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-08-01",
+              "limitation": "전국단위예방의날행사매년1회라는참조가정.노력규정이어서비용없다고단정하지않음.주간7일을7회행사로치환하지않음",
+              "scope": "전국단위기념일행사 연간1회",
+              "serviceFunction": "national_abuse_prevention_commemorative_event",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200487:prosthetic:unit_cost:2024",
+              "variableKey": "unit_cost",
+              "value": [
+                1660000,
+                1680000,
+                1700000,
+                1720000,
+                1730000
+              ],
+              "unit": "KRW/person/year",
+              "sourceRef": "2200487 비용추계서 24D1005, PDF p.15~16",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-08-14",
+              "limitation": "품목별 가격이 아닌 연간 지급예산/지급인원 평균 지원액. 2023년 약161만원에 연1% 상승 가정; 사용연한을 무시한 연1회 지급은 선례 가정",
+              "scope": "6·25참전 소년소녀병 보철구 지급",
+              "serviceFunction": "보철구 지급",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200601:employer_cost",
+              "variableKey": "unit_cost",
+              "value": [
+                5000000,
+                5000000,
+                5000000,
+                5000000,
+                6000000
+              ],
+              "unit": "KRW/person/year",
+              "sourceRef": "2200601 비용추계서 PDF p.4~8 표3·각주5",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-07-11",
+              "limitation": "2024년 비용추계서의 과거 가정. 최신 공식 단가 아님; 백만원 반올림 표이며 정확한 호봉별 원자료·기관부담률 전망은 미확보",
+              "scope": "public 신규 영양교사",
+              "serviceFunction": "학교 추가배치",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200879:awareness_video_production_distribution:unit_cost:2023",
+              "variableKey": "unit_cost",
+              "value": 150000000,
+              "unit": "KRW/package",
+              "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-06-27",
+              "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+              "scope": "전국대국민인식개선 연간패키지",
+              "serviceFunction": "awareness_video_production_distribution",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200879:public_awareness_campaign:unit_cost:2023",
+              "variableKey": "unit_cost",
+              "value": 200000000,
+              "unit": "KRW/package",
+              "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-06-27",
+              "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+              "scope": "전국대국민인식개선 연간패키지",
+              "serviceFunction": "public_awareness_campaign",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2201850:commemorative_event:unit_cost:reviewed",
+              "variableKey": "unit_cost",
+              "value": 100000000,
+              "unit": "KRW/event",
+              "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-08-01",
+              "limitation": "연1억원은유사사례의8300/9700만원을참고한정답가정.공식고정요율·최신단가아님.원위탁예산서독립검증미완료.지자체별추가행사홍보비미포함",
+              "scope": "전국단위기념일행사 연간1회",
+              "serviceFunction": "national_abuse_prevention_commemorative_event",
+              "requiresConfirmation": true
+            }
+          ],
+          "missingVariableEvidence": {
+            "quantity": {
+              "status": "candidates_need_review",
+              "candidateCount": 3,
+              "meaning": "후보가 있으나 적용·선택이 필요합니다."
+            },
+            "unit_cost": {
+              "status": "candidates_need_review",
+              "candidateCount": 5,
+              "meaning": "후보가 있으나 적용·선택이 필요합니다."
+            }
+          }
+        }
+      },
+      {
+        "itemIndex": 1,
+        "name": "제19조제1항",
+        "triggerRef": "제19조제1항",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "requiredVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient"
+        ],
+        "scopeNote": "실제구직촉진수당수급자×월단가차이×기존지급개월.서비스기간과지급개월분리",
+        "explicitInputs": {},
+        "decisionReason": "현행월50만원대비월지급액증가.생계급여기준의전년도시차필요",
+        "observedVariables": [],
+        "staffingContext": {
+          "court_upgrade": false,
+          "parent_court": ""
+        },
+        "staffingInputs": {},
+        "proposeDate": "2025-01-22",
+        "startYear": null,
+        "effectiveYear": null,
+        "timingNeedsConfirmation": true,
+        "timingSourceRef": "",
+        "policyDomain": "",
+        "methodCandidates": [],
+        "calculation": {
+          "status": "needs_input",
+          "routeKey": "transfer_recipient_delta",
+          "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+          "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+          "missingVariables": [
+            "recipient_count",
+            "benefit_per_recipient",
+            "existing_benefit_per_recipient"
+          ],
+          "missingDerivationVariables": [],
+          "derivationTrace": [],
+          "methodCandidates": [],
+          "selectedMethods": [],
+          "referenceCandidates": [
+            {
+              "evidenceKey": "2200147:under8_population:2025-2029",
+              "variableKey": "recipient_count",
+              "value": [
+                2177000,
+                2046000,
+                1953000,
+                1898000,
+                1872000
+              ],
+              "unit": "person/year",
+              "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-06-13",
+              "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+              "scope": "전국 아동수당, 2025~2029년",
+              "serviceFunction": "연령 확대 및 월 급여 인상",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200487:self_compensation:benefit_per_recipient:2024",
+              "variableKey": "benefit_per_recipient",
+              "value": [
+                1764000,
+                1845000,
+                1931000,
+                2020000,
+                2113000
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2200487 비용추계서 24D1005, PDF p.5~8",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-08-14",
+              "limitation": "2024년 재일학도의용군인 본인/유족 단가에 과거 연평균 상승률 4.6%를 적용한 선례 전망치. 공식 미래 단가 아님; 표시 단가의 반올림으로 순증 차액 오차 가능",
+              "scope": "6·25참전 소년소녀병 본인 보상금 순증",
+              "serviceFunction": "본인 보상금 순증",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2203602:between30_50:benefit_per_recipient:2026-2030",
+              "variableKey": "benefit_per_recipient",
+              "value": [
+                350387,
+                400000,
+                408000,
+                416160,
+                424483
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2203602 비용추계서24C3532 PDF5쪽표3;2024.10물가전망및전년도물가연동",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-11-12",
+              "limitation": "기준액이지감액후실수령액아님.해당시작연도·소득구간인상후물가연동 가정.수급률·평균차액지급계수는별도로필요.연2%는역사적표계속인상가정이며최신물가전망아님",
+              "scope": "국비지방비합산 기준연금액 증액",
+              "serviceFunction": "basic_pension_staged_increase",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2203602:lower30:benefit_per_recipient:2026-2030",
+              "variableKey": "benefit_per_recipient",
+              "value": [
+                400000,
+                408000,
+                416160,
+                424483,
+                432973
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2203602 비용추계서24C3532 PDF5쪽표3;2024.10물가전망및전년도물가연동",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-11-12",
+              "limitation": "기준액이지감액후실수령액아님.해당시작연도·소득구간인상후물가연동 가정.수급률·평균차액지급계수는별도로필요.연2%는역사적표계속인상가정이며최신물가전망아님",
+              "scope": "국비지방비합산 기준연금액 증액",
+              "serviceFunction": "basic_pension_staged_increase",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2200487:self_compensation:existing_benefit_per_recipient:2024",
+              "variableKey": "existing_benefit_per_recipient",
+              "value": [
+                481000,
+                515000,
+                551000,
+                590000,
+                632000
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2200487 비용추계서 24D1005, PDF p.6",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-08-14",
+              "limitation": "현재 지급 중인 참전명예수당 차감. 2024년 월 42만원에 과거 상승률 7% 적용 가정. 새 보상금 전액을 순증으로 더하지 않음",
+              "scope": "6·25참전 소년소녀병 본인 보상금 순증",
+              "serviceFunction": "본인 보상금 순증",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2203602:between30_50:existing_benefit_per_recipient:2026-2030",
+              "variableKey": "existing_benefit_per_recipient",
+              "value": [
+                350387,
+                357395,
+                364543,
+                371834,
+                379270
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2203602 비용추계서24C3532 PDF5쪽표3;2024.10물가전망및전년도물가연동",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-11-12",
+              "limitation": "기준액이지감액후실수령액아님.해당시작연도·소득구간인상후물가연동 가정.수급률·평균차액지급계수는별도로필요.연2%는역사적표계속인상가정이며최신물가전망아님",
+              "scope": "국비지방비합산 기준연금액 증액",
+              "serviceFunction": "basic_pension_staged_increase",
+              "requiresConfirmation": true
+            },
+            {
+              "evidenceKey": "2203602:lower30:existing_benefit_per_recipient:2026-2030",
+              "variableKey": "existing_benefit_per_recipient",
+              "value": [
+                350387,
+                357395,
+                364543,
+                371834,
+                379270
+              ],
+              "unit": "KRW/person/month",
+              "sourceRef": "2203602 비용추계서24C3532 PDF5쪽표3;2024.10물가전망및전년도물가연동",
+              "sourceClass": "precedent_assumption",
+              "availableAt": "2024-11-12",
+              "limitation": "기준액이지감액후실수령액아님.해당시작연도·소득구간인상후물가연동 가정.수급률·평균차액지급계수는별도로필요.연2%는역사적표계속인상가정이며최신물가전망아님",
+              "scope": "국비지방비합산 기준연금액 증액",
+              "serviceFunction": "basic_pension_staged_increase",
+              "requiresConfirmation": true
+            }
+          ],
+          "missingVariableEvidence": {
+            "recipient_count": {
+              "status": "candidates_need_review",
+              "candidateCount": 1,
+              "meaning": "후보가 있으나 적용·선택이 필요합니다."
+            },
+            "benefit_per_recipient": {
+              "status": "candidates_need_review",
+              "candidateCount": 3,
+              "meaning": "후보가 있으나 적용·선택이 필요합니다."
+            },
+            "existing_benefit_per_recipient": {
+              "status": "candidates_need_review",
+              "candidateCount": 3,
+              "meaning": "후보가 있으나 적용·선택이 필요합니다."
+            }
+          }
+        }
+      }
+    ],
+    "unmappedArticles": [],
+    "deferredItems": [],
+    "unmappedCount": 0,
+    "routeOptions": [
+      {
+        "routeKey": "personnel_grade",
+        "label": "인건비 › 보수 › 직급별",
+        "formulaKey": "PERSONNEL_GRADE_V1",
+        "formula": "Σ(직급별 순증인원 × 직급별 1인당 보수)",
+        "requiredVariables": [
+          "headcount_by_grade",
+          "salary_by_grade"
+        ]
+      },
+      {
+        "routeKey": "personnel_average",
+        "label": "인건비 › 보수 › 평균보수",
+        "formulaKey": "PERSONNEL_AVERAGE_V1",
+        "formula": "순증인원 × 1인당 보수",
+        "requiredVariables": [
+          "headcount",
+          "salary_per_person"
+        ]
+      },
+      {
+        "routeKey": "personnel_position_difference",
+        "label": "인건비 › 보수 › 직급·직위변경차액",
+        "formulaKey": "PERSONNEL_POSITION_DIFFERENCE_V1",
+        "formula": "직급·직위 변경 인원 × 1인당 연간 보수 차액",
+        "requiredVariables": [
+          "headcount",
+          "annual_salary_difference"
+        ]
+      },
+      {
+        "routeKey": "personnel_employer_contribution",
+        "label": "인건비 › 기관부담금",
+        "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+        "formula": "보수총액 × 기관부담률",
+        "requiredVariables": [
+          "annual_salary_amount",
+          "employer_contribution_rate"
+        ]
+      },
+      {
+        "routeKey": "personnel_basic_expense",
+        "label": "인건비 › 기본경비",
+        "formulaKey": "PERSONNEL_BASIC_EXPENSE_V1",
+        "formula": "보수총액 × 기본경비 비율",
+        "requiredVariables": [
+          "annual_salary_amount",
+          "basic_expense_ratio"
+        ]
+      },
+      {
+        "routeKey": "information_system_project_plan",
+        "label": "물건비 › 정보시스템 › 사업계획금액사용",
+        "formulaKey": "PROJECT_ANNUAL_BUDGET_V1",
+        "formula": "해당 사업계획의 연도별 재원배분액(포함된 운영·유지관리비 중복 가산 금지)",
+        "requiredVariables": [
+          "annual_project_budget"
+        ]
+      },
+      {
+        "routeKey": "information_system_operation",
+        "label": "물건비 › 정보시스템 › 운영 › 연간총액기반",
+        "formulaKey": "INFORMATION_SYSTEM_OPERATION_V1",
+        "formula": "기준 연간 운영비 × 연도별 적용 상승률 누적",
+        "requiredVariables": [
+          "annual_operating_amount"
+        ]
+      },
+      {
+        "routeKey": "information_system_operation_staff",
+        "label": "물건비 › 정보시스템 › 운영 › 인력단가기반",
+        "formulaKey": "INFORMATION_SYSTEM_OPERATION_STAFF_V1",
+        "formula": "운영인원 × 1인당 연간 인력단가 × 연도별 명목임금상승률 누적",
+        "requiredVariables": [
+          "operation_headcount",
+          "annual_labor_cost_per_person"
+        ]
+      },
+      {
+        "routeKey": "information_system_staged_build",
+        "label": "물건비 › 정보시스템 › 구축견적 › 기간지정연간사업비",
+        "formulaKey": "INFORMATION_SYSTEM_STAGED_BUILD_V1",
+        "formula": "연간 구축·운영 사업비 × 지정된 구축·운영 연도",
+        "requiredVariables": [
+          "annual_phase_cost",
+          "phase_start_offset_years",
+          "phase_duration_years"
+        ]
+      },
+      {
+        "routeKey": "research_plan",
+        "label": "물건비 › 연구용역 › 기본계획",
+        "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "requiredVariables": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ]
+      },
+      {
+        "routeKey": "research_survey",
+        "label": "물건비 › 연구용역 › 실태조사 › 주기적조사",
+        "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "requiredVariables": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ]
+      },
+      {
+        "routeKey": "annual_research_survey",
+        "label": "물건비 › 연구용역 › 실태조사 › 매년조사",
+        "formulaKey": "ANNUAL_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 연구용역 단가 × 연 1회",
+        "requiredVariables": [
+          "survey_unit_cost"
+        ]
+      },
+      {
+        "routeKey": "committee_operation",
+        "label": "물건비 › 위원회 › 선례가정기반",
+        "formulaKey": "COMMITTEE_MEETING_ALLOWANCE_V1",
+        "formula": "위원회 수 × 유급 민간위원 수 × 연간 회의 횟수 × 1인 1회당 회의수당",
+        "requiredVariables": [
+          "committee_components"
+        ]
+      },
+      {
+        "routeKey": "committee_components",
+        "label": "물건비 › 위원회 › 구성요소입력",
+        "formulaKey": "COMMITTEE_MEETING_ALLOWANCE_V1",
+        "formula": "Σ(유급위원 수 × 연도별 위원회 구성 건수 × 구성당 회의 횟수 × 1인당 회의수당)",
+        "requiredVariables": [
+          "committee_components"
+        ]
+      },
+      {
+        "routeKey": "committee_annual_operation",
+        "label": "물건비 › 위원회 › 과거운영실적기반",
+        "formulaKey": "ANNUAL_OPERATING_BUDGET_V1",
+        "formula": "기준 연간 운영비 × 기준연도 이후 연도별 적용 상승률 누적",
+        "requiredVariables": [
+          "annual_operating_amount"
+        ]
+      },
+      {
+        "routeKey": "legislative_committee_operation",
+        "label": "물건비 › 국회위원회 › 운영지원사업비",
+        "formulaKey": "ANNUAL_OPERATING_BUDGET_V1",
+        "formula": "기준 연간 운영비 × 기준연도 이후 연도별 적용 상승률 누적",
+        "requiredVariables": [
+          "annual_operating_amount"
+        ]
+      },
+      {
+        "routeKey": "interagency_meeting_operation",
+        "label": "물건비 › 협의체 › 회의개최운영비",
+        "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+        "formula": "수량 × 단가 × 연간 횟수",
+        "requiredVariables": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ]
+      },
+      {
+        "routeKey": "interagency_annual_operation",
+        "label": "물건비 › 협의체 › 연간운영비",
+        "formulaKey": "ANNUAL_OPERATING_BUDGET_V1",
+        "formula": "기준 연간 운영비 × 기준연도 이후 연도별 적용 상승률 누적",
+        "requiredVariables": [
+          "annual_operating_amount"
+        ]
+      },
+      {
+        "routeKey": "evaluation_panel_with_initial_study",
+        "label": "물건비 › 평가사업 › 평가단및초기지표개발",
+        "formulaKey": "EVALUATION_PANEL_WITH_INITIAL_STUDY_V1",
+        "formula": "Σ(평가단별 기구 수 × 민간위원 수 × 연간 회의 수 × 수당) + 첫해 지표개발비",
+        "requiredVariables": [
+          "committee_components",
+          "initial_study_cost"
+        ]
+      },
+      {
+        "routeKey": "legal_notification",
+        "label": "물건비 › 통지 › 법적우편송달",
+        "formulaKey": "LEGAL_NOTIFICATION_V1",
+        "formula": "연도별 추가 대상사건 수 × 조치 시행비율 × 사건당 통지 수 × 연도별 송달단가",
+        "requiredVariables": [
+          "annual_case_count",
+          "action_rate",
+          "notices_per_case",
+          "notice_unit_price"
+        ]
+      },
+      {
+        "routeKey": "burial_supplies",
+        "label": "물건비 › 장례안장 › 유골함및명패",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "requiredVariables": [
+          "quantity",
+          "unit_cost"
+        ]
+      },
+      {
+        "routeKey": "goods_service_activity",
+        "label": "물건비 › 일반활동",
+        "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+        "formula": "수량 × 단가 × 연간 횟수",
+        "requiredVariables": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ]
+      },
+      {
+        "routeKey": "committee_member_increase",
+        "label": "물건비 › 기존위원회증원",
+        "formulaKey": "COMMITTEE_MEMBER_INCREASE_V1",
+        "formula": "추가 위촉하는 유급 민간위원 수 × 연간 회의횟수 × 1인 1회 참석비",
+        "requiredVariables": [
+          "additional_paid_members",
+          "annual_meetings",
+          "meeting_unit_price"
+        ]
+      },
+      {
+        "routeKey": "quantity_unit",
+        "label": "물건비 › 수량단가",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "requiredVariables": [
+          "quantity",
+          "unit_cost"
+        ]
+      },
+      {
+        "routeKey": "direct_annual_amount",
+        "label": "물건비 › 검증된연간금액",
+        "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "requiredVariables": [
+          "annual_amount"
+        ]
+      },
+      {
+        "routeKey": "related_project_ratio",
+        "label": "물건비 › 연관사업 › 기준사업비비율",
+        "formulaKey": "RELATED_PROJECT_RATIO_V1",
+        "formula": "동일 기간 기준 사업비 × 연관 사업비 비율 (기준 사업비와 별도 계상)",
+        "requiredVariables": [
+          "reference_project_cost",
+          "related_project_ratio"
+        ]
+      },
+      {
+        "routeKey": "new_borrowing_interest_support",
+        "label": "이전지출 › 차입이자지원 › 당해신규차입분",
+        "formulaKey": "NEW_BORROWING_INTEREST_SUPPORT_V1",
+        "formula": "당해 추가 차입액 × 조달금리 × 평잔계수 × 정부 이자지원 부담률 (기존 차입분 이자·원금 제외)",
+        "requiredVariables": [
+          "new_borrowing_amount",
+          "borrowing_interest_rate",
+          "average_balance_factor",
+          "government_interest_support_share"
+        ]
+      },
+      {
+        "routeKey": "school_meal_annual_public_support",
+        "label": "이전지출 › 교육지원 › 급식 › 연간경비공공분담",
+        "formulaKey": "ANNUAL_PUBLIC_SERVICE_SUPPORT_V1",
+        "formula": "대상자 수 × 1인당 연간 경비 × 공공재정 부담률 × 연도별 단가 조정계수 − 확인된 기존 공공지원액 (미입력 시 총지원액 시나리오)",
+        "requiredVariables": [
+          "recipient_count",
+          "annual_service_cost_per_person",
+          "public_support_share",
+          "cost_adjustment_factors"
+        ]
+      },
+      {
+        "routeKey": "survivor_pension_cohort_delta",
+        "label": "이전지출 › 보상 › 유족연금승진차액",
+        "formulaKey": "SURVIVOR_PENSION_COHORT_DELTA_V1",
+        "formula": "Σ(발생연도별 신규 유족 수 × 최초 연간 연금 증가액 × 이후 연금 인상계수 × 해당 집단 생존율) ÷ 가격환산계수",
+        "requiredVariables": [
+          "new_survivors",
+          "initial_annual_pension_delta",
+          "survival_by_cohort",
+          "pension_index_factors",
+          "price_index_factors"
+        ]
+      },
+      {
+        "routeKey": "death_grant_delta",
+        "label": "이전지출 › 보상 › 사망조위금차액",
+        "formulaKey": "DEATH_GRANT_DELTA_V1",
+        "formula": "당해 신규 사망자 수 × 기준소득월액 증가분 × 조위금 지급배수 ÷ 가격환산계수",
+        "requiredVariables": [
+          "new_survivors",
+          "monthly_income_delta",
+          "grant_months",
+          "price_index_factors"
+        ]
+      },
+      {
+        "routeKey": "transfer_recipient",
+        "label": "이전지출 › 개인지원 › 일반급여",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "requiredVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ]
+      },
+      {
+        "routeKey": "transfer_child_asset_monthly",
+        "label": "이전지출 › 개인지원 › 아동자산형성월적립",
+        "formulaKey": "TRANSFER_CHILD_ASSET_MONTHLY_V1",
+        "formula": "연도별 18세 미만 아동 수 × 1인당 월 적립액 × 연간 지원개월 수",
+        "requiredVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "payments_per_year"
+        ]
+      },
+      {
+        "routeKey": "transfer_recipient_adjusted",
+        "label": "이전지출 › 개인지원 › 대상인구가감급여",
+        "formulaKey": "TRANSFER_RECIPIENT_ADJUSTED_V1",
+        "formula": "(기준 인구 − 제외 인원 + 추가 대상자) × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "requiredVariables": [
+          "base_population",
+          "excluded_recipients",
+          "additional_recipients",
+          "benefit_per_recipient"
+        ]
+      },
+      {
+        "routeKey": "transfer_recipient_delta",
+        "label": "이전지출 › 개인지원 › 기존급여인상차액",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "requiredVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient"
+        ]
+      },
+      {
+        "routeKey": "transfer_population_amount_delta",
+        "label": "이전지출 › 개인지원 › 대상자및지급액동시변경",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "requiredVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ]
+      },
+      {
+        "routeKey": "transfer_benefit_abolition",
+        "label": "이전지출 › 개인지원 › 기존월급여폐지감소",
+        "formulaKey": "TRANSFER_BENEFIT_ABOLITION_V1",
+        "formula": "− 연도별 대상자 수 × 지급률 × 기존 월 급여액 × 연간 지원개월 수",
+        "requiredVariables": [
+          "recipient_count",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ]
+      },
+      {
+        "routeKey": "transfer_spouse_leave_extension",
+        "label": "이전지출 › 개인지원 › 배우자출산휴가급여기간확대",
+        "formulaKey": "TRANSFER_SPOUSE_LEAVE_EXTENSION_V1",
+        "formula": "연도별 출생아 전망 × 과거 배우자출산휴가급여 수급자/과거 출생아 × 추가 기금지원일수/기준일수 × 기준일수 급여상한액",
+        "requiredVariables": [
+          "annual_births",
+          "historical_leave_recipients",
+          "historical_births",
+          "funded_days_before",
+          "funded_days_after",
+          "reference_days",
+          "grant_cap_per_reference_period"
+        ]
+      },
+      {
+        "routeKey": "transfer_service_use",
+        "label": "이전지출 › 개인지원 › 의료등이용지원",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "requiredVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ]
+      },
+      {
+        "routeKey": "diagnostic_test_subsidy",
+        "label": "이전지출 › 개인지원 › 진단검사비순증지원",
+        "formulaKey": "DIAGNOSTIC_TEST_SUBSIDY_NET_V1",
+        "formula": "연도별 지원 대상자 수 × 1인당 검사비 − 기존 사업의 연도별 비용",
+        "requiredVariables": [
+          "annual_recipients",
+          "test_unit_cost",
+          "existing_annual_cost"
+        ]
+      },
+      {
+        "routeKey": "transfer_subsidy_rate",
+        "label": "이전지출 › 사업보조",
+        "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+        "formula": "적격 사업비 × 보조율",
+        "requiredVariables": [
+          "project_cost",
+          "subsidy_rate"
+        ]
+      },
+      {
+        "routeKey": "transfer_premium_subsidy_delta",
+        "label": "이전지출 › 보험료지원 › 기준선차감",
+        "formulaKey": "TRANSFER_PREMIUM_SUBSIDY_DELTA_V1",
+        "formula": "(보험료 기준액 × 개정 보조율 − 현행 지원액) × 연도별 보험료 증가계수",
+        "requiredVariables": [
+          "premium_base",
+          "new_support_rate",
+          "existing_support_amount"
+        ]
+      },
+      {
+        "routeKey": "health_insurance_treasury_support",
+        "label": "이전지출 › 사회보험 › 건강보험급여증가국고지원",
+        "formulaKey": "HEALTH_INSURANCE_TREASURY_SUPPORT_V1",
+        "formula": "(Σ[환자군별 연도별 급여대상 입원건수 × 건당 지원일수 × 일당 공단급여비] − 기존 공단급여비) × 국고지원율; 시나리오별 별도 계산",
+        "requiredVariables": [
+          "insurance_benefit_cohorts",
+          "government_support_rate"
+        ]
+      },
+      {
+        "routeKey": "infertility_leave_civil_proxy",
+        "label": "이전지출 › 사회보험 › 난임치료휴가급여 › 공무원사용률준용",
+        "formulaKey": "INFERTILITY_LEAVE_CIVIL_PROXY_V1",
+        "formula": "Σ(성별 고용보험가입자 전망 × 공무원 난임휴가 사용률) × 우선지원기업 비율 × 일당급여 × 지급일수",
+        "requiredVariables": [
+          "infertility_population_basis",
+          "daily_leave_benefit",
+          "paid_leave_days"
+        ]
+      },
+      {
+        "routeKey": "infertility_leave_budget_proxy",
+        "label": "이전지출 › 사회보험 › 난임치료휴가급여 › 예산산출근거준용",
+        "formulaKey": "INFERTILITY_LEAVE_BUDGET_PROXY_V1",
+        "formula": "평균 난임환자 수 × 임금근로자 비율 × 고용보험가입률 × 우선지원기업 비율 × 휴가사용률 × 일당급여 × 지급일수",
+        "requiredVariables": [
+          "infertility_population_basis",
+          "daily_leave_benefit",
+          "paid_leave_days"
+        ]
+      },
+      {
+        "routeKey": "health_insurance_general_support_change",
+        "label": "이전지출 › 사회보험 › 건강보험일반회계지원기준변경",
+        "formulaKey": "HEALTH_INSURANCE_GENERAL_SUPPORT_CHANGE_V1",
+        "formula": "전전년도 보험료 수입 × 개정 일반회계 지원율 − (현행 일몰 전 당해연도 보험료 수입 × 현행 실효 지원율)",
+        "requiredVariables": [
+          "premium_receipts_by_year",
+          "new_general_support_rate",
+          "current_general_support_rate",
+          "current_support_end_year"
+        ]
+      },
+      {
+        "routeKey": "transfer_recipient_subsidy",
+        "label": "이전지출 › 수급자기반국비분담",
+        "formulaKey": "TRANSFER_RECIPIENT_SUBSIDY_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수 × 국고분담률",
+        "requiredVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "subsidy_rate"
+        ]
+      },
+      {
+        "routeKey": "capital_area",
+        "label": "자본지출 › 시설공사",
+        "formulaKey": "CAPITAL_AREA_V1",
+        "formula": "면적 × 면적당 공사단가 × (1 + 설계·감리 비율)",
+        "requiredVariables": [
+          "required_area",
+          "construction_unit_cost"
+        ]
+      },
+      {
+        "routeKey": "capital_asset",
+        "label": "자본지출 › 자산취득",
+        "formulaKey": "CAPITAL_ASSET_V1",
+        "formula": "자산 수량 × 자산 단가",
+        "requiredVariables": [
+          "asset_quantity",
+          "asset_unit_cost"
+        ]
+      },
+      {
+        "routeKey": "capital_phased_installation",
+        "label": "자본지출 › 연차분할설치",
+        "formulaKey": "ASSET_PHASED_INSTALLATION_V1",
+        "formula": "전체 설치대상 수량 ÷ 설치기간 × 해당 연도 설치단가 (설치기간 종료 후 0)",
+        "requiredVariables": [
+          "total_installation_quantity",
+          "installation_years",
+          "installation_unit_cost"
+        ]
+      },
+      {
+        "routeKey": "personnel_asset",
+        "label": "자본지출 › 인원기반자산취득",
+        "formulaKey": "PERSONNEL_ASSET_V1",
+        "formula": "순증인원 × 1인당 자산취득비",
+        "requiredVariables": [
+          "headcount",
+          "asset_unit_price_per_person"
+        ]
+      },
+      {
+        "routeKey": "burial_plot_construction",
+        "label": "자본지출 › 묘지조성",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "requiredVariables": [
+          "quantity",
+          "unit_cost"
+        ]
+      },
+      {
+        "routeKey": "tax_rate_change",
+        "label": "조세감면 › 세율변경",
+        "formulaKey": "TAX_RATE_CHANGE_V1",
+        "formula": "과세표준 × 세율 변화 × 적용률",
+        "requiredVariables": [
+          "tax_base",
+          "tax_rate_change"
+        ]
+      },
+      {
+        "routeKey": "tax_deduction_change",
+        "label": "조세감면 › 공제변경",
+        "formulaKey": "TAX_DEDUCTION_CHANGE_V1",
+        "formula": "적용 인원 × 공제액 변화 × 적용률",
+        "requiredVariables": [
+          "taxpayer_count",
+          "deduction_change"
+        ]
+      },
+      {
+        "routeKey": "non_tax_fee_change",
+        "label": "세외수입감소 › 수수료변경",
+        "formulaKey": "NON_TAX_FEE_CHANGE_V1",
+        "formula": "대상 건수 × 건당 수입 감소액 × 적용률",
+        "requiredVariables": [
+          "transaction_count",
+          "fee_change_per_case"
+        ]
+      },
+      {
+        "routeKey": "non_tax_fee_revenue_average",
+        "label": "세외수입감소 › 수수료면제 › 기존수입평균",
+        "formulaKey": "NON_TAX_FEE_REVENUE_AVERAGE_V1",
+        "formula": "과거 평균 수수료 수입 × 신규 면제비율",
+        "requiredVariables": [
+          "historical_annual_fee_revenues",
+          "exemption_rate"
+        ]
+      },
+      {
+        "routeKey": "non_tax_fee_channel_shift",
+        "label": "세외수입감소 › 수수료면제 › 무료채널전환반영",
+        "formulaKey": "NON_TAX_FEE_CHANNEL_SHIFT_V1",
+        "formula": "기존 채널 수입 면제액 + 다른 채널 예상 수입 × 무료채널 전환율",
+        "requiredVariables": [
+          "historical_annual_fee_revenues",
+          "exemption_rate",
+          "other_channel_base_revenue",
+          "other_channel_base_year",
+          "other_channel_growth_rate",
+          "channel_shift_rate"
+        ]
+      },
+      {
+        "routeKey": "equity_project_share",
+        "label": "출자출연 › 사업분담",
+        "formulaKey": "EQUITY_PROJECT_SHARE_V1",
+        "formula": "총사업비 × 정부 분담률",
+        "requiredVariables": [
+          "project_cost",
+          "government_share"
+        ]
+      },
+      {
+        "routeKey": "equity_institution_unit",
+        "label": "출자출연 › 기관별출연",
+        "formulaKey": "EQUITY_INSTITUTION_UNIT_V1",
+        "formula": "기관 수 × 기관당 출자·출연액",
+        "requiredVariables": [
+          "institution_count",
+          "contribution_per_institution"
+        ]
+      }
+    ],
+    "reviewCandidates": [],
+    "billNo": "2207706"
+  },
+  "calculations": [
+    {
+      "kind": "allowance_increase",
+      "payload": {
+        "bill_no": "2207706",
+        "evidence_mode": "holdout",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5,
+        "explicit_inputs": {
+          "existing_benefit_per_recipient": {
+            "value": 500000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문PDF1쪽현행월50만원"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200147:under8_population:2025-2029",
+            "variableKey": "recipient_count",
+            "value": [
+              2177000,
+              2046000,
+              1953000,
+              1898000,
+              1872000
+            ],
+            "unit": "person/year",
+            "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-13",
+            "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+            "scope": "전국 아동수당, 2025~2029년",
+            "serviceFunction": "연령 확대 및 월 급여 인상",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band1:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 6269000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band2:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 6292000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band3:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 6277000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band4:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 6275000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band5:benefit_per_recipient:2024",
+            "variableKey": "benefit_per_recipient",
+            "value": 6302000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "candidates_need_review",
+            "candidateCount": 1,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "benefit_per_recipient": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "kind": "service_extension",
+      "payload": {
+        "bill_no": "2207706",
+        "evidence_mode": "holdout",
+        "route_key": "quantity_unit",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "quantity_unit",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "package/year",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "매년한연간사업패키지실시·단가동결은정답의가정.법률에횟수1이명시된것아님.신규법안에자동빈도확정금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:annual_quantity:reviewed",
+            "variableKey": "quantity",
+            "value": 1,
+            "unit": "event/year",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "전국단위예방의날행사매년1회라는참조가정.노력규정이어서비용없다고단정하지않음.주간7일을7회행사로치환하지않음",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:awareness_video_production_distribution:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 150000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "awareness_video_production_distribution",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200879:public_awareness_campaign:unit_cost:2023",
+            "variableKey": "unit_cost",
+            "value": 200000000,
+            "unit": "KRW/package",
+            "sourceRef": "2200879 비용추계서24C1330 PDF3~4쪽;2023보건복지부장애인식개선·차별학대예방홍보예산준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-06-27",
+            "limitation": "역사적사업예산준용패키지,최신공식광고요율아님.원2023예산서독립검증미완료.대상·규모·제작물·매체범위다르면재검토.영상송출비중복추가금지",
+            "scope": "전국대국민인식개선 연간패키지",
+            "serviceFunction": "public_awareness_campaign",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201850:commemorative_event:unit_cost:reviewed",
+            "variableKey": "unit_cost",
+            "value": 100000000,
+            "unit": "KRW/event",
+            "sourceRef": "2201850 비용추계서24C2064 PDF4쪽;아동권리보장원2023행사비8300만원·2024편성9700만원준용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-08-01",
+            "limitation": "연1억원은유사사례의8300/9700만원을참고한정답가정.공식고정요율·최신단가아님.원위탁예산서독립검증미완료.지자체별추가행사홍보비미포함",
+            "scope": "전국단위기념일행사 연간1회",
+            "serviceFunction": "national_abuse_prevention_commemorative_event",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_house:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 200000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_house",
+            "serviceFunction": "electric_house",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2203380:electric_other:unit_cost:2024",
+            "variableKey": "unit_cost",
+            "value": 1300000,
+            "unit": "KRW/facility/year",
+            "sourceRef": "2203380 비용추계서 24D3202, PDF p.7~12",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-10-28",
+            "limitation": "선례의 민간공항 2024년 지원단가를 군 소음 사업에 준용한 가정. 미래 단가는 공식 확정값 아님. 시설 물량은 2007년 자료여서 최신 현황 아님. 대상·기간·지원방식 확인 필수",
+            "scope": "군 소음대책 electric_other",
+            "serviceFunction": "electric_other",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "quantity": {
+            "status": "candidates_need_review",
+            "candidateCount": 3,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "unit_cost": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    }
+  ],
+  "whole_bill_total": null,
+  "required_variables_filled": 1,
+  "required_variable_count": 5,
+  "forecast_start_confirmed": false,
+  "forecast_note": "공포날시행·신규신청자부터,2025~2029는임시시나리오.공포일없으므로기간확정미완료",
+  "official_reference_candidate": {
+    "year": 2024,
+    "single_person_livelihood_floor": 713102,
+    "unit": "KRW/person/month",
+    "source_url": "https://www.mohw.go.kr/board.es?act=view&bid=0027&list_no=377507&mid=a10503000000",
+    "limitation": "2025추계년의전년도최저액후보.장래5년기준시리즈없어월액슬롯에상수복사안함"
+  },
+  "rejected_reference": "2200431농어민수당은연단가·생계최저액50%·다른기간으로target_only.구직수당으로전용안함",
+  "latest_policy_warning": "현재자료는2026구직수당인상정보도존재.원문2025현행비교와최신현행시나리오를섞지않음"
+}

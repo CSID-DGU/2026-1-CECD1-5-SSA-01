@@ -1,0 +1,63 @@
+{
+  "bill_no": "2204756",
+  "mode": "development_review (사후 회귀, 정답 열람 후)",
+  "cutoff_date": "2024-12-23",
+  "selected_evidence_keys": [
+    "2204756:moe_vice_office_headcount:convention",
+    "2204756:moe_vice_office_salary_by_grade:2024",
+    "nabo:central_wage_growth:2025-2029:v202411",
+    "nabo:central_salary_base_year:2024:v202411",
+    "nabo:central_employer_rate:2025-2029:v202411",
+    "2204756:moe_basic_expense_ratio:2024",
+    "nabo:central_asset_per_person:2025:v202411"
+  ],
+  "components_thousand": {
+    "보수": [
+      368927,
+      375937,
+      383079,
+      390358,
+      397775
+    ],
+    "기관부담금": [
+      47975,
+      49120,
+      50298,
+      51504,
+      52848
+    ],
+    "기본경비": [
+      87549,
+      89262,
+      91009,
+      92791,
+      94631
+    ],
+    "자산취득비": [
+      24535,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "total_thousand": 2647598,
+  "answer_total_million": 2647,
+  "error_percent": 0.023,
+  "annual_million": [
+    529,
+    514,
+    524,
+    535,
+    545
+  ],
+  "answer_annual_million": [
+    528,
+    514,
+    524,
+    534,
+    545
+  ],
+  "annual_display_match": "3/5 (2025·2028 단수 1백만원 차)",
+  "note": "정답값을 적재한 뒤의 재현이므로 성능 지표가 아님. 보수 총액은 정답 표3과 천원 단위 일치"
+}

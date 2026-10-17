@@ -1,0 +1,423 @@
+{
+  "bill_no": "2211348",
+  "run_date": "2026-10-03",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_cutoff": "2026-10-03",
+  "ai_mode": "manual_no_api",
+  "ai_draft": {
+    "bill_no": "2211348",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-07-08",
+    "articles": [
+      {
+        "article_ref": "제3조의2제1항/기본계획",
+        "source_quote": "교육부장관은3년마다학교급식에관한기본계획(이하“기본계획”이라한다)을수립하여야한다.",
+        "source_page": 3,
+        "route_key": "research_plan",
+        "route_reason": "교육부 중앙 기본계획의 연구용역 비용 × 원문3년 주기. 교육부 기본계획 단가를 참고하고 직접 수행 가능성은 별도 확인",
+        "change_summary": "학교급식 중앙 기본계획 신설",
+        "cost_trigger": true,
+        "variables": [
+          {
+            "key": "recurrence_interval_years",
+            "value_json": "3",
+            "unit": "year",
+            "source_quote": "교육부장관은3년마다학교급식에관한기본계획(이하“기본계획”이라한다)을수립하여야한다.",
+            "source_page": 3
+          }
+        ]
+      },
+      {
+        "article_ref": "제3조의2제2항/공청회",
+        "source_quote": "②교육부장관은기본계획을수립하는경우미리공청회를열어영양교사,학교급식종사자및관계전문가의의견을들어야한다.",
+        "source_page": 8,
+        "route_key": "goods_service_activity",
+        "route_reason": "기본계획 수립 시 공청회 개최비. 회수·규모·장소 및 연구용역 비용에 이미 포함됐는지 확인해 중복 제외",
+        "change_summary": "기본계획 수립 시 공청회 의무",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제7항/식수인원기준 연구조사",
+        "source_quote": "⑦교육부장관은학교급식종사자1인당적정식수인원기준마련및조정을위한연구ㆍ조사를실시하여야한다.",
+        "source_page": 4,
+        "route_key": "research_survey",
+        "route_reason": "기준 마련·조정 연구조사 회당 단가 × 실시연도. 법안에는 실시주기 없음; 교육부 기존조사와 동등한 규모인지 확인",
+        "change_summary": "급식종사자 적정식수 기준 연구조사 의무",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제3조의2제3항/교육감 시행계획",
+        "source_quote": "③특별시ㆍ광역시ㆍ도ㆍ특별자치도의교육감(이하“교육감”이라한다)은기본계획에따라매년학교급식에관한시행계획을수립ㆍ시행하여야한다.",
+        "source_page": 4,
+        "route_key": "research_plan",
+        "route_reason": "기존 교육감 연간 학교급식 계획과 연계된 업무; 신규 별도 연구용역으로 가산하지 않음",
+        "cost_trigger": true,
+        "estimation_decision": "no_incremental_cost",
+        "decision_reason": "신구조문대비표 p.8의 기존 제3조제2항에도 교육감 매년 학교급식 계획 수립·시행 의무가 있음; 별도 용역 의무 없음",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제5~6항/종사자 배치",
+        "source_quote": "⑤교육감은학교급식운영업무를하기위하여그소속학교에학교급식종사자를둘수있다.",
+        "source_page": 4,
+        "route_key": "personnel_average",
+        "route_reason": "재량적 배치 및 적정식수 기준 노력의무로 확정 증원 인원 없음. 영양교사 의무증원 선례와 구분",
+        "change_summary": "조리 종사자 배치 근거",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "둘 수 있다 및 기준 준수 노력의무. 순증 배치계획 미확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제6조·제8조/안전시설설비",
+        "source_quote": "제6조제1항본문중“위하여”를“위생적ㆍ안정적으로제공하기위하여학생의건전한심신발달과학교급식종사자의업무효율과안전을고려하여”로한다.",
+        "source_page": 4,
+        "route_key": "capital_asset",
+        "route_reason": "추가 시설 개선·환기 등 규격과 수량이 결정되면 계산; 기존 모든 주방 전체 교체 가정 금지",
+        "change_summary": "시설·설비의 종사자 안전 고려",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "설비 규격·대상·개선사업량 미명시, 기존 시설 의무의 강화로 추가 교체계획 확인 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제8항/정기 점검공표",
+        "source_quote": "⑧교육감은제6항에따른학교급식종사자1인당적정식수인원기준준수여부를정기적으로점검하고그결과를공표하여야한다.",
+        "source_page": 4,
+        "route_key": "goods_service_activity",
+        "route_reason": "교육감 점검·공표 추가 소요. 점검 범위와 수행방식 미정이라 별도 외부 조사 예산을 임의 가산하지 않음",
+        "change_summary": "배치기준 정기 점검 및 공표",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "주기·점검 수행방식·기존 교육청 업무 중복 미확인",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "items": [
+    {
+      "itemIndex": 0,
+      "name": "제3조의2제1항/기본계획",
+      "triggerRef": "제3조의2제1항/기본계획",
+      "routeKey": "research_plan",
+      "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+      "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+      "requiredVariables": [
+        "plan_unit_cost",
+        "recurrence_interval_years"
+      ],
+      "scopeNote": "교육부 중앙 기본계획의 연구용역 비용 × 원문3년 주기. 교육부 기본계획 단가를 참고하고 직접 수행 가능성은 별도 확인",
+      "explicitInputs": {
+        "recurrence_interval_years": {
+          "value": 3,
+          "unit": "year",
+          "source_ref": "bill_text.pdf 3쪽: 교육부장관은3년마다학교급식에관한기본계획(이하“기본계획”이라한다)을수립하여야한다."
+        }
+      },
+      "decisionReason": "",
+      "observedVariables": [
+        {
+          "key": "recurrence_interval_years",
+          "value": 3,
+          "unit": "year",
+          "source_ref": "bill_text.pdf 3쪽: 교육부장관은3년마다학교급식에관한기본계획(이하“기본계획”이라한다)을수립하여야한다."
+        }
+      ],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-07-08",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "research_plan",
+        "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "missingVariables": [
+          "plan_unit_cost"
+        ]
+      }
+    },
+    {
+      "itemIndex": 1,
+      "name": "제3조의2제2항/공청회",
+      "triggerRef": "제3조의2제2항/공청회",
+      "routeKey": "goods_service_activity",
+      "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+      "formula": "수량 × 단가 × 연간 횟수",
+      "requiredVariables": [
+        "service_quantity",
+        "service_unit_cost",
+        "frequency_per_year"
+      ],
+      "scopeNote": "기본계획 수립 시 공청회 개최비. 회수·규모·장소 및 연구용역 비용에 이미 포함됐는지 확인해 중복 제외",
+      "explicitInputs": {},
+      "decisionReason": "",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-07-08",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "goods_service_activity",
+        "formulaKey": "GOODS_SERVICE_ACTIVITY_V1",
+        "formula": "수량 × 단가 × 연간 횟수",
+        "missingVariables": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ]
+      }
+    },
+    {
+      "itemIndex": 2,
+      "name": "제7조제7항/식수인원기준 연구조사",
+      "triggerRef": "제7조제7항/식수인원기준 연구조사",
+      "routeKey": "research_survey",
+      "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+      "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+      "requiredVariables": [
+        "survey_unit_cost",
+        "recurrence_interval_years"
+      ],
+      "scopeNote": "기준 마련·조정 연구조사 회당 단가 × 실시연도. 법안에는 실시주기 없음; 교육부 기존조사와 동등한 규모인지 확인",
+      "explicitInputs": {},
+      "decisionReason": "",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-07-08",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "research_survey",
+        "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "missingVariables": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ]
+      }
+    }
+  ],
+  "deferred_items": [
+    {
+      "itemIndex": 3,
+      "name": "제3조의2제3항/교육감 시행계획",
+      "text": "③특별시ㆍ광역시ㆍ도ㆍ특별자치도의교육감(이하“교육감”이라한다)은기본계획에따라매년학교급식에관한시행계획을수립ㆍ시행하여야한다.",
+      "routeKey": "research_plan",
+      "decision": "no_incremental_cost",
+      "reason": "신구조문대비표 p.8의 기존 제3조제2항에도 교육감 매년 학교급식 계획 수립·시행 의무가 있음; 별도 용역 의무 없음"
+    },
+    {
+      "itemIndex": 4,
+      "name": "제7조제5~6항/종사자 배치",
+      "text": "⑤교육감은학교급식운영업무를하기위하여그소속학교에학교급식종사자를둘수있다.",
+      "routeKey": "personnel_average",
+      "decision": "defer",
+      "reason": "둘 수 있다 및 기준 준수 노력의무. 순증 배치계획 미확인"
+    },
+    {
+      "itemIndex": 5,
+      "name": "제6조·제8조/안전시설설비",
+      "text": "제6조제1항본문중“위하여”를“위생적ㆍ안정적으로제공하기위하여학생의건전한심신발달과학교급식종사자의업무효율과안전을고려하여”로한다.",
+      "routeKey": "capital_asset",
+      "decision": "defer",
+      "reason": "설비 규격·대상·개선사업량 미명시, 기존 시설 의무의 강화로 추가 교체계획 확인 필요"
+    },
+    {
+      "itemIndex": 6,
+      "name": "제7조제8항/정기 점검공표",
+      "text": "⑧교육감은제6항에따른학교급식종사자1인당적정식수인원기준준수여부를정기적으로점검하고그결과를공표하여야한다.",
+      "routeKey": "goods_service_activity",
+      "decision": "defer",
+      "reason": "주기·점검 수행방식·기존 교육청 업무 중복 미확인"
+    }
+  ],
+  "unmapped_count": 0,
+  "candidate_evidence_keys": [
+    "2200039:mois_plan_research_unit_cost:2021-2023",
+    "2205985:social_worker_wage_survey:2023",
+    "2211999:first_plan_unit_cost:2027",
+    "2214485:interagency_meeting_unit_cost:2024",
+    "2214690:plan_unit_cost:reviewed",
+    "borderline_intelligence_plan_2024_10_22:plan_unit_cost",
+    "borderline_intelligence_survey_2024_10_22:survey_unit_cost",
+    "mcst_library_survey_2026_04_03:survey_unit_cost",
+    "moe_plan_research_2024_07_25:plan_unit_cost",
+    "moe_survey_research_2024_07_25:survey_unit_cost"
+  ],
+  "selected_evidence_keys": [
+    "moe_plan_research_2024_07_25:plan_unit_cost",
+    "moe_survey_research_2024_07_25:survey_unit_cost"
+  ],
+  "rejected_evidence": [
+    {
+      "evidence_key": "2214485:interagency_meeting_unit_cost:2024",
+      "reason": "상설 부처협의체 운영12백만원은 공개 공청회 개최·참석 규모에 대한 단가가 아니므로 전용하지 않음"
+    }
+  ],
+  "reference_scenario_runs": [
+    {
+      "payload": {
+        "bill_no": "2211348",
+        "agency": "교육부",
+        "policy_domain": "학교급식",
+        "years": 5,
+        "start_year": 2027,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "route_key": "research_plan",
+        "selected_evidence_keys": [
+          "moe_plan_research_2024_07_25:plan_unit_cost"
+        ],
+        "evidence_selection_reasons": {
+          "moe_plan_research_2024_07_25:plan_unit_cost": "교육부 중앙 연구용역 비교. 대상은 학교급식으로 다르므로 과거 교육부 평균 비용을 참고 시나리오로만 사용; 실제 사업범위 확인 필요"
+        },
+        "explicit_inputs": {
+          "recurrence_interval_years": {
+            "value": 3,
+            "unit": "year",
+            "source_ref": "원문 제3조의2제1항"
+          }
+        }
+      },
+      "result": {
+        "route_key": "research_plan",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "evidence_key": "moe_plan_research_2024_07_25:plan_unit_cost",
+        "annual_amounts_thousand": [
+          32000,
+          0,
+          0,
+          32000,
+          0
+        ],
+        "source_refs": [
+          "의안 2201446, 추계번호 24C1763, 표 2~3; 최근 교육부 기본계획 연구용역 3건을 바탕으로 회당 3,200만원·5년 주기 적용",
+          "원문 제3조의2제1항"
+        ],
+        "resolved_variables": {
+          "plan_unit_cost": {
+            "key": "plan_unit_cost",
+            "value": 32000000,
+            "unit": "KRW/plan",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2201446, 추계번호 24C1763, 표 2~3; 최근 교육부 기본계획 연구용역 3건을 바탕으로 회당 3,200만원·5년 주기 적용",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 3,
+            "unit": "year",
+            "source_class": "target_explicit",
+            "source_ref": "원문 제3조의2제1항",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "holdout"
+      },
+      "scenario_note": "2027~2031 첫해부터 수행·단가 동결의 참고 시나리오. 조사 연1회는 교육부 선례 가정이지 원문의 확정 주기가 아님"
+    },
+    {
+      "payload": {
+        "bill_no": "2211348",
+        "agency": "교육부",
+        "policy_domain": "학교급식",
+        "years": 5,
+        "start_year": 2027,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "route_key": "research_survey",
+        "selected_evidence_keys": [
+          "moe_survey_research_2024_07_25:survey_unit_cost"
+        ],
+        "evidence_selection_reasons": {
+          "moe_survey_research_2024_07_25:survey_unit_cost": "교육부 중앙 연구용역 비교. 대상은 학교급식으로 다르므로 과거 교육부 평균 비용을 참고 시나리오로만 사용; 실제 사업범위 확인 필요"
+        }
+      },
+      "result": {
+        "route_key": "research_survey",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "evidence_key": "moe_survey_research_2024_07_25:survey_unit_cost",
+        "annual_amounts_thousand": [
+          22000,
+          22000,
+          22000,
+          22000,
+          22000
+        ],
+        "source_refs": [
+          "의안 2201446, 추계번호 24C1763, 표 4~5; 최근 교육부 실태조사 연구용역 2건을 바탕으로 연 2,200만원 적용",
+          "국회예산정책처 초·중등교육법 일부개정법률안 비용추계서; 의안 2201446, 추계번호 24C1763, 표 4~5; 최근 교육부 실태조사 연구용역 2건을 바탕으로 연 2,200만원 적용; available_at=2024-07-25; https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2201446/detailRP"
+        ],
+        "resolved_variables": {
+          "survey_unit_cost": {
+            "key": "survey_unit_cost",
+            "value": 22000000,
+            "unit": "KRW/survey",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2201446, 추계번호 24C1763, 표 4~5; 최근 교육부 실태조사 연구용역 2건을 바탕으로 연 2,200만원 적용",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 1,
+            "unit": "year",
+            "source_class": "precedent_assumption",
+            "source_ref": "국회예산정책처 초·중등교육법 일부개정법률안 비용추계서; 의안 2201446, 추계번호 24C1763, 표 4~5; 최근 교육부 실태조사 연구용역 2건을 바탕으로 연 2,200만원 적용; available_at=2024-07-25; https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2201446/detailRP",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "holdout"
+      },
+      "scenario_note": "2027~2031 첫해부터 수행·단가 동결의 참고 시나리오. 조사 연1회는 교육부 선례 가정이지 원문의 확정 주기가 아님"
+    }
+  ],
+  "annual_amounts_thousand": null,
+  "partial_reference_amounts_thousand": [
+    54000,
+    22000,
+    22000,
+    54000,
+    22000
+  ],
+  "result_note": "기본계획·연구조사만 참고 시나리오 금액 산출. 공청회 및 다른 보류 항목 비용은 포함되지 않아 완성된 총액이 아님",
+  "assumptions": [
+    "원문 공포후1년 시행;2027~2031은 첫 시행·수행연도 미확정의 참고 시나리오",
+    "기본계획 주기는 원문3년; 연구조사 연1회는 기존 교육부 조사 주기 가정으로 별도 검토",
+    "과거 교육부 단가3200만원·2200만원을 물가 조정 없이 유지한 참고 시나리오",
+    "공청회 단가 미확보; 용역 포함 여부 확인 전0원으로 간주하지 않음",
+    "조리 종사자의 재량적 배치를 영양교사 의무증원으로 잘못 라우팅하지 않음",
+    "학교급식 지원의 기존 의무 이동 및 시행계획을 새 지원사업으로 중복 추계하지 않음"
+  ]
+}

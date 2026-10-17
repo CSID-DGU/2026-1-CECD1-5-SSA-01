@@ -1,0 +1,363 @@
+{
+  "bill_no": "2216008",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "reference_scenario": true,
+  "payload": {
+    "bill_no": "2216008",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-13",
+    "route_key": "prefunded_annual_survey_delta",
+    "support_derivation": "prefunded_annual_survey_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "prefunded_survey_confirmed": true,
+    "future_unfunded_survey_assumption_confirmed": true,
+    "prefunded_survey_scope_note": "유아사교육비 조사표에 어린이집특별활동 별도항목 포함. 같은연간전체조사 예산을 준용",
+    "prefunded_survey_baseline_note": "2026기편성8.7억원 차감.2027~2030정례조사 재원은 새로소요된다는 정답의 가정. 기존재원영구자동계속 가정안함",
+    "prefunded_survey_price_note": "공식예산8.7억원 유지. 확보된2025.9 전망과정답표를비교. 적용시점미기재를확정공식산식으로주장안함",
+    "explicit_inputs": {},
+    "selected_evidence_keys": [
+      "2216008:survey_unit_cost:2026",
+      "2216008:survey_base_year:2026",
+      "2216008:funded_budget:2026",
+      "nabo_macro_2025_09:prefunded_survey_cpi"
+    ],
+    "evidence_selection_reasons": {
+      "2216008:survey_unit_cost:2026": "유사과업·공식2026예산·기편성분 및 물가시점 검토",
+      "2216008:survey_base_year:2026": "유사과업·공식2026예산·기편성분 및 물가시점 검토",
+      "2216008:funded_budget:2026": "유사과업·공식2026예산·기편성분 및 물가시점 검토",
+      "nabo_macro_2025_09:prefunded_survey_cpi": "유사과업·공식2026예산·기편성분 및 물가시점 검토"
+    },
+    "selected_method_keys": [
+      "2216008:prefunded_annual_survey_delta"
+    ],
+    "method_selection_reasons": {
+      "2216008:prefunded_annual_survey_delta": "총조사비 아닌 기편성연도 차감 추가재정"
+    },
+    "method_confirmations": {
+      "2216008:prefunded_annual_survey_delta": {
+        "prefunded_survey_scope_note": "유아사교육비 조사표에 어린이집특별활동 별도항목 포함. 같은연간전체조사 예산을 준용",
+        "prefunded_survey_baseline_note": "2026기편성8.7억원 차감.2027~2030정례조사 재원은 새로소요된다는 정답의 가정. 기존재원영구자동계속 가정안함",
+        "prefunded_survey_price_note": "공식예산8.7억원 유지. 확보된2025.9 전망과정답표를비교. 적용시점미기재를확정공식산식으로주장안함"
+      }
+    },
+    "survey_price_rate_year_offset": -1,
+    "estimate_purpose": "reference_scenario",
+    "survey_lagged_cpi_assumption_confirmed": true,
+    "survey_cpi_timing_note": "2027가격에2026전망1.9%,이후2027~2029전망2%적용시 정답표와대응. 표에서검토한시차가정이며 원NABO계산시점확인아님"
+  },
+  "result": {
+    "route_key": "prefunded_annual_survey_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2216008:survey_unit_cost:2026,2216008:survey_base_year:2026,2216008:funded_budget:2026,nabo_macro_2025_09:prefunded_survey_cpi",
+    "annual_amounts_thousand": [
+      0,
+      886530,
+      904261,
+      922346,
+      940793
+    ],
+    "source_refs": [
+      "국회예산정책처2026예산안심의결과 PDF102쪽870백만원; 2216008 비용추계서26C0181 PDF1~3쪽; 2025.9. 소비자물가 상승률 전망표",
+      "2216008 비용추계서26C0181 PDF1~4쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          0,
+          886530000,
+          904260600,
+          922345812,
+          940792728.24
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "국회예산정책처2026예산안심의결과 PDF102쪽870백만원; 2216008 비용추계서26C0181 PDF1~3쪽; 2025.9. 소비자물가 상승률 전망표",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2216008:prefunded_annual_survey_delta"
+    ]
+  },
+  "web_interface_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "",
+    "routeKey": "prefunded_annual_survey_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      0,
+      886530,
+      904261,
+      922346,
+      940793
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "gross_survey_cost_won": 870000000,
+        "already_funded_won": 870000000,
+        "annual_increment_won": 0,
+        "cpi_years_applied": [],
+        "cpi_year_offset": -1,
+        "future_funding_absence_is_assumption": false
+      },
+      {
+        "year": 2027,
+        "gross_survey_cost_won": 886530000,
+        "already_funded_won": 0,
+        "annual_increment_won": 886530000,
+        "cpi_years_applied": [
+          2026
+        ],
+        "cpi_year_offset": -1,
+        "future_funding_absence_is_assumption": true
+      },
+      {
+        "year": 2028,
+        "gross_survey_cost_won": 904260600,
+        "already_funded_won": 0,
+        "annual_increment_won": 904260600,
+        "cpi_years_applied": [
+          2026,
+          2027
+        ],
+        "cpi_year_offset": -1,
+        "future_funding_absence_is_assumption": true
+      },
+      {
+        "year": 2029,
+        "gross_survey_cost_won": 922345812,
+        "already_funded_won": 0,
+        "annual_increment_won": 922345812,
+        "cpi_years_applied": [
+          2026,
+          2027,
+          2028
+        ],
+        "cpi_year_offset": -1,
+        "future_funding_absence_is_assumption": true
+      },
+      {
+        "year": 2030,
+        "gross_survey_cost_won": 940792728.24,
+        "already_funded_won": 0,
+        "annual_increment_won": 940792728.24,
+        "cpi_years_applied": [
+          2026,
+          2027,
+          2028,
+          2029
+        ],
+        "cpi_year_offset": -1,
+        "future_funding_absence_is_assumption": true
+      }
+    ],
+    "sourceRefs": [
+      "국회예산정책처2026예산안심의결과 PDF102쪽870백만원; 2216008 비용추계서26C0181 PDF1~3쪽; 2025.9. 소비자물가 상승률 전망표",
+      "2216008 비용추계서26C0181 PDF1~4쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2216008:prefunded_annual_survey_delta"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2216008:prefunded_annual_survey_delta",
+        "source_bill_no": "2216008",
+        "available_at": "2026-02-20",
+        "reviewed_at": "2026-10-13",
+        "payer": "government",
+        "family_key": "prefunded_annual_survey_delta",
+        "source_ref": "2216008 비용추계서26C0181 PDF1~4쪽",
+        "match_groups": [
+          [
+            "영유아",
+            "어린이집",
+            "유아"
+          ],
+          [
+            "특별활동",
+            "선행학습",
+            "사교육비"
+          ],
+          [
+            "조사",
+            "매년"
+          ]
+        ],
+        "allowed_routes": [
+          "prefunded_annual_survey_delta"
+        ],
+        "support_derivation": "prefunded_annual_survey_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2216008:survey_unit_cost:2026",
+          "2216008:survey_base_year:2026",
+          "2216008:funded_budget:2026",
+          "nabo_macro_2025_09:prefunded_survey_cpi"
+        ],
+        "required_confirmations": [
+          "prefunded_survey_scope_note",
+          "prefunded_survey_baseline_note",
+          "prefunded_survey_price_note"
+        ],
+        "baseline_check": "2026기편성예산8.7억원은차감. 이후연도기편성없음은 별도승인 가정",
+        "method_steps": [
+          "유아사교육비 조사표의 어린이집특별활동 범위를확인",
+          "이미편성된연도 예산은 차감하고 미래추가재정과 분리",
+          "추계기간2026~2030 유지·기준예산이후물가 적용",
+          "정답미기재 물가시점·버전은 확정공식규칙으로 저장하지 않음"
+        ],
+        "limitation": "같은해기편성분과차년도정례조사비 분리.1년시차물가모드는 명시승인한참고시나리오만.실제NABO계산시점독립미확인",
+        "lower_variable_keys": [
+          "prefunded_survey_unit_cost",
+          "prefunded_survey_base_year",
+          "prefunded_survey_existing_budget",
+          "prefunded_survey_cpi_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "총조사비 아닌 기편성연도 차감 추가재정",
+        "confirmed_assumptions": {
+          "prefunded_survey_scope_note": "유아사교육비 조사표에 어린이집특별활동 별도항목 포함. 같은연간전체조사 예산을 준용",
+          "prefunded_survey_baseline_note": "2026기편성8.7억원 차감.2027~2030정례조사 재원은 새로소요된다는 정답의 가정. 기존재원영구자동계속 가정안함",
+          "prefunded_survey_price_note": "공식예산8.7억원 유지. 확보된2025.9 전망과정답표를비교. 적용시점미기재를확정공식산식으로주장안함"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          0,
+          886530000,
+          904260600,
+          922345812,
+          940792728.24
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "국회예산정책처2026예산안심의결과 PDF102쪽870백만원; 2216008 비용추계서26C0181 PDF1~3쪽; 2025.9. 소비자물가 상승률 전망표",
+        "is_assumption": true
+      }
+    }
+  },
+  "calendar_cpi_missing_result": {
+    "status": "needs_input",
+    "routeKey": "prefunded_annual_survey_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "missingVariables": [
+      "annual_amount"
+    ],
+    "missingDerivationVariables": [
+      "prefunded_survey_cpi_year_coverage"
+    ],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [
+      {
+        "method_key": "2216008:prefunded_annual_survey_delta",
+        "source_bill_no": "2216008",
+        "available_at": "2026-02-20",
+        "reviewed_at": "2026-10-13",
+        "payer": "government",
+        "family_key": "prefunded_annual_survey_delta",
+        "source_ref": "2216008 비용추계서26C0181 PDF1~4쪽",
+        "match_groups": [
+          [
+            "영유아",
+            "어린이집",
+            "유아"
+          ],
+          [
+            "특별활동",
+            "선행학습",
+            "사교육비"
+          ],
+          [
+            "조사",
+            "매년"
+          ]
+        ],
+        "allowed_routes": [
+          "prefunded_annual_survey_delta"
+        ],
+        "support_derivation": "prefunded_annual_survey_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2216008:survey_unit_cost:2026",
+          "2216008:survey_base_year:2026",
+          "2216008:funded_budget:2026",
+          "nabo_macro_2025_09:prefunded_survey_cpi"
+        ],
+        "required_confirmations": [
+          "prefunded_survey_scope_note",
+          "prefunded_survey_baseline_note",
+          "prefunded_survey_price_note"
+        ],
+        "baseline_check": "2026기편성예산8.7억원은차감. 이후연도기편성없음은 별도승인 가정",
+        "method_steps": [
+          "유아사교육비 조사표의 어린이집특별활동 범위를확인",
+          "이미편성된연도 예산은 차감하고 미래추가재정과 분리",
+          "추계기간2026~2030 유지·기준예산이후물가 적용",
+          "정답미기재 물가시점·버전은 확정공식규칙으로 저장하지 않음"
+        ],
+        "limitation": "같은해기편성분과차년도정례조사비 분리.1년시차물가모드는 명시승인한참고시나리오만.실제NABO계산시점독립미확인",
+        "lower_variable_keys": [
+          "prefunded_survey_unit_cost",
+          "prefunded_survey_base_year",
+          "prefunded_survey_existing_budget",
+          "prefunded_survey_cpi_rates"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "총조사비 아닌 기편성연도 차감 추가재정",
+        "confirmed_assumptions": {
+          "prefunded_survey_scope_note": "유아사교육비 조사표에 어린이집특별활동 별도항목 포함. 같은연간전체조사 예산을 준용",
+          "prefunded_survey_baseline_note": "2026기편성8.7억원 차감.2027~2030정례조사 재원은 새로소요된다는 정답의 가정. 기존재원영구자동계속 가정안함",
+          "prefunded_survey_price_note": "공식예산8.7억원 유지. 확보된2025.9 전망과정답표를비교. 적용시점미기재를확정공식산식으로주장안함"
+        }
+      }
+    ],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "annual_amount": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "prefunded_survey_cpi_year_coverage": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "total_eok": 36.5393,
+  "gold_display_total_eok": 36.54,
+  "raw_error_percent": 0.0019157088122657945,
+  "annual_million_display": [
+    0,
+    887,
+    904,
+    922,
+    941
+  ],
+  "annual_display_matches": 5,
+  "first_run_official_budget_preserved": true,
+  "limitation": "단가와기편성연도차감은검증. 물가1년시차는조건부재현가정이며실제정답계산시점미확인.동일달력연도방식은2030전망미확보로추가입력필요"
+}

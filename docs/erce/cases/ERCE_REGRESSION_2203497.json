@@ -1,0 +1,162 @@
+{
+  "bill_no": "2203497",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "scenario_only": true,
+  "payload": {
+    "bill_no": "2203497",
+    "route_key": "transfer_recipient",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "development_review",
+    "start_year": 2025,
+    "years": 5,
+    "support_derivation": "disability_eligibility_expansion",
+    "disability_benefit_scope": "severe_grade3_single_incremental_18plus",
+    "disability_population_basis": "freeze_2023_eligibility_delta",
+    "disability_composition_basis": "table_2023_frozen",
+    "disability_cpi_basis": "table_application_years_2025_2029",
+    "benefit_index_base_year": 2024,
+    "supplementary_benefit_policy_unchanged": true,
+    "support_derivation_note": "종전3급단일등 신규수급범위.현행차감·기초/부가급여 구분; 기존18~64재가 부부감액비율 준용 후보",
+    "population_proxy_note": "2023년 수급권자 실적 차이동결 후보.추세전망 아님, 사용자 미확정 가정",
+    "composition_conflict_note": "본문2022와표2023 불일치:표2023 구성비 선택.65세차상위초과는표본체3만원선택; 주석5만원은 미반영.시설기초지급은표기초급여행 준용",
+    "estimation_start_note": "원문2025-01-01시행, 물가는정답표의2025~2029 적용연도대로 선택한 후보",
+    "use_unmatched_source_as_reference": true,
+    "unmatched_source_reference_note": "회답일이발의일보다앞서동일버전미확인.명시적사후참조시나리오",
+    "selected_evidence_keys": [
+      "2203497:expanded_eligible_reference:scenario_2023",
+      "2203497:existing_eligible_reference:scenario_2023",
+      "2203497:disability_take_up:scenario_2023",
+      "2203497:disability_benefit_groups:scenario_2023",
+      "2203497:expansion_cpi:scenario_2023",
+      "2203497:existing_couple_reduction:scenario_2023",
+      "mohw:disability_basic_monthly:2024:expansion",
+      "2204018:disability_couple_share:reference:expansion"
+    ],
+    "evidence_selection_reasons": {
+      "2203497:expanded_eligible_reference:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:existing_eligible_reference:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:disability_take_up:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:disability_benefit_groups:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:expansion_cpi:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2203497:existing_couple_reduction:scenario_2023": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "mohw:disability_basic_monthly:2024:expansion": "같은 급여유형과2023실적동결 후보의 검토용참조",
+      "2204018:disability_couple_share:reference:expansion": "같은 급여유형과2023실적동결 후보의 검토용참조"
+    },
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문2025시행 및매월지급"
+      }
+    }
+  },
+  "result": {
+    "route_key": "transfer_recipient",
+    "subtype": "",
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+    "evidence_key": "2203497:expanded_eligible_reference:scenario_2023,2203497:existing_eligible_reference:scenario_2023,2203497:disability_take_up:scenario_2023,2203497:disability_benefit_groups:scenario_2023,2203497:expansion_cpi:scenario_2023,2203497:existing_couple_reduction:scenario_2023,mohw:disability_basic_monthly:2024:expansion,2204018:disability_couple_share:reference:expansion",
+    "annual_amounts_thousand": [
+      1075126965,
+      1094376140,
+      1113154585,
+      1132327378,
+      1151902799
+    ],
+    "source_refs": [
+      "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제",
+      "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제; 보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "원문2025시행 및매월지급"
+    ],
+    "resolved_variables": {
+      "recipient_count": {
+        "key": "recipient_count",
+        "value": [
+          278868.6186,
+          278868.6186,
+          278868.6186,
+          278868.6186,
+          278868.6186
+        ],
+        "unit": "person",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제",
+        "is_assumption": true
+      },
+      "benefit_per_recipient": {
+        "key": "benefit_per_recipient",
+        "value": [
+          321276.42816220934,
+          327028.5918247896,
+          332640.08893962135,
+          338369.42749386455,
+          344219.08215774683
+        ],
+        "unit": "KRW/person/month",
+        "source_class": "calculated_estimate",
+        "source_ref": "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제; 보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+        "is_assumption": true
+      },
+      "payments_per_year": {
+        "key": "payments_per_year",
+        "value": 12,
+        "unit": "month/year",
+        "source_class": "target_explicit",
+        "source_ref": "원문2025시행 및매월지급",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": []
+  },
+  "required_variables_filled": 2,
+  "required_variable_count": 2,
+  "total_thousand": 5566887867,
+  "gold_total_thousand": 5472400000,
+  "difference_percent": 1.7266257400774798,
+  "synthetic_web_status": "computed_review",
+  "synthetic_derivation_trace": [
+    {
+      "variable_key": "recipient_count",
+      "expression": "(확대대상2023실적−현행대상2023실적)×수급률; 동결후보",
+      "dependencies": [
+        "expanded_eligible_reference",
+        "existing_eligible_reference",
+        "disability_take_up"
+      ],
+      "values": [
+        278868.6186,
+        278868.6186,
+        278868.6186,
+        278868.6186,
+        278868.6186
+      ],
+      "unit": "person",
+      "source_ref": "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제",
+      "applied": true
+    },
+    {
+      "variable_key": "benefit_per_recipient",
+      "expression": "Σ(유형별인원비중×(기초급여·기초연동부가급여·고정부가급여)); 기초에만부부감액",
+      "dependencies": [
+        "disability_benefit_groups",
+        "disability_base_monthly",
+        "expansion_cpi",
+        "disability_couple_share",
+        "existing_couple_reduction"
+      ],
+      "values": [
+        321276.42816220934,
+        327028.5918247896,
+        332640.08893962135,
+        338369.42749386455,
+        344219.08215774683
+      ],
+      "unit": "KRW/person/month",
+      "source_ref": "2203497 비용추계서24C2651 PDF4~6쪽 표2·3·5 및 전제; 보건복지부고시제2024-3호 제3조 2024년도 기초급여액; 2204018 비용추계서24C3784 PDF4쪽 표2 및 전제·물가전망",
+      "applied": true
+    }
+  ],
+  "unresolved": "정답은인구·수급권자비율추세·과거평균연령구성을사용.이번은2023실적동결 가정후보.원자료·표기불일치 검증미완료; 결과를정답재현 또는자동확정값으로취급금지"
+}

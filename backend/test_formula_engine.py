@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from unittest.mock import patch
 
 from backend.assembly_formula_engine import (
     apply_formula_source_strategy,
@@ -16,6 +17,546 @@ from backend.form_renderer import render_form
 
 
 class AssemblyFormulaEngineTest(unittest.TestCase):
+    def test_split_bill_title_is_reconstructed(self) -> None:
+        from backend.analyzer_v2 import _extract_bill_name
+
+        text = (
+            "친환경농어업육성및유기식품등의관리ㆍ지원에관한\n"
+            "법률일부개정법률안\n"
+            "(송옥주의원대표발의)"
+        )
+        self.assertEqual(
+            _extract_bill_name(text, "uploaded.pdf"),
+            "친환경농어업육성및유기식품등의관리ㆍ지원에관한법률일부개정법률안",
+        )
+
+    def test_current_bill_number_is_reconstructed_for_rag_holdout(self) -> None:
+        from backend.analyzer_v2 import _extract_current_bill_no
+
+        text = """
+        의안 번호 14559
+        발의연월일: 2025. 11. 26.
+        친환경농어업 육성법 일부개정법률안
+        """
+        self.assertEqual(_extract_current_bill_no(text, "uploaded.pdf"), "2214559")
+        self.assertEqual(_extract_current_bill_no(text, "2214559_의안원문.pdf"), "2214559")
+
+    def test_vector_search_excludes_current_bill_and_refills_results(self) -> None:
+        from backend.analyzer_v2 import vector_search
+
+        returned = [
+            {"bill_no": "2214559", "chunk_id": "target:1"},
+            {"bill_no": "2214559", "chunk_id": "target:2"},
+            {"bill_no": "2216569", "chunk_id": "other:1"},
+            {"bill_no": "2213486", "chunk_id": "other:2"},
+        ]
+        with patch("backend.analyzer_v2._post", return_value=returned) as post:
+            matches = vector_search(
+                [0.0, 0.1],
+                source="national_assembly",
+                doc_type="cost_estimate",
+                k=2,
+                exclude_bill_nos={"2214559"},
+            )
+
+        self.assertEqual([row["bill_no"] for row in matches], ["2216569", "2213486"])
+        self.assertEqual(post.call_args.args[2]["match_count"], 20)
+
+    def test_korean_person_counter_is_parsed_for_committee_size(self) -> None:
+        from backend.analyzer_v2 import _extract_committee_total_members, _rule_cost_trigger
+
+        article = "위원장과 부위원장 각 1인을 포함한 25인 이내의 위원으로 구성한다."
+        self.assertEqual(_extract_committee_total_members(article), 25)
+        rule = _rule_cost_trigger(
+            "제18조의2(녹색산업발전위원회) 정책을 심의하기 위하여 장관 소속으로 위원회를 둔다. "
+            "위원장과 부위원장 각 1인을 포함한 25인 이내의 위원으로 구성한다. "
+            "운영에 필요한 사항은 대통령령으로 정한다."
+        )
+        self.assertIsNotNone(rule)
+        self.assertEqual(rule["rule"], "committee_or_body_operation")
+        self.assertEqual(rule["estimate_feasibility"], "formula_ready")
+
+    def test_non_estimable_llm_item_is_removed_before_defaults(self) -> None:
+        from backend.analyzer_v2 import _exclude_non_estimable_items
+
+        estimate = {
+            "items": [
+                {"name": "민간단체 지원 소요", "trigger_ref": "안 제3조"},
+                {"name": "발전위원회 운영비", "trigger_ref": "안 제18조의2"},
+            ]
+        }
+        articles = [
+            {
+                "no": "제3조(국가와 지방자치단체의 책무)",
+                "cost_candidate_strength": "weak",
+                "estimate_feasibility": "non_attachment_review",
+                "reason": "지원 대상과 단가가 정해지지 않음",
+            },
+            {
+                "no": "제18조의2(친환경농어업발전위원회)",
+                "cost_candidate_strength": "strong",
+                "estimate_feasibility": "formula_ready",
+            },
+        ]
+        self.assertEqual(_exclude_non_estimable_items(estimate, articles), 1)
+        self.assertEqual([item["name"] for item in estimate["items"]], ["발전위원회 운영비"])
+        self.assertEqual(estimate["excluded_items"][0]["trigger_ref"], "안 제3조")
+
+    def test_ungrounded_llm_cost_claim_is_removed(self) -> None:
+        from backend.analyzer_v2 import _exclude_non_estimable_items
+
+        estimate = {
+            "items": [{
+                "name": "직원 임면 관련 조세·부담금 감면",
+                "trigger_ref": "제15조",
+                "formula": "감면 대상 인원 × 1인당 감면액",
+            }]
+        }
+        articles = [{
+            "no": "제15조(직원의 임면)",
+            "text": "병원장은 정관으로 정하는 바에 따라 직원을 임면한다.",
+            "cost_candidate_strength": "medium",
+            "estimate_feasibility": "external_data_needed",
+        }]
+
+        self.assertEqual(_exclude_non_estimable_items(estimate, articles), 1)
+        self.assertEqual(estimate["items"], [])
+        self.assertEqual(estimate["excluded_items"][0]["case_policy"], "ungrounded_cost_claim")
+        self.assertIn("조세·부담금", estimate["excluded_items"][0]["reason"])
+
+    def test_missing_evidence_creates_targeted_human_input_requests(self) -> None:
+        from backend.analyzer_v2 import _build_human_input_requests
+
+        estimate = {
+            "items": [{
+                "name": "신규 지원사업",
+                "formula_family": "transfer_payment",
+                "variables_needed": ["지원 대상자 수", "1인당 지급액"],
+                "assumptions": [
+                    {
+                        "name": "지원 대상자 수",
+                        "value": None,
+                        "unit": "명",
+                        "source_type": "external_data",
+                        "needs_user_confirm": True,
+                    },
+                    {
+                        "name": "1인당 지급액",
+                        "value": None,
+                        "unit": "천원/명",
+                        "source_type": "policy_input",
+                        "needs_user_confirm": True,
+                    },
+                ],
+                "calculation": {"base_amount_thousand": None},
+            }]
+        }
+        apply_formula_source_strategy(estimate, [])
+
+        human_input = _build_human_input_requests(estimate)
+
+        self.assertEqual(human_input["status"], "required")
+        self.assertEqual(human_input["blocking_count"], 2)
+        self.assertEqual(
+            [row["variable"] for row in human_input["requests"]],
+            ["지원 대상자 수", "1인당 지급액"],
+        )
+
+    def test_missing_net_staff_shows_sourced_staffing_candidate(self) -> None:
+        from backend.analyzer_v2 import _build_human_input_requests
+
+        estimate = {"items": [{
+            "name": "지방법원 신설 인건비",
+            "calculation": {"base_amount_thousand": None},
+            "assumption_strategy": [{"variable": "순증 인원", "unit": "명",
+                                     "status": "missing", "basis": "기존 정원과 전입 인원 미확인"}],
+            "assumption_candidates": [{
+                "assumption_key": "staffing_count", "label": "소요인력",
+                "value": 28, "unit": "명", "bill_no": "2213969",
+                "source_text": "안양지방법원 법원공무원 순증인원 28명",
+            }],
+        }]}
+        request = _build_human_input_requests(estimate)["requests"][0]
+        self.assertEqual(request["suggested_values"][0]["bill_no"], "2213969")
+        self.assertTrue(request["blocking"])
+
+    def test_committee_without_evidence_does_not_receive_flat_default(self) -> None:
+        articles = [{
+            "no": "제10조(새로운위원회)",
+            "text": "장관은 새로운위원회를 설치하여야 한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "strong",
+            "trigger_type": "조직설치",
+            "rule_cost_trigger": {"rule": "committee_or_body_operation"},
+        }]
+        estimate = build_generalized_estimate(articles)
+
+        self.assertIsNotNone(estimate)
+        self.assertEqual(apply_reasonable_default_amounts(estimate), 0)
+        self.assertIsNone(estimate["items"][0]["calculation"]["base_amount_thousand"])
+        calculated, _ = compute_year_estimates(estimate, tag_patterns=[], allow_estimated=False)
+        self.assertIsNone(calculated)
+
+    def test_human_inputs_recompute_transfer_formula_without_hidden_default(self) -> None:
+        from backend.analyzer_v2 import recompute_with_user_inputs
+
+        articles = [{
+            "no": "제4조(지원금의 지급)",
+            "text": "국가는 지원대상자에게 지원금을 매월 지급하여야 한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "strong",
+            "trigger_type": "직접지원",
+            "rule_cost_trigger": {"rule": "payment_or_subsidy"},
+        }]
+        estimate = build_generalized_estimate(articles)
+        updated = recompute_with_user_inputs(
+            estimate,
+            [{
+                "item_index": 0,
+                "variables": {
+                    "지원 대상자 수": 1_000,
+                    "1인당 지급액": 50,
+                    "지급 횟수": 12,
+                    "집행률": 90,
+                },
+            }],
+        )
+
+        self.assertEqual(updated["items"][0]["calculation"]["base_amount_thousand"], 540_000)
+        self.assertEqual([row["amount_thousand"] for row in updated["year_estimates"]], [540_000] * 5)
+        self.assertEqual(updated["calculation_status"], "computed_by_python")
+        self.assertNotIn("human_input", updated)
+
+    def test_human_inputs_keep_initial_and_maintenance_costs_separate(self) -> None:
+        from backend.analyzer_v2 import recompute_with_user_inputs
+
+        estimate = {
+            "items": [{
+                "name": "정보시스템 구축·운영비",
+                "formula_family": "facility_system",
+                "variables_needed": ["초기 구축비", "연간 유지관리비"],
+                "assumptions": [
+                    {"name": "초기 구축비", "value": None, "unit": "천원", "source_type": "external_data", "needs_user_confirm": True},
+                    {"name": "연간 유지관리비", "value": None, "unit": "천원/년", "source_type": "external_data", "needs_user_confirm": True},
+                ],
+                "calculation": {"base_amount_thousand": None, "recurrence": "annual", "start_year": 1, "end_year": 5},
+            }],
+        }
+        updated = recompute_with_user_inputs(
+            estimate,
+            [{
+                "item_index": 0,
+                "variables": {"초기 구축비": 500_000, "연간 유지관리비": 50_000},
+            }],
+        )
+
+        self.assertEqual(
+            [row["amount_thousand"] for row in updated["year_estimates"]],
+            [550_000, 50_000, 50_000, 50_000, 50_000],
+        )
+        self.assertEqual(updated["calculation_status"], "computed_by_python")
+
+    def test_committee_assumptions_transfer_ratio_and_use_robust_unit_cost(self) -> None:
+        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+
+        item = {
+            "name": "녹색산업발전위원회 운영비",
+            "category": "운영비",
+            "formula": "회의수당 단가 × 회의횟수 × 수당지급대상 인원",
+            "variables_needed": ["회의수당 단가", "회의횟수", "수당지급대상 인원"],
+            "trigger_ref": "제18조의2(녹색산업발전위원회)",
+            "calculation": {"base_amount_thousand": 28_800},
+            "assumption_candidates": [
+                {
+                    "assumption_key": "committee_meeting_count",
+                    "value": 4,
+                    "bill_no": "2200100",
+                    "bill_name": "녹색산업법 일부개정법률안",
+                    "source_text": "회의개최 횟수는 연간 4회로 가정",
+                    "score": 1.4,
+                },
+                {
+                    "assumption_key": "committee_meeting_count",
+                    "value": 1,
+                    "bill_no": "2200200",
+                    "bill_name": "다른 분야 법률안",
+                    "source_text": "회의는 연 1회로 가정",
+                    "score": 0.7,
+                },
+                {
+                    "assumption_key": "committee_paid_member_count",
+                    "value": 24,
+                    "bill_no": "2200100",
+                    "bill_name": "녹색산업법 일부개정법률안",
+                    "source_text": "위원회 정원 30명 중 민간위원 수는 24명으로 가정",
+                    "score": 1.3,
+                },
+                {
+                    "assumption_key": "committee_allowance_unit",
+                    "value": 200_000,
+                    "bill_no": "2200300",
+                    "bill_name": "유사 위원회 법률안",
+                    "source_text": "회의수당 단가는 20만원",
+                    "score": 0.8,
+                },
+                {
+                    "assumption_key": "committee_allowance_unit",
+                    "value": 300_000,
+                    "bill_no": "2200400",
+                    "bill_name": "유사 심의회 법률안",
+                    "source_text": "회의참석 사례금은 30만원",
+                    "score": 0.79,
+                },
+            ],
+        }
+        articles = [{
+            "no": "제18조의2(녹색산업발전위원회)",
+            "text": "위원장과 부위원장 각 1인을 포함한 25인 이내의 위원으로 구성한다.",
+        }]
+        estimate = {"items": [item]}
+
+        self.assertEqual(_enhance_committee_meeting_formulas(estimate, articles), 1)
+        formula = item["committee_formula"]
+        self.assertEqual(formula["meeting_count"], 4)
+        self.assertEqual(formula["paid_members"], 20)
+        self.assertEqual(formula["allowance_won"], 250_000)
+        self.assertEqual(formula["amount_thousand"], 20_000)
+        self.assertEqual(item["calculation"]["base_amount_thousand"], 20_000)
+        self.assertTrue(formula["calculation_invariant"]["replaced_previous_base"])
+        self.assertEqual(
+            formula["calculation_invariant"]["previous_base_amount_thousand"],
+            28_800,
+        )
+        self.assertEqual(
+            formula["evidence_trace"]["paid_members"]["method"],
+            "top_similar_case_ratio",
+        )
+
+    def test_generic_committee_candidates_use_target_excluded_corpus_mode(self) -> None:
+        from backend.analyzer_v2 import _extract_committee_meetings
+
+        corpus = {
+            "n": 119,
+            "min": 1,
+            "max": 12,
+            "median": 4,
+            "mode": 4,
+            "mode_count": 49,
+            "excluded_bill_nos": ["2199999"],
+        }
+        candidates = [
+            {
+                "assumption_key": "committee_meeting_count",
+                "value": 1,
+                "source_text": "회의횟수(연 1회)",
+                "score": 0.96,
+                "corpus_distribution": corpus,
+            },
+            {
+                "assumption_key": "committee_meeting_count",
+                "value": 3,
+                "source_text": "연 3회 회의를 개최",
+                "score": 0.95,
+                "corpus_distribution": corpus,
+            },
+        ]
+
+        value, _, _, trace = _extract_committee_meetings("", candidates)
+
+        self.assertEqual(value, 4)
+        self.assertEqual(trace["method"], "target_excluded_corpus_mode")
+        self.assertEqual(trace["corpus_distribution"]["excluded_bill_nos"], ["2199999"])
+
+    def test_subject_matched_committee_candidates_beat_corpus_mode(self) -> None:
+        from backend.analyzer_v2 import _extract_committee_meetings
+
+        corpus = {"n": 100, "mode": 4, "mode_count": 40}
+        candidates = [
+            {
+                "assumption_key": "committee_meeting_count",
+                "value": 3,
+                "source_text": "연간 3회의 회의",
+                "score": 1.31,
+                "corpus_distribution": corpus,
+            },
+            {
+                "assumption_key": "committee_meeting_count",
+                "value": 4,
+                "source_text": "회의를 연 4회 개최",
+                "score": 1.30,
+                "corpus_distribution": corpus,
+            },
+        ]
+
+        value, _, _, trace = _extract_committee_meetings("", candidates)
+
+        self.assertEqual(value, 3)
+        self.assertEqual(trace["method"], "tag_candidates_median")
+
+    def test_generalized_merge_deduplicates_same_article_and_cost_family(self) -> None:
+        from backend.assembly_formula_engine import merge_generalized_estimate
+
+        current = {
+            "items": [
+                {
+                    "name": "정책위원회 운영",
+                    "trigger_ref": "제18조, 제19조",
+                    "category": "운영비",
+                    "formula": "위원 수 × 회의 수당 + 행정지원 비용",
+                },
+                {
+                    "name": "평가 결과 지원 비용",
+                    "trigger_ref": "제32조",
+                    "category": "지원금",
+                    "formula": "지원 대상 × 지원 단가",
+                },
+            ]
+        }
+        generated = {
+            "items": [
+                {
+                    "name": "정책위원회 운영비",
+                    "trigger_ref": "제18조(정책위원회)",
+                    "formula_family": "committee_operation",
+                    "formula": "회의수당 단가 × 회의횟수 × 수당지급대상 인원",
+                },
+                {
+                    "name": "평가 지원 소요",
+                    "trigger_ref": "제32조(평가)",
+                    "formula_family": "transfer_payment",
+                    "formula": "지원 대상자 수 × 1인당 지급액",
+                },
+            ]
+        }
+
+        merged = merge_generalized_estimate(current, generated)
+
+        self.assertEqual(len(merged["items"]), 2)
+        self.assertTrue(all(item.get("merged_llm_drafts") for item in merged["items"]))
+
+    def test_plan_draft_merges_into_research_service_item(self) -> None:
+        from backend.assembly_formula_engine import merge_generalized_estimate
+
+        current = {"items": [{
+            "name": "발전종합계획 수립",
+            "trigger_ref": "제21조",
+            "category": "사업비",
+            "formula": "회당 계획수립 비용",
+            "calculation": {"base_amount_thousand": 89_000},
+        }]}
+        generated = {"items": [{
+            "name": "발전종합계획 연구용역비",
+            "trigger_ref": "제21조(발전종합계획)",
+            "category": "위탁비",
+            "formula_family": "research_service",
+            "formula": "용역 단가 × 5년마다 1회",
+        }]}
+
+        merged = merge_generalized_estimate(current, generated)
+
+        self.assertEqual(len(merged["items"]), 1)
+        self.assertEqual(merged["items"][0]["formula_family"], "research_service")
+        self.assertEqual(merged["items"][0]["merged_llm_drafts"][0]["name"], "발전종합계획 수립")
+
+    def test_committee_creation_and_composition_articles_are_one_cost_item(self) -> None:
+        from backend.analyzer_v2 import _enhance_committee_meeting_formulas
+
+        articles = [
+            {
+                "no": "제18조(국립병원발전위원회)",
+                "text": "장관 소속으로 국립병원발전위원회를 둔다.",
+                "cost_trigger": True,
+                "cost_candidate_strength": "medium",
+                "trigger_type": "조직설치",
+                "rule_cost_trigger": {"rule": "committee_or_body_operation"},
+            },
+            {
+                "no": "제19조(위원회의 구성)",
+                "text": "위원회는 공동위원장 2명을 포함한 25명 이내의 위원으로 구성한다.",
+                "cost_trigger": True,
+                "cost_candidate_strength": "strong",
+                "trigger_type": "조직설치",
+                "rule_cost_trigger": {"rule": "committee_or_body_operation"},
+            },
+        ]
+
+        estimate = build_generalized_estimate(articles)
+
+        self.assertEqual(len(estimate["items"]), 1)
+        self.assertEqual(_enhance_committee_meeting_formulas(estimate, articles), 1)
+        self.assertEqual(estimate["items"][0]["committee_formula"]["paid_members"], 12)
+
+    def test_explicit_five_year_plan_is_formula_ready_and_periodic(self) -> None:
+        from backend.analyzer_v2 import _rule_cost_trigger
+
+        text = (
+            "제21조(발전종합계획) 장관은 사업의 발전을 위한 "
+            "종합계획을 5년마다 수립하여야 한다."
+        )
+        rule = _rule_cost_trigger(text)
+        self.assertEqual(rule["rule"], "survey_or_plan_service")
+        self.assertEqual(rule["candidate_strength"], "strong")
+        self.assertEqual(rule["estimate_feasibility"], "formula_ready")
+
+        articles = [{
+            "no": "제21조(발전종합계획)",
+            "text": text,
+            "cost_trigger": True,
+            "cost_candidate_strength": "strong",
+            "trigger_type": "의무부과",
+            "rule_cost_trigger": rule,
+        }]
+        estimate = build_generalized_estimate(articles)
+        item = estimate["items"][0]
+        self.assertEqual(item["calculation"]["recurrence"], "periodic")
+        self.assertEqual(item["calculation"]["interval_years"], 5)
+        item["calculation"]["base_amount_thousand"] = 100_000
+        calculated, issues = compute_year_estimates(estimate, allow_estimated=False)
+        self.assertFalse(issues)
+        self.assertEqual([row["amount_thousand"] for row in calculated], [100_000, 0, 0, 0, 0])
+
+    def test_differential_allocation_does_not_create_new_support_total(self) -> None:
+        articles = [{
+            "no": "제32조(평가)",
+            "text": (
+                "장관은 사업실적을 매년 평가하고 그 결과를 반영하여 "
+                "기존 출연금을 교부할 경우 차등지원할 수 있다."
+            ),
+            "cost_trigger": True,
+            "trigger_type": "직접지원",
+            "cost_candidate_strength": "medium",
+        }]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertEqual(result[0]["estimate_feasibility"], "no_incremental_cost")
+        self.assertEqual(result[0]["case_policy"], "differential_allocation_only")
+
+    def test_appointment_article_is_not_misread_as_tax_exemption_at_text_boundary(self) -> None:
+        articles = [{
+            "no": "제15조(직원 등의 임면)",
+            "text": "제15조(직원 등의 임면) 기관의 직원은 정관으로 정하는 바에 따라 임면한다.",
+            "cost_trigger": True,
+            "trigger_type": "조직설치",
+            "cost_candidate_strength": "medium",
+        }]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertFalse(result[0]["cost_trigger"])
+        self.assertEqual(result[0]["case_policy"], "unverified_ai_candidate_suppressed")
+
+    def test_non_committee_organization_label_does_not_create_committee_formula(self) -> None:
+        articles = [{
+            "no": "제15조(직원 등의 임면)",
+            "text": "기관의 직원은 정관으로 정하는 바에 따라 임면한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "medium",
+            "trigger_type": "조직설치",
+        }]
+
+        self.assertIsNone(build_generalized_estimate(articles))
+
     def test_assembly_form_uses_final_article_exclusion_reason(self) -> None:
         result = {
             "billName": "보건인력지원법안",
@@ -295,7 +836,7 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual([row["amount_thousand"] for row in calculated], [190_000] * 5)
         self.assertEqual(classify_estimation_status(estimate)["code"], "computed_with_estimates")
 
-    def test_standard_committee_formula_takes_precedence_over_tag_amount(self) -> None:
+    def test_committee_without_meeting_evidence_waits_for_human_input(self) -> None:
         articles = [{
             "no": "제26조(정책심의위원회)",
             "text": "정책을 심의하기 위하여 정책심의위원회를 둔다. 위원회는 위원장 1명을 포함한 15명 이내의 위원으로 구성한다.",
@@ -326,9 +867,39 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertEqual(apply_tag_formula_evidence(estimate, patterns), 0)
         self.assertEqual(apply_formula_source_strategy(estimate, patterns), 1)
         item = estimate["items"][0]
-        self.assertEqual(item["calculation"]["base_amount_thousand"], 4_000)
-        self.assertEqual(item["committee_formula"]["amount_thousand"], 4_000)
+        self.assertIsNone(item["calculation"]["base_amount_thousand"])
+        self.assertIsNone(item["committee_formula"]["amount_thousand"])
+        self.assertEqual(item["committee_formula"]["evidence_trace"]["meeting_count"]["method"], "missing_evidence")
+        meeting_strategy = next(
+            row for row in item["assumption_strategy"] if row["variable"] == "회의횟수"
+        )
+        self.assertEqual(meeting_strategy["status"], "missing")
         self.assertEqual(item["selected_formula"]["source_type"], "standard_structured_formula")
+
+    def test_scale_dependent_item_cannot_use_hidden_tag_fallback(self) -> None:
+        estimate = {
+            "items": [{
+                "name": "정보시스템 구축비",
+                "category": "시설구축비",
+                "formula_family": "facility_system",
+                "calculation": {"base_amount_thousand": None, "recurrence": "annual"},
+            }],
+        }
+        patterns = [{
+            "bill_no": "2200999",
+            "bill_name": "유사 시스템 법률안",
+            "items": [{
+                "category": "시설구축비",
+                "name": "정보시스템 구축비",
+                "amounts": [{"amount_thousand": 500_000, "is_total": False}],
+            }],
+        }]
+
+        calculated, issues = compute_year_estimates(estimate, tag_patterns=patterns, allow_estimated=True)
+
+        self.assertIsNone(calculated)
+        self.assertIsNone(estimate["items"][0]["calculation"]["base_amount_thousand"])
+        self.assertTrue(any(issue.get("level") == "error" for issue in issues))
 
     def test_tag_formula_candidate_is_kept_when_variables_are_missing(self) -> None:
         articles = [{
@@ -404,7 +975,97 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         self.assertNotEqual(status["code"], "technically_infeasible")
         self.assertIn("지원 대상자 수", status["missing"]["external_data"]["급여의 지급 지원 소요"])
 
-    def test_reasonable_defaults_emit_draft_when_tag_is_missing(self) -> None:
+    def test_tax_reduction_overrides_direct_support_classification(self) -> None:
+        articles = [{
+            "no": "제10조(세액공제)",
+            "text": "법인세 세액공제의 적용기한을 연장한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "medium",
+            "trigger_type": "직접지원",
+            "rule_cost_trigger": {"rule": "payment_or_subsidy"},
+        }]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertEqual(result[0]["trigger_type"], "세수감소")
+        self.assertEqual(result[0]["formula_family"], "revenue_loss")
+
+    def test_revenue_loss_rule_is_general_but_tax_specific(self) -> None:
+        articles = [
+            {
+                "no": "제10조(법인세 세액공제)",
+                "text": "법인세 세액공제의 적용기한을 3년 연장한다.",
+                "cost_trigger": True,
+                "cost_candidate_strength": "medium",
+                "trigger_type": "직접지원",
+            },
+            {
+                "no": "제20조(입장료 감면)",
+                "text": "시설 이용자의 입장료를 감면할 수 있다.",
+                "cost_trigger": True,
+                "cost_candidate_strength": "medium",
+                "trigger_type": "직접지원",
+                "rule_cost_trigger": {"rule": "payment_or_subsidy"},
+            },
+        ]
+
+        result = apply_validated_case_policy(articles)
+
+        self.assertEqual(result[0]["trigger_type"], "세수감소")
+        self.assertEqual(result[1]["trigger_type"], "직접지원")
+        self.assertNotIn("formula_family", result[1])
+
+    def test_revenue_loss_uses_negative_tag_amount(self) -> None:
+        articles = [{
+            "no": "제10조(세액공제)",
+            "text": "연구개발비 법인세 세액공제의 적용기한을 연장한다.",
+            "cost_trigger": True,
+            "cost_candidate_strength": "medium",
+            "trigger_type": "세수감소",
+        }]
+        estimate = build_generalized_estimate(articles)
+        patterns = [{
+            "bill_no": "2299998",
+            "bill_name": "조세특례제한법 일부개정법률안",
+            "items": [{
+                "category": "지원금",
+                "name": "연구개발비 법인세 세액공제",
+                "variables": [{
+                    "name": "연평균 감면액",
+                    "value": 10,
+                    "unit": "천원",
+                }],
+                "amounts": [
+                    {
+                        "amount_thousand": -10_000,
+                        "formula": "최근 5년 연평균 감면실적",
+                        "is_total": False,
+                    },
+                    {
+                        "amount_thousand": -50_000,
+                        "formula": "연평균 감면실적 × 5년",
+                        "is_total": True,
+                    },
+                ],
+            }],
+        }]
+
+        self.assertIsNotNone(estimate)
+        self.assertEqual(estimate["items"][0]["formula_family"], "revenue_loss")
+        self.assertEqual(apply_tag_formula_evidence(estimate, patterns), 1)
+        calculated, issues = compute_year_estimates(
+            estimate,
+            tag_patterns=patterns,
+            allow_estimated=False,
+        )
+
+        self.assertFalse(issues)
+        self.assertEqual(
+            [row["amount_thousand"] for row in calculated],
+            [-10_000] * 5,
+        )
+
+    def test_scale_dependent_facility_does_not_receive_flat_default(self) -> None:
         articles = [{
             "no": "제20조(센터 설치)",
             "text": "장관은 센터를 설치하고 필요한 시스템을 구축하여 운영할 수 있다.",
@@ -416,12 +1077,12 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
         estimate = build_generalized_estimate(articles)
 
         self.assertIsNotNone(estimate)
-        self.assertEqual(apply_reasonable_default_amounts(estimate), 1)
+        self.assertEqual(apply_reasonable_default_amounts(estimate), 0)
         item = estimate["items"][0]
-        self.assertEqual(item["calculation"]["base_amount_thousand"], 500_000)
+        self.assertIsNone(item["calculation"]["base_amount_thousand"])
         calculated, issues = compute_year_estimates(estimate, tag_patterns=[], allow_estimated=True)
-        self.assertTrue(calculated)
-        self.assertFalse([issue for issue in issues if issue.get("level") == "error"])
+        self.assertIsNone(calculated)
+        self.assertTrue([issue for issue in issues if issue.get("level") == "error"])
 
     def test_high_court_establishment_uses_judicial_institution_template(self) -> None:
         from backend.analyzer_v2 import _build_public_organization_establishment_estimate

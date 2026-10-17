@@ -1,0 +1,431 @@
+{
+  "bill_no": "2200629",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2200629",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "payer": "government",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "grandparent_care_allowance_parallel",
+    "start_year": 2025,
+    "years": 5,
+    "grandparent_count_basis": "child_age_proxy",
+    "care_price_projection": "freeze_reference_rate",
+    "population_geography": "전국",
+    "statistical_sex": "total",
+    "population_vintage": "2023-12",
+    "support_derivation_note": "기존공식각세인구재사용,조부모양육비율·공공시간제지원액·연령별대체급여연결",
+    "registration_scope_note": "0~5세 낮시간 조부모양육 아동 단위, 전원 교육이수·연초등록·연중유지 참고 가정.",
+    "allowance_overlap_note": "원문 제34조의2제2항은 양육수당 병행 허용. 기존수당 변화 없음으로 차감0, 국비·지방비 총액.",
+    "estimation_start_note": "공포즉시 시행이지만 심사·공포 준비기간을 고려한2025~2029 정답 시나리오.",
+    "selected_evidence_keys": [
+      "official:kosis:age0_5:2025-2029:grandparent_parallel",
+      "2200629:grandparent_care_shares:parallel",
+      "2200629:supported_care_hours:parallel",
+      "2200629:public_care_hour_rate:parallel",
+      "2200629:foregone_allowance_by_age:parallel",
+      "2200629:registration_take_up:parallel",
+      "2200629:care_payment_months:parallel"
+    ],
+    "evidence_selection_reasons": {
+      "official:kosis:age0_5:2025-2029:grandparent_parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:grandparent_care_shares:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:supported_care_hours:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:public_care_hour_rate:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:foregone_allowance_by_age:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:registration_take_up:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인",
+      "2200629:care_payment_months:parallel": "2021돌봄비율·당시80시간 지원, 수당 병행 및 대리모집단의 조건부 적용 승인"
+    },
+    "selected_method_keys": [
+      "2200629:grandparent_allowance_parallel"
+    ],
+    "method_selection_reasons": {
+      "2200629:grandparent_allowance_parallel": "시간한도·수당병행 구조를 별도 선택"
+    },
+    "method_confirmations": {
+      "2200629:grandparent_allowance_parallel": {
+        "registration_scope_note": "0~5세 낮시간 조부모양육 아동 단위, 전원 교육이수·연초등록·연중유지 참고 가정.",
+        "allowance_overlap_note": "원문 제34조의2제2항은 양육수당 병행 허용. 기존수당 변화 없음으로 차감0, 국비·지방비 총액.",
+        "estimation_start_note": "공포즉시 시행이지만 심사·공포 준비기간을 고려한2025~2029 정답 시나리오.",
+        "care_population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영."
+      }
+    },
+    "grandparent_allowance_mode": "allowance_parallel",
+    "care_proxy_confirmed": true,
+    "care_population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영."
+  },
+  "result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "official:kosis:age0_5:2025-2029:grandparent_parallel,2200629:grandparent_care_shares:parallel,2200629:supported_care_hours:parallel,2200629:public_care_hour_rate:parallel,2200629:foregone_allowance_by_age:parallel,2200629:registration_take_up:parallel,2200629:care_payment_months:parallel",
+    "annual_amounts_thousand": [
+      215735040,
+      205954560,
+      201162240,
+      199218240,
+      200154240
+    ],
+    "source_refs": [
+      "기존KOSIS2023.12 전국 중위전망 원자료, 2025~2029 0~5세 각세 남녀합산; 2200629 비용추계서24C1054 PDF4~7쪽;2021보육실태조사·당시 시간제보육 지원한도",
+      "2200629 비용추계서24C1054 PDF3~7쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          215735040000,
+          205954560000,
+          201162240000,
+          199218240000,
+          200154240000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "기존KOSIS2023.12 전국 중위전망 원자료, 2025~2029 0~5세 각세 남녀합산; 2200629 비용추계서24C1054 PDF4~7쪽;2021보육실태조사·당시 시간제보육 지원한도",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2200629:grandparent_allowance_parallel"
+    ]
+  },
+  "web_result": {
+    "status": "computed_review",
+    "routeKey": "direct_annual_amount",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      215735040,
+      205954560,
+      201162240,
+      199218240,
+      200154240
+    ],
+    "derivationTrace": [
+      {
+        "year": 2025,
+        "age_child_counts": {
+          "0": 18030,
+          "1": 8902,
+          "2": 9249,
+          "3": 12644,
+          "4": 11461,
+          "5": 14622
+        },
+        "gross_monthly_support": 240000,
+        "net_monthly_by_age": {
+          "0": 240000,
+          "1": 240000,
+          "2": 240000,
+          "3": 240000,
+          "4": 240000,
+          "5": 240000
+        },
+        "registration_take_up": 1,
+        "annual_won_by_age": {
+          "0": 51926400000,
+          "1": 25637760000,
+          "2": 26637120000,
+          "3": 36414720000,
+          "4": 33007680000,
+          "5": 42111360000
+        },
+        "allowance_mode": "allowance_parallel",
+        "population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영.",
+        "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+      },
+      {
+        "year": 2026,
+        "age_child_counts": {
+          "0": 18018,
+          "1": 8445,
+          "2": 8674,
+          "3": 11926,
+          "4": 10828,
+          "5": 13621
+        },
+        "gross_monthly_support": 240000,
+        "net_monthly_by_age": {
+          "0": 240000,
+          "1": 240000,
+          "2": 240000,
+          "3": 240000,
+          "4": 240000,
+          "5": 240000
+        },
+        "registration_take_up": 1,
+        "annual_won_by_age": {
+          "0": 51891840000,
+          "1": 24321600000,
+          "2": 24981120000,
+          "3": 34346880000,
+          "4": 31184640000,
+          "5": 39228480000
+        },
+        "allowance_mode": "allowance_parallel",
+        "population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영.",
+        "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+      },
+      {
+        "year": 2027,
+        "age_child_counts": {
+          "0": 18910,
+          "1": 8440,
+          "2": 8230,
+          "3": 11186,
+          "4": 10213,
+          "5": 12869
+        },
+        "gross_monthly_support": 240000,
+        "net_monthly_by_age": {
+          "0": 240000,
+          "1": 240000,
+          "2": 240000,
+          "3": 240000,
+          "4": 240000,
+          "5": 240000
+        },
+        "registration_take_up": 1,
+        "annual_won_by_age": {
+          "0": 54460800000,
+          "1": 24307200000,
+          "2": 23702400000,
+          "3": 32215680000,
+          "4": 29413440000,
+          "5": 37062720000
+        },
+        "allowance_mode": "allowance_parallel",
+        "population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영.",
+        "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+      },
+      {
+        "year": 2028,
+        "age_child_counts": {
+          "0": 19754,
+          "1": 8858,
+          "2": 8225,
+          "3": 10615,
+          "4": 9581,
+          "5": 12140
+        },
+        "gross_monthly_support": 240000,
+        "net_monthly_by_age": {
+          "0": 240000,
+          "1": 240000,
+          "2": 240000,
+          "3": 240000,
+          "4": 240000,
+          "5": 240000
+        },
+        "registration_take_up": 1,
+        "annual_won_by_age": {
+          "0": 56891520000,
+          "1": 25511040000,
+          "2": 23688000000,
+          "3": 30571200000,
+          "4": 27593280000,
+          "5": 34963200000
+        },
+        "allowance_mode": "allowance_parallel",
+        "population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영.",
+        "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+      },
+      {
+        "year": 2029,
+        "age_child_counts": {
+          "0": 20524,
+          "1": 9252,
+          "2": 8632,
+          "3": 10610,
+          "4": 9092,
+          "5": 11388
+        },
+        "gross_monthly_support": 240000,
+        "net_monthly_by_age": {
+          "0": 240000,
+          "1": 240000,
+          "2": 240000,
+          "3": 240000,
+          "4": 240000,
+          "5": 240000
+        },
+        "registration_take_up": 1,
+        "annual_won_by_age": {
+          "0": 59109120000,
+          "1": 26645760000,
+          "2": 24860160000,
+          "3": 30556800000,
+          "4": 26184960000,
+          "5": 32797440000
+        },
+        "allowance_mode": "allowance_parallel",
+        "population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영.",
+        "expression": "Σ(연령별인구×조부모돌봄비율×등록률×(시간한도×공공시간단가−기존양육수당)×개월)"
+      }
+    ],
+    "sourceRefs": [
+      "기존KOSIS2023.12 전국 중위전망 원자료, 2025~2029 0~5세 각세 남녀합산; 2200629 비용추계서24C1054 PDF4~7쪽;2021보육실태조사·당시 시간제보육 지원한도",
+      "2200629 비용추계서24C1054 PDF3~7쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2200629:grandparent_allowance_parallel"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2200629:grandparent_allowance_parallel",
+        "source_bill_no": "2200629",
+        "available_at": "2024-07-11",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "grandparent_care_allowance_parallel",
+        "source_ref": "2200629 비용추계서24C1054 PDF3~7쪽",
+        "match_groups": [
+          [
+            "손자녀",
+            "조부모"
+          ],
+          [
+            "돌보미",
+            "보육비용"
+          ],
+          [
+            "양육수당",
+            "미이용",
+            "신고"
+          ]
+        ],
+        "allowed_routes": [
+          "direct_annual_amount"
+        ],
+        "support_derivation": "grandparent_care_allowance_parallel",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2200629:grandparent_care_shares:parallel",
+          "2200629:supported_care_hours:parallel",
+          "2200629:public_care_hour_rate:parallel",
+          "2200629:foregone_allowance_by_age:parallel",
+          "2200629:registration_take_up:parallel",
+          "2200629:care_payment_months:parallel"
+        ],
+        "required_confirmations": [
+          "registration_scope_note",
+          "allowance_overlap_note",
+          "estimation_start_note",
+          "care_population_proxy_note"
+        ],
+        "method_steps": [
+          "시설 미이용·등록 조건과 기존양육수당 병행 조문 확인",
+          "낮시간 조부모양육 아동수를 대리모집단으로 삼는 한계를 설명·승인",
+          "2021각세비율과 공식0~5세전망 연결, 전원등록 참고 가정",
+          "당시80시간×3000원×12개월, 양육수당 차감 없이 단가동결",
+          "국비·지방비 총액 합산, 환수·벌칙 수입은 별도 판단"
+        ],
+        "baseline_check": "60시간·양육수당대체 모형과 혼용 금지. 전체영유아를 지원대상으로 곱하지 않음",
+        "limitation": "법정 시설미이용자를 직접 집계한 값이 아닌 정답의 조부모양육 대리추계 시나리오",
+        "lower_variable_keys": [
+          "grandparent_care_shares",
+          "supported_care_hours",
+          "public_care_hour_rate",
+          "foregone_allowance_by_age",
+          "registration_take_up",
+          "care_payment_months"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "시간한도·수당병행 구조를 별도 선택",
+        "confirmed_assumptions": {
+          "registration_scope_note": "0~5세 낮시간 조부모양육 아동 단위, 전원 교육이수·연초등록·연중유지 참고 가정.",
+          "allowance_overlap_note": "원문 제34조의2제2항은 양육수당 병행 허용. 기존수당 변화 없음으로 차감0, 국비·지방비 총액.",
+          "estimation_start_note": "공포즉시 시행이지만 심사·공포 준비기간을 고려한2025~2029 정답 시나리오.",
+          "care_population_proxy_note": "시설 미이용·등록 실제수 부족. 정답처럼2021 낮시간 친조부모+외조부모 양육비율을 각세인구에 적용하는 대리추계. 정확한 법정 모집단 집계가 아니며 시간제 서비스 중복이용 감액은 불확실해 미반영."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          215735040000,
+          205954560000,
+          201162240000,
+          199218240000,
+          200154240000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "기존KOSIS2023.12 전국 중위전망 원자료, 2025~2029 0~5세 각세 남녀합산; 2200629 비용추계서24C1054 PDF4~7쪽;2021보육실태조사·당시 시간제보육 지원한도",
+        "is_assumption": true
+      }
+    }
+  },
+  "annual_eok": [
+    2157.3504,
+    2059.5456,
+    2011.6224,
+    1992.1824,
+    2001.5424
+  ],
+  "displayed_annual_eok": [
+    2157,
+    2060,
+    2012,
+    1992,
+    2002
+  ],
+  "raw_total_eok": 10222.2432,
+  "gold_display_total_eok": 10223,
+  "raw_error_percent": 0.00740291499559036,
+  "annual_matches": 5,
+  "sum_displayed_annual_eok": 10223,
+  "recovery_review_payload": {
+    "bill_no": "2200629",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "decision_evidence_key": "2200629:care_recovery_penalty_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "new_program_implemented": false,
+      "violation_forecast_available": false,
+      "recovery_forecast_available": false,
+      "fine_forecast_available": false
+    },
+    "decision_confirmations": {
+      "care_violation_scope_note": "2024정답의 신규 손자녀돌보미 부정수급·벌칙 규정, 위반인원 실적 부재 확인",
+      "recovery_forecast_note": "당시 환수 규모 예측 어려움, 급여와 상계하지 않음",
+      "fine_forecast_note": "당시 위반·벌금 규모 예측 어려움, 수입효과0원으로 표시하지 않음"
+    }
+  },
+  "recovery_decision": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2200629:care_recovery_penalty_not_estimated",
+    "reason": "신규 손자녀돌보미 제도의 부정수급 위반인원·환수액·벌금을 예측할 근거가 부족해 수입 효과를 미추계",
+    "source_ref": "2200629 비용추계서24C1054 PDF3쪽",
+    "source_quote": "손자녀돌보미 제도가 도입되지 않은 현시점에서 위반 인원, 환수금액, 벌금 등에 대한 예상이 어려워 비용추계가 불가능함",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_revenue_increase",
+    "confirmed_conditions": {
+      "care_violation_scope_note": "2024정답의 신규 손자녀돌보미 부정수급·벌칙 규정, 위반인원 실적 부재 확인",
+      "recovery_forecast_note": "당시 환수 규모 예측 어려움, 급여와 상계하지 않음",
+      "fine_forecast_note": "당시 위반·벌금 규모 예측 어려움, 수입효과0원으로 표시하지 않음"
+    },
+    "confirmed_facts": {
+      "new_program_implemented": false,
+      "violation_forecast_available": false,
+      "recovery_forecast_available": false,
+      "fine_forecast_available": false
+    },
+    "reestimate_when": "제도 시행 실적 또는 적용 가능한 위반인원·환수 및 벌금 근거가 확보되면 재추계",
+    "limitation": "2024정답의 신규제도 예측 제약. 현재 신뢰할 실적이 있으면 적용 금지. DB검색 실패만으로 미추계하지 않음"
+  },
+  "official_scope_complete": true,
+  "limitation": "연간 억원표시와 그 합계로 정답표를 비교하며 계산 원값을 조정하지 않음. 정답 확인 후 참고 시나리오 보강 회귀."
+}

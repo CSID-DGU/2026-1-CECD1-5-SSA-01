@@ -1,0 +1,318 @@
+{
+  "bill_no": "2203602",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "reserved_holdout": false,
+  "prior_own_db_evidence_count": 0,
+  "ai_draft": {
+    "bill_no": "2203602",
+    "bill_name": "기초연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-03",
+    "articles": [
+      {
+        "article_ref": "제5조의2제1항제1호",
+        "source_quote": "1. 소득인정액이100분의30 이하인사람에대한2026년의기준연금\n액: 40만원",
+        "source_page": 3,
+        "change_summary": "2026년65세이상 소득하위30%기준연금액40만원. 실제수급률·부부/국민연금연계/소득역전감액 별도확인",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "2026년65세이상 소득하위30%기준연금액40만원. 실제수급률·부부/국민연금연계/소득역전감액 별도확인",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "2026년65세이상 소득하위30%기준연금액40만원. 실제수급률·부부/국민연금연계/소득역전감액 별도확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제5조의2제1항제2호",
+        "source_quote": "2. 소득인정액이100분의50 이하인사람에대한2027년의기준연금\n액: 40만원",
+        "source_page": 3,
+        "change_summary": "2027년65세이상 소득하위50%기준연금액40만원.2028년이후계속40만원인지원문만으로자동연장하지않음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "2027년65세이상 소득하위50%기준연금액40만원.2028년이후계속40만원인지원문만으로자동연장하지않음",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "2027년65세이상 소득하위50%기준연금액40만원.2028년이후계속40만원인지원문만으로자동연장하지않음",
+        "variables": []
+      },
+      {
+        "article_ref": "제3조제3항",
+        "source_quote": "③제1항에도불구하고대통령령으로정하는사람중19세이후국\n내에7년이상거주하지않은사람에게는기초연금을지급하지아\n니한다.",
+        "source_page": 3,
+        "change_summary": "국내거주7년요건에의한신규신청자제외.대통령령대상범위·배제인원·공포일미확정",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "국내거주7년요건에의한신규신청자제외.대통령령대상범위·배제인원·공포일미확정",
+        "route_key": "",
+        "route_reason": "국내거주7년요건에의한신규신청자제외.대통령령대상범위·배제인원·공포일미확정",
+        "variables": []
+      },
+      {
+        "article_ref": "제10조제3항",
+        "source_quote": "③기초연금수급희망자와그배우자는제1항에따른신청을할때\n국외에소득또는재산을보유한경우에는이를신고하여야한다.",
+        "source_page": 3,
+        "change_summary": "국외소득·재산신고 의무.수급자선정에미치는금액·행정비미확인",
+        "cost_trigger": true,
+        "estimation_decision": "needs_review",
+        "decision_reason": "국외소득·재산신고 의무.수급자선정에미치는금액·행정비미확인",
+        "route_key": "",
+        "route_reason": "국외소득·재산신고 의무.수급자선정에미치는금액·행정비미확인",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "runs": [
+    {
+      "year": 2026,
+      "payload": {
+        "bill_no": "2203602",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2026,
+        "years": 1,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 400000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽제5조의2 2026기준연금액"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "월기준연금액의해당연도통년시나리오;실제시행시점검토필요"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "existing_benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2201899:band1:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5059000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band2:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5062000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band3:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5043000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band4:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 4410000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band5:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 4434000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          },
+          "existing_benefit_per_recipient": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      },
+      "required_variables_filled": 1,
+      "required_variable_count": 3
+    },
+    {
+      "year": 2027,
+      "payload": {
+        "bill_no": "2203602",
+        "route_key": "transfer_recipient_delta",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2027,
+        "years": 1,
+        "explicit_inputs": {
+          "benefit_per_recipient": {
+            "value": 400000,
+            "unit": "KRW/person/month",
+            "source_ref": "원문3쪽제5조의2 2027기준연금액"
+          },
+          "payments_per_year": {
+            "value": 12,
+            "unit": "month/year",
+            "source_ref": "월기준연금액의해당연도통년시나리오;실제시행시점검토필요"
+          }
+        }
+      },
+      "result": {
+        "status": "needs_input",
+        "routeKey": "transfer_recipient_delta",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "existing_benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2201899:band1:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5059000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band2:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5062000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band3:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 5043000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band4:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 4410000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2201899:band5:existing_benefit_per_recipient:2024",
+            "variableKey": "existing_benefit_per_recipient",
+            "value": 4434000,
+            "unit": "KRW/person/year",
+            "sourceRef": "2201899 첨부24C1992 PDF p.6",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-10-03",
+            "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+            "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+            "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "recipient_count": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          },
+          "existing_benefit_per_recipient": {
+            "status": "candidates_need_review",
+            "candidateCount": 5,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      },
+      "required_variables_filled": 1,
+      "required_variable_count": 3
+    }
+  ],
+  "required_variables_filled": 2,
+  "required_variable_count": 6,
+  "review_items": 2,
+  "amount_thousand": null,
+  "known_population_basis": "공식연령별인구는있으나소득계층별실제수급자및실수령연금액과다름",
+  "limitations": [
+    "개발시점DB검색,발의일시점독립평가아님",
+    "단일연도상위산식연결만,5년단계확대·평균수령액미산정",
+    "30만원특례유효기간2020년종료를원문부칙에서확인;현행수령액30만원으로전용하지않음",
+    "40만원은기준액,감액후실수령액동일이라고확정하지않음"
+  ]
+}

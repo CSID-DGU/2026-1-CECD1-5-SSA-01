@@ -1,0 +1,407 @@
+{
+  "independent_evaluation": false,
+  "target_answer_read": false,
+  "paid_api_calls": 0,
+  "scope": "2217718 기본계획 항목만의 연결 회귀검증",
+  "ai_draft": {
+    "bill_name": "인공지능 데이터센터 구축 및 운영 활성화에 관한 법률안",
+    "document_type": "제정",
+    "bill_no": "2217718",
+    "propose_date": "2026-03-24",
+    "articles": [
+      {
+        "article_ref": "제5조제1항",
+        "change_summary": "5년마다 기본계획 수립 의무 신설",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기본계획 수립의 비용 후보. 외부 용역 실시 여부는 가정으로 확인 필요",
+        "route_key": "research_plan",
+        "route_reason": "매년 시행계획과 구별해 5년 주기 기본계획만 계산",
+        "source_quote": "제5조(기본계획및시행계획의수립) ①정부는인공지능데이터센터의\n효율적구축과진흥을위하여제6조에따른국가인공지능데이터센\n터진흥전문위원회의심의ㆍ의결을거쳐인공지능데이터센터기본계\n획(이하“기본계획”이라한다)을5년마다수립하여야한다.",
+        "source_page": 7,
+        "variables": [
+          {
+            "key": "recurrence_interval_years",
+            "value_json": "5",
+            "unit": "year",
+            "source_quote": "5년마다",
+            "source_page": 7
+          }
+        ]
+      }
+    ]
+  },
+  "quote_verified": true,
+  "method_candidates": [
+    "2200039:periodic_plan_research"
+  ],
+  "initial_result": {
+    "status": "needs_input",
+    "routeKey": "research_plan",
+    "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "missingVariables": [
+      "plan_unit_cost"
+    ],
+    "methodCandidates": [
+      {
+        "method_key": "2200039:periodic_plan_research",
+        "source_bill_no": "2200039",
+        "family_key": "village_enterprise_basic_plan",
+        "available_at": "2024-07-02",
+        "source_ref": "의안2200039 비용추계서24D0282, PDF4~6쪽",
+        "match_groups": [
+          [
+            "계획",
+            "plan"
+          ],
+          [
+            "수립",
+            "용역",
+            "research"
+          ]
+        ],
+        "allowed_routes": [
+          "research_plan"
+        ],
+        "payer": "government",
+        "baseline_check": "내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.",
+        "method_steps": [
+          "계획 수립 주기와 첫 수립시점을 확인",
+          "과업·규모가 유사한 연구용역 단가 선택",
+          "수립연도에만 비용 반영"
+        ],
+        "required_confirmations": [
+          "external_research_scope"
+        ],
+        "variable_keys": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2200039:mois_plan_research_unit_cost:2021-2023"
+        ],
+        "limitation": "행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.",
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "reviewed_at": "2026-10-03",
+        "matched_terms": [
+          "계획",
+          "수립"
+        ],
+        "selection_status": "candidate_only"
+      }
+    ],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200039:mois_plan_research_unit_cost:2021-2023",
+        "variableKey": "plan_unit_cost",
+        "value": 203000000,
+        "unit": "KRW/plan",
+        "sourceRef": "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-07-02",
+        "limitation": "2024-07-02 정답에서 처음 확인한 행안부 제출자료. 이 대상의 블라인드 입력 아님. 다른 계획에는 범위·규모 비교 필요",
+        "scope": "행정안전부 5년 종합계획 수립 연구용역",
+        "serviceFunction": "기본계획 수립 연구용역",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211999:first_plan_unit_cost:2027",
+        "variableKey": "plan_unit_cost",
+        "value": 220000000,
+        "unit": "KRW/plan",
+        "sourceRef": "의안 2211999 비용추계서 25C3287 PDF p.4, 첫 기본계획 예산",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2025-08-08",
+        "limitation": "2023~2025 문화디지털혁신 기본계획 예산을 인용한 선례 가정. 원 예산서는 독립 확인하지 않았으며 후속계획 절반 가정은 보편 단가가 아님",
+        "scope": "스포츠지능정보화 3년 기본계획 수립 연구",
+        "serviceFunction": "기본계획 연구용역",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "plan_unit_cost": {
+        "status": "candidates_need_review",
+        "candidateCount": 2,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "confirmed_development_scenario": {
+    "route_key": "research_plan",
+    "bill_no": "2217718",
+    "cutoff_date": "2026-03-24",
+    "years": 5,
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 5,
+        "unit": "year",
+        "source_ref": "bill_text.pdf 7쪽: 5년마다"
+      }
+    },
+    "method_query": "제5조(기본계획및시행계획의수립) ①정부는인공지능데이터센터의\n효율적구축과진흥을위하여제6조에따른국가인공지능데이터센\n터진흥전문위원회의심의ㆍ의결을거쳐인공지능데이터센터기본계\n획(이하“기본계획”이라한다)을5년마다수립하여야한다.",
+    "payer": "government",
+    "start_year": 2027,
+    "selected_method_keys": [
+      "2200039:periodic_plan_research"
+    ],
+    "method_selection_reasons": {
+      "2200039:periodic_plan_research": "5년 주기 기본계획의 수립연도에 연구용역을 계상하는 방법을 재사용. 부처·분야가 달라 실제 과업 검증은 남음"
+    },
+    "method_confirmations": {
+      "2200039:periodic_plan_research": {
+        "external_research_scope": "개발 연결 검증용으로 외부 용역 1회를 가정. 법안이 외부 용역을 명시한 것으로 해석하지 않음"
+      }
+    },
+    "selected_evidence_keys": [
+      "2200039:mois_plan_research_unit_cost:2021-2023"
+    ],
+    "evidence_selection_reasons": {
+      "2200039:mois_plan_research_unit_cost:2021-2023": "연결 검증용 과거 가격 동결 시나리오만 채택. AI 데이터센터 과업·규모와 일치한다고 검증된 단가가 아님"
+    }
+  },
+  "scenario_calculation": {
+    "status": "computed_review",
+    "routeKey": "research_plan",
+    "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "annualAmountsThousand": [
+      203000,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceRefs": [
+      "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+      "bill_text.pdf 7쪽: 5년마다",
+      "의안2200039 비용추계서24D0282, PDF4~6쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2200039:periodic_plan_research"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2200039:periodic_plan_research",
+        "source_bill_no": "2200039",
+        "family_key": "village_enterprise_basic_plan",
+        "available_at": "2024-07-02",
+        "source_ref": "의안2200039 비용추계서24D0282, PDF4~6쪽",
+        "match_groups": [
+          [
+            "계획",
+            "plan"
+          ],
+          [
+            "수립",
+            "용역",
+            "research"
+          ]
+        ],
+        "allowed_routes": [
+          "research_plan"
+        ],
+        "payer": "government",
+        "baseline_check": "내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.",
+        "method_steps": [
+          "계획 수립 주기와 첫 수립시점을 확인",
+          "과업·규모가 유사한 연구용역 단가 선택",
+          "수립연도에만 비용 반영"
+        ],
+        "required_confirmations": [
+          "external_research_scope"
+        ],
+        "variable_keys": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2200039:mois_plan_research_unit_cost:2021-2023"
+        ],
+        "limitation": "행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.",
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "reviewed_at": "2026-10-03",
+        "applicability_reason": "5년 주기 기본계획의 수립연도에 연구용역을 계상하는 방법을 재사용. 부처·분야가 달라 실제 과업 검증은 남음",
+        "confirmed_assumptions": {
+          "external_research_scope": "개발 연결 검증용으로 외부 용역 1회를 가정. 법안이 외부 용역을 명시한 것으로 해석하지 않음"
+        }
+      }
+    ],
+    "methodCandidates": [
+      {
+        "method_key": "2200039:periodic_plan_research",
+        "source_bill_no": "2200039",
+        "family_key": "village_enterprise_basic_plan",
+        "available_at": "2024-07-02",
+        "source_ref": "의안2200039 비용추계서24D0282, PDF4~6쪽",
+        "match_groups": [
+          [
+            "계획",
+            "plan"
+          ],
+          [
+            "수립",
+            "용역",
+            "research"
+          ]
+        ],
+        "allowed_routes": [
+          "research_plan"
+        ],
+        "payer": "government",
+        "baseline_check": "내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.",
+        "method_steps": [
+          "계획 수립 주기와 첫 수립시점을 확인",
+          "과업·규모가 유사한 연구용역 단가 선택",
+          "수립연도에만 비용 반영"
+        ],
+        "required_confirmations": [
+          "external_research_scope"
+        ],
+        "variable_keys": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2200039:mois_plan_research_unit_cost:2021-2023"
+        ],
+        "limitation": "행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.",
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "reviewed_at": "2026-10-03",
+        "matched_terms": [
+          "계획",
+          "수립"
+        ],
+        "selection_status": "candidate_only"
+      }
+    ],
+    "resolvedVariables": {
+      "plan_unit_cost": {
+        "key": "plan_unit_cost",
+        "value": 203000000,
+        "unit": "KRW/plan",
+        "source_class": "precedent_assumption",
+        "source_ref": "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 5,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "bill_text.pdf 7쪽: 5년마다",
+        "is_assumption": false
+      }
+    }
+  },
+  "draft": {
+    "status": "draft_ready",
+    "title": "인공지능 데이터센터 구축 및 운영 활성화에 관한 법률안",
+    "summary": "확인한 1개 비용 항목의 2027~2031년 합계는 203,000천원입니다. 미산출 항목이 있어 법안 전체 비용은 아닙니다.",
+    "startYear": 2027,
+    "years": 5,
+    "items": [
+      {
+        "name": "기본계획 연구용역(가정 시나리오)",
+        "triggerRef": "제5조제1항",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "annualAmountsThousand": [
+          203000,
+          0,
+          0,
+          0,
+          0
+        ],
+        "resolvedVariables": {
+          "plan_unit_cost": {
+            "key": "plan_unit_cost",
+            "value": 203000000,
+            "unit": "KRW/plan",
+            "source_class": "precedent_assumption",
+            "source_ref": "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 5,
+            "unit": "year",
+            "source_class": "target_explicit",
+            "source_ref": "bill_text.pdf 7쪽: 5년마다",
+            "is_assumption": false
+          }
+        },
+        "sourceRefs": [
+          "의안 2200039 비용추계서(24D0282), PDF p.4~6",
+          "bill_text.pdf 7쪽: 5년마다",
+          "의안2200039 비용추계서24D0282, PDF4~6쪽"
+        ],
+        "selectedMethods": [
+          {
+            "method_key": "2200039:periodic_plan_research",
+            "source_bill_no": "2200039",
+            "family_key": "village_enterprise_basic_plan",
+            "available_at": "2024-07-02",
+            "source_ref": "의안2200039 비용추계서24D0282, PDF4~6쪽",
+            "match_groups": [
+              [
+                "계획",
+                "plan"
+              ],
+              [
+                "수립",
+                "용역",
+                "research"
+              ]
+            ],
+            "allowed_routes": [
+              "research_plan"
+            ],
+            "payer": "government",
+            "baseline_check": "내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.",
+            "method_steps": [
+              "계획 수립 주기와 첫 수립시점을 확인",
+              "과업·규모가 유사한 연구용역 단가 선택",
+              "수립연도에만 비용 반영"
+            ],
+            "required_confirmations": [
+              "external_research_scope"
+            ],
+            "variable_keys": [
+              "plan_unit_cost",
+              "recurrence_interval_years"
+            ],
+            "variable_evidence_keys": [
+              "2200039:mois_plan_research_unit_cost:2021-2023"
+            ],
+            "limitation": "행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.",
+            "review_status": "reviewed",
+            "obtained_from": "reviewed_answer",
+            "reviewed_at": "2026-10-03",
+            "applicability_reason": "5년 주기 기본계획의 수립연도에 연구용역을 계상하는 방법을 재사용. 부처·분야가 달라 실제 과업 검증은 남음",
+            "confirmed_assumptions": {
+              "external_research_scope": "개발 연결 검증용으로 외부 용역 1회를 가정. 법안이 외부 용역을 명시한 것으로 해석하지 않음"
+            }
+          }
+        ]
+      }
+    ],
+    "exclusions": [
+      "제5조 기본계획만 연결 검증. 나머지 조문은 이번 실행에서 분석·추계하지 않음",
+      "2027년 첫 수립 및 2023년 기준 과거 용역단가 동결은 개발 시나리오. 현재 적정가격 검증 필요"
+    ],
+    "annualAmountsThousand": [
+      203000,
+      0,
+      0,
+      0,
+      0
+    ],
+    "totalAmountThousand": 203000,
+    "markdown": "# 인공지능 데이터센터 구축 및 운영 활성화에 관한 법률안 비용추계서 초안\n\n> 검토용 자동 생성 초안입니다. 공식 비용추계서가 아닙니다.\n\n## Ⅰ. 비용추계 결과\n\n확인한 1개 비용 항목의 2027~2031년 합계는 203,000천원입니다. 미산출 항목이 있어 법안 전체 비용은 아닙니다.\n\n단위: 천원\n\n| 항목 | 2027 | 2028 | 2029 | 2030 | 2031 | 합계 |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: |\n| 기본계획 연구용역(가정 시나리오) | 203,000 | 0 | 0 | 0 | 0 | 203,000 |\n| 합계 | 203,000 | 0 | 0 | 0 | 0 | 203,000 |\n\n## Ⅱ. 재정수반요인\n\n- 제5조제1항: 기본계획 연구용역(가정 시나리오)\n\n## Ⅲ. 추계의 전제와 상세내역\n\n- 추계 시작연도와 기간은 원문 확인 또는 사용자의 설정을 따릅니다.\n- 입력하지 않은 선택 변수는 등록 산식의 기본값을 적용합니다. 지급범위·기간·참여율을 검토해야 합니다.\n\n### 기본계획 연구용역(가정 시나리오)\n\n산식: 계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)\n\n- 추계 방법 선례: 의안2200039 비용추계서24D0282, PDF4~6쪽\n- 적용 판단: 5년 주기 기본계획의 수립연도에 연구용역을 계상하는 방법을 재사용. 부처·분야가 달라 실제 과업 검증은 남음\n- 기존 비용 확인 기준: 내부 작성과 별도 연구용역을 구별하고 시행계획을 종합계획과 중복 계산하지 않는다.\n- 한계: 행안부 계획 용역 선례. 기관·과업·규모가 다르면 단가 재사용을 별도로 검토해야 한다.\n- 확인한 가정 (external_research_scope): 개발 연결 검증용으로 외부 용역 1회를 가정. 법안이 외부 용역을 명시한 것으로 해석하지 않음\n- plan_unit_cost: 203000000 KRW/plan — 근거: 의안 2200039 비용추계서(24D0282), PDF p.4~6\n- recurrence_interval_years: 5 year — 근거: bill_text.pdf 7쪽: 5년마다\n\n## Ⅳ. 부대의견 및 검토사항\n\n- 사용자 입력 및 선례 가정의 대상·규모·적용연도와 중복 지원 여부를 검토해야 합니다.\n- 산출된 금액은 입력 가정에 따라 달라지며, 비용 항목의 누락 여부도 확인해야 합니다.\n\n미산출·검토 보류 항목:\n- 제5조 기본계획만 연결 검증. 나머지 조문은 이번 실행에서 분석·추계하지 않음\n- 2027년 첫 수립 및 2023년 기준 과거 용역단가 동결은 개발 시나리오. 현재 적정가격 검증 필요\n"
+  },
+  "limitation": "산식·근거 검색·웹 계산·초안 연결만 검증. 실제 적정단가·시작연도·총비용 정확도는 검증하지 않음"
+}

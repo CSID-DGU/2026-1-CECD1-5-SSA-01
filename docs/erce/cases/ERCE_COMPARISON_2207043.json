@@ -1,0 +1,96 @@
+{
+  "bill_no": "2207043",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2207043.json",
+  "first": {
+    "total_eok": null,
+    "error_percent": null,
+    "exam_and_transition_cost_trigger_found": true,
+    "detailed_quantity_basis_matches": false,
+    "period_matches": false,
+    "start_year": 2028,
+    "cost_requests": [
+      {
+        "component": "national_exam_operation",
+        "status": "needs_input",
+        "missing": [
+          "service_quantity",
+          "service_unit_cost",
+          "frequency_per_year"
+        ]
+      },
+      {
+        "component": "initial_exam_development",
+        "status": "needs_input",
+        "missing": [
+          "quantity",
+          "unit_cost"
+        ]
+      },
+      {
+        "component": "certificate_issue_administration",
+        "status": "needs_input",
+        "missing": [
+          "quantity",
+          "unit_cost"
+        ]
+      }
+    ]
+  },
+  "gold": {
+    "estimate_no": "24C6328",
+    "reply_date": "2025-01-07",
+    "total_eok": 58.93,
+    "annual_million": [
+      4848,
+      279,
+      251,
+      229,
+      286
+    ],
+    "start_year": 2027,
+    "end_year": 2031,
+    "formula": "연도별 실제응시자 전망 × 응시자1인당 시험운영단가",
+    "base_exam_cost_won": 662000000,
+    "base_exam_applicants": 2760,
+    "base_unit_display_won": 239855,
+    "price_base_year": 2023,
+    "comparable_exam": "언어재활사 국가시험",
+    "cpi_vintage": "2024-12",
+    "provider_forecast": [
+      36188,
+      37236,
+      38161,
+      38988,
+      39736
+    ],
+    "exam_applicants": [
+      18564,
+      1048,
+      925,
+      827,
+      1013
+    ],
+    "initial_unlicensed_share": 0.513,
+    "regular_exam_fail_share": 0.32,
+    "special_exam_years": [
+      2027,
+      2028,
+      2029
+    ],
+    "regular_exam_years": [
+      2030,
+      2031
+    ],
+    "retake_rule": "2031응시인원=서비스제공인원순증748명+2030국가시험827명×32%실패 재응시 약265명",
+    "linked_bill_assumed": "2207049의결 전제",
+    "quantity_history_availability": "2021~2023제공인원추세유지라고설명하나 해당원관측값·추세모형은본문에미기재"
+  },
+  "differences": [
+    "최초시험종류별 총운영비가 아니라 응시자별 운영단가가 정답의 수량단위",
+    "첫해미자격자재고51.3%,이후순증인원,정규시험실패 재응시를 별도계산해야함",
+    "정답은2027~2031이고 최초잠정2028~2032는1년차이",
+    "초기문항개발·자격교부행정비를 별도확정추계하지않고응시자운영단가에포함된유사시험비용범위 확인"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

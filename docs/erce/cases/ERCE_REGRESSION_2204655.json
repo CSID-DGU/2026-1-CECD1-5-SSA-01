@@ -1,0 +1,337 @@
+{
+  "bill_no": "2204655",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "formal_review_payload": {
+    "bill_no": "2204655",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "decision_evidence_key": "2204655:medical_workplace_formal_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "actual_new_application_volume_confirmed": false,
+      "additional_support_budget_committed": false
+    },
+    "decision_confirmations": {
+      "medical_application_forecast_review": "신청물량을특정하기어려운당시조건과0.1%참여참고가정 구분",
+      "medical_budget_forecast_review": "확정추가예산아님, 기존예산내집행이면 지출증가없을수있음"
+    }
+  },
+  "formal_decision": {
+    "decision": "not_estimated",
+    "amount": null,
+    "source_decision_label": "미첨부3호",
+    "decision_evidence_key": "2204655:medical_workplace_formal_not_estimated",
+    "reason": "설립특례에 따른 실제신청·예산확대가 미확정이라 공식적으로3호미첨부. 가정에 따른 참고금액은 별도로 제시가능",
+    "source_ref": "2204655 비용추계서24B4305 PDF3~5쪽",
+    "source_quote": "제3호: 의안의 내용이 선언적·권고적인 형식으로 규정되는 등 기술적으로 추계가 어려운 경우에 해당",
+    "additional_source_quote": "현시점에서 개정안의 시행에 따른 신청 물량을 특정하기 어려우므로",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "medical_application_forecast_review": "신청물량을특정하기어려운당시조건과0.1%참여참고가정 구분",
+      "medical_budget_forecast_review": "확정추가예산아님, 기존예산내집행이면 지출증가없을수있음"
+    },
+    "confirmed_facts": {
+      "actual_new_application_volume_confirmed": false,
+      "additional_support_budget_committed": false
+    },
+    "reestimate_when": "실제신청과 추가편성예산 또는 합리적인 확정수요 근거가 확보되면 재추계",
+    "limitation": "2024정답의 공식판단과 참고시나리오를 함께 보존. 새로운확정근거가있으면미첨부선례적용금지"
+  },
+  "reference_payload": {
+    "bill_no": "2204655",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "medical_standard_workplace_reference",
+    "support_derivation": "medical_standard_workplace_reference",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "workplace_form": "medical_corporation_subsidiary",
+    "standard_grant_price_year": 2025,
+    "medical_reference_confirmed": true,
+    "budget_expansion_assumed": true,
+    "medical_certification_retention": 1,
+    "medical_support_mode": "cumulative_support_reference",
+    "cumulative_source_replay_confirmed": true,
+    "medical_workplace_scope_note": "의료법인 자회사형 설립허용의 기존설립지원 신청증가. 국가의 병원출자금이 아님.",
+    "medical_application_note": "2024.3의료법인1617개 중 매년0.1%참여를 올림해 신규2개. 실제신청 예측치가 아닌 참고가정.",
+    "medical_budget_note": "인증유지100%·예산확대 참고가정, 고정예산내배분과 세제감면 추가효과는 별도.",
+    "medical_support_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토.",
+    "selected_evidence_keys": [
+      "2204655:medical_corporation_reference_count:reference",
+      "2204655:medical_annual_participation_share:reference",
+      "2204655:standard_grant_unit:reference",
+      "2204655:standard_grant_cpi:reference"
+    ],
+    "evidence_selection_reasons": {
+      "2204655:medical_corporation_reference_count:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:medical_annual_participation_share:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:standard_grant_unit:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:standard_grant_cpi:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인"
+    },
+    "selected_method_keys": [
+      "2204655:medical_workplace_reference"
+    ],
+    "method_selection_reasons": {
+      "2204655:medical_workplace_reference": "공식미첨부와 별도로 제시한 참고시나리오 선택"
+    },
+    "method_confirmations": {
+      "2204655:medical_workplace_reference": {
+        "medical_workplace_scope_note": "의료법인 자회사형 설립허용의 기존설립지원 신청증가. 국가의 병원출자금이 아님.",
+        "medical_application_note": "2024.3의료법인1617개 중 매년0.1%참여를 올림해 신규2개. 실제신청 예측치가 아닌 참고가정.",
+        "medical_budget_note": "인증유지100%·예산확대 참고가정, 고정예산내배분과 세제감면 추가효과는 별도.",
+        "medical_support_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      }
+    }
+  },
+  "reference_result": {
+    "route_key": "medical_standard_workplace_reference",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2204655:medical_corporation_reference_count:reference,2204655:medical_annual_participation_share:reference,2204655:standard_grant_unit:reference,2204655:standard_grant_cpi:reference",
+    "annual_amounts_thousand": [
+      612000,
+      1248480,
+      1910174,
+      2597837,
+      3312242
+    ],
+    "source_refs": [
+      "2204655 비용추계서24B4305 PDF4~6쪽;2024.3의료법인현황·2025설립보조계획안",
+      "2204655 비용추계서24B4305 PDF4~6쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          612000000,
+          1248480000,
+          1910174400,
+          2597837184,
+          3312242409.6
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204655 비용추계서24B4305 PDF4~6쪽;2024.3의료법인현황·2025설립보조계획안",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2204655:medical_workplace_reference"
+    ]
+  },
+  "reference_total_eok": 96.80733,
+  "gold_summary_reference_eok": 97,
+  "summary_error_percent": 0.19862886597938842,
+  "gold_displayed_detail_sum_eok": 96.8,
+  "detail_display_error_percent": 0.007572314049582708,
+  "annual_display_matches": 5,
+  "reusable_new_grants_payload": {
+    "bill_no": "SIMILAR_MEDICAL_STANDARD_WORKPLACE",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "medical_standard_workplace_reference",
+    "support_derivation": "medical_standard_workplace_reference",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "workplace_form": "medical_corporation_subsidiary",
+    "standard_grant_price_year": 2025,
+    "medical_reference_confirmed": true,
+    "budget_expansion_assumed": true,
+    "medical_certification_retention": 1,
+    "medical_support_mode": "annual_new_establishments",
+    "cumulative_source_replay_confirmed": false,
+    "medical_workplace_scope_note": "의료법인 자회사형 설립허용의 기존설립지원 신청증가. 국가의 병원출자금이 아님.",
+    "medical_application_note": "2024.3의료법인1617개 중 매년0.1%참여를 올림해 신규2개. 실제신청 예측치가 아닌 참고가정.",
+    "medical_budget_note": "인증유지100%·예산확대 참고가정, 고정예산내배분과 세제감면 추가효과는 별도.",
+    "medical_support_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토.",
+    "selected_evidence_keys": [
+      "2204655:medical_corporation_reference_count:reference",
+      "2204655:medical_annual_participation_share:reference",
+      "2204655:standard_grant_unit:reference",
+      "2204655:standard_grant_cpi:reference"
+    ],
+    "evidence_selection_reasons": {
+      "2204655:medical_corporation_reference_count:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:medical_annual_participation_share:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:standard_grant_unit:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인",
+      "2204655:standard_grant_cpi:reference": "의료법인모집단·신청률·설립보조 과업·2025가격과2024.11전망 참고가정 확인"
+    },
+    "selected_method_keys": [
+      "2204655:medical_workplace_reference"
+    ],
+    "method_selection_reasons": {
+      "2204655:medical_workplace_reference": "공식미첨부와 별도로 제시한 참고시나리오 선택"
+    },
+    "method_confirmations": {
+      "2204655:medical_workplace_reference": {
+        "medical_workplace_scope_note": "의료법인 자회사형 설립허용의 기존설립지원 신청증가. 국가의 병원출자금이 아님.",
+        "medical_application_note": "2024.3의료법인1617개 중 매년0.1%참여를 올림해 신규2개. 실제신청 예측치가 아닌 참고가정.",
+        "medical_budget_note": "인증유지100%·예산확대 참고가정, 고정예산내배분과 세제감면 추가효과는 별도.",
+        "medical_support_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      }
+    }
+  },
+  "reusable_new_grants_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "공식미첨부 판단과 별도의 가정에 따른 참고금액. 확정된 예산이나 수요 추계가 아닙니다.",
+    "routeKey": "medical_standard_workplace_reference",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      612000,
+      624240,
+      636725,
+      649459,
+      662448
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "annual_new_workplaces": 2,
+        "supported_workplaces": 2,
+        "grant_per_workplace": 306000000,
+        "annual_won": 612000000,
+        "support_mode": "annual_new_establishments",
+        "estimate_purpose": "reference_scenario",
+        "source_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      },
+      {
+        "year": 2027,
+        "annual_new_workplaces": 2,
+        "supported_workplaces": 2,
+        "grant_per_workplace": 312120000,
+        "annual_won": 624240000,
+        "support_mode": "annual_new_establishments",
+        "estimate_purpose": "reference_scenario",
+        "source_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      },
+      {
+        "year": 2028,
+        "annual_new_workplaces": 2,
+        "supported_workplaces": 2,
+        "grant_per_workplace": 318362400,
+        "annual_won": 636724800,
+        "support_mode": "annual_new_establishments",
+        "estimate_purpose": "reference_scenario",
+        "source_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      },
+      {
+        "year": 2029,
+        "annual_new_workplaces": 2,
+        "supported_workplaces": 2,
+        "grant_per_workplace": 324729648,
+        "annual_won": 649459296,
+        "support_mode": "annual_new_establishments",
+        "estimate_purpose": "reference_scenario",
+        "source_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      },
+      {
+        "year": 2030,
+        "annual_new_workplaces": 2,
+        "supported_workplaces": 2,
+        "grant_per_workplace": 331224240.96,
+        "annual_won": 662448481.92,
+        "support_mode": "annual_new_establishments",
+        "estimate_purpose": "reference_scenario",
+        "source_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+      }
+    ],
+    "sourceRefs": [
+      "2204655 비용추계서24B4305 PDF4~6쪽;2024.3의료법인현황·2025설립보조계획안",
+      "2204655 비용추계서24B4305 PDF4~6쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2204655:medical_workplace_reference"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2204655:medical_workplace_reference",
+        "source_bill_no": "2204655",
+        "available_at": "2024-11-15",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "medical_standard_workplace_reference",
+        "source_ref": "2204655 비용추계서24B4305 PDF4~6쪽",
+        "match_groups": [
+          [
+            "의료법인"
+          ],
+          [
+            "표준사업장"
+          ],
+          [
+            "설립",
+            "지원"
+          ]
+        ],
+        "allowed_routes": [
+          "medical_standard_workplace_reference"
+        ],
+        "support_derivation": "medical_standard_workplace_reference",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2204655:medical_corporation_reference_count:reference",
+          "2204655:medical_annual_participation_share:reference",
+          "2204655:standard_grant_unit:reference",
+          "2204655:standard_grant_cpi:reference"
+        ],
+        "required_confirmations": [
+          "medical_workplace_scope_note",
+          "medical_application_note",
+          "medical_budget_note",
+          "medical_support_basis_note"
+        ],
+        "method_steps": [
+          "의료법인 설립주체와 공동출자 주체 구분, 같은설립지원 가격은 과업/기준년 검토",
+          "의료법인1617개×0.1%참여를 올림한 매년2개 신규신청 가정",
+          "2025평균지원3억원에2026부터전망물가, 인증유지100%·예산확대 승인",
+          "매년신규지원과 정답누적지원참고 재현은 별도모드, 누적은 자기회귀만 허용",
+          "공식미첨부3호 판단과 참고숫자를 분리해 표시"
+        ],
+        "baseline_check": "민간주식출자금 가산금지. 기존2200200의79개·1/4/8증분을 의료법인에 전용하지 않음",
+        "limitation": "정답표의 누적지원은 설립보조 성격과 일관성이 미확인되어 보편규칙으로 적용하지 않음",
+        "lower_variable_keys": [
+          "medical_corporation_reference_count",
+          "medical_annual_participation_share",
+          "standard_grant_unit",
+          "standard_grant_cpi"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "공식미첨부와 별도로 제시한 참고시나리오 선택",
+        "confirmed_assumptions": {
+          "medical_workplace_scope_note": "의료법인 자회사형 설립허용의 기존설립지원 신청증가. 국가의 병원출자금이 아님.",
+          "medical_application_note": "2024.3의료법인1617개 중 매년0.1%참여를 올림해 신규2개. 실제신청 예측치가 아닌 참고가정.",
+          "medical_budget_note": "인증유지100%·예산확대 참고가정, 고정예산내배분과 세제감면 추가효과는 별도.",
+          "medical_support_basis_note": "정답표2·4·6·8·10 누적지원은 기존설립보조 설명과 일관성미확인, 자기정답참고재현만. 새의안은 매년신규지원 기본으로 검토."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          612000000,
+          624240000,
+          636724800,
+          649459296,
+          662448481.92
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2204655 비용추계서24B4305 PDF4~6쪽;2024.3의료법인현황·2025설립보조계획안",
+        "is_assumption": true
+      }
+    }
+  },
+  "limitation": "공식판단은3호미첨부. 누적97억원참고는자기회귀만, 새의안재사용에는 누적지원금복사금지."
+}

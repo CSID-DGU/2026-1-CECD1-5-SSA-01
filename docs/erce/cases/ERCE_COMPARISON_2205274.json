@@ -1,0 +1,54 @@
+{
+  "bill_no": "2205274",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C4866",
+  "gold_date": "2024-12-12",
+  "first_total_won": null,
+  "gold_total_won": 2325000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 1,
+  "quote_total": 1,
+  "incremental_formula_direction_match": true,
+  "horizon_match": true,
+  "gold_scope": "만18세미만 생계·의료급여 수급 등록장애아동 중 장애아동수당 미신청자, 유형별 직권지급",
+  "gold_parameters": {
+    "eligible_by_group": {
+      "severe_home": 3999,
+      "severe_facility": 1028,
+      "mild_home": 4583,
+      "mild_facility": 1005
+    },
+    "existing_recipients_by_group": {
+      "severe_home": 3919,
+      "severe_facility": 1018,
+      "mild_home": 4409,
+      "mild_facility": 968
+    },
+    "new_recipient_delta_by_group": {
+      "severe_home": 80,
+      "severe_facility": 10,
+      "mild_home": 174,
+      "mild_facility": 37
+    },
+    "monthly_prices": {
+      "severe_home": 220000,
+      "severe_facility": 90000,
+      "mild_home": 110000,
+      "mild_facility": 30000
+    },
+    "payment_months": 12,
+    "price_and_count_policy": "2024.11실적·2024단가 모두동결",
+    "start_year": 2025,
+    "years": 5
+  },
+  "gold_data_source": "한국사회보장정보원2024.11행복이음 행정자료",
+  "first_gaps": [
+    "생계·의료수급 장애아동 중 현재수당 미신청자301명",
+    "중증/경증·재가/시설 4개집단의 수급·미수급 분해",
+    "유형별 월급여액과 동결 가정"
+  ],
+  "well_handled": "기존사업 의무화와 실제 순증을 비교하고 전체장애아동 수당을 추가재정으로 계산하지 않음. 기존이미지원 가능성을0원으로 확정하지 않음.",
+  "scope_limit": "학교재학18~20세 대상은 행정자료 추출 한계로 정답에서 제외됨. 추계된 만18세미만 범위와 별도대상 검토 구분.",
+  "reinforcement_performed": false
+}

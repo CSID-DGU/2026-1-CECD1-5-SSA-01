@@ -1,0 +1,215 @@
+{
+  "bill_no": "2212766",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "parts": [
+    {
+      "kind": "survey",
+      "payload": {
+        "bill_no": "2212766",
+        "cutoff_date": "2026-10-08",
+        "evidence_mode": "development_review",
+        "route_key": "research_survey",
+        "start_year": 2027,
+        "years": 5,
+        "payer": "government",
+        "agency": "보건복지부",
+        "policy_domain": "장애인활동지원",
+        "research_service_function": "activity_support_survey",
+        "research_cost_scope": "research_contract_only",
+        "selected_evidence_keys": [
+          "2212766:survey:survey_unit_cost:reviewed",
+          "2212766:survey:recurrence:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2212766:survey:survey_unit_cost:reviewed": "계약과업·포함범위·법정주기와추계시점확인후사후준용",
+          "2212766:survey:recurrence:reviewed": "계약과업·포함범위·법정주기와추계시점확인후사후준용"
+        },
+        "selected_method_keys": [
+          "2212766:research_survey"
+        ],
+        "method_selection_reasons": {
+          "2212766:research_survey": "동일과업에대한유사연구계약범위검토"
+        },
+        "method_confirmations": {
+          "2212766:research_survey": {
+            "research_contract_scope_note": "조사현장수행비750백만원아닌연구용역분만;계획은신규서비스정책연구",
+            "recurrence_phase_note": "실태3년2027/2030,계획5년2027.지방계획은별도미검증",
+            "price_freeze_note": "과거계약9000/4000만원준용동결,최신고시단가아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "research_survey",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "evidence_key": "2212766:survey:survey_unit_cost:reviewed,2212766:survey:recurrence:reviewed",
+        "annual_amounts_thousand": [
+          90000,
+          0,
+          0,
+          90000,
+          0
+        ],
+        "source_refs": [
+          "2212766 비용추계서25C4872 PDF4~5쪽"
+        ],
+        "resolved_variables": {
+          "survey_unit_cost": {
+            "key": "survey_unit_cost",
+            "value": 90000000,
+            "unit": "KRW/survey",
+            "source_class": "precedent_assumption",
+            "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 3,
+            "unit": "year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2212766:research_survey"
+        ]
+      }
+    },
+    {
+      "kind": "plan",
+      "payload": {
+        "bill_no": "2212766",
+        "cutoff_date": "2026-10-08",
+        "evidence_mode": "development_review",
+        "route_key": "research_plan",
+        "start_year": 2027,
+        "years": 5,
+        "payer": "government",
+        "agency": "보건복지부",
+        "policy_domain": "장애인활동지원",
+        "research_service_function": "activity_support_plan",
+        "research_cost_scope": "research_contract_only",
+        "selected_evidence_keys": [
+          "2212766:plan:plan_unit_cost:reviewed",
+          "2212766:plan:recurrence:reviewed"
+        ],
+        "evidence_selection_reasons": {
+          "2212766:plan:plan_unit_cost:reviewed": "계약과업·포함범위·법정주기와추계시점확인후사후준용",
+          "2212766:plan:recurrence:reviewed": "계약과업·포함범위·법정주기와추계시점확인후사후준용"
+        },
+        "selected_method_keys": [
+          "2212766:research_plan"
+        ],
+        "method_selection_reasons": {
+          "2212766:research_plan": "동일과업에대한유사연구계약범위검토"
+        },
+        "method_confirmations": {
+          "2212766:research_plan": {
+            "research_contract_scope_note": "조사현장수행비750백만원아닌연구용역분만;계획은신규서비스정책연구",
+            "recurrence_phase_note": "실태3년2027/2030,계획5년2027.지방계획은별도미검증",
+            "price_freeze_note": "과거계약9000/4000만원준용동결,최신고시단가아님"
+          }
+        }
+      },
+      "result": {
+        "route_key": "research_plan",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "evidence_key": "2212766:plan:plan_unit_cost:reviewed,2212766:plan:recurrence:reviewed",
+        "annual_amounts_thousand": [
+          40000,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_refs": [
+          "2212766 비용추계서25C4872 PDF4~5쪽"
+        ],
+        "resolved_variables": {
+          "plan_unit_cost": {
+            "key": "plan_unit_cost",
+            "value": 40000000,
+            "unit": "KRW/plan",
+            "source_class": "precedent_assumption",
+            "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 5,
+            "unit": "year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2212766 비용추계서25C4872 PDF4~5쪽",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2212766:research_plan"
+        ]
+      }
+    }
+  ],
+  "reusable_web_status": [
+    "computed_review",
+    "computed_review"
+  ],
+  "annual_thousand": [
+    130000,
+    0,
+    0,
+    90000,
+    0
+  ],
+  "partial_total_thousand": 220000,
+  "gold_partial_total_thousand": 220000,
+  "error_percent": 0,
+  "pay_non_estimation": {
+    "decision": "not_estimated",
+    "amount": null,
+    "decision_evidence_key": "2212766:pay_standard_not_estimated",
+    "reason": "급여비용변동가능성은있으나적정인건비수준과급여산정반영방식미확정으로인건비영향미추계",
+    "source_ref": "2212766 비용추계서25C4872 PDF3쪽",
+    "source_quote": "현시점에서 활동지원인력의 적정 인건비수준과 급여비용 산정 시 반영 방식 등을 합리적으로 예측할 수 없어 비용추계의 대상에서 제외",
+    "additional_source_quote": "",
+    "fiscal_effect": "potential_expenditure_increase",
+    "confirmed_conditions": {
+      "pay_standard_scope_review": "정답PDF3의당시적정인건비수준미확정확인",
+      "benefit_reflection_review": "당시급여비반영방식미확정.현재후속고시부재를전수확인한주장아님"
+    },
+    "confirmed_facts": {
+      "pay_standard_confirmed": false,
+      "benefit_reflection_method_confirmed": false
+    },
+    "reestimate_when": "적정인건비고시/시급과급여비반영기준·서비스시간/대상규모가확보되면증분계산",
+    "limitation": "역사적정답의자료부족확인.현재기준고시가없음을전수검색한주장아님"
+  },
+  "pay_review_payload": {
+    "bill_no": "2212766",
+    "cutoff_date": "2026-10-08",
+    "evidence_mode": "development_review",
+    "decision_evidence_key": "2212766:pay_standard_not_estimated",
+    "reliable_estimation_basis_available": false,
+    "decision_facts": {
+      "pay_standard_confirmed": false,
+      "benefit_reflection_method_confirmed": false
+    },
+    "decision_confirmations": {
+      "pay_standard_scope_review": "정답PDF3의당시적정인건비수준미확정확인",
+      "benefit_reflection_review": "당시급여비반영방식미확정.현재후속고시부재를전수확인한주장아님"
+    }
+  },
+  "whole_bill_total": null,
+  "other_scope_review": [
+    "지방연간시행계획",
+    "분리청구/전산처리",
+    "시정명령행정비"
+  ],
+  "limitation": "일부연구용역추계와적정인건비3호미추계재현.현장조사전체비/전체사업완료아님.사후회귀"
+}

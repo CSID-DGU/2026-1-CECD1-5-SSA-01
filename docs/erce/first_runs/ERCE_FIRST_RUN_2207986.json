@@ -1,0 +1,484 @@
+{
+  "bill_no": "2207986",
+  "run_date": "2026-10-03",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_cutoff": "2026-10-03",
+  "time_scope_note": "현재 개발 DB와 보강된 다른 의안의 선례를 사용. 발의 당시 자료만 제한한 시험 아님",
+  "ai_mode": "manual_no_api",
+  "ai_draft": {
+    "bill_no": "2207986",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-02-07",
+    "articles": [
+      {
+        "article_ref": "제7조제2항/국공립 봉급·수당",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_average",
+        "route_reason": "국공립 순증 영양교사 수 × 교원 연간 봉급·수당. 대상학교는 일정 규모 이상 또는1일2회 이상 급식의 합집합으로 중복 제거하고 기존 배치·재배치를 확인해야 함",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/국공립 기관부담금",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "quantity_unit",
+        "route_reason": "국공립 순증 인원 × 인당 기관부담금. 선례의 반올림 단가 경로를 검토하며 부담률 경로와 중복 합산하지 않음",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/국공립 기본경비",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_basic_expense",
+        "route_reason": "국공립 봉급·수당+기관부담금 × 기본경비율. 학교별 증원에 필요한 운영경비를 선례 조건으로 검토",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/국공립 초기 집기",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_asset",
+        "route_reason": "국공립 순증 인원 × 첫해 집기 단가. 기존 집기 재사용이면 제외하고 필요할 경우 첫해에만 계상",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제2항/사립 연금 국가부담",
+        "source_quote": "②제1항에따라영양교사를두는경우대통령령으로정하는바에따라일정규모이상의학교또는1일2회이상의급식을실시하는학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_employer_contribution",
+        "route_reason": "사립 대상학교 순증 인원에 대응하는 봉급·수당 × 연금 국가부담률. 사립 전체 보수를 국가 비용으로 계상하지 않고 재정결함보조는 규모 미확인으로 제외 후보",
+        "change_summary": "규모 또는1일2회 급식 기준 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "items": [
+    {
+      "itemIndex": 0,
+      "name": "제7조제2항/국공립 봉급·수당",
+      "triggerRef": "제7조제2항/국공립 봉급·수당",
+      "routeKey": "personnel_average",
+      "formulaKey": "PERSONNEL_AVERAGE_V1",
+      "formula": "순증인원 × 1인당 보수",
+      "requiredVariables": [
+        "headcount",
+        "salary_per_person"
+      ],
+      "scopeNote": "국공립 순증 영양교사 수 × 교원 연간 봉급·수당. 대상학교는 일정 규모 이상 또는1일2회 이상 급식의 합집합으로 중복 제거하고 기존 배치·재배치를 확인해야 함",
+      "explicitInputs": {},
+      "decisionReason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-02-07",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_average",
+        "formulaKey": "PERSONNEL_AVERAGE_V1",
+        "formula": "순증인원 × 1인당 보수",
+        "missingVariables": [
+          "headcount",
+          "salary_per_person"
+        ],
+        "staffingScenarios": [
+          {
+            "methodKey": "confirmed_plan",
+            "label": "확인된 계획 정원 기준",
+            "formula": "계획 정원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 계획 정원이 별도 자료로 확인됨",
+            "candidateRole": "계획 정원 확인 시 우선 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_total",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "parent_population_share",
+            "label": "모기관 정원·관할인구 비례",
+            "formula": "반올림(모기관 정원 × 대상 관할인구 ÷ 모기관 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 인구당 업무·인력 밀도가 모기관과 유사함",
+            "candidateRole": "모기관과 업무가 유사하면 우선 검토",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "parent_staff_total",
+              "target_population",
+              "parent_population",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "population_per_staff",
+            "label": "유사기관 1인당 관할인구 기준",
+            "formula": "반올림(대상 관할인구 ÷ 공무원 1인당 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "비교기관의 인구당 업무·인력 밀도를 대상에도 적용할 수 있음",
+            "candidateRole": "광범위한 비교기관 평균을 쓴 민감도 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "target_population",
+              "population_per_staff",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "grade_by_grade",
+            "label": "직급별 계획·기존·전입 인원 차감",
+            "formula": "직급마다 계획 인원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "동일한 직급 기준의 세 인원표를 확인함",
+            "candidateRole": "직급별 원자료 확인 시 인건비 계산용",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_by_grade",
+              "existing_staff_by_grade",
+              "incoming_staff_by_grade"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          }
+        ]
+      }
+    },
+    {
+      "itemIndex": 1,
+      "name": "제7조제2항/국공립 기관부담금",
+      "triggerRef": "제7조제2항/국공립 기관부담금",
+      "routeKey": "quantity_unit",
+      "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+      "formula": "수량 × 단가",
+      "requiredVariables": [
+        "quantity",
+        "unit_cost"
+      ],
+      "scopeNote": "국공립 순증 인원 × 인당 기관부담금. 선례의 반올림 단가 경로를 검토하며 부담률 경로와 중복 합산하지 않음",
+      "explicitInputs": {},
+      "decisionReason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-02-07",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "quantity_unit",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ]
+      }
+    },
+    {
+      "itemIndex": 2,
+      "name": "제7조제2항/국공립 기본경비",
+      "triggerRef": "제7조제2항/국공립 기본경비",
+      "routeKey": "personnel_basic_expense",
+      "formulaKey": "PERSONNEL_BASIC_EXPENSE_V1",
+      "formula": "보수총액 × 기본경비 비율",
+      "requiredVariables": [
+        "annual_salary_amount",
+        "basic_expense_ratio"
+      ],
+      "scopeNote": "국공립 봉급·수당+기관부담금 × 기본경비율. 학교별 증원에 필요한 운영경비를 선례 조건으로 검토",
+      "explicitInputs": {},
+      "decisionReason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-02-07",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_basic_expense",
+        "formulaKey": "PERSONNEL_BASIC_EXPENSE_V1",
+        "formula": "보수총액 × 기본경비 비율",
+        "missingVariables": [
+          "annual_salary_amount",
+          "basic_expense_ratio"
+        ]
+      }
+    },
+    {
+      "itemIndex": 3,
+      "name": "제7조제2항/국공립 초기 집기",
+      "triggerRef": "제7조제2항/국공립 초기 집기",
+      "routeKey": "personnel_asset",
+      "formulaKey": "PERSONNEL_ASSET_V1",
+      "formula": "순증인원 × 1인당 자산취득비",
+      "requiredVariables": [
+        "headcount",
+        "asset_unit_price_per_person"
+      ],
+      "scopeNote": "국공립 순증 인원 × 첫해 집기 단가. 기존 집기 재사용이면 제외하고 필요할 경우 첫해에만 계상",
+      "explicitInputs": {},
+      "decisionReason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-02-07",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_asset",
+        "formulaKey": "PERSONNEL_ASSET_V1",
+        "formula": "순증인원 × 1인당 자산취득비",
+        "missingVariables": [
+          "headcount",
+          "asset_unit_price_per_person"
+        ]
+      }
+    },
+    {
+      "itemIndex": 4,
+      "name": "제7조제2항/사립 연금 국가부담",
+      "triggerRef": "제7조제2항/사립 연금 국가부담",
+      "routeKey": "personnel_employer_contribution",
+      "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+      "formula": "보수총액 × 기관부담률",
+      "requiredVariables": [
+        "annual_salary_amount",
+        "employer_contribution_rate"
+      ],
+      "scopeNote": "사립 대상학교 순증 인원에 대응하는 봉급·수당 × 연금 국가부담률. 사립 전체 보수를 국가 비용으로 계상하지 않고 재정결함보조는 규모 미확인으로 제외 후보",
+      "explicitInputs": {},
+      "decisionReason": "신규 배치 의무.2200601의 비용 구조를 참고하되 인원·연도·채용호봉·실제 신규 구입은 별도 확인",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2025-02-07",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_employer_contribution",
+        "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+        "formula": "보수총액 × 기관부담률",
+        "missingVariables": [
+          "annual_salary_amount",
+          "employer_contribution_rate"
+        ]
+      }
+    }
+  ],
+  "unmapped_count": 0,
+  "deferred_items": [],
+  "review_candidates": [],
+  "candidate_evidence_keys": [
+    "2200601:asset_duration",
+    "2200601:basic_ratio",
+    "2200601:employer_cost",
+    "2200601:initial_asset",
+    "2200601:private_pension_rate",
+    "2200601:salary"
+  ],
+  "selected_evidence_keys": [],
+  "conditional_reference_runs": [
+    {
+      "name": "국공립 봉급·수당",
+      "payload": {
+        "route_key": "personnel_average",
+        "bill_no": "2207986",
+        "start_year": 2026,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "staff_pay_profile": "nutrition_teacher_grade2_start_step8_annual_step_2026_2030",
+        "school_sector": "public",
+        "personnel_cost_component": "salary",
+        "selected_evidence_keys": [
+          "2200601:salary"
+        ],
+        "evidence_selection_reasons": {
+          "2200601:salary": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음"
+        }
+      },
+      "status": "missing ERCE formula variables: headcount",
+      "scenario_note": "선례와 동일한2026~2030 및 채용조건의 참고 시나리오만 검사. 본 의안의 확정 시행연도 아님. 인원 부족으로 금액 생성하지 않음"
+    },
+    {
+      "name": "국공립 기관부담금",
+      "payload": {
+        "route_key": "quantity_unit",
+        "bill_no": "2207986",
+        "start_year": 2026,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "staff_pay_profile": "nutrition_teacher_grade2_start_step8_annual_step_2026_2030",
+        "school_sector": "public",
+        "personnel_cost_component": "employer_cost",
+        "selected_evidence_keys": [
+          "2200601:employer_cost"
+        ],
+        "evidence_selection_reasons": {
+          "2200601:employer_cost": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음"
+        }
+      },
+      "status": "missing ERCE formula variables: quantity",
+      "scenario_note": "선례와 동일한2026~2030 및 채용조건의 참고 시나리오만 검사. 본 의안의 확정 시행연도 아님. 인원 부족으로 금액 생성하지 않음"
+    },
+    {
+      "name": "국공립 기본경비",
+      "payload": {
+        "route_key": "personnel_basic_expense",
+        "bill_no": "2207986",
+        "start_year": 2026,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "staff_pay_profile": "nutrition_teacher_grade2_start_step8_annual_step_2026_2030",
+        "school_sector": "public",
+        "personnel_cost_component": "basic_expense",
+        "selected_evidence_keys": [
+          "2200601:basic_ratio"
+        ],
+        "evidence_selection_reasons": {
+          "2200601:basic_ratio": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음"
+        }
+      },
+      "status": "missing ERCE formula variables: annual_salary_amount",
+      "scenario_note": "선례와 동일한2026~2030 및 채용조건의 참고 시나리오만 검사. 본 의안의 확정 시행연도 아님. 인원 부족으로 금액 생성하지 않음"
+    },
+    {
+      "name": "국공립 초기 집기",
+      "payload": {
+        "route_key": "personnel_asset",
+        "bill_no": "2207986",
+        "start_year": 2026,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "staff_pay_profile": "nutrition_teacher_grade2_start_step8_annual_step_2026_2030",
+        "school_sector": "public",
+        "personnel_cost_component": "initial_asset",
+        "selected_evidence_keys": [
+          "2200601:initial_asset",
+          "2200601:asset_duration"
+        ],
+        "evidence_selection_reasons": {
+          "2200601:initial_asset": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음",
+          "2200601:asset_duration": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음"
+        }
+      },
+      "status": "missing ERCE formula variables: headcount",
+      "scenario_note": "선례와 동일한2026~2030 및 채용조건의 참고 시나리오만 검사. 본 의안의 확정 시행연도 아님. 인원 부족으로 금액 생성하지 않음"
+    },
+    {
+      "name": "사립 연금 국가부담",
+      "payload": {
+        "route_key": "personnel_employer_contribution",
+        "bill_no": "2207986",
+        "start_year": 2026,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "holdout",
+        "staff_pay_profile": "nutrition_teacher_grade2_start_step8_annual_step_2026_2030",
+        "school_sector": "private",
+        "personnel_cost_component": "private_pension",
+        "selected_evidence_keys": [
+          "2200601:private_pension_rate"
+        ],
+        "evidence_selection_reasons": {
+          "2200601:private_pension_rate": "동일 유형 신규 영양교사 가정의 조건부 후보.2026~2030·2급8호봉 신규채용을 확인해야 하며 확정 법 시행연도나 대상 인원으로 사용하지 않음"
+        }
+      },
+      "status": "missing ERCE formula variables: annual_salary_amount",
+      "scenario_note": "선례와 동일한2026~2030 및 채용조건의 참고 시나리오만 검사. 본 의안의 확정 시행연도 아님. 인원 부족으로 금액 생성하지 않음"
+    }
+  ],
+  "annual_amounts_thousand": null,
+  "missing_independent_inputs": [
+    "규모 기준 및 다회급식 대상의 중복 제거 후 국공립 순증 인원",
+    "같은 기준의 사립 순증 인원",
+    "채용 및 시행 연도·호봉·수당 가정"
+  ],
+  "assumptions": [
+    "국공립 보수·기관부담·운영·신규 집기와 사립 연금 국가부담을 별도 검토",
+    "학교당2명은 전국 순증2명이 아님",
+    "이전156/618명 또는8/9명은 다른 대상 집단이라 재사용하지 않음",
+    "규모와 다회급식은 OR 조건이므로 대상학교를 단순 합산하면 중복될 수 있음",
+    "제안이유36학급은 신설 본문에서 확정 기준으로 제시하지 않아 법정 수치로 추출하지 않음",
+    "신규채용 자격·호봉 및 집기 필요를 선례와 동일하게 가정하는 경우만 단가 후보 재사용",
+    "사립 재정결함보조 증가분은 지역·세입세출 자료가 없어 금액화하지 않음",
+    "원문 공포 후1년 시행으로 확정 시작연도와 근무 개시일을 생성하지 않음"
+  ],
+  "result_note": "법안에 인원 및 확정 시행연도 없음. 조건부 단가 후보6행은 검색되지만 범위·기간 확인 전 최종 금액 생성 불가"
+}

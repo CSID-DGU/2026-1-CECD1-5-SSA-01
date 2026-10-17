@@ -1,0 +1,485 @@
+{
+  "bill_no": "2200209",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "replay_payload": {
+    "bill_no": "2200209",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "government_employment_levy_delta",
+    "support_derivation": "government_employment_levy_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "levy_payer_scope": "state_local_employer",
+    "government_levy_scenario_confirmed": true,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "reviewed_table_year_offset": 1,
+    "levy_table_year_discrepancy_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지.",
+    "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+    "levy_band_note": "2024고용률별 원기초액/월최저임금의 원비율 사용, 개정80%+기초구간과의비율차이 절반가산, 무고용100%유지.",
+    "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+    "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정.",
+    "selected_evidence_keys": [
+      "2200209:levy_old_bands:reviewed",
+      "2200209:government_unfilled_by_band:reviewed",
+      "2200209:levy_minimum_monthly_base:reviewed",
+      "2200209:levy_new_floor_share:reviewed",
+      "2200209:levy_band_difference_weight:reviewed",
+      "2200209:government_non_civil_share:reviewed",
+      "2200209:levy_payment_months:reviewed",
+      "2200209:levy_minimum_growth:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2200209:levy_old_bands:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_unfilled_by_band:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_monthly_base:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_new_floor_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_band_difference_weight:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_non_civil_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_payment_months:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_growth:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인"
+    },
+    "selected_method_keys": [
+      "2200209:government_employer_levy_delta"
+    ],
+    "method_selection_reasons": {
+      "2200209:government_employer_levy_delta": "수입증가와 별도인 정부납부지출의 구간차액"
+    },
+    "method_confirmations": {
+      "2200209:government_employer_levy_delta": {
+        "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+        "levy_band_note": "2024고용률별 원기초액/월최저임금의 원비율 사용, 개정80%+기초구간과의비율차이 절반가산, 무고용100%유지.",
+        "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+        "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정."
+      }
+    }
+  },
+  "replay_result": {
+    "route_key": "government_employment_levy_delta",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2200209:levy_old_bands:reviewed,2200209:government_unfilled_by_band:reviewed,2200209:levy_minimum_monthly_base:reviewed,2200209:levy_new_floor_share:reviewed,2200209:levy_band_difference_weight:reviewed,2200209:government_non_civil_share:reviewed,2200209:levy_payment_months:reviewed,2200209:levy_minimum_growth:reviewed",
+    "annual_amounts_thousand": [
+      38646183,
+      39882861,
+      41159112,
+      42476204,
+      43792966
+    ],
+    "source_refs": [
+      "2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적; 2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적;2030 3.1%는동일NABO2024.7전망2200664 PDF3각주1",
+      "2200209 비용추계서24B0612 PDF5~11쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          38646182781.407745,
+          39882860630.41279,
+          41159112170.586,
+          42476203760.044754,
+          43792966076.60613
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적; 2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적;2030 3.1%는동일NABO2024.7전망2200664 PDF3각주1",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2200209:government_employer_levy_delta"
+    ]
+  },
+  "replay_total_eok": 2059.57326,
+  "gold_display_total_eok": 2060,
+  "error_percent": 0.020715533980576774,
+  "annual_display_matches": 5,
+  "scope_decisions": [
+    {
+      "decision": "out_of_scope",
+      "amount": null,
+      "source_decision_label": "미대상",
+      "decision_evidence_key": "2200209:grant_use_outside_scope",
+      "reason": "고용장려금 사용용도 제한만으로 추가 국가·지자체 재정소요에 직접영향이 없어 미대상",
+      "source_ref": "2200209 비용추계서24B0612 PDF3·5~6쪽",
+      "source_quote": "국가 또는 지방자치단체의 추가적인 재정 소요에 직접적인 영향을 미치지 않을 것으로 예상됨",
+      "additional_source_quote": "",
+      "fiscal_effect": "no_direct_additional_expenditure",
+      "confirmed_conditions": {
+        "grant_use_only_scope_note": "장려금 금액·대상이 아니라 사용용도만 제한, 별도신규집행비 미명시"
+      },
+      "confirmed_facts": {
+        "grant_amount_changed": false,
+        "direct_new_expenditure": false
+      },
+      "reestimate_when": "새로운 지출증가·수입감소·구체집행사업이 있으면 그 부분을 별도추계",
+      "limitation": "해당 조문·효과별 범위판단. 법안전체를 미대상으로 덮지 않음"
+    },
+    {
+      "decision": "out_of_scope",
+      "amount": null,
+      "source_decision_label": "미대상",
+      "decision_evidence_key": "2200209:grant_recovery_outside_scope",
+      "reason": "고용장려금 환수 수입의 순증만인 효과는 비용추계 대상아닌 미대상, 자료부족3호미추계와 다름",
+      "source_ref": "2200209 비용추계서24B0612 PDF3·5~6쪽",
+      "source_quote": "재정수입의 순증가액은 비용추계의 대상에 해당하지 않음",
+      "additional_source_quote": "",
+      "fiscal_effect": "potential_revenue_increase",
+      "confirmed_conditions": {
+        "receipt_only_scope_note": "환수 또는 기금부담금 수입의 순증효과만 분리, 지출증가는 다른 항목으로 검토"
+      },
+      "confirmed_facts": {
+        "effect_is_only_revenue_increase": true
+      },
+      "reestimate_when": "새로운 지출증가·수입감소·구체집행사업이 있으면 그 부분을 별도추계",
+      "limitation": "해당 조문·효과별 범위판단. 법안전체를 미대상으로 덮지 않음"
+    },
+    {
+      "decision": "out_of_scope",
+      "amount": null,
+      "source_decision_label": "미대상",
+      "decision_evidence_key": "2200209:levy_receipts_outside_scope",
+      "reason": "기금의 부담금수입 순증은 미대상. 정부고용주 납부지출 증가분은 별도 추계",
+      "source_ref": "2200209 비용추계서24B0612 PDF3·5~6쪽",
+      "source_quote": "수입 증가분은 장애인 고용부담금 부담기초액이 최저임금액의80%이상으로 상향 조정되는 법정부담금의 증가분",
+      "additional_source_quote": "",
+      "fiscal_effect": "potential_revenue_increase",
+      "confirmed_conditions": {
+        "receipt_only_scope_note": "환수 또는 기금부담금 수입의 순증효과만 분리, 지출증가는 다른 항목으로 검토",
+        "government_payer_review_note": "정부고용주 납부지출은 구간별 별도계산, 수입과 상계하지 않음"
+      },
+      "confirmed_facts": {
+        "effect_is_only_revenue_increase": true,
+        "government_employer_expense_separately_reviewed": true
+      },
+      "reestimate_when": "새로운 지출증가·수입감소·구체집행사업이 있으면 그 부분을 별도추계",
+      "limitation": "해당 조문·효과별 범위판단. 법안전체를 미대상으로 덮지 않음"
+    }
+  ],
+  "statutory_previous_year_payload": {
+    "bill_no": "SIMILAR_GOVERNMENT_EMPLOYMENT_LEVY",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "government_employment_levy_delta",
+    "support_derivation": "government_employment_levy_delta",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "levy_payer_scope": "state_local_employer",
+    "government_levy_scenario_confirmed": true,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "reviewed_table_year_offset": 0,
+    "levy_table_year_discrepancy_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지.",
+    "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+    "levy_band_note": "2024고용률별 원기초액/월최저임금의 원비율 사용, 개정80%+기초구간과의비율차이 절반가산, 무고용100%유지.",
+    "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+    "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정.",
+    "selected_evidence_keys": [
+      "2200209:levy_old_bands:reviewed",
+      "2200209:government_unfilled_by_band:reviewed",
+      "2200209:levy_minimum_monthly_base:reviewed",
+      "2200209:levy_new_floor_share:reviewed",
+      "2200209:levy_band_difference_weight:reviewed",
+      "2200209:government_non_civil_share:reviewed",
+      "2200209:levy_payment_months:reviewed",
+      "2200209:levy_minimum_growth:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2200209:levy_old_bands:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_unfilled_by_band:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_monthly_base:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_new_floor_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_band_difference_weight:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:government_non_civil_share:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_payment_months:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인",
+      "2200209:levy_minimum_growth:reviewed": "정부고용주 5구간·2023고용분포·가산비중 및 역사적가격 가정 확인"
+    },
+    "selected_method_keys": [
+      "2200209:government_employer_levy_delta"
+    ],
+    "method_selection_reasons": {
+      "2200209:government_employer_levy_delta": "수입증가와 별도인 정부납부지출의 구간차액"
+    },
+    "method_confirmations": {
+      "2200209:government_employer_levy_delta": {
+        "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+        "levy_band_note": "2024고용률별 원기초액/월최저임금의 원비율 사용, 개정80%+기초구간과의비율차이 절반가산, 무고용100%유지.",
+        "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+        "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정."
+      }
+    }
+  },
+  "statutory_web_result": {
+    "status": "computed_review",
+    "routeKey": "government_employment_levy_delta",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      37447852,
+      38646183,
+      39882861,
+      41159112,
+      42476204
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "liability_year": 2025,
+        "price_reference_year": 2025,
+        "old_band_shares": {
+          "1": 0.6002698059920223,
+          "2": 0.6362859943515436,
+          "3": 0.7203237671904268,
+          "4": 0.8403777283888312,
+          "5": 1
+        },
+        "new_band_shares": {
+          "1": 0.8,
+          "2": 0.8180080941797607,
+          "3": 0.8600269805992022,
+          "4": 0.9200539611984044,
+          "5": 1
+        },
+        "civil_won_by_band": {
+          "1": 2722503272.2560005,
+          "2": 18225871172.064003,
+          "3": 14246974740.239994,
+          "4": 0,
+          "5": 0
+        },
+        "civil_won": 35195349184.56,
+        "non_civil_won": 2252502347.81184,
+        "total_won": 37447851532.37184,
+        "netted_with_receipts": false,
+        "table_year_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지."
+      },
+      {
+        "year": 2027,
+        "liability_year": 2026,
+        "price_reference_year": 2026,
+        "old_band_shares": {
+          "1": 0.6002698059920223,
+          "2": 0.6362859943515436,
+          "3": 0.7203237671904268,
+          "4": 0.8403777283888312,
+          "5": 1
+        },
+        "new_band_shares": {
+          "1": 0.8,
+          "2": 0.8180080941797607,
+          "3": 0.8600269805992022,
+          "4": 0.9200539611984044,
+          "5": 1
+        },
+        "civil_won_by_band": {
+          "1": 2809623376.968193,
+          "2": 18809099049.570053,
+          "3": 14702877931.927677,
+          "4": 0,
+          "5": 0
+        },
+        "civil_won": 36321600358.46593,
+        "non_civil_won": 2324582422.941819,
+        "total_won": 38646182781.407745,
+        "netted_with_receipts": false,
+        "table_year_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지."
+      },
+      {
+        "year": 2028,
+        "liability_year": 2027,
+        "price_reference_year": 2027,
+        "old_band_shares": {
+          "1": 0.6002698059920223,
+          "2": 0.6362859943515436,
+          "3": 0.7203237671904268,
+          "4": 0.8403777283888312,
+          "5": 1
+        },
+        "new_band_shares": {
+          "1": 0.8,
+          "2": 0.8180080941797607,
+          "3": 0.8600269805992022,
+          "4": 0.9200539611984044,
+          "5": 1
+        },
+        "civil_won_by_band": {
+          "1": 2899531325.0311756,
+          "2": 19410990219.156296,
+          "3": 15173370025.749361,
+          "4": 0,
+          "5": 0
+        },
+        "civil_won": 37483891569.93683,
+        "non_civil_won": 2398969060.475957,
+        "total_won": 39882860630.41279,
+        "netted_with_receipts": false,
+        "table_year_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지."
+      },
+      {
+        "year": 2029,
+        "liability_year": 2028,
+        "price_reference_year": 2028,
+        "old_band_shares": {
+          "1": 0.6002698059920223,
+          "2": 0.6362859943515436,
+          "3": 0.7203237671904268,
+          "4": 0.8403777283888312,
+          "5": 1
+        },
+        "new_band_shares": {
+          "1": 0.8,
+          "2": 0.8180080941797607,
+          "3": 0.8600269805992022,
+          "4": 0.9200539611984044,
+          "5": 1
+        },
+        "civil_won_by_band": {
+          "1": 2992316327.4321733,
+          "2": 20032141906.169296,
+          "3": 15658917866.573341,
+          "4": 0,
+          "5": 0
+        },
+        "civil_won": 38683376100.17481,
+        "non_civil_won": 2475736070.411188,
+        "total_won": 41159112170.586,
+        "netted_with_receipts": false,
+        "table_year_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지."
+      },
+      {
+        "year": 2030,
+        "liability_year": 2029,
+        "price_reference_year": 2029,
+        "old_band_shares": {
+          "1": 0.6002698059920223,
+          "2": 0.6362859943515436,
+          "3": 0.7203237671904268,
+          "4": 0.8403777283888312,
+          "5": 1
+        },
+        "new_band_shares": {
+          "1": 0.8,
+          "2": 0.8180080941797607,
+          "3": 0.8600269805992022,
+          "4": 0.9200539611984044,
+          "5": 1
+        },
+        "civil_won_by_band": {
+          "1": 3088070449.9100027,
+          "2": 20673170447.166718,
+          "3": 16160003238.303688,
+          "4": 0,
+          "5": 0
+        },
+        "civil_won": 39921244135.38041,
+        "non_civil_won": 2554959624.664346,
+        "total_won": 42476203760.044754,
+        "netted_with_receipts": false,
+        "table_year_note": "표의 월최저임금 수준은 본문의 전년도과세분 납부설명과 달리 현금연도 가격에 가까움. 정답표참고재현만 현금연도가격, 일반경로는1년시차 유지."
+      }
+    ],
+    "sourceRefs": [
+      "2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적; 2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적;2030 3.1%는동일NABO2024.7전망2200664 PDF3각주1",
+      "2200209 비용추계서24B0612 PDF5~11쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2200209:government_employer_levy_delta"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2200209:government_employer_levy_delta",
+        "source_bill_no": "2200209",
+        "available_at": "2024-08-29",
+        "reviewed_at": "2026-10-10",
+        "payer": "government",
+        "family_key": "government_employment_levy_delta",
+        "source_ref": "2200209 비용추계서24B0612 PDF5~11쪽",
+        "match_groups": [
+          [
+            "장애인"
+          ],
+          [
+            "부담기초액",
+            "고용부담금"
+          ],
+          [
+            "고용",
+            "사업주"
+          ]
+        ],
+        "allowed_routes": [
+          "government_employment_levy_delta"
+        ],
+        "support_derivation": "government_employment_levy_delta",
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2200209:levy_old_bands:reviewed",
+          "2200209:government_unfilled_by_band:reviewed",
+          "2200209:levy_minimum_monthly_base:reviewed",
+          "2200209:levy_new_floor_share:reviewed",
+          "2200209:levy_band_difference_weight:reviewed",
+          "2200209:government_non_civil_share:reviewed",
+          "2200209:levy_payment_months:reviewed",
+          "2200209:levy_minimum_growth:reviewed"
+        ],
+        "required_confirmations": [
+          "government_payer_note",
+          "levy_band_note",
+          "levy_overlap_note",
+          "levy_timing_note"
+        ],
+        "method_steps": [
+          "기금징수 수입과 정부고용주 납부지출을 각각 탐지, 상계금지",
+          "5고용률구간 원기초액 비율·개정하한과 가산 가중치 계산, 무고용100%유지",
+          "정부공무원 미고용인원×월기초액 차이×12개월",
+          "비공무원 추가비중6.4% 참고가산, 미래고용행태·감면반영여부 확인",
+          "고용연도와 다음해 납부연도 분리, 정답표가격년 차이는 자기회귀만 허용"
+        ],
+        "baseline_check": "국가납부자 지출을 단순수입증가로 미대상처리하지 않음. 민간·공공기관 전체부담금을 정부지출로 잡지 않음",
+        "limitation": "2023미고용·구간구성·비공무원비중 동결. 고용행태와 교육감·일시납감면 미반영 참고모형",
+        "lower_variable_keys": [
+          "levy_old_bands",
+          "government_unfilled_by_band",
+          "levy_minimum_monthly_base",
+          "levy_new_floor_share",
+          "levy_band_difference_weight",
+          "government_non_civil_share",
+          "levy_payment_months",
+          "levy_minimum_growth"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "수입증가와 별도인 정부납부지출의 구간차액",
+        "confirmed_assumptions": {
+          "government_payer_note": "국가·지자체는 징수자뿐 아니라 고용주로서 부담금납부자. 공무원 및 비공무원 지출증가만 계산.",
+          "levy_band_note": "2024고용률별 원기초액/월최저임금의 원비율 사용, 개정80%+기초구간과의비율차이 절반가산, 무고용100%유지.",
+          "levy_overlap_note": "기금수입·환수증가와 납부지출 상계금지. 민간·공공기관부담금을 정부고용주 지출에 합치지 않음.",
+          "levy_timing_note": "2025의무고용분은2026납부. 기본경로는가격년1년이전, 원자료 표의 연도차이재현은자기회귀에한정."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          37447851532.37184,
+          38646182781.407745,
+          39882860630.41279,
+          41159112170.586,
+          42476203760.044754
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적; 2200209 비용추계서24B0612 PDF4~11쪽;2024기초액·2023정부미고용인원·납부실적;2030 3.1%는동일NABO2024.7전망2200664 PDF3각주1",
+        "is_assumption": true
+      }
+    }
+  },
+  "limitation": "월단가 표의 연도차이는 자기회귀에서만 승인. 재사용은 납부1년시차 유지. 원금액을맞추려고예측값·계수를역산하지 않음."
+}

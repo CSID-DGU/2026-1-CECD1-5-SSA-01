@@ -1,0 +1,242 @@
+{
+  "bill_no": "2200601",
+  "run_date": "2026-10-03",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_cutoff": "2026-10-03",
+  "time_scope_note": "현재 개발 DB를 재사용; 발의 당시 자료만으로 시험한 것은 아님",
+  "ai_mode": "manual_no_api",
+  "ai_draft": {
+    "bill_no": "2200601",
+    "bill_name": "학교급식법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-06-18",
+    "articles": [
+      {
+        "article_ref": "제7조제1항/보수",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_average",
+        "route_reason": "영양교사 순증 인원 × 교원 1인당 연간 보수. 2명 이상은 학교별 총 배치 하한으로 전국 순증 인원과 구분",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      },
+      {
+        "article_ref": "제7조제1항/기관부담금",
+        "source_quote": "이경우재학중인학생수가대통령령으로정하는규모이상의학교에는2명이상의영양교사를둔다.",
+        "source_page": 3,
+        "route_key": "personnel_employer_contribution",
+        "route_reason": "증원 보수총액 × 교원에 적용되는 기관부담률. 교원과 일반직의 제도 차이를 확인하기 전 일반직 비율을 전용하지 않음",
+        "change_summary": "일정 규모 이상 학교의 영양교사 추가 배치 의무",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "unmapped_count": 0,
+  "items": [
+    {
+      "itemIndex": 0,
+      "name": "제7조제1항/보수",
+      "triggerRef": "제7조제1항/보수",
+      "routeKey": "personnel_average",
+      "formulaKey": "PERSONNEL_AVERAGE_V1",
+      "formula": "순증인원 × 1인당 보수",
+      "requiredVariables": [
+        "headcount",
+        "salary_per_person"
+      ],
+      "scopeNote": "영양교사 순증 인원 × 교원 1인당 연간 보수. 2명 이상은 학교별 총 배치 하한으로 전국 순증 인원과 구분",
+      "explicitInputs": {},
+      "decisionReason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2024-06-18",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_average",
+        "formulaKey": "PERSONNEL_AVERAGE_V1",
+        "formula": "순증인원 × 1인당 보수",
+        "missingVariables": [
+          "headcount",
+          "salary_per_person"
+        ],
+        "staffingScenarios": [
+          {
+            "methodKey": "confirmed_plan",
+            "label": "확인된 계획 정원 기준",
+            "formula": "계획 정원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 계획 정원이 별도 자료로 확인됨",
+            "candidateRole": "계획 정원 확인 시 우선 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_total",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "parent_population_share",
+            "label": "모기관 정원·관할인구 비례",
+            "formula": "반올림(모기관 정원 × 대상 관할인구 ÷ 모기관 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 인구당 업무·인력 밀도가 모기관과 유사함",
+            "candidateRole": "모기관과 업무가 유사하면 우선 검토",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "parent_staff_total",
+              "target_population",
+              "parent_population",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "population_per_staff",
+            "label": "유사기관 1인당 관할인구 기준",
+            "formula": "반올림(대상 관할인구 ÷ 공무원 1인당 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "비교기관의 인구당 업무·인력 밀도를 대상에도 적용할 수 있음",
+            "candidateRole": "광범위한 비교기관 평균을 쓴 민감도 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "target_population",
+              "population_per_staff",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "grade_by_grade",
+            "label": "직급별 계획·기존·전입 인원 차감",
+            "formula": "직급마다 계획 인원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "동일한 직급 기준의 세 인원표를 확인함",
+            "candidateRole": "직급별 원자료 확인 시 인건비 계산용",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_by_grade",
+              "existing_staff_by_grade",
+              "incoming_staff_by_grade"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          }
+        ]
+      }
+    },
+    {
+      "itemIndex": 1,
+      "name": "제7조제1항/기관부담금",
+      "triggerRef": "제7조제1항/기관부담금",
+      "routeKey": "personnel_employer_contribution",
+      "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+      "formula": "보수총액 × 기관부담률",
+      "requiredVariables": [
+        "annual_salary_amount",
+        "employer_contribution_rate"
+      ],
+      "scopeNote": "증원 보수총액 × 교원에 적용되는 기관부담률. 교원과 일반직의 제도 차이를 확인하기 전 일반직 비율을 전용하지 않음",
+      "explicitInputs": {},
+      "decisionReason": "규모 기준은 대통령령에 위임; 추가 배치는 의무이므로 시나리오 추계 후보이나 학교별 기존 배치 자료 필요",
+      "observedVariables": [],
+      "staffingContext": {
+        "court_upgrade": false,
+        "parent_court": ""
+      },
+      "staffingInputs": {},
+      "proposeDate": "2024-06-18",
+      "startYear": null,
+      "policyDomain": "",
+      "calculation": {
+        "status": "needs_input",
+        "routeKey": "personnel_employer_contribution",
+        "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+        "formula": "보수총액 × 기관부담률",
+        "missingVariables": [
+          "annual_salary_amount",
+          "employer_contribution_rate"
+        ]
+      }
+    }
+  ],
+  "deferred_items": [],
+  "candidate_search": {
+    "영양교사": [],
+    "교사": [],
+    "학교급식": [
+      "2201813:annual_cost_2023",
+      "2201813:annual_cost_2025_assumption",
+      "2201813:combined_public_share_2023"
+    ]
+  },
+  "rejected_evidence": [
+    {
+      "evidence_key": "2212534:legislative_salary_per_person:2026-2030",
+      "reason": "교원의 보수 또는 학교 증원 인원 근거가 아닌 국회 지원 인력 선례"
+    },
+    {
+      "evidence_key": "2214994:legislative_salary_per_person:2027-2031_projected",
+      "reason": "교원의 보수 또는 학교 증원 인원 근거가 아닌 국회 지원 인력 선례"
+    },
+    {
+      "evidence_key": "2214994:legislative_support_headcount:2026",
+      "reason": "교원의 보수 또는 학교 증원 인원 근거가 아닌 국회 지원 인력 선례"
+    },
+    {
+      "evidence_key": "2215199:policy_review_salary_per_person:2027-2031",
+      "reason": "교원의 보수 또는 학교 증원 인원 근거가 아닌 국회 지원 인력 선례"
+    },
+    {
+      "evidence_key": "2215199:policy_review_staff_model:2026",
+      "reason": "교원의 보수 또는 학교 증원 인원 근거가 아닌 국회 지원 인력 선례"
+    }
+  ],
+  "selected_evidence_keys": [],
+  "annual_amounts_thousand": null,
+  "assumptions": [
+    "대통령령의 대상 학교 규모 기준 미정; 학교당 2명을 전국 순증 인원으로 추출하지 않음",
+    "일반직·공안직 월 봉급표는 교원 연간 총보수 근거로 사용할 수 없음",
+    "유치원 조항 이동은 기존 의무의 재배치라 신규 비용으로 중복 분석하지 않음",
+    "공포 후1년 시행이라 확정 추계 시작연도는 원문에 없음",
+    "기관부담금은 보수와 별도 검토하며 기본경비·신규 자산을 자동 가산하지 않음"
+  ]
+}

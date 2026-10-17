@@ -1,0 +1,32 @@
+{
+  "bill_no": "2209533",
+  "evidence_mode": "development_review",
+  "evaluated_at": "2026-10-03",
+  "years": [2026, 2027, 2028, 2029, 2030],
+  "added_evidence_rows": 31,
+  "existing_band9_thousand": [6540300, 6466200, 6392750, 6320600, 6248450],
+  "existing_band9_gold_total_million": 31968,
+  "existing_band9_predicted_total_million": 31968.3,
+  "lower_bound_thousand": [155578508, 154756667, 153935266, 153111055, 152285946],
+  "upper_bound_thousand": [1971859408, 1973183442, 1974737399, 1975993370, 1976980294],
+  "gold_annual_million": [1498425, 1503288, 1508302, 1512959, 1517417],
+  "gold_total_million": 7540391,
+  "full_point_estimate": {
+    "status": "computed_review",
+    "basis": "정답 표 지원방식 참조 + 전국 재적학생 대학구성비 대리 가정",
+    "annual_amounts_thousand": [1539849176, 1544763108, 1549827752, 1554530036, 1559039712],
+    "total_thousand": 7748009784,
+    "components": 32,
+    "missing_calculation_inputs": []
+  },
+  "full_error_rate": 0.02753421990981635,
+  "remaining_confirmation": ["소득구간·집단별 실제 대학유형 분포", "9구간 지원 시나리오 확인"],
+  "complete_scenario_record": "docs/erce/cases/ERCE_REGRESSION_2209533_COMPLETE.json",
+  "limitations": [
+    "정답 확인 후 회귀검증이며 미열람 평가 아님",
+    "대학유형별 실제 인원 대신 전국 구성비 대리 가정을 사용한 전체 초안",
+    "신규2자녀 첫째는 정답도 미추계",
+    "9구간 신규 전액/기존200만원 지원방식 차이는 정책 가정 확인 필요",
+    "범위는 등록금 구성 극단 시나리오이며 합리적 대학 구성비가 확인된 추계 아님"
+  ]
+}

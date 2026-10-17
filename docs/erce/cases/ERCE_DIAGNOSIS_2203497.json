@@ -1,0 +1,51 @@
+{
+  "bill_no": "2203497",
+  "diagnostic_only": true,
+  "annual": [
+    {
+      "year": 2025,
+      "current_cost_eok": 13745.467274056675,
+      "expanded_cost_eok": 24755.123884067852,
+      "gold_current_cost_eok": 14130,
+      "gold_expanded_cost_eok": 24956
+    },
+    {
+      "year": 2026,
+      "current_cost_eok": 13905.522154382184,
+      "expanded_cost_eok": 25135.712591224034,
+      "gold_current_cost_eok": 14401,
+      "gold_expanded_cost_eok": 25302
+    },
+    {
+      "year": 2027,
+      "current_cost_eok": 14041.782534243457,
+      "expanded_cost_eok": 25477.229936582607,
+      "gold_current_cost_eok": 14667,
+      "gold_expanded_cost_eok": 25626
+    },
+    {
+      "year": 2028,
+      "current_cost_eok": 14173.105738262706,
+      "expanded_cost_eok": 25813.65813829581,
+      "gold_current_cost_eok": 14925,
+      "gold_expanded_cost_eok": 25923
+    },
+    {
+      "year": 2029,
+      "current_cost_eok": 14312.61975203973,
+      "expanded_cost_eok": 26169.02195811585,
+      "gold_current_cost_eok": 15198,
+      "gold_expanded_cost_eok": 26237
+    }
+  ],
+  "current_cost_total_eok": 70178.49745298475,
+  "expanded_cost_total_eok": 127350.74650828616,
+  "gold_current_total_eok": 73320,
+  "gold_expanded_total_eok": 128044,
+  "current_cost_difference_eok": -3141.502547015247,
+  "expanded_cost_difference_eok": -693.25349171384,
+  "population_scenario_effect_eok": 1503.37039,
+  "known_age_share_2018": 0.6178491522077694,
+  "known_age_share_2023": 0.6180842255853379,
+  "limitation": "기존/개정총액차이분해는가능하나정답연도별수급자·평균단가미공개로인원대단가오차의유일한분해불가.총액역산으로DB인원생성하지않음"
+}

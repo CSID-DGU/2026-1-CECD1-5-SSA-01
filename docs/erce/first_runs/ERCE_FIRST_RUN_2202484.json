@@ -1,0 +1,185 @@
+{
+  "bill_no": "2202484",
+  "run_date": "2026-10-09",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_draft": {
+    "bill_no": "2202484",
+    "bill_name": "양육비 이행확보 및 지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-08-01",
+    "articles": [
+      {
+        "article_ref": "제21조의6",
+        "source_quote": "대지급금액은제5조에따른양육비가이드라인",
+        "source_page": 8,
+        "change_summary": "성년전대지급제도,기존긴급지원삭제.채권자조건필터/연간지원/기존예산차감참고모형",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "성년전대지급제도,기존긴급지원삭제.채권자조건필터/연간지원/기존예산차감참고모형",
+        "route_key": "direct_annual_amount",
+        "route_reason": "변경범위별후보/기존사업차감과구현비분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제6조·제21조의6",
+        "source_quote": "위원회의심의ㆍ의결을거쳐대지급여부를",
+        "source_page": 8,
+        "change_summary": "기존양육비이행심의위원회에대지급결정추가,신설위원회아님.안건처리량/회의방식/추가빈도확인",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기존양육비이행심의위원회에대지급결정추가,신설위원회아님.안건처리량/회의방식/추가빈도확인",
+        "route_key": "committee_components",
+        "route_reason": "변경범위별후보/기존사업차감과구현비분리",
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의6제5항",
+        "source_quote": "국세체납처분의예에따라징수한다.",
+        "source_page": 8,
+        "change_summary": "회수수입/징수업무효과는별도,회수율을선지급지출과상계안함",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "회수수입/징수업무효과는별도,회수율을선지급지출과상계안함",
+        "route_key": "",
+        "route_reason": "변경범위별후보/기존사업차감과구현비분리",
+        "variables": []
+      },
+      {
+        "article_ref": "부칙제2조",
+        "source_quote": "긴급지원을받은사람은이법의개정규정에도불구하고종전의",
+        "source_page": 11,
+        "change_summary": "기지원자경과조치·전산연계/통지·수수료/집행비순증미확정.원문IT구축조항없어기존948백만원자동추가안함",
+        "cost_trigger": true,
+        "estimation_decision": "defer",
+        "decision_reason": "기지원자경과조치·전산연계/통지·수수료/집행비순증미확정.원문IT구축조항없어기존948백만원자동추가안함",
+        "route_key": "",
+        "route_reason": "변경범위별후보/기존사업차감과구현비분리",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "advance_payload": {
+    "bill_no": "2202484",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-09",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "child_support_advance_expense",
+    "child_support_model": "child_support_advance_expense",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "support_derivation_note": "정답후가구·채권필터/기존사업대체예산과전산사업수명주기분리",
+    "child_support_scope_note": "같은양육비대지급정부계획후보·경과조치의기존예산차감정책미확정",
+    "estimation_start_note": "공포후1년의2026~2030시행준비후보가정.실제공포일확정아님",
+    "selected_evidence_keys": [
+      "2201707:child_support_advance_expense:household_forecast:reviewed",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed",
+      "2201707:child_support_advance_expense:advance_monthly_amount:reviewed",
+      "2201707:child_support_advance_expense:advance_months:reviewed",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2201707:child_support_advance_expense:household_forecast:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:advance_monthly_amount:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:advance_months:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed": "동일양육비채권자·미지급대상연간지원참고.정답미열람,경과조치/기존예산범위검토필요"
+    },
+    "selected_method_keys": [
+      "2201707:child_support_advance_expense"
+    ],
+    "method_selection_reasons": {
+      "2201707:child_support_advance_expense": "동일선지급급여/전산사업과업범위"
+    },
+    "method_confirmations": {
+      "2201707:child_support_advance_expense": {
+        "child_support_scope_note": "기존긴급지원차감·회수수입분리확인",
+        "estimation_start_note": "2026시작참고가정"
+      }
+    },
+    "advance_take_up_scenario": "all_eligible",
+    "claim_count_rounding": "final_half_up"
+  },
+  "advance_result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2201707:child_support_advance_expense:household_forecast:reviewed,2201707:child_support_advance_expense:minor_single_parent_share:reviewed,2201707:child_support_advance_expense:divorced_unmarried_share:reviewed,2201707:child_support_advance_expense:claim_holder_share:reviewed,2201707:child_support_advance_expense:unpaid_claim_share:reviewed,2201707:child_support_advance_expense:children_per_claim:reviewed,2201707:child_support_advance_expense:advance_monthly_amount:reviewed,2201707:child_support_advance_expense:advance_months:reviewed,2201707:child_support_advance_expense:legacy_support_budget:reviewed",
+    "annual_amounts_thousand": [
+      63333400,
+      63880600,
+      64382200,
+      64835800,
+      65248600
+    ],
+    "source_refs": [
+      "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+      "2201707 비용추계서24C1988 PDF4~7쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          63333400000,
+          63880600000,
+          64382200000,
+          64835800000,
+          65248600000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "holdout",
+    "method_evidence_keys": [
+      "2201707:child_support_advance_expense"
+    ]
+  },
+  "covered_advance_thousand": 321680600,
+  "committee_payload": {
+    "bill_no": "2202484",
+    "route_key": "committee_components",
+    "cutoff_date": "2026-10-09",
+    "start_year": 2026,
+    "years": 5,
+    "evidence_mode": "holdout"
+  },
+  "committee_result": {
+    "status": "needs_input",
+    "missingVariables": [
+      "committee_components"
+    ]
+  },
+  "whole_bill_total": null,
+  "whole_error_percent": null,
+  "pending": [
+    "기존위원회추가업무운영비",
+    "회수수입",
+    "긴급지원경과조치",
+    "조사/통지/수수료/행정집행"
+  ],
+  "limitation": "양육비지급후보만계산.중앙정책위원회연4회·20만원규칙을신청처리위원회에강제하지않음.IT구축비를법안에없는데추가하지않음"
+}

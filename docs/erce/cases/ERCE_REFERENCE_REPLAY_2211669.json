@@ -1,0 +1,73 @@
+{
+  "bill_no": "2211669",
+  "post_answer_reference_replay": true,
+  "independent_evaluation": false,
+  "predictive_reinforcement_complete": false,
+  "payload": {
+    "bill_no": "2211669",
+    "route_key": "direct_annual_amount",
+    "cutoff_date": "2026-10-06",
+    "evidence_mode": "development_review",
+    "start_year": 2026,
+    "years": 5,
+    "support_derivation": "published_pension_cost_replay",
+    "replay_purpose": "post_answer_reference_only",
+    "replay_source_note": "정답PDF5쪽표4현행·개정총비용의차감재생.예측변수정확성성과아님",
+    "selected_evidence_keys": [
+      "2211669:published_cost_table:reference_replay"
+    ]
+  },
+  "result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2211669:published_cost_table:reference_replay",
+    "annual_amounts_thousand": [
+      4100000000,
+      5200000000,
+      6600000000,
+      6900000000,
+      7300000000
+    ],
+    "source_refs": [
+      "2211669 비용추계서25C3952 PDF5쪽표4 공표현행·개정총비용"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          4100000000000,
+          5200000000000,
+          6600000000000,
+          6900000000000,
+          7300000000000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2211669 비용추계서25C3952 PDF5쪽표4 공표현행·개정총비용",
+        "is_assumption": false
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": []
+  },
+  "total_thousand": 30100000000,
+  "published_total_thousand": 30100000000,
+  "grand_total_difference_percent": 0,
+  "published_increment_thousand": [
+    4100000000,
+    5200000000,
+    6500000000,
+    6900000000,
+    7300000000
+  ],
+  "annual_display_discrepancy_thousand": [
+    0,
+    0,
+    100000000,
+    0,
+    0
+  ],
+  "limitation": "정답공표비용값을입력받아차감한참조재생.원자료변수추계는여전히미완료.2028년표시총비용차감6.6조원과표시순증6.5조원은별도보존,0.1조원보정하지않음"
+}

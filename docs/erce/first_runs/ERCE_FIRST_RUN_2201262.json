@@ -1,0 +1,37 @@
+{
+  "bill_no": "2201262",
+  "run_date": "2026-10-04",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2201262",
+    "bill_name": "후계농어업인 및 청년농어업인 육성ㆍ지원에 관한 법률 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-07-01",
+    "articles": [{
+      "article_ref": "제13조의2제1항·제3항",
+      "change_summary": "전문기관·단체를 농어업인 정착지원센터로 지정·운영하고 업무 비용을 지원할 수 있도록 신설",
+      "source_quote": "③농림축산식품부장관, 해양수산부장관또는지방자치단체의장은정착지원센터에대하여업무수행에필요한비용을지원할수있다.",
+      "source_page": 4,
+      "cost_trigger": true,
+      "estimation_decision": "estimate_now",
+      "decision_reason": "지원 실시 시나리오의 비용 후보. 기존 기관 지정이므로 공무원 조직 신설·건물 신축으로 자동 판단하지 않는다. 상담·정보·교육·컨설팅·네트워크 업무를 포함한 센터 지원규모와 비용 근거가 필요하다",
+      "route_key": "quantity_unit",
+      "route_reason": "지원 실시를 가정한 센터 수×센터당 연간 지원단가 후보. 공공 부담 범위와 기존 유사 사업 중복은 별도 확인하며 제1항 지정과 제3항 비용 지원을 한 항목으로 묶어 중복 계산하지 않음",
+      "variables": []
+    }]
+  },
+  "candidate_search": {
+    "selected_evidence_keys": [],
+    "rejected": ["2214218의4-H 교육지원 연2600만원은 상담·정보·컨설팅·네트워크를 수행하는 정착센터의 연간 종합 운영단가와 업무 범위가 다름", "특정 단체29개를 지정 센터 개수로 전용 불가", "위원회 운영비·공무원보수·장학금·학자금 잔액은 정착지원센터 단가가 아님"],
+    "search_note": "DB의 service_function·scope에서 센터·상담·컨설팅 기능 근거를 검색했으나 적합한 결과 없음. 단가 전체가 없는 것으로 단정하지 않고 현재 검색 범위의 부재로 기록"
+  },
+  "required_variables": ["quantity", "unit_cost"],
+  "missing_required_variables": ["quantity", "unit_cost"],
+  "start_year": null,
+  "annual_amounts_thousand": null,
+  "execution": {"pipeline": "analyze_erce_pdf(ai_draft) -> calculate_erce_web_item", "quote_verified": [true], "cost_item_count": 1, "formula_key": "COMMON_QUANTITY_UNIT_V1", "status": "needs_input", "available_required_variables": 0, "required_variable_count": 2, "missing_variables": ["quantity", "unit_cost"]},
+  "scope_notes": ["공포후6개월이라 시행연도와 추계 시작연도를 만들지 않음", "운영비에 인건비·상담·교육비가 포함된다면 별도 중복 가산하지 않음", "현재 개발 DB를 이용한 과거 의안 실행이며 발의시점 제한 평가가 아님"]
+}

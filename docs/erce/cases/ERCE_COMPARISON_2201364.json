@@ -1,0 +1,26 @@
+{
+  "bill_no": "2201364",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C1610",
+  "gold_date": "2024-07-11",
+  "first_total_won": null,
+  "gold_total_won": 1000000000,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "quote_verified_count": 2,
+  "quote_total": 2,
+  "first_route": "quantity_unit",
+  "gold_calculation_model": "연간 정책영향평가 연구용역 패키지 예산 동결",
+  "gold_parameters": {
+    "annual_contracts": 1,
+    "annual_budget_won": 200000000,
+    "start_year": 2025,
+    "years": 5,
+    "growth_rate": 0
+  },
+  "gold_price_source": "2024과학기술정보통신부 기술영향평가 정책연구용역 예산2억원",
+  "routing_difference": "첫 판단은 평가정책별 건수×단가를 요구. 정답은 모든 정책별 건수 확정 없이 유사 연간정책연구 패키지 예산을 준용.",
+  "well_handled": "일반보육·복지실태조사 단가와 신설위원회 수당을 억지로 적용하지 않음. 위임규정만으로 근거없는 미추계판정 안함.",
+  "needed_reinforcement": "연간 정책영향평가 패키지 연구용역 하위산식 및 유사 과업 적용·연1회·가격동결 가정. 보고·공표 작업이 패키지에 포함되는지 설명.",
+  "reinforcement_performed": false
+}

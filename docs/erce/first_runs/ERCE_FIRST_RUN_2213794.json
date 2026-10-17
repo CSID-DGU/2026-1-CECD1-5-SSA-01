@@ -1,0 +1,251 @@
+{
+  "bill_no": "2213794",
+  "run_date": "2026-10-06",
+  "gold_opened": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2213794",
+    "bill_name": "기초연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-10-29",
+    "articles": [
+      {
+        "article_ref": "제8조제2항·부칙제2조",
+        "source_quote": "제2조(기초연금액의감액에관한특례) 제8조제2항의개정규정에도불\n구하고2027년1월1일부터2029년12월31일까지는제8조제2항의\n개정규정중“100분의10”을“100분의15”로본다.",
+        "source_page": 4,
+        "change_summary": "소득하위40%부부동시수급자만대상.2027~2029년15%,2030년부터10%감액;일반부부20%는유지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "소득하위40%부부동시수급자만대상.2027~2029년15%,2030년부터10%감액;일반부부20%는유지",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "같은저소득부부2인집단의실제개정후급여−현행급여.조건중첩을별도비용으로중복계상하지않음",
+        "variables": []
+      },
+      {
+        "article_ref": "제8조제4항",
+        "source_quote": "④제2항의적용을받는기초연금수급권자의소득인정액과제1항\n에따른감액비율에서제2항에따른감액비율을뺀값에해당기",
+        "source_page": 3,
+        "change_summary": "저소득특례경계에서도증액분에따른소득역전감액적용.회복비율5/10%를실제수령액증가로확정하지않음",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "저소득특례경계에서도증액분에따른소득역전감액적용.회복비율5/10%를실제수령액증가로확정하지않음",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "같은저소득부부2인집단의실제개정후급여−현행급여.조건중첩을별도비용으로중복계상하지않음",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true,
+    true
+  ],
+  "payload": {
+    "bill_no": "2213794",
+    "route_key": "transfer_recipient_delta",
+    "cutoff_date": "2026-10-06",
+    "start_year": 2027,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문4쪽2027-01-01시행 및매월급여"
+      }
+    }
+  },
+  "result": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient_delta",
+    "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "missingVariables": [
+      "recipient_count",
+      "benefit_per_recipient",
+      "existing_benefit_per_recipient"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2201899:band1:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 6269000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band2:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 6292000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band3:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 6277000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band4:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 6275000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band5:benefit_per_recipient:2024",
+        "variableKey": "benefit_per_recipient",
+        "value": 6302000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band1:existing_benefit_per_recipient:2024",
+        "variableKey": "existing_benefit_per_recipient",
+        "value": 5059000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band2:existing_benefit_per_recipient:2024",
+        "variableKey": "existing_benefit_per_recipient",
+        "value": 5062000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band3:existing_benefit_per_recipient:2024",
+        "variableKey": "existing_benefit_per_recipient",
+        "value": 5043000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band4:existing_benefit_per_recipient:2024",
+        "variableKey": "existing_benefit_per_recipient",
+        "value": 4410000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2201899:band5:existing_benefit_per_recipient:2024",
+        "variableKey": "existing_benefit_per_recipient",
+        "value": 4434000,
+        "unit": "KRW/person/year",
+        "sourceRef": "2201899 첨부24C1992 PDF p.6",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "24C1992가 인용한 교육부2024년1학기 실적·가정. 교육부 원자료 독립 검증 전. 현재 최신 단가·전체 다자녀 인원 아님",
+        "scope": "1~8소득구간 다자녀 첫째·둘째 등록금 전액지원",
+        "serviceFunction": "기존 장학금 차감 후 등록금 지원 순증",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "benefit_per_recipient": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "existing_benefit_per_recipient": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "required_variables_filled": 0,
+  "required_variable_count": 3,
+  "amount_thousand": null,
+  "known_reduction_schedule": [
+    0.15,
+    0.15,
+    0.15,
+    0.1,
+    0.1
+  ],
+  "existing_reduction": 0.2,
+  "known_gross_recovery": [
+    0.05,
+    0.05,
+    0.05,
+    0.1,
+    0.1
+  ],
+  "rejected_reuse": [
+    "전체부부2인인원은소득하위40%에해당하는부부인원이아님",
+    "국민연금·소득역전감액이있어기준액5/10%가실제증가액과같다고확정불가",
+    "기존기준액전망2026~2030을2031까지무조건늘리지않음",
+    "기존30만원저소득특례삭제와국민연금연계전체폐지를혼동하지않음"
+  ],
+  "limitations": [
+    "3개의상위필수값미산출;부족변수는법정미추계사유로확정하지않음",
+    "현재개발자료수동AI검토.발의시점독립평가아님"
+  ]
+}

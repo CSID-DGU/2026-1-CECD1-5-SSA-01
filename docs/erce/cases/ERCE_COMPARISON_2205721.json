@@ -1,0 +1,74 @@
+{
+  "bill_no": "2205721",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2205721.json",
+  "first": {
+    "total_eok": null,
+    "error_percent": null,
+    "component_candidates": 3,
+    "computed_components": 0,
+    "construction_formula_matches": false,
+    "construction_candidate_found": true,
+    "teacher_cost_status": "inputs_missing_not_formal_non_estimation",
+    "missing_inputs": [
+      {
+        "component": "teacher_salary",
+        "variables": [
+          "headcount",
+          "salary_per_person"
+        ]
+      },
+      {
+        "component": "teacher_employer_contribution",
+        "variables": [
+          "annual_salary_amount",
+          "employer_contribution_rate"
+        ]
+      },
+      {
+        "component": "additional_classroom_construction",
+        "variables": [
+          "required_area",
+          "construction_unit_cost"
+        ]
+      }
+    ]
+  },
+  "gold": {
+    "estimate_no": "24C5227",
+    "reply_date": "2024-12-02",
+    "headline_total_eok": 3143.52,
+    "display_total_eok": 3143.5,
+    "annual_display_eok": [
+      1302.8,
+      409.5,
+      441.8,
+      475.3,
+      514.1
+    ],
+    "estimated_cost_scope": "특수학교 학급·일반학교 특수학급 증개축비",
+    "formula": "학교급별 학생수 전망 및 배치비율로 필요학급 계산 − 기설치학급; 연간 순증학급수 × 학급당 신증설단가",
+    "teacher_cost_decision": "특수교육교원 증원·기존교원 활용 불분명으로 추계대상 제외",
+    "new_school_building_assumed": false,
+    "existing_spare_space_assumed": true,
+    "high_school_new_classes": 0,
+    "new_elementary_classes_by_year": [
+      2356,
+      726,
+      768,
+      810,
+      859
+    ],
+    "unit_cost_base_won": 50000000,
+    "unit_cost_base_year": 2022,
+    "unit_price_growth_basis": "소비자물가상승률 전망",
+    "start_year": 2026
+  },
+  "differences": [
+    "기존교원활용·증원 불확실성을 근거로 하는 인건비 미추계 판단을 연결하지 못함",
+    "학급당 신증설단가인데 최초는 면적당 건설비 산식으로 시험",
+    "대상학생 전망·배치비율·기존학급 전망에서 연차별 부족학급을 계산하는 하위모듈 미준비",
+    "고등학교는 기존학급이 필요학급을 초과해 정답에서 추가공사0, 원문기준변경만 보고 자동증설하면 안됨"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

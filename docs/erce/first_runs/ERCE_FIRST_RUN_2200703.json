@@ -1,0 +1,389 @@
+{
+  "bill_no": "2200703",
+  "run_date": "2026-10-10",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "evaluation_type": "pre_answer_development_first_run",
+  "data_vintage_mode": "current_development_db_not_proposal_date_isolated",
+  "ai_draft": {
+    "bill_no": "2200703",
+    "bill_name": "양육비 이행확보 및 지원에 관한 법률 일부개정법률안",
+    "propose_date": "2024-06-20",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제21조의6",
+        "source_page": 9,
+        "source_quote": "양육비선지급금액은제5조에따른양육비가이드라인을고려하여책정한다.",
+        "route_key": "direct_annual_amount",
+        "route_reason": "미지급 양육비 선지급. 법률지원 신청 조건과 가이드라인 고려, 구체적 대상·금액·기간은 대통령령에 위임. 월20만원 전원신청은 기존 정책 참고 후보이지 원문 확정값은 아니다.",
+        "change_summary": "미지급 양육비 선지급. 법률지원 신청 조건과 가이드라인 고려, 구체적 대상·금액·기간은 대통령령에 위임. 월20만원 전원신청은 기존 정책 참고 후보이지 원문 확정값은 아니다.",
+        "decision_reason": "미지급 양육비 선지급. 법률지원 신청 조건과 가이드라인 고려, 구체적 대상·금액·기간은 대통령령에 위임. 월20만원 전원신청은 기존 정책 참고 후보이지 원문 확정값은 아니다.",
+        "estimation_decision": "estimate_now",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제14조",
+        "source_page": 6,
+        "source_quote": "제14조및제14조의2부터제14조의4까지를각각삭제한다.",
+        "route_key": "direct_annual_amount",
+        "route_reason": "기존 한시적 긴급지원 삭제로 기존 예산 차감. 동일 사업 범위인지 확인한 참고 가정.",
+        "change_summary": "기존 한시적 긴급지원 삭제로 기존 예산 차감. 동일 사업 범위인지 확인한 참고 가정.",
+        "decision_reason": "기존 한시적 긴급지원 삭제로 기존 예산 차감. 동일 사업 범위인지 확인한 참고 가정.",
+        "estimation_decision": "defer",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제6조",
+        "source_page": 5,
+        "source_quote": "제21조의6에따른양육비선지급에관한사항",
+        "route_key": "committee_components",
+        "route_reason": "기존 위원회의 심의 사항 추가. 위원회 신설이 아니므로 기존 신설위원회 횟수·단가를 자동 적용하지 않는다. 순증 심의량 미확정.",
+        "change_summary": "기존 위원회의 심의 사항 추가. 위원회 신설이 아니므로 기존 신설위원회 횟수·단가를 자동 적용하지 않는다. 순증 심의량 미확정.",
+        "decision_reason": "기존 위원회의 심의 사항 추가. 위원회 신설이 아니므로 기존 신설위원회 횟수·단가를 자동 적용하지 않는다. 순증 심의량 미확정.",
+        "estimation_decision": "defer",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제21조의11",
+        "source_page": 11,
+        "source_quote": "그지급액의전부또는일부를양육비채무자에게통지하여회수하고",
+        "route_key": "direct_annual_amount",
+        "route_reason": "회수 수입은 선지급 지출과 별도. 회수액·시점 미확정, 누적 회수율로 상계하지 않는다.",
+        "change_summary": "회수 수입은 선지급 지출과 별도. 회수액·시점 미확정, 누적 회수율로 상계하지 않는다.",
+        "decision_reason": "회수 수입은 선지급 지출과 별도. 회수액·시점 미확정, 누적 회수율로 상계하지 않는다.",
+        "estimation_decision": "defer",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "제23조",
+        "source_page": 12,
+        "source_quote": "제출하는자료에대한사용료,수수료등을면제한다.",
+        "route_key": "direct_annual_amount",
+        "route_reason": "수수료 면제, 조회·통지·위탁 행정 증분은 대상건수·부담주체·시행방식 부족으로 별도 확인. 금액 0이나 공식 미추계 판정으로 처리하지 않는다.",
+        "change_summary": "수수료 면제, 조회·통지·위탁 행정 증분은 대상건수·부담주체·시행방식 부족으로 별도 확인. 금액 0이나 공식 미추계 판정으로 처리하지 않는다.",
+        "decision_reason": "수수료 면제, 조회·통지·위탁 행정 증분은 대상건수·부담주체·시행방식 부족으로 별도 확인. 금액 0이나 공식 미추계 판정으로 처리하지 않는다.",
+        "estimation_decision": "defer",
+        "cost_trigger": true,
+        "variables": []
+      },
+      {
+        "article_ref": "부칙 제1조",
+        "source_page": 13,
+        "source_quote": "이법은공포후1년이경과한날부터시행한다.",
+        "route_key": "",
+        "route_reason": "공포일 미확정. 기존 DB가 보유한 2026~2030년 준비 시나리오를 조건부 계산하고 실제 시행연도는 검토 필요.",
+        "change_summary": "공포일 미확정. 기존 DB가 보유한 2026~2030년 준비 시나리오를 조건부 계산하고 실제 시행연도는 검토 필요.",
+        "decision_reason": "공포일 미확정. 기존 DB가 보유한 2026~2030년 준비 시나리오를 조건부 계산하고 실제 시행연도는 검토 필요.",
+        "estimation_decision": "defer",
+        "cost_trigger": false,
+        "variables": []
+      }
+    ]
+  },
+  "quote_checks": [
+    {
+      "article": "제21조의6",
+      "verified": true,
+      "decision": "estimate_now"
+    },
+    {
+      "article": "제14조",
+      "verified": true,
+      "decision": "defer"
+    },
+    {
+      "article": "제6조",
+      "verified": true,
+      "decision": "defer"
+    },
+    {
+      "article": "제21조의11",
+      "verified": true,
+      "decision": "defer"
+    },
+    {
+      "article": "제23조",
+      "verified": true,
+      "decision": "defer"
+    },
+    {
+      "article": "부칙 제1조",
+      "verified": true,
+      "decision": "defer"
+    }
+  ],
+  "payload": {
+    "bill_no": "2200703",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-10",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "child_support_advance_expense",
+    "child_support_model": "child_support_advance_expense",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "fiscal_reporting": "separate_revenue_and_expenditure",
+    "support_derivation_note": "현 개발 DB의 다른 의안 선지급 모형 적용. 대상 정답 미열람. 발의 당시 시점 격리 아님.",
+    "child_support_scope_note": "미지급 양육비 선지급·기존 긴급지원 폐지, 소득 상한 신설 없음. 신청 필요 전원신청 후보. 월20만원은 정책 참고 후보.",
+    "estimation_start_note": "공포일 미확정. 준비기간 참고 후보 2026~2030을 조건부 사용, 확정 시행연도 아님.",
+    "selected_evidence_keys": [
+      "2201707:child_support_advance_expense:household_forecast:reviewed",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed",
+      "2201707:child_support_advance_expense:advance_monthly_amount:reviewed",
+      "2201707:child_support_advance_expense:advance_months:reviewed",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+    ],
+    "evidence_selection_reasons": {
+      "2201707:child_support_advance_expense:household_forecast:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:minor_single_parent_share:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:claim_holder_share:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:unpaid_claim_share:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:children_per_claim:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:advance_monthly_amount:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:advance_months:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오.",
+      "2201707:child_support_advance_expense:legacy_support_budget:reviewed": "동일 선지급 모집단·미지급·채권 구조 참고. 법률지원 신청율 별도 미확정, 전원신청 조건부 시나리오."
+    },
+    "selected_method_keys": [
+      "2201707:child_support_advance_expense"
+    ],
+    "method_selection_reasons": {
+      "2201707:child_support_advance_expense": "급여와 기존 긴급지원 대체 구조가 유사. 원문에 전산구축 신설 없음."
+    },
+    "method_confirmations": {
+      "2201707:child_support_advance_expense": {
+        "child_support_scope_note": "미지급 양육비 선지급·기존 긴급지원 폐지, 소득 상한 신설 없음. 신청 필요 전원신청 후보. 월20만원은 정책 참고 후보.",
+        "estimation_start_note": "공포일 미확정. 준비기간 참고 후보 2026~2030을 조건부 사용, 확정 시행연도 아님."
+      }
+    },
+    "advance_take_up_scenario": "all_eligible",
+    "claim_count_rounding": "final_half_up"
+  },
+  "calculation": {
+    "status": "computed_review",
+    "routeKey": "direct_annual_amount",
+    "formulaKey": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "annualAmountsThousand": [
+      63333400,
+      63880600,
+      64382200,
+      64835800,
+      65248600
+    ],
+    "derivationTrace": [
+      {
+        "year": 2026,
+        "households": 22516347,
+        "unrounded_stages": {
+          "minor_single_parent_share": 396287.7072,
+          "divorced_unmarried_share": 350318.3331648,
+          "claim_holder_share": 74617.8049641024,
+          "unpaid_claim_share": 19326.011485702522,
+          "children_per_claim": 27056.41607998353
+        },
+        "advance_cases": 27056,
+        "gross_expense": 64934400000,
+        "legacy_budget": 1601000000,
+        "additional_expense": 63333400000,
+        "amount_basis": "reviewed_reference",
+        "statutory_basis_difference_note": null,
+        "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+      },
+      {
+        "year": 2027,
+        "households": 22705521,
+        "unrounded_stages": {
+          "minor_single_parent_share": 399617.1696,
+          "divorced_unmarried_share": 353261.5779264,
+          "claim_holder_share": 75244.7160983232,
+          "unpaid_claim_share": 19488.38146946571,
+          "children_per_claim": 27283.734057251993
+        },
+        "advance_cases": 27284,
+        "gross_expense": 65481600000,
+        "legacy_budget": 1601000000,
+        "additional_expense": 63880600000,
+        "amount_basis": "reviewed_reference",
+        "statutory_basis_difference_note": null,
+        "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+      },
+      {
+        "year": 2028,
+        "households": 22879575,
+        "unrounded_stages": {
+          "minor_single_parent_share": 402680.52,
+          "divorced_unmarried_share": 355969.57968,
+          "claim_holder_share": 75821.52047184,
+          "unpaid_claim_share": 19637.77380220656,
+          "children_per_claim": 27492.883323089183
+        },
+        "advance_cases": 27493,
+        "gross_expense": 65983200000,
+        "legacy_budget": 1601000000,
+        "additional_expense": 64382200000,
+        "amount_basis": "reviewed_reference",
+        "statutory_basis_difference_note": null,
+        "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+      },
+      {
+        "year": 2029,
+        "households": 23037240,
+        "unrounded_stages": {
+          "minor_single_parent_share": 405455.424,
+          "divorced_unmarried_share": 358422.594816,
+          "claim_holder_share": 76344.012695808,
+          "unpaid_claim_share": 19773.09928821427,
+          "children_per_claim": 27682.33900349998
+        },
+        "advance_cases": 27682,
+        "gross_expense": 66436800000,
+        "legacy_budget": 1601000000,
+        "additional_expense": 64835800000,
+        "amount_basis": "reviewed_reference",
+        "statutory_basis_difference_note": null,
+        "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+      },
+      {
+        "year": 2030,
+        "households": 23180129,
+        "unrounded_stages": {
+          "minor_single_parent_share": 407970.2704,
+          "divorced_unmarried_share": 360645.7190336,
+          "claim_holder_share": 76817.5381541568,
+          "unpaid_claim_share": 19895.74238192661,
+          "children_per_claim": 27854.039334697256
+        },
+        "advance_cases": 27854,
+        "gross_expense": 66849600000,
+        "legacy_budget": 1601000000,
+        "additional_expense": 65248600000,
+        "amount_basis": "reviewed_reference",
+        "statutory_basis_difference_note": null,
+        "expression": "round(가구×미성년한부모×이혼미혼×채권×미지급×자녀수)×월액×개월−기존지원예산;회수수입상계없음"
+      }
+    ],
+    "sourceRefs": [
+      "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+      "2201707 비용추계서24C1988 PDF4~7쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2201707:child_support_advance_expense"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2201707:child_support_advance_expense",
+        "source_bill_no": "2201707",
+        "available_at": "2024-08-12",
+        "payer": "government",
+        "family_key": "child_support_advance_expense",
+        "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽",
+        "match_groups": [
+          [
+            "양육비"
+          ],
+          [
+            "선지급"
+          ],
+          [
+            "신청",
+            "지원"
+          ]
+        ],
+        "allowed_routes": [
+          "direct_annual_amount"
+        ],
+        "support_derivation": "child_support_advance_expense",
+        "required_confirmations": [
+          "child_support_scope_note",
+          "estimation_start_note"
+        ],
+        "variable_keys": [
+          "annual_amount"
+        ],
+        "variable_evidence_keys": [
+          "2201707:child_support_advance_expense:household_forecast:reviewed",
+          "2201707:child_support_advance_expense:minor_single_parent_share:reviewed",
+          "2201707:child_support_advance_expense:divorced_unmarried_share:reviewed",
+          "2201707:child_support_advance_expense:claim_holder_share:reviewed",
+          "2201707:child_support_advance_expense:unpaid_claim_share:reviewed",
+          "2201707:child_support_advance_expense:children_per_claim:reviewed",
+          "2201707:child_support_advance_expense:advance_monthly_amount:reviewed",
+          "2201707:child_support_advance_expense:advance_months:reviewed",
+          "2201707:child_support_advance_expense:legacy_support_budget:reviewed"
+        ],
+        "method_steps": [
+          "가구·채권·미지급·자녀수필터와기존예산차감",
+          "회수수입과지출상계금지",
+          "과업/시점가정확인후연간계산"
+        ],
+        "baseline_check": "기존긴급지원예산차감은중복사업지출제거.회수수입차감과다름",
+        "limitation": "정부계획/조사준용가정.단가·선정자·참여실적확정값아님.조사인력·통지/수수료범위별도검토",
+        "lower_variable_keys": [
+          "household_forecast",
+          "minor_single_parent_share",
+          "divorced_unmarried_share",
+          "claim_holder_share",
+          "unpaid_claim_share",
+          "children_per_claim",
+          "advance_monthly_amount",
+          "advance_months",
+          "legacy_support_budget"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "reviewed_at": "2026-10-03",
+        "applicability_reason": "급여와 기존 긴급지원 대체 구조가 유사. 원문에 전산구축 신설 없음.",
+        "confirmed_assumptions": {
+          "child_support_scope_note": "미지급 양육비 선지급·기존 긴급지원 폐지, 소득 상한 신설 없음. 신청 필요 전원신청 후보. 월20만원은 정책 참고 후보.",
+          "estimation_start_note": "공포일 미확정. 준비기간 참고 후보 2026~2030을 조건부 사용, 확정 시행연도 아님."
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          63333400000,
+          63880600000,
+          64382200000,
+          64835800000,
+          65248600000
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2201707 비용추계서24C1988 PDF4~7쪽;2021한부모실태조사·장래가구/여가부고도화계획인용",
+        "is_assumption": true
+      }
+    }
+  },
+  "candidate_total_eok": 3216.806,
+  "unresolved": [
+    "법률지원 신청 참여율",
+    "대통령령 지급액·기간·대상",
+    "공포일과 시행연도",
+    "위원회 심의 증분",
+    "회수 수입",
+    "행정 조회·통지·수수료 효과"
+  ],
+  "assumptions": [
+    "월20만원 정책 참고 후보",
+    "대상자 전원 신청 및 연12개월",
+    "기존 긴급지원 예산 동결 차감",
+    "2026~2030 준비 시나리오"
+  ],
+  "system_upgrade_included": false
+}

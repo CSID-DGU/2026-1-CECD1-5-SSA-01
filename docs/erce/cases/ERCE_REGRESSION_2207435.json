@@ -1,0 +1,218 @@
+{
+  "bill_no": "2207435",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2207435",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "route_key": "research_plan",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "research_service_function": "social_worker_treatment_basic_plan",
+    "research_cost_scope": "research_contract_only",
+    "implementation_model": "separate_national_treatment_plan",
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "2207435 원문PDF3쪽 제3조의2제1항"
+      }
+    },
+    "selected_evidence_keys": [
+      "2207435:treatment_plan:2022_unit_cost",
+      "2207435:treatment_plan:price_freeze"
+    ],
+    "evidence_selection_reasons": {
+      "2207435:treatment_plan:2022_unit_cost": "전국 사회복지사 처우개선 방향·보수·근로환경·재원규모·조달방안의 별도 연구용역. 기존 보수실태조사에는 근로여건도 포함되어 기존 조사비를 가산하지 않음",
+      "2207435:treatment_plan:price_freeze": "전국 사회복지사 처우개선 방향·보수·근로환경·재원규모·조달방안의 별도 연구용역. 기존 보수실태조사에는 근로여건도 포함되어 기존 조사비를 가산하지 않음"
+    },
+    "selected_method_keys": [
+      "2207435:separate_treatment_basic_plan"
+    ],
+    "method_selection_reasons": {
+      "2207435:separate_treatment_basic_plan": "동일 직종 처우개선의 별도 기본계획 정책연구 과업"
+    },
+    "method_confirmations": {
+      "2207435:separate_treatment_basic_plan": {
+        "separate_plan_scope_note": "전국 사회복지사 처우개선 방향·보수·근로환경·재원규모·조달방안의 별도 연구용역. 기존 보수실태조사에는 근로여건도 포함되어 기존 조사비를 가산하지 않음",
+        "price_freeze_note": "2022 처우개선 지원방안 연구7,950만원을 약8,000만원으로 준용, 추계기간 동결 확인. 최신 공식요금 아님",
+        "recurrence_phase_note": "원문3년주기, 기존2023조사 이후2026조사에 맞춰 첫기본계획 수립 가정. 2026·2029, 확정 공포일 아님"
+      }
+    }
+  },
+  "engine_result": {
+    "route_key": "research_plan",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "evidence_key": "2207435:treatment_plan:2022_unit_cost,2207435:treatment_plan:price_freeze",
+    "annual_amounts_thousand": [
+      80000,
+      0,
+      0,
+      80000,
+      0
+    ],
+    "source_refs": [
+      "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+      "2207435 원문PDF3쪽 제3조의2제1항",
+      "2207435 비용추계서25C0178 PDF3쪽"
+    ],
+    "resolved_variables": {
+      "plan_unit_cost": {
+        "key": "plan_unit_cost",
+        "value": 80000000,
+        "unit": "KRW/plan",
+        "source_class": "precedent_assumption",
+        "source_ref": "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "2207435 원문PDF3쪽 제3조의2제1항",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2207435:separate_treatment_basic_plan"
+    ]
+  },
+  "reusable_web_result": {
+    "status": "computed_review",
+    "routeKey": "research_plan",
+    "formulaKey": "PERIODIC_RESEARCH_PLAN_V1",
+    "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+    "annualAmountsThousand": [
+      80000,
+      0,
+      0,
+      80000,
+      0
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+      "2207435 원문PDF3쪽 제3조의2제1항",
+      "2207435 비용추계서25C0178 PDF3쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2207435:separate_treatment_basic_plan"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2207435:separate_treatment_basic_plan",
+        "source_bill_no": "2207435",
+        "available_at": "2025-02-13",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "social_worker_treatment_basic_plan",
+        "source_ref": "2207435 비용추계서25C0178 PDF3쪽",
+        "match_groups": [
+          [
+            "사회복지사",
+            "사회복지시설 종사자"
+          ],
+          [
+            "처우개선",
+            "처우 개선"
+          ],
+          [
+            "기본계획",
+            "계획"
+          ]
+        ],
+        "allowed_routes": [
+          "research_plan"
+        ],
+        "variable_keys": [
+          "plan_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2207435:treatment_plan:2022_unit_cost",
+          "2207435:treatment_plan:price_freeze"
+        ],
+        "required_confirmations": [
+          "separate_plan_scope_note",
+          "price_freeze_note",
+          "recurrence_phase_note"
+        ],
+        "method_steps": [
+          "기존 보수·근로여건 조사와 별도 기본계획 연구과업 구분",
+          "처우개선 방향·재원규모·조달방안 정책연구 범위 검토",
+          "2022 처우개선 지원방안 계약7,950만원을 약8,000만원으로 준용하고 가격동결 확인",
+          "새 원문 주기와 첫수립연도로 계산, 기존 조사비·기존위원회비 중복 가산 금지"
+        ],
+        "baseline_check": "2020·2023 보수실태조사는 이미 근로여건을 포함. 기존 실태조사비178백만원을 신규 계획 단가로 사용하지 않음",
+        "limitation": "외주용역은 추계 가정. 별도 정책연구 없이 기존 조사로 계획을 수립하거나 과업·규모가 다르면 단가 재검토. 3년주기는 새 원문에서 추출",
+        "support_derivation": "",
+        "lower_variable_keys": [
+          "plan_unit_cost",
+          "growth_rate"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "동일 직종 처우개선의 별도 기본계획 정책연구 과업",
+        "confirmed_assumptions": {
+          "separate_plan_scope_note": "전국 사회복지사 처우개선 방향·보수·근로환경·재원규모·조달방안의 별도 연구용역. 기존 보수실태조사에는 근로여건도 포함되어 기존 조사비를 가산하지 않음",
+          "price_freeze_note": "2022 처우개선 지원방안 연구7,950만원을 약8,000만원으로 준용, 추계기간 동결 확인. 최신 공식요금 아님",
+          "recurrence_phase_note": "원문3년주기, 기존2023조사 이후2026조사에 맞춰 첫기본계획 수립 가정. 2026·2029, 확정 공포일 아님"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "plan_unit_cost": {
+        "key": "plan_unit_cost",
+        "value": 80000000,
+        "unit": "KRW/plan",
+        "source_class": "precedent_assumption",
+        "source_ref": "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "2207435 원문PDF3쪽 제3조의2제1항",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2207435 비용추계서25C0178 PDF3쪽; 2022 사회복지시설 종사자 인건비 가이드라인 개선 등 처우개선 지원방안 연구",
+        "is_assumption": true
+      }
+    }
+  },
+  "annual_amounts_thousand": [
+    80000,
+    0,
+    0,
+    80000,
+    0
+  ],
+  "total_eok": 1.6,
+  "gold_total_eok": 1.6,
+  "error_percent": 0,
+  "annual_matches": 5,
+  "regression_scope_complete": true,
+  "limitation": "정답 확인 후 단가를 저장한 회귀시험. 원문 새 의안의 독립 정확도가 아님; 가상 유사 의안은 재사용 연결 점검"
+}

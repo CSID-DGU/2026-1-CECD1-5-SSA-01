@@ -1,0 +1,212 @@
+{
+  "bill_no": "2209797",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "payload": {
+    "bill_no": "2209797",
+    "route_key": "research_survey",
+    "start_year": 2026,
+    "years": 5,
+    "cutoff_date": "2026-10-12",
+    "payer": "government",
+    "explicit_inputs": {
+      "recurrence_interval_years": {
+        "value": 3,
+        "unit": "year",
+        "source_ref": "원문PDF3쪽 제29조의9제1항3년마다의무조사"
+      }
+    },
+    "evidence_mode": "development_review",
+    "research_service_function": "policy_media_monitoring_survey",
+    "research_cost_scope": "monitoring_research_package",
+    "selected_evidence_keys": [
+      "2209797:media_monitoring:2025_unit_cost",
+      "2209797:media_monitoring:price_freeze"
+    ],
+    "evidence_selection_reasons": {
+      "2209797:media_monitoring:2025_unit_cost": "정책·언론모니터링 조사분석 동일과업·규모·가격동결 선례 확인",
+      "2209797:media_monitoring:price_freeze": "정책·언론모니터링 조사분석 동일과업·규모·가격동결 선례 확인"
+    },
+    "selected_method_keys": [
+      "2209797:policy_media_monitoring_survey"
+    ],
+    "method_selection_reasons": {
+      "2209797:policy_media_monitoring_survey": "기존기관의 권고기준점검 조사연구 과업"
+    },
+    "method_confirmations": {
+      "2209797:policy_media_monitoring_survey": {
+        "monitoring_scope_note": "아동권리보장원 무증원 조사연구. 정책·언론 모니터링 조사분석에5천만원 준용. 대상변경은 선례가정",
+        "price_freeze_note": "2025사업예산을2026~2030 조사실시연도에 동결적용. 현재공식요율 아님",
+        "recurrence_phase_note": "원문3년주기·2026.1.1시행 유지. 첫조사2026가정으로2026/2029 실시"
+      }
+    }
+  },
+  "result": {
+    "route_key": "research_survey",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "evidence_key": "2209797:media_monitoring:2025_unit_cost,2209797:media_monitoring:price_freeze",
+    "annual_amounts_thousand": [
+      50000,
+      0,
+      0,
+      50000,
+      0
+    ],
+    "source_refs": [
+      "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+      "원문PDF3쪽 제29조의9제1항3년마다의무조사",
+      "2209797 비용추계서25C2159 PDF2~3쪽"
+    ],
+    "resolved_variables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF3쪽 제29조의9제1항3년마다의무조사",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2209797:policy_media_monitoring_survey"
+    ]
+  },
+  "web_interface_result": {
+    "status": "computed_review",
+    "routeKey": "research_survey",
+    "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "annualAmountsThousand": [
+      50000,
+      0,
+      0,
+      50000,
+      0
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+      "원문PDF3쪽 제29조의9제1항3년마다의무조사",
+      "2209797 비용추계서25C2159 PDF2~3쪽"
+    ],
+    "methodEvidenceKeys": [
+      "2209797:policy_media_monitoring_survey"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2209797:policy_media_monitoring_survey",
+        "source_bill_no": "2209797",
+        "available_at": "2025-04-28",
+        "reviewed_at": "2026-10-12",
+        "payer": "government",
+        "family_key": "policy_media_monitoring_survey",
+        "source_ref": "2209797 비용추계서25C2159 PDF2~3쪽",
+        "match_groups": [
+          [
+            "언론",
+            "보도",
+            "모니터링"
+          ],
+          [
+            "실태조사",
+            "조사"
+          ],
+          [
+            "권고기준",
+            "정책",
+            "준수"
+          ]
+        ],
+        "allowed_routes": [
+          "research_survey"
+        ],
+        "variable_keys": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2209797:media_monitoring:2025_unit_cost",
+          "2209797:media_monitoring:price_freeze"
+        ],
+        "required_confirmations": [
+          "monitoring_scope_note",
+          "price_freeze_note",
+          "recurrence_phase_note"
+        ],
+        "baseline_check": "기존기관 무증원 조사연구 선례. 현장조사·일반생활실태조사 예산과 구별",
+        "method_steps": [
+          "정책·언론 모니터링과 권고기준 준수 조사분석의 동일과업을 확인",
+          "2025장애인정책모니터링 연간예산5천만원을 조사1회 비용으로 준용",
+          "주기는 새 원문에서 가져오고 최초 실시연도는 별도 가정 확인",
+          "단가동결 가정 확인 후 기존 주기적조사 산식으로 계산"
+        ],
+        "limitation": "정답 확인 후 저장한 동종 모니터링 선례.5천만원은 법정고정단가 아님. 새의안 과업·규모·기관 증원 여부 재검토",
+        "support_derivation": "",
+        "lower_variable_keys": [
+          "survey_unit_cost",
+          "growth_rate"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "기존기관의 권고기준점검 조사연구 과업",
+        "confirmed_assumptions": {
+          "monitoring_scope_note": "아동권리보장원 무증원 조사연구. 정책·언론 모니터링 조사분석에5천만원 준용. 대상변경은 선례가정",
+          "price_freeze_note": "2025사업예산을2026~2030 조사실시연도에 동결적용. 현재공식요율 아님",
+          "recurrence_phase_note": "원문3년주기·2026.1.1시행 유지. 첫조사2026가정으로2026/2029 실시"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "target_explicit",
+        "source_ref": "원문PDF3쪽 제29조의9제1항3년마다의무조사",
+        "is_assumption": false
+      },
+      "growth_rate": {
+        "key": "growth_rate",
+        "value": 0,
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2209797 비용추계서25C2159 PDF2~3쪽;2025장애인정책모니터링 사업예산",
+        "is_assumption": true
+      }
+    }
+  },
+  "total_eok": 1,
+  "gold_total_eok": 1,
+  "error_percent": 0,
+  "annual_display_matches": 5,
+  "first_run_cycle_and_start_preserved": true,
+  "limitation": "정답 확인 후 단가보강 회귀. 새의안 독립성과 아님"
+}

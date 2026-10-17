@@ -1,0 +1,53 @@
+{
+  "bill_no": "2207221",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2207221.json",
+  "first": {
+    "route": "transfer_service_use",
+    "status": "needs_input",
+    "required_variables": 3,
+    "filled_variables": 0,
+    "missing_variables": [
+      "recipient_count",
+      "visits_per_recipient",
+      "cost_per_visit"
+    ],
+    "total_eok": null,
+    "error_percent": null,
+    "formula_matches": false
+  },
+  "gold": {
+    "estimate_no": "25A0014",
+    "reply_date": "2025-03-05",
+    "total_eok": 16120,
+    "annual_display_eok": [
+      2106,
+      2558,
+      3106,
+      3771,
+      4579
+    ],
+    "formula": "1인 중증장애인기업 수 전망 × 신청·지원율50% × 업무지원인 1인당 연간 서비스단가",
+    "enterprise_history": {
+      "2018": 4494,
+      "2020": 6051,
+      "2022": 9142
+    },
+    "enterprise_growth_assumption": 0.194,
+    "take_up_assumption": 0.5,
+    "annual_unit_cost_won": 21900000,
+    "unit_cost_label_year": 2025,
+    "unit_growth_assumption": 0.017,
+    "comparable_program": "고용노동부 근로지원인 지원사업",
+    "pilot_2024_budget_won": 200000000,
+    "continuation_assumption": true,
+    "start_year": 2026,
+    "unit_year_limitation": "본문은2025예산연단가21.9백만원이라 기재하나 표2026단가22.7백만원은1.7%두차례 적용 수준. 보강시 기준년·표가격환산 검토 필요"
+  },
+  "differences": [
+    "신청·지원율50%와 기업수19.4%성장 가정을 확보하지 못함",
+    "회당 이용횟수×회당지원액보다 연간 인력서비스패키지 단가가 정답 계산구조",
+    "기존ERCE DB에 동일 업무지원인·근로지원인 단가가 없었음"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

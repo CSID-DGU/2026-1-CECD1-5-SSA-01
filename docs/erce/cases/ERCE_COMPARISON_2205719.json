@@ -1,0 +1,90 @@
+{
+  "bill_no": "2205719",
+  "first_run": "../first_runs/ERCE_FIRST_RUN_2205719.json",
+  "first": {
+    "total_eok": null,
+    "error_percent": null,
+    "component_candidates": 3,
+    "computed_components": 0,
+    "organization_cost_trigger_found": true,
+    "staff_pay_formula_matches": false,
+    "appointed_pay_formula_matches": false,
+    "missing_variables": [
+      {
+        "component": "appointed_ombudsman_compensation",
+        "variables": [
+          "quantity",
+          "unit_cost"
+        ]
+      },
+      {
+        "component": "secretariat_personnel",
+        "variables": [
+          "headcount_by_grade",
+          "salary_by_grade"
+        ]
+      },
+      {
+        "component": "secretariat_operation",
+        "variables": [
+          "annual_operating_amount"
+        ]
+      }
+    ]
+  },
+  "gold": {
+    "estimate_no": "24C5380",
+    "reply_date": "2024-12-12",
+    "total_eok": 175.17,
+    "annual_million_display": [
+      3389,
+      3399,
+      3486,
+      3575,
+      3668
+    ],
+    "components": [
+      "위촉자회의참석수당",
+      "전문위원인건비",
+      "사무기구운영비",
+      "첫해자산취득비"
+    ],
+    "appointed_head_count": 1,
+    "appointed_head_paid_salary": false,
+    "meeting_price_won": 400000,
+    "meetings_per_year": 48,
+    "professional_members": 16,
+    "professional_annual_total_2024_won": 964000000,
+    "operation_annual_2024_won": 2168000000,
+    "first_year_asset_staff_count": 17,
+    "asset_price_per_person_reference_won": 4200000,
+    "asset_source_study_year": 2020,
+    "administrative_support_personnel_increment": 0,
+    "comparable": "중소벤처기업부 중소기업 옴부즈만2024사업설명자료",
+    "growth_vintage": "2024-10",
+    "nominal_wage_growth": {
+      "2025": 0.036,
+      "2026": 0.039,
+      "2027": 0.038,
+      "2028": 0.038,
+      "2029": 0.038,
+      "2030": 0.038
+    },
+    "cpi": {
+      "2025": 0.021,
+      "2026": 0.02,
+      "2027": 0.02,
+      "2028": 0.02,
+      "2029": 0.02,
+      "2030": 0.02
+    }
+  },
+  "differences": [
+    "직원들이 공무원직급별 급여가 아닌 전문위원16명 연간인건비패키지로 추계됨",
+    "옴부즈만은 비상근무보수, 연보수가 아니라 회의수당1명×48회×40만원",
+    "신규총17명 초기자산을 첫해1회 추가",
+    "행정지원은기존부서가담당해 추가행정공무원증원없음"
+  ],
+  "reinforced": false,
+  "independent_achievement": false
+}

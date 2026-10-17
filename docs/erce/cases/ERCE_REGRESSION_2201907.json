@@ -1,0 +1,148 @@
+{
+  "bill_no": "2201907",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "target_only_payload": {
+    "bill_no": "2201907",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-10",
+    "route_key": "direct_annual_amount",
+    "support_derivation": "foreign_child_parent_fee",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "parent_fee_base_year": 2024,
+    "foreign_population_base_year": 2023,
+    "foreign_parent_fee_basis": "reviewed_target",
+    "foreign_scope_confirmed": true,
+    "foreign_eligibility_note": "2024정답처럼 합법 장기체류 외국국적 아동. 기존지원 재외국민·기관보육료·누리·교사인건비 제외. 지방 기존 자체지원 미차감 참고 가정.",
+    "foreign_use_proxy_note": "외국아동 이용률 부재로2023.12 전체 반연령 이용률 준용. 이용증가 미반영. 자기정답 전망수는 검증 전용, 새의안에 못 씀.",
+    "parent_fee_price_note": "2024부모보육료54·47.5·39.4만원, 2024.3NABO CPI를2025부터 적용, 12개월·국비69.4%동결.",
+    "foreign_estimation_start_note": "공포후6개월·심사 및 준비기간을 고려한 정답2026~2030 참고 시나리오.",
+    "selected_evidence_keys": [
+      "2201907:age_to_nursery_class:reviewed",
+      "2201907:nursery_use_rates:reviewed",
+      "2201907:parent_fee_monthly_base:reviewed",
+      "2201907:foreign_child_payment_months:reviewed",
+      "2201907:parent_fee_national_share:reviewed",
+      "2200987:nabo_cpi:202403:foreign_fee",
+      "2201907:foreign_nursery_counts:target_only"
+    ],
+    "evidence_selection_reasons": {
+      "2201907:age_to_nursery_class:reviewed": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2201907:nursery_use_rates:reviewed": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2201907:parent_fee_monthly_base:reviewed": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2201907:foreign_child_payment_months:reviewed": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2201907:parent_fee_national_share:reviewed": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2200987:nabo_cpi:202403:foreign_fee": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토",
+      "2201907:foreign_nursery_counts:target_only": "같은 반연령·기준년도·공공 지원과업의 참고 근거 검토"
+    },
+    "selected_method_keys": [
+      "2201907:foreign_parent_fee:reviewed_target"
+    ],
+    "method_selection_reasons": {
+      "2201907:foreign_parent_fee:reviewed_target": "외국아동 부모보육료 순증, 양육수당 및 기존지원 중복 제외"
+    },
+    "method_confirmations": {
+      "2201907:foreign_parent_fee:reviewed_target": {
+        "foreign_eligibility_note": "2024정답처럼 합법 장기체류 외국국적 아동. 기존지원 재외국민·기관보육료·누리·교사인건비 제외. 지방 기존 자체지원 미차감 참고 가정.",
+        "foreign_use_proxy_note": "외국아동 이용률 부재로2023.12 전체 반연령 이용률 준용. 이용증가 미반영. 자기정답 전망수는 검증 전용, 새의안에 못 씀.",
+        "parent_fee_price_note": "2024부모보육료54·47.5·39.4만원, 2024.3NABO CPI를2025부터 적용, 12개월·국비69.4%동결.",
+        "foreign_estimation_start_note": "공포후6개월·심사 및 준비기간을 고려한 정답2026~2030 참고 시나리오."
+      }
+    }
+  },
+  "result": {
+    "route_key": "direct_annual_amount",
+    "subtype": "",
+    "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+    "formula": "검증된 연간 금액",
+    "evidence_key": "2201907:age_to_nursery_class:reviewed,2201907:nursery_use_rates:reviewed,2201907:parent_fee_monthly_base:reviewed,2201907:foreign_child_payment_months:reviewed,2201907:parent_fee_national_share:reviewed,2200987:nabo_cpi:202403:foreign_fee,2201907:foreign_nursery_counts:target_only",
+    "annual_amounts_thousand": [
+      74536864,
+      73193312,
+      74141407,
+      77933943,
+      82973154
+    ],
+    "source_refs": [
+      "2201907 비용추계서24C2118 PDF3~6쪽; 교육부2023.12 이용률·2024부모보육료; 2200987 비용추계서24C1050 PDF7쪽 각주4, NABO2024.3 전망CPI; 2201907 비용추계서24C2118 PDF5쪽 표2, 대상 의안 전망치",
+      "2201907 비용추계서24C2118 PDF3~6쪽"
+    ],
+    "resolved_variables": {
+      "annual_amount": {
+        "key": "annual_amount",
+        "value": [
+          74536864111.92,
+          73193312089.05408,
+          74141406589.22285,
+          77933942833.53519,
+          82973154206.49242
+        ],
+        "unit": "KRW/year",
+        "source_class": "calculated_estimate",
+        "source_ref": "2201907 비용추계서24C2118 PDF3~6쪽; 교육부2023.12 이용률·2024부모보육료; 2200987 비용추계서24C1050 PDF7쪽 각주4, NABO2024.3 전망CPI; 2201907 비용추계서24C2118 PDF5쪽 표2, 대상 의안 전망치",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2201907:foreign_parent_fee:reviewed_target"
+    ]
+  },
+  "annual_eok": [
+    745.36864,
+    731.93312,
+    741.41407,
+    779.33943,
+    829.73154
+  ],
+  "total_eok": 3827.7868,
+  "gold_detail_total_eok": 3827.84,
+  "detail_error_percent": 0.0013898177562355826,
+  "annual_summary_matches": 5,
+  "decisions": [
+    {
+      "decision": "not_estimated",
+      "amount": null,
+      "decision_evidence_key": "2201907:foreign_home_allowance_not_estimated",
+      "reason": "외국국적 아동의 시설·아이돌봄 등 미이용률 예측근거가 부족해 가정양육수당 증가액을 미추계",
+      "source_ref": "2201907 비용추계서24C2118 PDF3쪽",
+      "source_quote": "해당 아동이 유치원·어린이집, 아이돌봄서비스를 이용하지 않을 확률 등에 대한 예측이 어려워 추계에서 제외함",
+      "additional_source_quote": "",
+      "fiscal_effect": "potential_expenditure_increase",
+      "confirmed_conditions": {
+        "foreign_home_scope_note": "2024정답 양육수당 대상 연령·기관미이용요건 검토, 부모급여와 구분",
+        "foreign_nonuse_review_note": "당시 외국아동 유치원·어린이집·아이돌봄 미이용 확률 예측근거 부족"
+      },
+      "confirmed_facts": {
+        "institution_nonuse_basis_available": false
+      },
+      "reestimate_when": "외국아동의 기관·아이돌봄 미이용률과 해당 연령별 대상수·단가 근거 확보 시 재추계",
+      "limitation": "2024추계서 예측제약. 확정 통계·실적이 있으면 검토해야 하며 검색 실패만으로 적용 금지"
+    },
+    {
+      "decision": "not_estimated",
+      "amount": null,
+      "decision_evidence_key": "2201907:childcare_principle_not_estimated",
+      "reason": "국적 차별금지 보육이념만으로는 구체 재정수요를 추정하기 어려워 이 조문은 미추계",
+      "source_ref": "2201907 비용추계서24C2118 PDF3쪽",
+      "source_quote": "이는 선언적·권고적 규정으로 관련 재정수요 추정에 한계가 있음",
+      "additional_source_quote": "",
+      "fiscal_effect": "potential_expenditure_increase",
+      "confirmed_conditions": {
+        "principle_only_scope_note": "제3조 차별금지 이념만 분리, 제34조의8 구체지원은 별도 계산"
+      },
+      "confirmed_facts": {
+        "concrete_payment_obligation": false
+      },
+      "reestimate_when": "별도의 구체 지원·집행 의무나 사업설계가 있으면 해당 조항을 별도 추계",
+      "limitation": "보육이념 조항에 한정. 보육료 지원조문까지 미추계로 덮지 않음"
+    }
+  ],
+  "reusable_web_status": "needs_input",
+  "reusable_missing": [
+    "foreign_base_counts_by_age"
+  ],
+  "limitation": "금액은 대상 정답 전망량을 쓴 자기회귀. 재사용 구조는 각세 외국인 기준실적 부재로 입력 필요. 공개2023연보는0~4세 묶음이라 임의 분해하지 않음."
+}

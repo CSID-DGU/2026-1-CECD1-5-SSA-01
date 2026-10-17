@@ -1,0 +1,107 @@
+{
+  "bill_no": "2204018",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "reserved_holdout": false,
+  "prior_own_db_evidence_count": 0,
+  "ai_draft": {
+    "bill_no": "2204018",
+    "bill_name": "장애인연금법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2024-09-13",
+    "articles": [
+      {
+        "article_ref": "제6조제3항 삭제",
+        "source_quote": "제6조제3항을삭제한다.",
+        "source_page": 3,
+        "change_summary": "부부가 모두 장애인연금 기초급여 수급시 각각20%감액하는 규정 삭제. 소득역전방지 감액은 유지",
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "기존 부부감액 해당 인원×개정후기초급여와기존기초급여 차액×12개월. 인원은 부부쌍이 아닌 수급자 명 단위.2025시행",
+        "route_key": "transfer_recipient_delta",
+        "route_reason": "기존 수급자 급여인상 차액; 부칙 참조삭제는 같은 효과로 중복추계하지 않음",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "payload": {
+    "bill_no": "2204018",
+    "route_key": "transfer_recipient_delta",
+    "cutoff_date": "2024-09-13",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문3쪽2025-01-01시행; 장애인연금 매월지급"
+      }
+    }
+  },
+  "result": {
+    "status": "needs_input",
+    "routeKey": "transfer_recipient_delta",
+    "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+    "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+    "missingVariables": [
+      "recipient_count",
+      "benefit_per_recipient",
+      "existing_benefit_per_recipient"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2200147:under8_population:2025-2029",
+        "variableKey": "recipient_count",
+        "value": [
+          2177000,
+          2046000,
+          1953000,
+          1898000,
+          1872000
+        ],
+        "unit": "person/year",
+        "sourceRef": "의안 2200147 비용추계서(24C0335), PDF p.3~4, 표 2·3",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-06-13",
+        "limitation": "인구이지 실제 수급자 수가 아님. 연령·지역·기간·통계 버전 확인 후 지급률 별도 적용. 최신 통계라고 간주하지 않음",
+        "scope": "전국 아동수당, 2025~2029년",
+        "serviceFunction": "연령 확대 및 월 급여 인상",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "recipient_count": {
+        "status": "candidates_need_review",
+        "candidateCount": 1,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "benefit_per_recipient": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "existing_benefit_per_recipient": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "required_variables_filled": 0,
+  "required_variable_count": 3,
+  "logical_missing_inputs": [
+    "부부감액 대상 수급자 인원",
+    "연도별 기초급여액 및 실제 회복액 산정기준"
+  ],
+  "pre_answer_decision": "추계대상; DB부족은법정미추계사유가아님",
+  "amount_thousand": null
+}

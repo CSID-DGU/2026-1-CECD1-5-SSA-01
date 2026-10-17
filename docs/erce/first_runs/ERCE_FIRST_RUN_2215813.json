@@ -1,0 +1,46 @@
+{
+  "bill_no": "2215813",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0, "prior_case": false},
+  "ai_draft": {
+    "bill_no": "2215813",
+    "bill_name": "고등교육법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-12-31",
+    "articles": [{
+      "article_ref": "제11조제2항/대학원 입학금 폐지",
+      "change_summary": "입학금 징수금지의 대학원대학·대학원 과정 예외를 삭제하고2026학년도부터 적용",
+      "source_quote": "제11조제2항중“학교(제30조에따른대학원대학은제외한다)의”를“학교의”로, “사람(제29조에따라대학원에두는학위과정, 연구과정및제29조의3에따라통합된학위과정에입학또는편입학하는사람은제외한다)으로부터”를“사람으로부터”로한다.",
+      "source_page": 3,
+      "cost_trigger": true,
+      "estimation_decision": "estimate_now",
+      "decision_reason": "국공립 대학원 등의 입학금 수입 감소 가능성. 사립의 수입 감소를 국가재정 손실로 합산하지 않으며 대학회계·국고 귀속과 현행 면제·입학금 징수 실적을 확인해야 함. 정부 보전금은 원문에 없어 별도 지출로 생성하지 않음",
+      "route_key": "non_tax_fee_change",
+      "route_reason": "재정 범위에 포함되는 국공립 대학원 신입·편입 인원 × 실제 입학금 감소액. 재학생 전체가 아니라 해당 입학금 납부 건수이며, 기존 미징수 기관은 제외. 국립대학회계 등 재정 귀속 확인이 필요한 후보 경로",
+      "variables": [{
+        "key": "start_year", "value_json": "2026", "unit": "year",
+        "source_quote": "제11조제2항의개정규정은2026학년도이후학교에입학또는편입학하는사람부터적용한다.",
+        "source_page": 3
+      }]
+    }]
+  },
+  "candidate_search": {
+    "selected_evidence_keys": [],
+    "rejected": ["다자녀 장학금의 대학 재적학생 분포는 대학원 신입·편입 입학금 납부 인원이 아님", "등록금 평균은 일회성 입학금 단가가 아님", "부동산등기 수수료와 징수 실적은 대학원 입학금에 적용 불가"]
+  },
+  "required_variables": ["transaction_count", "fee_change_per_case"],
+  "missing_required_variables": ["transaction_count", "fee_change_per_case"],
+  "start_year": 2026,
+  "annual_amounts_thousand": null,
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> ERCE formula requirements",
+    "quote_verified": [true], "cost_item_count": 1, "unmapped_count": 0,
+    "formula_key": "NON_TAX_FEE_CHANGE_V1", "status": "needs_input",
+    "start_year": 2026, "available_required_variables": 0,
+    "missing_variables": ["transaction_count", "fee_change_per_case"]
+  },
+  "time_scope_note": "현재 개발 DB로 과거 법안을 테스트. 해당 정답 PDF는 아직 열람하지 않음; 발의시점 제한 독립평가 아님"
+}

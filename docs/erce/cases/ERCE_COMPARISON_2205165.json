@@ -1,0 +1,45 @@
+{
+  "bill_no": "2205165",
+  "gold_opened_after_first_run": true,
+  "gold_document": "24C4734",
+  "gold_date": "2024-11-19",
+  "first_total_won": 328000000,
+  "gold_total_won": 328000000,
+  "total_error_percent": 0,
+  "official_scope_complete": false,
+  "formula_match": true,
+  "unit_prices_match": true,
+  "recurrence_match": true,
+  "first_horizon": [
+    2026,
+    2030
+  ],
+  "gold_horizon": [
+    2025,
+    2029
+  ],
+  "first_annual_won": {
+    "2026": 50000000,
+    "2027": 0,
+    "2028": 228000000,
+    "2029": -178000000,
+    "2030": 228000000
+  },
+  "gold_annual_won": {
+    "2025": 228000000,
+    "2026": -178000000,
+    "2027": 228000000,
+    "2028": 0,
+    "2029": 50000000
+  },
+  "overlap_annual_matches": 0,
+  "overlap_year_count": 4,
+  "first_baseline_phase": "2026첫조사·3년 주기(2026·2029)",
+  "gold_baseline_phase": "2023실시 이력→2026·2029, 2025~2029 기준에서 첫해가 아닌 다음해 차감",
+  "first_amended_phase": "2026첫조사·2년 주기(2026·2028·2030)",
+  "gold_amended_phase": "2025첫조사·2년 주기(2025·2027·2029)",
+  "well_handled": "폭력조사50백만원 재사용, 보수조사178백만원과 분리, 현행총지출 차감, 3→2년 변경 감지",
+  "needed_reinforcement": "공포후3개월 및 시행후1년 첫조사 가정의2025시작 선택, 기존2023조사 기준일과 개정 첫실시연도를 분리하여 연도별 순증·감소 계산",
+  "source_note": "이번 정답은 보수조사178백만원을 명시하여 기존 DB값과 일치. 이전2203955의278백만원 참고 인용과 차이는 유지하되 이번 계산에278 적용하지 않음.",
+  "reinforcement_performed": false
+}

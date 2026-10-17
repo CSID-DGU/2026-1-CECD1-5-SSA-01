@@ -1,0 +1,258 @@
+{
+  "bill_no": "2212022",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "results": [
+    {
+      "age": 0,
+      "result": {
+        "route_key": "direct_annual_amount",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "kosis_202312:age0_population:total:2026-2030:common,kosis_202312:age0:retro_population:2025:voucher,2212022:voucher:age0:voucher_base_monthly:reviewed,2212022:voucher:age0:voucher_growth_rate:reviewed,2212022:voucher:age0:execution_rate:reviewed,2212022:voucher:age0:retro_monthly_increment:reviewed",
+        "annual_amounts_thousand": [
+          87401081,
+          69310475,
+          75551720,
+          81913294,
+          88285768
+        ],
+        "source_refs": [
+          "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2212022 비용추계서25C4271 PDF3~4쪽;2025보육바우처 및2022~2025평균상승률; KOSIS 전국2023.12중위2025연령별 전망인구",
+          "2212022 비용추계서25C4271 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              87401081025.675,
+              69310474905.31384,
+              75551720217.16414,
+              81913293563.36185,
+              88285768445.25098
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2212022 비용추계서25C4271 PDF3~4쪽;2025보육바우처 및2022~2025평균상승률; KOSIS 전국2023.12중위2025연령별 전망인구",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2212022:parent_voucher_annual_increment"
+        ]
+      },
+      "reusable_web_status": "computed_review",
+      "trace": [
+        {
+          "year": 2026,
+          "age": 0,
+          "population": 217079,
+          "monthly_increment": 24664.5,
+          "paid_months": 10,
+          "execution_rate": 0.985,
+          "regular_won": 52738328205.675,
+          "retro_won": 34662752820,
+          "retro_months": 6,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2027,
+          "age": 0,
+          "population": 227833,
+          "monthly_increment": 25737.405749999998,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 69310474905.31384,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2028,
+          "age": 0,
+          "population": 237996,
+          "monthly_increment": 26856.982900125004,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 75551720217.16414,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2029,
+          "age": 0,
+          "population": 247279,
+          "monthly_increment": 28025.26165628044,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 81913293563.36185,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2030,
+          "age": 0,
+          "population": 255406,
+          "monthly_increment": 29244.36053832865,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 88285768445.25098,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "result": {
+        "route_key": "direct_annual_amount",
+        "subtype": "",
+        "formula_key": "DIRECT_ANNUAL_AMOUNT_V1",
+        "formula": "검증된 연간 금액",
+        "evidence_key": "kosis_202312:age1_population:total:2026-2030:common,kosis_202312:age1:retro_population:2025:voucher,2212022:voucher:age1:voucher_base_monthly:reviewed,2212022:voucher:age1:voucher_growth_rate:reviewed,2212022:voucher:age1:execution_rate:reviewed,2212022:voucher:age1:retro_monthly_increment:reviewed",
+        "annual_amounts_thousand": [
+          80970457,
+          59169763,
+          64848369,
+          70732690,
+          76738639
+        ],
+        "source_refs": [
+          "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2212022 비용추계서25C4271 PDF3~4쪽;2025보육바우처 및2022~2025평균상승률; KOSIS 전국2023.12중위2025연령별 전망인구",
+          "2212022 비용추계서25C4271 PDF3~5쪽"
+        ],
+        "resolved_variables": {
+          "annual_amount": {
+            "key": "annual_amount",
+            "value": [
+              80970457350,
+              59169763107.86669,
+              64848368579.022514,
+              70732689774.2402,
+              76738639045.70903
+            ],
+            "unit": "KRW/year",
+            "source_class": "calculated_estimate",
+            "source_ref": "KOSIS 성·연령별 추계인구 전국 DT_1BPA001, 중위시나리오222,2023.12버전; 2212022 비용추계서25C4271 PDF3~4쪽;2025보육바우처 및2022~2025평균상승률; KOSIS 전국2023.12중위2025연령별 전망인구",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review",
+        "method_evidence_keys": [
+          "2212022:parent_voucher_annual_increment"
+        ]
+      },
+      "reusable_web_status": "computed_review",
+      "trace": [
+        {
+          "year": 2026,
+          "age": 1,
+          "population": 216540,
+          "monthly_increment": 22150,
+          "paid_months": 10,
+          "execution_rate": 0.985,
+          "regular_won": 47244155850,
+          "retro_won": 33726301500,
+          "retro_months": 6,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2027,
+          "age": 1,
+          "population": 216413,
+          "monthly_increment": 23131.245,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 59169763107.86669,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2028,
+          "age": 1,
+          "population": 227121,
+          "monthly_increment": 24155.9591535,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 64848368579.022514,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2029,
+          "age": 1,
+          "population": 237221,
+          "monthly_increment": 25226.068144000044,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 70732689774.2402,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        },
+        {
+          "year": 2030,
+          "age": 1,
+          "population": 246446,
+          "monthly_increment": 26343.582962779252,
+          "paid_months": 12,
+          "execution_rate": 0.985,
+          "regular_won": 76738639045.70903,
+          "retro_won": 0,
+          "retro_months": 0,
+          "expression": "인구×바우처기준월액×(1+상승률)^연차×상승률×개월×집행계수 + 첫해소급분"
+        }
+      ]
+    }
+  ],
+  "required_lower_filled": 12,
+  "required_lower_count": 12,
+  "annual_thousand": [
+    168371538,
+    128480238,
+    140400089,
+    152645984,
+    165024407
+  ],
+  "annual_eok": [
+    1683.71538,
+    1284.80238,
+    1404.00089,
+    1526.45984,
+    1650.24407
+  ],
+  "total_eok": 7549.22256,
+  "gold_total_eok": 7525,
+  "difference_percent": 0.321894485049836,
+  "annual_difference_percent": [
+    0.13550533807828613,
+    0.24826242236024187,
+    0.0000633903133922153,
+    0.6235886618325633,
+    1.2419674846625746
+  ],
+  "gold_annual_eok": [
+    1686,
+    1288,
+    1404,
+    1517,
+    1630
+  ],
+  "gold_age_totals_eok": [
+    4032,
+    3493
+  ],
+  "national_share_reference": 0.6947,
+  "limitation": "표의 공개된 기준단가·상승률로 계산. 숨은 정밀수치에 맞춰 역산하지 않아 잔여오차 존재",
+  "unverified_details": [
+    "정답 원작업파일의 월증가액 정밀도와 반올림·절사 시점",
+    "2022~2025바우처 원단가와 집행계수 원예산서 독립검증"
+  ]
+}

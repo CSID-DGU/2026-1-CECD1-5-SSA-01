@@ -1,0 +1,46 @@
+{
+  "bill_no": "2209405",
+  "run_date": "2026-10-03",
+  "evaluation_type": "pre_answer_development_first_run",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "eligibility": {"in_development_manifest": true, "reserved_holdout": false, "prior_own_db_evidence_count": 0},
+  "ai_draft": {
+    "bill_no": "2209405",
+    "bill_name": "취업 후 학자금 상환 특별법 일부개정법률안",
+    "document_type": "amendment",
+    "propose_date": "2025-03-27",
+    "articles": [{
+      "article_ref": "제16조의2제2항제5호/자립지원대상자 이자면제 확대",
+      "source_quote": "5. 「아동복지법」제38조제2항에따른자립지원대상자중교육부장관이고시하는사람",
+      "source_page": 3,
+      "cost_trigger": true,
+      "estimation_decision": "estimate_now",
+      "decision_reason": "기존 ICL 이자면제 대상에 자립지원대상자를 추가. 기존 수급자·차상위·한부모·다자녀 면제와 중복되지 않는 실제 신규면제 대상만 순증비용으로 계산할 조건부 시나리오. 교육부 고시 범위·정부 부담구조 확인 필요",
+      "route_key": "transfer_recipient",
+      "route_reason": "기존 면제를 못 받던 추가 대상자 수 × 연간 1인당 면제이자. 직접 면제비용 기준 후보이며 재단의 신규차입 이자만 국고 부담하는 구조가 확인되면 별도 금융경로로 변경해야 함. 원금 전체나 신규 차입과 혼동하지 않음",
+      "variables": []
+    }]
+  },
+  "candidate_search": {
+    "selected_evidence_keys": [],
+    "rejected": ["2204385의 신규 채권 조달금리3.57%와 정부지원율은 학생 ICL 대출금리 및 신규면제 대상의 근거가 아님", "연간 퇴소1500명·대학진학률69.7%·학자금대출 이용16.1%는 실제 신규면제 재학생 수를 확정하지 못함"]
+  },
+  "start_year": null,
+  "effective_date_note": "공포 후6개월. 공포일 미정이며 시작연도 임의 확정 안 함",
+  "required_variables": ["recipient_count", "benefit_per_recipient"],
+  "missing_required_variables": ["recipient_count", "benefit_per_recipient"],
+  "annual_amounts_thousand": null,
+  "execution": {
+    "pipeline": "analyze_erce_pdf(ai_draft) -> ERCE formula requirements",
+    "quote_verified": [true],
+    "cost_item_count": 1,
+    "unmapped_count": 0,
+    "formula_key": "TRANSFER_RECIPIENT_V1",
+    "status": "needs_input",
+    "available_required_variables": 0,
+    "missing_variables": ["recipient_count", "benefit_per_recipient"]
+  },
+  "scope_checks": ["교육부 고시 대상", "기존 면제와 중복 제외", "ICL 이용 대상자의 연간 면제이자", "정부지원과 재단 손실의 관계", "재학 및 소득기준 초과 전 기간"],
+  "time_scope_note": "현재 개발 DB로 과거 법안 시험. 정답 금액 및 정답 문서는 미열람; 발의시점 제한 독립평가 아님"
+}

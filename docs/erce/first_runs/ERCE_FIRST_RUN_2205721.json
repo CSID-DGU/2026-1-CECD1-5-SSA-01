@@ -1,0 +1,410 @@
+{
+  "bill_no": "2205721",
+  "bill_name": "장애인 등에 대한 특수교육법 일부개정법률안",
+  "proposer": "정성국",
+  "propose_date": "2024-11-20",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "page": 3,
+      "quote": "2026년1월1일부터시행한다.",
+      "verified": true
+    }
+  ],
+  "law_inputs": {
+    "elementary_current_cap": 6,
+    "elementary_new_cap": 4,
+    "high_current_cap": 7,
+    "high_new_cap": 6,
+    "effective_year": 2026,
+    "source_ref": "원문PDF3·5쪽 제27조·부칙"
+  },
+  "ai_decisions": [
+    {
+      "article": "제27조",
+      "decision": "estimate_when_inputs_available",
+      "reason": "초등6→4·고등7→6 정원감축으로 학교/과정별 신규학급과 교원·교실 추가소요 검토. 유치원·중학교 기준은 유지",
+      "classification": "교원증원+교육시설확충",
+      "missing_lower_data": [
+        "학교/과정별 특수교육학생수·현재학급수",
+        "기존교원 및 재배치가능인원",
+        "사용가능교실·시설신축비율"
+      ]
+    }
+  ],
+  "rejected_comparables": "영양교사 단가는 초임호봉·수당·공사립 조건이 달라 자동전용하지 않음. 경계선지능 기본계획 용역은 학급확대와 다른 과업",
+  "items": [
+    {
+      "component": "teacher_salary",
+      "payload": {
+        "bill_no": "2205721",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "personnel_average"
+      },
+      "reason": "학급 증가에 따른 교원 순증보수, 일반 영양교사 단가를 특수교사에 자동전용하지 않음",
+      "result": {
+        "status": "needs_input",
+        "routeKey": "personnel_average",
+        "formulaKey": "PERSONNEL_AVERAGE_V1",
+        "formula": "순증인원 × 1인당 보수",
+        "missingVariables": [
+          "headcount",
+          "salary_per_person"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "staffingScenarios": [
+          {
+            "methodKey": "confirmed_plan",
+            "label": "확인된 계획 정원 기준",
+            "formula": "계획 정원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 계획 정원이 별도 자료로 확인됨",
+            "candidateRole": "계획 정원 확인 시 우선 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_total",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "parent_population_share",
+            "label": "모기관 정원·관할인구 비례",
+            "formula": "반올림(모기관 정원 × 대상 관할인구 ÷ 모기관 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "대상 조직의 인구당 업무·인력 밀도가 모기관과 유사함",
+            "candidateRole": "모기관과 업무가 유사하면 우선 검토",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "parent_staff_total",
+              "target_population",
+              "parent_population",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "population_per_staff",
+            "label": "유사기관 1인당 관할인구 기준",
+            "formula": "반올림(대상 관할인구 ÷ 공무원 1인당 관할인구) - 기존 인원 - 전입·재배치 인원",
+            "assumption": "비교기관의 인구당 업무·인력 밀도를 대상에도 적용할 수 있음",
+            "candidateRole": "광범위한 비교기관 평균을 쓴 민감도 후보",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "target_population",
+              "population_per_staff",
+              "existing_staff_total",
+              "incoming_staff_total"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          },
+          {
+            "methodKey": "grade_by_grade",
+            "label": "직급별 계획·기존·전입 인원 차감",
+            "formula": "직급마다 계획 인원 - 기존 인원 - 전입·재배치 인원",
+            "assumption": "동일한 직급 기준의 세 인원표를 확인함",
+            "candidateRole": "직급별 원자료 확인 시 인건비 계산용",
+            "status": "needs_input",
+            "grossStaff": null,
+            "netStaff": null,
+            "netStaffByGrade": null,
+            "missingInputs": [
+              "planned_staff_by_grade",
+              "existing_staff_by_grade",
+              "incoming_staff_by_grade"
+            ],
+            "sourceRefs": [],
+            "warning": "",
+            "approximateInputs": [],
+            "nextStep": "부족한 항목의 근거값을 확인"
+          }
+        ],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2214994:legislative_support_headcount:2026",
+            "variableKey": "headcount",
+            "value": 10,
+            "unit": "person",
+            "sourceRef": "의안2214994, 25D6771, 비용추계서 PDF p.4~6; 소규모 2개 위원회 11·9명, 운영경비 평균",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-03-24",
+            "limitation": "국회의원 정수와 지원 공무원 수는 별개. 순증 여부·재배치·직급 구성은 대상에서 재검토",
+            "scope": "국회 소규모 상설위원회 입법·심의 지원 공무원 및 운영",
+            "serviceFunction": "국회 상설 특별위원회 지원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2215199:policy_review_staff_model:2026",
+            "variableKey": "headcount",
+            "value": 6,
+            "unit": "person",
+            "sourceRef": "의안2215199, 25D6889, 비용추계서 PDF p.4~6 표2·3; 업무 권한에 따른 6명 직급모델 및 2026년 국회 예산 인용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-03-24",
+            "limitation": "6명은 해당 업무를 고려한 선례 가정. 공식 직제 별표·급여 예산 원본을 독립 확인한 값 아님",
+            "scope": "예산·결산 예비심사 없는 제한된 정책심의 특별위원회",
+            "serviceFunction": "국회 소규모 정책심의 지원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2200601:salary",
+            "variableKey": "salary_per_person",
+            "value": [
+              35000000,
+              37000000,
+              38000000,
+              40000000,
+              41000000
+            ],
+            "unit": "KRW/person/year",
+            "sourceRef": "2200601 비용추계서 PDF p.4~8 표3·각주5",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-07-11",
+            "limitation": "2024년 비용추계서의 과거 가정. 최신 공식 단가 아님; 백만원 반올림 표이며 정확한 호봉별 원자료·기관부담률 전망은 미확보",
+            "scope": "public 신규 영양교사",
+            "serviceFunction": "학교 추가배치",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2207986:salary_public",
+            "variableKey": "salary_per_person",
+            "value": [
+              34491000,
+              35535000,
+              36378000,
+              37219000,
+              38436000
+            ],
+            "unit": "KRW/person/year",
+            "sourceRef": "2207986 비용추계서25C0723 PDF p.5~7 표3·7",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2025-04-07",
+            "limitation": "2025 추계서가 인용한 과거 교육부 통계·교원 전망. 최신 공식값 아님. 원 봉급표·기관부담 요율·통계 원자료는 별도 확인 필요",
+            "scope": "public 신규 영양교사",
+            "serviceFunction": "규모 또는 다회급식 학교 증원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2212534:legislative_salary_per_person:2026-2030",
+            "variableKey": "salary_per_person",
+            "value": [
+              92909090.9090909,
+              95181818.18181819,
+              97454545.45454545,
+              99818181.81818181,
+              102181818.18181819
+            ],
+            "unit": "KRW/person/year",
+            "sourceRef": "의안2212534, 25D4707, 비용추계서 PDF p.5~6 표3·4 및 각주6; 11명 지원공무원 보수와 기관부담 전망",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2025-09-12",
+            "limitation": "국회의원 정수와 지원 공무원 수는 별개. 순증 여부·재배치·직급 구성은 대상에서 재검토",
+            "scope": "국회 소규모 상설위원회 입법·심의 지원 공무원 및 운영",
+            "serviceFunction": "국회 상설 특별위원회 지원",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "headcount": {
+            "status": "candidates_need_review",
+            "candidateCount": 2,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          },
+          "salary_per_person": {
+            "status": "candidates_need_review",
+            "candidateCount": 3,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "component": "teacher_employer_contribution",
+      "payload": {
+        "bill_no": "2205721",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "personnel_employer_contribution"
+      },
+      "reason": "교원보수와 기관부담금을 분리하고 공사립 부담 범위 확인",
+      "result": {
+        "status": "needs_input",
+        "routeKey": "personnel_employer_contribution",
+        "formulaKey": "PERSONNEL_EMPLOYER_CONTRIBUTION_V1",
+        "formula": "보수총액 × 기관부담률",
+        "missingVariables": [
+          "annual_salary_amount",
+          "employer_contribution_rate"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [
+          {
+            "evidenceKey": "2200601:private_pension_rate",
+            "variableKey": "employer_contribution_rate",
+            "value": 0.03706,
+            "unit": "ratio",
+            "sourceRef": "2200601 비용추계서 PDF p.4~8 표3·각주5",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2024-07-11",
+            "limitation": "2024년 비용추계서의 과거 가정. 최신 공식 단가 아님; 백만원 반올림 표이며 정확한 호봉별 원자료·기관부담률 전망은 미확보",
+            "scope": "private 신규 영양교사",
+            "serviceFunction": "학교 추가배치",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2207986:private_pension_rate",
+            "variableKey": "employer_contribution_rate",
+            "value": 0.03706,
+            "unit": "ratio",
+            "sourceRef": "2207986 비용추계서25C0723 PDF p.5~7 표3·7",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2025-04-07",
+            "limitation": "2025 추계서가 인용한 과거 교육부 통계·교원 전망. 최신 공식값 아님. 원 봉급표·기관부담 요율·통계 원자료는 별도 확인 필요",
+            "scope": "private 신규 영양교사",
+            "serviceFunction": "규모 또는 다회급식 학교 증원",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2212273:court_employer_rate:2026-2030",
+            "variableKey": "employer_contribution_rate",
+            "value": [
+              0.13066,
+              0.1313,
+              0.13194,
+              0.13286,
+              0.1338
+            ],
+            "unit": "ratio/year",
+            "sourceRef": "의안 2212273 추계서 25D4478 PDF p.4, 기관부담 요율 전망 인용",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2025-09-12",
+            "limitation": "대법원 원자료·경제전망 원문은 독립 확인하지 않음. 순증 인원과 청사·자산 집행시점은 새 법원별로 별도 산정",
+            "scope": "기존 지원의 지방법원 승격에 따른 순증 법원공무원",
+            "serviceFunction": "법원공무원 인건비·기본경비·자산취득비",
+            "requiresConfirmation": true
+          },
+          {
+            "evidenceKey": "2214994:legislative_employer_rate:2026-2030",
+            "variableKey": "employer_contribution_rate",
+            "value": [
+              0.13067,
+              0.13129,
+              0.13193,
+              0.13285,
+              0.13379
+            ],
+            "unit": "ratio",
+            "sourceRef": "의안2214994, 25D6771, 비용추계서 PDF p.4~6; 소규모 2개 위원회 11·9명, 운영경비 평균",
+            "sourceClass": "precedent_assumption",
+            "availableAt": "2026-03-24",
+            "limitation": "국회의원 정수와 지원 공무원 수는 별개. 순증 여부·재배치·직급 구성은 대상에서 재검토",
+            "scope": "국회 소규모 상설위원회 입법·심의 지원 공무원 및 운영",
+            "serviceFunction": "국회 상설 특별위원회 지원",
+            "requiresConfirmation": true
+          }
+        ],
+        "missingVariableEvidence": {
+          "annual_salary_amount": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          },
+          "employer_contribution_rate": {
+            "status": "candidates_need_review",
+            "candidateCount": 4,
+            "meaning": "후보가 있으나 적용·선택이 필요합니다."
+          }
+        }
+      }
+    },
+    {
+      "component": "additional_classroom_construction",
+      "payload": {
+        "bill_no": "2205721",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-11",
+        "payer": "government",
+        "start_year": 2026,
+        "years": 5,
+        "explicit_inputs": {},
+        "selected_evidence_keys": [],
+        "selected_method_keys": [],
+        "route_key": "capital_area"
+      },
+      "reason": "기존 빈교실 재사용 가능량을 확인한 뒤 부족한 교실의 추가공사만 산정",
+      "result": {
+        "status": "needs_input",
+        "routeKey": "capital_area",
+        "formulaKey": "CAPITAL_AREA_V1",
+        "formula": "면적 × 면적당 공사단가 × (1 + 설계·감리 비율)",
+        "missingVariables": [
+          "required_area",
+          "construction_unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "derivationTrace": [],
+        "methodCandidates": [],
+        "selectedMethods": [],
+        "referenceCandidates": [],
+        "missingVariableEvidence": {
+          "required_area": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          },
+          "construction_unit_cost": {
+            "status": "no_eligible_candidate",
+            "candidateCount": 0,
+            "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+          }
+        }
+      }
+    }
+  ],
+  "first_total_eok": null,
+  "error_percent": null,
+  "limitation": "아직 특수학급 순증 산출 모듈·분포자료가 없어 구성요소별 실제엔진 요청은 모두 입력부족. 각 학교별 올림과 기존학급/빈교실을 고려해야 하며 전국학생수 단순나눗셈이나 특수학교 전체신축으로 계산하지 않음"
+}

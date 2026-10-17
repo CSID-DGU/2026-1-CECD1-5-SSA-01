@@ -1,0 +1,1813 @@
+{
+  "batch_id": "ERCE_TRIAGE_30_20261006",
+  "run_date": "2026-10-06",
+  "phase": "pre_answer_intake_and_operand_check",
+  "ai_mode": "manual_no_paid_api",
+  "gold_opened": false,
+  "records": [
+    {
+      "bill_no": "2200061",
+      "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-05-31",
+      "group": "소득보장·부양기준",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": false,
+      "scope_note": "중위소득60%−가구소득 부족액 및 동거가족 기준변경. 소득분포 하위산식 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200061",
+        "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-05-31",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제13조제1항",
+            "source_quote": "조제11호에따른기준중위소득의100분의60이상이되도록정하여야한다”로하며,같은조에제4항을다음과같이",
+            "source_page": 3,
+            "change_summary": "중위소득60%−가구소득 부족액 및 동거가족 기준변경. 소득분포 하위산식 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200061",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200062",
+      "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-05-31",
+      "group": "소득보장·부양기준",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": false,
+      "scope_note": "유공자 생활조정수당 소득격차+동거가족 변경. 중위소득전체액 지급으로 오인금지",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200062",
+        "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-05-31",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제14조제1항",
+            "source_quote": "조제11호에따른기준중위소득의100분의60이상이되도록정하여야한다”로하며,같은조에제4항을다음과같이",
+            "source_page": 3,
+            "change_summary": "유공자 생활조정수당 소득격차+동거가족 변경. 중위소득전체액 지급으로 오인금지",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200062",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200063",
+      "bill_name": "독립유공자예우에 관한 법률 일부개정법률안",
+      "propose_date": "2024-05-31",
+      "group": "소득보장·부양기준",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": false,
+      "scope_note": "독립유공자 생활조정수당 부족액+소득심사범위 변경",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200063",
+        "bill_name": "독립유공자예우에 관한 법률 일부개정법률안",
+        "propose_date": "2024-05-31",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제14조",
+            "source_quote": "조제11호에따른기준중위소득의100분의60이상이되도록정하여야한다”로하며,같은조에제4항을다음과같이",
+            "source_page": 3,
+            "change_summary": "독립유공자 생활조정수당 부족액+소득심사범위 변경",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200063",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200101",
+      "bill_name": "의료급여법 일부개정법률안",
+      "propose_date": "2024-06-03",
+      "group": "의료·돌봄급여",
+      "primary_candidate_route": "transfer_service_use",
+      "exact_lower_formula_ready": false,
+      "scope_note": "의료급여 간병추가, 요양병원2025/그외2027 시행분리 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200101",
+        "bill_name": "의료급여법 일부개정법률안",
+        "propose_date": "2024-06-03",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제7조제1항제8호",
+            "source_quote": "에제8호를다음과같이신설한다.8.간병부칙이법은2025년1월1일부터시행한다.다만,「의료법」제",
+            "source_page": 3,
+            "change_summary": "의료급여 간병추가, 요양병원2025/그외2027 시행분리 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_service_use",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200101",
+        "route_key": "transfer_service_use",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "missingVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200444",
+      "bill_name": "장애인·노인·임산부 등의 편의증진 보장에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-13",
+      "group": "행정표지·수입",
+      "primary_candidate_route": "quantity_unit",
+      "exact_lower_formula_ready": false,
+      "scope_note": "활동지원사 주차표지 확대; 별도 과태료20→30만원의 수입효과는 전용 산식 없음",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200444",
+        "bill_name": "장애인·노인·임산부 등의 편의증진 보장에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-13",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제17조",
+            "source_quote": "각호외의부분중“20만원”을“30만원”으로한다.부칙이법은공포후6개월이경과한날부터시행한다.",
+            "source_page": 3,
+            "change_summary": "활동지원사 주차표지 확대; 별도 과태료20→30만원의 수입효과는 전용 산식 없음",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "quantity_unit",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200444",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200492",
+      "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-14",
+      "group": "단체설립·운영보조",
+      "primary_candidate_route": "transfer_subsidy_rate",
+      "exact_lower_formula_ready": false,
+      "scope_note": "민간단체 신설·지원가능성, 공무원조직정원이나 설립위원 전원유급으로 단정금지",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200492",
+        "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-14",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제1조·제3조",
+            "source_quote": "회”를“재일학도의용군동지회,6ㆍ25참전소년소녀병전우회”로한다.제3조에제10호를다음과같이신설한다.10.6ㆍ2",
+            "source_page": 3,
+            "change_summary": "민간단체 신설·지원가능성, 공무원조직정원이나 설립위원 전원유급으로 단정금지",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_subsidy_rate",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200492",
+        "route_key": "transfer_subsidy_rate",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+        "formula": "적격 사업비 × 보조율",
+        "missingVariables": [
+          "project_cost",
+          "subsidy_rate"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200568",
+      "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-18",
+      "group": "기존급여균등화",
+      "primary_candidate_route": "transfer_recipient_delta",
+      "exact_lower_formula_ready": true,
+      "scope_note": "유족보상금 소멸시점별 자녀수당 차등폐지. 대상집단별 현행단가 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200568",
+        "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-18",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제16조의3제3항",
+            "source_quote": "의보상금수급권소멸시점을사유로차등을두어서는아니된다.부칙이법은공포후3개월이경과한날부터시행한다.",
+            "source_page": 3,
+            "change_summary": "유족보상금 소멸시점별 자녀수당 차등폐지. 대상집단별 현행단가 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200568",
+        "route_key": "transfer_recipient_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_DELTA_V1",
+        "formula": "기존 대상자 수 × 지급률 × (신규 1인당 지급액 − 현행 1인당 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200602",
+      "bill_name": "장애인·노인·임산부 등의 편의증진 보장에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-18",
+      "group": "행정표지·수입",
+      "primary_candidate_route": "quantity_unit",
+      "exact_lower_formula_ready": true,
+      "scope_note": "주차표지 대상 보훈·동거가족·외국인·보조인력 확대. 급여가 아닌 순증표지 제작비",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200602",
+        "bill_name": "장애인·노인·임산부 등의 편의증진 보장에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-18",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제17조",
+            "source_quote": "지원에관한법률」제27조에따른활동지원사,「노인복지법」제39조의2에따른요양보호사등보건복지부장관",
+            "source_page": 4,
+            "change_summary": "주차표지 대상 보훈·동거가족·외국인·보조인력 확대. 급여가 아닌 순증표지 제작비",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "quantity_unit",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200602",
+        "route_key": "quantity_unit",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "COMMON_QUANTITY_UNIT_V1",
+        "formula": "수량 × 단가",
+        "missingVariables": [
+          "quantity",
+          "unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200622",
+      "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-19",
+      "group": "급여자격확대·소급",
+      "primary_candidate_route": "transfer_recipient_adjusted",
+      "exact_lower_formula_ready": false,
+      "scope_note": "7급 사망자의 유족보상금 확대, 사망·유족현존·소급분 분해 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200622",
+        "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-19",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제12조",
+            "source_quote": "제4호의개정규정은이법시행전에상이등급7급에해당하는전상군경,공상군경,4ㆍ19혁명부상자및특별공로상",
+            "source_page": 3,
+            "change_summary": "7급 사망자의 유족보상금 확대, 사망·유족현존·소급분 분해 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient_adjusted",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200622",
+        "route_key": "transfer_recipient_adjusted",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_ADJUSTED_V1",
+        "formula": "(기준 인구 − 제외 인원 + 추가 대상자) × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "base_population",
+          "excluded_recipients",
+          "additional_recipients",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200626",
+      "bill_name": "소득세법 일부개정법률안",
+      "propose_date": "2024-06-19",
+      "group": "조세공제",
+      "primary_candidate_route": "tax_deduction_change",
+      "exact_lower_formula_ready": false,
+      "scope_note": "돌봄교육비 세액공제 범위/한도500만원 확대. 소득공제 평균세율 산식을 그대로 쓰면 안 됨",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200626",
+        "bill_name": "소득세법 일부개정법률안",
+        "propose_date": "2024-06-19",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제59조의4제3항",
+            "source_quote": "문중“교육비를”을“교육비또는돌봄서비스비용(이하이조에서“교육비등”이라한다)을”로하고,같은항각호외",
+            "source_page": 3,
+            "change_summary": "돌봄교육비 세액공제 범위/한도500만원 확대. 소득공제 평균세율 산식을 그대로 쓰면 안 됨",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "tax_deduction_change",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200626",
+        "route_key": "tax_deduction_change",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TAX_DEDUCTION_CHANGE_V1",
+        "formula": "적용 인원 × 공제액 변화 × 적용률",
+        "missingVariables": [
+          "taxpayer_count",
+          "deduction_change"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200830",
+      "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-24",
+      "group": "의료·돌봄급여",
+      "primary_candidate_route": "transfer_service_use",
+      "exact_lower_formula_ready": true,
+      "scope_note": "보훈 위탁진료의75→65세 확대. 순증65~74세 이용자료 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200830",
+        "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-24",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제51조제6항",
+            "source_quote": "호외의부분전단중“75세”를“65세”로한다.부칙이법은2025년1월1일부터시행한다.",
+            "source_page": 3,
+            "change_summary": "보훈 위탁진료의75→65세 확대. 순증65~74세 이용자료 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_service_use",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200830",
+        "route_key": "transfer_service_use",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "missingVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200929",
+      "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-25",
+      "group": "공공요금보전",
+      "primary_candidate_route": "transfer_recipient",
+      "exact_lower_formula_ready": false,
+      "scope_note": "참전유공자 공공요금 지원. 기존감면을 차감한 실제청구액/대상가구 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200929",
+        "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-25",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제10조의2",
+            "source_quote": "령등에따라감면되는금액을제외한나머지공공요금을지원하여야한다.②공공요금의지원방법ㆍ절차ㆍ범위등에필요한사항은",
+            "source_page": 3,
+            "change_summary": "참전유공자 공공요금 지원. 기존감면을 차감한 실제청구액/대상가구 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200929",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2200933",
+      "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-25",
+      "group": "신규수당·선택수급",
+      "primary_candidate_route": "transfer_recipient_adjusted",
+      "exact_lower_formula_ready": false,
+      "scope_note": "60세보국훈장 등급별수당, 보상금/참전수당과택일·최고등급1개. 중복차감 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2200933",
+        "bill_name": "국가유공자 등 예우 및 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-25",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제16조의3",
+            "source_quote": "를다음과같이신설한다.3의2.보훈영예수당제16조의3및제16조의4를각각제16조의4및제16조의5로",
+            "source_page": 3,
+            "change_summary": "60세보국훈장 등급별수당, 보상금/참전수당과택일·최고등급1개. 중복차감 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient_adjusted",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2200933",
+        "route_key": "transfer_recipient_adjusted",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_ADJUSTED_V1",
+        "formula": "(기준 인구 − 제외 인원 + 추가 대상자) × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "base_population",
+          "excluded_recipients",
+          "additional_recipients",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201069",
+      "bill_name": "독립유공자예우에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-27",
+      "group": "소득심사범위변경",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": true,
+      "scope_note": "부양의무자에서가구원 심사기준변경. 대상범위 위임과 추가수급자규모 확인",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201069",
+        "bill_name": "독립유공자예우에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-27",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제14조",
+            "source_quote": "단을다음과같이신설한다.이경우가구원의범위는대통령령으로정한다.제14조의2제2항각호외의부분중“부양의무자(부",
+            "source_page": 3,
+            "change_summary": "부양의무자에서가구원 심사기준변경. 대상범위 위임과 추가수급자규모 확인",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201069",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201081",
+      "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-27",
+      "group": "소득심사범위변경",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": true,
+      "scope_note": "보훈보상 가구원 심사범위 변경. 수당 단가보다 대상수 변동이 핵심",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201081",
+        "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-27",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제13조",
+            "source_quote": "항에후단을다음과같이신설한다.가구원의범위는대통령령으로정한다.제14조제2항각호외의부분중“부양의무자(부양의",
+            "source_page": 3,
+            "change_summary": "보훈보상 가구원 심사범위 변경. 수당 단가보다 대상수 변동이 핵심",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201081",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201108",
+      "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-28",
+      "group": "참전 중복수당",
+      "primary_candidate_route": "transfer_recipient",
+      "exact_lower_formula_ready": true,
+      "scope_note": "6.25/월남 양쪽참전자는 각각수당. 추가1회분, 이중참전자수 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201108",
+        "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-28",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제6조",
+            "source_quote": "공자가6ㆍ25전쟁과월남전쟁에모두참전한경우그각각에관한참전명예수당을지급한다”로한다.부칙이법은공포후",
+            "source_page": 3,
+            "change_summary": "6.25/월남 양쪽참전자는 각각수당. 추가1회분, 이중참전자수 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201108",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201112",
+      "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-06-28",
+      "group": "사망배우자수당",
+      "primary_candidate_route": "transfer_recipient",
+      "exact_lower_formula_ready": false,
+      "scope_note": "사망참전유공자 배우자에 기존월액70%, 시행전사망 포함. 생존배우자재고+사망흐름 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201112",
+        "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-06-28",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제6조제8항",
+            "source_quote": ")에게제7항에해당하는지급액의70%를월액으로지급한다.이경우지급방법,지급절차,그밖에필요한사",
+            "source_page": 3,
+            "change_summary": "사망참전유공자 배우자에 기존월액70%, 시행전사망 포함. 생존배우자재고+사망흐름 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201112",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201497",
+      "bill_name": "양육비 대지급을 위한 특별법안",
+      "propose_date": "2024-07-08",
+      "group": "양육비대지급",
+      "primary_candidate_route": "",
+      "exact_lower_formula_ready": false,
+      "scope_note": "감치명령불이행 대상 대지급·채무자회수·기존긴급지원종료·위원회13명. 복합순비용/회수 산식 필요",
+      "amendment_pages_read": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201497",
+        "bill_name": "양육비 대지급을 위한 특별법안",
+        "propose_date": "2024-07-08",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제5조~제11조",
+            "source_quote": "부모가지급하여야한다.제5조(양육비대지급신청)①양육비채권자는양육비채무자가양육비채무불이행으로인하여「",
+            "source_page": 6,
+            "change_summary": "감치명령불이행 대상 대지급·채무자회수·기존긴급지원종료·위원회13명. 복합순비용/회수 산식 필요",
+            "cost_trigger": true,
+            "estimation_decision": "defer",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "",
+            "route_reason": "전용하위산식미구현",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": null,
+      "calculation_result": null,
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201629",
+      "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-07-11",
+      "group": "의료·돌봄급여",
+      "primary_candidate_route": "transfer_service_use",
+      "exact_lower_formula_ready": true,
+      "scope_note": "요양지원80세연령제한폐지, 심리재활위탁은 별도 신규계획 확인",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201629",
+        "bill_name": "참전유공자 예우 및 단체설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-07-11",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제6조의3",
+            "source_quote": "개정한다.제6조의3제1항중“80세이상의참전유공자”를“참전유공자”로한다.제40조제2항을제",
+            "source_page": 3,
+            "change_summary": "요양지원80세연령제한폐지, 심리재활위탁은 별도 신규계획 확인",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_service_use",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201629",
+        "route_key": "transfer_service_use",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "missingVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2201639",
+      "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+      "propose_date": "2024-07-11",
+      "group": "장제·장례지원",
+      "primary_candidate_route": "transfer_recipient",
+      "exact_lower_formula_ready": false,
+      "scope_note": "사망자장제보조/저소득·무연고장례서비스. 국립묘지안장제외·기존지원중복 분리",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2201639",
+        "bill_name": "보훈보상대상자 지원에 관한 법률 일부개정법률안",
+        "propose_date": "2024-07-11",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제54조의6·7",
+            "source_quote": "과같이신설한다.제54조의6(장제보조비지급등)①보훈보상대상자가사망한경우에는예산의범위에서장제보",
+            "source_page": 3,
+            "change_summary": "사망자장제보조/저소득·무연고장례서비스. 국립묘지안장제외·기존지원중복 분리",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2201639",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2202818",
+      "bill_name": "국민건강보험법 일부개정법률안",
+      "propose_date": "2024-08-14",
+      "group": "출산소득보전",
+      "primary_candidate_route": "transfer_recipient_adjusted",
+      "exact_lower_formula_ready": false,
+      "scope_note": "출산·유산·사산 소득상실기간 생계기준지원, 고용보험수급자제외·최대3개월. 국가공단지원 이전 중복가산금지",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2202818",
+        "bill_name": "국민건강보험법 일부개정법률안",
+        "propose_date": "2024-08-14",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제49조의2",
+            "source_quote": "과같이신설한다.제49조의2(출산수당)①공단은가입자의출산,유산또는사산으로인하여소득을상실하거",
+            "source_page": 3,
+            "change_summary": "출산·유산·사산 소득상실기간 생계기준지원, 고용보험수급자제외·최대3개월. 국가공단지원 이전 중복가산금지",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient_adjusted",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2202818",
+        "route_key": "transfer_recipient_adjusted",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_ADJUSTED_V1",
+        "formula": "(기준 인구 − 제외 인원 + 추가 대상자) × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "base_population",
+          "excluded_recipients",
+          "additional_recipients",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2202905",
+      "bill_name": "소득세법 일부개정법률안",
+      "propose_date": "2024-08-16",
+      "group": "조세공제",
+      "primary_candidate_route": "tax_deduction_change",
+      "exact_lower_formula_ready": false,
+      "scope_note": "아이돌봄비20% 세액공제·아동당한도500만원. 실제지출·세액한도·기존공제상계 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2202905",
+        "bill_name": "소득세법 일부개정법률안",
+        "propose_date": "2024-08-16",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제59조의4제10항",
+            "source_quote": "육비를지급한경우에는그보육비의100분의20에해당하는금액을해당과세기간의종합소득산출세액에서공제한다.",
+            "source_page": 3,
+            "change_summary": "아이돌봄비20% 세액공제·아동당한도500만원. 실제지출·세액한도·기존공제상계 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "tax_deduction_change",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2202905",
+        "route_key": "tax_deduction_change",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TAX_DEDUCTION_CHANGE_V1",
+        "formula": "적용 인원 × 공제액 변화 × 적용률",
+        "missingVariables": [
+          "taxpayer_count",
+          "deduction_change"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2203404",
+      "bill_name": "의료급여법 일부개정법률안",
+      "propose_date": "2024-08-30",
+      "group": "의료·돌봄급여",
+      "primary_candidate_route": "transfer_service_use",
+      "exact_lower_formula_ready": true,
+      "scope_note": "65세의료급여수급자의 보청기 급여. 전체고령인구아닌 의료수급·청력·갱신수요 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2203404",
+        "bill_name": "의료급여법 일부개정법률안",
+        "propose_date": "2024-08-30",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제13조제3항",
+            "source_quote": "로한다.③시장ㆍ군수ㆍ구청장은65세이상인수급권자에게는보청기에대하여급여를실시할수있다.제23",
+            "source_page": 3,
+            "change_summary": "65세의료급여수급자의 보청기 급여. 전체고령인구아닌 의료수급·청력·갱신수요 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_service_use",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2203404",
+        "route_key": "transfer_service_use",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SERVICE_USE_V1",
+        "formula": "신규 지원대상자 수 × 1인당 연간 이용횟수 × 회당 국가 지원액",
+        "missingVariables": [
+          "recipient_count",
+          "visits_per_recipient",
+          "cost_per_visit"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2203838",
+      "bill_name": "양육비 대지급에 관한 특별법안",
+      "propose_date": "2024-09-10",
+      "group": "양육비대지급",
+      "primary_candidate_route": "",
+      "exact_lower_formula_ready": false,
+      "scope_note": "2회불이행 양육비대지급·회수·기존긴급지원종료·위원회·우편통지·과태료. 2201497감치조건과 구분",
+      "amendment_pages_read": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2203838",
+        "bill_name": "양육비 대지급에 관한 특별법안",
+        "propose_date": "2024-09-10",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제5조~제14조",
+            "source_quote": "는양육비채무자가정당한사유없이2회이상양육비채무를이행하지아니하는경우에는「양육비이행확보및지원에",
+            "source_page": 6,
+            "change_summary": "2회불이행 양육비대지급·회수·기존긴급지원종료·위원회·우편통지·과태료. 2201497감치조건과 구분",
+            "cost_trigger": true,
+            "estimation_decision": "defer",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "",
+            "route_reason": "전용하위산식미구현",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": null,
+      "calculation_result": null,
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204026",
+      "bill_name": "국민기초생활 보장법 일부개정법률안",
+      "propose_date": "2024-09-13",
+      "group": "생계선정기준·부양폐지",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": false,
+      "scope_note": "중위소득40% 선정 및 보충성예외. 신규수급·기존증액·가구소득분포 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204026",
+        "bill_name": "국민기초생활 보장법 일부개정법률안",
+        "propose_date": "2024-09-13",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제8조·제8조의2",
+            "source_quote": "항후단중“100분의30”을“100분의40”으로한다.제8조의2를제8조의3으로하고,제8조의2를다음",
+            "source_page": 3,
+            "change_summary": "중위소득40% 선정 및 보충성예외. 신규수급·기존증액·가구소득분포 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204026",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204112",
+      "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-09-20",
+      "group": "단체설립·운영보조",
+      "primary_candidate_route": "transfer_subsidy_rate",
+      "exact_lower_formula_ready": false,
+      "scope_note": "기존상이군경회등에서 분리되는 유족회. 신규총비용과 기존보조 이전을 구분",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204112",
+        "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-09-20",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제1조·제3조",
+            "source_quote": "대한민국전몰군경미망인회”를“대한민국순직군경유족회,대한민국전몰군경미망인회”로한다.제3조제2호본문중“제4",
+            "source_page": 3,
+            "change_summary": "기존상이군경회등에서 분리되는 유족회. 신규총비용과 기존보조 이전을 구분",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_subsidy_rate",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204112",
+        "route_key": "transfer_subsidy_rate",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+        "formula": "적격 사업비 × 보조율",
+        "missingVariables": [
+          "project_cost",
+          "subsidy_rate"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204393",
+      "bill_name": "국민기초생활 보장법 일부개정법률안",
+      "propose_date": "2024-09-27",
+      "group": "실태조사",
+      "primary_candidate_route": "annual_research_survey",
+      "exact_lower_formula_ready": false,
+      "scope_note": "실태조사의무화·자활급여연1회. 기존조사비/주기와 신규순증 조사비 분리",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204393",
+        "bill_name": "국민기초생활 보장법 일부개정법률안",
+        "propose_date": "2024-09-27",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제20조의2",
+            "source_quote": "신설한다.다만,제15조에따른자활급여에대하여는1년마다실태조사를실시ㆍ공표하여야한다.부칙이법은",
+            "source_page": 3,
+            "change_summary": "실태조사의무화·자활급여연1회. 기존조사비/주기와 신규순증 조사비 분리",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "annual_research_survey",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204393",
+        "route_key": "annual_research_survey",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "ANNUAL_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 연구용역 단가 × 연 1회",
+        "missingVariables": [
+          "survey_unit_cost"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204731",
+      "bill_name": "주거급여법 일부개정법률안",
+      "propose_date": "2024-10-16",
+      "group": "주거관리비급여",
+      "primary_candidate_route": "transfer_recipient",
+      "exact_lower_formula_ready": false,
+      "scope_note": "자가/임차가구 관리비 지원. 가구규모·소득·주거형태별 단가와 조례/고시 확인",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204731",
+        "bill_name": "주거급여법 일부개정법률안",
+        "propose_date": "2024-10-16",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제8조의2",
+            "source_quote": "음과같이신설한다.제8조의2(관리비의지급)①제2조제1호의관리비(이하“관리비”라한다)는타인의주택",
+            "source_page": 3,
+            "change_summary": "자가/임차가구 관리비 지원. 가구규모·소득·주거형태별 단가와 조례/고시 확인",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_recipient",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204731",
+        "route_key": "transfer_recipient",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_RECIPIENT_V1",
+        "formula": "대상자 수 × 참여율 × 1인당 지급액 × 연간 지급횟수",
+        "missingVariables": [
+          "recipient_count",
+          "benefit_per_recipient"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204762",
+      "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+      "propose_date": "2024-10-17",
+      "group": "단체설립·운영보조",
+      "primary_candidate_route": "transfer_subsidy_rate",
+      "exact_lower_formula_ready": false,
+      "scope_note": "순국선열유족 단체의 운영보조 계획/기존수행사업 이관 확인",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204762",
+        "bill_name": "국가유공자 등 단체 설립에 관한 법률 일부개정법률안",
+        "propose_date": "2024-10-17",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제1조·제3조",
+            "source_quote": "”를“,대한민국무공수훈자회및순국선열유족회”로한다.제3조에제10호를다음과같이신설한다.10.순국선",
+            "source_page": 3,
+            "change_summary": "순국선열유족 단체의 운영보조 계획/기존수행사업 이관 확인",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_subsidy_rate",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204762",
+        "route_key": "transfer_subsidy_rate",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_SUBSIDY_RATE_V1",
+        "formula": "적격 사업비 × 보조율",
+        "missingVariables": [
+          "project_cost",
+          "subsidy_rate"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    },
+    {
+      "bill_no": "2204827",
+      "bill_name": "국민기초생활 보장법 일부개정법률안",
+      "propose_date": "2024-10-22",
+      "group": "소득산정공제",
+      "primary_candidate_route": "transfer_population_amount_delta",
+      "exact_lower_formula_ready": false,
+      "scope_note": "기초연금50% 소득평가 공제. 기존생계급여증액·신규자격·가구소득분포 필요",
+      "amendment_pages_read": [
+        3,
+        4
+      ],
+      "gold_opened": false,
+      "ai_draft": {
+        "bill_no": "2204827",
+        "bill_name": "국민기초생활 보장법 일부개정법률안",
+        "propose_date": "2024-10-22",
+        "document_type": "amendment",
+        "articles": [
+          {
+            "article_ref": "제6조의3제3항",
+            "source_quote": "금법」제5조에따른기초연금액은100분의50에해당하는금액을감하여소득평가액으로산정한다”로한다.부칙이",
+            "source_page": 3,
+            "change_summary": "기초연금50% 소득평가 공제. 기존생계급여증액·신규자격·가구소득분포 필요",
+            "cost_trigger": true,
+            "estimation_decision": "estimate_now",
+            "decision_reason": "원문개정부분의재정후보,기존사업/순증범위검토전",
+            "route_key": "transfer_population_amount_delta",
+            "route_reason": "기존상위산식후보",
+            "variables": []
+          }
+        ]
+      },
+      "quote_verified": [
+        true
+      ],
+      "calculation_payload": {
+        "bill_no": "2204827",
+        "route_key": "transfer_population_amount_delta",
+        "evidence_mode": "holdout",
+        "cutoff_date": "2026-10-06",
+        "start_year": 2025,
+        "years": 5
+      },
+      "calculation_result": {
+        "status": "needs_input",
+        "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+        "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+        "missingVariables": [
+          "new_recipient_count",
+          "existing_recipient_count",
+          "benefit_per_recipient",
+          "existing_benefit_per_recipient",
+          "payments_per_year"
+        ],
+        "missingDerivationVariables": [],
+        "method_candidate_keys": []
+      },
+      "prior_own_db_evidence_count": 0,
+      "reserved_holdout": false,
+      "amount": null
+    }
+  ],
+  "group_counts": {
+    "소득보장·부양기준": 3,
+    "의료·돌봄급여": 4,
+    "행정표지·수입": 2,
+    "단체설립·운영보조": 3,
+    "기존급여균등화": 1,
+    "급여자격확대·소급": 1,
+    "조세공제": 2,
+    "공공요금보전": 1,
+    "신규수당·선택수급": 1,
+    "소득심사범위변경": 2,
+    "참전 중복수당": 1,
+    "사망배우자수당": 1,
+    "양육비대지급": 2,
+    "장제·장례지원": 1,
+    "출산소득보전": 1,
+    "생계선정기준·부양폐지": 1,
+    "실태조사": 1,
+    "주거관리비급여": 1,
+    "소득산정공제": 1
+  },
+  "routed_candidates": 28,
+  "verified_quotes": 30,
+  "actual_formula_calls": 28,
+  "computed_amount_count": 0,
+  "limitation": "개정원문30건1차분류/슬롯점검.정답미열람.금액성능평가/보강완료아님. 상위산식후보와정밀하위산식완성구분.임시기간2025~2029는누락점검용,확정추계시점아님",
+  "db_sha256": "ab51d3d266ae077d8cc00193fb9b862a16176eae6d24dd11128b369881a72c4c"
+}

@@ -1,0 +1,146 @@
+{
+  "bill_no": "2219149",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "components": [
+    {
+      "band": 7,
+      "inputs": {
+        "bill_no": "2219149",
+        "route_key": "transfer_recipient",
+        "start_year": 2027,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "development_review",
+        "support_derivation": "student_income_interest",
+        "loan_income_band": "7",
+        "student_loan_region": "capital",
+        "support_derivation_note": "정답 확인 후 수도권 소득구간별 ICL 이용자·잔액·금리 가정으로 회귀검증",
+        "student_interest_scope_note": "6구간 이하·비수도권은 이미 면제라 제외.7·8구간 각각 계산하며 면제이자 전액 정부지원 시나리오. 졸업 후 누적·원금상환은 미반영",
+        "effective_date": "2026-11-20",
+        "estimation_start_note": "26C2955 PDF5쪽 선례는 시행 다음 완전연도2027년부터 추계. 해당 기간 가정을 확인하며2026년 비용이 없다고 주장하지 않음",
+        "selected_evidence_keys": [
+          "2219149:eligible_loan_students:capital_band7",
+          "2219149:average_loan_balance:capital_band7",
+          "2219149:student_loan_rate:reference"
+        ],
+        "evidence_selection_reasons": {
+          "2219149:eligible_loan_students:capital_band7": "수도권 재학생 해당 소득구간의 ICL, 2026년1학기 실적 준용. 잔액은 NABO물가 전망. 이용률 분모 원자료는 미확인; 자립지원·전국·다른 소득구간에 자동 전용 금지",
+          "2219149:average_loan_balance:capital_band7": "수도권 재학생 해당 소득구간의 ICL, 2026년1학기 실적 준용. 잔액은 NABO물가 전망. 이용률 분모 원자료는 미확인; 자립지원·전국·다른 소득구간에 자동 전용 금지",
+          "2219149:student_loan_rate:reference": "추계기간 학생 ICL금리1.7% 동결 선례 가정. 재단 조달금리·미래 확정금리·최신 공식 API 검증 아님"
+        }
+      },
+      "formula_key": "TRANSFER_RECIPIENT_V1",
+      "annual_amounts_thousand": [
+        4560734,
+        4675001,
+        4793796,
+        4917183,
+        5041765
+      ],
+      "resolved_variables": {
+        "recipient_count": {
+          "value": [
+            66422,
+            66780,
+            67140,
+            67502,
+            67866
+          ],
+          "unit": "person",
+          "source_ref": "의안2219149 비용추계서 PDF5~6쪽 표2~3"
+        },
+        "benefit_per_recipient": {
+          "value": [
+            68663.0,
+            70006.0,
+            71400.0,
+            72845.0,
+            74290.0
+          ],
+          "unit": "KRW/person/year",
+          "source_ref": "의안2219149 비용추계서 PDF5~6쪽 표2~3; 의안2219149 비용추계서 PDF6쪽"
+        }
+      }
+    },
+    {
+      "band": 8,
+      "inputs": {
+        "bill_no": "2219149",
+        "route_key": "transfer_recipient",
+        "start_year": 2027,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "development_review",
+        "support_derivation": "student_income_interest",
+        "loan_income_band": "8",
+        "student_loan_region": "capital",
+        "support_derivation_note": "정답 확인 후 수도권 소득구간별 ICL 이용자·잔액·금리 가정으로 회귀검증",
+        "student_interest_scope_note": "6구간 이하·비수도권은 이미 면제라 제외.7·8구간 각각 계산하며 면제이자 전액 정부지원 시나리오. 졸업 후 누적·원금상환은 미반영",
+        "effective_date": "2026-11-20",
+        "estimation_start_note": "26C2955 PDF5쪽 선례는 시행 다음 완전연도2027년부터 추계. 해당 기간 가정을 확인하며2026년 비용이 없다고 주장하지 않음",
+        "selected_evidence_keys": [
+          "2219149:eligible_loan_students:capital_band8",
+          "2219149:average_loan_balance:capital_band8",
+          "2219149:student_loan_rate:reference"
+        ],
+        "evidence_selection_reasons": {
+          "2219149:eligible_loan_students:capital_band8": "수도권 재학생 해당 소득구간의 ICL, 2026년1학기 실적 준용. 잔액은 NABO물가 전망. 이용률 분모 원자료는 미확인; 자립지원·전국·다른 소득구간에 자동 전용 금지",
+          "2219149:average_loan_balance:capital_band8": "수도권 재학생 해당 소득구간의 ICL, 2026년1학기 실적 준용. 잔액은 NABO물가 전망. 이용률 분모 원자료는 미확인; 자립지원·전국·다른 소득구간에 자동 전용 금지",
+          "2219149:student_loan_rate:reference": "추계기간 학생 ICL금리1.7% 동결 선례 가정. 재단 조달금리·미래 확정금리·최신 공식 API 검증 아님"
+        }
+      },
+      "formula_key": "TRANSFER_RECIPIENT_V1",
+      "annual_amounts_thousand": [
+        5727482,
+        5871896,
+        6021494,
+        6175072,
+        6332680
+      ],
+      "resolved_variables": {
+        "recipient_count": {
+          "value": [
+            73803,
+            74201,
+            74601,
+            75003,
+            75407
+          ],
+          "unit": "person",
+          "source_ref": "의안2219149 비용추계서 PDF5~6쪽 표2~3"
+        },
+        "benefit_per_recipient": {
+          "value": [
+            77605.0,
+            79135.0,
+            80716.0,
+            82331.0,
+            83980.0
+          ],
+          "unit": "KRW/person/year",
+          "source_ref": "의안2219149 비용추계서 PDF5~6쪽 표2~3; 의안2219149 비용추계서 PDF6쪽"
+        }
+      }
+    }
+  ],
+  "annual_amounts_thousand": [
+    10288216,
+    10546897,
+    10815290,
+    11092255,
+    11374445
+  ],
+  "total_thousand": 54117103,
+  "gold_annual_thousand": [
+    10288000,
+    10547000,
+    10815000,
+    11091000,
+    11374000
+  ],
+  "gold_total_thousand": 54116000,
+  "total_error_percent": 0.0020382142065193285,
+  "mape_percent": 0.004197097654398052,
+  "limitation": "정답 표2·3의 표시 변수를 재계산. 총액에서 인원·단가를 역산하지 않으며 표의 표시 정밀도 차이는 남김"
+}

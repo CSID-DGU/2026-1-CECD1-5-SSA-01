@@ -1,0 +1,183 @@
+{
+  "bill_no": "2211348",
+  "run_date": "2026-10-03",
+  "gold_opened": true,
+  "evaluation_type": "post_answer_development_reference_regression",
+  "ai_mode": "manual_no_api",
+  "source_version_match": false,
+  "scope": "첨부25C0254의 기본계획·연구2항목만 재현. 현 원문의 공청회·1년 시행과는 별도 범위",
+  "quote_verified": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "recurrence_candidates": [
+    {
+      "name": "제7조제7항/식수인원기준 연구조사",
+      "candidates": [
+        {
+          "value": 3,
+          "unit": "year",
+          "basis": "linked_plan_cycle",
+          "sourceRef": "bill_text.pdf 3쪽: 교육부장관은3년마다학교급식에관한기본계획(이하“기본계획”이라한다)을수립하여야한다.",
+          "requiresConfirmation": true,
+          "reason": "기준 검토를 기본계획 갱신과 함께 수행한다는 가정이에요. 법안이 조사 주기를 정한 것은 아니에요."
+        }
+      ]
+    }
+  ],
+  "hearing_scope_checks": [
+    {
+      "name": "제3조의2제2항/공청회",
+      "checks": [
+        "용역비에 공청회가 포함돼 있는지",
+        "별도 개최 규모와 단가"
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "payload": {
+        "bill_no": "2211348",
+        "agency": "교육부",
+        "policy_domain": "학교급식",
+        "start_year": 2025,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "development_review",
+        "variable_db_path": "/Users/anseung-won/Desktop/프로젝트/비용추계자동화시스템/backend/generated/erce_variable_evidence.sqlite3",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "사용자 요청으로 첨부25C0254를 정답기준 회귀 참고. 현재 원문 시행일·공청회와는 별도 범위이며 새 정확도 평가가 아님",
+        "route_key": "research_plan",
+        "research_service_kind": "education_basic_plan",
+        "selected_evidence_keys": [
+          "2211348:plan_schedule"
+        ],
+        "explicit_inputs": {
+          "recurrence_interval_years": {
+            "value": 3,
+            "unit": "year",
+            "source_ref": "기본계획3년 주기 원문·참고 추계 공통"
+          }
+        }
+      },
+      "result": {
+        "route_key": "research_plan",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_PLAN_V1",
+        "formula": "계획수립 연구용역 단가 × 계획 수립연도(주기별 1회)",
+        "evidence_key": "2211348:plan_schedule",
+        "annual_amounts_thousand": [
+          42000,
+          0,
+          0,
+          44000,
+          0
+        ],
+        "source_refs": [
+          "2211348 첨부25C0254 PDF p.7 표3·5 적용연도 경비",
+          "기본계획3년 주기 원문·참고 추계 공통"
+        ],
+        "resolved_variables": {
+          "plan_unit_cost": {
+            "key": "plan_unit_cost",
+            "value": {
+              "2025": 42000000,
+              "2028": 44000000
+            },
+            "unit": "KRW/occurrence/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2211348 첨부25C0254 PDF p.7 표3·5 적용연도 경비",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 3,
+            "unit": "year",
+            "source_class": "target_explicit",
+            "source_ref": "기본계획3년 주기 원문·참고 추계 공통",
+            "is_assumption": false
+          }
+        },
+        "evidence_mode": "development_review"
+      }
+    },
+    {
+      "payload": {
+        "bill_no": "2211348",
+        "agency": "교육부",
+        "policy_domain": "학교급식",
+        "start_year": 2025,
+        "years": 5,
+        "cutoff_date": "2026-10-03",
+        "evidence_mode": "development_review",
+        "variable_db_path": "/Users/anseung-won/Desktop/프로젝트/비용추계자동화시스템/backend/generated/erce_variable_evidence.sqlite3",
+        "use_unmatched_source_as_reference": true,
+        "unmatched_source_reference_note": "사용자 요청으로 첨부25C0254를 정답기준 회귀 참고. 현재 원문 시행일·공청회와는 별도 범위이며 새 정확도 평가가 아님",
+        "route_key": "research_survey",
+        "research_service_kind": "meal_staffing_standard",
+        "research_cycle_basis": "linked_plan_cycle",
+        "linked_plan_recurrence_years": 3,
+        "selected_evidence_keys": [
+          "2211348:survey_schedule",
+          "2211348:survey_plan_linked_cycle"
+        ]
+      },
+      "result": {
+        "route_key": "research_survey",
+        "subtype": "",
+        "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+        "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+        "evidence_key": "2211348:survey_schedule,2211348:survey_plan_linked_cycle",
+        "annual_amounts_thousand": [
+          22000,
+          0,
+          0,
+          24000,
+          0
+        ],
+        "source_refs": [
+          "2211348 첨부25C0254 PDF p.7 표3·5 적용연도 경비",
+          "2211348 첨부25C0254 PDF p.6: 주기 미규정으로 기본계획과 같은3년 재검토 가정"
+        ],
+        "resolved_variables": {
+          "survey_unit_cost": {
+            "key": "survey_unit_cost",
+            "value": {
+              "2025": 22000000,
+              "2028": 24000000
+            },
+            "unit": "KRW/occurrence/year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2211348 첨부25C0254 PDF p.7 표3·5 적용연도 경비",
+            "is_assumption": true
+          },
+          "recurrence_interval_years": {
+            "key": "recurrence_interval_years",
+            "value": 3,
+            "unit": "year",
+            "source_class": "precedent_assumption",
+            "source_ref": "2211348 첨부25C0254 PDF p.6: 주기 미규정으로 기본계획과 같은3년 재검토 가정",
+            "is_assumption": true
+          }
+        },
+        "evidence_mode": "development_review"
+      }
+    }
+  ],
+  "annual_amounts_thousand": [
+    64000,
+    0,
+    0,
+    68000,
+    0
+  ],
+  "total_thousand": 132000,
+  "gold_total_thousand": 132000,
+  "total_error_percent": 0,
+  "limitation": "사용자 요청으로 정답의 적용연도 경비와3년 주기 가정을 DB 저장해 재현한 회귀시험. 독립 정확도나 현 원문 전체 비용 추계 아님"
+}

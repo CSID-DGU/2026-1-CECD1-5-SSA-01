@@ -1,0 +1,182 @@
+{
+  "bill_no": "2208199",
+  "bill_name": "노인·장애인 등 사회복지시설의 급식안전 지원에 관한 법률 일부개정법률안",
+  "proposer": "김재원",
+  "propose_date": "2025-02-17",
+  "run_date": "2026-10-11",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "in_previous_batch": false,
+  "quote_checks": [
+    {
+      "article": "제8조제1항",
+      "page": 3,
+      "quote": "주기적으로실태조사를하고, 그결과를공표하여야한다",
+      "verified": true
+    },
+    {
+      "article": "제8조제3항",
+      "page": 4,
+      "quote": "위생및영양관리개선에필요한지원을할수있다.",
+      "verified": true
+    }
+  ],
+  "ai_decisions": [
+    {
+      "article": "제8조제1항",
+      "decision": "estimate_when_inputs_available",
+      "route": "research_survey",
+      "reason": "재량조사를 주기적 의무조사로 변경. 조사과업 단가와 주기는 미명시. 2026첫해는 다음해 시행 준비 후보일 뿐 확정 아님"
+    },
+    {
+      "article": "제8조제3항",
+      "decision": "defer",
+      "reason": "조사결과에 따른 위생·영양 개선지원은 재량이고 대상·지원방식·금액이 미정. 추가지원 잠재비용은 조사비와 별도"
+    },
+    {
+      "article": "제3조",
+      "decision": "no_direct_quantified_obligation",
+      "reason": "기존 시설장의 영양·위생 관리 노력의무 구체화. 전국 시설식비·인력비를 새정부지출로 계산하지 않음"
+    }
+  ],
+  "candidate_review": "현재 ERCE DB에 사회복지급식소 운영·위생·영양 조사 대응단가 없음. 학교 급식종사자 인력운영 조사나 보수실태조사는 조사과업이 달라 미선택. 법정주기는 총리령 위임으로 임의3년 입력 안함.",
+  "payload": {
+    "bill_no": "2208199",
+    "evidence_mode": "holdout",
+    "cutoff_date": "2026-10-11",
+    "route_key": "research_survey",
+    "payer": "government",
+    "start_year": 2026,
+    "years": 5,
+    "agency": "식품의약품안전처",
+    "research_service_function": "social_welfare_meal_safety_survey",
+    "research_cost_scope": "research_contract_only",
+    "explicit_inputs": {},
+    "selected_evidence_keys": [],
+    "selected_method_keys": []
+  },
+  "web_result": {
+    "status": "needs_input",
+    "routeKey": "research_survey",
+    "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "missingVariables": [
+      "survey_unit_cost",
+      "recurrence_interval_years"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [
+      {
+        "evidenceKey": "2203955:rights_survey:2021_unit_cost",
+        "variableKey": "survey_unit_cost",
+        "value": 50000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2203955 비용추계서24C3788 PDF3~4쪽; 2021 사회복지사 안전 확보를 위한 폭력 경험 등에 관한 종합실태조사",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-10-21",
+        "limitation": "2021 유사 인권·폭력경험 조사용역 준용 및 기간 동결. 기존 보수조사 전체사업비 아님. 지자체마다 별도 수행비로 중복 적용 금지",
+        "scope": "중앙·지방 협력 전국 통합 인권침해 연구용역",
+        "serviceFunction": "social_worker_rights_violence_survey",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2205985:social_worker_wage_survey:2023",
+        "variableKey": "survey_unit_cost",
+        "value": 178000000,
+        "unit": "KRW/survey",
+        "sourceRef": "의안 2205985 비용추계서(24C5258), PDF p.5; 보건복지부 2023년 사회복지사 보수 등 실태조사",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2024-12-02",
+        "limitation": "공식 고정요금이 아닌 2023년 유사 조사 사업비. 대상 직종·조사항목·전국 범위·수행방식을 확인한 뒤 사용. 지자체마다 별도 조사 시 개별 단가로 전용 금지; 시행 주기는 새 법안에서 추출",
+        "scope": "중앙정부와 지방자치단체가 협력하는 전국 보수·지급실태 조사 1회",
+        "serviceFunction": "종사자 보수수준·지급실태·기준 준수율 조사",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:care_worker_job_2023",
+        "variableKey": "survey_unit_cost",
+        "value": 22000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "돌봄전담사 직무분석·인력 운영",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:choice_meal_manual_2024",
+        "variableKey": "survey_unit_cost",
+        "value": 20000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "자율선택급식 표준 매뉴얼",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:research_sample:choice_meal_work_analysis_2024",
+        "variableKey": "survey_unit_cost",
+        "value": 22000000,
+        "unit": "KRW/survey",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6~7 표2·4,PRISM 연구사례 인용",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "자율선택급식 종사자 업무분석·효율화",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2211348:survey_plan_linked_cycle",
+        "variableKey": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "sourceRef": "2211348 첨부25C0254 PDF p.6: 주기 미규정으로 기본계획과 같은3년 재검토 가정",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2026-10-03",
+        "limitation": "정답기준 참고 자료. 같은 원문 버전인지 미확인;PRISM 원자료 독립 검증 전이며 실제 확보일 이후만 사용",
+        "scope": "기본계획 연계 적정인력 기준 재검토",
+        "serviceFunction": "계획 수립·적정인력 기준 검토",
+        "requiresConfirmation": true
+      },
+      {
+        "evidenceKey": "2212766:survey:recurrence:reviewed",
+        "variableKey": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "sourceRef": "2212766 비용추계서25C4872 PDF4~5쪽",
+        "sourceClass": "precedent_assumption",
+        "availableAt": "2025-10-22",
+        "limitation": "당시유사연구용역비를기간동결한가정.공식고정가격/최신예산/현장조사전체비아님",
+        "scope": "전국장애인활동지원 연구용역",
+        "serviceFunction": "activity_support_survey",
+        "requiresConfirmation": true
+      }
+    ],
+    "missingVariableEvidence": {
+      "survey_unit_cost": {
+        "status": "candidates_need_review",
+        "candidateCount": 5,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      },
+      "recurrence_interval_years": {
+        "status": "candidates_need_review",
+        "candidateCount": 2,
+        "meaning": "후보가 있으나 적용·선택이 필요합니다."
+      }
+    }
+  },
+  "first_total_eok": null,
+  "error_percent": null
+}

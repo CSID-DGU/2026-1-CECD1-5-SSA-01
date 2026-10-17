@@ -1,0 +1,28 @@
+{
+  "bill_no": "2209259",
+  "gold_opened_after_first_run": true,
+  "gold_document": "25C1706",
+  "gold_date": "2025-04-22",
+  "gold_total_won": 12000000,
+  "first_total_won": null,
+  "error_percent": null,
+  "evaluation_status": "needs_reinforcement",
+  "cost_item_detection_match": "1/1",
+  "formula_family_match": true,
+  "first_calculation_status": "needs_input",
+  "gold_operands": {
+    "incremental_paid_members": 4,
+    "annual_meetings": 3,
+    "meeting_unit_price_won": 200000,
+    "years": 5
+  },
+  "gold_member_assumption": "상한 증가5명 중 당연직1명·위촉 유급4명으로 가정",
+  "gold_frequency_source": "2023·2024 사회보장위원회 본회의 각3회, 매년3회 대면회의 가정",
+  "db_comparison": {
+    "face_to_face_price": "기존20만원 후보와 일치",
+    "meeting_frequency": "기존 다른 중앙정책위원회 연4회와 다름. 본회의 실적 기반3회 저장 필요",
+    "incremental_members": "위원회 신설의 동수범주 산식과 다름. 정원상한 증가−추가 당연직 구성 가정 필요"
+  },
+  "reason": "비용항목 및 회의수당 산식 종류는 맞게 파악했지만 참고 구성 가정과 해당 위원회 실적 빈도 선택 경로가 부족해 첫 금액을 산출하지 못함.",
+  "reinforcement_performed": false
+}

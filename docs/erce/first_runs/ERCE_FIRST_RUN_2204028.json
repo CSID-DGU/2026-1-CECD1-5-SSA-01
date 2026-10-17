@@ -1,0 +1,93 @@
+{
+  "bill_no": "2204028",
+  "run_date": "2026-10-04",
+  "gold_opened": false,
+  "ai_mode": "manual_no_api",
+  "evaluation_type": "pre_answer_development_first_run",
+  "prior_own_db_evidence_count": 0,
+  "reserved_holdout": false,
+  "ai_draft": {
+    "bill_no": "2204028",
+    "bill_name": "아동수당법 일부개정법률안",
+    "propose_date": "2024-09-13",
+    "document_type": "amendment",
+    "articles": [
+      {
+        "article_ref": "제4조제1항·제5항",
+        "change_summary": "19세미만 확대 및 전년도 아동수당 금액에 소비자물가변동률 반영, 부모급여 추가지급 유지",
+        "source_quote": "제4조제1항중“8세”를“19세”로, “매월10만원을지급한다”를“지급한\n다”로하고",
+        "source_page": 3,
+        "cost_trigger": true,
+        "estimation_decision": "estimate_now",
+        "decision_reason": "신규0~18세 급여에서 기존0~7세 급여 차감. 물가연동 지급액 및 신규연령 인구 근거 필요. 부모급여 별도변경 없음",
+        "route_key": "transfer_population_amount_delta",
+        "route_reason": "연령 확대와 시계열 급여변동의 순증 차액",
+        "variables": []
+      }
+    ]
+  },
+  "quote_verified": [
+    true
+  ],
+  "payload": {
+    "bill_no": "2204028",
+    "route_key": "transfer_population_amount_delta",
+    "cutoff_date": "2026-10-04",
+    "start_year": 2025,
+    "years": 5,
+    "explicit_inputs": {
+      "existing_benefit_per_recipient": {
+        "value": 100000,
+        "unit": "KRW/person/month",
+        "source_ref": "원문5쪽 현행 월10만원"
+      },
+      "payments_per_year": {
+        "value": 12,
+        "unit": "month/year",
+        "source_ref": "원문3쪽2025-01-01시행 및 원문7쪽 매월 지급"
+      }
+    }
+  },
+  "result": {
+    "status": "needs_input",
+    "routeKey": "transfer_population_amount_delta",
+    "formulaKey": "TRANSFER_POPULATION_AMOUNT_DELTA_V1",
+    "formula": "(개정 대상자 수 × 개정 지급액 − 현행 대상자 수 × 현행 지급액) × 연간 지급횟수",
+    "missingVariables": [
+      "new_recipient_count",
+      "existing_recipient_count",
+      "benefit_per_recipient"
+    ],
+    "missingDerivationVariables": [],
+    "derivationTrace": [],
+    "methodCandidates": [],
+    "selectedMethods": [],
+    "referenceCandidates": [],
+    "missingVariableEvidence": {
+      "new_recipient_count": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "existing_recipient_count": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      },
+      "benefit_per_recipient": {
+        "status": "no_eligible_candidate",
+        "candidateCount": 0,
+        "meaning": "현재 변수키·산식·시점·평가제외 조건으로 찾은 후보가 없습니다. DB 전체에 값이 없다는 뜻은 아닙니다."
+      }
+    }
+  },
+  "required_variable_count": 5,
+  "required_variables_filled": 2,
+  "method_keys": [],
+  "diagnosis": {
+    "new_recipient_count": "DB에 전국0~18세 또는18세 단독 인구 근거 없음. 0~17세로 대체하지 않음",
+    "existing_recipient_count": "0~7세 인구 및 지급률은2200147 근거로 존재하지만 현재 해당 루트의 기본급여 유지 프로필로 변환·연결되지 않음. under2_parent_only프로필은 조건 불일치로 거부",
+    "benefit_per_recipient": "전년도 급여×물가연동의 연도별 월액 필요. 물가전망은 코드에 있지만 적용 지연·기준연도·첫해 금액 확인 및 하위 계산 연결 없음"
+  },
+  "limitation": "계산완료 아닌 입력필요 결과. 자료·하위변수 연결 부족이며 법안 자체가 미추계 대상이라고 판단한 것 아님"
+}

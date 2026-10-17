@@ -1,0 +1,50 @@
+{
+  "route": "organization",
+  "components": [
+    "personnel",
+    "employer_contribution",
+    "basic_expense",
+    "asset",
+    "operating_expense"
+  ],
+  "years": 5,
+  "effective_year_offset": 0,
+  "inputs": {
+    "headcount": {
+      "value": 10,
+      "unit": "person",
+      "source": "user_input",
+      "source_ref": "대상 조직 순증인원 확인"
+    },
+    "salary_per_person": {
+      "value": 50000000,
+      "unit": "KRW/person/year",
+      "source": "official_standard",
+      "source_ref": "기준연도 공식 보수 기준"
+    },
+    "employer_contribution_rate": {
+      "value": 0.13,
+      "unit": "ratio",
+      "source": "official_standard",
+      "source_ref": "현행 기관부담률"
+    },
+    "basic_expense_ratio": {
+      "value": 0.1,
+      "unit": "ratio",
+      "source": "verified_precedent",
+      "source_ref": "동일 조직형태 검수 선례"
+    },
+    "asset_unit_price_per_person": {
+      "value": 5000000,
+      "unit": "KRW/person",
+      "source": "official_standard",
+      "source_ref": "정부기관 1인당 자산취득비 기준"
+    },
+    "annual_operating_amount": {
+      "value": 100000000,
+      "unit": "KRW/year",
+      "source": "user_input",
+      "source_ref": "대상 조직 연간 운영예산"
+    }
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "bill_no": "2208199",
+  "post_answer_regression": true,
+  "independent_evaluation": false,
+  "source_bill_version_match": false,
+  "evaluation_type": "version_unverified_reference_regression",
+  "payload": {
+    "bill_no": "2208199",
+    "evidence_mode": "development_review",
+    "cutoff_date": "2026-10-11",
+    "route_key": "research_survey",
+    "payer": "government",
+    "agency": "식품의약품안전처",
+    "start_year": 2026,
+    "years": 5,
+    "research_service_function": "social_welfare_meal_safety_survey",
+    "research_cost_scope": "integrated_survey_budget",
+    "implementation_model": "national_integrated_meal_safety_survey",
+    "estimate_purpose": "reference_scenario",
+    "reference_notice": "첨부 회답2025-02-03이 발의2025-02-17보다 앞서고 의안번호 공란. 동일 원문버전 미확인, 참고 추계로만 사용",
+    "use_unmatched_source_as_reference": true,
+    "unmatched_source_reference_note": "첨부 회답2025-02-03이 발의2025-02-17보다 앞서고 의안번호 공란. 동일 원문버전 미확인, 참고 추계로만 사용",
+    "selected_evidence_keys": [
+      "2208199:meal_survey:survey_unit_cost:reference",
+      "2208199:meal_survey:base_year:reference",
+      "2208199:meal_survey:recurrence_interval_years:reference",
+      "2208199:meal_survey:growth_rates_by_year:reference"
+    ],
+    "evidence_selection_reasons": {
+      "2208199:meal_survey:survey_unit_cost:reference": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음",
+      "2208199:meal_survey:base_year:reference": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음",
+      "2208199:meal_survey:recurrence_interval_years:reference": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음",
+      "2208199:meal_survey:growth_rates_by_year:reference": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음"
+    },
+    "selected_method_keys": [
+      "2208199:meal_safety_integrated_survey_reference"
+    ],
+    "method_selection_reasons": {
+      "2208199:meal_safety_integrated_survey_reference": "전국 식품위생·영양 통합조사 비용구조의 참고 재현"
+    },
+    "method_confirmations": {
+      "2208199:meal_safety_integrated_survey_reference": {
+        "meal_survey_scope_note": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음",
+        "cycle_assumption_note": "원문 주기는 총리령 위임. 어린이 통합조사의3년주기를 참고 가정으로 승인하며 법정 확정값 아님",
+        "price_projection_note": "2023예산7.6억원에2024.12전망CPI를2024부터 매년 반영. 예산은 최신공식가격 아니며 조사비에 임금상승을 중복 반영하지 않음",
+        "first_survey_note": "공포후3개월과 준비기간 고려2026첫조사 참고 가정. 기존조사 실적이나 확정시행연도로 단정하지 않음",
+        "unmatched_source_reference_note": "첨부 회답2025-02-03이 발의2025-02-17보다 앞서고 의안번호 공란. 동일 원문버전 미확인, 참고 추계로만 사용"
+      }
+    }
+  },
+  "engine_result": {
+    "route_key": "research_survey",
+    "subtype": "",
+    "formula_key": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "evidence_key": "2208199:meal_survey:survey_unit_cost:reference,2208199:meal_survey:base_year:reference,2208199:meal_survey:recurrence_interval_years:reference,2208199:meal_survey:growth_rates_by_year:reference",
+    "annual_amounts_thousand": [
+      811266,
+      0,
+      0,
+      860922,
+      0
+    ],
+    "source_refs": [
+      "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+      "2208199 첨부25C0024 PDF3~4쪽, 동일 원문버전 미확인"
+    ],
+    "resolved_variables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 760000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "growth_rates_by_year": {
+        "key": "growth_rates_by_year",
+        "value": {
+          "2024": 0.025,
+          "2025": 0.021,
+          "2026": 0.02,
+          "2027": 0.02,
+          "2028": 0.02,
+          "2029": 0.02,
+          "2030": 0.02
+        },
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "base_year": {
+        "key": "base_year",
+        "value": 2023,
+        "unit": "year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      }
+    },
+    "evidence_mode": "development_review",
+    "method_evidence_keys": [
+      "2208199:meal_safety_integrated_survey_reference"
+    ]
+  },
+  "reusable_web_result": {
+    "status": "computed_review",
+    "estimatePurpose": "reference_scenario",
+    "referenceNotice": "첨부 회답2025-02-03이 발의2025-02-17보다 앞서고 의안번호 공란. 동일 원문버전 미확인, 참고 추계로만 사용",
+    "routeKey": "research_survey",
+    "formulaKey": "PERIODIC_RESEARCH_SURVEY_V1",
+    "formula": "실태조사 회당 단가 × 조사 실시연도(주기별 1회)",
+    "annualAmountsThousand": [
+      811266,
+      0,
+      0,
+      860922,
+      0
+    ],
+    "derivationTrace": [],
+    "sourceRefs": [
+      "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+      "2208199 첨부25C0024 PDF3~4쪽, 동일 원문버전 미확인"
+    ],
+    "methodEvidenceKeys": [
+      "2208199:meal_safety_integrated_survey_reference"
+    ],
+    "selectedMethods": [
+      {
+        "method_key": "2208199:meal_safety_integrated_survey_reference",
+        "source_bill_no": "2208199",
+        "available_at": "2026-10-11",
+        "reviewed_at": "2026-10-11",
+        "payer": "government",
+        "family_key": "social_welfare_meal_safety_survey",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽, 동일 원문버전 미확인",
+        "source_bill_version_match": false,
+        "match_groups": [
+          [
+            "사회복지급식소",
+            "사회복지시설",
+            "급식소"
+          ],
+          [
+            "실태조사",
+            "운영현황"
+          ],
+          [
+            "위생",
+            "영양",
+            "급식안전"
+          ]
+        ],
+        "allowed_routes": [
+          "research_survey"
+        ],
+        "variable_keys": [
+          "survey_unit_cost",
+          "recurrence_interval_years"
+        ],
+        "variable_evidence_keys": [
+          "2208199:meal_survey:survey_unit_cost:reference",
+          "2208199:meal_survey:base_year:reference",
+          "2208199:meal_survey:recurrence_interval_years:reference",
+          "2208199:meal_survey:growth_rates_by_year:reference"
+        ],
+        "required_confirmations": [
+          "meal_survey_scope_note",
+          "cycle_assumption_note",
+          "price_projection_note",
+          "first_survey_note",
+          "unmatched_source_reference_note"
+        ],
+        "method_steps": [
+          "의무조사와 재량 개선지원·기존시설 관리노력을 구분",
+          "어린이 통합조사와 노인·장애인 급식소 조사과업·표본·범위 비교",
+          "2023 전체조사예산7.6억원에 기준년 이후 CPI 반영",
+          "3년주기는 선례 가정, 새 원문 명시주기가 있으면 우선",
+          "전국조사 예산에 급식시설수를 중복 곱하지 않음",
+          "동일버전 미확인이므로 승인된 참고 추계로만 표시"
+        ],
+        "baseline_check": "학교 급식종사자 인력운영 조사·시설 식비지원과 다름. 개선지원비를 임의 생성하지 않음",
+        "limitation": "회답일이 발의일보다 앞서고 의안번호 공란. 공식 정답 일치 성과로 사용하지 않음",
+        "support_derivation": "",
+        "lower_variable_keys": [
+          "survey_unit_cost",
+          "base_year",
+          "recurrence_interval_years",
+          "growth_rates_by_year"
+        ],
+        "review_status": "reviewed",
+        "obtained_from": "reviewed_answer",
+        "applicability_reason": "전국 식품위생·영양 통합조사 비용구조의 참고 재현",
+        "confirmed_assumptions": {
+          "meal_survey_scope_note": "전국 사회복지급식소 운영·위생·영양 조사에 어린이 식생활안전 통합조사를 참고. 대상집단은 달라 과업·표본범위 검토할 가정. 전체 조사예산에 시설수를 중복 곱하지 않음",
+          "cycle_assumption_note": "원문 주기는 총리령 위임. 어린이 통합조사의3년주기를 참고 가정으로 승인하며 법정 확정값 아님",
+          "price_projection_note": "2023예산7.6억원에2024.12전망CPI를2024부터 매년 반영. 예산은 최신공식가격 아니며 조사비에 임금상승을 중복 반영하지 않음",
+          "first_survey_note": "공포후3개월과 준비기간 고려2026첫조사 참고 가정. 기존조사 실적이나 확정시행연도로 단정하지 않음",
+          "unmatched_source_reference_note": "첨부 회답2025-02-03이 발의2025-02-17보다 앞서고 의안번호 공란. 동일 원문버전 미확인, 참고 추계로만 사용"
+        }
+      }
+    ],
+    "methodCandidates": [],
+    "resolvedVariables": {
+      "survey_unit_cost": {
+        "key": "survey_unit_cost",
+        "value": 760000000,
+        "unit": "KRW/survey",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "recurrence_interval_years": {
+        "key": "recurrence_interval_years",
+        "value": 3,
+        "unit": "year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "growth_rates_by_year": {
+        "key": "growth_rates_by_year",
+        "value": {
+          "2024": 0.025,
+          "2025": 0.021,
+          "2026": 0.02,
+          "2027": 0.02,
+          "2028": 0.02,
+          "2029": 0.02,
+          "2030": 0.02
+        },
+        "unit": "ratio/year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      },
+      "base_year": {
+        "key": "base_year",
+        "value": 2023,
+        "unit": "year",
+        "source_class": "precedent_assumption",
+        "source_ref": "2208199 첨부25C0024 PDF3~4쪽; 2023 어린이 식생활안전관리 실태조사 및 식생활 안전지수 통합조사",
+        "is_assumption": true
+      }
+    }
+  },
+  "annual_amounts_thousand": [
+    811266,
+    0,
+    0,
+    860922,
+    0
+  ],
+  "reference_total_eok": 16.72188,
+  "attached_display_total_eok": 16.72,
+  "attached_display_error_percent": 0.011244019138755274,
+  "annual_million_display": [
+    811,
+    0,
+    0,
+    861,
+    0
+  ],
+  "annual_display_matches": 5,
+  "limitation": "첨부 참고자료의 산식·가정 재현이지 동일 원문 정답의 독립 추계 성과가 아님. 재량 개선지원비는 조사비와 별도 검토"
+}

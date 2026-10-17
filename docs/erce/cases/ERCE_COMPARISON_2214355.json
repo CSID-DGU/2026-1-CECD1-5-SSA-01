@@ -1,0 +1,55 @@
+{
+  "bill_no": "2214355",
+  "first_run_file": "docs/erce/first_runs/ERCE_FIRST_RUN_2214355.json",
+  "gold": {
+    "estimate_no": "25D6242",
+    "reply_date": "2025-12-23",
+    "decision": "일부추계",
+    "total_eok": 552125,
+    "national_total_eok": 441700,
+    "local_total_eok": 110425,
+    "population_forecast": [
+      4646350,
+      4623583,
+      4600927,
+      4578383,
+      4555949
+    ],
+    "population_history": {
+      "2021": 4785658,
+      "2022": 4745423,
+      "2023": 4744755,
+      "2024": 4715326
+    },
+    "population_projection": "2024지역총인구에2021~2024 전년비증감률3개 평균을 적용.표시평균−0.49%",
+    "eligibility_assumption": "2년계속거주·국외체류·수급정지제외는예측곤란하여미반영",
+    "annual_benefit_won": 2400000,
+    "national_share": 0.8,
+    "annual_total_eok": [
+      111512,
+      110966,
+      110422,
+      109881,
+      109343
+    ],
+    "unestimated_item": "수급권현지조사:실시여부·빈도예측곤란"
+  },
+  "first_run": {
+    "benefit_amount_match": true,
+    "national_share_match": true,
+    "start_year_match": true,
+    "primary_formula_match": true,
+    "primary_required_slots": 3,
+    "primary_filled_slots": 2,
+    "primary_missing_slots": 1,
+    "total_eok": null,
+    "error_percent": null
+  },
+  "difference": [
+    "급여와국비분담 산식·하한연240만원·가격동결·국비80%·2027시작은맞음",
+    "2년계속거주 인원 없다고 계산을멈췄지만 정답은 이필터를미반영하는가정을선택하고89개지역 전체인구를 사용",
+    "DB의지역아동인구를전연령대상에사용하지않은 것은 적절",
+    "위원회 후보를잡았으나 정답에는별도위원회추계가없음.현지조사비는 정답에서 근거있게미추계했으나 최초판단은 이항목을별도명시하지않음"
+  ],
+  "reinforcement_done": false
+}
