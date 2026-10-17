@@ -10,7 +10,7 @@ from backend.erce_web.assembly_formula_engine import (
     build_generalized_estimate,
     classify_estimation_status,
 )
-from backend.erce_web.assembly_analogy_engine import build_analogical_committee_estimate
+from backend.erce_web.assembly_analogy_engine import SEED_DIR, build_analogical_committee_estimate
 from backend.erce_web.assembly_case_policy import apply_validated_case_policy
 from backend.erce_web.calculator import compute_year_estimates
 from backend.erce_web.form_renderer import render_form
@@ -639,6 +639,8 @@ class AssemblyFormulaEngineTest(unittest.TestCase):
 
         self.assertTrue(result[0]["cost_trigger"])
 
+    @unittest.skipUnless((SEED_DIR / "cost_estimate_structures.jsonl").exists(),
+                         "needs the locally generated assembly RAG seed (backend/generated is not in git)")
     def test_special_committee_uses_analogous_official_case(self) -> None:
         articles = [{
             "no": "제45조의2(헌법특별위원회)",
