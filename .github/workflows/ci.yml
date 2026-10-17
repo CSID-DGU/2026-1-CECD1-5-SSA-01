@@ -19,7 +19,7 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python -m unittest backend.test_formula_engine
+      - run: python -m unittest backend.tests.test_formula_engine
 
   frontend:
     name: Frontend lint and build

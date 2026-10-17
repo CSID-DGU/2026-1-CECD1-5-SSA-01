@@ -52,13 +52,13 @@ Thumbs.db
 .claude/
 
 # 개인 기술면접 학습 자료 (GitHub 공개 제외)
-docs/SYSTEM_LOGIC_GUIDE.md
-docs/UPSTAGE_INTERVIEW_D1.md
-docs/UPSTAGE_INTERVIEW_MASTER.md
-docs/AI_LIVE_CODING_PLAYBOOK.md
-docs/AI_PRODUCT_ENGINEER_MOCK_ANSWERS.md
-/interview_practice/
-/FINAL_INTERVIEW_PREP/
+docs/archive/SYSTEM_LOGIC_GUIDE.md
+docs/career/UPSTAGE_INTERVIEW_D1.md
+docs/career/UPSTAGE_INTERVIEW_MASTER.md
+docs/career/AI_LIVE_CODING_PLAYBOOK.md
+docs/career/AI_PRODUCT_ENGINEER_MOCK_ANSWERS.md
+/archive/interview_practice/
+/archive/FINAL_INTERVIEW_PREP/
 
 # NABO PDF 원본 (Supabase에 적재됨, 용량 큼)
 법안비용추계_이해와_사례_*.pdf
