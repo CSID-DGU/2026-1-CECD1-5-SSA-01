@@ -21,14 +21,24 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --nb-bg: #0d1117;
     --nb-card: #161b24;
     --nb-text: #e8ecf3;
     --nb-muted: #9aa4b5;
     --nb-line: #283041;
     --nb-nabo: #e5e7eb;
+    color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --nb-bg: #0d1117;
+  --nb-card: #161b24;
+  --nb-text: #e8ecf3;
+  --nb-muted: #9aa4b5;
+  --nb-line: #283041;
+  --nb-nabo: #e5e7eb;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -386,3 +396,4 @@ button { font: inherit; cursor: pointer; }
 .lg-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
 .lg-row .nb-quote { margin: 8px 0 4px; font-size: 13px; }
 .lg-more-link { font-size: 13px; color: var(--nb-muted); } .lg-more-link button { background: none; border: 0; color: var(--nb-ours); padding: 0; font-size: 13px; text-decoration: underline; }
+.sv-ro { max-width: 1120px; margin: 16px auto 0; padding: 8px 16px; font-size: 13px; color: var(--nb-muted); }

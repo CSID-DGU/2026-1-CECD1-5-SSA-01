@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Pipeline } from './Pipeline.jsx'
 import { Clauses, Compare, Dates, EvidenceTable, Formula, YearTable } from './sections.jsx'
-import { API, pct, won } from './util.js'
+import { API, STATIC, paths, pct, won } from './util.js'
 
 function NeedsInput({ needs, onSubmit, busy }) {
   const [vals, setVals] = useState({})
@@ -53,7 +53,7 @@ export default function RunPage({ runId, onPick }) {
 
   useEffect(() => {
     let live = true
-    fetch(`${API}/api/nabo/ai/run/${runId}`).then((r) => r.json())
+    fetch(paths.run(runId)).then((r) => r.json())
       .then((d) => { if (live) (d.error ? setError(d.error) : setState(d)) })
       .catch(() => live && setError('결과를 불러오지 못했어요.'))
     return () => { live = false }
@@ -63,8 +63,8 @@ export default function RunPage({ runId, onPick }) {
   if (!state) return <p className="nb-loading">불러오는 중…</p>
   const data = state.case
   const pick = (s) => onPick(s && { ...s, cutoff: data.cutoff })
-  const pdf = `${API}/api/nabo/ai/pdf/${runId}`
-  const report = `${API}/api/nabo/ai/report/${runId}`
+  const pdf = paths.pdf(runId)
+  const report = paths.report(runId)
   const scen = Object.entries(data.scenarios)
   const main = scen[0][1]
   const years = Object.keys(main.by_year).sort()
@@ -97,7 +97,7 @@ export default function RunPage({ runId, onPick }) {
         <div className="sv-actions">
           <span className={`sv-status ${needs ? 'warn' : 'ok'}`}>{needs ? `입력 필요 ${needs}` : '추계 완료'}</span>
           <a className="sv-btn" href={pdf} target="_blank" rel="noreferrer">의안 원문</a>
-          <a className="sv-btn" href={`${report}?format=doc`}>Word 받기</a>
+          {!STATIC && <a className="sv-btn" href={`${report}?format=doc`}>Word 받기</a>}
           <a className="sv-btn primary" href={report} target="_blank" rel="noreferrer">비용추계서 초안</a>
         </div>
       </div>
@@ -132,7 +132,7 @@ export default function RunPage({ runId, onPick }) {
             <Formula data={data} onPick={pick} />
             {data.ai.payment_years_why && <p className="nb-muted">추계기간 판단: {data.ai.payment_years_why}</p>}
           </div>
-          <NeedsInput key={JSON.stringify(data.ai.needs_input)} needs={data.ai.needs_input} onSubmit={recompute} busy={busy} />
+          {!STATIC && <NeedsInput key={JSON.stringify(data.ai.needs_input)} needs={data.ai.needs_input} onSubmit={recompute} busy={busy} />}
           <Review data={data} />
         </div>
       )}

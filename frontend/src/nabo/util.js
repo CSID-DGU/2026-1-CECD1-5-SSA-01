@@ -1,3 +1,12 @@
+// Read-only export (no server): pages read pre-exported files next to nabo.html.
+export const STATIC = import.meta.env.VITE_NABO_STATIC === '1'
+export const paths = {
+  runs: () => (STATIC ? './data/runs.json' : `${API}/api/nabo/ai/runs`),
+  run: (id) => (STATIC ? `./data/run/${id}.json` : `${API}/api/nabo/ai/run/${id}`),
+  pdf: (id) => (STATIC ? `./data/pdf/${id}.pdf` : `${API}/api/nabo/ai/pdf/${id}`),
+  report: (id) => (STATIC ? `./data/report/${id}.html` : `${API}/api/nabo/ai/report/${id}`),
+}
+
 export const API = (import.meta.env.VITE_NABO_API_URL ?? 'http://127.0.0.1:8010').replace(/\/$/, '')
 
 export const GRADE = {

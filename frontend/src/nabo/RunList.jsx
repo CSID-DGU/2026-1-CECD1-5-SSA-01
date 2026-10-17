@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { API, won } from './util.js'
+import { STATIC, paths, won } from './util.js'
 
 export default function RunList() {
   const [runs, setRuns] = useState(null)
   const [q, setQ] = useState('')
   useEffect(() => {
-    fetch(`${API}/api/nabo/ai/runs`).then((r) => r.json()).then(setRuns).catch(() => setRuns([]))
+    fetch(paths.runs()).then((r) => r.json()).then(setRuns).catch(() => setRuns([]))
   }, [])
   const shown = (runs ?? []).filter((r) => !q.trim() || `${r.title} ${r.bill_no} ${r.proposer}`.includes(q.trim()))
   return (
@@ -17,12 +17,12 @@ export default function RunList() {
         </div>
         <div className="sv-actions">
           <input className="sv-search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="의안명·의안번호 검색" />
-          <a className="sv-btn primary" href="#/new">새 추계</a>
+          {!STATIC && <a className="sv-btn primary" href="#/new">새 추계</a>}
         </div>
       </div>
       <div className="sv-card">
         {runs === null && <p className="nb-loading">불러오는 중…</p>}
-        {runs?.length === 0 && <p className="nb-muted">아직 추계가 없어요. <a href="#/new">새 추계</a>를 시작해 보세요.</p>}
+        {runs?.length === 0 && <p className="nb-muted">아직 추계가 없어요.</p>}
         {shown.length > 0 && (
           <div className="nb-evi-wrap">
             <table className="sv-list">
